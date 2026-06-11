@@ -1,68 +1,76 @@
 # cURL 예제
 
+## 사전 준비
+
+1. **MIDAS Gen NX 실행**
+2. Open API 메뉴에서 **MAPI-Key** 발급
+
 ## 기본 사용법
 
 ```bash
 #!/bin/bash
 
-API_KEY="your-api-key-here"
-BASE_URL="https://your-midas-server.com/api/v1"
+BASE_URL="https://moa-engineers.midasit.com:443/gen"   # Civil NX: /civil
+MAPI_KEY="your-mapi-key-here"
 
-curl -X GET "${BASE_URL}/db/PJCF" \
-  -H "Authorization: Bearer ${API_KEY}" \
+curl -X GET "${BASE_URL}/db/node" \
+  -H "MAPI-Key: ${MAPI_KEY}" \
   -H "Content-Type: application/json"
 ```
+
+> ⚠️ 인증 헤더는 `Authorization: Bearer`가 아니라 **`MAPI-Key`** 입니다.
+> 모든 `/db/*` 요청은 `{"Assign": {...}}` 형식을 사용합니다.
 
 ## 예제
 
-### 1. 프로젝트 정보 조회
+### 1. 새 문서 생성
 
 ```bash
-curl -X GET https://your-midas-server.com/api/v1/db/PJCF \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json"
-```
-
-### 2. 새 프로젝트 생성
-
-```bash
-curl -X POST https://your-midas-server.com/api/v1/doc/NEW \
-  -H "Authorization: Bearer YOUR_API_KEY" \
+curl -X POST "${BASE_URL}/doc/new" \
+  -H "MAPI-Key: ${MAPI_KEY}" \
   -H "Content-Type: application/json" \
-  -d '{
-    "project_name": "My Project",
-    "unit": "m"
-  }'
+  -d '{}'
 ```
 
-### 3. 단위 정보 조회
+### 2. 단위 설정
 
 ```bash
-curl -X GET https://your-midas-server.com/api/v1/db/UNIT \
-  -H "Authorization: Bearer YOUR_API_KEY" \
+curl -X PUT "${BASE_URL}/db/unit" \
+  -H "MAPI-Key: ${MAPI_KEY}" \
+  -H "Content-Type: application/json" \
+  -d '{ "Assign": { "1": { "DIST": "M", "FORCE": "TONF" } } }'
+```
+
+### 3. 노드 생성
+
+```bash
+curl -X POST "${BASE_URL}/db/node" \
+  -H "MAPI-Key: ${MAPI_KEY}" \
+  -H "Content-Type: application/json" \
+  -d '{ "Assign": { "1": { "X": 0, "Y": 0, "Z": 0 }, "2": { "X": 0, "Y": 0, "Z": 3.2 } } }'
+```
+
+### 4. 요소(기둥) 생성
+
+```bash
+curl -X POST "${BASE_URL}/db/elem" \
+  -H "MAPI-Key: ${MAPI_KEY}" \
+  -H "Content-Type: application/json" \
+  -d '{ "Assign": { "1": { "TYPE": "BEAM", "MATL": 1, "SECT": 1, "NODE": [1, 2], "ANGLE": 0 } } }'
+```
+
+### 5. 노드 조회
+
+```bash
+curl -X GET "${BASE_URL}/db/node" \
+  -H "MAPI-Key: ${MAPI_KEY}" \
   -H "Content-Type: application/json"
 ```
 
-### 4. 재료 목록 조회
+### 6. 문서 저장
 
 ```bash
-curl -X GET https://your-midas-server.com/api/v1/db/MATL \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json"
-```
-
-### 5. 노드 목록 조회
-
-```bash
-curl -X GET https://your-midas-server.com/api/v1/db/NODE \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json"
-```
-
-### 6. 요소 목록 조회
-
-```bash
-curl -X GET https://your-midas-server.com/api/v1/db/ELEM \
-  -H "Authorization: Bearer YOUR_API_KEY" \
+curl -X POST "${BASE_URL}/doc/save" \
+  -H "MAPI-Key: ${MAPI_KEY}" \
   -H "Content-Type: application/json"
 ```

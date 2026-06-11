@@ -1,151 +1,94 @@
 #!/usr/bin/env python3
 """
-MIDAS API - Python 예제
-첫 번째 API 호출을 위한 기본 예제입니다.
+MIDAS NX Open API - Python 기본 예제
+
+MIDAS Gen NX에 사각 기둥 1개를 생성하는 최소 예제입니다.
+
+사전 준비:
+  1) MIDAS Gen NX 실행
+  2) Open API 메뉴에서 MAPI-Key 발급
+  3) 아래 MAPI_KEY / BASE_URL 설정 (또는 환경변수 사용)
+
+실행:
+  pip install requests
+  python basic_example.py
 """
 
-import requests
-import json
 import os
-from typing import Dict, Any
+import json
+import requests
 
-# 설정
-API_KEY = os.getenv("MIDAS_API_KEY", "your-api-key-here")
-BASE_URL = os.getenv("MIDAS_BASE_URL", "https://your-midas-server.com/api/v1")
+# ── 설정 ────────────────────────────────────────────────────────────────
+# Gen NX: .../gen   |   Civil NX: .../civil
+BASE_URL = os.getenv("MIDAS_BASE_URL", "https://moa-engineers.midasit.com:443/gen")
+MAPI_KEY = os.getenv("MIDAS_MAPI_KEY", "your-mapi-key-here")
 
-# 헤더 준비
-headers = {
-    "Authorization": f"Bearer {API_KEY}",
-    "Content-Type": "application/json"
+HEADERS = {
+    "MAPI-Key": MAPI_KEY,          # ⚠️ Authorization Bearer 아님
+    "Content-Type": "application/json",
 }
 
 
-def print_response(title: str, response: requests.Response) -> None:
-    """응답을 보기 좋게 출력합니다."""
-    print("\n" + "=" * 60)
-    print(f"📌 {title}")
-    print("=" * 60)
-    print(f"상태 코드: {response.status_code}")
+def MidasAPI(method: str, command: str, body: dict | None = None) -> dict:
+    """MIDAS NX Open API 호출 헬퍼.
+
+    method  : "POST" | "PUT" | "GET" | "DELETE"
+    command : "/doc/new", "/db/node" 등
+    body    : {"Assign": {...}} 형식의 요청 바디
+    """
+    url = BASE_URL + command
+    fn = getattr(requests, method.lower())
+    res = fn(url, headers=HEADERS, json=body, timeout=10)
+    print(f"{method:6} {command:14} -> {res.status_code}")
     try:
-        data = response.json()
-        print(f"응답:\n{json.dumps(data, indent=2, ensure_ascii=False)}")
+        return res.json()
     except json.JSONDecodeError:
-        print(f"응답: {response.text}")
-
-
-def get_project_info() -> None:
-    """프로젝트 정보를 조회합니다."""
-    try:
-        response = requests.get(
-            f"{BASE_URL}/db/PJCF",
-            headers=headers,
-            timeout=10
-        )
-        print_response("프로젝트 정보 조회 (GET)", response)
-    except requests.exceptions.RequestException as e:
-        print(f"❌ 오류: {e}")
-
-
-def create_new_project() -> None:
-    """새 프로젝트를 생성합니다."""
-    try:
-        payload = {
-            "project_name": "My API Project",
-            "unit": "m",
-            "description": "Created via Python API"
-        }
-        response = requests.post(
-            f"{BASE_URL}/doc/NEW",
-            headers=headers,
-            json=payload,
-            timeout=10
-        )
-        print_response("새 프로젝트 생성 (POST)", response)
-        return response.json()
-    except requests.exceptions.RequestException as e:
-        print(f"❌ 오류: {e}")
-        return None
-
-
-def get_unit_info() -> None:
-    """단위 정보를 조회합니다."""
-    try:
-        response = requests.get(
-            f"{BASE_URL}/db/UNIT",
-            headers=headers,
-            timeout=10
-        )
-        print_response("단위 정보 조회 (GET)", response)
-    except requests.exceptions.RequestException as e:
-        print(f"❌ 오류: {e}")
-
-
-def get_materials() -> None:
-    """재료 목록을 조회합니다."""
-    try:
-        response = requests.get(
-            f"{BASE_URL}/db/MATL",
-            headers=headers,
-            timeout=10
-        )
-        print_response("재료 목록 조회 (GET)", response)
-    except requests.exceptions.RequestException as e:
-        print(f"❌ 오류: {e}")
-
-
-def get_nodes() -> None:
-    """노드 목록을 조회합니다."""
-    try:
-        response = requests.get(
-            f"{BASE_URL}/db/NODE",
-            headers=headers,
-            timeout=10
-        )
-        print_response("노드 목록 조회 (GET)", response)
-    except requests.exceptions.RequestException as e:
-        print(f"❌ 오류: {e}")
-
-
-def get_elements() -> None:
-    """요소 목록을 조회합니다."""
-    try:
-        response = requests.get(
-            f"{BASE_URL}/db/ELEM",
-            headers=headers,
-            timeout=10
-        )
-        print_response("요소 목록 조회 (GET)", response)
-    except requests.exceptions.RequestException as e:
-        print(f"❌ 오류: {e}")
+        return {"raw": res.text}
 
 
 def main() -> None:
-    """메인 함수: 모든 예제를 실행합니다."""
-    print("\n" + "🚀 MIDAS API Python 예제" + "\n")
-    print(f"📍 Base URL: {BASE_URL}")
-    print(f"🔑 API Key: {API_KEY[:10]}..." if len(API_KEY) > 10 else f"🔑 API Key: {API_KEY}")
+    print("🚀 MIDAS NX Open API - Python 예제")
+    print(f"📍 Base URL: {BASE_URL}\n")
 
-    # 예제 1: 프로젝트 정보 조회
-    get_project_info()
+    # 1) 새 문서
+    MidasAPI("POST", "/doc/new", {})
 
-    # 예제 2: 새 프로젝트 생성
-    result = create_new_project()
+    # 2) 단위 (대만 RC 관행: m, tonf)
+    MidasAPI("PUT", "/db/unit", {"Assign": {"1": {"DIST": "M", "FORCE": "TONF"}}})
 
-    # 예제 3: 단위 정보 조회
-    get_unit_info()
+    # 3) 재료 (RC C32)
+    MidasAPI("POST", "/db/matl", {"Assign": {1: {
+        "TYPE": "CONC", "NAME": "C32",
+        "PARAM": [{"P_TYPE": 1, "STANDARD": "AS17(RC)", "DB": "C32"}],
+    }}})
 
-    # 예제 4: 재료 목록 조회
-    get_materials()
+    # 4) 단면 (600x600 사각)
+    MidasAPI("POST", "/db/sect", {"Assign": {1: {
+        "SECTTYPE": "DBUSER", "SECT_NAME": "C600",
+        "SECT_BEFORE": {"SHAPE": "SB", "DATATYPE": 2,
+                        "SECT_I": {"vSIZE": [0.6, 0.6]}},
+    }}})
 
-    # 예제 5: 노드 목록 조회
-    get_nodes()
+    # 5) 노드 (3.2m 기둥)
+    MidasAPI("POST", "/db/node", {"Assign": {
+        1: {"X": 0, "Y": 0, "Z": 0},
+        2: {"X": 0, "Y": 0, "Z": 3.2},
+    }})
 
-    # 예제 6: 요소 목록 조회
-    get_elements()
+    # 6) 기둥 요소 (BEAM)
+    MidasAPI("POST", "/db/elem", {"Assign": {1: {
+        "TYPE": "BEAM", "MATL": 1, "SECT": 1, "NODE": [1, 2], "ANGLE": 0,
+    }}})
 
-    print("\n" + "=" * 60)
-    print("✅ 모든 예제 완료!")
-    print("=" * 60 + "\n")
+    # 7) 하단 고정 지지
+    MidasAPI("POST", "/db/cons", {"Assign": {1: {
+        "ITEMS": [{"ID": 1, "CONSTRAINT": "1111111"}],
+    }}})
+
+    # 8) 저장
+    MidasAPI("POST", "/doc/save")
+
+    print("\n✅ 완료! MIDAS Gen NX 화면에서 기둥을 확인하세요.")
 
 
 if __name__ == "__main__":
