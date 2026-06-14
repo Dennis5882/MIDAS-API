@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIDAS Gen NX — Auto Save Before Analysis</title>
+<style>
+  :root {
+    --bg: #1e1e1e; --surface: #252526; --border: #3e3e3e;
+    --kw: #569cd6; --fn: #dcdcaa; --str: #ce9178;
+    --cmt: #6a9955; --num: #b5cea8; --ok: #4ec9b0;
+    --err: #f44747; --info: #9cdcfe; --text: #d4d4d4;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); padding: 32px 24px; max-width: 860px; margin: 0 auto; }
+  h1 { color: var(--ok); font-size: 1.15em; font-weight: 600; margin-bottom: 4px; }
+  .subtitle { color: #808080; font-size: 0.85em; margin-bottom: 28px; }
+  h2 { color: var(--info); font-size: 0.9em; font-weight: 600; margin: 28px 0 10px; letter-spacing: 0.03em; text-transform: uppercase; }
+  p { color: #aaa; font-size: 0.88em; line-height: 1.75; margin-bottom: 8px; }
+  code { font-family: 'Cascadia Code', 'Fira Code', monospace; background: #2d2d2d; padding: 1px 6px; border-radius: 3px; color: var(--str); font-size: 0.9em; }
+  pre {
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 6px; padding: 20px; overflow-x: auto;
+    font-size: 0.82em; line-height: 1.65; margin-bottom: 8px;
+  }
+  .kw  { color: var(--kw); }
+  .fn  { color: var(--fn); }
+  .str { color: var(--str); }
+  .cmt { color: var(--cmt); font-style: italic; }
+  .num { color: var(--num); }
+  .section-note { background: #1a2a1a; border-left: 3px solid var(--ok); padding: 10px 14px; border-radius: 0 4px 4px 0; font-size: 0.85em; color: #aaa; margin-bottom: 16px; line-height: 1.6; }
+  .warn-note { background: #2a2a1a; border-left: 3px solid #d7ba7d; padding: 10px 14px; border-radius: 0 4px 4px 0; font-size: 0.85em; color: #aaa; margin-bottom: 16px; line-height: 1.6; }
+  .warn-note strong { color: #d7ba7d; }
+  label { display: block; color: var(--info); font-size: 0.82em; margin-bottom: 4px; margin-top: 14px; }
+  input { width: 100%; background: #3c3c3c; border: 1px solid #555; color: var(--text); padding: 7px 10px; border-radius: 4px; font-family: monospace; font-size: 0.85em; }
+  input:focus { outline: none; border-color: var(--ok); }
+  button { margin-top: 14px; padding: 8px 22px; background: #0e639c; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 0.85em; }
+  button:hover { background: #1177bb; }
+  #log { margin-top: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 14px; min-height: 90px; font-family: monospace; font-size: 0.83em; white-space: pre-wrap; line-height: 1.6; }
+  .ok   { color: var(--ok); }
+  .err  { color: var(--err); }
+  .info { color: var(--info); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+  .lang-badge { display: inline-block; font-size: 0.72em; padding: 1px 7px; border-radius: 3px; margin-right: 6px; vertical-align: middle; }
+  .ko { background: #1a3a5c; color: #9cdcfe; }
+  .en { background: #1a3a2a; color: #4ec9b0; }
+  .flow { display: flex; flex-direction: column; gap: 2px; margin: 12px 0; font-size: 0.84em; font-family: monospace; }
+  .flow-step { padding: 6px 12px; background: #2a2a2a; border-radius: 3px; color: #ccc; }
+  .flow-step span { color: var(--ok); margin-right: 8px; }
+  .flow-arrow { color: #555; text-align: center; font-size: 0.8em; }
+</style>
+</head>
+<body>
+
+<h1>MIDAS Gen NX MAPI — Auto Save Before Analysis</h1>
+<p class="subtitle">
+  <span class="lang-badge ko">KO</span>해석 실행 전 파일 자동 저장 패턴 &nbsp;|&nbsp;
+  <span class="lang-badge en">EN</span>Auto-save pattern before running structural analysis
+</p>
+
+<!-- ── OVERVIEW ─────────────────────────────────────────── -->
+<h2>Overview</h2>
+
+<div class="section-note">
+  <strong style="color:var(--ok)">KO</strong>&nbsp;
+  MIDAS Gen NX의 MAPI는 해석(<code>POST /doc/anal</code>)을 실행하기 전에
+  반드시 파일을 먼저 저장(<code>POST /doc/saveas</code>)해야 합니다.
+  저장 없이 해석하면 Gen NX가 저장 다이얼로그를 띄워 자동화가 중단됩니다.<br><br>
+  이 예제는 <code>GET /mapikey/verify</code>로 현재 로그인된 사용자의 이메일을 가져와
+  저장 경로를 동적으로 만들고, <code>POST /doc/saveas → POST /doc/anal</code> 순서로
+  실행하는 전체 흐름을 보여줍니다.
+</div>
+<div class="section-note">
+  <strong style="color:var(--ok)">EN</strong>&nbsp;
+  MIDAS Gen NX MAPI requires saving the file (<code>POST /doc/saveas</code>) before
+  running analysis (<code>POST /doc/anal</code>).
+  Without saving first, Gen NX shows a save dialog that interrupts automation.<br><br>
+  This example retrieves the logged-in user's email via <code>GET /mapikey/verify</code>,
+  builds a dynamic save path from it, then runs
+  <code>POST /doc/saveas → POST /doc/anal</code> in the correct order.
+</div>
+
+<!-- ── FLOW ──────────────────────────────────────────────── -->
+<h2>Flow / 동작 흐름</h2>
+<div class="flow">
+  <div class="flow-step"><span>1</span>GET  /mapikey/verify → <code>j.user</code> (e.g. <code>"john@midasit.com"</code>)</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><span>2</span>extract username → <code>"john"</code> &nbsp;·&nbsp; build path <code>C:/Users/john/Documents/gen_rc_temp_1234567.mgbx</code></div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><span>3</span>POST /doc/saveas &nbsp;{ Argument: "&lt;path&gt;" }</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><span>4</span>POST /doc/anal &nbsp;&nbsp;&nbsp;{}</div>
+</div>
+
+<!-- ── WHY ORDER MATTERS ─────────────────────────────────── -->
+<h2>Why Order Matters / 순서가 중요한 이유</h2>
+<div class="warn-note">
+  <strong>⚠️ KO</strong>&nbsp;
+  <code>/doc/anal</code>을 <code>/doc/saveas</code> 보다 먼저 호출하면
+  Gen NX가 "저장하시겠습니까?" 다이얼로그를 표시하고 응답을 기다립니다.
+  MAPI 호출은 타임아웃 또는 에러 없이 무한 대기 상태가 될 수 있습니다.<br><br>
+  <strong>⚠️ EN</strong>&nbsp;
+  Calling <code>/doc/anal</code> before <code>/doc/saveas</code> causes Gen NX to show
+  a "Do you want to save?" dialog and wait for user input.
+  The MAPI call may hang indefinitely without a timeout or error.
+</div>
+
+<!-- ── UNIT SETTING ──────────────────────────────────────── -->
+<h2>Unit Setting Before Build / 단위계 선제 설정</h2>
+<div class="warn-note">
+  <strong>⚠️ KO</strong>&nbsp;
+  모델을 만들기 전(<code>PUT /db/node</code> 호출 전)에 반드시 단위계를 설정하세요.
+  Gen NX가 kN/m 등 다른 단위로 열려 있으면 좌표 <code>7000</code>(mm 의도)이
+  <code>7000 m</code>로 해석되어 해석 결과에 이상 변위 경고가 발생합니다.<br><br>
+  <strong>⚠️ EN</strong>&nbsp;
+  Always set the unit system before creating model entities (<code>PUT /db/node</code>).
+  If Gen NX is open in a different unit (e.g. kN/m), the coordinate <code>7000</code>
+  (intended as mm) is interpreted as <code>7000 m</code>, causing abnormal displacement warnings.
+</div>
+
+<!-- ── CODE ─────────────────────────────────────────────── -->
+<h2>Code / 코드</h2>
+<pre>
+<span class="cmt">/**
+ * KO: Base URL에서 /gen, /civil 경로를 제거해 루트 URL 반환
+ *     /mapikey/verify 는 루트(포트 바로 뒤)에 위치합니다.
+ * EN: Strip /gen or /civil suffix to get the root URL.
+ *     /mapikey/verify lives at the root, not under /gen or /civil.
+ */</span>
+<span class="kw">function</span> <span class="fn">mapiRoot</span>(base) {
+  <span class="kw">return</span> base.replace(<span class="str">/\/(gen|civil)\/?$/i</span>, <span class="str">''</span>);
+}
+
+<span class="cmt">/**
+ * KO: 연결 확인 및 로그인 사용자 이메일 반환
+ *     j.user 에 이메일 전체가 담깁니다 (예: "john@midasit.com")
+ * EN: Verify connection and return the logged-in user's email.
+ *     j.user contains the full email (e.g. "john@midasit.com")
+ */</span>
+<span class="kw">async function</span> <span class="fn">verifyConn</span>(base, key) {
+  <span class="kw">const</span> res = <span class="kw">await</span> fetch(`${<span class="fn">mapiRoot</span>(base)}/mapikey/verify`, {
+    headers: { <span class="str">'MAPI-Key'</span>: key }
+  });
+  <span class="kw">let</span> j = {};
+  <span class="kw">try</span> { j = <span class="kw">await</span> res.json(); } <span class="kw">catch</span> (e) {}
+  <span class="kw">return</span> { ok: res.ok, j };
+}
+
+<span class="cmt">/**
+ * KO: 저장 경로 자동 결정
+ *     성공: C:/Users/{username}/Documents/gen_rc_temp_{timestamp}.mgbx
+ *     폴백: C:/Temp/gen_rc_temp_{timestamp}.mgbx  (verifyConn 실패 시)
+ *
+ *     ※ %USERPROFILE% 같은 환경변수는 MAPI 서버(Gen NX 프로세스)가 인식하지 못합니다.
+ *       /mapikey/verify 의 j.user 이메일로 사용자 폴더를 직접 구성해야 합니다.
+ *
+ * EN: Determine save path automatically.
+ *     Primary : C:/Users/{username}/Documents/gen_rc_temp_{timestamp}.mgbx
+ *     Fallback: C:/Temp/gen_rc_temp_{timestamp}.mgbx  (if verifyConn fails)
+ *
+ *     ※ Environment variables like %USERPROFILE% are NOT resolved by the MAPI server.
+ *       Build the path from j.user returned by /mapikey/verify instead.
+ */</span>
+<span class="kw">async function</span> <span class="fn">autoSavePath</span>(base, key) {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> { ok, j } = <span class="kw">await</span> <span class="fn">verifyConn</span>(base, key);
+    <span class="kw">if</span> (ok &amp;&amp; j?.user) {
+      <span class="kw">const</span> username = j.user.split(<span class="str">'@'</span>)[<span class="num">0</span>];           <span class="cmt">// "john@midasit.com" → "john"</span>
+      <span class="kw">return</span> `C:/Users/${username}/Documents/gen_rc_temp_${Date.now()}.mgbx`;
+    }
+  } <span class="kw">catch</span> (e) {}
+  <span class="kw">return</span> `C:/Temp/gen_rc_temp_${Date.now()}.mgbx`;     <span class="cmt">// fallback</span>
+}
+
+<span class="cmt">/**
+ * KO: 단위 설정 → 모델 생성 → 저장 → 해석 전체 흐름
+ *     setUnit 은 모델 생성(노드 추가) 전에 반드시 호출해야 합니다.
+ * EN: Set unit → build model → save → analyze — full flow.
+ *     setUnit MUST be called before creating any model entities (nodes/elements).
+ */</span>
+<span class="kw">async function</span> <span class="fn">runAnalysis</span>(base, key) {
+  <span class="kw">const</span> headers = { <span class="str">'MAPI-Key'</span>: key, <span class="str">'Content-Type'</span>: <span class="str">'application/json'</span> };
+  <span class="kw">const</span> api = (method, path, body) =>
+    fetch(`${base}${path}`, { method, headers, body: body ? JSON.stringify(body) : undefined });
+
+  <span class="cmt">// ① 단위계 선제 설정 (KO: 노드 추가 전 필수 / EN: must call before PUT /db/node)</span>
+  <span class="kw">await</span> <span class="fn">api</span>(<span class="str">'PUT'</span>, <span class="str">'/db/unit'</span>, { Assign: { <span class="num">1</span>: { FORCE: <span class="str">'N'</span>, DIST: <span class="str">'MM'</span> } } });
+
+  <span class="cmt">// ② ... 모델 생성 (nodes, elements, loads ...) ...</span>
+
+  <span class="cmt">// ③ 저장 — 반드시 /doc/anal 보다 먼저 (EN: must precede /doc/anal)</span>
+  <span class="kw">const</span> savePath = <span class="kw">await</span> <span class="fn">autoSavePath</span>(base, key);
+  <span class="kw">await</span> <span class="fn">api</span>(<span class="str">'POST'</span>, <span class="str">'/doc/saveas'</span>, { Argument: savePath });
+
+  <span class="cmt">// ④ 해석 (EN: run analysis)</span>
+  <span class="kw">await</span> <span class="fn">api</span>(<span class="str">'POST'</span>, <span class="str">'/doc/anal'</span>, {});
+
+  <span class="kw">return</span> savePath;
+}
+</pre>
+
+<!-- ── LIVE DEMO ──────────────────────────────────────────── -->
+<h2>Live Demo — verifyConn &amp; Path Preview</h2>
+<p>
+  <span class="lang-badge ko">KO</span>실제 저장·해석은 실행하지 않습니다. 연결 확인 후 생성될 경로만 미리 봅니다.<br>
+  <span class="lang-badge en">EN</span>This demo only calls verifyConn. It does not save or analyze — just previews the generated path.
+</p>
+
+<label>Base URL &nbsp;<span style="color:#555; font-size:0.9em">(예: http://127.0.0.1:8090/gen)</span></label>
+<input id="baseUrl" placeholder="http://127.0.0.1:8090/gen">
+
+<label>MAPI Key</label>
+<input id="mapiKey" type="password" placeholder="your-mapi-key">
+
+<button onclick="runDemo()">Check Connection &amp; Preview Path</button>
+<div id="log">— 결과가 여기에 표시됩니다 / Results will appear here —</div>
+
+<hr>
+<p style="color:#555; font-size:0.8em">
+  MIDAS Gen NX Open API &nbsp;·&nbsp;
+  <a href="https://github.com/Dennis5882/MIDAS-API" style="color:#555">github.com/Dennis5882/MIDAS-API</a>
+</p>
+
+<script>
+function mapiRoot(base) {
+  return base.replace(/\/(gen|civil)\/?$/i, '');
+}
+
+async function verifyConn(base, key) {
+  const res = await fetch(`${mapiRoot(base)}/mapikey/verify`, {
+    headers: { 'MAPI-Key': key }
+  });
+  let j = {};
+  try { j = await res.json(); } catch (e) {}
+  return { ok: res.ok, j };
+}
+
+async function autoSavePath(base, key) {
+  try {
+    const { ok, j } = await verifyConn(base, key);
+    if (ok && j?.user) {
+      const username = j.user.split('@')[0];
+      return { path: `C:/Users/${username}/Documents/gen_rc_temp_${Date.now()}.mgbx`, user: j.user, program: j.program };
+    }
+  } catch (e) {}
+  return { path: `C:/Temp/gen_rc_temp_${Date.now()}.mgbx`, user: null, program: null };
+}
+
+async function runDemo() {
+  const base = document.getElementById('baseUrl').value.trim().replace(/\/$/, '');
+  const key  = document.getElementById('mapiKey').value.trim();
+  const log  = document.getElementById('log');
+
+  if (!base || !key) {
+    log.innerHTML = '<span class="err">Base URL 과 MAPI Key 를 입력하세요 / Enter Base URL and MAPI Key.</span>';
+    return;
+  }
+
+  log.innerHTML = '<span class="info">연결 확인 중... / Checking connection...</span>';
+  try {
+    const { path, user, program } = await autoSavePath(base, key);
+    if (!user) {
+      log.innerHTML = '<span class="err">연결 실패 — MAPI Key 또는 Base URL을 확인하세요.\nConnection failed — check your MAPI Key and Base URL.</span>';
+      return;
+    }
+    log.innerHTML =
+      `<span class="ok">✔ 연결 성공 / Connected</span>\n` +
+      `  user    : ${user}\n` +
+      `  program : ${program ?? '—'}\n\n` +
+      `<span class="ok">✔ 자동 저장 경로 / Auto-save path</span>\n  ${path}\n\n` +
+      `<span class="cmt">  (이 경로로 POST /doc/saveas 가 호출됩니다 /\n   POST /doc/saveas will be called with this path)</span>`;
+  } catch (e) {
+    log.innerHTML = `<span class="err">오류 / Error: ${e.message}</span>`;
+  }
+}
+</script>
+</body>
+</html>

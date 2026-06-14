@@ -67,3 +67,33 @@ main().catch((e) => console.error(e.response?.status, e.message));
 ```
 
 > 참고: 모든 `/db/*` 요청은 `{ Assign: { "<ID>": { ... } } }` 형식을 사용합니다.
+
+---
+
+## 예제 파일 / Example Files
+
+### [auto-save-before-analysis.html](./auto-save-before-analysis.html)
+
+**KO** — 해석 실행 전 자동 저장 패턴. 핵심 흐름:
+
+1. `GET /mapikey/verify` → 로그인 이메일(`j.user`) 회수
+2. 이메일 `@` 앞 부분으로 저장 경로 동적 구성
+3. `POST /doc/saveas` → 저장 완료 후
+4. `POST /doc/anal` → 해석 실행
+
+주의 사항:
+- `/doc/saveas` 를 `/doc/anal` **보다 먼저** 호출해야 합니다. 순서가 바뀌면 Gen NX가 저장 다이얼로그를 띄워 자동화가 중단됩니다.
+- `%USERPROFILE%` 같은 환경변수는 MAPI 서버가 인식하지 못합니다. `/mapikey/verify`의 `j.user`로 경로를 직접 구성하세요.
+- 모델 생성(`PUT /db/node` 등) **전에** `PUT /db/unit`으로 단위계를 설정하세요. Gen NX가 다른 단위로 열려 있으면 좌표가 잘못 해석되어 해석 경고가 발생합니다.
+
+**EN** — Auto-save pattern before running structural analysis. Key flow:
+
+1. `GET /mapikey/verify` → retrieve logged-in user email (`j.user`)
+2. Extract username (before `@`) and build a dynamic save path
+3. `POST /doc/saveas` → save the file first
+4. `POST /doc/anal` → then run analysis
+
+Important notes:
+- Always call `/doc/saveas` **before** `/doc/anal`. Reversing the order causes Gen NX to show a save dialog, which blocks automation.
+- Environment variables like `%USERPROFILE%` are **not** resolved by the MAPI server. Build the path from `j.user` returned by `/mapikey/verify`.
+- Set the unit system via `PUT /db/unit` **before** creating model entities (`PUT /db/node`, etc.). If Gen NX is open in a different unit, coordinates will be misinterpreted and analysis warnings will occur.
