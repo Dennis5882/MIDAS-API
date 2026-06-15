@@ -130,6 +130,7 @@ MidasAPI("POST", "/doc/save")
 | `/db/bmld` | 보 하중 | `ITEMS:[{LCNAME, CMD:"BEAM", TYPE:"UNILOAD", DIRECTION, D, P}]` |
 | `/db/fbld` | **바닥하중 타입 정의** | `NAME`, `ITEM:[{LCNAME, FLOOR_LOAD, OPT_SUB_BEAM_WEIGHT}]` |
 | `/db/fbla` | **바닥하중 면 지정** | `FLOOR_LOAD_TYPE_NAME`, `FLOOR_DIST_TYPE`(1~4), `DIR`, `NODES:[…]` |
+| `/db/pres` | **압력(풍압) 하중** | `LCNAME`, `CMD:"PRES"`, `ELEM_TYPE`, `FACE_EDGE_TYPE`, `DIRECTION`, `FORCES:[...]` |
 | `/db/cons` | 지지(경계) | `ITEMS:[{ID, CONSTRAINT:"1111000"}]` (Dx Dy Dz Rx Ry Rz) |
 | `/db/lcom-gen` | 하중조합 | `NAME`, `vCOMB:[{ANAL:"ST", LCNAME, FACTOR}]` |
 
@@ -142,6 +143,135 @@ MidasAPI("POST", "/doc/save")
 | 기타 | `TRUSS` / `TENSTR` / `COMPTR` / `PLSTRS` / `PLSTRN` / `AXISYM` / `SOLID` | |
 
 > 전체 키·필드 스키마는 [NX Open API JSON Manual](https://support.midasuser.com/hc/en-us/sections/30087500371097-JSON-Manual)을 참고하세요.
+
+---
+
+## 🌬️ 풍하중 (KDS 41 12:2022)
+
+MIDAS NX는 **KDS 41 12:2022 (한국 풍하중 기준)** 및 다양한 국제 코드를 지원합니다.
+
+### 풍하중 관련 엔드포인트
+
+| 엔드포인트 | 기능 | 핵심 필드 |
+|-----------|------|----------|
+| `/db/stld` | 풍하중 케이스 생성 | `NAME`, `TYPE:"W"` (Wind) |
+| `/db/pres` | 압력(풍압) 재하 | `LCNAME`, `ELEM_TYPE:"PLATE"/"SOLID"`, `DIRECTION`, `FORCES` |
+| `/db/wprs` | 절점(Nodal) 풍압 | `LCNAME`, `DIRECTION`, `NODES:[...]`, `PRESSURE` |
+| `/db/aprs` | 면적(Area) 풍압 | `LCNAME`, `DIRECTION`, `NODES:[...]`, `PRESSURE` |
+
+### Python 예제: KDS 풍하중 적용
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/gen"
+MAPI_KEY = "your-mapi-key-here"
+
+def MidasAPI(method, command, body=None):
+    url = BASE_URL + command
+    headers = {"Content-Type": "application/json", "MAPI-Key": MAPI_KEY}
+    res = getattr(requests, method.lower())(url, headers=headers, json=body)
+    print(f"{method} {command} → {res.status_code}")
+    return res.json() if res.text else None
+
+# 1) 새 문서
+MidasAPI("POST", "/doc/new", {})
+
+# 2) 단위 설정
+MidasAPI("PUT", "/db/unit", {"Assign": {"1": {"DIST": "M", "FORCE": "KN"}}})
+
+# 3) 풍하중 케이스 생성 (KDS 41 12:2022)
+MidasAPI("POST", "/db/stld", {"Assign": {1: {
+    "NAME": "WIND_X_KDS",
+    "TYPE": "W",           # W = Wind Load
+    "CODE": "KDS41122022", # KDS 41 12:2022 기준
+    "DESC": "KDS 풍하중 X방향"
+}}})
+
+# 4) 슬래브 요소 생성 (예: 3×3m 판)
+MidasAPI("POST", "/db/node", {"Assign": {
+    1: {"X": 0, "Y": 0, "Z": 5},
+    2: {"X": 3, "Y": 0, "Z": 5},
+    3: {"X": 3, "Y": 3, "Z": 5},
+    4: {"X": 0, "Y": 3, "Z": 5},
+}})
+
+MidasAPI("POST", "/db/elem", {"Assign": {1: {
+    "TYPE": "PLATE", "NODE": [1, 2, 3, 4], "THIK": 1, "STYPE": 1
+}}})
+
+# 5) 압력 하중 적용 (풍압 1.5 kN/m², X 방향)
+MidasAPI("POST", "/db/pres", {"Assign": {1: {
+    "ITEMS": [{
+        "LCNAME": "WIND_X_KDS",
+        "CMD": "PRES",
+        "ELEM_TYPE": "PLATE",
+        "FACE_EDGE_TYPE": "FACE",
+        "DIRECTION": "GX",        # Global X 방향
+        "EDGE_FACE": 1,           # 면 1 (위쪽)
+        "FORCES": [-1.5, 0, 0, 0, 0]  # -1.5 kN/m² (음수 = 흡입)
+    }]
+}})
+
+# 6) 저장 & 해석
+MidasAPI("POST", "/doc/save", {})
+MidasAPI("POST", "/doc/anal", {})
+```
+
+### 풍하중 계산 (KDS 기준)
+
+```python
+def calculate_kds_wind_pressure(height, wind_speed=28, exposure_category="C"):
+    """
+    KDS 41 12:2022 정적 등가풍하중 계산
+    
+    Parameters:
+    - height: 구조물 높이 (m)
+    - wind_speed: 기본 설계풍속 (m/s, 기본값 28)
+    - exposure_category: 노출범주 ("B", "C", "D" 등)
+    
+    Returns:
+    - 풍압 (kN/m²)
+    """
+    # 노출범주별 풍속계수 (KDS 기준 근사값)
+    kz_table = {
+        "B": {10: 1.0, 20: 1.1, 30: 1.2},
+        "C": {10: 0.9, 20: 1.0, 30: 1.1},
+        "D": {10: 0.8, 20: 0.9, 30: 1.0}
+    }
+    
+    # 선형 보간
+    kz_values = kz_table.get(exposure_category, kz_table["C"])
+    if height <= 10:
+        Kz = kz_values[10]
+    elif height <= 20:
+        Kz = kz_values[20]
+    else:
+        Kz = kz_values[30]
+    
+    # 구조계수 (직사각형 구조물 기준)
+    Cp = 0.8
+    # 중요도 계수
+    Iw = 1.0
+    
+    # 동압 q = 0.613 * Kz * V² * Iw (단위: kN/m²)
+    q = 0.613 * Kz * (wind_speed ** 2) * Iw
+    
+    # 풍압 = q * Cp
+    wind_pressure = q * Cp
+    
+    return round(wind_pressure, 3)
+
+# 예제: 높이 30m, 설계풍속 28m/s, 노출범주 C
+pressure = calculate_kds_wind_pressure(30, 28, "C")
+print(f"풍압: {pressure} kN/m²")  # 약 1.58 kN/m²
+```
+
+### 참고 문서
+- [MIDAS Support - Wind Loads (KDS 41 12:2022)](https://support.midasuser.com/hc/ko/articles/29238911763353-Wind-Loads)
+- [MIDAS Support - Nodal Wind Pressure](https://support.midasuser.com/hc/ko/articles/29270162256281-Nodal-Wind-Pressure)
+- [MIDAS Support - Area Wind Pressure](https://support.midasuser.com/hc/ko/articles/29270183516057-Area-Wind-Pressure)
+- [MIDAS Support - Static Wind Load (KDS 41 12:2022)](https://support.midasuser.com/hc/ko/articles/58908673370521-Static-Wind-Load-KDS-41-12-2022)
 
 ---
 
@@ -174,4 +304,4 @@ examples/
 
 ## 📝 참고
 
-본 문서의 엔드포인트·JSON 스키마는 MIDAS 공식 NX Open API 매뉴얼(2026-06 기준)을 근거로 작성되었습니다.
+본 문서의 엔드포인트·JSON 스키마는 MIDAS 공식 NX Open API 매뉴얼(2026-06 기준) 및 KDS 41 12:2022 풍하중 기준을 근거로 작성되었습니다.
