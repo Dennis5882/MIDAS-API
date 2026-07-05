@@ -277,8 +277,10 @@ print(f"풍압: {pressure} kN/m²")  # 약 1.58 kN/m²
 
 ## 🔗 공식 문서
 
+- [docs/manual/INDEX.md](./docs/manual/INDEX.md) — 이 저장소에 정리된 전체 엔드포인트·JSON 스키마 한글 매뉴얼 (27개 파일)
+- [docs/AUTHENTICATION.md](./docs/AUTHENTICATION.md) — MAPI-Key 인증 설정, 언어별 예제, 보안 팁
 - [MIDAS API 온라인 매뉴얼](https://support.midasuser.com/hc/en-us/articles/33016922742937-MIDAS-API-Online-Manual)
-- [MIDAS API JSON Manual (전체 엔드포인트 스키마)](https://support.midasuser.com/hc/en-us/sections/30087500371097-JSON-Manual)
+- [MIDAS API JSON Manual (원문, 전체 엔드포인트 스키마)](https://support.midasuser.com/hc/en-us/sections/30087500371097-JSON-Manual)
 - [MIDAS CIVIL NX Open API 동작 원리](https://support.midasuser.com/hc/en-us/articles/30212837484441-How-to-work-MIDAS-CIVIL-NX-Open-API)
 - [Python 예제](https://support.midasuser.com/hc/en-us/articles/30230181806361-Example-Python)
 
@@ -286,10 +288,8 @@ print(f"풍압: {pressure} kN/m²")  # 약 1.58 kN/m²
 
 ```
 docs/
-├── API-OVERVIEW.md      # REST API, JSON, WebSocket 기본 개념
-├── AUTHENTICATION.md    # Base URL, MAPI-Key 설정
-├── ENDPOINTS.md         # 엔드포인트 가이드
-└── QUICK-START.md       # 5분 안에 시작하기
+├── AUTHENTICATION.md    # Base URL, MAPI-Key 설정, 언어별 인증 예제, 보안 팁
+└── manual/              # MIDAS API JSON Manual 전체 번역·정리 (INDEX.md부터 시작, 01~27)
 
 examples/
 ├── python/              # Python 예제

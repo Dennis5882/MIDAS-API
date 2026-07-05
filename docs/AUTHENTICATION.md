@@ -144,5 +144,5 @@ MAPI_KEY = os.getenv("MIDAS_MAPI_KEY")
 
 ## 📝 다음 단계
 
-1. [5분 시작 가이드](./QUICK-START.md) - 첫 모델 생성
-2. [엔드포인트 가이드](./ENDPOINTS.md) - 전체 엔드포인트
+1. [README 빠른 시작](../README.md#-빠른-시작-python) - 첫 모델 생성
+2. [MIDAS API JSON Manual 목차](./manual/INDEX.md) - 전체 엔드포인트·JSON 스키마
