@@ -1,0 +1,78 @@
+name: MIDAS API Manual Sync Check
+
+on:
+  schedule:
+    # 매주 월요일 03:17 UTC (정각/30분을 피해 부하 분산). 필요시 주기 조정.
+    - cron: '17 3 * * 1'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # AI 미호출 — 순수 스크립트로 홈페이지 article 목록의 id/updated_at만 비교.
+      - name: Check MIDAS API manual for changes (no AI)
+        id: diff
+        working-directory: scripts/manual_sync
+        run: |
+          if python3 check_diff.py --out /tmp/manual_diff.json; then
+            echo "has_diff=false" >> "$GITHUB_OUTPUT"
+            echo "No changes detected on the MIDAS API manual homepage."
+          else
+            echo "has_diff=true" >> "$GITHUB_OUTPUT"
+            echo "Changes detected:"
+            cat /tmp/manual_diff.json
+          fi
+
+      - uses: actions/upload-artifact@v4
+        if: steps.diff.outputs.has_diff == 'true'
+        with:
+          name: manual-diff
+          path: /tmp/manual_diff.json
+
+      # 변경이 있을 때만 이슈를 열어(또는 갱신해) 알림. 실제 패치는 사람이
+      # Claude Code 대화창에서 이 이슈 내용을 프롬프트로 넘겨 진행한다.
+      - name: Open/update notification issue
+        if: steps.diff.outputs.has_diff == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          DIFF_JSON="$(cat /tmp/manual_diff.json)"
+          TITLE="MIDAS API manual 변경 감지 ($(date -u +%Y-%m-%d))"
+          BODY=$(cat <<EOF
+          홈페이지(Zendesk JSON Manual 섹션)에서 변경이 감지되었습니다. Claude Code 대화창에서 아래 프롬프트를 붙여넣어 반영하세요.
+
+          ---
+
+          \`\`\`
+          MIDAS API JSON Manual 홈페이지에서 변경이 감지됐어. 아래 diff만 반영해서 docs/manual/을 갱신해줘 (전체 재검토 금지).
+
+          $DIFF_JSON
+
+          1. 각 article title을 ' : ' 기준으로 분리해 URI/코드를 파싱하고, docs/manual/INDEX.md 및 각 파일 상단 URI 접두사와 대조해서 몇 번 파일의 어느 '## ' 섹션에 해당하는지 찾아줘.
+          2. changed 항목은 해당 섹션만 재스크래핑(User-Agent 지정, 본문은 <section class="article-body">)해서 그 섹션만 패치해. added는 매핑 파일이 있으면 섹션 추가, 없으면 새 파일이 필요하다고만 보고해. removed는 삭제하지 말고 경고 문구만 추가해.
+          3. 끝나면 scripts/manual_sync/validate_manual.py로 검증하고, 변경이 있었으면 scripts/manual_sync/fetch_manifest.py로 매니페스트를 갱신해줘.
+          4. 마지막에 커밋·푸시는 나에게 확인 받고 진행해.
+          \`\`\`
+
+          ---
+          워크플로우 실행 로그: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          EOF
+          )
+
+          EXISTING=$(gh issue list --search "MIDAS API manual 변경 감지 in:title" --state open --json number --jq '.[0].number')
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body "$BODY"
+          else
+            gh issue create --title "$TITLE" --body "$BODY"
+          fi

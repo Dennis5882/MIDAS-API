@@ -1,0 +1,3256 @@
+{
+ "article_count": 650,
+ "articles": {
+  "33016922742937": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/33016922742937-MIDAS-API-Online-Manual",
+   "title": "MIDAS API Online Manual",
+   "updated_at": "2026-07-02T08:59:24Z"
+  },
+  "35409287717657": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35409287717657-Main-Control-Data",
+   "title": "Main Control Data",
+   "updated_at": "2025-11-04T00:20:01Z"
+  },
+  "35523395368985": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35523395368985-Active",
+   "title": "Active",
+   "updated_at": "2025-12-17T03:02:23Z"
+  },
+  "35685160815897": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35685160815897-Perform-Analysis",
+   "title": "Perform Analysis",
+   "updated_at": "2025-02-06T06:52:23Z"
+  },
+  "35736247981209": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35736247981209-Viewpoint",
+   "title": "Viewpoint",
+   "updated_at": "2025-03-07T07:53:35Z"
+  },
+  "35736427971225": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35736427971225-Auto-Mesh-Planar-Area",
+   "title": "Auto-Mesh Planar Area",
+   "updated_at": "2025-03-07T08:54:23Z"
+  },
+  "35736960800281": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35736960800281-Boundary-Change-Assignment",
+   "title": "Boundary Change Assignment",
+   "updated_at": "2025-11-04T00:20:03Z"
+  },
+  "35801869341337": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35801869341337-Project-Information",
+   "title": "Project Information",
+   "updated_at": "2025-02-06T06:52:50Z"
+  },
+  "35802155483801": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35802155483801-Unit-System",
+   "title": "Unit System",
+   "updated_at": "2025-02-06T06:53:10Z"
+  },
+  "35802404495257": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35802404495257-Structure-Type",
+   "title": "Structure Type",
+   "updated_at": "2025-02-06T06:53:33Z"
+  },
+  "35802441712921": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35802441712921-Structure-Group",
+   "title": "Structure Group",
+   "updated_at": "2025-11-04T00:18:15Z"
+  },
+  "35804937452313": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35804937452313-Boundary-Group",
+   "title": "Boundary Group",
+   "updated_at": "2025-02-06T06:54:56Z"
+  },
+  "35804975346841": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35804975346841-Load-Group",
+   "title": "Load Group",
+   "updated_at": "2025-02-06T06:55:17Z"
+  },
+  "35805198736793": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35805198736793-Tendon-Group",
+   "title": "Tendon Group",
+   "updated_at": "2025-02-06T06:55:40Z"
+  },
+  "35805287066649": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35805287066649-Named-Plane",
+   "title": "Named Plane",
+   "updated_at": "2025-02-06T06:56:00Z"
+  },
+  "35805703171353": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35805703171353-Material-Color",
+   "title": "Material Color",
+   "updated_at": "2025-02-06T06:57:46Z"
+  },
+  "35805763514393": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35805763514393-Section-Color",
+   "title": "Section Color",
+   "updated_at": "2025-02-06T06:58:08Z"
+  },
+  "35805833925785": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35805833925785-Thickness-Color",
+   "title": "Thickness Color",
+   "updated_at": "2025-02-06T06:58:28Z"
+  },
+  "35805846236441": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35805846236441-Floor-Load-Color",
+   "title": "Floor Load Color",
+   "updated_at": "2025-09-17T06:22:27Z"
+  },
+  "35805957502233": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35805957502233-Span-Information",
+   "title": "Span Information",
+   "updated_at": "2025-02-06T06:59:14Z"
+  },
+  "35806845654169": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35806845654169-Node",
+   "title": "Node",
+   "updated_at": "2025-02-06T06:59:36Z"
+  },
+  "35806934300825": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35806934300825-Element",
+   "title": "Element",
+   "updated_at": "2025-11-04T00:18:17Z"
+  },
+  "35807178748569": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35807178748569-Node-Local-Axis",
+   "title": "Node Local Axis",
+   "updated_at": "2025-02-06T07:00:29Z"
+  },
+  "35807228332825": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35807228332825-Define-Domain",
+   "title": "Define Domain",
+   "updated_at": "2025-02-06T07:00:51Z"
+  },
+  "35807304820761": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35807304820761-Define-Sub-Domain",
+   "title": "Define Sub-Domain",
+   "updated_at": "2025-11-04T00:15:03Z"
+  },
+  "35807341514393": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35807341514393-Domain-Element",
+   "title": "Domain-Element",
+   "updated_at": "2025-02-06T07:01:37Z"
+  },
+  "35807411331993": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35807411331993-Material-Properties",
+   "title": "Material Properties",
+   "updated_at": "2025-11-04T00:15:06Z"
+  },
+  "35807475893401": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35807475893401-Inelastic-Material-Properties-for-Fiber-Model",
+   "title": "Inelastic Material Properties for Fiber Model",
+   "updated_at": "2025-02-06T07:02:23Z"
+  },
+  "35807665049369": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35807665049369-Time-Dependent-Material-Properties-User-Defined",
+   "title": "Time Dependent Material Properties - User Defined",
+   "updated_at": "2025-02-06T07:02:49Z"
+  },
+  "35808006330009": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35808006330009-Time-Dependent-Material-Properties-Creep-Shrinkage",
+   "title": "Time Dependent Material Properties - Creep/Shrinkage",
+   "updated_at": "2025-09-17T06:20:17Z"
+  },
+  "35808102389401": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35808102389401-Time-Dependent-Material-Properties-Compressive-Strength",
+   "title": "Time Dependent Material Properties - Compressive Strength",
+   "updated_at": "2025-08-12T01:02:49Z"
+  },
+  "35808245801881": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35808245801881-Change-Property",
+   "title": "Change Property",
+   "updated_at": "2025-02-06T07:04:01Z"
+  },
+  "35808280891033": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35808280891033-Time-Dependent-Material-Link",
+   "title": "Time Dependent Material Link",
+   "updated_at": "2025-02-06T07:04:22Z"
+  },
+  "35808376517913": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35808376517913-Plastic-Material",
+   "title": "Plastic Material",
+   "updated_at": "2025-02-06T07:04:51Z"
+  },
+  "35808653964185": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35808653964185-Section-Properties-Common",
+   "title": "Section Properties - Common",
+   "updated_at": "2025-11-04T00:18:17Z"
+  },
+  "35809067039513": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35809067039513-Section-Properties-DB-User",
+   "title": "Section Properties - DB/User",
+   "updated_at": "2025-11-04T00:15:04Z"
+  },
+  "35839753881497": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35839753881497-Section-Properties-Value",
+   "title": "Section Properties - Value",
+   "updated_at": "2026-06-19T04:05:53Z"
+  },
+  "35845378225689": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35845378225689-Section-Properties-SRC",
+   "title": "Section Properties - SRC",
+   "updated_at": "2025-02-06T07:18:09Z"
+  },
+  "35851350827801": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35851350827801-Section-Properties-Combined",
+   "title": "Section Properties - Combined",
+   "updated_at": "2025-02-06T07:35:52Z"
+  },
+  "35851688190105": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35851688190105-Section-Properties-PSC",
+   "title": "Section Properties - PSC",
+   "updated_at": "2025-02-06T07:43:14Z"
+  },
+  "35852806893593": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35852806893593-Section-Properties-Tapered-DB-User",
+   "title": "Section Properties - Tapered - DB/User",
+   "updated_at": "2025-11-04T00:17:28Z"
+  },
+  "35938685208089": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35938685208089-Section-Properties-Tapered-Value",
+   "title": "Section Properties - Tapered - Value",
+   "updated_at": "2025-03-25T07:02:18Z"
+  },
+  "35938998724377": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35938998724377-Section-Properties-Composite-PSC",
+   "title": "Section Properties - Composite - PSC",
+   "updated_at": "2025-02-06T08:01:39Z"
+  },
+  "35939122737689": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35939122737689-Section-Properties-Composite-Steel",
+   "title": "Section Properties - Composite - Steel",
+   "updated_at": "2025-11-04T00:17:27Z"
+  },
+  "35939506348697": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35939506348697-Section-Properties-Steel-Girder",
+   "title": "Section Properties - Steel Girder",
+   "updated_at": "2025-08-20T07:59:18Z"
+  },
+  "35941360898713": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35941360898713-Section-Properties-Tapered-PSC",
+   "title": "Section Properties - Tapered - PSC",
+   "updated_at": "2025-03-25T07:13:47Z"
+  },
+  "35941514067225": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35941514067225-Section-Properties-Tapered-Composite-PSC",
+   "title": "Section Properties - Tapered - Composite PSC",
+   "updated_at": "2025-03-31T04:21:04Z"
+  },
+  "35941644806553": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35941644806553-Section-Properties-Tapered-Composite-Steel",
+   "title": "Section Properties - Tapered - Composite Steel",
+   "updated_at": "2025-03-25T07:16:35Z"
+  },
+  "35941809011225": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35941809011225-Section-Properties-Tapered-Steel-Girder",
+   "title": "Section Properties - Tapered - Steel Girder",
+   "updated_at": "2025-03-25T07:17:23Z"
+  },
+  "35942236652697": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35942236652697-Thickness-Value",
+   "title": "Thickness - Value",
+   "updated_at": "2025-03-05T10:37:24Z"
+  },
+  "35942342783769": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35942342783769-Thickness-Stiffened-DB",
+   "title": "Thickness - Stiffened DB",
+   "updated_at": "2025-11-04T00:15:02Z"
+  },
+  "35942603029401": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35942603029401-Thickness-Stiffened-User",
+   "title": "Thickness - Stiffened User",
+   "updated_at": "2025-03-05T10:45:13Z"
+  },
+  "35942739673369": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35942739673369-Thickness-Stiffened-Value",
+   "title": "Thickness - Stiffened Value",
+   "updated_at": "2025-03-05T10:48:16Z"
+  },
+  "35942955627673": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35942955627673-Tapered-Group",
+   "title": "Tapered Group",
+   "updated_at": "2025-03-05T10:57:17Z"
+  },
+  "35943174833177": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35943174833177-Section-Manager-Stiffness",
+   "title": "Section Manager - Stiffness",
+   "updated_at": "2025-03-05T11:00:34Z"
+  },
+  "35943227821465": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35943227821465-Section-Manager-Reinforcements",
+   "title": "Section Manager - Reinforcements",
+   "updated_at": "2026-01-12T06:03:33Z"
+  },
+  "35943448721177": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35943448721177-Section-Manager-Stress-Points",
+   "title": "Section Manager - Stress Points",
+   "updated_at": "2025-03-05T11:06:15Z"
+  },
+  "35943557337753": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35943557337753-Section-Manager-Plate-Stiffness-Scale-Factor",
+   "title": "Section Manager - Plate Stiffness Scale Factor",
+   "updated_at": "2025-03-05T11:08:16Z"
+  },
+  "35943802727065": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35943802727065-Section-Manager-Section-for-Resultant-Forces-Virtual-Beam",
+   "title": "Section Manager - Section for Resultant Forces - Virtual Beam",
+   "updated_at": "2025-03-05T11:10:15Z"
+  },
+  "35943859944729": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35943859944729-Section-Manager-Section-for-Resultant-Forces-Virtual-Section",
+   "title": "Section Manager - Section for Resultant Forces - Virtual Section",
+   "updated_at": "2025-03-05T11:12:20Z"
+  },
+  "35943954272281": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35943954272281-Effective-Width-Scale-Factor",
+   "title": "Effective Width Scale Factor",
+   "updated_at": "2025-03-05T11:14:53Z"
+  },
+  "35944093809689": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35944093809689-Inelastic-Hinge-Control-Data",
+   "title": "Inelastic Hinge Control Data",
+   "updated_at": "2025-11-04T00:15:04Z"
+  },
+  "35944228031001": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35944228031001-Assign-Inelastic-Hinge-Properties",
+   "title": "Assign Inelastic Hinge Properties",
+   "updated_at": "2025-03-05T11:18:44Z"
+  },
+  "35944335180569": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35944335180569-Inelastic-Material-Properties",
+   "title": "Inelastic Material Properties",
+   "updated_at": "2025-03-05T11:40:37Z"
+  },
+  "35944476555801": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35944476555801-Fiber-Division-of-Section",
+   "title": "Fiber Division of Section",
+   "updated_at": "2025-03-05T11:43:15Z"
+  },
+  "35944577940633": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35944577940633-Group-Damping",
+   "title": "Group Damping",
+   "updated_at": "2025-03-05T11:47:57Z"
+  },
+  "35944759597337": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35944759597337-Constraint-Support",
+   "title": "Constraint Support",
+   "updated_at": "2025-11-04T00:15:03Z"
+  },
+  "35945908301081": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35945908301081-Point-Spring",
+   "title": "Point Spring",
+   "updated_at": "2025-03-06T00:11:23Z"
+  },
+  "35946004118169": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35946004118169-Define-General-Spring-Type",
+   "title": "Define General Spring Type",
+   "updated_at": "2025-03-06T00:03:56Z"
+  },
+  "35946151002393": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35946151002393-Assign-General-Spring-Supports",
+   "title": "Assign General Spring Supports",
+   "updated_at": "2025-03-06T00:05:45Z"
+  },
+  "35946218805785": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35946218805785-Surface-Spring",
+   "title": "Surface Spring",
+   "updated_at": "2025-03-31T04:24:17Z"
+  },
+  "35946439146649": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35946439146649-Elastic-Link",
+   "title": "Elastic Link",
+   "updated_at": "2025-11-04T00:17:25Z"
+  },
+  "35946584247193": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35946584247193-Rigid-Link",
+   "title": "Rigid Link",
+   "updated_at": "2025-03-06T00:17:53Z"
+  },
+  "35946764618905": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35946764618905-General-Link-Properties",
+   "title": "General Link Properties",
+   "updated_at": "2026-02-23T05:33:13Z"
+  },
+  "35946942651289": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35946942651289-General-Link",
+   "title": "General Link",
+   "updated_at": "2025-03-06T00:31:28Z"
+  },
+  "35947087784217": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35947087784217-Change-General-Link-Property",
+   "title": "Change General Link Property",
+   "updated_at": "2025-03-06T00:32:52Z"
+  },
+  "35947184258585": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35947184258585-Beam-End-Release",
+   "title": "Beam End Release",
+   "updated_at": "2025-11-04T00:15:03Z"
+  },
+  "35947465569049": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35947465569049-Beam-End-Offsets",
+   "title": "Beam End Offsets",
+   "updated_at": "2025-03-06T00:37:37Z"
+  },
+  "35947668757017": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35947668757017-Plate-End-Release",
+   "title": "Plate End Release",
+   "updated_at": "2025-03-06T00:39:52Z"
+  },
+  "35947795463705": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35947795463705-Force-Deformation-Function",
+   "title": "Force-Deformation Function",
+   "updated_at": "2025-03-06T00:42:36Z"
+  },
+  "35947995586713": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35947995586713-Seismic-Device-Viscous-Damper-Oil-Damper",
+   "title": "Seismic Device - Viscous Damper/Oil Damper",
+   "updated_at": "2025-03-06T00:46:03Z"
+  },
+  "35948062417049": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35948062417049-Seismic-Device-Viscoelastic-Damper",
+   "title": "Seismic Device - Viscoelastic Damper",
+   "updated_at": "2025-03-06T00:48:42Z"
+  },
+  "35948150053529": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35948150053529-Seismic-Device-Steel-Damper",
+   "title": "Seismic Device - Steel Damper",
+   "updated_at": "2025-03-06T00:51:29Z"
+  },
+  "35948292269977": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35948292269977-Seismic-Device-Hysteretic-Isolator-MSS",
+   "title": "Seismic Device - Hysteretic Isolator(MSS)",
+   "updated_at": "2025-03-06T00:53:48Z"
+  },
+  "35948330042649": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35948330042649-Seismic-Device-Isolator-MSS",
+   "title": "Seismic Device - Isolator(MSS)",
+   "updated_at": "2025-03-06T00:57:16Z"
+  },
+  "35948507217689": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35948507217689-Linear-Constraints",
+   "title": "Linear Constraints",
+   "updated_at": "2025-03-06T00:59:49Z"
+  },
+  "35950231812505": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35950231812505-Panel-Zone-Effects",
+   "title": "Panel Zone Effects",
+   "updated_at": "2025-03-06T01:01:17Z"
+  },
+  "35952465579417": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35952465579417-Define-Constraints-Label-Direction",
+   "title": "Define Constraints Label Direction",
+   "updated_at": "2025-03-06T01:02:46Z"
+  },
+  "35952651947801": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35952651947801-Static-Load-Cases",
+   "title": "Static Load Cases",
+   "updated_at": "2025-11-04T00:15:01Z"
+  },
+  "35952708909337": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35952708909337-Self-Weight",
+   "title": "Self-Weight",
+   "updated_at": "2025-03-06T01:53:49Z"
+  },
+  "35952812160281": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35952812160281-Nodal-Loads",
+   "title": "Nodal Loads",
+   "updated_at": "2025-03-06T01:55:33Z"
+  },
+  "35952826746521": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35952826746521-Beam-Loads",
+   "title": "Beam Loads",
+   "updated_at": "2025-03-06T02:01:25Z"
+  },
+  "35952933108761": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35952933108761-Specified-Displacements-of-Support",
+   "title": "Specified Displacements of Support",
+   "updated_at": "2025-03-06T02:03:32Z"
+  },
+  "35952994344985": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35952994344985-Nodal-Masses",
+   "title": "Nodal Masses",
+   "updated_at": "2025-03-06T02:05:02Z"
+  },
+  "35953062761881": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35953062761881-Loads-to-Masses",
+   "title": "Loads to Masses",
+   "updated_at": "2025-03-06T02:06:51Z"
+  },
+  "35953117115545": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35953117115545-Nodal-Body-Force",
+   "title": "Nodal Body Force",
+   "updated_at": "2025-03-06T02:11:42Z"
+  },
+  "35953165879833": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35953165879833-Define-Pressure-Load-Type",
+   "title": "Define Pressure Load Type",
+   "updated_at": "2025-11-04T00:17:27Z"
+  },
+  "35953322434457": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35953322434457-Assign-Pressure-Loads",
+   "title": "Assign Pressure Loads",
+   "updated_at": "2025-11-04T00:15:02Z"
+  },
+  "35953492119321": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35953492119321-Define-Plane-Load-Type",
+   "title": "Define Plane Load Type",
+   "updated_at": "2025-03-06T02:30:00Z"
+  },
+  "35953557411993": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35953557411993-Assign-Plane-Loads",
+   "title": "Assign Plane Loads",
+   "updated_at": "2025-03-06T02:39:26Z"
+  },
+  "35953604106137": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35953604106137-Define-Floor-Load-Type",
+   "title": "Define Floor Load Type",
+   "updated_at": "2025-03-06T02:41:15Z"
+  },
+  "35953653792665": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35953653792665-Assign-Floor-Loads",
+   "title": "Assign Floor Loads",
+   "updated_at": "2025-03-06T02:44:30Z"
+  },
+  "35953690148121": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35953690148121-Finishing-Material-Loads",
+   "title": "Finishing Material Loads",
+   "updated_at": "2025-03-06T02:46:41Z"
+  },
+  "35954097233561": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35954097233561-Element-Temperature",
+   "title": "Element Temperature",
+   "updated_at": "2025-03-06T04:11:32Z"
+  },
+  "35954163821593": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35954163821593-Temperature-Gradient",
+   "title": "Temperature Gradient",
+   "updated_at": "2025-03-06T04:13:50Z"
+  },
+  "35954186047897": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35954186047897-Beam-Section-Temperature",
+   "title": "Beam Section Temperature",
+   "updated_at": "2025-11-04T00:17:26Z"
+  },
+  "35954219102233": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35954219102233-System-Temperature",
+   "title": "System Temperature",
+   "updated_at": "2025-03-06T04:19:03Z"
+  },
+  "35954302641177": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35954302641177-Nodal-Temperature",
+   "title": "Nodal Temperature",
+   "updated_at": "2025-03-06T04:20:33Z"
+  },
+  "35954451663513": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35954451663513-Tendon-Property",
+   "title": "Tendon Property",
+   "updated_at": "2025-11-04T00:15:04Z"
+  },
+  "35954555962137": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35954555962137-Tendon-Profile",
+   "title": "Tendon Profile",
+   "updated_at": "2025-03-06T05:20:54Z"
+  },
+  "35954649371545": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35954649371545-Tendon-Location-for-Composite-Section",
+   "title": "Tendon Location for Composite Section",
+   "updated_at": "2025-03-06T05:24:06Z"
+  },
+  "35954702397209": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35954702397209-Tendon-Prestress",
+   "title": "Tendon Prestress",
+   "updated_at": "2025-03-06T05:25:59Z"
+  },
+  "35954744402713": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35954744402713-Prestress-Beam-Loads",
+   "title": "Prestress Beam Loads",
+   "updated_at": "2025-03-06T05:27:55Z"
+  },
+  "35954793469593": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35954793469593-Pretension-Loads",
+   "title": "Pretension Loads",
+   "updated_at": "2025-03-06T05:29:21Z"
+  },
+  "35954841849753": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35954841849753-External-Type-Load-Case-for-Pretension",
+   "title": "External Type Load Case for Pretension",
+   "updated_at": "2025-03-06T05:30:50Z"
+  },
+  "35955076795929": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35955076795929-Moving-Load-Code",
+   "title": "Moving Load Code",
+   "updated_at": "2025-11-04T00:17:25Z"
+  },
+  "35955170613273": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35955170613273-Traffic-Line-Lanes",
+   "title": "Traffic Line Lanes",
+   "updated_at": "2025-03-06T05:38:32Z"
+  },
+  "35955208713241": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35955208713241-Traffic-Line-Lanes-China",
+   "title": "Traffic Line Lanes - China",
+   "updated_at": "2025-03-06T05:43:03Z"
+  },
+  "35955251576089": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35955251576089-Traffic-Line-Lanes-India",
+   "title": "Traffic Line Lanes - India",
+   "updated_at": "2025-03-06T05:45:01Z"
+  },
+  "35955355080217": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35955355080217-Traffic-Line-Lanes-Transverse",
+   "title": "Traffic Line Lanes - Transverse",
+   "updated_at": "2025-03-06T05:46:42Z"
+  },
+  "35955410961689": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35955410961689-Traffic-Line-Lanes-Moving-Load-Optimizaion",
+   "title": "Traffic Line Lanes - Moving Load Optimizaion",
+   "updated_at": "2025-03-06T05:49:56Z"
+  },
+  "35956862556313": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35956862556313-Traffic-Surface-Lanes",
+   "title": "Traffic Surface Lanes",
+   "updated_at": "2025-03-06T05:53:03Z"
+  },
+  "35956917206425": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35956917206425-Traffic-Surface-Lanes-China",
+   "title": "Traffic Surface Lanes - China",
+   "updated_at": "2025-03-06T05:54:53Z"
+  },
+  "35956982840473": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35956982840473-Traffic-Surface-Lanes-Moving-Load-Optimization",
+   "title": "Traffic Surface Lanes - Moving Load Optimization",
+   "updated_at": "2025-12-22T08:32:14Z"
+  },
+  "35957125531545": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35957125531545-Vehicles-AASHTO-Standard",
+   "title": "Vehicles - AASHTO Standard",
+   "updated_at": "2025-11-04T00:15:03Z"
+  },
+  "35957229130521": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35957229130521-Vehicles-AASHTO-LRFD",
+   "title": "Vehicles - AASHTO LRFD",
+   "updated_at": "2025-11-04T00:15:03Z"
+  },
+  "35957369367321": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35957369367321-Vehicles-PENNDOT",
+   "title": "Vehicles - PENNDOT",
+   "updated_at": "2025-11-04T00:17:25Z"
+  },
+  "35957455014041": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35957455014041-Vehicles-Canada",
+   "title": "Vehicles - Canada",
+   "updated_at": "2025-11-04T00:17:25Z"
+  },
+  "35957522468889": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35957522468889-Vehicles-BS",
+   "title": "Vehicles - BS",
+   "updated_at": "2025-11-04T00:15:02Z"
+  },
+  "35957725805977": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35957725805977-Vehicles-Eurocode",
+   "title": "Vehicles - Eurocode",
+   "updated_at": "2025-11-04T00:15:01Z"
+  },
+  "35957830747033": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35957830747033-Vehicles-Australia",
+   "title": "Vehicles - Australia",
+   "updated_at": "2025-03-07T00:59:07Z"
+  },
+  "35957893970457": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35957893970457-Vehicles-Poland",
+   "title": "Vehicles - Poland",
+   "updated_at": "2025-03-07T01:05:13Z"
+  },
+  "35958016039577": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35958016039577-Vehicles-Russia",
+   "title": "Vehicles - Russia",
+   "updated_at": "2025-03-07T01:18:10Z"
+  },
+  "35958066812057": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35958066812057-Vehicles-South-Africa",
+   "title": "Vehicles - South Africa",
+   "updated_at": "2025-03-07T01:37:45Z"
+  },
+  "35958302958745": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35958302958745-Vehicles-Korea",
+   "title": "Vehicles - Korea",
+   "updated_at": "2025-03-07T01:41:06Z"
+  },
+  "35958367637273": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35958367637273-Vehicles-KSCE-LSD15",
+   "title": "Vehicles - KSCE-LSD15",
+   "updated_at": "2025-03-07T01:45:49Z"
+  },
+  "35958523379353": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35958523379353-Vehicles-China",
+   "title": "Vehicles - China",
+   "updated_at": "2025-03-07T01:51:42Z"
+  },
+  "35958578983065": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35958578983065-Vehicles-India",
+   "title": "Vehicles - India",
+   "updated_at": "2025-11-04T00:09:47Z"
+  },
+  "35958804436633": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35958804436633-Vehicles-Taiwan",
+   "title": "Vehicles - Taiwan",
+   "updated_at": "2025-03-07T02:02:32Z"
+  },
+  "35958910039321": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35958910039321-Vehicles-Transverse",
+   "title": "Vehicles - Transverse",
+   "updated_at": "2025-03-07T02:04:37Z"
+  },
+  "35959068573209": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35959068573209-Moving-Load-Cases",
+   "title": "Moving Load Cases",
+   "updated_at": "2025-11-04T00:20:00Z"
+  },
+  "35960417354649": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35960417354649-Moving-Load-Cases-China",
+   "title": "Moving Load Cases - China",
+   "updated_at": "2025-08-29T06:51:13Z"
+  },
+  "35961164029593": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35961164029593-Moving-Load-Cases-India",
+   "title": "Moving Load Cases - India",
+   "updated_at": "2025-08-29T06:51:14Z"
+  },
+  "35961459443737": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35961459443737-Moving-Load-Cases-BS",
+   "title": "Moving Load Cases - BS",
+   "updated_at": "2025-08-29T06:50:59Z"
+  },
+  "35961579883929": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35961579883929-Moving-Load-Cases-Eurocode",
+   "title": "Moving Load Cases - Eurocode",
+   "updated_at": "2025-08-29T06:51:47Z"
+  },
+  "35961922701209": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35961922701209-Moving-Load-Cases-Poland",
+   "title": "Moving Load Cases - Poland",
+   "updated_at": "2025-08-29T06:51:18Z"
+  },
+  "35961950207129": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35961950207129-Moving-Load-Cases-Transverse",
+   "title": "Moving Load Cases - Transverse",
+   "updated_at": "2025-08-29T06:52:10Z"
+  },
+  "35962261902745": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35962261902745-Concurrent-Reaction-Group",
+   "title": "Concurrent Reaction Group",
+   "updated_at": "2025-03-07T04:18:00Z"
+  },
+  "35962376351769": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35962376351769-Concurrent-Joint-Force-Group",
+   "title": "Concurrent Joint Force Group",
+   "updated_at": "2025-03-07T04:19:27Z"
+  },
+  "35962463156761": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35962463156761-Vehicle-Classes",
+   "title": "Vehicle Classes",
+   "updated_at": "2025-03-07T04:21:02Z"
+  },
+  "35962659347481": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35962659347481-Plate-Element-for-Influence-Surface",
+   "title": "Plate Element for Influence Surface",
+   "updated_at": "2025-03-07T04:22:18Z"
+  },
+  "35962967211545": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35962967211545-Lane-Support-Negative-Moments-at-Interior-Piers",
+   "title": "Lane Support - Negative Moments at Interior Piers",
+   "updated_at": "2025-03-07T04:28:00Z"
+  },
+  "35963167875225": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35963167875225-Lane-Support-Reactions-at-Interior-Piers",
+   "title": "Lane Support - Reactions at Interior Piers",
+   "updated_at": "2025-03-07T04:29:35Z"
+  },
+  "35963288573849": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35963288573849-Dynamic-Load-Allowance",
+   "title": "Dynamic Load Allowance",
+   "updated_at": "2025-03-07T04:30:50Z"
+  },
+  "35963359844889": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35963359844889-Additional-Impact-Factor",
+   "title": "Additional Impact Factor",
+   "updated_at": "2025-03-07T04:35:05Z"
+  },
+  "35963474883097": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35963474883097-Railway-Dynamic-Factor",
+   "title": "Railway Dynamic Factor",
+   "updated_at": "2025-03-07T04:37:17Z"
+  },
+  "35963520535577": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35963520535577-Railway-Dynamic-Factor-by-Element",
+   "title": "Railway Dynamic Factor by Element",
+   "updated_at": "2025-03-07T04:39:07Z"
+  },
+  "35963686253593": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35963686253593-Response-Spectrum-Functions-User-Type",
+   "title": "Response Spectrum Functions - User Type",
+   "updated_at": "2025-03-06T07:59:22Z"
+  },
+  "35963719599641": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35963719599641-Response-Spectrum-Load-Cases",
+   "title": "Response Spectrum Load Cases",
+   "updated_at": "2025-11-04T00:19:06Z"
+  },
+  "35963819140505": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35963819140505-Time-History-Global-Control",
+   "title": "Time History Global Control",
+   "updated_at": "2025-11-04T00:19:07Z"
+  },
+  "35963903917593": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35963903917593-Time-History-Load-Cases",
+   "title": "Time History Load Cases",
+   "updated_at": "2025-08-20T03:31:48Z"
+  },
+  "35964507702937": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35964507702937-Time-History-Functions",
+   "title": "Time History Functions",
+   "updated_at": "2025-03-06T07:49:49Z"
+  },
+  "35964586306841": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35964586306841-Dynamic-Nodal-Loads",
+   "title": "Dynamic Nodal Loads",
+   "updated_at": "2025-03-06T07:53:47Z"
+  },
+  "35964590740633": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35964590740633-Ground-Acceleration",
+   "title": "Ground Acceleration",
+   "updated_at": "2025-03-06T07:52:06Z"
+  },
+  "35964656837785": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35964656837785-Time-Varying-Static-Loads",
+   "title": "Time Varying Static Loads",
+   "updated_at": "2025-03-06T07:55:11Z"
+  },
+  "35964708397081": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35964708397081-Multiple-Support-Excitation",
+   "title": "Multiple Support Excitation",
+   "updated_at": "2025-03-06T07:57:05Z"
+  },
+  "35987578396697": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35987578396697-Define-Construction-Stage",
+   "title": "Define Construction Stage",
+   "updated_at": "2025-03-06T06:02:45Z"
+  },
+  "35987625234201": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35987625234201-Composite-Section-for-Construction-Stage",
+   "title": "Composite Section for Construction Stage",
+   "updated_at": "2025-03-06T06:05:47Z"
+  },
+  "35987743311385": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35987743311385-Time-Loads-for-Construction-Stage",
+   "title": "Time Loads for Construction Stage",
+   "updated_at": "2025-03-06T06:09:20Z"
+  },
+  "35987807611161": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35987807611161-Camber-for-Construction-Stage",
+   "title": "Camber for Construction Stage",
+   "updated_at": "2025-03-06T06:28:51Z"
+  },
+  "35987833076505": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35987833076505-Set-Back-Loads-for-Nonlinear-Construction-Stage",
+   "title": "Set-Back Loads for Nonlinear Construction Stage",
+   "updated_at": "2025-03-06T06:12:26Z"
+  },
+  "35987878971545": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35987878971545-Creep-Coefficient-for-Construction-Stage",
+   "title": "Creep Coefficient for Construction Stage",
+   "updated_at": "2025-03-06T06:30:18Z"
+  },
+  "35988049086489": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35988049086489-Ambient-Temperature-Functions",
+   "title": "Ambient Temperature Functions",
+   "updated_at": "2025-03-07T04:46:27Z"
+  },
+  "35988168533785": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35988168533785-Convection-Coefficient-Functions",
+   "title": "Convection Coefficient Functions",
+   "updated_at": "2025-03-07T04:48:17Z"
+  },
+  "35988210740761": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35988210740761-Element-Convection-Boundary",
+   "title": "Element Convection Boundary",
+   "updated_at": "2025-03-07T04:49:52Z"
+  },
+  "35988262538521": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35988262538521-Prescribed-Temperature",
+   "title": "Prescribed Temperature",
+   "updated_at": "2025-03-07T04:51:20Z"
+  },
+  "35988291377305": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35988291377305-Heat-Source-Functions",
+   "title": "Heat Source Functions",
+   "updated_at": "2025-03-07T04:53:30Z"
+  },
+  "35988378892441": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35988378892441-Assign-Heat-Source",
+   "title": "Assign Heat Source",
+   "updated_at": "2025-03-07T04:55:01Z"
+  },
+  "35988420776345": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35988420776345-Pipe-Cooling",
+   "title": "Pipe Cooling",
+   "updated_at": "2025-03-07T04:56:43Z"
+  },
+  "35988442589465": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35988442589465-Define-Construction-Stage-for-Hydration",
+   "title": "Define Construction Stage for Hydration",
+   "updated_at": "2025-03-07T04:59:04Z"
+  },
+  "35988516836633": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35988516836633-Settlement-Group",
+   "title": "Settlement Group",
+   "updated_at": "2025-03-07T05:00:26Z"
+  },
+  "35988560566425": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35988560566425-Settlement-Load-Cases",
+   "title": "Settlement Load Cases",
+   "updated_at": "2025-03-07T05:15:46Z"
+  },
+  "35988644139673": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35988644139673-Pre-composite-Section",
+   "title": "Pre-composite Section",
+   "updated_at": "2025-03-07T05:32:01Z"
+  },
+  "35988663234329": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35988663234329-Load-Sequence-for-Nonlinear",
+   "title": "Load Sequence for Nonlinear",
+   "updated_at": "2025-03-07T05:33:20Z"
+  },
+  "35988728179097": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35988728179097-Wave-Loads",
+   "title": "Wave Loads",
+   "updated_at": "2025-03-07T05:34:49Z"
+  },
+  "35988790960921": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35988790960921-Ignore-Elements-for-Load-Cases",
+   "title": "Ignore Elements for Load Cases",
+   "updated_at": "2025-03-07T05:36:13Z"
+  },
+  "35988857497113": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35988857497113-Large-Displacement-Initial-Forces-for-Geometric-Stiffness",
+   "title": "Large Displacement - Initial Forces for Geometric Stiffness",
+   "updated_at": "2025-03-07T05:37:44Z"
+  },
+  "35988927684633": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35988927684633-Small-Displacement-Initial-Force-Control-Data",
+   "title": "Small Displacement - Initial Force Control Data",
+   "updated_at": "2025-03-07T05:39:28Z"
+  },
+  "35988975670937": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35988975670937-Small-Displacement-Initial-Element-Force",
+   "title": "Small Displacement - Initial Element Force",
+   "updated_at": "2025-03-07T05:40:56Z"
+  },
+  "35989163268249": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35989163268249-P-Delta-Analysis-Control",
+   "title": "P-Delta Analysis Control",
+   "updated_at": "2025-03-07T05:56:55Z"
+  },
+  "35989190592537": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35989190592537-Buckling-Analysis-Control",
+   "title": "Buckling Analysis Control",
+   "updated_at": "2025-03-07T05:58:38Z"
+  },
+  "35989224565273": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35989224565273-Eigenvalue-Analysis-Control",
+   "title": "Eigenvalue Analysis Control",
+   "updated_at": "2026-01-13T07:28:09Z"
+  },
+  "35989317531417": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35989317531417-Heat-of-Hydration-Analysis-Control",
+   "title": "Heat of Hydration Analysis Control",
+   "updated_at": "2025-03-07T06:13:09Z"
+  },
+  "35989483364633": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35989483364633-Moving-Load-Analysis-Control",
+   "title": "Moving Load Analysis Control",
+   "updated_at": "2025-08-13T02:09:06Z"
+  },
+  "35989643553305": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35989643553305-Moving-Load-Analysis-Control-India",
+   "title": "Moving Load Analysis Control - India",
+   "updated_at": "2025-08-13T02:48:33Z"
+  },
+  "35989644995609": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35989644995609-Moving-Load-Analysis-Control-China",
+   "title": "Moving Load Analysis Control - China",
+   "updated_at": "2025-08-13T02:47:44Z"
+  },
+  "35989838706969": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35989838706969-Moving-Load-Analysis-Control-BS",
+   "title": "Moving Load Analysis Control - BS",
+   "updated_at": "2025-08-13T02:46:50Z"
+  },
+  "35989924517401": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35989924517401-Moving-Load-Analysis-Control-Transverse",
+   "title": "Moving Load Analysis Control - Transverse",
+   "updated_at": "2025-08-13T02:49:56Z"
+  },
+  "35990184995481": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35990184995481-Settlement-Analysis-Control-Data",
+   "title": "Settlement Analysis Control Data",
+   "updated_at": "2025-03-07T06:45:02Z"
+  },
+  "35990229420441": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35990229420441-Nonlinear-Analysis-Control-Data",
+   "title": "Nonlinear Analysis Control Data",
+   "updated_at": "2025-03-07T06:53:26Z"
+  },
+  "35990281053465": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35990281053465-Construction-Stage-Analysis-Control-Data",
+   "title": "Construction Stage Analysis Control Data",
+   "updated_at": "2025-09-17T06:20:52Z"
+  },
+  "35990806887065": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35990806887065-Load-Combinations-General",
+   "title": "Load Combinations - General",
+   "updated_at": "2025-12-01T08:20:27Z"
+  },
+  "35990864052249": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35990864052249-Load-Combinations-Concrete-Design",
+   "title": "Load Combinations - Concrete Design",
+   "updated_at": "2025-12-01T08:19:57Z"
+  },
+  "35990929861913": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35990929861913-Load-Combinations-Steel-Design",
+   "title": "Load Combinations - Steel Design",
+   "updated_at": "2025-12-01T08:22:03Z"
+  },
+  "35991038731161": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35991038731161-Load-Combinations-SRC-Design",
+   "title": "Load Combinations - SRC Design",
+   "updated_at": "2025-12-01T08:21:33Z"
+  },
+  "35991080923033": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35991080923033-Load-Combinations-Composite-Steel-Girder-Design",
+   "title": "Load Combinations - Composite Steel Girder Design",
+   "updated_at": "2025-12-01T08:20:57Z"
+  },
+  "35991142266265": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35991142266265-Load-Combinations-Seismic-Design",
+   "title": "Load Combinations - Seismic Design",
+   "updated_at": "2025-12-01T08:19:54Z"
+  },
+  "35991257189017": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35991257189017-Cutting-Line",
+   "title": "Cutting Line",
+   "updated_at": "2025-03-07T07:37:09Z"
+  },
+  "35991500289561": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35991500289561-Plate-Cutting-Line-Diagram",
+   "title": "Plate Cutting Line Diagram",
+   "updated_at": "2025-03-07T07:39:11Z"
+  },
+  "35991591178265": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35991591178265-Bridge-Girder-Diagrams",
+   "title": "Bridge Girder Diagrams",
+   "updated_at": "2025-03-07T08:14:19Z"
+  },
+  "35991765204121": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35991765204121-General-Camber-Control",
+   "title": "General Camber Control",
+   "updated_at": "2025-03-07T08:15:52Z"
+  },
+  "35991862460697": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35991862460697-FCM-Camber-Control",
+   "title": "FCM Camber Control",
+   "updated_at": "2025-03-07T08:17:20Z"
+  },
+  "35991960319897": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35991960319897-Cable-Control-Unknown-Load-Factor-Constraints",
+   "title": "Cable Control - Unknown Load Factor Constraints",
+   "updated_at": "2025-03-07T08:19:24Z"
+  },
+  "35992341376025": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35992341376025-Time-History-Graph-General-Link-Smart-Graph",
+   "title": "Time History Graph - General Link Smart Graph",
+   "updated_at": "2025-03-07T08:22:40Z"
+  },
+  "35992399685017": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35992399685017-Time-History-Graph-Inelastic-Hinge-Smart-Graph",
+   "title": "Time History Graph - Inelastic Hinge Smart Graph",
+   "updated_at": "2025-11-04T00:19:08Z"
+  },
+  "35992460196121": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35992460196121-Time-History-Graph-Seismic-Devices-Smart-Graph",
+   "title": "Time History Graph - Seismic Devices Smart Graph",
+   "updated_at": "2025-03-07T08:25:51Z"
+  },
+  "35992577650841": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35992577650841-Heat-of-Hydaration-Result-Graph",
+   "title": "Heat of Hydaration Result Graph",
+   "updated_at": "2025-03-07T08:27:26Z"
+  },
+  "35992664632601": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35992664632601-Pushover-Analysis-Control-Data",
+   "title": "Pushover Analysis Control Data",
+   "updated_at": "2026-07-02T06:17:53Z"
+  },
+  "35992797619097": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35992797619097-Ignore-Elements-for-Pushover-Intial-Load",
+   "title": "Ignore Elements for Pushover Intial Load",
+   "updated_at": "2026-07-02T06:41:56Z"
+  },
+  "35992838417049": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35992838417049-Assign-Pushover-Hinge-Properties",
+   "title": "Assign Pushover Hinge Properties",
+   "updated_at": "2026-07-02T06:48:28Z"
+  },
+  "35993449470489": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35993449470489-Pushover-Load-Cases",
+   "title": "Pushover Load Cases",
+   "updated_at": "2026-07-02T06:53:57Z"
+  },
+  "35993633394969": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35993633394969-RC-Design-Code",
+   "title": "RC Design Code",
+   "updated_at": "2026-07-02T07:34:53Z"
+  },
+  "35993732216985": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35993732216985-Modify-Concrete-Materials",
+   "title": "Modify Concrete Materials",
+   "updated_at": "2026-07-02T07:51:32Z"
+  },
+  "35993850335897": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35993850335897-Rebar-Input-for-Checking-Beam-Column",
+   "title": "Rebar Input for Checking - Beam/Column",
+   "updated_at": "2026-07-02T07:59:10Z"
+  },
+  "35994078198681": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35994078198681-New-Project",
+   "title": "New Project",
+   "updated_at": "2025-11-04T00:18:17Z"
+  },
+  "35994112560793": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35994112560793-Open-Project",
+   "title": "Open Project",
+   "updated_at": "2025-11-04T00:19:06Z"
+  },
+  "35994162529305": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35994162529305-Close-Project",
+   "title": "Close Project",
+   "updated_at": "2025-11-04T00:18:18Z"
+  },
+  "35994210207513": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35994210207513-Save",
+   "title": "Save",
+   "updated_at": "2025-09-17T06:22:29Z"
+  },
+  "35994277012377": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35994277012377-Save-As",
+   "title": "Save As",
+   "updated_at": "2025-09-17T06:22:28Z"
+  },
+  "35994338816793": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35994338816793-Import-to-Json",
+   "title": "Import to Json",
+   "updated_at": "2025-09-17T06:22:29Z"
+  },
+  "35994365225113": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35994365225113-Import-to-mct-mgt",
+   "title": "Import to mct/mgt",
+   "updated_at": "2025-11-04T00:20:02Z"
+  },
+  "35994422273305": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35994422273305-Export-to-Json",
+   "title": "Export to Json",
+   "updated_at": "2025-02-06T06:30:12Z"
+  },
+  "35994462805017": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35994462805017-Export-to-mct-mgt",
+   "title": "Export to mct/mgt",
+   "updated_at": "2025-11-04T00:15:02Z"
+  },
+  "35994678976281": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35994678976281-Project-Status",
+   "title": "Project Status",
+   "updated_at": "2025-03-07T08:28:41Z"
+  },
+  "35994694310937": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35994694310937-Divide-Elements",
+   "title": "Divide Elements",
+   "updated_at": "2025-11-04T00:20:01Z"
+  },
+  "35994769341081": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35994769341081-Section-Properties-Calculation-Results",
+   "title": "Section Properties Calculation Results",
+   "updated_at": "2025-03-07T08:39:12Z"
+  },
+  "35994827741465": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35994827741465-Using-Load-Combinations",
+   "title": "Using Load Combinations",
+   "updated_at": "2025-11-04T00:20:02Z"
+  },
+  "35994879160857": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35994879160857-Line-Beam-Load",
+   "title": "Line Beam Load",
+   "updated_at": "2025-03-07T08:47:32Z"
+  },
+  "35995942911257": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35995942911257-Select",
+   "title": "Select",
+   "updated_at": "2025-03-07T07:41:26Z"
+  },
+  "35996023805337": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35996023805337-Capture",
+   "title": "Capture",
+   "updated_at": "2025-04-24T10:37:47Z"
+  },
+  "35996157533977": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35996157533977-Display",
+   "title": "Display",
+   "updated_at": "2025-03-07T08:07:41Z"
+  },
+  "35996812786841": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35996812786841-Type-of-Display",
+   "title": "Type of Display",
+   "updated_at": "2026-06-19T06:37:07Z"
+  },
+  "35997222326937": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35997222326937-Reaction-Forces-Moments-Result-Display",
+   "title": "Reaction Forces/Moments - Result Display",
+   "updated_at": "2025-03-13T00:22:25Z"
+  },
+  "35997247818393": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35997247818393-Soil-Pressure-Result-Display",
+   "title": "Soil Pressure - Result Display",
+   "updated_at": "2025-03-13T00:24:39Z"
+  },
+  "35997589496089": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35997589496089-Deformed-Shape-Result-Display",
+   "title": "Deformed Shape - Result Display",
+   "updated_at": "2025-03-13T00:27:06Z"
+  },
+  "35997611572505": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35997611572505-Displacement-Contour-Result-Display",
+   "title": "Displacement Contour - Result Display",
+   "updated_at": "2025-03-13T00:37:14Z"
+  },
+  "35997661413785": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35997661413785-Truss-Forces-Result-Display",
+   "title": "Truss Forces - Result Display",
+   "updated_at": "2025-03-13T00:39:40Z"
+  },
+  "35997711810969": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35997711810969-Beam-Forces-Moments-Result-Display",
+   "title": "Beam Forces/Moments - Result Display",
+   "updated_at": "2025-08-11T09:56:42Z"
+  },
+  "35997754209817": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35997754209817-Beam-Diagrams-Result-Display",
+   "title": "Beam Diagrams - Result Display",
+   "updated_at": "2026-01-06T02:23:30Z"
+  },
+  "35997813329177": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/35997813329177-Plate-Forces-Moments-Result-Display",
+   "title": "Plate Forces/Moments - Result Display",
+   "updated_at": "2025-08-19T06:02:37Z"
+  },
+  "36000934415257": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36000934415257-Plate-Cutting-Line-Diagram-Result-Display",
+   "title": "Plate Cutting Line Diagram - Result Display",
+   "updated_at": "2025-03-13T01:05:42Z"
+  },
+  "36001099992985": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36001099992985-Truss-Stresses-Result-Display",
+   "title": "Truss Stresses - Result Display",
+   "updated_at": "2025-09-23T05:39:45Z"
+  },
+  "36001119330969": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36001119330969-Beam-Stresses-Result-Display",
+   "title": "Beam Stresses - Result Display",
+   "updated_at": "2025-12-05T07:18:48Z"
+  },
+  "36001679829785": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36001679829785-Beam-Stresses-Diagram-Result-Display",
+   "title": "Beam Stresses Diagram - Result Display",
+   "updated_at": "2025-03-13T01:13:46Z"
+  },
+  "36002326176665": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36002326176665-Beam-Stresses-Equivalent-Result-Display",
+   "title": "Beam Stresses (Equivalent) - Result Display",
+   "updated_at": "2025-03-13T01:16:20Z"
+  },
+  "36002496760217": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36002496760217-Beam-Stresses-Diagram-Equivalent-Result-Display",
+   "title": "Beam Stresses Diagram (Equivalent) - Result Display",
+   "updated_at": "2025-03-13T01:18:57Z"
+  },
+  "36002716977817": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36002716977817-Beam-Stresses-PSC-Result-Display",
+   "title": "Beam Stresses (PSC) - Result Display",
+   "updated_at": "2025-03-13T01:21:35Z"
+  },
+  "36002978639641": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36002978639641-Plane-Stress-Plate-Stresses-Result-Display",
+   "title": "Plane-Stress/Plate Stresses - Result Display",
+   "updated_at": "2025-09-23T05:42:21Z"
+  },
+  "36003113196441": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36003113196441-Plane-Strain-Stresses-Result-Display",
+   "title": "Plane Strain Stresses - Result Display",
+   "updated_at": "2025-09-23T05:43:10Z"
+  },
+  "36003190685209": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36003190685209-Axisymmetric-Stresses-Result-Display",
+   "title": "Axisymmetric Stresses - Result Display",
+   "updated_at": "2025-09-23T05:43:57Z"
+  },
+  "36004183629209": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36004183629209-Solid-Stresses-Result-Display",
+   "title": "Solid Stresses - Result Display",
+   "updated_at": "2025-09-23T05:44:51Z"
+  },
+  "36004234384665": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36004234384665-Reactions-Moving-Tracer-Display",
+   "title": "Reactions - Moving Tracer Display",
+   "updated_at": "2025-03-13T01:47:15Z"
+  },
+  "36004334029593": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36004334029593-Displacements-Moving-Tracer-Display",
+   "title": "Displacements - Moving Tracer Display",
+   "updated_at": "2025-03-13T01:49:20Z"
+  },
+  "36004378825497": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36004378825497-Truss-Forces-Moving-Tracer-Display",
+   "title": "Truss Forces - Moving Tracer Display",
+   "updated_at": "2025-03-13T01:51:17Z"
+  },
+  "36004453575193": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36004453575193-Beam-Forces-Moments-Moving-Tracer-Display",
+   "title": "Beam Forces/Moments - Moving Tracer Display",
+   "updated_at": "2025-03-13T01:53:22Z"
+  },
+  "36004497508505": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36004497508505-Plate-Forces-Moments-Moving-Tracer-Display",
+   "title": "Plate Forces/Moments - Moving Tracer Display",
+   "updated_at": "2025-03-13T01:55:22Z"
+  },
+  "36005757391385": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36005757391385-Beam-Stresses-Moving-Tracer-Display",
+   "title": "Beam Stresses - Moving Tracer Display",
+   "updated_at": "2025-03-13T01:57:43Z"
+  },
+  "36005864558617": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36005864558617-Vibration-Mode-Shapes-Mode-Shapes-Display",
+   "title": "Vibration Mode Shapes - Mode Shapes Display",
+   "updated_at": "2026-06-15T05:03:48Z"
+  },
+  "36005908557465": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36005908557465-Buckling-Mode-Shapes-Mode-Shapes-Display",
+   "title": "Buckling Mode Shapes - Mode Shapes Display",
+   "updated_at": "2025-08-11T09:57:10Z"
+  },
+  "36006059687449": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36006059687449-Stress-Heat-of-Hydration-Display",
+   "title": "Stress - Heat of Hydration Display",
+   "updated_at": "2025-03-31T04:28:15Z"
+  },
+  "36006173505433": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36006173505433-Temperature-Heat-of-Hydration-Display",
+   "title": "Temperature - Heat of Hydration Display",
+   "updated_at": "2025-03-31T04:30:09Z"
+  },
+  "36006239859225": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36006239859225-Displacements-Heat-of-Hydration-Display",
+   "title": "Displacements - Heat of Hydration Display",
+   "updated_at": "2025-03-31T04:32:24Z"
+  },
+  "36006326138521": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36006326138521-Allowable-Tensile-Stress-Heat-of-Hydration-Display",
+   "title": "Allowable Tensile Stress - Heat of Hydration Display",
+   "updated_at": "2025-03-31T04:34:40Z"
+  },
+  "36006358418713": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36006358418713-Crack-Ratio-Heat-of-Hydration-Display",
+   "title": "Crack Ratio - Heat of Hydration Display",
+   "updated_at": "2025-03-31T04:36:50Z"
+  },
+  "36007474964249": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36007474964249-Element-Weight-Table",
+   "title": "Element Weight Table",
+   "updated_at": "2025-03-31T04:41:18Z"
+  },
+  "36007518091289": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36007518091289-Nodal-Body-Force-Table",
+   "title": "Nodal Body Force Table",
+   "updated_at": "2025-03-31T04:43:55Z"
+  },
+  "36007577052441": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36007577052441-Mass-Summary-Table",
+   "title": "Mass Summary Table",
+   "updated_at": "2025-03-31T04:46:20Z"
+  },
+  "36007640088857": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36007640088857-Load-Summary-Table",
+   "title": "Load Summary Table",
+   "updated_at": "2025-03-31T04:51:12Z"
+  },
+  "36009349748249": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36009349748249-Reaction-Analysis-Result-Table",
+   "title": "Reaction - Analysis Result Table",
+   "updated_at": "2025-03-31T05:00:32Z"
+  },
+  "36009638400281": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36009638400281-Displacements-Analysis-Result-Table",
+   "title": "Displacements - Analysis Result Table",
+   "updated_at": "2025-03-31T05:05:39Z"
+  },
+  "36009739012249": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36009739012249-Truss-Force-Analysis-Result-Table",
+   "title": "Truss Force - Analysis Result Table",
+   "updated_at": "2025-03-31T06:16:19Z"
+  },
+  "36010188199833": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36010188199833-Truss-Stress-Analysis-Result-Table",
+   "title": "Truss Stress - Analysis Result Table",
+   "updated_at": "2025-03-31T06:20:31Z"
+  },
+  "36010315199001": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36010315199001-Cable-Force-Analysis-Result-Table",
+   "title": "Cable Force - Analysis Result Table",
+   "updated_at": "2025-03-31T06:24:21Z"
+  },
+  "36011013418905": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36011013418905-Cable-Configuration-Analysis-Result-Table",
+   "title": "Cable Configuration - Analysis Result Table",
+   "updated_at": "2025-03-31T06:28:20Z"
+  },
+  "36011176175385": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36011176175385-Cable-Efficiency-Analysis-Result-Table",
+   "title": "Cable Efficiency - Analysis Result Table",
+   "updated_at": "2025-03-31T06:32:27Z"
+  },
+  "36011262919705": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36011262919705-Beam-Force-Analysis-Result-Table",
+   "title": "Beam Force - Analysis Result Table",
+   "updated_at": "2025-03-31T06:39:07Z"
+  },
+  "36011373070745": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36011373070745-Beam-Force-Static-Prestress-Analysis-Result-Table",
+   "title": "Beam Force (Static Prestress) - Analysis Result Table",
+   "updated_at": "2025-03-31T06:42:46Z"
+  },
+  "36011455813273": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36011455813273-Beam-Stress-Analysis-Result-Table",
+   "title": "Beam Stress - Analysis Result Table",
+   "updated_at": "2025-03-31T06:48:02Z"
+  },
+  "36011572000153": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36011572000153-Beam-Stress-Equivalent-Analysis-Result-Table",
+   "title": "Beam Stress (Equivalent) - Analysis Result Table",
+   "updated_at": "2025-03-31T06:52:45Z"
+  },
+  "36011704177561": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36011704177561-Beam-Stress-PSC-Analysis-Result-Table",
+   "title": "Beam Stress (PSC) - Analysis Result Table",
+   "updated_at": "2025-03-31T06:58:12Z"
+  },
+  "36012451576985": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36012451576985-Plate-Force-Local-Analysis-Result-Table",
+   "title": "Plate Force (Local) - Analysis Result Table",
+   "updated_at": "2025-03-31T07:02:17Z"
+  },
+  "36012742430873": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36012742430873-Plate-Force-Global-Analysis-Result-Table",
+   "title": "Plate Force (Global) - Analysis Result Table",
+   "updated_at": "2025-03-31T07:06:20Z"
+  },
+  "36012822385817": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36012822385817-Plate-Force-Unit-Length-Analysis-Result-Table",
+   "title": "Plate Force (Unit Length) - Analysis Result Table",
+   "updated_at": "2025-03-31T07:14:31Z"
+  },
+  "36013026785433": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36013026785433-Plate-Stress-Local-Analysis-Result-Table",
+   "title": "Plate Stress (Local) - Analysis Result Table",
+   "updated_at": "2025-03-31T07:26:10Z"
+  },
+  "36013101276697": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36013101276697-Plate-Stress-Global-Analysis-Result-Table",
+   "title": "Plate Stress (Global) - Analysis Result Table",
+   "updated_at": "2025-03-31T07:30:29Z"
+  },
+  "36013201499417": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36013201499417-Plate-Strain-Local-Analysis-Result-Table",
+   "title": "Plate Strain (Local) - Analysis Result Table",
+   "updated_at": "2025-03-31T07:43:00Z"
+  },
+  "36013319302809": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36013319302809-Plate-Strain-Global-Analysis-Result-Table",
+   "title": "Plate Strain (Global) - Analysis Result Table",
+   "updated_at": "2025-03-31T07:51:37Z"
+  },
+  "36013533471769": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36013533471769-Plane-Force-Local-Analysis-Result-Table",
+   "title": "Plane Force (Local) - Analysis Result Table",
+   "updated_at": "2025-03-31T07:55:33Z"
+  },
+  "36013633381913": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36013633381913-Plane-Force-Global-Analysis-Result-Table",
+   "title": "Plane Force (Global) - Analysis Result Table",
+   "updated_at": "2025-03-31T07:59:22Z"
+  },
+  "36013761320601": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36013761320601-Plane-Stress-Local-Analysis-Result-Table",
+   "title": "Plane Stress (Local) - Analysis Result Table",
+   "updated_at": "2025-03-31T08:03:25Z"
+  },
+  "36013846930969": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36013846930969-Plane-Stress-Global-Analysis-Result-Table",
+   "title": "Plane Stress (Global) - Analysis Result Table",
+   "updated_at": "2025-03-31T08:07:25Z"
+  },
+  "36013937993881": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36013937993881-Plane-Strain-Force-Local-Analysis-Result-Table",
+   "title": "Plane Strain Force (Local) - Analysis Result Table",
+   "updated_at": "2025-03-31T08:11:28Z"
+  },
+  "36014002581273": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36014002581273-Plane-Strain-Force-Global-Analysis-Result-Table",
+   "title": "Plane Strain Force (Global) - Analysis Result Table",
+   "updated_at": "2025-03-31T08:15:17Z"
+  },
+  "36014055094297": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36014055094297-Plane-Strain-Stress-Local-Analysis-Result-Table",
+   "title": "Plane Strain Stress (Local) - Analysis Result Table",
+   "updated_at": "2025-03-31T08:19:20Z"
+  },
+  "36014149296409": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36014149296409-Plane-Strain-Stress-Global-Analysis-Result-Table",
+   "title": "Plane Strain Stress (Global) - Analysis Result Table",
+   "updated_at": "2025-03-31T08:23:28Z"
+  },
+  "36014348032409": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36014348032409-Axisymmetric-Force-Local-Analysis-Result-Table",
+   "title": "Axisymmetric Force (Local) - Analysis Result Table",
+   "updated_at": "2025-03-31T08:27:21Z"
+  },
+  "36014441528985": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36014441528985-Axisymmetric-Force-Global-Analysis-Result-Table",
+   "title": "Axisymmetric Force (Global) - Analysis Result Table",
+   "updated_at": "2025-03-31T08:31:11Z"
+  },
+  "36014896433945": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36014896433945-Axisymmetric-Stress-Local-Analysis-Result-Table",
+   "title": "Axisymmetric Stress (Local) - Analysis Result Table",
+   "updated_at": "2025-04-21T11:54:55Z"
+  },
+  "36014957537433": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36014957537433-Axisymmetric-Stress-Global-Analysis-Result-Table",
+   "title": "Axisymmetric Stress (Global) - Analysis Result Table",
+   "updated_at": "2025-04-21T11:58:36Z"
+  },
+  "36015113863449": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36015113863449-Solid-Force-Local-Analysis-Result-Table",
+   "title": "Solid Force (Local) - Analysis Result Table",
+   "updated_at": "2025-04-22T11:37:27Z"
+  },
+  "36015175530137": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36015175530137-Solid-Force-Global-Analysis-Result-Table",
+   "title": "Solid Force (Global) - Analysis Result Table",
+   "updated_at": "2025-04-22T11:41:39Z"
+  },
+  "36015236608281": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36015236608281-Solid-Stress-Local-Analysis-Result-Table",
+   "title": "Solid Stress (Local) - Analysis Result Table",
+   "updated_at": "2025-04-22T11:44:52Z"
+  },
+  "36015348343833": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36015348343833-Solid-Stress-Global-Analysis-Result-Table",
+   "title": "Solid Stress (Global) - Analysis Result Table",
+   "updated_at": "2025-04-22T11:48:06Z"
+  },
+  "36017264069017": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36017264069017-Solid-Strain-Local-Analysis-Result-Table",
+   "title": "Solid Strain (Local) - Analysis Result Table",
+   "updated_at": "2025-04-22T11:53:18Z"
+  },
+  "36017308083481": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36017308083481-Solid-Strain-Global-Analysis-Result-Table",
+   "title": "Solid Strain (Global) - Analysis Result Table",
+   "updated_at": "2025-04-22T11:58:19Z"
+  },
+  "36017416195737": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36017416195737-Elastic-Link-Analysis-Result-Table",
+   "title": "Elastic Link - Analysis Result Table",
+   "updated_at": "2025-08-14T02:58:45Z"
+  },
+  "36017500761369": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36017500761369-General-Link-Analysis-Result-Table",
+   "title": "General Link - Analysis Result Table",
+   "updated_at": "2025-08-14T04:11:25Z"
+  },
+  "36017614482201": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36017614482201-Resultant-Forces-Analysis-Result-Table",
+   "title": "Resultant Forces - Analysis Result Table",
+   "updated_at": "2025-04-25T00:17:37Z"
+  },
+  "36017669319321": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36017669319321-Vibration-Mode-Shape-Analysis-Result-Table",
+   "title": "Vibration Mode Shape - Analysis Result Table",
+   "updated_at": "2025-04-25T10:27:42Z"
+  },
+  "36017712087065": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36017712087065-Buckling-Mode-Shape-Analysis-Result-Table",
+   "title": "Buckling Mode Shape - Analysis Result Table",
+   "updated_at": "2025-04-25T10:30:24Z"
+  },
+  "36017771824281": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36017771824281-Effective-Span-Length-Analysis-Result-Table",
+   "title": "Effective Span Length - Analysis Result Table",
+   "updated_at": "2025-04-25T10:33:34Z"
+  },
+  "36017837129241": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36017837129241-Nodal-Results-of-RS-Analysis-Result-Table",
+   "title": "Nodal Results of RS - Analysis Result Table",
+   "updated_at": "2025-04-25T10:37:01Z"
+  },
+  "36017935058713": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36017935058713-Tendon-Coordinates-Analysis-Result-Table",
+   "title": "Tendon Coordinates - Analysis Result Table",
+   "updated_at": "2025-04-25T10:40:16Z"
+  },
+  "36018016568345": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36018016568345-Tendon-Elongation-Analysis-Result-Table",
+   "title": "Tendon Elongation - Analysis Result Table",
+   "updated_at": "2025-04-25T10:42:20Z"
+  },
+  "36018062664857": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36018062664857-Tendon-Arrangement-Analysis-Result-Table",
+   "title": "Tendon Arrangement - Analysis Result Table",
+   "updated_at": "2025-04-25T10:45:22Z"
+  },
+  "36018150905881": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36018150905881-Tendon-Loss-Analysis-Result-Table",
+   "title": "Tendon Loss - Analysis Result Table",
+   "updated_at": "2026-06-16T00:48:29Z"
+  },
+  "36018235852569": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36018235852569-Tendon-Weight-Analysis-Result-Table",
+   "title": "Tendon Weight - Analysis Result Table",
+   "updated_at": "2025-04-25T10:53:50Z"
+  },
+  "36018322624281": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36018322624281-Tendon-Stress-Limit-Check-Analysis-Result-Table",
+   "title": "Tendon Stress Limit Check - Analysis Result Table",
+   "updated_at": "2026-06-17T00:58:21Z"
+  },
+  "36018411935129": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36018411935129-Tendon-Approximate-Loss-Analysis-Result-Table",
+   "title": "Tendon Approximate Loss - Analysis Result Table",
+   "updated_at": "2025-04-25T10:59:12Z"
+  },
+  "36018521410457": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36018521410457-Composite-Section-for-C-S-Force-and-Stress-Analysis-Result-Table",
+   "title": "Composite Section for C.S. (Force and Stress) - Analysis Result Table",
+   "updated_at": "2025-04-25T11:13:23Z"
+  },
+  "36018582743705": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36018582743705-Composite-Section-for-C-S-Self-Constraint-Force-and-Stress-Analysis-Result-Table",
+   "title": "Composite Section for C.S. (Self-Constraint Force and Stress) - Analysis Result Table",
+   "updated_at": "2025-04-25T11:17:48Z"
+  },
+  "36018688503065": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36018688503065-Element-Properties-at-Each-Stage-Analysis-Result-Table",
+   "title": "Element Properties at Each Stage - Analysis Result Table",
+   "updated_at": "2025-04-27T06:25:24Z"
+  },
+  "36018718339353": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36018718339353-Beam-Section-Properties-at-Last-Stage-Analysis-Result-Table",
+   "title": "Beam Section Properties at Last Stage - Analysis Result Table",
+   "updated_at": "2025-04-27T06:28:48Z"
+  },
+  "36018798699161": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36018798699161-Lack-of-Fit-Force-Truss-Analysis-Result-Table",
+   "title": "Lack of Fit Force (Truss) - Analysis Result Table",
+   "updated_at": "2025-04-27T06:31:05Z"
+  },
+  "36018843180057": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36018843180057-Lack-of-Fit-Force-Beam-Analysis-Result-Table",
+   "title": "Lack of Fit Force (Beam) - Analysis Result Table",
+   "updated_at": "2025-04-27T06:33:02Z"
+  },
+  "36018883915289": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36018883915289-Lack-of-Fit-Force-Plate-Analysis-Result-Table",
+   "title": "Lack of Fit Force (Plate) - Analysis Result Table",
+   "updated_at": "2025-04-27T06:35:03Z"
+  },
+  "36018955537177": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36018955537177-Equilibrium-Element-Nodal-Force-Analysis-Result-Table",
+   "title": "Equilibrium Element Nodal Force - Analysis Result Table",
+   "updated_at": "2025-04-27T06:37:05Z"
+  },
+  "36018962493721": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36018962493721-Initial-Element-Force-Analysis-Result-Table",
+   "title": "Initial Element Force - Analysis Result Table",
+   "updated_at": "2025-04-27T06:39:03Z"
+  },
+  "36019076720921": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36019076720921-Displacement-Velocity-Acceleration-TH-Result-Table",
+   "title": "Displacement/Velocity/Acceleration - TH Result Table",
+   "updated_at": "2025-04-27T06:42:03Z"
+  },
+  "36020023438361": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36020023438361-Beam-Force-TH-Result-Table",
+   "title": "Beam Force - TH Result Table",
+   "updated_at": "2025-04-27T06:44:37Z"
+  },
+  "36020089749913": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36020089749913-Truss-Force-TH-Result-Table",
+   "title": "Truss Force - TH Result Table",
+   "updated_at": "2025-04-27T06:46:50Z"
+  },
+  "36020136483353": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36020136483353-General-Link-TH-Result-Table",
+   "title": "General Link - TH Result Table",
+   "updated_at": "2025-04-27T06:49:37Z"
+  },
+  "36020215503257": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36020215503257-Inelastic-Hinge-Event-Time-TH-Result-Table",
+   "title": "Inelastic Hinge Event Time - TH Result Table",
+   "updated_at": "2025-04-27T06:54:40Z"
+  },
+  "36020290127513": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36020290127513-Inelastic-Hinge-Beam-Summary-TH-Result-Table",
+   "title": "Inelastic Hinge Beam Summary - TH Result Table",
+   "updated_at": "2025-04-27T06:57:19Z"
+  },
+  "36020311969305": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36020311969305-Inelastic-Hinge-Truss-Summary-TH-Result-Table",
+   "title": "Inelastic Hinge Truss Summary - TH Result Table",
+   "updated_at": "2025-04-27T06:59:26Z"
+  },
+  "36020391511961": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36020391511961-Inelastic-Hinge-General-Link-Summary-TH-Result-Table",
+   "title": "Inelastic Hinge General Link Summary - TH Result Table",
+   "updated_at": "2025-04-27T07:01:24Z"
+  },
+  "36020436094105": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36020436094105-Inelastic-Hinge-Force-TH-Result-Table",
+   "title": "Inelastic Hinge Force - TH Result Table",
+   "updated_at": "2025-04-27T07:05:10Z"
+  },
+  "36020548520601": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36020548520601-Inelastic-Hinge-Deformation-TH-Result-Table",
+   "title": "Inelastic Hinge Deformation - TH Result Table",
+   "updated_at": "2025-04-27T07:07:54Z"
+  },
+  "36020688077209": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36020688077209-Inelastic-Hinge-Element-Rotation-TH-Result-Table",
+   "title": "Inelastic Hinge Element Rotation - TH Result Table",
+   "updated_at": "2025-04-27T07:10:42Z"
+  },
+  "36020795064089": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36020795064089-Inelastic-Hinge-Ductility-Factor-D-D1-TH-Result-Table",
+   "title": "Inelastic Hinge Ductility Factor(D/D1) - TH Result Table",
+   "updated_at": "2025-04-27T07:13:40Z"
+  },
+  "36020877017497": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36020877017497-Inelastic-Hinge-Ductility-Factor-D-D2-TH-Result-Table",
+   "title": "Inelastic Hinge Ductility Factor(D/D2) - TH Result Table",
+   "updated_at": "2025-04-27T07:16:33Z"
+  },
+  "36020924196249": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36020924196249-Stress-HY-Result-Table",
+   "title": "Stress - HY Result Table",
+   "updated_at": "2025-04-27T07:37:34Z"
+  },
+  "36020983264793": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36020983264793-Temperature-HY-Result-Table",
+   "title": "Temperature - HY Result Table",
+   "updated_at": "2025-04-27T07:39:48Z"
+  },
+  "36021071108377": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36021071108377-Displacement-HY-Result-Table",
+   "title": "Displacement - HY Result Table",
+   "updated_at": "2025-04-27T07:42:06Z"
+  },
+  "36021119165081": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36021119165081-Tensile-Stress-HY-Result-Table",
+   "title": "Tensile Stress - HY Result Table",
+   "updated_at": "2025-04-27T07:44:20Z"
+  },
+  "36021224509977": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36021224509977-Pipe-Cooling-Nodal-Temperature-HY-Result-Table",
+   "title": "Pipe Cooling Nodal Temperature - HY Result Table",
+   "updated_at": "2025-04-27T07:46:37Z"
+  },
+  "36021337973017": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36021337973017-P-M-Interaction-Diagram",
+   "title": "P-M Interaction Diagram",
+   "updated_at": "2024-11-08T06:42:22Z"
+  },
+  "36704969941913": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36704969941913-Time-History-Text-Node-Results",
+   "title": "Time History Text - Node Results",
+   "updated_at": "2025-08-14T04:54:17Z"
+  },
+  "36705161290649": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36705161290649-Time-History-Text-Element-Result-Truss-Beam-Plane-Stress-Strain-Solid",
+   "title": "Time History Text - Element Result(Truss, Beam, Plane Stress/Strain, Solid)",
+   "updated_at": "2025-08-14T05:00:31Z"
+  },
+  "36705400674585": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36705400674585-Time-History-Text-Element-Result-Plate",
+   "title": "Time History Text - Element Result(Plate)",
+   "updated_at": "2025-08-14T04:55:48Z"
+  },
+  "36705611314585": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36705611314585-Time-History-Text-Element-Result-Wall",
+   "title": "Time History Text - Element Result(Wall)",
+   "updated_at": "2025-08-14T04:58:26Z"
+  },
+  "36705822943257": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36705822943257-Time-History-Text-General-Link-Result",
+   "title": "Time History Text - General Link Result",
+   "updated_at": "2025-08-14T04:57:02Z"
+  },
+  "36705962238873": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36705962238873-Pushover-Text-Displacement-Result",
+   "title": "Pushover Text - Displacement Result",
+   "updated_at": "2025-08-14T04:49:00Z"
+  },
+  "36706062373657": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36706062373657-Pushover-Text-Element-Result-Beam-Truss",
+   "title": "Pushover Text - Element Result(Beam, Truss)",
+   "updated_at": "2025-08-14T05:23:28Z"
+  },
+  "36706217576217": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36706217576217-Pushover-Text-Element-Result-Wall",
+   "title": "Pushover Text - Element Result(Wall)",
+   "updated_at": "2025-08-14T04:51:10Z"
+  },
+  "36706344369049": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36706344369049-Pushover-Text-General-Link-Result",
+   "title": "Pushover Text - General Link Result",
+   "updated_at": "2025-08-14T04:51:49Z"
+  },
+  "36706383777817": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/36706383777817-Pushover-Text-Elastic-Link-Result",
+   "title": "Pushover Text - Elastic Link Result",
+   "updated_at": "2025-08-14T04:50:08Z"
+  },
+  "39233604772633": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/39233604772633-Section-Properties-PSC-Value",
+   "title": "Section Properties - PSC Value",
+   "updated_at": "2025-02-06T07:58:03Z"
+  },
+  "39233752695321": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/39233752695321-Section-Properties-Tapered-PSC-Value",
+   "title": "Section Properties - Tapered - PSC Value",
+   "updated_at": "2025-03-31T04:17:09Z"
+  },
+  "39235144118297": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/39235144118297-Response-Spectrum-Functions-Korea",
+   "title": "Response Spectrum Functions - Korea",
+   "updated_at": "2025-11-04T00:20:00Z"
+  },
+  "39235469691033": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/39235469691033-Response-Spectrum-Functions-US",
+   "title": "Response Spectrum Functions - US",
+   "updated_at": "2025-11-04T00:20:00Z"
+  },
+  "39235490544281": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/39235490544281-Response-Spectrum-Functions-Eurocode",
+   "title": "Response Spectrum Functions - Eurocode",
+   "updated_at": "2025-03-06T08:15:23Z"
+  },
+  "39236719728281": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/39236719728281-Grid-Analysis-Load",
+   "title": "Grid Analysis Load",
+   "updated_at": "2025-03-07T05:53:17Z"
+  },
+  "39236753314073": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/39236753314073-Time-History-Graph-Element-Force-Smart-Graph",
+   "title": "Time History Graph - Element Force Smart Graph",
+   "updated_at": "2025-11-04T00:20:00Z"
+  },
+  "39236964850329": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/39236964850329-Dialog-Capture",
+   "title": "Dialog Capture",
+   "updated_at": "2025-03-07T07:46:39Z"
+  },
+  "39237582598937": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/39237582598937-Fiber-Section-Estimate-Yield-Strength-TH-Result-Table",
+   "title": "Fiber Section Estimate Yield Strength - TH Result Table",
+   "updated_at": "2025-04-27T07:19:11Z"
+  },
+  "39237678441497": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/39237678441497-Fiber-Section-Elastic-Modulus-Retention-Rate-TH-Result-Table",
+   "title": "Fiber Section Elastic Modulus Retention Rate - TH Result Table",
+   "updated_at": "2025-04-27T07:21:29Z"
+  },
+  "39237774129433": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/39237774129433-Fiber-Section-Maximum-Strain-of-The-Cell-TH-Result-Table",
+   "title": "Fiber Section Maximum Strain of The Cell - TH Result Table",
+   "updated_at": "2025-04-27T07:23:47Z"
+  },
+  "39237785220505": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/39237785220505-Fiber-Section-Event-Step-TH-Result-Table",
+   "title": "Fiber Section Event Step - TH Result Table",
+   "updated_at": "2025-04-27T07:26:06Z"
+  },
+  "39237854424601": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/39237854424601-Fiber-Section-Average-Compression-Strain-TH-Result-Table",
+   "title": "Fiber Section Average Compression Strain - TH Result Table",
+   "updated_at": "2025-04-27T07:28:08Z"
+  },
+  "39473334759065": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/39473334759065-Response-Spectrum-Functions-China",
+   "title": "Response Spectrum Functions - China",
+   "updated_at": "2025-11-04T00:20:00Z"
+  },
+  "39473375938969": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/39473375938969-Response-Spectrum-Functions-Japan",
+   "title": "Response Spectrum Functions - Japan",
+   "updated_at": "2025-11-04T00:19:08Z"
+  },
+  "39473471043737": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/39473471043737-Response-Spectrum-Functions-Taiwan",
+   "title": "Response Spectrum Functions - Taiwan",
+   "updated_at": "2025-11-04T00:19:07Z"
+  },
+  "39508760179097": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/39508760179097-Response-Spectrum-Functions-India",
+   "title": "Response Spectrum Functions - India",
+   "updated_at": "2025-09-17T06:20:52Z"
+  },
+  "39508838720153": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/39508838720153-Response-Spectrum-Functions-Other-Countries",
+   "title": "Response Spectrum Functions - Other Countries",
+   "updated_at": "2025-11-04T00:20:03Z"
+  },
+  "39772183634329": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/39772183634329-Surface-Spring",
+   "title": "Surface Spring",
+   "updated_at": "2025-03-07T09:01:07Z"
+  },
+  "39772649347865": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/39772649347865-Change-Property",
+   "title": "Change Property",
+   "updated_at": "2025-03-07T09:04:02Z"
+  },
+  "43835303404825": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/43835303404825-Material-Table",
+   "title": "Material Table",
+   "updated_at": "2025-02-25T02:43:13Z"
+  },
+  "43835398107801": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/43835398107801-Section-Table",
+   "title": "Section Table",
+   "updated_at": "2025-02-25T02:46:17Z"
+  },
+  "43835481307161": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/43835481307161-Restraint-Supports-Table",
+   "title": "Restraint Supports Table",
+   "updated_at": "2025-02-25T02:48:10Z"
+  },
+  "44613910309401": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/44613910309401-Element-Stiffness-Scale-Factor",
+   "title": "Element Stiffness Scale Factor",
+   "updated_at": "2026-07-02T00:07:22Z"
+  },
+  "44662732910233": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/44662732910233-Steel-Code-Check",
+   "title": "Steel Code Check",
+   "updated_at": "2025-11-04T00:16:11Z"
+  },
+  "49510398353945": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49510398353945-Element-Stiffness-Scale-Factor",
+   "title": "Element Stiffness Scale Factor",
+   "updated_at": "2025-11-04T00:15:04Z"
+  },
+  "49510865840537": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49510865840537-Parameter-of-Soil-Properties",
+   "title": "Parameter of Soil Properties",
+   "updated_at": "2026-07-02T01:56:19Z"
+  },
+  "49511059178521": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49511059178521-Static-Earth-Pressure",
+   "title": "Static Earth Pressure",
+   "updated_at": "2026-07-02T02:15:35Z"
+  },
+  "49511153905177": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49511153905177-Seismic-Earth-Pressure",
+   "title": "Seismic Earth Pressure",
+   "updated_at": "2026-07-02T02:32:38Z"
+  },
+  "49511410691609": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49511410691609-Parameter-of-Seismic-Loads",
+   "title": "Parameter of Seismic Loads",
+   "updated_at": "2026-07-02T05:32:28Z"
+  },
+  "49511531295257": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49511531295257-Story-Drift-X-Y-Combine-Story-Result-Table",
+   "title": "Story Drift(X,Y,Combine) - Story Result Table",
+   "updated_at": "2025-12-23T08:30:10Z"
+  },
+  "49511597474713": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49511597474713-Story-Displacement-X-Y-Combined-Story-Result-Table",
+   "title": "Story Displacement(X,Y,Combined) - Story Result Table",
+   "updated_at": "2025-11-06T06:27:22Z"
+  },
+  "49511717907097": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49511717907097-Story-Shear-Force-R-S-Analysis-Story-Result-Table",
+   "title": "Story Shear Force(R.S.Analysis) - Story Result Table",
+   "updated_at": "2025-11-06T01:50:36Z"
+  },
+  "49511816211737": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49511816211737-Story-Shear-Force-Coefficient-R-S-Analysis-Story-Result-Table",
+   "title": "Story Shear Force Coefficient(R.S.Analysis) - Story Result Table",
+   "updated_at": "2025-11-06T01:51:27Z"
+  },
+  "49511927443481": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49511927443481-Story-Mode-Shape-Story-Result-Table",
+   "title": "Story Mode Shape - Story Result Table",
+   "updated_at": "2025-11-06T06:29:40Z"
+  },
+  "49511990423833": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49511990423833-Story-Eccentricity-Story-Result-Table",
+   "title": "Story Eccentricity - Story Result Table",
+   "updated_at": "2025-11-06T02:04:01Z"
+  },
+  "49512035391641": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49512035391641-Overturning-Moment-Story-Result-Table",
+   "title": "Overturning Moment - Story Result Table",
+   "updated_at": "2025-11-06T06:50:45Z"
+  },
+  "49512116327065": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49512116327065-Story-Axial-Force-Sum-Story-Result-Table",
+   "title": "Story Axial Force Sum - Story Result Table",
+   "updated_at": "2025-11-06T06:34:21Z"
+  },
+  "49512411760665": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49512411760665-Story-Shear-Force-Ratio-Story-Result-Table",
+   "title": "Story Shear Force Ratio - Story Result Table",
+   "updated_at": "2025-11-06T02:01:19Z"
+  },
+  "49512818237849": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49512818237849-Story-Stability-Coefficient-Story-Result-Table",
+   "title": "Story Stability Coefficient - Story Result Table",
+   "updated_at": "2025-11-06T06:53:06Z"
+  },
+  "49512900149017": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49512900149017-Torsional-Irregularity-Check-Story-Result-Table",
+   "title": "Torsional Irregularity Check - Story Result Table",
+   "updated_at": "2026-06-08T05:03:14Z"
+  },
+  "49513005384089": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49513005384089-Torsional-Amplification-Factor-Story-Result-Table",
+   "title": "Torsional Amplification Factor - Story Result Table",
+   "updated_at": "2025-11-06T06:55:08Z"
+  },
+  "49513107644057": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49513107644057-Stiffness-Irregularity-Check-Soft-Story-Story-Result-Table",
+   "title": "Stiffness Irregularity Check (Soft Story) - Story Result Table",
+   "updated_at": "2025-11-07T00:50:29Z"
+  },
+  "49513198751385": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49513198751385-Capacity-Irregularity-Check-Weak-Story-Story-Result-Table",
+   "title": "Capacity Irregularity Check(Weak Story) - Story Result Table",
+   "updated_at": "2025-11-06T02:11:02Z"
+  },
+  "49513284077721": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49513284077721-Criteria-for-Regularity-in-Plan-Story-Result-Table",
+   "title": "Criteria for Regularity in Plan - Story Result Table",
+   "updated_at": "2025-11-06T02:11:52Z"
+  },
+  "49513305580569": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49513305580569-Ultimate-Story-Shear-For-Check-Story-Result-Table",
+   "title": "Ultimate Story Shear For Check - Story Result Table",
+   "updated_at": "2025-11-06T07:09:20Z"
+  },
+  "49513398732953": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49513398732953-Wall-Force-Analysis-Result-Table",
+   "title": "Wall Force - Analysis Result Table",
+   "updated_at": "2025-11-04T00:15:05Z"
+  },
+  "49513466793113": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49513466793113-Story-Data",
+   "title": "Story Data",
+   "updated_at": "2026-07-01T01:38:53Z"
+  },
+  "49513511154329": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49513511154329-Unbraced-Length",
+   "title": "Unbraced Length",
+   "updated_at": "2026-07-02T08:03:49Z"
+  },
+  "49513603328793": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49513603328793-Member-Assignment",
+   "title": "Member Assignment",
+   "updated_at": "2026-07-02T08:20:18Z"
+  },
+  "49513652948377": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49513652948377-Definition-of-Frame",
+   "title": "Definition of Frame",
+   "updated_at": "2026-07-02T08:26:59Z"
+  },
+  "49513681377689": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49513681377689-Limiting-Slenderness-Ratio",
+   "title": "Limiting Slenderness Ratio",
+   "updated_at": "2026-07-02T08:33:33Z"
+  },
+  "49513792356505": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49513792356505-Underground-Load-Combination-Type",
+   "title": "Underground Load Combination Type",
+   "updated_at": "2026-07-02T08:46:14Z"
+  },
+  "49513816193689": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49513816193689-Modify-Member-Type",
+   "title": "Modify Member Type",
+   "updated_at": "2026-07-02T08:52:24Z"
+  },
+  "49513846785817": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49513846785817-Modify-Wall-Mark-Design",
+   "title": "Modify Wall Mark Design",
+   "updated_at": "2026-07-02T08:57:40Z"
+  },
+  "49513980544793": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49513980544793-Modify-Column-Rebar-Data",
+   "title": "Modify Column Rebar Data",
+   "updated_at": "2026-06-25T01:45:32Z"
+  },
+  "49513985245849": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49513985245849-Modify-Beam-Rebar-Data",
+   "title": "Modify Beam Rebar Data",
+   "updated_at": "2026-06-25T08:20:32Z"
+  },
+  "49514033006745": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49514033006745-Modify-Wall-Rebar-Data",
+   "title": "Modify Wall Rebar Data",
+   "updated_at": "2026-06-25T08:20:37Z"
+  },
+  "49514136996889": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49514136996889-Story-Mass-Summary",
+   "title": "Story Mass Summary",
+   "updated_at": "2025-11-21T06:54:03Z"
+  },
+  "49514148775705": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49514148775705-Story-Load-Summary",
+   "title": "Story Load Summary",
+   "updated_at": "2025-11-04T00:17:29Z"
+  },
+  "49514231584921": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49514231584921-Story-Weight",
+   "title": "Story Weight",
+   "updated_at": "2025-11-04T00:18:20Z"
+  },
+  "49514295460889": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49514295460889-Concrete-Design-Beam-Design-Forces",
+   "title": "Concrete Design - Beam Design Forces",
+   "updated_at": "2025-11-04T00:18:18Z"
+  },
+  "49514320078489": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49514320078489-Concrete-Design-Column-Design-Forces",
+   "title": "Concrete Design - Column Design Forces",
+   "updated_at": "2025-11-04T00:18:19Z"
+  },
+  "49514395318041": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49514395318041-Concrete-Design-Brace-Design-Forces",
+   "title": "Concrete Design - Brace Design Forces",
+   "updated_at": "2025-11-04T00:18:18Z"
+  },
+  "49514433321881": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49514433321881-Concrete-Design-Wall-Design-Forces",
+   "title": "Concrete Design - Wall Design Forces",
+   "updated_at": "2025-11-04T00:18:18Z"
+  },
+  "49514496461593": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49514496461593-Steel-Design-Steel-Member-Design-Forces",
+   "title": "Steel Design - Steel Member Design Forces",
+   "updated_at": "2025-11-04T00:19:06Z"
+  },
+  "49514560567961": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49514560567961-SRC-Design-SRC-Beam-Design-Forces",
+   "title": "SRC Design - SRC Beam Design Forces",
+   "updated_at": "2025-11-04T00:18:19Z"
+  },
+  "49514609393049": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49514609393049-SRC-Design-SRC-Column-Design-Forces",
+   "title": "SRC Design - SRC Column Design Forces",
+   "updated_at": "2025-11-04T00:18:19Z"
+  },
+  "49514621265305": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49514621265305-Cold-Formed-Design-Cold-Formed-Steel-Member-Design-Forces",
+   "title": "Cold Formed Design - Cold Formed Steel Member Design Forces",
+   "updated_at": "2025-11-04T00:18:17Z"
+  },
+  "49514653408793": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49514653408793-Story-Calc-OPT",
+   "title": "Story Calc OPT",
+   "updated_at": "2025-11-04T00:19:06Z"
+  },
+  "49514705474457": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49514705474457-Story-Check-Parameter",
+   "title": "Story Check Parameter",
+   "updated_at": "2025-11-04T00:19:06Z"
+  },
+  "49514751862425": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49514751862425-Story-Irregularity-Check-Parameter",
+   "title": "Story Irregularity Check Parameter",
+   "updated_at": "2026-06-10T05:37:31Z"
+  },
+  "49514773501721": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49514773501721-Story-Properties",
+   "title": "Story Properties",
+   "updated_at": "2025-11-04T00:19:05Z"
+  },
+  "49514964272665": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/49514964272665-Member-Assignment",
+   "title": "Member Assignment",
+   "updated_at": "2025-11-04T00:18:17Z"
+  },
+  "50694881913241": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/50694881913241-Resultant-Force-Diagram-Result-Display",
+   "title": "Resultant Force Diagram - Result Display",
+   "updated_at": "2025-09-15T08:02:13Z"
+  },
+  "50707525717401": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/50707525717401-Save-Current-Stage-As",
+   "title": "Save Current Stage As",
+   "updated_at": "2026-06-30T08:51:02Z"
+  },
+  "50760778765593": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/50760778765593",
+   "title": "MIDAS API Online Manual(사내 검증용)",
+   "updated_at": "2025-11-04T00:19:09Z"
+  },
+  "51740138178969": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/51740138178969-Diaphragm-Disconnect",
+   "title": "Diaphragm Disconnect",
+   "updated_at": "2026-07-02T01:05:11Z"
+  },
+  "52149417728665": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/52149417728665-Design-Steel-Code",
+   "title": "Design Steel Code",
+   "updated_at": "2025-11-05T03:12:45Z"
+  },
+  "56371398681241": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/56371398681241-Time-History-Output-Option",
+   "title": "Time History Output Option",
+   "updated_at": "2026-05-15T08:31:56Z"
+  },
+  "56374180830745": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/56374180830745-Define-Boundary-Combination",
+   "title": "Define Boundary Combination",
+   "updated_at": "2026-05-07T01:20:15Z"
+  },
+  "56375029084697": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/56375029084697-Assign-Boundary-Combination",
+   "title": "Assign Boundary Combination",
+   "updated_at": "2026-05-07T01:20:14Z"
+  },
+  "56375076523929": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/56375076523929-Inelastic-Material-Link-for-Auto-Generation",
+   "title": "Inelastic Material Link for Auto Generation",
+   "updated_at": "2026-05-07T01:20:14Z"
+  },
+  "56375311138201": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/56375311138201-Structure-Type",
+   "title": "Structure Type",
+   "updated_at": "2026-05-15T08:31:57Z"
+  },
+  "56375983487385": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/56375983487385-Eigenvalue-Analysis-Control",
+   "title": "Eigenvalue Analysis Control",
+   "updated_at": "2026-05-07T01:20:13Z"
+  },
+  "56396523438873": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/56396523438873-Material-Properties",
+   "title": "Material Properties",
+   "updated_at": "2026-05-07T01:20:12Z"
+  },
+  "56397306107545": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/56397306107545-Main-Control-Data",
+   "title": "Main Control Data",
+   "updated_at": "2026-05-07T01:20:12Z"
+  },
+  "56399833703193": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/56399833703193-Heat-of-Hydration-Analysis-Control",
+   "title": "Heat of Hydration Analysis Control",
+   "updated_at": "2026-05-07T01:20:11Z"
+  },
+  "56506753403673": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/56506753403673-Pushover-Load-Case",
+   "title": "Pushover Load Case",
+   "updated_at": "2026-05-07T01:20:11Z"
+  },
+  "56506850582425": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/56506850582425-Nonlinear-Analysis-Control",
+   "title": "Nonlinear Analysis Control",
+   "updated_at": "2026-05-07T01:20:10Z"
+  },
+  "56510942223513": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/56510942223513-Time-History-Global-Control",
+   "title": "Time History Global Control",
+   "updated_at": "2026-05-07T01:20:09Z"
+  },
+  "56511008007705": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/56511008007705-Pushover-Global-Control",
+   "title": "Pushover Global Control",
+   "updated_at": "2026-05-07T01:20:09Z"
+  },
+  "56511025581337": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/56511025581337-Plastic-Material",
+   "title": "Plastic Material",
+   "updated_at": "2026-05-15T08:31:57Z"
+  },
+  "56511465190937": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/56511465190937-General-Link",
+   "title": "General Link",
+   "updated_at": "2026-05-07T01:20:07Z"
+  },
+  "56538335819673": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/56538335819673-Time-History-Load-Cases",
+   "title": "Time History Load Cases",
+   "updated_at": "2026-05-15T08:31:56Z"
+  },
+  "56823620531865": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/56823620531865-Steel-Design-Result",
+   "title": "Steel Design Result",
+   "updated_at": "2026-06-22T08:24:01Z"
+  },
+  "57053813627673": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57053813627673-Construction-Stage-Analysis-Control-Data",
+   "title": "Construction Stage Analysis Control Data",
+   "updated_at": "2026-05-07T01:20:06Z"
+  },
+  "57365469935257": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57365469935257-DESIGN-STEEL-KDS-41-30-2022-DCO-Design-Code-Option",
+   "title": "DESIGN/STEEL/KDS-41-30-2022/DCO : Design Code Option",
+   "updated_at": "2026-06-29T00:43:02Z"
+  },
+  "57365599209497": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57365599209497-DESIGN-STEEL-KDS-41-30-2022-DCTL-Definition-of-Frame",
+   "title": "DESIGN/STEEL/KDS-41-30-2022/DCTL : Definition of Frame",
+   "updated_at": "2026-05-11T02:09:29Z"
+  },
+  "57365732533145": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57365732533145-DESIGN-STEEL-KDS-41-30-2022-LLRF-Live-Load-Reduction-Factor",
+   "title": "DESIGN/STEEL/KDS-41-30-2022/LLRF : Live Load Reduction Factor",
+   "updated_at": "2026-05-11T02:08:18Z"
+  },
+  "57366206820249": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57366206820249-DESIGN-STEEL-KDS-41-30-2022-LCTB-Load-Contribution-for-Nonlinear-Load-Case",
+   "title": "DESIGN/STEEL/KDS-41-30-2022/LCTB : Load Contribution for Nonlinear Load Case",
+   "updated_at": "2026-05-11T02:07:42Z"
+  },
+  "57367569665177": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57367569665177-DESIGN-STEEL-KDS-41-30-2022-HCBM-Haunched-Beam-Assignment",
+   "title": "DESIGN/STEEL/KDS-41-30-2022/HCBM : Haunched Beam Assignment",
+   "updated_at": "2026-05-11T02:05:58Z"
+  },
+  "57368323557785": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57368323557785-DESIGN-STEEL-KDS-41-30-2022-LENG-Unbraced-Length-L-Lb",
+   "title": "DESIGN/STEEL/KDS-41-30-2022/LENG : Unbraced Length (L, Lb)",
+   "updated_at": "2026-05-11T02:06:28Z"
+  },
+  "57368572755353": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57368572755353-DESIGN-STEEL-KDS-41-30-2022-KFAC-Effective-Length-Factor-K",
+   "title": "DESIGN/STEEL/KDS-41-30-2022/KFAC : Effective Length Factor (K)",
+   "updated_at": "2026-05-11T00:58:40Z"
+  },
+  "57368629920793": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57368629920793-DESIGN-STEEL-KDS-41-30-2022-LTSR-Limiting-Slenderness-Ratio",
+   "title": "DESIGN/STEEL/KDS-41-30-2022/LTSR : Limiting Slenderness Ratio",
+   "updated_at": "2026-05-11T00:57:58Z"
+  },
+  "57368834102041": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57368834102041-DESIGN-STEEL-KDS-41-30-2022-CMFT-Equivalent-Moment-Correction-Factor-Cm",
+   "title": "DESIGN/STEEL/KDS-41-30-2022/CMFT : Equivalent Moment Correction Factor(Cm)",
+   "updated_at": "2026-05-11T00:26:58Z"
+  },
+  "57369103995033": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57369103995033-DESIGN-STEEL-KDS-41-30-2022-FMAG-Moment-Magnifier-B1-Delta-b-B2-Delta-s",
+   "title": "DESIGN/STEEL/KDS-41-30-2022/FMAG : Moment Magnifier(B1/Delta_b, B2/Delta_s)",
+   "updated_at": "2026-05-11T00:25:33Z"
+  },
+  "57369321629081": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57369321629081-DESIGN-STEEL-KDS-41-30-2022-SUEQ-Scale-up-Factor-for-Earthquake",
+   "title": "DESIGN/STEEL/KDS-41-30-2022/SUEQ : Scale up Factor for Earthquake",
+   "updated_at": "2026-05-11T00:20:22Z"
+  },
+  "57369329156377": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57369329156377-DESIGN-STEEL-KDS-41-30-2022-MBTP-Modify-Member-Type",
+   "title": "DESIGN/STEEL/KDS-41-30-2022/MBTP : Modify Member Type",
+   "updated_at": "2026-05-11T00:19:02Z"
+  },
+  "57369505978777": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57369505978777-DESIGN-STEEL-KDS-41-30-2022-EQCT-Seismic-Load-Combination-Type",
+   "title": "DESIGN/STEEL/KDS-41-30-2022/EQCT : Seismic Load Combination Type",
+   "updated_at": "2026-05-11T00:19:35Z"
+  },
+  "57369593628057": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57369593628057-DESIGN-STEEL-KDS-41-30-2022-SRDF-Strength-Reduction-Factors",
+   "title": "DESIGN/STEEL/KDS-41-30-2022/SRDF : Strength Reduction Factors",
+   "updated_at": "2026-05-11T00:18:30Z"
+  },
+  "57369714731673": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57369714731673-DESIGN-STEEL-KDS-41-30-2022-SERV-Serviceability-Parameters",
+   "title": "DESIGN/STEEL/KDS-41-30-2022/SERV : Serviceability Parameters",
+   "updated_at": "2026-07-03T04:48:39Z"
+  },
+  "57370057195545": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57370057195545-DESIGN-STEEL-KDS-41-30-2022-CBFT-Bending-Coefficient-Cb",
+   "title": "DESIGN/STEEL/KDS-41-30-2022/CBFT : Bending Coefficient(Cb)",
+   "updated_at": "2026-05-11T00:18:06Z"
+  },
+  "57371787001881": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57371787001881-DESIGN-STEEL-KDS-41-30-2022-SLRS-Seismic-Load-Resisting-System-by-Member",
+   "title": "DESIGN/STEEL/KDS-41-30-2022/SLRS : Seismic Load Resisting System by Member",
+   "updated_at": "2026-06-22T08:24:07Z"
+  },
+  "57371843417497": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57371843417497-DESIGN-STEEL-KDS-41-30-2022-CRCM-Combined-Ratio-Calculation-Method-for-Circular-Section",
+   "title": "DESIGN/STEEL/KDS-41-30-2022/CRCM : Combined Ratio Calculation Method for Circular Section",
+   "updated_at": "2026-05-11T00:17:34Z"
+  },
+  "57389316545177": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57389316545177-DESIGN-STEEL-KDS-41-30-2022-SMODI-Modify-Steel-Material",
+   "title": "DESIGN/STEEL/KDS-41-30-2022/SMODI : Modify Steel Material",
+   "updated_at": "2026-05-11T00:16:36Z"
+  },
+  "57389469766681": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57389469766681-DESIGN-STEEL-KDS-41-30-2022-CODE-ANAL-Steel-Code-Check-Perform",
+   "title": "DESIGN/STEEL/KDS-41-30-2022/CODE-ANAL : Steel Code Check Perform",
+   "updated_at": "2026-05-11T02:19:46Z"
+  },
+  "57389577645209": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57389577645209-DESIGN-STEEL-KDS-41-30-2022-CODE-REPORT-Steel-Code-Check-Report",
+   "title": "DESIGN/STEEL/KDS-41-30-2022/CODE-REPORT : Steel Code Check Report",
+   "updated_at": "2026-05-11T02:17:06Z"
+  },
+  "57389596454553": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57389596454553-DESIGN-STEEL-KDS-41-30-2022-CODE-TABLE-Steel-Code-Check-Table",
+   "title": "DESIGN/STEEL/KDS-41-30-2022/CODE-TABLE : Steel Code Check Table",
+   "updated_at": "2026-06-09T05:23:49Z"
+  },
+  "57389695353241": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57389695353241-Steel-Optimal-Design",
+   "title": "Steel Optimal Design",
+   "updated_at": "2026-06-22T08:24:10Z"
+  },
+  "57390686440345": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57390686440345-DESIGN-STEEL-KDS-41-30-2022-DREULT-Steel-Design-Result",
+   "title": "DESIGN/STEEL/KDS-41-30-2022/DREULT : Steel Design Result",
+   "updated_at": "2026-06-04T07:44:49Z"
+  },
+  "57399235907097": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57399235907097-DESIGN-RC-KDS-41-20-2022-DCTL-Definition-of-Frame",
+   "title": "DESIGN/RC/KDS-41-20-2022/DCTL : Definition of Frame",
+   "updated_at": "2026-05-11T02:24:29Z"
+  },
+  "57400611535513": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57400611535513-DESIGN-STEEL-KDS-41-30-2022-MLLR-Modify-Live-Load-Reduction-Factor",
+   "title": "DESIGN/STEEL/KDS-41-30-2022/MLLR : Modify Live Load Reduction Factor",
+   "updated_at": "2026-06-22T08:24:11Z"
+  },
+  "57400849512089": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57400849512089-DESIGN-RC-KDS-41-20-2022-LCTB-Load-Contribution-for-Nonlinear-Load-Case",
+   "title": "DESIGN/RC/KDS-41-20-2022/LCTB : Load Contribution for Nonlinear Load Case",
+   "updated_at": "2026-05-11T02:27:27Z"
+  },
+  "57401028854553": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57401028854553-DESIGN-RC-KDS-41-20-2022-HCBM-Haunched-Beam-Assignment",
+   "title": "DESIGN/RC/KDS-41-20-2022/HCBM : Haunched Beam Assignment",
+   "updated_at": "2026-05-11T02:29:22Z"
+  },
+  "57401130563353": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57401130563353-DESIGN-RC-KDS-41-20-2022-LENG-Unbraced-Length-L-Lb",
+   "title": "DESIGN/RC/KDS-41-20-2022/LENG : Unbraced Length (L, Lb)",
+   "updated_at": "2026-05-11T02:30:03Z"
+  },
+  "57401483836313": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57401483836313-DESIGN-RC-KDS-41-20-2022-KFAC-Effective-Length-Factor-K",
+   "title": "DESIGN/RC/KDS-41-20-2022/KFAC : Effective Length Factor (K)",
+   "updated_at": "2026-05-11T02:30:30Z"
+  },
+  "57401571080345": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57401571080345-DESIGN-RC-KDS-41-20-2022-CMFT-Equivalent-Moment-Correction-Factor-Cm",
+   "title": "DESIGN/RC/KDS-41-20-2022/CMFT : Equivalent Moment Correction Factor(Cm)",
+   "updated_at": "2026-06-22T08:24:13Z"
+  },
+  "57401658783385": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57401658783385-DESIGN-RC-KDS-41-20-2022-FMAG-Moment-Magnifier-B1-Delta-b-B2-Delta-s",
+   "title": "DESIGN/RC/KDS-41-20-2022/FMAG : Moment Magnifier(B1/Delta_b, B2/Delta_s)",
+   "updated_at": "2026-05-11T02:33:03Z"
+  },
+  "57401688698393": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57401688698393-DESIGN-RC-KDS-41-20-2022-MLLR-Modify-Live-Load-Reduction-Factor",
+   "title": "DESIGN/RC/KDS-41-20-2022/MLLR : Modify Live Load Reduction Factor",
+   "updated_at": "2026-06-22T08:24:14Z"
+  },
+  "57401718595481": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57401718595481-DESIGN-RC-KDS-41-20-2022-SUEQ-Scale-up-Factor-for-Earthquake",
+   "title": "DESIGN/RC/KDS-41-20-2022/SUEQ : Scale up Factor for Earthquake",
+   "updated_at": "2026-06-22T08:24:15Z"
+  },
+  "57401721345305": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57401721345305-DESIGN-RC-KDS-41-20-2022-MBTP-Modify-Member-Type",
+   "title": "DESIGN/RC/KDS-41-20-2022/MBTP : Modify Member Type",
+   "updated_at": "2026-06-22T08:24:15Z"
+  },
+  "57401739847065": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57401739847065-DESIGN-RC-KDS-41-20-2022-EQCT-Seismic-Load-Combination-Type",
+   "title": "DESIGN/RC/KDS-41-20-2022/EQCT : Seismic Load Combination Type",
+   "updated_at": "2026-06-22T08:24:16Z"
+  },
+  "57401906803225": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57401906803225-DESIGN-RC-KDS-41-20-2022-SDGN-Seismic-Design-Type",
+   "title": "DESIGN/RC/KDS-41-20-2022/SDGN : Seismic Design Type",
+   "updated_at": "2026-06-22T08:24:16Z"
+  },
+  "57402191658777": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57402191658777-DESIGN-RC-KDS-41-20-2022-MRFT-Moment-Redistribution-Factor",
+   "title": "DESIGN/RC/KDS-41-20-2022/MRFT : Moment Redistribution Factor",
+   "updated_at": "2026-06-22T08:24:17Z"
+  },
+  "57402250238617": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57402250238617-DESIGN-RC-KDS-41-20-2022-TRFT-Torsion-Reduction-Factor",
+   "title": "DESIGN/RC/KDS-41-20-2022/TRFT : Torsion Reduction Factor",
+   "updated_at": "2026-06-22T08:24:17Z"
+  },
+  "57402267791001": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57402267791001-DESIGN-RC-KDS-41-20-2022-MCMB-Moment-Calculation-Method-for-Beam",
+   "title": "DESIGN/RC/KDS-41-20-2022/MCMB : Moment Calculation Method for Beam",
+   "updated_at": "2026-06-22T08:24:18Z"
+  },
+  "57402315435545": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57402315435545-DESIGN-RC-KDS-41-20-2022-DFBA-Design-Force-for-Beam-Assigned-as-Member",
+   "title": "DESIGN/RC/KDS-41-20-2022/DFBA : Design Force for Beam Assigned as Member",
+   "updated_at": "2026-05-11T02:34:08Z"
+  },
+  "57402389191065": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57402389191065-DESIGN-RC-KDS-41-20-2022-PMDM-P-M-Curve-Calculation-Method",
+   "title": "DESIGN/RC/KDS-41-20-2022/PMDM : P-M Curve Calculation Method",
+   "updated_at": "2026-05-11T02:34:58Z"
+  },
+  "57402506763289": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57402506763289-DESIGN-RC-KDS-41-20-2022-SCOL-Seismic-Column-Type",
+   "title": "DESIGN/RC/KDS-41-20-2022/SCOL : Seismic Column Type",
+   "updated_at": "2026-05-11T02:38:21Z"
+  },
+  "57402556185625": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57402556185625-DESIGN-RC-KDS-41-20-2022-WMAK-Modify-Wall-Mark-Data",
+   "title": "DESIGN/RC/KDS-41-20-2022/WMAK : Modify Wall Mark Data",
+   "updated_at": "2026-05-11T02:39:36Z"
+  },
+  "57402573014169": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57402573014169-DESIGN-RC-KDS-41-20-2022-BEMW-Boundary-Element-Method-by-Wall-ID",
+   "title": "DESIGN/RC/KDS-41-20-2022/BEMW : Boundary Element Method by Wall ID",
+   "updated_at": "2026-05-11T02:51:40Z"
+  },
+  "57402955647769": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57402955647769-DESIGN-RC-KDS-41-20-2022-DCRM-BEAM-Design-Criteria-for-Rebars-by-Beam-Member",
+   "title": "DESIGN/RC/KDS-41-20-2022/DCRM-BEAM : Design Criteria for Rebars by Beam Member",
+   "updated_at": "2026-05-12T00:29:59Z"
+  },
+  "57403168622873": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57403168622873-DESIGN-RC-KDS-41-20-2022-DCRM-COLUMN-Design-Criteria-for-Rebars-by-Column-Member",
+   "title": "DESIGN/RC/KDS-41-20-2022/DCRM-COLUMN : Design Criteria for Rebars by Column Member",
+   "updated_at": "2026-05-12T00:43:24Z"
+  },
+  "57403194027033": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57403194027033-DESIGN-RC-KDS-41-20-2022-DCRM-BRACE-Design-Criteria-for-Rebars-by-Brace-Member",
+   "title": "DESIGN/RC/KDS-41-20-2022/DCRM-BRACE : Design Criteria for Rebars by Brace Member",
+   "updated_at": "2026-05-12T00:44:16Z"
+  },
+  "57404666280729": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57404666280729-DESIGN-RC-KDS-41-20-2022-DCRE-Design-Criteria-for-Rebar",
+   "title": "DESIGN/RC/KDS-41-20-2022/DCRE : Design Criteria for Rebar",
+   "updated_at": "2026-05-12T00:44:56Z"
+  },
+  "57407575510937": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57407575510937-DESIGN-RC-KDS-41-20-2022-DCREM-Same-Beam-Rebar-at-Joints",
+   "title": "DESIGN/RC/KDS-41-20-2022/DCREM : Same Beam Rebar at Joints",
+   "updated_at": "2026-05-12T00:54:29Z"
+  },
+  "57424449702681": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57424449702681-DESIGN-STEEL-KDS-41-30-2022-ULCT-Underground-Load-Combination-Type",
+   "title": "DESIGN/STEEL/KDS-41-30-2022/ULCT : Underground Load Combination Type",
+   "updated_at": "2026-06-22T08:24:23Z"
+  },
+  "57424526808345": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57424526808345-DESIGN-RC-KDS-41-20-2022-ULCT-Underground-Load-Combination-Type",
+   "title": "DESIGN/RC/KDS-41-20-2022/ULCT : Underground Load Combination Type",
+   "updated_at": "2026-06-22T08:24:23Z"
+  },
+  "57424760263833": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57424760263833-DESIGN-RC-KDS-41-20-2022-REXC-Rebar-Exposure-Condition",
+   "title": "DESIGN/RC/KDS-41-20-2022/REXC : Rebar Exposure Condition",
+   "updated_at": "2026-06-22T08:24:24Z"
+  },
+  "57426912432793": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57426912432793-DESIGN-RC-KDS-41-20-2022-BD-ANAL-RC-Beam-Design-Perform",
+   "title": "DESIGN/RC/KDS-41-20-2022/BD-ANAL : RC Beam Design Perform",
+   "updated_at": "2026-06-22T08:24:24Z"
+  },
+  "57426948142105": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57426948142105-DESIGN-RC-KDS-41-20-2022-BD-TABLE-RC-Beam-Design-Table",
+   "title": "DESIGN/RC/KDS-41-20-2022/BD-TABLE : RC Beam Design Table",
+   "updated_at": "2026-06-22T08:24:25Z"
+  },
+  "57427789377433": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57427789377433-DESIGN-RC-KDS-41-20-2022-BD-REPORT-RC-Beam-Design-Report",
+   "title": "DESIGN/RC/KDS-41-20-2022/BD-REPORT : RC Beam Design Report",
+   "updated_at": "2026-06-22T08:24:25Z"
+  },
+  "57429905171225": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57429905171225-DESIGN-RC-KDS-41-20-2022-CD-ANAL-RC-Column-Design-Perform",
+   "title": "DESIGN/RC/KDS-41-20-2022/CD-ANAL : RC Column Design Perform",
+   "updated_at": "2026-06-22T08:24:26Z"
+  },
+  "57430243603225": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57430243603225-DESIGN-RC-KDS-41-20-2022-CD-TABLE-RC-Column-Design-Table",
+   "title": "DESIGN/RC/KDS-41-20-2022/CD-TABLE : RC Column Design Table",
+   "updated_at": "2026-06-09T04:31:57Z"
+  },
+  "57430321588249": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57430321588249-DESIGN-RC-KDS-41-20-2022-CD-REPORT-RC-Column-Design-Report",
+   "title": "DESIGN/RC/KDS-41-20-2022/CD-REPORT : RC Column Design Report",
+   "updated_at": "2026-05-27T00:27:50Z"
+  },
+  "57430416643225": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57430416643225-DESIGN-RC-KDS-41-20-2022-BRD-ANAL-RC-Brace-Design-Perform",
+   "title": "DESIGN/RC/KDS-41-20-2022/BRD-ANAL : RC Brace Design Perform",
+   "updated_at": "2026-06-22T08:24:27Z"
+  },
+  "57430428520601": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57430428520601-DESIGN-RC-KDS-41-20-2022-BRD-TABLE-RC-Brace-Design-Table",
+   "title": "DESIGN/RC/KDS-41-20-2022/BRD-TABLE : RC Brace Design Table",
+   "updated_at": "2026-05-27T01:31:57Z"
+  },
+  "57430481485081": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57430481485081-DESIGN-RC-KDS-41-20-2022-BRD-REPORT-RC-Brace-Design-Report",
+   "title": "DESIGN/RC/KDS-41-20-2022/BRD-REPORT : RC Brace Design Report",
+   "updated_at": "2026-05-27T00:32:57Z"
+  },
+  "57430514941209": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57430514941209-DESIGN-RC-KDS-41-20-2022-WD-ANAL-RC-Wall-Design-Perform",
+   "title": "DESIGN/RC/KDS-41-20-2022/WD-ANAL : RC Wall Design Perform",
+   "updated_at": "2026-06-22T08:25:42Z"
+  },
+  "57442273865625": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57442273865625-DESIGN-RC-KDS-41-20-2022-WD-TABLE-RC-Wall-Design-Table",
+   "title": "DESIGN/RC/KDS-41-20-2022/WD-TABLE : RC Wall Design Table",
+   "updated_at": "2026-07-01T03:55:11Z"
+  },
+  "57442429841561": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57442429841561-DESIGN-RC-KDS-41-20-2022-WD-REPORT-RC-Wall-Design-Report",
+   "title": "DESIGN/RC/KDS-41-20-2022/WD-REPORT : RC Wall Design Report",
+   "updated_at": "2026-05-19T01:49:44Z"
+  },
+  "57456785885465": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57456785885465-DESIGN-RC-KDS-41-20-2022-HCD-ANAL-RC-Haunched-Beam-Design-Perform",
+   "title": "DESIGN/RC/KDS-41-20-2022/HCD-ANAL : RC Haunched Beam Design Perform",
+   "updated_at": "2026-06-22T08:24:29Z"
+  },
+  "57457041716889": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57457041716889-DESIGN-RC-KDS-41-20-2022-HCD-TABLE-RC-Haunched-Beam-Design-Table",
+   "title": "DESIGN/RC/KDS-41-20-2022/HCD-TABLE : RC Haunched Beam Design Table",
+   "updated_at": "2026-06-22T08:24:30Z"
+  },
+  "57457044886169": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57457044886169-DESIGN-RC-KDS-41-20-2022-HCD-REPORT-RC-Haunched-Beam-Design-Report",
+   "title": "DESIGN/RC/KDS-41-20-2022/HCD-REPORT : RC Haunched Beam Design Report",
+   "updated_at": "2026-06-22T08:24:30Z"
+  },
+  "57457104239129": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57457104239129-DESIGN-RC-KDS-41-20-2022-BC-ANAL-RC-Beam-Check-Perform",
+   "title": "DESIGN/RC/KDS-41-20-2022/BC-ANAL : RC Beam Check Perform",
+   "updated_at": "2026-06-22T08:24:31Z"
+  },
+  "57457223050521": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57457223050521-DESIGN-RC-KDS-41-20-2022-BC-TABLE-RC-Beam-Check-Table",
+   "title": "DESIGN/RC/KDS-41-20-2022/BC-TABLE : RC Beam Check Table",
+   "updated_at": "2026-06-22T08:24:31Z"
+  },
+  "57457268302233": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57457268302233-DESIGN-RC-KDS-41-20-2022-BC-REPORT-RC-Beam-Check-Report",
+   "title": "DESIGN/RC/KDS-41-20-2022/BC-REPORT : RC Beam Check Report",
+   "updated_at": "2026-06-22T08:24:32Z"
+  },
+  "57457806251929": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57457806251929-DESIGN-RC-KDS-41-20-2022-CC-ANAL-RC-Column-Check-Perform",
+   "title": "DESIGN/RC/KDS-41-20-2022/CC-ANAL : RC Column Check Perform",
+   "updated_at": "2026-06-22T08:24:32Z"
+  },
+  "57458112575641": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57458112575641-DESIGN-RC-KDS-41-20-2022-CC-REPORT-RC-Column-Check-Report",
+   "title": "DESIGN/RC/KDS-41-20-2022/CC-REPORT : RC Column Check Report",
+   "updated_at": "2026-05-27T00:43:49Z"
+  },
+  "57458140117657": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57458140117657-DESIGN-RC-KDS-41-20-2022-CC-TABLE-RC-Column-Check-Table",
+   "title": "DESIGN/RC/KDS-41-20-2022/CC-TABLE : RC Column Check Table",
+   "updated_at": "2026-06-09T04:29:08Z"
+  },
+  "57458218715417": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57458218715417-DESIGN-RC-KDS-41-20-2022-BRC-ANAL-RC-Brace-Check-Perform",
+   "title": "DESIGN/RC/KDS-41-20-2022/BRC-ANAL : RC Brace Check Perform",
+   "updated_at": "2026-06-22T08:24:37Z"
+  },
+  "57458359943449": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57458359943449-DESIGN-RC-KDS-41-20-2022-BRC-TABLE-RC-Brace-Check-Table",
+   "title": "DESIGN/RC/KDS-41-20-2022/BRC-TABLE : RC Brace Check Table",
+   "updated_at": "2026-06-22T08:24:37Z"
+  },
+  "57458379586713": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57458379586713-DESIGN-RC-KDS-41-20-2022-BRC-REPORT-RC-Brace-Check-Report",
+   "title": "DESIGN/RC/KDS-41-20-2022/BRC-REPORT : RC Brace Check Report",
+   "updated_at": "2026-05-27T00:45:15Z"
+  },
+  "57458454433689": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57458454433689-DESIGN-RC-KDS-41-20-2022-WC-ANAL-RC-Wall-Check-Perform",
+   "title": "DESIGN/RC/KDS-41-20-2022/WC-ANAL : RC Wall Check Perform",
+   "updated_at": "2026-05-19T05:15:27Z"
+  },
+  "57458599023897": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57458599023897-DESIGN-RC-KDS-41-20-2022-WC-TABLE-RC-Wall-Check-Table",
+   "title": "DESIGN/RC/KDS-41-20-2022/WC-TABLE : RC Wall Check Table",
+   "updated_at": "2026-07-01T04:02:35Z"
+  },
+  "57458710549913": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57458710549913-DESIGN-RC-KDS-41-20-2022-WC-REPORT-RC-Wall-Check-Report",
+   "title": "DESIGN/RC/KDS-41-20-2022/WC-REPORT : RC Wall Check Report",
+   "updated_at": "2026-05-19T05:13:15Z"
+  },
+  "57458836502553": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57458836502553-DESIGN-RC-KDS-41-20-2022-CDESIGN-RC-Concrete-Design-Result",
+   "title": "DESIGN/RC/KDS-41-20-2022/CDESIGN : RC Concrete Design Result",
+   "updated_at": "2026-05-12T02:56:04Z"
+  },
+  "57459388328601": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57459388328601-DESIGN-RC-KDS-41-20-2022-TABLE-Column-Design-Forces",
+   "title": "DESIGN/RC/KDS-41-20-2022/TABLE : Column Design Forces",
+   "updated_at": "2026-06-22T08:24:40Z"
+  },
+  "57459768200217": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57459768200217-DESIGN-RC-KDS-41-20-2022-TABLE-Brace-Design-Forces",
+   "title": "DESIGN/RC/KDS-41-20-2022/TABLE : Brace Design Forces",
+   "updated_at": "2026-06-22T08:24:41Z"
+  },
+  "57465267608345": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57465267608345-DESIGN-SRC-AIK-SRC2K-DSRC-SRC-Design-Code",
+   "title": "DESIGN/SRC/AIK-SRC2K/DSRC : SRC Design Code",
+   "updated_at": "2026-06-22T08:24:41Z"
+  },
+  "57465303138329": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57465303138329-DESIGN-SRC-AIK-SRC2K-DCO-Design-Code-Option",
+   "title": "DESIGN/SRC/AIK-SRC2K/DCO : Design Code Option",
+   "updated_at": "2026-06-22T08:24:42Z"
+  },
+  "57465737477273": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57465737477273-DESIGN-SRC-AIK-SRC2K-DCTL-Definition-of-Frame",
+   "title": "DESIGN/SRC/AIK-SRC2K/DCTL : Definition of Frame",
+   "updated_at": "2026-06-22T08:24:42Z"
+  },
+  "57465890420505": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57465890420505-DESIGN-SRC-AIK-SRC2K-LCTB-Load-Contribution-for-Nonlinear-Load-Case",
+   "title": "DESIGN/SRC/AIK-SRC2K/LCTB : Load Contribution for Nonlinear Load Case",
+   "updated_at": "2026-06-22T08:24:43Z"
+  },
+  "57465892856857": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57465892856857-DESIGN-SRC-AIK-SRC2K-LLRF-Live-Load-Reduction-Factor",
+   "title": "DESIGN/SRC/AIK-SRC2K/LLRF : Live Load Reduction Factor",
+   "updated_at": "2026-06-22T08:24:43Z"
+  },
+  "57466007733785": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57466007733785-DESIGN-SRC-AIK-SRC2K-LENG-Unbraced-Length-L-Lb",
+   "title": "DESIGN/SRC/AIK-SRC2K/LENG : Unbraced Length (L, Lb)",
+   "updated_at": "2026-06-22T08:24:44Z"
+  },
+  "57466103707801": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57466103707801-DESIGN-SRC-AIK-SRC2K-KFAC-Effective-Length-Factor-K",
+   "title": "DESIGN/SRC/AIK-SRC2K/KFAC : Effective Length Factor (K)",
+   "updated_at": "2026-06-22T08:24:44Z"
+  },
+  "57466235159577": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57466235159577-DESIGN-SRC-AIK-SRC2K-LTSR-Limiting-Slenderness-Ratio",
+   "title": "DESIGN/SRC/AIK-SRC2K/LTSR : Limiting Slenderness Ratio",
+   "updated_at": "2026-06-22T08:24:45Z"
+  },
+  "57466258537625": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57466258537625-DESIGN-SRC-AIK-SRC2K-CMFT-Equivalent-Moment-Correction-Factor-Cm",
+   "title": "DESIGN/SRC/AIK-SRC2K/CMFT : Equivalent Moment Correction Factor(Cm)",
+   "updated_at": "2026-06-22T08:24:45Z"
+  },
+  "57466283605657": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57466283605657-DESIGN-SRC-AIK-SRC2K-FMAG-Moment-Magnifier-B1-Delta-b-B2-Delta-s",
+   "title": "DESIGN/SRC/AIK-SRC2K/FMAG : Moment Magnifier(B1/Delta_b, B2/Delta_s)",
+   "updated_at": "2026-06-22T08:24:46Z"
+  },
+  "57466533347993": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57466533347993-DESIGN-SRC-AIK-SRC2K-MLLR-Modify-Live-Load-Reduction-Factor",
+   "title": "DESIGN/SRC/AIK-SRC2K/MLLR : Modify Live Load Reduction Factor",
+   "updated_at": "2026-06-22T08:24:47Z"
+  },
+  "57466547756313": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57466547756313-DESIGN-SRC-AIK-SRC2K-SUEQ-Scale-up-Factor-for-Earthquake",
+   "title": "DESIGN/SRC/AIK-SRC2K/SUEQ : Scale up Factor for Earthquake",
+   "updated_at": "2026-06-22T08:24:47Z"
+  },
+  "57466577314201": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57466577314201-DESIGN-SRC-AIK-SRC2K-MBTP-Modify-Member-Type",
+   "title": "DESIGN/SRC/AIK-SRC2K/MBTP : Modify Member Type",
+   "updated_at": "2026-06-22T08:24:48Z"
+  },
+  "57466649126041": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57466649126041-DESIGN-SRC-AIK-SRC2K-EQCT-Seismic-Load-Combination-Type",
+   "title": "DESIGN/SRC/AIK-SRC2K/EQCT : Seismic Load Combination Type",
+   "updated_at": "2026-06-22T08:24:48Z"
+  },
+  "57471631056153": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57471631056153-DESIGN-SRC-AIK-SRC2K-BC-ANAL-SRC-Beam-Checking-Perform",
+   "title": "DESIGN/SRC/AIK-SRC2K/BC-ANAL : SRC Beam Checking Perform",
+   "updated_at": "2026-06-22T08:24:49Z"
+  },
+  "57471700233369": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57471700233369-DESIGN-SRC-AIK-SRC2K-BC-REPORT-SRC-Beam-Checking-Report",
+   "title": "DESIGN/SRC/AIK-SRC2K/BC-REPORT : SRC Beam Checking Report",
+   "updated_at": "2026-05-08T04:15:26Z"
+  },
+  "57471707745945": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57471707745945-DESIGN-SRC-AIK-SRC2K-BC-TABLE-SRC-Beam-Checking-Table",
+   "title": "DESIGN/SRC/AIK-SRC2K/BC-TABLE : SRC Beam Checking Table",
+   "updated_at": "2026-06-22T08:24:50Z"
+  },
+  "57471905977241": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57471905977241-DESIGN-SRC-AIK-SRC2K-CC-ANAL-SRC-Column-Checking-Perform",
+   "title": "DESIGN/SRC/AIK-SRC2K/CC-ANAL : SRC Column Checking Perform",
+   "updated_at": "2026-05-08T04:15:26Z"
+  },
+  "57471918632857": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57471918632857-DESIGN-SRC-AIK-SRC2K-CC-REPORT-SRC-Column-Checking-Report",
+   "title": "DESIGN/SRC/AIK-SRC2K/CC-REPORT : SRC Column Checking Report",
+   "updated_at": "2026-05-08T04:15:25Z"
+  },
+  "57471932075033": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57471932075033-DESIGN-SRC-AIK-SRC2K-CC-TABLE-SRC-Column-Checking-Table",
+   "title": "DESIGN/SRC/AIK-SRC2K/CC-TABLE : SRC Column Checking Table",
+   "updated_at": "2026-05-08T04:15:25Z"
+  },
+  "57472245522201": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57472245522201-DESIGN-SRC-AIK-SRC2K-OCHECK-SRC-Optimal-Design",
+   "title": "DESIGN/SRC/AIK-SRC2K/OCHECK : SRC Optimal Design",
+   "updated_at": "2026-05-08T04:15:24Z"
+  },
+  "57473503612569": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57473503612569-DESIGN-SRC-AIK-SRC2K-TABLE-SRC-Beam-Design-Forces",
+   "title": "DESIGN/SRC/AIK-SRC2K/TABLE : SRC Beam Design Forces",
+   "updated_at": "2026-05-08T04:15:23Z"
+  },
+  "57473614628889": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57473614628889-DESIGN-SRC-AIK-SRC2K-TABLE-SRC-Column-Design-Forces",
+   "title": "DESIGN/SRC/AIK-SRC2K/TABLE : SRC Column Design Forces",
+   "updated_at": "2026-05-08T04:15:23Z"
+  },
+  "57474262026905": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57474262026905-DESIGN-RC-KDS-41-20-2022-TABLE-Beam-Design-Forces",
+   "title": "DESIGN/RC/KDS-41-20-2022/TABLE : Beam Design Forces",
+   "updated_at": "2026-05-08T04:15:22Z"
+  },
+  "57474427261465": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57474427261465-DESIGN-STEEL-KDS-41-30-2022-TABLE-Steel-Member-Design-Forces",
+   "title": "DESIGN/STEEL/KDS-41-30-2022/TABLE : Steel Member Design Forces",
+   "updated_at": "2026-05-08T04:15:22Z"
+  },
+  "57475390140313": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57475390140313-DESIGN-RC-KDS-41-20-2022-LMRR-Limiting-Maximum-Rebar-Ratio",
+   "title": "DESIGN/RC/KDS-41-20-2022/LMRR : Limiting Maximum Rebar Ratio",
+   "updated_at": "2026-05-08T04:15:21Z"
+  },
+  "57567874715289": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57567874715289-DESIGN-RC-KDS-41-20-2022-DCRM-WALL-Design-Criteria-for-Rebars-by-Wall-Member",
+   "title": "DESIGN/RC/KDS-41-20-2022/DCRM-WALL : Design Criteria for Rebars by Wall Member",
+   "updated_at": "2026-05-08T04:15:21Z"
+  },
+  "57568269363737": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57568269363737-Design-Code",
+   "title": "Design Code",
+   "updated_at": "2026-05-08T04:15:20Z"
+  },
+  "57656773423385": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57656773423385-Assign-Inelastic-Hinges-Beam",
+   "title": "Assign Inelastic Hinges - Beam",
+   "updated_at": "2026-05-06T13:09:43Z"
+  },
+  "57656796689177": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57656796689177-Assign-Inelastic-Hinges-Truss",
+   "title": "Assign Inelastic Hinges - Truss",
+   "updated_at": "2026-05-06T13:09:26Z"
+  },
+  "57656799110937": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57656799110937-Assign-Inelastic-Hinges-General-Link",
+   "title": "Assign Inelastic Hinges - General Link",
+   "updated_at": "2026-05-06T13:09:09Z"
+  },
+  "57656826629657": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57656826629657-Assign-Inelastic-Hinges-Point-Spring-Support",
+   "title": "Assign Inelastic Hinges - Point Spring Support",
+   "updated_at": "2026-05-06T13:08:20Z"
+  },
+  "57670595775641": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57670595775641-DESIGN-STEEL-KDS-41-30-2022-MEMB-Member-Assignment",
+   "title": "DESIGN/STEEL/KDS-41-30-2022/MEMB : Member Assignment",
+   "updated_at": "2026-05-08T04:15:20Z"
+  },
+  "57678093825049": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57678093825049-KDS-41-30-2022",
+   "title": "KDS 41 30 : 2022",
+   "updated_at": "2026-07-03T05:09:20Z"
+  },
+  "57711427405209": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57711427405209-KDS-41-20-2022",
+   "title": "KDS 41 20 : 2022",
+   "updated_at": "2026-07-03T07:17:47Z"
+  },
+  "57711471216537": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57711471216537-AIK-SRC2K",
+   "title": "AIK-SRC2K",
+   "updated_at": "2026-07-03T07:27:42Z"
+  },
+  "57871845685401": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57871845685401-DESIGN-RC-KDS-41-20-2022-REBB-Modify-Beam-Rebar-Data",
+   "title": "DESIGN/RC/KDS-41-20-2022/REBB : Modify Beam Rebar Data",
+   "updated_at": "2026-05-13T05:51:33Z"
+  },
+  "57945465173145": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57945465173145-DESIGN-PSC-AASHTO-LRFD24-DSPSC-Design-Code",
+   "title": "DESIGN/PSC/AASHTO-LRFD24/DSPSC : Design Code",
+   "updated_at": "2026-05-15T06:58:22Z"
+  },
+  "57945497373465": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57945497373465-DESIGN-PSC-AASHTO-LRFD24-DPSC-Design-Code-Option",
+   "title": "DESIGN/PSC/AASHTO-LRFD24/DPSC : Design Code Option",
+   "updated_at": "2026-05-15T06:59:21Z"
+  },
+  "57945521269145": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57945521269145-DESIGN-PSC-AASHTO-LRFD24-MEMB-VBEAM-PSC-Segment-Assignment",
+   "title": "DESIGN/PSC/AASHTO-LRFD24/MEMB-VBEAM : PSC Segment Assignment",
+   "updated_at": "2026-05-15T07:00:37Z"
+  },
+  "57945530824345": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57945530824345-DESIGN-PSC-AASHTO-LRFD24-MEMB-PSC-Segment-Assignment",
+   "title": "DESIGN/PSC/AASHTO-LRFD24/MEMB : PSC Segment Assignment",
+   "updated_at": "2026-05-15T07:00:03Z"
+  },
+  "57945572333849": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57945572333849-DESIGN-PSC-AASHTO-LRFD24-SLCT-Serviceability-Load-Combination-Type",
+   "title": "DESIGN/PSC/AASHTO-LRFD24/SLCT : Serviceability Load Combination Type",
+   "updated_at": "2026-05-15T07:01:18Z"
+  },
+  "57945615379609": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57945615379609-DESIGN-PSC-AASHTO-LRFD24-INFS-Interface-shear",
+   "title": "DESIGN/PSC/AASHTO-LRFD24/INFS : Interface shear",
+   "updated_at": "2026-05-15T07:01:56Z"
+  },
+  "57945623457561": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57945623457561-DESIGN-PSC-AASHTO-LRFD24-INFS-VBEAM-Interface-shear",
+   "title": "DESIGN/PSC/AASHTO-LRFD24/INFS-VBEAM : Interface shear",
+   "updated_at": "2026-05-15T07:02:40Z"
+  },
+  "57946907749017": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57946907749017-DESIGN-PSC-AASHTO-LRFD24-RPSC-Logitudinal-Rebar-Reinforcements",
+   "title": "DESIGN/PSC/AASHTO-LRFD24/RPSC : Logitudinal Rebar-Reinforcements",
+   "updated_at": "2026-05-15T07:35:34Z"
+  },
+  "57946987740569": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57946987740569-DESIGN-PSC-AASHTO-LRFD24-SECF-Logitudinal-Rebar-Stiffness",
+   "title": "DESIGN/PSC/AASHTO-LRFD24/SECF : Logitudinal Rebar-Stiffness",
+   "updated_at": "2026-05-15T07:37:25Z"
+  },
+  "57947090728857": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/57947090728857-DESIGN-PSC-AASHTO-LRFD24-PSC-ANAL-Perform-Design",
+   "title": "DESIGN/PSC/AASHTO-LRFD24/PSC-ANAL : Perform Design",
+   "updated_at": "2026-05-15T07:40:41Z"
+  },
+  "58037812666521": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/58037812666521-DESIGN-RC-KDS-41-20-2022-WD-ANAL-RC-Wall-Design-Perform",
+   "title": "DESIGN/RC/KDS-41-20-2022/WD-ANAL : RC Wall Design Perform",
+   "updated_at": "2026-05-18T06:51:43Z"
+  },
+  "58043328695705": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/58043328695705-Modify-Material-concrete",
+   "title": "Modify Material - concrete",
+   "updated_at": "2026-05-18T09:08:31Z"
+  },
+  "58043403493785": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/58043403493785-Modify-Material-Rebar",
+   "title": "Modify Material - Rebar",
+   "updated_at": "2026-05-18T09:10:08Z"
+  },
+  "58043488354969": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/58043488354969-DESIGN-PSC-AASHTO-LRFD24-MATD-Modify-Material",
+   "title": "DESIGN/PSC/AASHTO-LRFD24/MATD : Modify Material",
+   "updated_at": "2026-05-18T09:12:20Z"
+  },
+  "58078143157785": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/58078143157785-DESIGN-PSC-AASHTO-LRFD24-DIDP-Design-Position",
+   "title": "DESIGN/PSC/AASHTO-LRFD24/DIDP : Design Position",
+   "updated_at": "2026-05-19T08:48:35Z"
+  },
+  "58078226966169": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/58078226966169-DESIGN-PSC-AASHTO-LRFD24-DIDP-VBEAM-Design-Position-for-Virtual-Beam",
+   "title": "DESIGN/PSC/AASHTO-LRFD24/DIDP-VBEAM : Design Position for Virtual Beam",
+   "updated_at": "2026-05-19T08:50:49Z"
+  },
+  "58078690517017": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/58078690517017-DESIGN-PSC-AASHTO-LRFD24-DIOP-Output-Position",
+   "title": "DESIGN/PSC/AASHTO-LRFD24/DIOP : Output Position",
+   "updated_at": "2026-05-19T09:03:05Z"
+  },
+  "58094307410457": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/58094307410457-DESIGN-PSC-AASHTO-LRFD24-DIOP-VBEAM-Output-Position-for-Virtual-Beam",
+   "title": "DESIGN/PSC/AASHTO-LRFD24/DIOP-VBEAM : Output Position for Virtual Beam",
+   "updated_at": "2026-05-19T23:55:28Z"
+  },
+  "58329524570905": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/58329524570905-DESIGN-PSC-AASHTO-LRFD24-TABLE-Check-Flexure-Strength",
+   "title": "DESIGN/PSC/AASHTO-LRFD24/TABLE : Check Flexure Strength",
+   "updated_at": "2026-05-27T07:28:31Z"
+  },
+  "58329976060057": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/58329976060057-DESIGN-PSC-AASHTO-LRFD24-TABLE-Design-Forces",
+   "title": "DESIGN/PSC/AASHTO-LRFD24/TABLE : Design Forces",
+   "updated_at": "2026-05-27T03:57:13Z"
+  },
+  "58332500765849": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/58332500765849-DESIGN-PSC-AASHTO-LRFD24-TABLE-Principal-stress-at-a-construction-stage",
+   "title": "DESIGN/PSC/AASHTO-LRFD24/TABLE : Principal stress at a construction stage",
+   "updated_at": "2026-05-27T05:03:30Z"
+  },
+  "58332864321305": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/58332864321305-DESIGN-PSC-AASHTO-LRFD24-TABLE-Check-Combined-Shear-and-Torsion-Strength",
+   "title": "DESIGN/PSC/AASHTO-LRFD24/TABLE : Check Combined Shear and Torsion Strength",
+   "updated_at": "2026-05-27T07:29:32Z"
+  },
+  "58333287089689": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/58333287089689-DESIGN-PSC-AASHTO-LRFD24-TABLE-Check-Shear-Strength",
+   "title": "DESIGN/PSC/AASHTO-LRFD24/TABLE : Check Shear Strength",
+   "updated_at": "2026-05-27T07:27:42Z"
+  },
+  "58334071429401": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/58334071429401-DESIGN-PSC-AASHTO-LRFD24-TABLE-Check-stress-for-cross-section-at-a-construction-stage",
+   "title": "DESIGN/PSC/AASHTO-LRFD24/TABLE : Check stress for cross section at a construction stage",
+   "updated_at": "2026-05-27T05:44:42Z"
+  },
+  "58334269624601": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/58334269624601-DESIGN-PSC-AASHTO-LRFD24-TABLE-Check-stress-for-cross-section-at-service-loads",
+   "title": "DESIGN/PSC/AASHTO-LRFD24/TABLE : Check stress for cross section at service loads",
+   "updated_at": "2026-05-27T05:50:45Z"
+  },
+  "58336859751193": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/58336859751193-DESIGN-PSC-AASHTO-LRFD24-TABLE-Principal-stress-at-a-construction-stage",
+   "title": "DESIGN/PSC/AASHTO-LRFD24/TABLE : Principal stress at a construction stage",
+   "updated_at": "2026-05-27T06:58:01Z"
+  },
+  "58336954415385": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/58336954415385-DESIGN-PSC-AASHTO-LRFD24-TABLE-Principal-stress-at-service-loads-excluding-torsional-shear-stress",
+   "title": "DESIGN/PSC/AASHTO-LRFD24/TABLE : Principal stress at service loads (excluding torsional shear stress)",
+   "updated_at": "2026-05-27T07:00:47Z"
+  },
+  "58337159836441": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/58337159836441-DESIGN-PSC-AASHTO-LRFD24-TABLE-Principal-stress-at-service-loads",
+   "title": "DESIGN/PSC/AASHTO-LRFD24/TABLE : Principal stress at service loads",
+   "updated_at": "2026-05-27T07:03:21Z"
+  },
+  "58337212919321": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/58337212919321-DESIGN-PSC-AASHTO-LRFD24-TABLE-Check-crack-width-at-service-loads",
+   "title": "DESIGN/PSC/AASHTO-LRFD24/TABLE : Check crack width at service loads",
+   "updated_at": "2026-05-27T07:05:34Z"
+  },
+  "58337271509017": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/58337271509017-DESIGN-PSC-AASHTO-LRFD24-TABLE-Check-tensile-stress-for-Prestressing-tendons",
+   "title": "DESIGN/PSC/AASHTO-LRFD24/TABLE : Check tensile stress for Prestressing tendons",
+   "updated_at": "2026-05-27T07:07:36Z"
+  },
+  "58381619465241": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/58381619465241-RATING-PSC-AASHTO-LRFR19-RPSC-ANAL-Perform-Rating",
+   "title": "RATING/PSC/AASHTO-LRFR19/RPSC-ANAL : Perform Rating",
+   "updated_at": "2026-05-28T08:08:47Z"
+  },
+  "58381704142105": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/58381704142105-RATING-PSC-AASHTO-LRFR19-PFRO-VBEAM-Position-for-Rating-Output",
+   "title": "RATING/PSC/AASHTO-LRFR19/PFRO-VBEAM : Position for Rating Output",
+   "updated_at": "2026-05-28T08:10:59Z"
+  },
+  "58381791502873": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/58381791502873-RATING-PSC-AASHTO-LRFR19-PFRO-Position-for-Rating-Output",
+   "title": "RATING/PSC/AASHTO-LRFR19/PFRO : Position for Rating Output",
+   "updated_at": "2026-05-28T08:14:33Z"
+  },
+  "58412610890137": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/58412610890137-RATING-PSC-AASHTO-LRFR19-DFRC-Define-Rating-Case",
+   "title": "RATING/PSC/AASHTO-LRFR19/DFRC : Define Rating Case",
+   "updated_at": "2026-05-29T05:32:12Z"
+  },
+  "58746274895769": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/58746274895769-Weight-Irregularity-Check-Story-Result-Table",
+   "title": "Weight Irregularity Check - Story Result Table",
+   "updated_at": "2026-06-10T05:59:25Z"
+  },
+  "58908673370521": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/58908673370521-Static-Wind-Load-KDS-41-12-2022",
+   "title": "Static Wind Load - KDS(41-12:2022)",
+   "updated_at": "2026-06-18T09:56:27Z"
+  },
+  "58908676674585": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/58908676674585-Static-Seismic-Load-KDS-41-17-00-2019",
+   "title": "Static Seismic Load - KDS(41-17-00:2019)",
+   "updated_at": "2026-06-18T09:56:23Z"
+  },
+  "58908922148249": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/58908922148249-Static-Wind-Load-User-Type",
+   "title": "Static Wind Load - User Type",
+   "updated_at": "2026-06-18T09:56:29Z"
+  },
+  "58908928576153": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/58908928576153-Static-Seismic-Load-User-Type",
+   "title": "Static Seismic Load - User Type",
+   "updated_at": "2026-06-18T09:56:25Z"
+  },
+  "59050520760473": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/59050520760473-Gust-Factor-Calculator",
+   "title": "Gust Factor Calculator",
+   "updated_at": "2026-06-18T09:56:31Z"
+  },
+  "59054671269145": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/59054671269145-Load-Combination-Steel-KDS-41-30-2022",
+   "title": "Load Combination (Steel) - KDS 41 30 : 2022",
+   "updated_at": "2026-06-18T09:56:44Z"
+  },
+  "59054699524889": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/59054699524889-Load-Combination-Concrete-KDS-41-20-2022",
+   "title": "Load Combination (Concrete) - KDS 41 20 : 2022",
+   "updated_at": "2026-06-18T09:56:33Z"
+  },
+  "59056886354201": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/59056886354201-Load-Combination-SRC-AIK-SRC2K",
+   "title": "Load Combination (SRC) - AIK-SRC2K",
+   "updated_at": "2026-06-18T09:56:38Z"
+  },
+  "59057584761369": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/59057584761369-Load-Combination-General-AIK-SRC2K",
+   "title": "Load Combination (General) - AIK-SRC2K",
+   "updated_at": "2026-06-18T09:56:34Z"
+  },
+  "59057595762329": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/59057595762329-Load-Combination-General-KDS-2022",
+   "title": "Load Combination (General) - KDS : 2022",
+   "updated_at": "2026-06-18T09:56:37Z"
+  },
+  "59057831082265": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/59057831082265-Load-Combination-SRC-KDS-41-SRC-2022",
+   "title": "Load Combination (SRC) - KDS 41 SRC : 2022",
+   "updated_at": "2026-06-18T09:56:40Z"
+  },
+  "59120800558361": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/59120800558361-DESIGN-RC-DRC-RC-Design-Code",
+   "title": "DESIGN/RC/DRC : RC Design Code",
+   "updated_at": "2026-06-18T07:02:14Z"
+  },
+  "59236057502873": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/59236057502873-DESIGN-RC-KDS-41-20-2022-REBB-Modify-Beam-Rebar-Data",
+   "title": "DESIGN/RC/KDS-41-20-2022/REBB : Modify Beam Rebar Data",
+   "updated_at": "2026-06-22T05:41:43Z"
+  },
+  "59236188355097": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/59236188355097-DESIGN-RC-KDS-41-20-2022-REBR-Modify-Brace-Rebar-Data",
+   "title": "DESIGN/RC/KDS-41-20-2022/REBR : Modify Brace Rebar Data",
+   "updated_at": "2026-06-22T05:41:44Z"
+  },
+  "59236266281625": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/59236266281625-DESIGN-RC-KDS-41-20-2022-REBC-Modify-Column-Rebar-Data",
+   "title": "DESIGN/RC/KDS-41-20-2022/REBC : Modify Column Rebar Data",
+   "updated_at": "2026-06-25T08:04:47Z"
+  },
+  "59236271208729": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/59236271208729-DESIGN-RC-KDS-41-20-2022-REBW-Modify-Wall-Rebar-Data",
+   "title": "DESIGN/RC/KDS-41-20-2022/REBW : Modify Wall Rebar Data",
+   "updated_at": "2026-06-22T05:41:47Z"
+  },
+  "59358972353817": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/59358972353817-Modify-Brace-Rebar-Data",
+   "title": "Modify Brace Rebar Data",
+   "updated_at": "2026-06-25T08:20:35Z"
+  },
+  "59358984494233": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/59358984494233-Modify-Beam-Rebar-Data",
+   "title": "Modify Beam Rebar Data",
+   "updated_at": "2026-06-25T07:08:46Z"
+  },
+  "59359088215065": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/59359088215065-Modify-Column-Rebar-Data",
+   "title": "Modify Column Rebar Data",
+   "updated_at": "2026-06-25T07:11:13Z"
+  },
+  "59359110968345": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/59359110968345-Modify-Wall-Rebar-Data",
+   "title": "Modify Wall Rebar Data",
+   "updated_at": "2026-06-25T07:12:14Z"
+  },
+  "59398215969561": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/59398215969561-DESIGN-RC-KDS-41-20-2022-DCO-Concrete-Design-Code-Option",
+   "title": "DESIGN/RC/KDS-41-20-2022/DCO : Concrete Design Code Option",
+   "updated_at": "2026-06-26T06:22:44Z"
+  },
+  "59398737034009": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/59398737034009-DESIGN-RC-KDS-41-20-2022-LLRF-Live-Load-Reduction-Factor",
+   "title": "DESIGN/RC/KDS-41-20-2022/LLRF : Live Load Reduction Factor",
+   "updated_at": "2026-06-26T06:36:54Z"
+  },
+  "59398794726041": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/59398794726041-DESIGN-RC-KDS-41-20-2022-MATD-Modify-Concrete-Material",
+   "title": "DESIGN/RC/KDS-41-20-2022/MATD : Modify Concrete Material",
+   "updated_at": "2026-06-26T06:38:43Z"
+  },
+  "59398810145817": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/59398810145817-DESIGN-RC-KDS-41-20-2022-MEMB-Member-Assignment",
+   "title": "DESIGN/RC/KDS-41-20-2022/MEMB : Member Assignment",
+   "updated_at": "2026-06-26T06:40:17Z"
+  },
+  "59398928723865": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/59398928723865-DESIGN-RC-KDS-41-20-2022-SRDF-Strength-Reduction-Factors",
+   "title": "DESIGN/RC/KDS-41-20-2022/SRDF : Strength Reduction Factors",
+   "updated_at": "2026-06-26T06:42:20Z"
+  },
+  "59471948895129": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/59471948895129-DESIGN-SRC-AIK-SRC2K-MATD-Modify-SRC-Material",
+   "title": "DESIGN/SRC/AIK-SRC2K/MATD : Modify SRC Material",
+   "updated_at": "2026-06-29T00:30:52Z"
+  },
+  "59471991932441": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/59471991932441-DESIGN-SECT-Section-for-Design",
+   "title": "DESIGN/SECT : Section for Design",
+   "updated_at": "2026-06-29T00:32:36Z"
+  },
+  "59472022302617": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/59472022302617-DESIGN-SRC-AIK-SRC2K-MCRD-Modify-SRC-Column-Section-Data",
+   "title": "DESIGN/SRC/AIK-SRC2K/MCRD : Modify SRC Column Section Data",
+   "updated_at": "2026-06-29T00:32:48Z"
+  },
+  "59472072271385": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/59472072271385-DESIGN-SRC-AIK-SRC2K-MEMB-Member-Assignment",
+   "title": "DESIGN/SRC/AIK-SRC2K/MEMB : Member Assignment",
+   "updated_at": "2026-06-29T00:35:04Z"
+  },
+  "59472130238873": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/59472130238873-DESIGN-SRC-AIK-SRC2K-MRBD-Modify-SRC-Beam-Section-Data",
+   "title": "DESIGN/SRC/AIK-SRC2K/MRBD : Modify SRC Beam Section Data",
+   "updated_at": "2026-06-29T00:36:33Z"
+  },
+  "59520540732185": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/59520540732185-Concurrent-Joint-Force-Table",
+   "title": "Concurrent Joint Force Table",
+   "updated_at": "2026-06-30T05:25:49Z"
+  }
+ },
+ "section_id": "30087500371097"
+}
