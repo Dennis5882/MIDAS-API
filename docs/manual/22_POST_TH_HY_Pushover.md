@@ -28,8 +28,8 @@
 | 4 | [A-4](#a-4-time-history-text--element-resultwall) | TH Text – Element (Wall) | A | `post/TEXT` | POST |
 | 5 | [A-5](#a-5-time-history-text--general-link-result) | TH Text – General Link | A | `post/TEXT` | POST |
 | 6 | [A-6](#a-6-pushover-text--displacement) | Pushover Text – Displacement | A | `post/TEXT` | POST |
-| 7 | [A-7](#a-7-pushover-text--elementbeam-truss) | Pushover Text – Element (Beam, Truss) | A | `post/TEXT` | POST |
-| 8 | [A-8](#a-8-pushover-text--elementwall) | Pushover Text – Element (Wall) | A | `post/TEXT` | POST |
+| 7 | [A-7](#a-7-pushover-text--element-resultbeam-truss) | Pushover Text – Element (Beam, Truss) | A | `post/TEXT` | POST |
+| 8 | [A-8](#a-8-pushover-text--element-resultwall) | Pushover Text – Element (Wall) | A | `post/TEXT` | POST |
 | 9 | [A-9](#a-9-pushover-text--general-link) | Pushover Text – General Link | A | `post/TEXT` | POST |
 | 10 | [A-10](#a-10-pushover-text--elastic-link) | Pushover Text – Elastic Link | A | `post/TEXT` | POST |
 | 11 | [B-1](#b-1-inelastic-hinge-event-time) | Inelastic Hinge Event Time | B | `post/TABLE` | POST |
@@ -39,8 +39,8 @@
 | 15 | [B-5](#b-5-inelastic-hinge-force) | Inelastic Hinge Force | B | `post/TABLE` | POST |
 | 16 | [B-6](#b-6-inelastic-hinge-deformation) | Inelastic Hinge Deformation | B | `post/TABLE` | POST |
 | 17 | [B-7](#b-7-inelastic-hinge-element-rotation) | Inelastic Hinge Element Rotation | B | `post/TABLE` | POST |
-| 18 | [B-8](#b-8-inelastic-hinge-ductility-factor-dd1) | Inelastic Hinge Ductility Factor (D/D1) | B | `post/TABLE` | POST |
-| 19 | [B-9](#b-9-inelastic-hinge-ductility-factor-dd2) | Inelastic Hinge Ductility Factor (D/D2) | B | `post/TABLE` | POST |
+| 18 | [B-8](#b-8-inelastic-hinge-ductility-factordd1) | Inelastic Hinge Ductility Factor (D/D1) | B | `post/TABLE` | POST |
+| 19 | [B-9](#b-9-inelastic-hinge-ductility-factordd2) | Inelastic Hinge Ductility Factor (D/D2) | B | `post/TABLE` | POST |
 | 20 | [C-1](#c-1-stress--heat-of-hydration) | Stress | C | `view/RESULTGRAPHIC` | POST |
 | 21 | [C-2](#c-2-temperature--heat-of-hydration) | Temperature | C | `view/RESULTGRAPHIC` | POST |
 | 22 | [C-3](#c-3-displacements--heat-of-hydration) | Displacements | C | `view/RESULTGRAPHIC` | POST |

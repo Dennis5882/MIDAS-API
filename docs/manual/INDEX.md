@@ -1,7 +1,7 @@
 # MIDAS NX Open API — JSON Manual Index
 
 > **출처:** [MIDAS API Online Manual](https://support.midasuser.com/hc/ko/articles/33016922742937-MIDAS-API-Online-Manual)  
-> **최초 생성:** 2024.05.28 · **공식 최종 편집:** 2026.06.23 · **이 파일 동기화:** 2026-06-29  
+> **최초 생성:** 2024.05.28 · **공식 최종 편집:** 2026.06.23 · **이 파일 동기화:** 2026-07-05  
 > **대상 제품:** MIDAS Civil NX · MIDAS Gen NX
 
 ---
@@ -11,7 +11,7 @@
 | 파일 | 섹션 | 설명 |
 |------|------|------|
 | [01_DOC.md](./01_DOC.md) | DOC | 문서 생성·열기·저장·닫기·해석 실행 (11개) |
-| [02_DB_Project_Structure.md](./02_DB_Project_Structure.md) | DB – Project / Structure | 프로젝트 정보·단위·구조타입·그룹·층 데이터 (10개) |
+| [02_DB_Project_Structure.md](./02_DB_Project_Structure.md) | DB – Project / Structure | 프로젝트 정보·단위·구조타입·그룹·층 데이터 (14개) |
 | [03_DB_Node_Element.md](./03_DB_Node_Element.md) | DB – Node / Element | 노드·요소·로컬축·도메인 (6개) |
 | [04_DB_Properties.md](./04_DB_Properties.md) | DB – Properties | 재료·단면·두께·힌지·섬유단면 (31개) |
 | [05_DB_Boundary.md](./05_DB_Boundary.md) | DB – Boundary | 지지·스프링·링크·해제·내진장치 (24개) |
@@ -22,21 +22,21 @@
 | [10_DB_Construction_Stage.md](./10_DB_Construction_Stage.md) | DB – Construction Stage / Hydration | 시공단계·수화열 (14개) |
 | [11_DB_Settlement_Misc_Loads.md](./11_DB_Settlement_Misc_Loads.md) | DB – Settlement / Misc Loads | 침하·파도·비선형 초기하중 등 (9개) |
 | [12_DB_Analysis_Control.md](./12_DB_Analysis_Control.md) | DB – Analysis Control | 해석 제어 데이터 (21개) |
-| [13_DB_Load_Combinations.md](./13_DB_Load_Combinations.md) | DB – Load Combinations / Results | 하중조합·결과 설정 (12개) |
+| [13_DB_Load_Combinations.md](./13_DB_Load_Combinations.md) | DB – Load Combinations / Results | 하중조합·결과 설정 (8개) |
 | [14_DB_Pushover.md](./14_DB_Pushover.md) | DB – Pushover | 푸시오버 해석 제어·힌지·하중 (6개) |
 | [15_OPE.md](./15_OPE.md) | OPE | GUI 연동 운영 함수 (18개) |
 | [16_VIEW.md](./16_VIEW.md) | VIEW | 뷰 제어·캡처·결과 표시 (7개) |
 | [17_DB_Bridge.md](./17_DB_Bridge.md) | DB – Bridge Specialization | 거더·캠버·케이블 결과 설정 (4개) |
 | [18_POST_PreProcess.md](./18_POST_PreProcess.md) | POST – Pre-Process Tables | 중량·질량·하중·재료·단면·층 요약 (~10개) |
-| [19_POST_AnalysisResult_1.md](./19_POST_AnalysisResult_1.md) | POST – Analysis Result Tables Part 1 | 반력·변위·트러스·케이블·보 결과 (~15개) |
-| [20_POST_AnalysisResult_2.md](./20_POST_AnalysisResult_2.md) | POST – Analysis Result Tables Part 2 | 판·평면·축대칭·솔리드·링크·모드·텐던·시공단계 (~35개) |
-| [21_POST_StoryTables.md](./21_POST_StoryTables.md) | POST – Analysis Story Tables | 층변위·층전단·층비틀림·불규칙 검토 (~17개) |
-| [22_POST_TH_HY_Pushover.md](./22_POST_TH_HY_Pushover.md) | POST – TH / HY / Pushover Result Tables | 시간이력·수화열·푸시오버 결과 (~30개) |
+| [19_POST_AnalysisResult_1.md](./19_POST_AnalysisResult_1.md) | POST – Analysis Result Tables Part 1 | 반력·변위·트러스·케이블·보 결과 (12개) |
+| [20_POST_AnalysisResult_2.md](./20_POST_AnalysisResult_2.md) | POST – Analysis Result Tables Part 2 | 판·평면·축대칭·솔리드·링크·모드·텐던·시공단계 (38개) |
+| [21_POST_StoryTables.md](./21_POST_StoryTables.md) | POST – Analysis Story Tables | 층변위·층전단·층비틀림·불규칙 검토 (17개) |
+| [22_POST_TH_HY_Pushover.md](./22_POST_TH_HY_Pushover.md) | POST – TH / HY / Pushover Result Tables | 시간이력·수화열·푸시오버 결과 (28개) |
 | [23_POST_Design.md](./23_POST_Design.md) | POST – Design Tables | P-M·Steel·RC·SRC·냉간성형 설계 결과 (~10개) |
-| [24_DB_Design.md](./24_DB_Design.md) | DB – Design | RC·Steel 설계 코드·부재·비지지 길이 (11개) |
+| [24_DB_Design.md](./24_DB_Design.md) | DB – Design | RC·Steel 설계 코드·부재·비지지 길이 (13개) |
 | [25_Design_Steel_KDS41302022.md](./25_Design_Steel_KDS41302022.md) | Design Code – STEEL KDS 41 30:2022 | 강재 설계 코드 설정·부재·비지지길이·좌굴·설계검토 (27개) |
-| [26_Design_RC_KDS41202022.md](./26_Design_RC_KDS41202022.md) | Design Code – RC KDS 41 20:2022 | RC 설계 코드 설정·보·기둥·벽체·슬래브 설계 (65개) |
-| [27_Design_SRC_AIKSRC2K.md](./27_Design_SRC_AIKSRC2K.md) | Design Code – SRC AIK-SRC2K | SRC 합성부재 설계 코드 설정·보·기둥 설계 (23개) |
+| [26_Design_RC_KDS41202022.md](./26_Design_RC_KDS41202022.md) | Design Code – RC KDS 41 20:2022 | RC 설계 코드 설정·보·기둥·벽체·슬래브 설계 (69개) |
+| [27_Design_SRC_AIKSRC2K.md](./27_Design_SRC_AIKSRC2K.md) | Design Code – SRC AIK-SRC2K | SRC 합성부재 설계 코드 설정·보·기둥 설계 (27개) |
 
 ---
 
@@ -402,16 +402,18 @@ MIDAS NX 파일에 저장되는 데이터. MCT/MGT 기능과 동일한 역할.
 | No. | Endpoint | 기능 |
 |-----|----------|------|
 | 1 | `/db/DCON` | RC Design Code |
-| 2 | `/db/MATD` | Modify Concrete Materials |
-| 3 | `/db/RCHK` | Rebar Input for Checking |
+| 2 | `/db/DSTL` | Steel Design Code |
+| 3 | `/db/RCHK` | Rebar Input for Checking (Beam/Column) |
 | 4 | `/db/LENG` | Unbraced Length |
 | 5 | `/db/MEMB` | Member Assignment |
 | 6 | `/db/DCTL` | Definition of Frame |
 | 7 | `/db/LTSR` | Limiting Slenderness Ratio |
-| 8 | `/db/ULCT` | Underground Load Combination Type |
-| 9 | `/db/MBTP` | Modify Member Type |
-| 10 | `/db/WMAK` | Modify Wall Mark Design |
-| 11 | `/db/DSTL` | Steel Design Code |
+| 8 | `/db/MBTP` | Modify Member Type |
+| 9 | `/db/WMAK` | Modify Wall Mark Design |
+| 10 | `/db/REBB` | Modify Beam Rebar Data |
+| 11 | `/db/REBC` | Modify Column Rebar Data (POST 전용) |
+| 12 | `/db/REBW` | Modify Wall Rebar Data |
+| 13 | `/db/REBR` | Modify Brace Rebar Data |
 
 ---
 

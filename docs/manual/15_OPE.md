@@ -31,10 +31,10 @@
 | 12 | [`/ope/STORPROP`](#12-opestorprop--story-properties) | 층 속성 결과 | POST |
 | 13 | [`/ope/MEMB`](#13-opememb--member-assignment) | 부재(Member) 배정 | POST |
 | 14 | [`/ope/GUSTFACTOR`](#14-opegustfactor--gust-factor-calculator) | 거스트영향계수 계산기 | POST |
-| 15 | [`/ope/LCOM-GEN`](#15-opelcom-gen--load-combination-general--kds-2022--aik-src2k) | 하중조합(일반) 자동 생성 | POST |
-| 16 | [`/ope/LCOM-CONC`](#16-opelcom-conc--load-combination-concrete--kds-41-20-2022) | 하중조합(콘크리트) 자동 생성 | POST |
-| 17 | [`/ope/LCOM-STEEL`](#17-opelcom-steel--load-combination-steel--kds-41-30-2022) | 하중조합(강재) 자동 생성 | POST |
-| 18 | [`/ope/LCOM-SRC`](#18-opelcom-src--load-combination-src--kds-41-src-2022--aik-src2k) | 하중조합(SRC) 자동 생성 | POST |
+| 15 | [`/ope/LCOM-GEN`](#15-opelcom-gen--load-combination-general--kds2022--aik-src2k) | 하중조합(일반) 자동 생성 | POST |
+| 16 | [`/ope/LCOM-CONC`](#16-opelcom-conc--load-combination-concrete--kds-41-202022) | 하중조합(콘크리트) 자동 생성 | POST |
+| 17 | [`/ope/LCOM-STEEL`](#17-opelcom-steel--load-combination-steel--kds-41-302022) | 하중조합(강재) 자동 생성 | POST |
+| 18 | [`/ope/LCOM-SRC`](#18-opelcom-src--load-combination-src--kds-41-src2022--aik-src2k) | 하중조합(SRC) 자동 생성 | POST |
 
 > **참고:** `/ope/LCOM-GEN`, `/ope/LCOM-SRC`는 `DGNCODE` 값에 따라 **KDS:2022 계열**과 **AIK-SRC2K 계열**의 두 가지 스키마를 지원합니다. 본 문서에서는 KDS:2022 스키마를 기준으로 상세 설명하고, AIK-SRC2K 변형은 별도로 함께 표기합니다.
 

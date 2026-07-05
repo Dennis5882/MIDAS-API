@@ -29,8 +29,8 @@
 | 16 | [`/db/SDVI`](#16-dbsdvi--seismic-device--viscousoil-damper) | Seismic Device – Viscous/Oil Damper |
 | 17 | [`/db/SDVE`](#17-dbsdve--seismic-device--viscoelastic-damper) | Seismic Device – Viscoelastic Damper |
 | 18 | [`/db/SDST`](#18-dbsdst--seismic-device--steel-damper) | Seismic Device – Steel Damper |
-| 19 | [`/db/SDHY`](#19-dbsdhy--seismic-device--hysteretic-isolatormss) | Seismic Device – Hysteretic Isolator (MSS) |
-| 20 | [`/db/SDIS`](#20-dbsdis--seismic-device--isolatormss) | Seismic Device – Isolator (MSS) |
+| 19 | [`/db/SDHY`](#19-dbsdhy--seismic-device--hysteretic-isolator-mss) | Seismic Device – Hysteretic Isolator (MSS) |
+| 20 | [`/db/SDIS`](#20-dbsdis--seismic-device--isolator-mss) | Seismic Device – Isolator (MSS) |
 | 21 | [`/db/MCON`](#21-dbmcon--linear-constraints) | Linear Constraints (선형 구속조건) |
 | 22 | [`/db/PZEF`](#22-dbpzef--panel-zone-effects) | Panel Zone Effects |
 | 23 | [`/db/CLDR`](#23-dbcldr--define-constraints-label-direction) | Define Constraints Label Direction |

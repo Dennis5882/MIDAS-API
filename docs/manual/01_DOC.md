@@ -27,7 +27,7 @@
 | 8 | [`/doc/IMPORTMXT`](#8-docimportmxt--import-to-mctmgt) | MCT/MGT 파일 불러오기 | File Path (String) |
 | 9 | [`/doc/EXPORT`](#9-docexport--export-to-json) | JSON 파일로 내보내기 | File Path (String) |
 | 10 | [`/doc/EXPORTMXT`](#10-docexportmxt--export-to-mctmgt) | MCT/MGT 파일로 내보내기 | File Path (String) |
-| 11 | [`/doc/ANAL`](#11-docnal--perform-analysis) | 해석 실행 | Empty Object / Object |
+| 11 | [`/doc/ANAL`](#11-docanal--perform-analysis) | 해석 실행 | Empty Object / Object |
 
 ---
 

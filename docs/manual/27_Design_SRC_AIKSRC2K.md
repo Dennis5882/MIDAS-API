@@ -111,7 +111,7 @@
 
 | Key | 타입 | 설명 | 기본값 | 필수 |
 |-----|------|------|--------|------|
-| `DGNCODE` | string | Design Code — 가능값: `AIK-SRC2K` |  | O |
+| `DGNCODE` | string | 설계 코드 — 가능값: `AIK-SRC2K` |  | O |
 
 > 위 필드는 `"Assign"` 객체의 각 ID 키(예: `"1"`) 하위에 위치합니다.
 
@@ -232,8 +232,8 @@ res.raise_for_status()
 
 | Key | 타입 | 설명 | 기본값 | 필수 |
 |-----|------|------|--------|------|
-| `DGNCODE` | string | Design code. — `AIK-SRC2K`=AIK-SRC2K | AIK-SRC2K | O |
-| `SEISMIC` | boolean | Whether seismic design is applied. | true | O |
+| `DGNCODE` | string | 설계 코드. — `AIK-SRC2K`=AIK-SRC2K | AIK-SRC2K | O |
+| `SEISMIC` | boolean | 내진설계 적용 여부. | true | O |
 
 > 위 필드는 `"Assign"` 객체의 각 ID 키(예: `"1"`) 하위에 위치합니다.
 
@@ -401,10 +401,10 @@ print(got.json())
 
 | Key | 타입 | 설명 | 기본값 | 필수 |
 |-----|------|------|--------|------|
-| `FRAMEX` | string | X-Direction of Frame — `Unbraced Sway`=Unbraced \| Sway; `Braced Non-sway`=Braced \| Non-sway | Braced Non-sway |  |
-| `FRAMEY` | string | Y-Direction of Frame — `Unbraced Sway`=Unbraced \| Sway; `Braced Non-sway`=Braced \| Non-sway | Braced Non-sway |  |
-| `bAUTOKF` | boolean | Auto Calculate Effective Length Factor | false |  |
-| `DT` | string | Design Type — `3D`=3-D; `XZ`=X-Z Plane; `YZ`=Y-Z Plane; `XY`=X-Y Plane | 3D |  |
+| `FRAMEX` | string | X방향 프레임 — `Unbraced Sway`=비횡지지 \| Sway; `Braced Non-sway`=횡지지 \| Non-sway | Braced Non-sway |  |
+| `FRAMEY` | string | Y방향 프레임 — `Unbraced Sway`=비횡지지 \| Sway; `Braced Non-sway`=횡지지 \| Non-sway | Braced Non-sway |  |
+| `bAUTOKF` | boolean | 유효좌굴길이계수 자동계산 | false |  |
+| `DT` | string | 설계 타입 — `3D`=3-D; `XZ`=X-Z 평면; `YZ`=Y-Z 평면; `XY`=X-Y 평면 | 3D |  |
 
 > 위 필드는 `"Assign"` 객체의 각 ID 키(예: `"1"`) 하위에 위치합니다.
 
@@ -619,17 +619,17 @@ print(got.json())
 
 | Key | 타입 | 설명 | 기본값 | 필수 |
 |-----|------|------|--------|------|
-| `CALC_RULE` | integer | — `0`=by General Design Code; `1`=by Chinese Standard | 0 |  |
-| `APPLIED_COMP` | array | Applied Components Selection | ['AXIAL'] |  |
-| `LIVE_LOAD_CASES` | array | Live Load Case Names (user defined list) |  |  |
-| `REDUCTION_DATA` | array | Live Load Reduction Factor Table Data |  | O |
-| └ `STORY` | string | Story Name |  | O |
-| └ `XMIN` | number | X Min coordinate | 0 |  |
-| └ `XMAX` | number | X Max coordinate | 0 |  |
-| └ `YMIN` | number | Y Min coordinate | 0 |  |
-| └ `YMAX` | number | Y Max coordinate | 0 |  |
-| └ `RANGE_MAX` | number | Range Max value (only for General Design Code) — 가능값 11개: `1` ~ `0.5` | 1 |  |
-| └ `RANGE_MIN` | number | Range Min value (only for General Design Code) — 가능값 11개: `1` ~ `0.5` | 0.5 |  |
+| `CALC_RULE` | integer | — `0`=일반 설계 기준; `1`=중국 표준 기준 | 0 |  |
+| `APPLIED_COMP` | array | 적용 성분 선택 | ["AXIAL"] |  |
+| `LIVE_LOAD_CASES` | array | 활하중 케이스 이름 (사용자 정의 목록) |  |  |
+| `REDUCTION_DATA` | array | 활하중 저감계수 테이블 데이터 |  | O |
+| └ `STORY` | string | 층 이름 |  | O |
+| └ `XMIN` | number | X 최소 좌표 | 0 |  |
+| └ `XMAX` | number | X 최대 좌표 | 0 |  |
+| └ `YMIN` | number | Y 최소 좌표 | 0 |  |
+| └ `YMAX` | number | Y 최대 좌표 | 0 |  |
+| └ `RANGE_MAX` | number | 구간 최대값 (General Design Code 전용) — 가능값 11개: `1` ~ `0.5` | 1 |  |
+| └ `RANGE_MIN` | number | 구간 최소값 (General Design Code 전용) — 가능값 11개: `1` ~ `0.5` | 0.5 |  |
 
 > 위 필드는 `"Assign"` 객체의 각 ID 키(예: `"1"`) 하위에 위치합니다.
 
@@ -849,11 +849,11 @@ print(got.json())
 
 | Key | 타입 | 설명 | 기본값 | 필수 |
 |-----|------|------|--------|------|
-| `NAME` | string | Load Contribution Name |  | O |
-| `DESC` | string | Description |  |  |
-| `BASE_ITEM` | array | Load Contribution Items |  | O |
-| └ `FACTOR` | number | Factor |  | O |
-| └ `LOAD_CASE_NAME` | string | Load Case Name |  | O |
+| `NAME` | string | 하중기여 이름 |  | O |
+| `DESC` | string | 설명 |  |  |
+| `BASE_ITEM` | array | 하중기여 항목 |  | O |
+| └ `FACTOR` | number | 계수 |  | O |
+| └ `LOAD_CASE_NAME` | string | 하중케이스 이름 |  | O |
 
 > 위 필드는 `"Assign"` 객체의 각 ID 키(예: `"1"`) 하위에 위치합니다.
 
@@ -1064,11 +1064,11 @@ print(got.json())
 
 | Key | 타입 | 설명 | 기본값 | 필수 |
 |-----|------|------|--------|------|
-| `LY` | number | Unbraced Length Ly | 0 |  |
-| `LZ` | number | Unbraced Length Lz | 0 |  |
-| `LB` | number | Laterally Unbraced Length | 0 |  |
-| `bNOTUSE` | boolean | Do not consider of laterally unbraced length | false |  |
-| `LT` | number | Torsional Unbraced Length | 0 |  |
+| `LY` | number | 비지지 길이 Ly | 0 |  |
+| `LZ` | number | 비지지 길이 Lz | 0 |  |
+| `LB` | number | 횡방향 비지지 길이 | 0 |  |
+| `bNOTUSE` | boolean | 횡방향 비지지 길이 고려 안 함 | false |  |
+| `LT` | number | 비틀림 비지지 길이 | 0 |  |
 
 > 위 필드는 `"Assign"` 객체의 각 ID 키(예: `"1"`) 하위에 위치합니다.
 
@@ -1350,9 +1350,9 @@ print(got.json())
 
 | Key | 타입 | 설명 | 기본값 | 필수 |
 |-----|------|------|--------|------|
-| `bNOTCHECK` | boolean | Do not check for Slenderness Ratio | false |  |
-| `COMP` | number | Limiting Slenderness Ratio for Compression |  | O |
-| `TENS` | number | Limiting Slenderness Ratio for Tension |  | O |
+| `bNOTCHECK` | boolean | 세장비 검토 안 함 | false |  |
+| `COMP` | number | 압축재 세장비 제한값 |  | O |
+| `TENS` | number | 인장재 세장비 제한값 |  | O |
 
 > 위 필드는 `"Assign"` 객체의 각 ID 키(예: `"1"`) 하위에 위치합니다.
 
@@ -1499,7 +1499,7 @@ print(got.json())
 
 | Key | 타입 | 설명 | 기본값 | 필수 |
 |-----|------|------|--------|------|
-| `OPT_AUTO` | boolean | Auto Calculate | false |  |
+| `OPT_AUTO` | boolean | 자동 계산 | false |  |
 | `CMY` | number | CMy | 0 |  |
 | `CMZ` | number | CMz | 0 |  |
 
@@ -1647,10 +1647,10 @@ print(got.json())
 
 | Key | 타입 | 설명 | 기본값 | 필수 |
 |-----|------|------|--------|------|
-| `B1Y_DELTA_BY` | number | B1y - Delta by (First Order Moment Y) | 1 |  |
-| `B1Z_DELTA_BZ` | number | B1z - Delta bz (First Order Moment Z) | 1 |  |
-| `B2Y_DELTA_SY` | number | B2y - Delta sy (Second Order Moment Y) | 1 |  |
-| `B2Z_DELTA_SZ` | number | B2z - Delta sz (Second Order Moment Z) | 1 |  |
+| `B1Y_DELTA_BY` | number | B1y - Δby (1차 모멘트 Y) | 1 |  |
+| `B1Z_DELTA_BZ` | number | B1z - Δbz (1차 모멘트 Z) | 1 |  |
+| `B2Y_DELTA_SY` | number | B2y - Δsy (2차 모멘트 Y) | 1 |  |
+| `B2Z_DELTA_SZ` | number | B2z - Δsz (2차 모멘트 Z) | 1 |  |
 
 > 위 필드는 `"Assign"` 객체의 각 ID 키(예: `"1"`) 하위에 위치합니다.
 
@@ -1811,11 +1811,11 @@ print(got.json())
 
 | Key | 타입 | 설명 | 기본값 | 필수 |
 |-----|------|------|--------|------|
-| `FACTOR` | number | Reduction Factor | 1 |  |
-| `COMPONENTS` | object | Applied Components |  |  |
-| └ `AXIAL` | boolean | Axial Force | false |  |
-| └ `MOMENT` | boolean | Moments | false |  |
-| └ `SHEAR` | boolean | Shear Forces | false |  |
+| `FACTOR` | number | 저감계수 | 1 |  |
+| `COMPONENTS` | object | 적용 성분 |  |  |
+| └ `AXIAL` | boolean | 축력 | false |  |
+| └ `MOMENT` | boolean | 모멘트 | false |  |
+| └ `SHEAR` | boolean | 전단력 | false |  |
 
 > 위 필드는 `"Assign"` 객체의 각 ID 키(예: `"1"`) 하위에 위치합니다.
 
@@ -1983,12 +1983,12 @@ print(got.json())
 
 | Key | 타입 | 설명 | 기본값 | 필수 |
 |-----|------|------|--------|------|
-| `LC_AXIAL` | number | Load Case - Axial Scale Factor | 1 |  |
-| `LC_MOMENT` | number | Load Case - Moment Scale Factor | 1 |  |
-| `LC_SHEAR` | number | Load Case - Shear Scale Factor | 1 |  |
-| `LCOM_AXIAL` | number | Load Combination - Axial Scale Factor | 1 |  |
-| `LCOM_MOMENT` | number | Load Combination - Moment Scale Factor | 1 |  |
-| `LCOM_SHEAR` | number | Load Combination - Shear Scale Factor | 1 |  |
+| `LC_AXIAL` | number | 하중케이스 - 축력 증폭계수 | 1 |  |
+| `LC_MOMENT` | number | 하중케이스 - 모멘트 증폭계수 | 1 |  |
+| `LC_SHEAR` | number | 하중케이스 - 전단 증폭계수 | 1 |  |
+| `LCOM_AXIAL` | number | 하중조합 - 축력 증폭계수 | 1 |  |
+| `LCOM_MOMENT` | number | 하중조합 - 모멘트 증폭계수 | 1 |  |
+| `LCOM_SHEAR` | number | 하중조합 - 전단 증폭계수 | 1 |  |
 
 > 위 필드는 `"Assign"` 객체의 각 ID 키(예: `"1"`) 하위에 위치합니다.
 
@@ -2146,7 +2146,7 @@ print(got.json())
 
 | Key | 타입 | 설명 | 기본값 | 필수 |
 |-----|------|------|--------|------|
-| `TYPE` | string | Member Type — `COLUMN`=Column; `BEAM`=Beam; `BRACE`=Brace |  | O |
+| `TYPE` | string | 부재 타입 — `COLUMN`=기둥; `BEAM`=보; `BRACE`=가새 |  | O |
 
 > 위 필드는 `"Assign"` 객체의 각 ID 키(예: `"1"`) 하위에 위치합니다.
 
@@ -2276,7 +2276,7 @@ print(got.json())
 
 | Key | 타입 | 설명 | 기본값 | 필수 |
 |-----|------|------|--------|------|
-| `TYPE` | string | Assign Member Type — `Special Seismic Loads`=Special Seismic Loads; `Vertical Seismic Forces`=Vertical Seismic Forces |  | O |
+| `TYPE` | string | 부재 타입 배정 — `Special Seismic Loads`=특별 지진하중; `Vertical Seismic Forces`=수직 지진력 |  | O |
 
 > 위 필드는 `"Assign"` 객체의 각 ID 키(예: `"1"`) 하위에 위치합니다.
 
@@ -2442,12 +2442,12 @@ print(got.json())
 
 | Key | 타입 | 설명 | 기본값 | 필수 |
 |-----|------|------|--------|------|
-| `PERFORM_TYPE` | string | Select target type for design calculation. ELEMS: by element numbers, SECTIONS: by section numbers, ALL: all elements. — `ALL`=All Elements; `ELEMS`=By Element No.; `SECTIONS`=By Section No. | ALL |  |
-| `ELEMS` | object | Element No. Input. |  |  |
-| └ `KEYS` | array | Specify Each ID |  |  |
-| └ `TO` | string | Specify ID Range (e.g., '1to160') |  |  |
-| └ `STRUCTURE_GROUP_NAME` | string | Specify Structure Group Name |  |  |
-| `SECTIONS` | array | Section No. Input. |  |  |
+| `PERFORM_TYPE` | string | 설계 계산 대상 타입 선택. ELEMS: 요소번호별, SECTIONS: 단면번호별, ALL: 전체 요소. — `ALL`=전체 요소; `ELEMS`=요소번호별; `SECTIONS`=단면번호별 | ALL |  |
+| `ELEMS` | object | 요소 번호 입력. |  |  |
+| └ `KEYS` | array | 개별 ID 지정 |  |  |
+| └ `TO` | string | ID 범위 지정 (예: '1to160') |  |  |
+| └ `STRUCTURE_GROUP_NAME` | string | 구조 그룹 이름 지정 |  |  |
+| `SECTIONS` | array | 단면 번호 입력. |  |  |
 
 > 위 필드는 `"Argument"` 객체 하위에 위치합니다.
 
@@ -2756,25 +2756,25 @@ print(res.json())
 
 | Key | 타입 | 설명 | 기본값 | 필수 |
 |-----|------|------|--------|------|
-| `TABLE_TYPE` | string | Result Table Type — 가능값: `MEMB`, `PROP` |  | O |
-| `ELEMS` | object | Element number input. |  |  |
-| └ `KEYS` | array | Specify each element ID |  |  |
-| └ `TO` | string | Specify element ID range (e.g., "1to160") |  |  |
-| └ `STRUCTURE_GROUP_NAME` | string | Specify structure group name |  |  |
-| `SECTIONS` | array | List of section numbers to include in the table. |  |  |
-| `PRI_SORT` | integer | Sorting criteria for member-based output (by Section No. or Member No.) — `0`=SECT; `1`=MEMB | 1 |  |
-| `RESULT` | integer | Filter results by checking status — `0`=All; `1`=OK; `2`=NG | 0 |  |
-| `TABLE_NAME` | string | Response Table Title | SRC Checking Result |  |
-| `EXPORT_PATH` | string | Result Table Save Path |  |  |
-| `UNIT` | object | Response Unit Setting |  |  |
-| └ `FORCE` | string | Force unit |  |  |
-| └ `DIST` | string | Length/Distance unit |  |  |
-| └ `HEAT` | string | Heat unit |  |  |
-| └ `TEMP` | string | Temperature unit |  |  |
-| `STYLES` | object | Response Number Format |  |  |
-| └ `FORMAT` | string | Number format — 가능값: `Default`, `Fixed`, `Scientific`, `General` |  |  |
-| └ `PLACE` | integer | Digit place |  |  |
-| `COMPONENTS` | array | Components of SRC Checking Result Table |  |  |
+| `TABLE_TYPE` | string | 결과표 타입 — 가능값: `MEMB`, `PROP` |  | O |
+| `ELEMS` | object | 요소 번호 입력. |  |  |
+| └ `KEYS` | array | 개별 요소 ID 지정 |  |  |
+| └ `TO` | string | 요소 ID 범위 지정 (예: "1to160") |  |  |
+| └ `STRUCTURE_GROUP_NAME` | string | 구조 그룹 이름 지정 |  |  |
+| `SECTIONS` | array | 표에 포함할 단면 번호 목록. |  |  |
+| `PRI_SORT` | integer | 부재 기준 출력의 정렬 기준 (단면번호 또는 부재번호) — `0`=SECT; `1`=MEMB | 1 |  |
+| `RESULT` | integer | 검토 상태로 결과 필터링 — `0`=전체; `1`=OK; `2`=NG | 0 |  |
+| `TABLE_NAME` | string | 결과표 제목 | SRC Checking Result |  |
+| `EXPORT_PATH` | string | 결과표 저장 경로 |  |  |
+| `UNIT` | object | 결과 단위 설정 |  |  |
+| └ `FORCE` | string | 힘 단위 |  |  |
+| └ `DIST` | string | 길이/거리 단위 |  |  |
+| └ `HEAT` | string | 열 단위 |  |  |
+| └ `TEMP` | string | 온도 단위 |  |  |
+| `STYLES` | object | 결과 숫자 형식 |  |  |
+| └ `FORMAT` | string | 숫자 형식 — 가능값: `Default`, `Fixed`, `Scientific`, `General` |  |  |
+| └ `PLACE` | integer | 소수 자릿수 |  |  |
+| `COMPONENTS` | array | SRC 검토 결과표 구성 항목 |  |  |
 
 > 위 필드는 `"Argument"` 객체 하위에 위치합니다.
 
@@ -3165,20 +3165,20 @@ print(res.json())
 
 | Key | 타입 | 설명 | 기본값 | 필수 |
 |-----|------|------|--------|------|
-| `REPORT_TYPE` | string | Report Table Type — 가능값: `MEMB`, `PROP` |  | O |
-| `CURRENT_MODE_MEMB` | string | Report output mode for element-based report — `Graphic`=Graphic (JPG image); `Detail`=Detail (DOC document); `Summary`=Summary (TXT text) |  |  |
-| `CURRENT_MODE_PROP` | string | Report output mode for property-based report — `Graphic`=Graphic (JPG image); `Summary`=Summary (TXT text) |  |  |
-| `ELEMS` | object | Element No. Input. |  |  |
-| └ `KEYS` | array | Specify Each ID |  |  |
-| └ `TO` | string | Specify ID Range (e.g., '1to160') |  |  |
-| └ `STRUCTURE_GROUP_NAME` | string | Specify Structure Group Name |  |  |
-| `SECTIONS` | array | List of section numbers to include in the report. |  |  |
-| `DETAIL_POSITIONS` | object | Print positions for Detail report |  |  |
-| └ `END_I` | boolean | Include End I position | true |  |
-| └ `MID` | boolean | Include Mid position | false |  |
-| └ `END_J` | boolean | Include End J position | false |  |
-| `EXPORT_PATH` | string | Directory path to save the report files |  | O |
-| `OUTPUT_NAME` | string | Output file base name. For multiple elements, files are prefixed with index and element number (e.g. 001_E859_filename.jpg, 002_E1_filename.jpg) |  | O |
+| `REPORT_TYPE` | string | 보고서 표 타입 — 가능값: `MEMB`, `PROP` |  | O |
+| `CURRENT_MODE_MEMB` | string | 요소 기준 보고서의 출력 모드 — `Graphic`=그래픽 (JPG 이미지); `Detail`=상세 (DOC 문서); `Summary`=요약 (TXT 텍스트) |  |  |
+| `CURRENT_MODE_PROP` | string | 특성 기준 보고서의 출력 모드 — `Graphic`=그래픽 (JPG 이미지); `Summary`=요약 (TXT 텍스트) |  |  |
+| `ELEMS` | object | 요소 번호 입력. |  |  |
+| └ `KEYS` | array | 개별 ID 지정 |  |  |
+| └ `TO` | string | ID 범위 지정 (예: '1to160') |  |  |
+| └ `STRUCTURE_GROUP_NAME` | string | 구조 그룹 이름 지정 |  |  |
+| `SECTIONS` | array | 보고서에 포함할 단면 번호 목록. |  |  |
+| `DETAIL_POSITIONS` | object | 상세 보고서 출력 위치 |  |  |
+| └ `END_I` | boolean | I단 위치 포함 | true |  |
+| └ `MID` | boolean | 중앙 위치 포함 | false |  |
+| └ `END_J` | boolean | J단 위치 포함 | false |  |
+| `EXPORT_PATH` | string | 보고서 파일을 저장할 디렉토리 경로 |  | O |
+| `OUTPUT_NAME` | string | 출력 파일 기본 이름. 요소가 여러 개인 경우 파일명 앞에 순번과 요소번호가 붙습니다(예: 001_E859_filename.jpg, 002_E1_filename.jpg). |  | O |
 
 > 위 필드는 `"Argument"` 객체 하위에 위치합니다.
 
@@ -3330,12 +3330,12 @@ print(res.json())
 
 | Key | 타입 | 설명 | 기본값 | 필수 |
 |-----|------|------|--------|------|
-| `PERFORM_TYPE` | string | Select target type for design calculation. ELEMS: by element numbers, SECTIONS: by section numbers, ALL: all elements. — `ALL`=All Elements; `ELEMS`=By Element No.; `SECTIONS`=By Section No. | ALL |  |
-| `ELEMS` | object | Element No. Input. |  |  |
-| └ `KEYS` | array | Specify Each ID |  |  |
-| └ `TO` | string | Specify ID Range (e.g., '1to160') |  |  |
-| └ `STRUCTURE_GROUP_NAME` | string | Specify Structure Group Name |  |  |
-| `SECTIONS` | array | Section No. Input. |  |  |
+| `PERFORM_TYPE` | string | 설계 계산 대상 타입 선택. ELEMS: 요소번호별, SECTIONS: 단면번호별, ALL: 전체 요소. — `ALL`=전체 요소; `ELEMS`=요소번호별; `SECTIONS`=단면번호별 | ALL |  |
+| `ELEMS` | object | 요소 번호 입력. |  |  |
+| └ `KEYS` | array | 개별 ID 지정 |  |  |
+| └ `TO` | string | ID 범위 지정 (예: '1to160') |  |  |
+| └ `STRUCTURE_GROUP_NAME` | string | 구조 그룹 이름 지정 |  |  |
+| `SECTIONS` | array | 단면 번호 입력. |  |  |
 
 > 위 필드는 `"Argument"` 객체 하위에 위치합니다.
 
@@ -3603,25 +3603,25 @@ print(res.json())
 
 | Key | 타입 | 설명 | 기본값 | 필수 |
 |-----|------|------|--------|------|
-| `TABLE_TYPE` | string | Result Table Type — 가능값: `MEMB`, `PROP` |  | O |
-| `ELEMS` | object | Element number input. |  |  |
-| └ `KEYS` | array | Specify each element ID |  |  |
-| └ `TO` | string | Specify element ID range (e.g., "1to160") |  |  |
-| └ `STRUCTURE_GROUP_NAME` | string | Specify structure group name |  |  |
-| `SECTIONS` | array | List of section property numbers to include in the table. |  |  |
-| `PRI_SORT` | integer | Sorting criteria for member-based output (by Section No. or Member No.) — `0`=SECT; `1`=MEMB | 1 |  |
-| `RESULT` | integer | Filter results by checking status — `0`=All; `1`=OK; `2`=NG | 0 |  |
-| `TABLE_NAME` | string | Response Table Title | SRC Column Checking Result |  |
-| `EXPORT_PATH` | string | Result Table Save Path |  |  |
-| `UNIT` | object | Response Unit Setting |  |  |
-| └ `FORCE` | string | Force unit |  |  |
-| └ `DIST` | string | Length/Distance unit |  |  |
-| └ `HEAT` | string | Heat unit |  |  |
-| └ `TEMP` | string | Temperature unit |  |  |
-| `STYLES` | object | Response Number Format |  |  |
-| └ `FORMAT` | string | Number format — 가능값: `Default`, `Fixed`, `Scientific`, `General` |  |  |
-| └ `PLACE` | integer | Digit place |  |  |
-| `COMPONENTS` | array | Components of SRC Column Checking Result Table (SSRC79 style). SEL is not included. |  |  |
+| `TABLE_TYPE` | string | 결과표 타입 — 가능값: `MEMB`, `PROP` |  | O |
+| `ELEMS` | object | 요소 번호 입력. |  |  |
+| └ `KEYS` | array | 개별 요소 ID 지정 |  |  |
+| └ `TO` | string | 요소 ID 범위 지정 (예: "1to160") |  |  |
+| └ `STRUCTURE_GROUP_NAME` | string | 구조 그룹 이름 지정 |  |  |
+| `SECTIONS` | array | 표에 포함할 단면 특성 번호 목록. |  |  |
+| `PRI_SORT` | integer | 부재 기준 출력의 정렬 기준 (단면번호 또는 부재번호) — `0`=SECT; `1`=MEMB | 1 |  |
+| `RESULT` | integer | 검토 상태로 결과 필터링 — `0`=전체; `1`=OK; `2`=NG | 0 |  |
+| `TABLE_NAME` | string | 결과표 제목 | SRC Column Checking Result |  |
+| `EXPORT_PATH` | string | 결과표 저장 경로 |  |  |
+| `UNIT` | object | 결과 단위 설정 |  |  |
+| └ `FORCE` | string | 힘 단위 |  |  |
+| └ `DIST` | string | 길이/거리 단위 |  |  |
+| └ `HEAT` | string | 열 단위 |  |  |
+| └ `TEMP` | string | 온도 단위 |  |  |
+| `STYLES` | object | 결과 숫자 형식 |  |  |
+| └ `FORMAT` | string | 숫자 형식 — 가능값: `Default`, `Fixed`, `Scientific`, `General` |  |  |
+| └ `PLACE` | integer | 소수 자릿수 |  |  |
+| `COMPONENTS` | array | SRC 기둥 검토 결과표 구성 항목 (SSRC79 방식). SEL은 포함되지 않음. |  |  |
 
 > 위 필드는 `"Argument"` 객체 하위에 위치합니다.
 
@@ -3949,16 +3949,16 @@ print(res.json())
 
 | Key | 타입 | 설명 | 기본값 | 필수 |
 |-----|------|------|--------|------|
-| `REPORT_TYPE` | string | Report Table Type — 가능값: `MEMB`, `PROP` |  | O |
-| `CURRENT_MODE_MEMB` | string | Report output mode for element-based report — `Graphic`=Graphic (JPG image); `Detail`=Detail (DOC document); `Summary`=Summary (TXT text) |  |  |
-| `CURRENT_MODE_PROP` | string | Report output mode for property-based report — `Graphic`=Graphic (JPG image); `Summary`=Summary (TXT text) |  |  |
-| `ELEMS` | object | Element No. Input. |  |  |
-| └ `KEYS` | array | Specify Each ID |  |  |
-| └ `TO` | string | Specify ID Range (e.g., '1to160') |  |  |
-| └ `STRUCTURE_GROUP_NAME` | string | Specify Structure Group Name |  |  |
-| `SECTIONS` | array | List of section numbers to include in the report. |  |  |
-| `EXPORT_PATH` | string | Directory path to save the report files |  | O |
-| `OUTPUT_NAME` | string | Output file base name. For multiple elements, files are prefixed with index and element number (e.g. 001_E100_filename.jpg, 002_E865_filename.jpg) |  | O |
+| `REPORT_TYPE` | string | 보고서 표 타입 — 가능값: `MEMB`, `PROP` |  | O |
+| `CURRENT_MODE_MEMB` | string | 요소 기준 보고서의 출력 모드 — `Graphic`=그래픽 (JPG 이미지); `Detail`=상세 (DOC 문서); `Summary`=요약 (TXT 텍스트) |  |  |
+| `CURRENT_MODE_PROP` | string | 특성 기준 보고서의 출력 모드 — `Graphic`=그래픽 (JPG 이미지); `Summary`=요약 (TXT 텍스트) |  |  |
+| `ELEMS` | object | 요소 번호 입력. |  |  |
+| └ `KEYS` | array | 개별 ID 지정 |  |  |
+| └ `TO` | string | ID 범위 지정 (예: '1to160') |  |  |
+| └ `STRUCTURE_GROUP_NAME` | string | 구조 그룹 이름 지정 |  |  |
+| `SECTIONS` | array | 보고서에 포함할 단면 번호 목록. |  |  |
+| `EXPORT_PATH` | string | 보고서 파일을 저장할 디렉토리 경로 |  | O |
+| `OUTPUT_NAME` | string | 출력 파일 기본 이름. 요소가 여러 개인 경우 파일명 앞에 순번과 요소번호가 붙습니다(예: 001_E100_filename.jpg, 002_E865_filename.jpg). |  | O |
 
 > 위 필드는 `"Argument"` 객체 하위에 위치합니다.
 
@@ -4287,40 +4287,40 @@ print(res.json())
 
 | Key | 타입 | 설명 | 기본값 | 필수 |
 |-----|------|------|--------|------|
-| `SECT_LIST` | array | Section List & Design Criteria (SRC). Each item corresponds to one Section No entry and its design criteria (POST input only). |  | O |
-| └ `SECT_NO` | integer | Section Number (input). |  | O |
-| └ `SECT_DB` | string | Design Criteria - SectDB — `BUILT`=BUILT (Welded sections); `KS21`=KS21 (Korean Standard rolled sections); `USER`=USER (User-defined sections) |  | O |
-| └ `ALLOW` | number | Design Criteria - Allow | 1 |  |
-| └ `D1` | number | Design Criteria - D1 | 0 |  |
-| └ `D2` | number | Design Criteria - D2 | 0 |  |
-| └ `D3` | number | Design Criteria - D3 | 0 |  |
-| └ `D4` | number | Design Criteria - D4 | 0 |  |
-| └ `D5` | number | Design Criteria - D5 | 0 |  |
-| └ `D6` | number | Design Criteria - D6 | 0 |  |
-| `ANALYSIS_OPT` | object | Analysis option - number of re-analysis iterations |  |  |
-| └ `ANAL_TIME` | integer | Number of re-analysis iterations (max 10). Set 0 for section selection only without re-analysis. | 1 |  |
-| `PLATE_THICKNESS` | array | Plate thickness list for BUILT sections (max 50 entries) |  |  |
-| `COLUMN_DESIGN` | object | Column design settings for optimal design of column members |  |  |
-| └ `APPLIED_FORCES` | integer | Applied forces and moments method for column design — `0`=Axial Forces and Moments; `1`=Axial Forces Only | 0 |  |
-| └ `JOINT_METHOD` | integer | Joint method of built-up column splices — `0`=Internal Const (Fixed inside, expand outward); `1`=External Const (Fixed outside, adjust inward) | 1 |  |
-| `USER_DEFINED_SECT` | array | User-defined section database. Each row defines a section with No, Shape, and dimensions D1-D6. |  |  |
-| └ `NO` | integer | Section No. |  | O |
-| └ `SHAPE` | string | Section shape (L, C, H, T, B, P, SR, SB, 2L, 2C) |  | O |
+| `SECT_LIST` | array | 단면 목록 및 설계 기준(SRC). 각 항목은 하나의 단면번호와 그 설계 기준에 대응합니다(POST 입력 전용). |  | O |
+| └ `SECT_NO` | integer | 단면 번호(입력). |  | O |
+| └ `SECT_DB` | string | 설계 기준 - 단면 DB — `BUILT`=BUILT (용접 단면); `KS21`=KS21 (한국산업표준 압연 단면); `USER`=USER (사용자 정의 단면) |  | O |
+| └ `ALLOW` | number | 설계 기준 - 허용치 | 1 |  |
+| └ `D1` | number | 설계 기준 - D1 | 0 |  |
+| └ `D2` | number | 설계 기준 - D2 | 0 |  |
+| └ `D3` | number | 설계 기준 - D3 | 0 |  |
+| └ `D4` | number | 설계 기준 - D4 | 0 |  |
+| └ `D5` | number | 설계 기준 - D5 | 0 |  |
+| └ `D6` | number | 설계 기준 - D6 | 0 |  |
+| `ANALYSIS_OPT` | object | 해석 옵션 - 재해석 반복 횟수 |  |  |
+| └ `ANAL_TIME` | integer | 재해석 반복 횟수(최대 10). 재해석 없이 단면 선정만 할 경우 0으로 설정. | 1 |  |
+| `PLATE_THICKNESS` | array | BUILT 단면의 플레이트 두께 목록 (최대 50개) |  |  |
+| `COLUMN_DESIGN` | object | 기둥 부재 최적설계를 위한 기둥 설계 설정 |  |  |
+| └ `APPLIED_FORCES` | integer | 기둥 설계용 적용 부재력·모멘트 방법 — `0`=축력 및 모멘트; `1`=축력만 | 0 |  |
+| └ `JOINT_METHOD` | integer | 조립기둥 이음 접합 방법 — `0`=Internal Const (내측 고정, 외측으로 확장); `1`=External Const (외측 고정, 내측 조정) | 1 |  |
+| `USER_DEFINED_SECT` | array | 사용자 정의 단면 데이터베이스. 각 행은 No, 형상, 치수 D1~D6으로 단면을 정의함. |  |  |
+| └ `NO` | integer | 단면 번호 |  | O |
+| └ `SHAPE` | string | 단면 형상 (L, C, H, T, B, P, SR, SB, 2L, 2C) |  | O |
 | └ `D1` | number |  | 0 |  |
 | └ `D2` | number |  | 0 |  |
 | └ `D3` | number |  | 0 |  |
 | └ `D4` | number |  | 0 |  |
 | └ `D5` | number |  | 0 |  |
 | └ `D6` | number |  | 0 |  |
-| `OUTPUT` | object | Output options for optimal design results (can select multiple simultaneously) |  | O |
-| └ `GRAPH_MAX_RATIO` | boolean | Output Max. Ratio graph | true |  |
-| └ `GRAPH_AVG_RATIO` | boolean | Output Average Ratio graph | true |  |
-| └ `GRAPH_WEIGHT` | boolean | Output Weight graph | true |  |
-| └ `GRAPH_WEIGHT_SUM` | boolean | Output Weight Sum graph | true |  |
-| └ `GRAPH_WEIGHT_RATIO` | boolean | Output Weight Ratio graph | true |  |
-| └ `TEXT_REPORT` | boolean | Output results as text report to screen and file | true |  |
-| └ `MODEL_UPDATE` | boolean | Apply selected optimal sections to the model | true |  |
-| └ `EXPORT_PATH` | string | File path to save report output |  | O |
+| `OUTPUT` | object | 최적설계 결과 출력 옵션 (동시에 여러 개 선택 가능) |  | O |
+| └ `GRAPH_MAX_RATIO` | boolean | 최대 비율 그래프 출력 | true |  |
+| └ `GRAPH_AVG_RATIO` | boolean | 평균 비율 그래프 출력 | true |  |
+| └ `GRAPH_WEIGHT` | boolean | 중량 그래프 출력 | true |  |
+| └ `GRAPH_WEIGHT_SUM` | boolean | 중량 합계 그래프 출력 | true |  |
+| └ `GRAPH_WEIGHT_RATIO` | boolean | 중량 비율 그래프 출력 | true |  |
+| └ `TEXT_REPORT` | boolean | 결과를 텍스트 보고서로 화면 및 파일에 출력 | true |  |
+| └ `MODEL_UPDATE` | boolean | 선택된 최적 단면을 모델에 적용 | true |  |
+| └ `EXPORT_PATH` | string | 보고서 출력을 저장할 파일 경로 |  | O |
 
 > 위 필드는 `"Argument"` 객체 하위에 위치합니다.
 
@@ -4594,23 +4594,23 @@ print(res.json())
 
 | Key | 타입 | 설명 | 기본값 | 필수 |
 |-----|------|------|--------|------|
-| `TABLE_NAME` | string | Response Table Title |  |  |
-| `TABLE_TYPE` | string | Result Table Type — 가능값: `SRCBEAMDESIGNFORCES` |  | O |
-| `EXPORT_PATH` | string | Result Table Save Path |  |  |
-| `UNIT` | object | Response Unit Setting | System |  |
-| └ `FORCE` | string | Force unit |  |  |
-| └ `DIST` | string | Length/Distance unit |  |  |
-| └ `HEAT` | string | Heat unit |  |  |
-| └ `TEMP` | string | Temperature unit |  |  |
-| `STYLES` | object | Response Number Format | System |  |
-| └ `FORMAT` | string | Number format — 가능값: `Default`, `Fixed`, `Scientific`, `General` |  |  |
-| └ `PLACE` | integer | Digit place |  |  |
-| `COMPONENTS` | array | Components of Result Table |  |  |
-| `NODE_ELEMS` | object | Node/Element No. Input |  |  |
-| └ `KEYS` | array | Specify Each ID |  |  |
-| └ `TO` | string | Specify ID Range (e.g., '1to160') |  |  |
-| └ `STRUCTURE_GROUP_NAME` | string | Specify Structure Group Name |  |  |
-| `PARTS` | array | Element Part Number | ['All'] |  |
+| `TABLE_NAME` | string | 결과표 제목 |  |  |
+| `TABLE_TYPE` | string | 결과표 타입 — 가능값: `SRCBEAMDESIGNFORCES` |  | O |
+| `EXPORT_PATH` | string | 결과표 저장 경로 |  |  |
+| `UNIT` | object | 결과 단위 설정 | System |  |
+| └ `FORCE` | string | 힘 단위 |  |  |
+| └ `DIST` | string | 길이/거리 단위 |  |  |
+| └ `HEAT` | string | 열 단위 |  |  |
+| └ `TEMP` | string | 온도 단위 |  |  |
+| `STYLES` | object | 결과 숫자 형식 | System |  |
+| └ `FORMAT` | string | 숫자 형식 — 가능값: `Default`, `Fixed`, `Scientific`, `General` |  |  |
+| └ `PLACE` | integer | 소수 자릿수 |  |  |
+| `COMPONENTS` | array | 결과표 구성 항목 |  |  |
+| `NODE_ELEMS` | object | 절점/요소 번호 입력 |  |  |
+| └ `KEYS` | array | 개별 ID 지정 |  |  |
+| └ `TO` | string | ID 범위 지정 (예: '1to160') |  |  |
+| └ `STRUCTURE_GROUP_NAME` | string | 구조 그룹 이름 지정 |  |  |
+| `PARTS` | array | 요소 파트 번호 | ["All"] |  |
 
 > 위 필드는 `"Argument"` 객체 하위에 위치합니다.
 
@@ -4931,23 +4931,23 @@ print(res.json())
 
 | Key | 타입 | 설명 | 기본값 | 필수 |
 |-----|------|------|--------|------|
-| `TABLE_NAME` | string | Response Table Title |  |  |
-| `TABLE_TYPE` | string | Result Table Type — 가능값: `SRCCOLUMNDESIGNFORCES` |  | O |
-| `EXPORT_PATH` | string | Result Table Save Path |  |  |
-| `UNIT` | object | Response Unit Setting | System |  |
-| └ `FORCE` | string | Force unit |  |  |
-| └ `DIST` | string | Length/Distance unit |  |  |
-| └ `HEAT` | string | Heat unit |  |  |
-| └ `TEMP` | string | Temperature unit |  |  |
-| `STYLES` | object | Response Number Format | System |  |
-| └ `FORMAT` | string | Number format — 가능값: `Default`, `Fixed`, `Scientific`, `General` |  |  |
-| └ `PLACE` | integer | Digit place |  |  |
-| `COMPONENTS` | array | Components of Result Table |  |  |
-| `NODE_ELEMS` | object | Node/Element No. Input |  |  |
-| └ `KEYS` | array | Specify Each ID |  |  |
-| └ `TO` | string | Specify ID Range (e.g., '1to160') |  |  |
-| └ `STRUCTURE_GROUP_NAME` | string | Specify Structure Group Name |  |  |
-| `PARTS` | array | Element Part Number | ['All'] |  |
+| `TABLE_NAME` | string | 결과표 제목 |  |  |
+| `TABLE_TYPE` | string | 결과표 타입 — 가능값: `SRCCOLUMNDESIGNFORCES` |  | O |
+| `EXPORT_PATH` | string | 결과표 저장 경로 |  |  |
+| `UNIT` | object | 결과 단위 설정 | System |  |
+| └ `FORCE` | string | 힘 단위 |  |  |
+| └ `DIST` | string | 길이/거리 단위 |  |  |
+| └ `HEAT` | string | 열 단위 |  |  |
+| └ `TEMP` | string | 온도 단위 |  |  |
+| `STYLES` | object | 결과 숫자 형식 | System |  |
+| └ `FORMAT` | string | 숫자 형식 — 가능값: `Default`, `Fixed`, `Scientific`, `General` |  |  |
+| └ `PLACE` | integer | 소수 자릿수 |  |  |
+| `COMPONENTS` | array | 결과표 구성 항목 |  |  |
+| `NODE_ELEMS` | object | 절점/요소 번호 입력 |  |  |
+| └ `KEYS` | array | 개별 ID 지정 |  |  |
+| └ `TO` | string | ID 범위 지정 (예: '1to160') |  |  |
+| └ `STRUCTURE_GROUP_NAME` | string | 구조 그룹 이름 지정 |  |  |
+| `PARTS` | array | 요소 파트 번호 | ["All"] |  |
 
 > 위 필드는 `"Argument"` 객체 하위에 위치합니다.
 
@@ -5570,34 +5570,34 @@ print(res.json())
 
 | Key | 타입 | 설명 | 기본값 | 필수 |
 |-----|------|------|--------|------|
-| `STEEL` | object | Steel material selection. |  | O |
-| └ `CODE` | string | Steel material code type. — `None`=None; `Standard`=Standard |  | O |
-| └ `STANDARD_CODE` | string | Steel standard code when CODE is Standard. Currently only KS22(S) is supported. — `KS22(S)`=KS22(S) |  |  |
-| └ `GRADE` | string | Steel grade when CODE is Standard. — `SS235`=SS235; `SS275`=SS275; `SS315`=SS315; `SS410`=SS410; `SS450`=SS450; `SS550`=SS550; `SM275`=SM275; `SM355`=SM355; `SM420`=SM420; `SM460`=SM460; `SM275TMC`=SM275TMC; `SM355TMC`=SM355TMC …(전체 68개) |  |  |
-| └ `NAME` | string | User-defined steel material name when CODE is None. |  |  |
-| └ `ES` | number | Modulus of Elasticity. User input when CODE is None. Auto-filled when CODE is Standard. |  |  |
-| └ `FU` | number | Tensile Strength. User input when CODE is None. Auto-filled when CODE is Standard. |  |  |
-| └ `FY` | number | Yield Strength for CODE=None. |  |  |
-| └ `FY1` | number | Yield Strength Fy1. Auto-filled when CODE is Standard. |  |  |
-| └ `FY2` | number | Yield Strength Fy2. Auto-filled when CODE is Standard. |  |  |
-| └ `FY3` | number | Yield Strength Fy3. Auto-filled when CODE is Standard. |  |  |
-| └ `FY4` | number | Yield Strength Fy4. Auto-filled when CODE is Standard. |  |  |
-| └ `FY5` | number | Yield Strength Fy5. Auto-filled when CODE is Standard. |  |  |
-| `CONCRETE` | object | Concrete material selection. |  | O |
-| └ `CODE` | string | Concrete material code type. — `None`=None; `Standard`=Standard |  | O |
-| └ `STANDARD_CODE` | string | Concrete standard code when CODE is Standard. Currently only KS19(RC) is supported. — `KS19(RC)`=KS19(RC) |  |  |
-| └ `NAME` | string | User-defined concrete material name when CODE is None. |  |  |
-| └ `GRADE` | string | Concrete grade when CODE is Standard. — `C15`=C15; `C18`=C18; `C21`=C21; `C24`=C24; `C27`=C27; `C30`=C30; `C35`=C35; `C40`=C40; `C45`=C45; `C49`=C49; `C50`=C50; `C55`=C55 …(전체 20개) |  |  |
-| └ `FC` | number | Specified Compressive Strength. User input when CODE is None. Auto-filled when CODE is Standard. |  |  |
-| `REINFORCEMENT` | object | Reinforcement material selection. |  | O |
-| └ `CODE` | string | Reinforcement code type. — `None`=None; `Standard`=Standard |  | O |
-| └ `STANDARD_CODE` | string | Reinforcement standard code when CODE is Standard. Currently only KS19(RC) is supported. — `KS19(RC)`=KS19(RC) |  |  |
-| └ `MAIN_REBAR_NAME` | string | User-defined main rebar name when CODE is None. |  |  |
-| └ `MAIN_REBAR_GRADE` | string | Grade of main rebar when CODE is Standard. — `SD300`=SD300; `SD400`=SD400; `SD500`=SD500; `SD600`=SD600; `SD700`=SD700; `SD400S`=SD400S; `SD500S`=SD500S; `SD600S`=SD600S |  |  |
-| └ `FYR` | number | Yield Strength of main rebar. User input when CODE is None. Auto-filled when CODE is Standard. |  |  |
-| └ `SUB_REBAR_NAME` | string | User-defined sub-rebar name when CODE is None. |  |  |
-| └ `SUB_REBAR_GRADE` | string | Grade of sub-rebar when CODE is Standard. — `SD300`=SD300; `SD400`=SD400; `SD500`=SD500; `SD600`=SD600; `SD700`=SD700; `SD400S`=SD400S; `SD500S`=SD500S; `SD600S`=SD600S |  |  |
-| └ `FYS` | number | Yield Strength of sub-rebar. User input when CODE is None. Auto-filled when CODE is Standard. |  |  |
+| `STEEL` | object | 강재 재질 선택. |  | O |
+| └ `CODE` | string | 강재 재질 코드 타입. — `None`=없음; `Standard`=표준 |  | O |
+| └ `STANDARD_CODE` | string | CODE가 Standard일 때의 강재 표준 코드. 현재 KS22(S)만 지원됨. — `KS22(S)`=KS22(S) |  |  |
+| └ `GRADE` | string | CODE가 Standard일 때의 강재 등급. — `SS235`=SS235; `SS275`=SS275; `SS315`=SS315; `SS410`=SS410; `SS450`=SS450; `SS550`=SS550; `SM275`=SM275; `SM355`=SM355; `SM420`=SM420; `SM460`=SM460; `SM275TMC`=SM275TMC; `SM355TMC`=SM355TMC …(전체 68개) |  |  |
+| └ `NAME` | string | CODE가 None일 때의 사용자 정의 강재 이름. |  |  |
+| └ `ES` | number | 탄성계수. CODE가 None일 때 사용자 입력. CODE가 Standard일 때 자동 입력. |  |  |
+| └ `FU` | number | 인장강도. CODE가 None일 때 사용자 입력. CODE가 Standard일 때 자동 입력. |  |  |
+| └ `FY` | number | CODE=None일 때의 항복강도. |  |  |
+| └ `FY1` | number | 항복강도 Fy1. CODE가 Standard일 때 자동 입력. |  |  |
+| └ `FY2` | number | 항복강도 Fy2. CODE가 Standard일 때 자동 입력. |  |  |
+| └ `FY3` | number | 항복강도 Fy3. CODE가 Standard일 때 자동 입력. |  |  |
+| └ `FY4` | number | 항복강도 Fy4. CODE가 Standard일 때 자동 입력. |  |  |
+| └ `FY5` | number | 항복강도 Fy5. CODE가 Standard일 때 자동 입력. |  |  |
+| `CONCRETE` | object | 콘크리트 재질 선택. |  | O |
+| └ `CODE` | string | 콘크리트 재질 코드 타입. — `None`=없음; `Standard`=표준 |  | O |
+| └ `STANDARD_CODE` | string | CODE가 Standard일 때의 콘크리트 표준 코드. 현재 KS19(RC)만 지원됨. — `KS19(RC)`=KS19(RC) |  |  |
+| └ `NAME` | string | CODE가 None일 때의 사용자 정의 콘크리트 재질 이름. |  |  |
+| └ `GRADE` | string | CODE가 Standard일 때의 콘크리트 등급. — `C15`=C15; `C18`=C18; `C21`=C21; `C24`=C24; `C27`=C27; `C30`=C30; `C35`=C35; `C40`=C40; `C45`=C45; `C49`=C49; `C50`=C50; `C55`=C55 …(전체 20개) |  |  |
+| └ `FC` | number | 설계기준압축강도. CODE가 None일 때 사용자 입력. CODE가 Standard일 때 자동 입력. |  |  |
+| `REINFORCEMENT` | object | 철근 재질 선택. |  | O |
+| └ `CODE` | string | 철근 코드 타입. — `None`=없음; `Standard`=표준 |  | O |
+| └ `STANDARD_CODE` | string | CODE가 Standard일 때의 철근 표준 코드. 현재 KS19(RC)만 지원됨. — `KS19(RC)`=KS19(RC) |  |  |
+| └ `MAIN_REBAR_NAME` | string | CODE가 None일 때의 사용자 정의 주철근 이름. |  |  |
+| └ `MAIN_REBAR_GRADE` | string | CODE가 Standard일 때의 주철근 등급. — `SD300`=SD300; `SD400`=SD400; `SD500`=SD500; `SD600`=SD600; `SD700`=SD700; `SD400S`=SD400S; `SD500S`=SD500S; `SD600S`=SD600S |  |  |
+| └ `FYR` | number | 주철근 항복강도. CODE가 None일 때 사용자 입력. CODE가 Standard일 때 자동 입력. |  |  |
+| └ `SUB_REBAR_NAME` | string | CODE가 None일 때의 사용자 정의 보조철근 이름. |  |  |
+| └ `SUB_REBAR_GRADE` | string | CODE가 Standard일 때의 보조철근 등급. — `SD300`=SD300; `SD400`=SD400; `SD500`=SD500; `SD600`=SD600; `SD700`=SD700; `SD400S`=SD400S; `SD500S`=SD500S; `SD600S`=SD600S |  |  |
+| └ `FYS` | number | 보조철근 항복강도. CODE가 None일 때 사용자 입력. CODE가 Standard일 때 자동 입력. |  |  |
 
 > 위 필드는 `"Assign"` 객체의 각 ID 키(예: `"1"`) 하위에 위치합니다.
 
@@ -5861,16 +5861,16 @@ print(got.json())
 
 | Key | 타입 | 설명 | 기본값 | 필수 |
 |-----|------|------|--------|------|
-| `MAIN_BAR` | object | Main rebar data. |  | O |
-| └ `USE_REBAR_SPACE` | boolean | Auto-calculated rebar spacing. | true |  |
-| └ `REBAR_SPACE` | number | Main rebar spacing. Used when USE_REBAR_SPACE is false. | 0 |  |
-| └ `NUM` | integer | Total number of main rebars. Must be a multiple of 4. |  | O |
-| └ `NAME` | string | Main rebar size designation. — `D4`=D4; `D5`=D5; `D6`=D6; `D7`=D7; `D8`=D8; `D10`=D10; `D13`=D13; `D16`=D16; `D19`=D19; `D22`=D22; `D25`=D25; `D29`=D29 …(전체 19개) |  | O |
-| └ `ROW` | integer | Number of rebar rows for rectangular section. Must be a multiple of 2. |  | O |
-| └ `DO` | number | Concrete cover / center distance d0. |  | O |
-| `SHEAR_BAR` | object | Hoop/tie rebar data. |  | O |
-| └ `NAME` | string | Hoop/tie rebar size designation. — `D4`=D4; `D5`=D5; `D6`=D6; `D7`=D7; `D8`=D8; `D10`=D10; `D13`=D13; `D16`=D16; `D19`=D19; `D22`=D22; `D25`=D25; `D29`=D29 …(전체 19개) |  | O |
-| └ `DIST` | number | Hoop/tie rebar spacing. Used when USE_REBAR_SPACE is false. |  | O |
+| `MAIN_BAR` | object | 주철근 데이터. |  | O |
+| └ `USE_REBAR_SPACE` | boolean | 자동 계산된 철근 간격. | true |  |
+| └ `REBAR_SPACE` | number | 주철근 간격. USE_REBAR_SPACE가 false일 때 사용. | 0 |  |
+| └ `NUM` | integer | 주철근 총 개수. 4의 배수여야 함. |  | O |
+| └ `NAME` | string | 주철근 규격. — `D4`=D4; `D5`=D5; `D6`=D6; `D7`=D7; `D8`=D8; `D10`=D10; `D13`=D13; `D16`=D16; `D19`=D19; `D22`=D22; `D25`=D25; `D29`=D29 …(전체 19개) |  | O |
+| └ `ROW` | integer | 사각형 단면의 철근 열 수. 2의 배수여야 함. |  | O |
+| └ `DO` | number | 콘크리트 피복 / 중심간 거리 d0. |  | O |
+| `SHEAR_BAR` | object | 후프/타이 철근 데이터. |  | O |
+| └ `NAME` | string | 후프/타이 철근 규격. — `D4`=D4; `D5`=D5; `D6`=D6; `D7`=D7; `D8`=D8; `D10`=D10; `D13`=D13; `D16`=D16; `D19`=D19; `D22`=D22; `D25`=D25; `D29`=D29 …(전체 19개) |  | O |
+| └ `DIST` | number | 후프/타이 철근 간격. USE_REBAR_SPACE가 false일 때 사용. |  | O |
 
 > 위 필드는 `"Assign"` 객체의 각 ID 키(예: `"1"`) 하위에 위치합니다.
 
@@ -6022,8 +6022,8 @@ print(got.json())
 
 | Key | 타입 | 설명 | 기본값 | 필수 |
 |-----|------|------|--------|------|
-| `AELEM` | array | Element Lists |  | O |
-| `bREVERSE` | boolean | Reverse Local Direction | false |  |
+| `AELEM` | array | 요소 목록 |  | O |
+| `bREVERSE` | boolean | 부재축 방향 반전 | false |  |
 
 > 위 필드는 `"Assign"` 객체의 각 ID 키(예: `"1"`) 하위에 위치합니다.
 
@@ -6870,60 +6870,60 @@ print(got.json())
 
 | Key | 타입 | 설명 | 기본값 | 필수 |
 |-----|------|------|--------|------|
-| `BAR_SECTOR_I` | object | Rebar configuration at I-section. |  |  |
-| └ `TOP` | object | Top rebar configuration. |  | O |
-| └ └ `LAYER1` | object | First layer of top rebars. |  | O |
-| └ └ └ `NAME` | string | Rebar size designation for the first layer of top rebars. — `D4`=D4; `D5`=D5; `D6`=D6; `D7`=D7; `D8`=D8; `D10`=D10; `D13`=D13; `D16`=D16; `D19`=D19; `D22`=D22; `D25`=D25; `D29`=D29 …(전체 19개) |  | O |
-| └ └ └ `NUM` | integer | Number of rebars in the first layer of top rebars. |  | O |
-| └ └ `LAYER2` | object | Second layer of top rebars. |  |  |
-| └ └ └ `NAME` | string | Rebar size designation for the second layer of top rebars. — `D4`=D4; `D5`=D5; `D6`=D6; `D7`=D7; `D8`=D8; `D10`=D10; `D13`=D13; `D16`=D16; `D19`=D19; `D22`=D22; `D25`=D25; `D29`=D29 …(전체 19개) |  | O |
-| └ └ └ `NUM` | integer | Number of rebars in the second layer of top rebars. |  | O |
-| └ `BOT` | object | Bottom rebar configuration. |  | O |
-| └ └ `LAYER1` | object | First layer of bottom rebars. |  | O |
-| └ └ └ `NAME` | string | Rebar size designation for the first layer of bottom rebars. — `D4`=D4; `D5`=D5; `D6`=D6; `D7`=D7; `D8`=D8; `D10`=D10; `D13`=D13; `D16`=D16; `D19`=D19; `D22`=D22; `D25`=D25; `D29`=D29 …(전체 19개) |  | O |
-| └ └ └ `NUM` | integer | Number of rebars in the first layer of bottom rebars. |  | O |
-| └ └ `LAYER2` | object | Second layer of bottom rebars. |  |  |
-| └ └ └ `NAME` | string | Rebar size designation for the second layer of bottom rebars. — `D4`=D4; `D5`=D5; `D6`=D6; `D7`=D7; `D8`=D8; `D10`=D10; `D13`=D13; `D16`=D16; `D19`=D19; `D22`=D22; `D25`=D25; `D29`=D29 …(전체 19개) |  | O |
-| └ └ └ `NUM` | integer | Number of rebars in the second layer of bottom rebars. |  | O |
-| └ `STIRRUP_SPACE` | number | Stirrup spacing at I-section. |  | O |
-| └ `STIRRUP_NUM` | integer | Number of stirrup sets at I-section. | 2 |  |
-| `BAR_SECTOR_M` | object | Rebar configuration at M-section. |  |  |
-| └ `TOP` | object | Top rebar configuration. |  | O |
-| └ └ `LAYER1` | object | First layer of top rebars. |  | O |
-| └ └ └ `NAME` | string | Rebar size designation for the first layer of top rebars. — `D4`=D4; `D5`=D5; `D6`=D6; `D7`=D7; `D8`=D8; `D10`=D10; `D13`=D13; `D16`=D16; `D19`=D19; `D22`=D22; `D25`=D25; `D29`=D29 …(전체 19개) |  | O |
-| └ └ └ `NUM` | integer | Number of rebars in the first layer of top rebars. |  | O |
-| └ └ `LAYER2` | object | Second layer of top rebars. |  |  |
-| └ └ └ `NAME` | string | Rebar size designation for the second layer of top rebars. — `D4`=D4; `D5`=D5; `D6`=D6; `D7`=D7; `D8`=D8; `D10`=D10; `D13`=D13; `D16`=D16; `D19`=D19; `D22`=D22; `D25`=D25; `D29`=D29 …(전체 19개) |  | O |
-| └ └ └ `NUM` | integer | Number of rebars in the second layer of top rebars. |  | O |
-| └ `BOT` | object | Bottom rebar configuration. |  | O |
-| └ └ `LAYER1` | object | First layer of bottom rebars. |  | O |
-| └ └ └ `NAME` | string | Rebar size designation for the first layer of bottom rebars. — `D4`=D4; `D5`=D5; `D6`=D6; `D7`=D7; `D8`=D8; `D10`=D10; `D13`=D13; `D16`=D16; `D19`=D19; `D22`=D22; `D25`=D25; `D29`=D29 …(전체 19개) |  | O |
-| └ └ └ `NUM` | integer | Number of rebars in the first layer of bottom rebars. |  | O |
-| └ └ `LAYER2` | object | Second layer of bottom rebars. |  |  |
-| └ └ └ `NAME` | string | Rebar size designation for the second layer of bottom rebars. — `D4`=D4; `D5`=D5; `D6`=D6; `D7`=D7; `D8`=D8; `D10`=D10; `D13`=D13; `D16`=D16; `D19`=D19; `D22`=D22; `D25`=D25; `D29`=D29 …(전체 19개) |  | O |
-| └ └ └ `NUM` | integer | Number of rebars in the second layer of bottom rebars. |  | O |
-| └ `STIRRUP_SPACE` | number | Stirrup spacing at M-section. |  | O |
-| └ `STIRRUP_NUM` | integer | Number of stirrup sets at M-section. | 2 |  |
-| `BAR_SECTOR_J` | object | Rebar configuration at J-section. |  |  |
-| └ `TOP` | object | Top rebar configuration. |  | O |
-| └ └ `LAYER1` | object | First layer of top rebars. |  | O |
-| └ └ └ `NAME` | string | Rebar size designation for the first layer of top rebars. — `D4`=D4; `D5`=D5; `D6`=D6; `D7`=D7; `D8`=D8; `D10`=D10; `D13`=D13; `D16`=D16; `D19`=D19; `D22`=D22; `D25`=D25; `D29`=D29 …(전체 19개) |  | O |
-| └ └ └ `NUM` | integer | Number of rebars in the first layer of top rebars. |  | O |
-| └ └ `LAYER2` | object | Second layer of top rebars. |  |  |
-| └ └ └ `NAME` | string | Rebar size designation for the second layer of top rebars. — `D4`=D4; `D5`=D5; `D6`=D6; `D7`=D7; `D8`=D8; `D10`=D10; `D13`=D13; `D16`=D16; `D19`=D19; `D22`=D22; `D25`=D25; `D29`=D29 …(전체 19개) |  | O |
-| └ └ └ `NUM` | integer | Number of rebars in the second layer of top rebars. |  | O |
-| └ `BOT` | object | Bottom rebar configuration. |  | O |
-| └ └ `LAYER1` | object | First layer of bottom rebars. |  | O |
-| └ └ └ `NAME` | string | Rebar size designation for the first layer of bottom rebars. — `D4`=D4; `D5`=D5; `D6`=D6; `D7`=D7; `D8`=D8; `D10`=D10; `D13`=D13; `D16`=D16; `D19`=D19; `D22`=D22; `D25`=D25; `D29`=D29 …(전체 19개) |  | O |
-| └ └ └ `NUM` | integer | Number of rebars in the first layer of bottom rebars. |  | O |
-| └ └ `LAYER2` | object | Second layer of bottom rebars. |  |  |
-| └ └ └ `NAME` | string | Rebar size designation for the second layer of bottom rebars. — `D4`=D4; `D5`=D5; `D6`=D6; `D7`=D7; `D8`=D8; `D10`=D10; `D13`=D13; `D16`=D16; `D19`=D19; `D22`=D22; `D25`=D25; `D29`=D29 …(전체 19개) |  | O |
-| └ └ └ `NUM` | integer | Number of rebars in the second layer of bottom rebars. |  | O |
-| └ `STIRRUP_SPACE` | number | Stirrup spacing at J-section. |  | O |
-| └ `STIRRUP_NUM` | integer | Number of stirrup sets at J-section. | 2 |  |
-| `DT` | number | Top rebar cover thickness. |  | O |
-| `DB` | number | Bottom rebar cover thickness. |  | O |
-| `SHEAR_BAR` | string | Stirrup rebar size designation. — `D4`=D4; `D5`=D5; `D6`=D6; `D7`=D7; `D8`=D8; `D10`=D10; `D13`=D13; `D16`=D16; `D19`=D19; `D22`=D22; `D25`=D25; `D29`=D29 …(전체 19개) |  | O |
+| `BAR_SECTOR_I` | object | I단면 철근 배치. |  |  |
+| └ `TOP` | object | 상부 철근 배치. |  | O |
+| └ └ `LAYER1` | object | 상부 철근 1단. |  | O |
+| └ └ └ `NAME` | string | 상부 철근 1단의 철근 규격. — `D4`=D4; `D5`=D5; `D6`=D6; `D7`=D7; `D8`=D8; `D10`=D10; `D13`=D13; `D16`=D16; `D19`=D19; `D22`=D22; `D25`=D25; `D29`=D29 …(전체 19개) |  | O |
+| └ └ └ `NUM` | integer | 상부 철근 1단의 철근 개수. |  | O |
+| └ └ `LAYER2` | object | 상부 철근 2단. |  |  |
+| └ └ └ `NAME` | string | 상부 철근 2단의 철근 규격. — `D4`=D4; `D5`=D5; `D6`=D6; `D7`=D7; `D8`=D8; `D10`=D10; `D13`=D13; `D16`=D16; `D19`=D19; `D22`=D22; `D25`=D25; `D29`=D29 …(전체 19개) |  | O |
+| └ └ └ `NUM` | integer | 상부 철근 2단의 철근 개수. |  | O |
+| └ `BOT` | object | 하부 철근 배치. |  | O |
+| └ └ `LAYER1` | object | 하부 철근 1단. |  | O |
+| └ └ └ `NAME` | string | 하부 철근 1단의 철근 규격. — `D4`=D4; `D5`=D5; `D6`=D6; `D7`=D7; `D8`=D8; `D10`=D10; `D13`=D13; `D16`=D16; `D19`=D19; `D22`=D22; `D25`=D25; `D29`=D29 …(전체 19개) |  | O |
+| └ └ └ `NUM` | integer | 하부 철근 1단의 철근 개수. |  | O |
+| └ └ `LAYER2` | object | 하부 철근 2단. |  |  |
+| └ └ └ `NAME` | string | 하부 철근 2단의 철근 규격. — `D4`=D4; `D5`=D5; `D6`=D6; `D7`=D7; `D8`=D8; `D10`=D10; `D13`=D13; `D16`=D16; `D19`=D19; `D22`=D22; `D25`=D25; `D29`=D29 …(전체 19개) |  | O |
+| └ └ └ `NUM` | integer | 하부 철근 2단의 철근 개수. |  | O |
+| └ `STIRRUP_SPACE` | number | I단면 스터럽 간격. |  | O |
+| └ `STIRRUP_NUM` | integer | I단면 스터럽 세트 수. | 2 |  |
+| `BAR_SECTOR_M` | object | M단면 철근 배치. |  |  |
+| └ `TOP` | object | 상부 철근 배치. |  | O |
+| └ └ `LAYER1` | object | 상부 철근 1단. |  | O |
+| └ └ └ `NAME` | string | 상부 철근 1단의 철근 규격. — `D4`=D4; `D5`=D5; `D6`=D6; `D7`=D7; `D8`=D8; `D10`=D10; `D13`=D13; `D16`=D16; `D19`=D19; `D22`=D22; `D25`=D25; `D29`=D29 …(전체 19개) |  | O |
+| └ └ └ `NUM` | integer | 상부 철근 1단의 철근 개수. |  | O |
+| └ └ `LAYER2` | object | 상부 철근 2단. |  |  |
+| └ └ └ `NAME` | string | 상부 철근 2단의 철근 규격. — `D4`=D4; `D5`=D5; `D6`=D6; `D7`=D7; `D8`=D8; `D10`=D10; `D13`=D13; `D16`=D16; `D19`=D19; `D22`=D22; `D25`=D25; `D29`=D29 …(전체 19개) |  | O |
+| └ └ └ `NUM` | integer | 상부 철근 2단의 철근 개수. |  | O |
+| └ `BOT` | object | 하부 철근 배치. |  | O |
+| └ └ `LAYER1` | object | 하부 철근 1단. |  | O |
+| └ └ └ `NAME` | string | 하부 철근 1단의 철근 규격. — `D4`=D4; `D5`=D5; `D6`=D6; `D7`=D7; `D8`=D8; `D10`=D10; `D13`=D13; `D16`=D16; `D19`=D19; `D22`=D22; `D25`=D25; `D29`=D29 …(전체 19개) |  | O |
+| └ └ └ `NUM` | integer | 하부 철근 1단의 철근 개수. |  | O |
+| └ └ `LAYER2` | object | 하부 철근 2단. |  |  |
+| └ └ └ `NAME` | string | 하부 철근 2단의 철근 규격. — `D4`=D4; `D5`=D5; `D6`=D6; `D7`=D7; `D8`=D8; `D10`=D10; `D13`=D13; `D16`=D16; `D19`=D19; `D22`=D22; `D25`=D25; `D29`=D29 …(전체 19개) |  | O |
+| └ └ └ `NUM` | integer | 하부 철근 2단의 철근 개수. |  | O |
+| └ `STIRRUP_SPACE` | number | M단면 스터럽 간격. |  | O |
+| └ `STIRRUP_NUM` | integer | M단면 스터럽 세트 수. | 2 |  |
+| `BAR_SECTOR_J` | object | J단면 철근 배치. |  |  |
+| └ `TOP` | object | 상부 철근 배치. |  | O |
+| └ └ `LAYER1` | object | 상부 철근 1단. |  | O |
+| └ └ └ `NAME` | string | 상부 철근 1단의 철근 규격. — `D4`=D4; `D5`=D5; `D6`=D6; `D7`=D7; `D8`=D8; `D10`=D10; `D13`=D13; `D16`=D16; `D19`=D19; `D22`=D22; `D25`=D25; `D29`=D29 …(전체 19개) |  | O |
+| └ └ └ `NUM` | integer | 상부 철근 1단의 철근 개수. |  | O |
+| └ └ `LAYER2` | object | 상부 철근 2단. |  |  |
+| └ └ └ `NAME` | string | 상부 철근 2단의 철근 규격. — `D4`=D4; `D5`=D5; `D6`=D6; `D7`=D7; `D8`=D8; `D10`=D10; `D13`=D13; `D16`=D16; `D19`=D19; `D22`=D22; `D25`=D25; `D29`=D29 …(전체 19개) |  | O |
+| └ └ └ `NUM` | integer | 상부 철근 2단의 철근 개수. |  | O |
+| └ `BOT` | object | 하부 철근 배치. |  | O |
+| └ └ `LAYER1` | object | 하부 철근 1단. |  | O |
+| └ └ └ `NAME` | string | 하부 철근 1단의 철근 규격. — `D4`=D4; `D5`=D5; `D6`=D6; `D7`=D7; `D8`=D8; `D10`=D10; `D13`=D13; `D16`=D16; `D19`=D19; `D22`=D22; `D25`=D25; `D29`=D29 …(전체 19개) |  | O |
+| └ └ └ `NUM` | integer | 하부 철근 1단의 철근 개수. |  | O |
+| └ └ `LAYER2` | object | 하부 철근 2단. |  |  |
+| └ └ └ `NAME` | string | 하부 철근 2단의 철근 규격. — `D4`=D4; `D5`=D5; `D6`=D6; `D7`=D7; `D8`=D8; `D10`=D10; `D13`=D13; `D16`=D16; `D19`=D19; `D22`=D22; `D25`=D25; `D29`=D29 …(전체 19개) |  | O |
+| └ └ └ `NUM` | integer | 하부 철근 2단의 철근 개수. |  | O |
+| └ `STIRRUP_SPACE` | number | J단면 스터럽 간격. |  | O |
+| └ `STIRRUP_NUM` | integer | J단면 스터럽 세트 수. | 2 |  |
+| `DT` | number | 상부 철근 피복 두께. |  | O |
+| `DB` | number | 하부 철근 피복 두께. |  | O |
+| `SHEAR_BAR` | string | 스터럽 철근 규격. — `D4`=D4; `D5`=D5; `D6`=D6; `D7`=D7; `D8`=D8; `D10`=D10; `D13`=D13; `D16`=D16; `D19`=D19; `D22`=D22; `D25`=D25; `D29`=D29 …(전체 19개) |  | O |
 
 > 위 필드는 `"Assign"` 객체의 각 ID 키(예: `"1"`) 하위에 위치합니다.
 
