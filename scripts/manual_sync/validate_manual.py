@@ -34,7 +34,7 @@ def validate_file(path):
         except Exception as e:
             bad_snippets.append(str(e)[:80])
 
-    headers = re.findall(r"^#{1,3} (.*)$", text, re.MULTILINE)
+    headers = re.findall(r"^#{1,6} (.*)$", text, re.MULTILINE)
     anchors = set()
     seen_count = {}
     for h in headers:

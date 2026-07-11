@@ -70,7 +70,7 @@ jobs:
           EOF
           )
 
-          EXISTING=$(gh issue list --search "MIDAS API manual 변경 감지 in:title" --state open --json number --jq '.[0].number')
+          EXISTING=$(gh issue list --search "MIDAS API manual 변경 감지 in:title" --state open --json number --jq '.[0].number // empty')
           if [ -n "$EXISTING" ]; then
             gh issue comment "$EXISTING" --body "$BODY"
           else

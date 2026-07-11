@@ -10,6 +10,7 @@
 | `fetch_manifest.py` | 현재 홈페이지 상태를 `docs/manual/.sync_manifest.json`에 스냅샷으로 저장 | ✗ |
 | `check_diff.py` | 매니페스트와 현재 홈페이지 상태를 비교해 added/removed/changed article만 추출 | ✗ |
 | `validate_manual.py` | `docs/manual/*.md`의 JSON 코드블록 유효성 + TOC 앵커 정합성 검증 | ✗ |
+| `prompt_sample.md` | 최초 매뉴얼 문서(01~27)를 사람이 손으로 생성할 때 썼던 프롬프트 예시 (참고용, 실행 스크립트 아님) | — |
 
 AI(Claude)는 CI에서 자동 호출되지 않습니다 — **API 키를 CI에 등록하지 않는 것이 의도된 설계**입니다. 대신 GitHub Actions는 변경 여부만 무료로 확인해서 GitHub Issue로 알리고, 실제 패치는 사람이 Claude Code 대화창을 열어 직접 트리거합니다.
 
