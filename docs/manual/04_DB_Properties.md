@@ -1,8 +1,8 @@
 # 04 DB — Properties
 
 > **Source**: [MIDAS API Online Manual](https://support.midasuser.com/hc/ko/articles/33016922742937-MIDAS-API-Online-Manual)  
-> **Sync date**: 2026-06-29  
-> **Endpoints covered**: `/db/MATL`, `/db/MATL-M1`, `/db/IMFM`, `/db/IMFM-M1`, `/db/TDMF`, `/db/TDMT`, `/db/TDME`, `/db/EDMP`, `/db/TMAT`, `/db/EPMT`, `/db/EPMT-M1`, `/db/SECT`, `/db/THIK`, `/db/TSGR`, `/db/SECF`, `/db/RPSC`, `/db/STRPSSM`, `/db/PSSF`, `/db/VBEM`, `/db/VSEC`, `/db/EWSF`, `/db/IEHC`, `/db/IEHG`, `/db/IEHG-BEAM-M1`, `/db/IEHG-TRUSS-M1`, `/db/IEHG-GL-M1`, `/db/IEHG-PSS-M1`, `/db/FIMP`, `/db/FIBR`, `/db/GRDP`, `/db/ESSF`
+> **Sync date**: 2026-07-12  
+> **Endpoints covered**: `/db/MATL`, `/db/MATL-M1`, `/db/IMFM`, `/db/IMFM-M1`, `/db/TDMF`, `/db/TDMT`, `/db/TDME`, `/db/EDMP`, `/db/TMAT`, `/db/EPMT`, `/db/EPMT-M1`, `/db/SECT`, `/db/THIK`, `/db/TSGR`, `/db/SECF`, `/db/RPSC`, `/db/STRPSSM`, `/db/PSSF`, `/db/VBEM`, `/db/VSEC`, `/db/EWSF`, `/db/IEHC`, `/db/IEHG`, `/db/IEHG-BEAM-M1`, `/db/IEHG-TRUSS-M1`, `/db/IEHG-GL-M1`, `/db/IEHG-PSS-M1`, `/db/FIMP`, `/db/FIBR`, `/db/GRDP`, `/db/ESSF`, `/db/MATD`
 
 ---
 
@@ -41,6 +41,7 @@
 | 29 | [`/db/FIBR`](#29-dbfibr) | Fiber Division of Section | POST, GET, PUT, DELETE |
 | 30 | [`/db/GRDP`](#30-dbgrdp) | Group Damping | POST, GET, PUT, DELETE |
 | 31 | [`/db/ESSF`](#31-dbessf) | Element Stiffness Scale Factor | POST, GET, PUT, DELETE |
+| 32 | [`/db/MATD`](#32-dbmatd) | Modify Concrete Materials | GET, PUT |
 
 ---
 
@@ -2012,6 +2013,81 @@ essf_data = {
     }
 }
 midas_api("POST", "/db/ESSF", essf_data)
+```
+
+---
+
+## 32. `/db/MATD`
+
+> **Modify Concrete Materials** — 기존 콘크리트 재료(`TYPE:"CONC"`)의 설계값(강도)·철근 등급을 조회·수정합니다. `/db/MATL`과 달리 **GET/PUT만 지원**합니다.
+
+- **URL**: `{base url}/db/MATD`
+- **Methods**: `GET`, `PUT`
+- **Source**: [Modify Concrete Materials ↗](https://support.midasuser.com/hc/en-us/articles/35993732216985-Modify-Concrete-Materials)
+
+### Specifications
+
+| No. | Description | Key | Value Type | Default | Required |
+|-----|-------------|-----|------------|---------|----------|
+| 1 | Material Type (Concrete: `"CONC"`) | `"TYPE"` | String | - | **Required** |
+| 2 | Material Name | `"NAME"` | String | - | **Required** |
+| 3 | Concrete Material Information | `"DATA1"` | Object | - | **Required** |
+| 3-(1) | Material Code Name | `"DATA1.CODENAME"` | String | - | **Required** |
+| 3-(3) | Material Grade | `"DATA1.CODEMATLNAME"` | String | - | **Required** |
+| 3-(4) | Material Design Values | `"DATA1.DESIGN"` | Object | - | **Required** |
+| 3-(4)-i | Strength | `"DATA1.DESIGN.C_FC"` | Number | - | GET only |
+| 3-(4)-ii | Strength (Initial) | `"DATA1.DESIGN.C_FCI"` | Number | - | GET only |
+| 4 | Rebar Code Name | `"REBAR_CODENAME"` | String | - | **Required** |
+| 5 | Main Rebar Name | `"MAINREBAR_REBARNAME"` | String | - | **Required** |
+| 6 | Sub Rebar Name | `"SUBREBAR_REBARNAME"` | String | Blank | Optional |
+| 7 | Main Rebar (fy) | `"MAINREBAR_B_FY"` | Number | 0 | GET only |
+| 8 | Sub Rebar (fy) | `"SUBREBAR_B_FY"` | Number | 0 | GET only |
+
+> `C_FC`·`C_FCI`·`MAINREBAR_B_FY`·`SUBREBAR_B_FY`는 `CODENAME`/`CODEMATLNAME`/`REBAR_CODENAME`에 종속되는 계산값으로, GET 응답에서만 채워지며 PUT 요청 시에는 무시됩니다.
+
+### Request Body
+
+```json
+{
+  "Assign": {
+    "1": {
+      "TYPE": "CONC",
+      "NAME": "C16/20",
+      "DATA1": {
+        "CODENAME": "EN(RC)",
+        "CODEMATLNAME": "C16/20",
+        "DESIGN": { "C_FC": 16000, "C_FCI": 11200 }
+      },
+      "REBAR_CODENAME": "EN04(RC)",
+      "MAINREBAR_REBARNAME": "ClassB",
+      "SUBREBAR_REBARNAME": "ClassC",
+      "MAINREBAR_B_FY": 500000,
+      "SUBREBAR_B_FY": 600000
+    }
+  }
+}
+```
+
+### Python 예제
+
+```python
+# 기존 콘크리트 재료(ID=1)의 철근 등급 수정
+matd_data = {
+    "Assign": {
+        "1": {
+            "TYPE": "CONC",
+            "NAME": "C16/20",
+            "DATA1": {
+                "CODENAME": "EN(RC)",
+                "CODEMATLNAME": "C16/20"
+            },
+            "REBAR_CODENAME": "EN04(RC)",
+            "MAINREBAR_REBARNAME": "ClassB",
+            "SUBREBAR_REBARNAME": "ClassC"
+        }
+    }
+}
+midas_api("PUT", "/db/MATD/1", matd_data)
 ```
 
 ---

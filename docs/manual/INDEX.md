@@ -1,7 +1,7 @@
 # MIDAS NX Open API — JSON Manual Index
 
 > **출처:** [MIDAS API Online Manual](https://support.midasuser.com/hc/ko/articles/33016922742937-MIDAS-API-Online-Manual)  
-> **최초 생성:** 2024.05.28 · **공식 최종 편집:** 2026.06.23 · **이 파일 동기화:** 2026-07-05  
+> **최초 생성:** 2024.05.28 · **공식 최종 편집:** 2026.07.10 · **이 파일 동기화:** 2026-07-12  
 > **대상 제품:** MIDAS Civil NX · MIDAS Gen NX
 
 ---
@@ -13,7 +13,7 @@
 | [01_DOC.md](./01_DOC.md) | DOC | 문서 생성·열기·저장·닫기·해석 실행 (11개) |
 | [02_DB_Project_Structure.md](./02_DB_Project_Structure.md) | DB – Project / Structure | 프로젝트 정보·단위·구조타입·그룹·층 데이터 (14개) |
 | [03_DB_Node_Element.md](./03_DB_Node_Element.md) | DB – Node / Element | 노드·요소·로컬축·도메인 (6개) |
-| [04_DB_Properties.md](./04_DB_Properties.md) | DB – Properties | 재료·단면·두께·힌지·섬유단면 (31개) |
+| [04_DB_Properties.md](./04_DB_Properties.md) | DB – Properties | 재료·단면·두께·힌지·섬유단면 (32개) |
 | [05_DB_Boundary.md](./05_DB_Boundary.md) | DB – Boundary | 지지·스프링·링크·해제·내진장치 (24개) |
 | [06_DB_Static_Loads.md](./06_DB_Static_Loads.md) | DB – Static Loads | 정적하중케이스·자중·보하중·바닥하중·풍하중·지진하중 (21개) |
 | [07_DB_Temperature_Prestress.md](./07_DB_Temperature_Prestress.md) | DB – Temperature / Prestress | 온도·텐던·PS 하중 (12개) |
@@ -24,7 +24,7 @@
 | [12_DB_Analysis_Control.md](./12_DB_Analysis_Control.md) | DB – Analysis Control | 해석 제어 데이터 (21개) |
 | [13_DB_Load_Combinations.md](./13_DB_Load_Combinations.md) | DB – Load Combinations / Results | 하중조합·결과 설정 (8개) |
 | [14_DB_Pushover.md](./14_DB_Pushover.md) | DB – Pushover | 푸시오버 해석 제어·힌지·하중 (6개) |
-| [15_OPE.md](./15_OPE.md) | OPE | GUI 연동 운영 함수 (18개) |
+| [15_OPE.md](./15_OPE.md) | OPE | GUI 연동 운영 함수 (19개) |
 | [16_VIEW.md](./16_VIEW.md) | VIEW | 뷰 제어·캡처·결과 표시 (7개) |
 | [17_DB_Bridge.md](./17_DB_Bridge.md) | DB – Bridge Specialization | 거더·캠버·케이블 결과 설정 (4개) |
 | [18_POST_PreProcess.md](./18_POST_PreProcess.md) | POST – Pre-Process Tables | 중량·질량·하중·재료·단면·층 요약 (~10개) |
@@ -167,6 +167,7 @@ MIDAS NX 파일에 저장되는 데이터. MCT/MGT 기능과 동일한 역할.
 | 29 | `/db/FIBR` | Fiber Division of Section |
 | 30 | `/db/GRDP` | Group Damping |
 | 31 | `/db/ESSF` | Element Stiffness Scale Factor |
+| 32 | `/db/MATD` | Modify Concrete Materials |
 
 ### Boundary
 
@@ -441,6 +442,7 @@ GUI 또는 사전처리 계산값 제어 함수. DB에 저장되지 않는 데�
 | 16 | `/ope/LCOM-CONC` | Load Combination (Concrete) – KDS 41 20:2022 |
 | 17 | `/ope/LCOM-STEEL` | Load Combination (Steel) – KDS 41 30:2022 |
 | 18 | `/ope/LCOM-SRC` | Load Combination (SRC) – KDS 41 SRC:2022 / AIK-SRC2K |
+| 19 | `/ope/GSBG` | Bridge Girder Diagram Image Generation |
 
 ---
 

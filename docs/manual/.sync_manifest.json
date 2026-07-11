@@ -1,10 +1,10 @@
 {
- "article_count": 650,
+ "article_count": 651,
  "articles": {
   "33016922742937": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/33016922742937-MIDAS-API-Online-Manual",
    "title": "MIDAS API Online Manual",
-   "updated_at": "2026-07-02T08:59:24Z"
+   "updated_at": "2026-07-07T03:43:15Z"
   },
   "35409287717657": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35409287717657-Main-Control-Data",
@@ -724,7 +724,7 @@
   "35961579883929": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35961579883929-Moving-Load-Cases-Eurocode",
    "title": "Moving Load Cases - Eurocode",
-   "updated_at": "2025-08-29T06:51:47Z"
+   "updated_at": "2026-07-06T06:46:52Z"
   },
   "35961922701209": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35961922701209-Moving-Load-Cases-Poland",
@@ -959,7 +959,7 @@
   "35989224565273": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35989224565273-Eigenvalue-Analysis-Control",
    "title": "Eigenvalue Analysis Control",
-   "updated_at": "2026-01-13T07:28:09Z"
+   "updated_at": "2026-07-07T03:44:33Z"
   },
   "35989317531417": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35989317531417-Heat-of-Hydration-Analysis-Control",
@@ -1114,7 +1114,7 @@
   "35993732216985": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35993732216985-Modify-Concrete-Materials",
    "title": "Modify Concrete Materials",
-   "updated_at": "2026-07-02T07:51:32Z"
+   "updated_at": "2026-07-10T03:56:05Z"
   },
   "35993850335897": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35993850335897-Rebar-Input-for-Checking-Beam-Column",
@@ -1639,7 +1639,7 @@
   "36018322624281": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/36018322624281-Tendon-Stress-Limit-Check-Analysis-Result-Table",
    "title": "Tendon Stress Limit Check - Analysis Result Table",
-   "updated_at": "2026-06-17T00:58:21Z"
+   "updated_at": "2026-07-06T09:37:55Z"
   },
   "36018411935129": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/36018411935129-Tendon-Approximate-Loss-Analysis-Result-Table",
@@ -3250,6 +3250,11 @@
    "html_url": "https://support.midasuser.com/hc/en-us/articles/59520540732185-Concurrent-Joint-Force-Table",
    "title": "Concurrent Joint Force Table",
    "updated_at": "2026-06-30T05:25:49Z"
+  },
+  "59870138081177": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/59870138081177-Bridge-Girder-Diagrams",
+   "title": "Bridge Girder Diagrams",
+   "updated_at": "2026-07-09T09:55:24Z"
   }
  },
  "section_id": "30087500371097"

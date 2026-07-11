@@ -2746,7 +2746,7 @@ for row in table.get("DATA", []):
 
 ## 35. Tendon Stress Limit Check
 
-> **기능:** 텐던(Tendon)의 응력 한계 검토 결과를 추출합니다. 텐던 응력(f_p1·f_p2·f_pe)과 정착부/정착부 이격/사용상태 응력 한계를 비교합니다.
+> **기능:** 텐던(Tendon)의 응력 한계 검토 결과를 추출합니다. 텐던 응력(f_p1·f_p2·f_pe)과 정착부/정착부 이격/사용상태 응력 한계를 비교합니다. `ADDITIONAL.REDUCTION_FACTOR`로 각 응력 한계에 곱할 감소계수를 직접 지정할 수 있습니다.
 
 ### `TABLE_TYPE`
 
@@ -2756,7 +2756,17 @@ for row in table.get("DATA", []):
 
 ### Response HEAD
 
-`["Index", "Tendon", "TendonStress/f_p1", "TendonStress/f_p2", "TendonStress/f_pe", "TendonStressLimit/Atanch.", "TendonStressLimit/Awayfromanch.", "TendonStressLimit/Atservice"]`
+`["Index", "Tendon", "Tendon Stress/f_p1", "Tendon Stress/f_p2", "Tendon Stress/f_pe", "Tendon Stress Limit/Immediately after anchor set/At anch.", "Tendon Stress Limit/Immediately after anchor set/Away from anch.", "Tendon Stress Limit/At service"]`
+
+### `ADDITIONAL.REDUCTION_FACTOR` (Optional)
+
+정착 직후(anchor set) / 사용상태(service) 응력 한계에 곱하는 감소계수. 생략 시 기본값 사용.
+
+| Key | 설명 | Value Type | Default |
+|-----|------|-----------|---------|
+| `"AT_ANCH"` | 정착부(anchorage) 응력 한계 감소계수 (post-tensioning 전용) | Number | 0.7 |
+| `"AWAY_FROM_ANCH"` | 정착부 이격(away from anchorages) 응력 한계 감소계수 (post-tensioning 전용) | Number | 0.74 |
+| `"AT_SERVICE"` | 사용상태(service) 응력 한계 감소계수 | Number | 0.8 |
 
 ### Request / Response JSON
 
@@ -2765,11 +2775,14 @@ for row in table.get("DATA", []):
 ```json
 {
   "Argument": {
-    "TABLE_NAME": "TendonStressLimit",
+    "TABLE_NAME": "TendonStressLimitCheck",
     "TABLE_TYPE": "TNDN_STRS_LIMIT_CHECK",
     "UNIT": { "FORCE": "kN", "DIST": "m" },
     "STYLES": { "FORMAT": "Fixed", "PLACE": 12 },
-    "COMPONENTS": ["Tendon", "TendonStress/f_p1", "TendonStress/f_p2", "TendonStress/f_pe", "TendonStressLimit/Atanch.", "TendonStressLimit/Awayfromanch.", "TendonStressLimit/Atservice"]
+    "COMPONENTS": ["Tendon", "TendonStress/f_p1", "TendonStress/f_p2", "TendonStress/f_pe", "TendonStressLimit/Atanch.", "TendonStressLimit/Awayfromanch.", "TendonStressLimit/Atservice"],
+    "ADDITIONAL": {
+      "REDUCTION_FACTOR": { "AT_ANCH": 1, "AWAY_FROM_ANCH": 1, "AT_SERVICE": 1 }
+    }
   }
 }
 ```
@@ -2778,16 +2791,18 @@ for row in table.get("DATA", []):
 
 ```json
 {
-  "TendonStressLimit": {
-    "FORCE": "kN",
-    "DIST": "m",
-    "HEAD": ["Index", "Tendon", "TendonStress/f_p1", "TendonStress/f_p2", "TendonStress/f_pe", "TendonStressLimit/Atanch.", "TendonStressLimit/Awayfromanch.", "TendonStressLimit/Atservice"],
+  "TendonStressLimitCheck": {
+    "FORCE": "KN",
+    "DIST": "M",
+    "HEAD": ["Index", "Tendon", "Tendon Stress/f_p1", "Tendon Stress/f_p2", "Tendon Stress/f_pe", "Tendon Stress Limit/Immediately after anchor set/At anch.", "Tendon Stress Limit/Immediately after anchor set/Away from anch.", "Tendon Stress Limit/At service"],
     "DATA": [
-      ["1", "Bot-Key-A01", "1076.520685021510", "1204.341385434700", "1075.508421701910", "1304.284450000000", "1378.814990000000", "1255.251200000000"]
+      ["1", "A1L", "1094382.612985240063", "1209052.195195989916", "1037017.037908399943", "1900000.000000000000", "1900000.000000000000", "1600000.000000000000"]
     ]
   }
 }
 ```
+
+> ⚠️ 응답 루트 키가 `TendonStressLimit`에서 **`TendonStressLimitCheck`** 로 변경되었습니다(2026-07 공식 매뉴얼 갱신 반영).
 
 ### Python Example
 
@@ -2803,17 +2818,17 @@ HEADERS = {
 # ── POST: 텐던 응력 한계 검토 추출 ─────────────────────────────────
 payload = {
     "Argument": {
-        "TABLE_NAME": "TendonStressLimit",
+        "TABLE_NAME": "TendonStressLimitCheck",
         "TABLE_TYPE": "TNDN_STRS_LIMIT_CHECK",
         "UNIT": {"FORCE": "kN", "DIST": "m"}
     }
 }
 resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
-table = resp.json().get("TendonStressLimit", {})
+table = resp.json().get("TendonStressLimitCheck", {})
 head = table.get("HEAD", [])
 for row in table.get("DATA", []):
     d = dict(zip(head, row))
-    print(f"  {d['Tendon']}: f_pe={d['TendonStress/f_pe']} / 한계(service)={d['TendonStressLimit/Atservice']}")
+    print(f"  {d['Tendon']}: f_pe={d['Tendon Stress/f_pe']} / 한계(service)={d['Tendon Stress Limit/At service']}")
 ```
 
 ---

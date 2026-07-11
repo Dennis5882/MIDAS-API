@@ -35,6 +35,7 @@
 | 16 | [`/ope/LCOM-CONC`](#16-opelcom-conc--load-combination-concrete--kds-41-202022) | 하중조합(콘크리트) 자동 생성 | POST |
 | 17 | [`/ope/LCOM-STEEL`](#17-opelcom-steel--load-combination-steel--kds-41-302022) | 하중조합(강재) 자동 생성 | POST |
 | 18 | [`/ope/LCOM-SRC`](#18-opelcom-src--load-combination-src--kds-41-src2022--aik-src2k) | 하중조합(SRC) 자동 생성 | POST |
+| 19 | [`/ope/GSBG`](#19-opegsbg--bridge-girder-diagram-image-generation) | 교량 거더 다이어그램 이미지 생성 | POST |
 
 > **참고:** `/ope/LCOM-GEN`, `/ope/LCOM-SRC`는 `DGNCODE` 값에 따라 **KDS:2022 계열**과 **AIK-SRC2K 계열**의 두 가지 스키마를 지원합니다. 본 문서에서는 KDS:2022 스키마를 기준으로 상세 설명하고, AIK-SRC2K 변형은 별도로 함께 표기합니다.
 
@@ -3814,6 +3815,225 @@ payload2 = {
 }
 resp = requests.post(f"{BASE_URL}/ope/LCOM-SRC", json=payload2, headers=HEADERS)
 print("POST (LCOM-SRC, AIK-SRC2K):", resp.status_code, resp.json())
+```
+
+---
+
+## 19. `/ope/GSBG` — Bridge Girder Diagram Image Generation
+
+> ⚠️ **확인 필요 (2026-07-12):** Zendesk에 개별 기사(id `59870138081177`)로는 공개되어 있으나, [MIDAS API Online Manual](https://support.midasuser.com/hc/en-us/articles/33016922742937-MIDAS-API-Online-Manual) 공식 개요 목차의 OPE 섹션에는 아직 연결되어 있지 않습니다. 아래 스키마는 해당 기사 원문을 그대로 옮긴 것이며, 실제 프로덕션 반영 여부는 MIDAS 개발팀 확인 후 이 경고문을 제거해 주세요.
+>
+> **기능:** 교량 거더(Bridge Girder)의 응력(Stress)/부재력(Force) 다이어그램 이미지를 생성해 파일로 저장합니다. `/db/GSBG`(DB 파트, 다이어그램 데이터 조회/설정)와는 별개의 엔드포인트로, 이쪽은 **이미지 파일 생성 전용 OPE 명령**입니다.
+
+### Input URI
+
+```
+{base url}/ope/GSBG
+```
+
+### Active Methods
+
+`POST`
+
+### JSON Schema
+
+```json
+{
+  "type": "object",
+  "required": ["Argument"],
+  "properties": {
+    "Argument": {
+      "type": "object",
+      "required": ["LC_NAME", "LC_TYPE", "DGRM_TYPE", "STAGE_LIST"],
+      "properties": {
+        "LC_NAME": { "type": "string", "description": "Load Case/Combination name (LC_TYPE에 종속)" },
+        "LC_TYPE": { "type": "string", "enum": ["ST", "CS", "CB"], "description": "ST: Static Load Case, CS: Construction Stage Load Case, CB: Load Combination" },
+        "DGRM_TYPE": { "type": "integer", "enum": [0, 1], "description": "0: Stress, 1: Force" },
+        "BATCH": { "type": "boolean", "default": true, "description": "생략 시 true로 처리" },
+        "X_AXIS_TYPE": { "type": "integer", "enum": [0, 1], "default": 0, "description": "0: Distance, 1: Node" },
+        "BRDG_GROUP": { "type": "string", "description": "Bridge Girder Element Group (BATCH=false일 때만 사용)" },
+        "COMPONENTS": { "type": "integer", "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8], "default": 0, "description": "Stress: 0 Sax/1 +Sby/2 -Sby/3 +Sbz/4 -Sbz/5 Combined/6 7th DOF, Force: 0 Fx/1 Fy/2 Fz/3 Mx/4 My/5 Mz/6 Mb/7 Mt/8 Mw" },
+        "7TH_DOF_TYPE": { "type": "integer", "enum": [0, 1, 2, 3, 4, 5, 6], "default": 0, "description": "DGRM_TYPE=Stress·COMPONENTS=7th DOF일 때만 사용" },
+        "COMBINED_COMP": { "type": "integer", "enum": [0, 1, 2, 3, 4], "default": 0, "description": "DGRM_TYPE=Stress·COMPONENTS=Combined일 때만 사용" },
+        "STRESS_LINE": {
+          "type": "object",
+          "description": "허용응력선 (COMP/TENS 단위는 현재 시스템 단위 설정을 따름)",
+          "properties": {
+            "OPT_USE": { "type": "boolean", "default": false },
+            "COMP": { "type": "integer", "description": "허용 압축응력" },
+            "TENS": { "type": "integer", "description": "허용 인장응력" }
+          }
+        },
+        "BATCH_LIST": {
+          "type": "array",
+          "minItems": 1,
+          "description": "BATCH=true일 때 필수. Bridge Girder Element Group·Scale Factor·Group Name 세트 목록",
+          "items": {
+            "type": "object",
+            "required": ["BRDG_GROUP", "GROUP"],
+            "properties": {
+              "BRDG_GROUP": { "type": "string" },
+              "SF": { "type": "integer", "default": 1 },
+              "GROUP": { "type": "string" }
+            }
+          }
+        },
+        "STAGE_LIST": { "type": "array", "minItems": 1, "items": { "type": "string" }, "description": "다이어그램을 생성할 시공단계 목록" },
+        "EXPORT_PATH": { "type": "string", "description": "생성된 이미지의 저장 경로" },
+        "EXTENSION": { "type": "string", "enum": ["bmp", "jpg", "emf"], "description": "저장할 이미지 파일 확장자" }
+      }
+    }
+  }
+}
+```
+
+### Parameters
+
+| No. | Description | Key | Value Type | Default | Required |
+|-----|-------------|-----|-----------|---------|----------|
+| 1 | Load Case/Combination Name | `"LC_NAME"` | String | – | Required |
+| — | Load Case/Combination Type (Static: `"ST"` / Construction Stage: `"CS"` / Combination: `"CB"`) | `"LC_TYPE"` | String | – | Required |
+| 2 | Diagram Type (Stress: `0` / Force: `1`) | `"DGRM_TYPE"` | Integer | – | Required |
+| 3 | Batch Option | `"BATCH"` | Boolean | true | Optional |
+| 4 | X-Axis Type (Distance: `0` / Node: `1`) | `"X_AXIS_TYPE"` | Integer | 0 | Optional |
+| 5 | Stress Components (`DGRM_TYPE=0`) — Sax:0 / +Sby:1 / -Sby:2 / +Sbz:3 / -Sbz:4 / Combined:5 / 7th DOF:6 | `"COMPONENTS"` | Integer | 0 | Optional |
+| 6 | Location for Display of Stress (`DGRM_TYPE=0`, `COMPONENTS=5`) — Max:0 / 1(-y,+z):1 / 2(+y,+z):2 / 3(+y,-z):3 / 4(-y,-z):4 | `"COMBINED_COMP"` | Integer | 0 | Optional |
+| 7 | 7th DOF Type (`DGRM_TYPE=0`, `COMPONENTS=6`) — Sax(Warping):0 / Ssy(Mt):1 / Ssy(Mw):2 / Ssz(Mt):3 / Ssz(Mw):4 / Combined(Ssy):5 / Combined(Ssz):6 | `"7TH_DOF_TYPE"` | Integer | 0 | Optional |
+| 8 | Allowable Stress Line | `"STRESS_LINE"` | Object | – | Optional |
+| 8-(1) | Draw Allowable Stress Line | `"STRESS_LINE.OPT_USE"` | Boolean | false | Optional |
+| 8-(2) | Allowable Compression Stress (`OPT_USE=true`) | `"STRESS_LINE.COMP"` | Integer | – | Required |
+| 8-(3) | Allowable Tension Stress (`OPT_USE=true`) | `"STRESS_LINE.TENS"` | Integer | – | Required |
+| 9 | Beam Forces/Moments Components (`DGRM_TYPE=1`) — Fx:0 / Fy:1 / Fz:2 / Mx:3 / My:4 / Mz:5 / Mb:6 / Mt:7 / Mw:8 | `"COMPONENTS"` | Integer | 0 | Optional |
+| 10 | Batch Output List (`BATCH=true`) | `"BATCH_LIST"` | Array[Object] | – | Required |
+| 10-(1) | Bridge Girder Element Group | `"BATCH_LIST[].BRDG_GROUP"` | String | – | Required |
+| 10-(2) | Scale Factor | `"BATCH_LIST[].SF"` | Integer | 1 | Optional |
+| 10-(3) | Group Name | `"BATCH_LIST[].GROUP"` | String | – | Required |
+| 11 | Bridge Girder Element Group (`BATCH=false`) | `"BRDG_GROUP"` | String | – | Required |
+| 12 | Stage List for Diagram Generation | `"STAGE_LIST"` | Array[String] | – | Required |
+| 13 | Export Path | `"EXPORT_PATH"` | String | – | Required |
+| 14 | Export Image File Extension (`"bmp"` / `"jpg"` / `"emf"`) | `"EXTENSION"` | String | – | Required |
+
+### Request Examples
+
+**Stress, BATCH = true**
+
+```json
+{
+  "Argument": {
+    "LC_NAME": "LCB_STRENGTH_01",
+    "LC_TYPE": "CB",
+    "DGRM_TYPE": 0,
+    "BATCH": true,
+    "X_AXIS_TYPE": 0,
+    "COMPONENTS": 5,
+    "COMBINED_COMP": 0,
+    "STRESS_LINE": { "OPT_USE": true, "COMP": 24000, "TENS": 54000 },
+    "BATCH_LIST": [
+      { "BRDG_GROUP": "BG_LEFT", "SF": 1, "GROUP": "Stress_Left_Girder" },
+      { "BRDG_GROUP": "BG_RIGHT", "SF": 1, "GROUP": "Stress_Right_Girder" }
+    ],
+    "STAGE_LIST": ["CS1", "CS2", "FINAL"],
+    "EXPORT_PATH": "C:\\Temp\\GSBG\\StressBatch",
+    "EXTENSION": "jpg"
+  }
+}
+```
+
+**Stress, BATCH = false**
+
+```json
+{
+  "Argument": {
+    "LC_NAME": "LCB_SERVICE_01",
+    "LC_TYPE": "CB",
+    "DGRM_TYPE": 0,
+    "BATCH": false,
+    "X_AXIS_TYPE": 1,
+    "BRDG_GROUP": "BG_MAIN",
+    "COMPONENTS": 6,
+    "7TH_DOF_TYPE": 3,
+    "STRESS_LINE": { "OPT_USE": true, "COMP": 22000, "TENS": 16000 },
+    "STAGE_LIST": ["CS1", "CS2", "FINAL"],
+    "EXPORT_PATH": "C:\\Temp\\GSBG\\StressSingle",
+    "EXTENSION": "bmp"
+  }
+}
+```
+
+**Force, BATCH = true**
+
+```json
+{
+  "Argument": {
+    "LC_NAME": "LCB_STRENGTH_01",
+    "LC_TYPE": "CB",
+    "DGRM_TYPE": 1,
+    "BATCH": true,
+    "X_AXIS_TYPE": 0,
+    "COMPONENTS": 8,
+    "BATCH_LIST": [
+      { "BRDG_GROUP": "BG_LEFT", "SF": 1, "GROUP": "Force_Left_Girder" },
+      { "BRDG_GROUP": "BG_RIGHT", "SF": 2, "GROUP": "Force_Right_Girder" }
+    ],
+    "STAGE_LIST": ["CS1", "CS2", "FINAL"],
+    "EXPORT_PATH": "C:\\Temp\\GSBG\\ForceBatch",
+    "EXTENSION": "emf"
+  }
+}
+```
+
+**Force, BATCH = false**
+
+```json
+{
+  "Argument": {
+    "LC_NAME": "LCB_SERVICE_01",
+    "LC_TYPE": "CB",
+    "DGRM_TYPE": 1,
+    "BATCH": false,
+    "X_AXIS_TYPE": 1,
+    "BRDG_GROUP": "BG_MAIN",
+    "COMPONENTS": 5,
+    "STAGE_LIST": ["CS1", "CS2", "FINAL"],
+    "EXPORT_PATH": "C:\\Temp\\GSBG\\ForceSingle",
+    "EXTENSION": "jpg"
+  }
+}
+```
+
+### Python Example
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/civil"
+HEADERS = {
+    "Content-Type": "application/json",
+    "MAPI-Key": "YOUR_MAPI_KEY"
+}
+
+# ── POST: 거더 응력 다이어그램 이미지 일괄 생성 ─────────────────────
+payload = {
+    "Argument": {
+        "LC_NAME": "LCB_STRENGTH_01",
+        "LC_TYPE": "CB",
+        "DGRM_TYPE": 0,
+        "BATCH": True,
+        "X_AXIS_TYPE": 0,
+        "COMPONENTS": 5,
+        "COMBINED_COMP": 0,
+        "STRESS_LINE": {"OPT_USE": True, "COMP": 24000, "TENS": 54000},
+        "BATCH_LIST": [
+            {"BRDG_GROUP": "BG_LEFT", "SF": 1, "GROUP": "Stress_Left_Girder"},
+            {"BRDG_GROUP": "BG_RIGHT", "SF": 1, "GROUP": "Stress_Right_Girder"},
+        ],
+        "STAGE_LIST": ["CS1", "CS2", "FINAL"],
+        "EXPORT_PATH": "C:\\Temp\\GSBG\\StressBatch",
+        "EXTENSION": "jpg",
+    }
+}
+resp = requests.post(f"{BASE_URL}/ope/GSBG", json=payload, headers=HEADERS)
+print("POST (GSBG):", resp.status_code, resp.json())
 ```
 
 ---

@@ -1393,19 +1393,19 @@ print(result)
 
 ## 16. /db/MVLDeu – Moving Load Cases – Eurocode
 
-> Eurocode (EN 1991-2) 이동하중 하중 케이스. 5가지 Load Model 타입을 지원합니다.
+> Eurocode (EN 1991-2) 이동하중 하중 케이스. 5가지 Load Model 타입(`TYPE_LOADMODEL`)과 각 타입별 **General Load** / **Moving Load Optimization**(`OPT_AUTO_OPTIMIZE`) 두 입력 모드를 지원합니다.
 
 **Input URI:** `{base url}/db/MVLDeu`
 
 **Active Methods:** `POST`, `GET`, `PUT`, `DELETE`
 
-### Request Body – LM 1 (TYPE_LOADMODEL = 1)
+### Request Body – LM 1 / FLM 1 / Footbridge (TYPE_LOADMODEL = 1, General Load)
 
 ```json
 {
   "Assign": {
     "1": {
-      "LCNAME": "MV_EU_LM1",
+      "LCNAME": "MV_Case1",
       "OPT_AUTO_OPTIMIZE": false,
       "TYPE_LOADMODEL": 1,
       "DESC": "",
@@ -1420,6 +1420,131 @@ print(result)
 }
 ```
 
+### Request Body – LM 2/3/4, FLM 2/3/4, Permit Truck (TYPE_LOADMODEL = 2, General Load)
+
+```json
+{
+  "Assign": {
+    "2": {
+      "LCNAME": "MV_Case2",
+      "OPT_AUTO_OPTIMIZE": false,
+      "TYPE_LOADMODEL": 2,
+      "DESC": "",
+      "OPT_COMB": 1,
+      "OPT_LEADING": true,
+      "SUB_LOAD_LIST": [
+        {
+          "TYPE": 2,
+          "NAME": "EU_(FF)_ConcentratedLoad",
+          "SCALE_FACTOR": 1,
+          "MIN_LOAD_LANE_TYPE": 1,
+          "MAX_LOAD_LANE_TYPE": 4,
+          "SLN_LIST": ["LL_01", "LL_02", "LL_03", "LL_04"]
+        }
+      ]
+    }
+  }
+}
+```
+
+### Request Body – LM 1 & 3 Multi (TYPE_LOADMODEL = 3, General Load)
+
+```json
+{
+  "Assign": {
+    "3": {
+      "LCNAME": "MV_Case3",
+      "OPT_AUTO_OPTIMIZE": false,
+      "TYPE_LOADMODEL": 3,
+      "DESC": "",
+      "VHLNAME1": "EU_(R)_LoadModel1",
+      "VHLNAME2": "UD_LoadModel3",
+      "OPT_LEADING": false,
+      "SLN_LIST": ["LL_01", "LL_02"],
+      "SRA_LIST": ["LL_04"]
+    }
+  }
+}
+```
+
+### Request Body – LM 1 & 3 Multi (Straddling) (TYPE_LOADMODEL = 4, General Load)
+
+```json
+{
+  "Assign": {
+    "4": {
+      "LCNAME": "MV_Case4",
+      "OPT_AUTO_OPTIMIZE": false,
+      "TYPE_LOADMODEL": 4,
+      "DESC": "",
+      "VHLNAME1": "EU_(R)_LoadModel1",
+      "VHLNAME2": "EU_(R)_LoadModel3(UKNA)_SOV250_Auto",
+      "OPT_LEADING": false,
+      "SLN_LIST": ["LL_01", "LL_03", "LL_04"],
+      "SRA_LIST": ["LL_02"],
+      "STL_LIST": [
+        {"NAME1": "LL_03", "NAME2": "LL_04"}
+      ]
+    }
+  }
+}
+```
+
+### Request Body – Railway Bridge (TYPE_LOADMODEL = 5, General Load)
+
+```json
+{
+  "Assign": {
+    "5": {
+      "LCNAME": "MV_Case5",
+      "OPT_AUTO_OPTIMIZE": false,
+      "TYPE_LOADMODEL": 5,
+      "DESC": "",
+      "OPT_COMB": 1,
+      "SCALE_FACTOR1": 0.8,
+      "SCALE_FACTOR2": 0.7,
+      "SCALE_FACTOR3": 0.6,
+      "OPT_PSI_FACTOR": false,
+      "MULTI_FACTOR1": 1,
+      "MULTI_FACTOR2": 1,
+      "MULTI_FACTOR3": 0.75,
+      "SUB_LOAD_LIST": [
+        {
+          "TYPE": 2,
+          "NAME": "EU_(RFL)_HSLMB",
+          "SCALE_FACTOR": 1,
+          "MIN_LOAD_LANE_TYPE": 1,
+          "MAX_LOAD_LANE_TYPE": 4,
+          "SLN_LIST": ["LL_01", "LL_02", "LL_03", "LL_04"]
+        }
+      ]
+    }
+  }
+}
+```
+
+### Request Body – Moving Load Optimization (OPT_AUTO_OPTIMIZE = true, 예: LM 1)
+
+```json
+{
+  "Assign": {
+    "6": {
+      "LCNAME": "MV_Case6",
+      "OPT_AUTO_OPTIMIZE": true,
+      "TYPE_LOADMODEL": 1,
+      "DESC": "",
+      "VHLNAME1": "EU_(R)_LoadModel1",
+      "VHLNAME2": "EU_(FF)_Uniformload(Road)",
+      "OPT_LEADING": false,
+      "MINVHLDIST": 1,
+      "OPTIMIZE_LANE_NAME": "LL_01",
+      "LOADEDLANE": 3,
+      "SLN_LIST": ["LL_01", "LL_03", "LL_04"]
+    }
+  }
+}
+```
+
 ### Parameters
 
 | No. | Description | Key | Value Type | Default | Required |
@@ -1427,12 +1552,24 @@ print(result)
 | 1 | Load Case Name | `"LCNAME"` | String | – | Required |
 | 2 | Description | `"DESC"` | String | `""` | Optional |
 | 3 | Load Model Type ¹⁾ | `"TYPE_LOADMODEL"` | Integer | – | Required |
-| 4 | Moving Load Optimization | `"OPT_AUTO_OPTIMIZE"` | Boolean | false | Optional |
-| 5 | Leading Lane Option | `"OPT_LEADING"` | Boolean | false | Optional |
-| 6 | Standard Lane List | `"SLN_LIST"` | Array[String] | – | Optional |
-| 7 | Remaining Area List | `"SRA_LIST"` | Array[String] | – | Optional |
-| 8 | Footpath Lane List | `"FLN_LIST"` | Array[String] | – | Optional |
-| 9 | Sub Load List (TYPE=2) | `"SUB_LOAD_LIST"` | Array[Object] | – | Optional |
+| 4 | Moving Load Optimization (General Load: `false` / Optimization: `true`) | `"OPT_AUTO_OPTIMIZE"` | Boolean | false | Optional |
+| 5 | Ignore ψ(1) factor | `"OPT_LEADING"` | Boolean | – | Required (LM1/3/4, General·Optimization) |
+| 6 | Load Case – Vehicle | `"VHLNAME1"` | String | – | Required (LM1/3/4) |
+| 7 | Load Case – Footway | `"VHLNAME2"` | String | – | Optional (LM1) / Required (LM3/4, Optimization) |
+| 8 | Selected Lanes | `"SLN_LIST"` | Array[String] | – | Required (LM1/3/4) |
+| 9 | Remaining Area | `"SRA_LIST"` | Array[String] | – | Required (LM1/3) |
+| 10 | Footway Lanes (LM1) | `"FLN_LIST"` | Array[String] | – | Required (LM1) |
+| 11 | Straddling Lanes — `(1)` Start Lane `"NAME1"`, `(2)` End Lane `"NAME2"` | `"STL_LIST"` | Array[Object] | – | Required (LM4) |
+| 12 | Loading Effect (Combined: `0` / Independent: `1`) | `"OPT_COMB"` | String | – | Required (LM2/5) |
+| 13 | Sub-Load Cases — `(1)` Vehicle Load Type ²⁾ `"TYPE"`, `(2)` Name `"NAME"`, `(3)` Scale Factor `"SCALE_FACTOR"`, `(4)` Min. Loaded Lanes `"MIN_LOAD_LANE_TYPE"`, `(5)` Max. Loaded Lanes `"MAX_LOAD_LANE_TYPE"`, `(6)` Selected Lanes `"SLN_LIST"` | `"SUB_LOAD_LIST"` | Array[Object] | – | Required (LM2/5, General) |
+| 14 | Ignore ψ1 factor | `"OPT_PSI_FACTOR"` | Boolean | – | Required (LM5) |
+| 15 | ψ1 factor for Lane 1/2/3+ | `"SCALE_FACTOR1"/"SCALE_FACTOR2"/"SCALE_FACTOR3"` | Number | – | Required (LM5) |
+| 16 | Multi Presence Factor for Lane 1/2/3+ | `"MULTI_FACTOR1"/"MULTI_FACTOR2"/"MULTI_FACTOR3"` | Number | – | Required (LM5) |
+| 17 | Min. Vehicle Distance | `"MINVHLDIST"` | Number | – | Required (Optimization) |
+| 18 | Assignment Lane | `"OPTIMIZE_LANE_NAME"` | String | – | Required (Optimization) |
+| 19 | Number of Loaded Lane | `"LOADEDLANE"` | Integer | – | Required (Optimization, LM1/3/4) |
+| 20 | Min./Max. Number of Vehicle | `"MIN_NUM_VHL"/"MAX_NUM_VHL"` | Integer | – | Required (Optimization, LM2/5) |
+| 21 | Sub-Load Cases for Optimization — `(1)` Type `"TYPE"`, `(2)` Name `"NAME"`, `(3)` Scale Factor `"SCALE_FACTOR"` | `"OPTIMIZE_LIST"` | Array[Object] | – | Required (Optimization, LM2/5) |
 
 > ¹⁾ TYPE_LOADMODEL:  
 > 1 = LM 1, FLM 1 / Footbridge  
@@ -1440,13 +1577,15 @@ print(result)
 > 3 = LM 1 & 3 Multi  
 > 4 = LM 1 & 3 Multi (Straddling)  
 > 5 = Railway Bridge
+>
+> ²⁾ Vehicle Load Type(`"TYPE"`): Vehicle Class = `1` (Eurocode에서는 미사용) / Vehicle Load = `2` (Eurocode 고정값)
 
 ### Python 예제
 
 ```python
 result = mv_post("MVLDeu", {
     "1": {
-        "LCNAME": "MV_EU_LM1",
+        "LCNAME": "MV_Case1",
         "OPT_AUTO_OPTIMIZE": False,
         "TYPE_LOADMODEL": 1,
         "DESC": "",
