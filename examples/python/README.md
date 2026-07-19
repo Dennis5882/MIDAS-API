@@ -24,6 +24,7 @@ MIDAS_MAPI_KEY=your-mapi-key-here
 
 ```bash
 python basic_example.py
+python simple_beam_load_combination.py
 ```
 
 성공하면 MIDAS Gen NX 화면에 사각 기둥 1개가 생성됩니다.
@@ -31,6 +32,8 @@ python basic_example.py
 ## 예제 파일
 
 - `basic_example.py` — `MidasAPI()` 헬퍼 + 새문서→단위→재료→단면→노드→요소→지지→저장
+- `simple_beam_load_combination.py` — 단순보를 20등분해 절점/요소를 반복 생성하고, 자중(`/db/bodf`) +
+  등분포 보하중(`/db/bmld`) + 하중조합(`/db/lcom-gen`)까지 엮는 예제. [MIDAS Support "Example: Python"](https://support.midasuser.com/hc/en-us/articles/30230181806361-Example-Python) 튜토리얼 기사를 재구성.
 
 ## 핵심 패턴
 

@@ -283,6 +283,8 @@ print(f"풍압: {pressure} kN/m²")  # 약 1.58 kN/m²
 - [MIDAS API JSON Manual (원문, 전체 엔드포인트 스키마)](https://support.midasuser.com/hc/en-us/sections/30087500371097-JSON-Manual)
 - [MIDAS CIVIL NX Open API 동작 원리](https://support.midasuser.com/hc/en-us/articles/30212837484441-How-to-work-MIDAS-CIVIL-NX-Open-API)
 - [Python 예제](https://support.midasuser.com/hc/en-us/articles/30230181806361-Example-Python)
+- [Excel VBA 예제](https://support.midasuser.com/hc/en-us/articles/30506684736665-Example-Excel-VBA)
+- [기타 언어 예제 (C#·Java·Dart·C·Node.js)](https://support.midasuser.com/hc/en-us/articles/30506872725017-Example-Various-Programming-Languages)
 
 ## 📖 저장소 구조
 
@@ -294,7 +296,9 @@ docs/
 examples/
 ├── python/              # Python 예제
 ├── javascript/          # JavaScript 예제
-└── curl/                # cURL 예제
+├── curl/                # cURL 예제
+├── vba/                 # Excel VBA 예제
+└── OTHER_LANGUAGES.md   # C# · Java · Dart · C · Node.js 스니펫
 ```
 
 ## ❓ 도움말
