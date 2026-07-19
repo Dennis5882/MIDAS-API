@@ -101,6 +101,44 @@ End Sub
 
 ---
 
+## 💡 실전 팁
+
+### JSON 스키마를 못 찾았을 때 — GET → 수정 → PUT/POST
+
+특정 데이터의 JSON 구조가 매뉴얼에서 바로 안 보일 때, 매뉴얼을 뒤지는 대신 제품에서 직접
+뽑아내는 방법입니다.
+
+1. MIDAS Gen/Civil NX GUI에서 원하는 데이터를 직접 입력합니다.
+2. 해당 리소스를 `GET`으로 조회해 실제 JSON 형식을 확인합니다.
+3. 응답의 최상위 키(예: `"NODE"`)를 **`"Assign"`으로 바꿔서** 그대로 `PUT`/`POST` 바디로 재사용합니다.
+4. 반대로, 제품에서 데이터를 지운 뒤 `POST`로 원하는 값을 입력해보며 검증할 수도 있습니다.
+
+```python
+# 1) GUI에서 만든 데이터를 GET으로 확인
+resp = requests.get(f"{BASE_URL}/db/node", headers=HEADERS).json()
+# resp == {"NODE": {"1": {"X": 0, "Y": 0, "Z": 0}, ...}}
+
+# 2) 최상위 키만 "Assign"으로 바꿔서 그대로 재사용
+body = {"Assign": resp["NODE"]}
+requests.put(f"{BASE_URL}/db/node", headers=HEADERS, json=body)
+```
+
+### `/info/db/...` — DB 리소스 스키마 인트로스펙션
+
+`baseURL`과 `db` 사이에 `info`를 끼워 넣으면, 해당 DB 리소스의 Key 설명과 Value 타입을
+서버가 직접 반환해줍니다. 매뉴얼에 없는 필드거나 최신 스펙을 즉석에서 확인하고 싶을 때
+유용합니다.
+
+```bash
+curl -X GET "https://moa-engineers.midasit.com:443/civil/info/db/node" \
+  -H "MAPI-Key: $MIDAS_MAPI_KEY"
+```
+
+> 일반 엔드포인트는 `{base url}/db/NODE`이고, 인트로스펙션 엔드포인트는
+> `{base url}/info/db/NODE`처럼 `db` 앞에 `info`가 붙습니다.
+
+---
+
 ## 🛡️ 보안 팁
 
 ### ✅ 해야 할 것
@@ -139,6 +177,53 @@ MAPI_KEY = os.getenv("MIDAS_MAPI_KEY")
 
 > 가장 흔한 실수: **MIDAS Gen NX가 실행되어 있지 않은 경우**. 서버는 실행 중인
 > 제품과 WebSocket으로 연결되어야 동작합니다.
+
+### 연결 전 상태 확인 — `/mapikey/verify`
+
+여러 요청을 연달아 보내기 전에, 제품이 서버에 정상 연결되어 있는지 먼저 확인할 수 있습니다.
+Base URL에서 제품 경로(`/gen`, `/civil`)를 뺀 주소에 `/mapikey/verify`를 붙여 `GET`으로 호출합니다.
+
+```bash
+curl -X GET "https://moa-engineers.midasit.com:443/mapikey/verify" \
+  -H "MAPI-Key: $MIDAS_MAPI_KEY"
+```
+
+```json
+{
+    "user": "User_ID",
+    "program": "civil",
+    "connectionID": "Connection_ID",
+    "keyVerified": true,
+    "status": "connected"
+}
+```
+
+| 키 | 의미 |
+| --- | --- |
+| `status` | 제품-서버 연결 상태 |
+| `keyVerified` | MAPI-Key 유효 여부 |
+| `user` | 제품에 로그인된 사용자 ID |
+| `program` | 연결된 제품 (`gen` / `civil`) |
+| `connectionID` | 클라이언트를 식별하는 휘발성 ID |
+
+### 사내망/방화벽 환경 연결 문제
+
+"Connect" 버튼을 눌러도 상태가 바뀌지 않는다면, 대부분 사내 방화벽이 외부로 나가는
+`http(s)`/`WebSocket` 요청을 막고 있는 경우입니다. 네트워크/보안팀에 아래 정보로 허용을
+요청하세요.
+
+| 항목 | 값 |
+| --- | --- |
+| Protocol | `https`, `wss` |
+| Port | `443` |
+| IP | `121.157.60.1/32` (MIDAS Public NAT IP) |
+| URI | `https://moa-engineers.midasit.com` |
+
+> **SSL 인터셉션(SSL Inspection) 환경 주의:** 사내 프록시가 모든 트래픽에 SSL 인터셉션을
+> 적용하는 경우, `moa-engineers.midasit.com`을 인터셉션 대상에서 제외해야 연결이 됩니다.
+> 여러 기업 고객이 이 설정으로 문제를 해결한 사례가 있습니다 — 방화벽/프록시 자체는
+> 정상이어도 SSL 인터셉션 때문에 연결이 거부될 수 있다는 점을 network/보안팀에 함께
+> 전달하세요.
 
 ---
 
