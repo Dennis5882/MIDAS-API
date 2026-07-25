@@ -164,7 +164,11 @@
 | 1-2-4 | 　　└ 선택 절점(복수) 기준 수직선 평균변위 (X_DIR/Y_DIR/COMBINED 배열, **Required**) | `SET_STORY_DRIFT_CALCULATION_METHOD.AVERAGE_DRIFT_OF_VERTICAL_LINES_ON_SELECTED_NODES` | Array [Object] | — | Optional |
 | 1-2-5 | 　　└ 전단력 가중 평균변위 | `SET_STORY_DRIFT_CALCULATION_METHOD.SHEAR_WEIGHTED_AVERAGE_DRIFT_OF_VERTICAL_ELEMENTS` | Boolean | `false` | Optional |
 
-**요청 예시 — `ADDITIONAL` 포함 (Comb)**
+> ⚠️ **방향 Key 표기가 공식 문서 내에서 불일치합니다.** 위 표(공식 Specifications 표 기준)는 `"X_DIR"`·`"Y_DIR"`·`"COMBINED"`(언더스코어)로 기재되어 있으나, **공식 요청 예제는 `"X-DIR"`(하이픈)** 을 사용합니다. 아래 예제는 공식 예제를 그대로 옮긴 것이므로 하이픈 표기입니다. 실제 동작하는 예제 쪽 표기(`X-DIR`)를 먼저 시도하고, 거부되면 표 표기(`X_DIR`)로 바꿔 보십시오.
+>
+> 같은 맥락으로 `AVERAGE_DRIFT_OF_VERTICAL_LINES_ON_SELECTED_NODES`는 공식 표에서 `Array [Object]`로 기재되어 있으나, 공식 예제에서는 방향 Key를 갖는 **단일 객체**(`{ "X-DIR": [262, 260] }`)로 나타납니다.
+
+**요청 예시 — `ADDITIONAL` 포함 (Comb, 공식 예제 원문 그대로)**
 
 ```json
 {
@@ -182,8 +186,8 @@
       "SET_STORY_DRIFT_CALCULATION_METHOD": {
         "DRIFT_AT_THE_CENTER_OF_MASS": true,
         "AVERAGE_DRIFT_OF_VERTICAL_ELEMENTS": true,
-        "DRIFT_OF_A_VERTICAL_LINE_ON_SELECTED_NODE": { "X_DIR": 109 },
-        "AVERAGE_DRIFT_OF_VERTICAL_LINES_ON_SELECTED_NODES": { "X_DIR": [262, 260] },
+        "DRIFT_OF_A_VERTICAL_LINE_ON_SELECTED_NODE": { "X-DIR": 109 },
+        "AVERAGE_DRIFT_OF_VERTICAL_LINES_ON_SELECTED_NODES": { "X-DIR": [262, 260] },
         "SHEAR_WEIGHTED_AVERAGE_DRIFT_OF_VERTICAL_ELEMENTS": true
       }
     }
@@ -1061,7 +1065,9 @@ for row in table.get("DATA", []):
 | 1-1-5-2 | 　　　　└ 적용 시작/종료 층 — `FIX_USER_CHECK: "USER"`일 때만 | `BETA.NAME_FROM` / `BETA.NAME_TO` | String | — | Optional |
 | 1-1-5-3 | 　　　　└ 사용자 지정 Beta 값 — `FIX_USER_CHECK: "USER"`일 때만 | `BETA.VALUE` | Number | — | Optional |
 | 1-2 | └ 층간변위 산정 방식 선택 | `ADDITIONAL.SET_CALCULATION_METHOD` | Object | — | Optional |
-| 1-2-1 | 　　└ 방식: `"Drift on the Center of Mass"` / `"Max. Drift of Outer Extreme Points"` / `"Max. Drift of All Vertical Elements"` | `SET_CALCULATION_METHOD.STORY_DRIFT_METHOD` | String | — | Optional |
+| 1-2-1 | 　　└ 방식: `"Drift at the Center of Mass"`(질량중심 변위) / `"Max. Drift of Outer Extreme Points"`(외곽 최대변위) / `"Max. Drift of All Vertical Elements"`(전 수직요소 최대변위) | `SET_CALCULATION_METHOD.STORY_DRIFT_METHOD` | String | — | Optional |
+
+> ⚠️ **`STORY_DRIFT_METHOD` 값 표기 주의.** 이 테이블의 공식 Specifications 표는 첫 번째 값을 `"Drfit on the Center of Mass"`로 적고 있으나, 이는 공식 문서의 오타입니다(`Drfit` → `Drift`, `on` → `at`). 동일한 enum을 문서화한 [13. Stiffness Irregularity Check](#13-stiffness-irregularity-check-soft-story)·[17. Weight Irregularity Check](#17-weight-irregularity-check) 공식 아티클과 이 아티클의 요청 예제는 모두 `"Drift at the Center of Mass"` 형태를 사용하므로, 위 표에는 정규 표기를 기재했습니다. 다음 동기화 때 "원문과 다르다"고 되돌리지 마십시오.
 
 **요청 예시 — `ADDITIONAL` 포함**
 
@@ -1382,7 +1388,9 @@ for row in table.get("DATA", []):
 | --- | --- | --- | --- | --- | --- |
 | 1 | 세부 설정 객체 | `"ADDITIONAL"` | Object | — | Optional |
 | 1-1 | └ 산정방식 설정 | `ADDITIONAL.SET_CALCULATION_METHOD` | Object | — | Required |
-| 1-1-1 | 　　└ 층간변위 산정방식: `"Drift at the Center of Mass"`(질량중심 변위) / `"Max. Drift of Outer Extreme Points"`(외곽 최대변위) / `"Max. Drfit of All Vertical Elements"`(전 수직요소 최대변위) | `SET_CALCULATION_METHOD.STORY_DRIFT_METHOD` | String | `"Drift at the Center of Mass"` | Optional |
+| 1-1-1 | 　　└ 층간변위 산정방식: `"Drift at the Center of Mass"`(질량중심 변위) / `"Max. Drift of Outer Extreme Points"`(외곽 최대변위) / `"Max. Drift of All Vertical Elements"`(전 수직요소 최대변위) | `SET_CALCULATION_METHOD.STORY_DRIFT_METHOD` | String | `"Drift at the Center of Mass"` | Optional |
+
+> ⚠️ **`STORY_DRIFT_METHOD` 값 표기 주의.** 이 테이블의 공식 Specifications 표는 세 번째 값을 `"Max. Drfit of All Vertical Elements"`로 적고 있으나, 이는 공식 문서의 오타입니다(`Drfit` → `Drift`). [17. Weight Irregularity Check](#17-weight-irregularity-check) 공식 아티클은 동일 enum을 정상 표기로 기재하고 있어 위 표에는 정규 표기를 실었습니다. 다음 동기화 때 "원문과 다르다"고 되돌리지 마십시오.
 | 1-1-2 | 　　└ 층강성 산정방식: `"1 / Story Drift Ratio"`(층간변위비 역수) / `"Story Shear / Story Drift"`(층전단력/층간변위) | `SET_CALCULATION_METHOD.STORY_STIFFNESS_METHOD` | String | `"1 / Story Drift Ratio"` | Optional |
 
 **요청 예시 — `ADDITIONAL` 포함**
