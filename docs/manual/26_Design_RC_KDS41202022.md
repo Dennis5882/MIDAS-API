@@ -5334,7 +5334,9 @@ print("GET:", requests.get(URI, headers=HEADERS).json())   # 최상위 키 "DCRM
 
 ## 32. `DESIGN/RC/KDS-41-20-2022/DCRM-WALL` — 벽체 부재별 철근 설계기준
 
-> **기능:** 벽체(Wall) **ID별**로 철근 설계기준(수직·수평·단부 철근, 경계요소 수평철근, 경계요소 수평/수직 간격, 피복 de/dw)을 개별 지정합니다.
+> **기능:** 벽체(Wall) **ID별**로, 그리고 각 ID 내에서 **층(Story)별**로 철근 설계기준(수직·수평·단부 철근, 경계요소 수평철근, 경계요소 수평/수직 간격, 피복 de/dw)을 개별 지정합니다. 각 벽체 ID는 층별 항목 배열 `"ITEMS"` 를 가지며, 배열의 각 항목이 층 이름(`"STORY"`)과 해당 층의 철근 규격 필드를 함께 포함합니다.
+>
+> ℹ️ **2026-07-21 반영(구조 변경):** 공식 매뉴얼 스키마가 벽체 ID당 단일 철근 규격 객체(플랫 구조: `Assign.{벽체ID}.{VERTICAL_REBAR, HORIZONTAL_REBAR, END_REBAR, BE_HORZ_REBAR, BE_HORZ_SPACE, BE_VERT_SPACE, DE, DW}`)에서, **층별 항목 배열** `Assign.{벽체ID}.ITEMS[]` 구조로 변경되었습니다. `ITEMS` 는 벽체 ID 아래의 새로운 필수 키이며, 배열의 각 항목은 신규 필수 필드 `"STORY"`(문자열)와 함께 기존 철근/간격 필드를 항목 내부에 포함합니다. 기존 플랫 구조는 더 이상 유효하지 않으므로, 이 스키마로 연동 코드를 작성했다면 반드시 갱신이 필요합니다. GET 응답 최상위 키(`"DCRMW"`)와 Active Methods(POST/GET/PUT/DELETE)는 변경되지 않았습니다.
 
 ### Input URI
 
@@ -5364,18 +5366,32 @@ print("GET:", requests.get(URI, headers=HEADERS).json())   # 최상위 키 "DCRM
       "patternProperties": {
         "^[0-9]+$": {
           "type": "object",
-          "description": "벽체 철근 규격·배근",
-          "required": ["VERTICAL_REBAR", "HORIZONTAL_REBAR", "END_REBAR", "BE_HORZ_REBAR", "BE_HORZ_SPACE", "BE_VERT_SPACE"],
+          "description": "벽체별 층(Story)별 배근 지정",
+          "required": ["ITEMS"],
           "additionalProperties": false,
           "properties": {
-            "VERTICAL_REBAR": { "type": "string", "description": "수직 철근 규격 (전체 19종: D4 ~ D57)", "enum": ["D4", "D5", "D6", "D7", "D8"] },
-            "HORIZONTAL_REBAR": { "type": "string", "description": "수평 철근 규격 (전체 19종: D4 ~ D57)", "enum": ["D4", "D5", "D6", "D7", "D8"] },
-            "END_REBAR": { "type": "string", "description": "단부 철근 규격 (전체 19종: D4 ~ D57)", "enum": ["D4", "D5", "D6", "D7", "D8"] },
-            "BE_HORZ_REBAR": { "type": "string", "description": "경계요소 수평 철근 규격 (전체 19종: D4 ~ D57)", "enum": ["D4", "D5", "D6", "D7", "D8"] },
-            "BE_HORZ_SPACE": { "type": "number", "description": "경계요소 수평 철근 간격" },
-            "BE_VERT_SPACE": { "type": "number", "description": "경계요소 수직 철근 간격" },
-            "DE": { "type": "number", "description": "단부 피복 거리 de (m)", "default": 0 },
-            "DW": { "type": "number", "description": "벽면 피복 거리 dw (m)", "default": 0 }
+            "ITEMS": {
+              "type": "array",
+              "description": "해당 벽체 ID의 층별 지정 목록",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "description": "층별 벽체 철근 규격·배근",
+                "required": ["STORY", "VERTICAL_REBAR", "HORIZONTAL_REBAR", "END_REBAR", "BE_HORZ_REBAR", "BE_HORZ_SPACE", "BE_VERT_SPACE"],
+                "additionalProperties": false,
+                "properties": {
+                  "STORY": { "type": "string", "description": "층 이름", "minLength": 1 },
+                  "VERTICAL_REBAR": { "type": "string", "description": "수직 철근 규격 (전체 19종: D4 ~ D57)", "enum": ["D4", "D5", "D6", "D7", "D8"] },
+                  "HORIZONTAL_REBAR": { "type": "string", "description": "수평 철근 규격 (전체 19종: D4 ~ D57)", "enum": ["D4", "D5", "D6", "D7", "D8"] },
+                  "END_REBAR": { "type": "string", "description": "단부 철근 규격 (전체 19종: D4 ~ D57)", "enum": ["D4", "D5", "D6", "D7", "D8"] },
+                  "BE_HORZ_REBAR": { "type": "string", "description": "경계요소 수평 철근 규격 (전체 19종: D4 ~ D57)", "enum": ["D4", "D5", "D6", "D7", "D8"] },
+                  "BE_HORZ_SPACE": { "type": "number", "description": "경계요소 수평 철근 간격" },
+                  "BE_VERT_SPACE": { "type": "number", "description": "경계요소 수직 철근 간격" },
+                  "DE": { "type": "number", "description": "단부 피복 거리 de (m)", "default": 0 },
+                  "DW": { "type": "number", "description": "벽면 피복 거리 dw (m)", "default": 0 }
+                }
+              }
+            }
           }
         }
       }
@@ -5386,17 +5402,26 @@ print("GET:", requests.get(URI, headers=HEADERS).json())   # 최상위 키 "DCRM
 
 ### 파라미터
 
+**Root / Item**
+
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
-|-----|------|-----|------|--------|------|
+| --- | --- | --- | --- | --- | --- |
 | 1 | 벽체 ID 문자열을 키로 갖는 맵 | `"Assign"` | Object | — | **필수** |
-| 2 | 수직 철근 규격 · 19종 (D4 ~ D57) | `"VERTICAL_REBAR"` | String (enum) | — | **필수** |
-| 3 | 수평 철근 규격 · 19종 (D4 ~ D57) | `"HORIZONTAL_REBAR"` | String (enum) | — | **필수** |
-| 4 | 단부 철근 규격 · 19종 (D4 ~ D57) | `"END_REBAR"` | String (enum) | — | **필수** |
-| 5 | 경계요소 수평 철근 규격 · 19종 (D4 ~ D57) | `"BE_HORZ_REBAR"` | String (enum) | — | **필수** |
-| 6 | 경계요소 수평 철근 간격 | `"BE_HORZ_SPACE"` | Number | — | **필수** |
-| 7 | 경계요소 수직 철근 간격 | `"BE_VERT_SPACE"` | Number | — | **필수** |
-| 8 | 단부 피복 거리 de (m) | `"DE"` | Number | `0` | 선택 |
-| 9 | 벽면 피복 거리 dw (m) | `"DW"` | Number | `0` | 선택 |
+| 2 | 해당 벽체 ID의 층별 지정 목록 (min 1) | `"ITEMS"` | Array[Object] | — | **필수** |
+
+**`ITEMS` 배열 항목 (층별 배근 지정)**
+
+| No. | 설명 | Key | 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| a | 층 이름 (최소 1자) | `"STORY"` | String | — | **필수** |
+| b | 수직 철근 규격 · 19종 (D4 ~ D57) | `"VERTICAL_REBAR"` | String (enum) | — | **필수** |
+| c | 수평 철근 규격 · 19종 (D4 ~ D57) | `"HORIZONTAL_REBAR"` | String (enum) | — | **필수** |
+| d | 단부 철근 규격 · 19종 (D4 ~ D57) | `"END_REBAR"` | String (enum) | — | **필수** |
+| e | 경계요소 수평 철근 규격 · 19종 (D4 ~ D57) | `"BE_HORZ_REBAR"` | String (enum) | — | **필수** |
+| f | 경계요소 수평 철근 간격 | `"BE_HORZ_SPACE"` | Number | — | **필수** |
+| g | 경계요소 수직 철근 간격 | `"BE_VERT_SPACE"` | Number | — | **필수** |
+| h | 단부 피복 거리 de (m) | `"DE"` | Number | `0` | 선택 |
+| i | 벽면 피복 거리 dw (m) | `"DW"` | Number | `0` | 선택 |
 
 ### Request / Response JSON
 
@@ -5406,14 +5431,30 @@ print("GET:", requests.get(URI, headers=HEADERS).json())   # 최상위 키 "DCRM
 {
   "Assign": {
     "976": {
-      "VERTICAL_REBAR": "D4",
-      "HORIZONTAL_REBAR": "D4",
-      "END_REBAR": "D4",
-      "BE_HORZ_REBAR": "D4",
-      "BE_HORZ_SPACE": 0.2,
-      "BE_VERT_SPACE": 0.2,
-      "DE": 0.05,
-      "DW": 0.05
+      "ITEMS": [
+        {
+          "STORY": "1F",
+          "VERTICAL_REBAR": "D13",
+          "HORIZONTAL_REBAR": "D10",
+          "END_REBAR": "D13",
+          "BE_HORZ_REBAR": "D10",
+          "BE_HORZ_SPACE": 0.2,
+          "BE_VERT_SPACE": 0.1,
+          "DE": 0.05,
+          "DW": 0.05
+        },
+        {
+          "STORY": "B1",
+          "VERTICAL_REBAR": "D4",
+          "HORIZONTAL_REBAR": "D10",
+          "END_REBAR": "D5",
+          "BE_HORZ_REBAR": "D13",
+          "BE_HORZ_SPACE": 0.2,
+          "BE_VERT_SPACE": 0.2,
+          "DE": 0.05,
+          "DW": 0.05
+        }
+      ]
     }
   }
 }
@@ -5425,14 +5466,30 @@ print("GET:", requests.get(URI, headers=HEADERS).json())   # 최상위 키 "DCRM
 {
   "DCRMW": {
     "976": {
-      "VERTICAL_REBAR": "D4",
-      "HORIZONTAL_REBAR": "D4",
-      "END_REBAR": "D4",
-      "BE_HORZ_REBAR": "D4",
-      "BE_HORZ_SPACE": 0.2,
-      "BE_VERT_SPACE": 0.2,
-      "DE": 0.05,
-      "DW": 0.05
+      "ITEMS": [
+        {
+          "STORY": "1F",
+          "VERTICAL_REBAR": "D13",
+          "HORIZONTAL_REBAR": "D10",
+          "END_REBAR": "D13",
+          "BE_HORZ_REBAR": "D10",
+          "BE_HORZ_SPACE": 0.2,
+          "BE_VERT_SPACE": 0.1,
+          "DE": 0.05,
+          "DW": 0.05
+        },
+        {
+          "STORY": "B1",
+          "VERTICAL_REBAR": "D4",
+          "HORIZONTAL_REBAR": "D10",
+          "END_REBAR": "D5",
+          "BE_HORZ_REBAR": "D13",
+          "BE_HORZ_SPACE": 0.2,
+          "BE_VERT_SPACE": 0.2,
+          "DE": 0.05,
+          "DW": 0.05
+        }
+      ]
     }
   }
 }
@@ -5447,17 +5504,32 @@ BASE_URL = "https://moa-engineers.midasit.com:443/gen"
 HEADERS = {"MAPI-Key": "<발급된 키>", "Content-Type": "application/json"}
 URI = f"{BASE_URL}/DESIGN/RC/KDS-41-20-2022/DCRM-WALL"
 
-# 벽체 976 철근 기준 지정 (POST)
+# 벽체 976, 층(1F/B1)별 철근 기준 지정 (POST) — ITEMS[] 배열, 항목마다 STORY 포함
 payload = {
     "Assign": {
         "976": {
-            "VERTICAL_REBAR": "D13",     # 수직 철근
-            "HORIZONTAL_REBAR": "D10",   # 수평 철근
-            "END_REBAR": "D13",          # 단부 철근
-            "BE_HORZ_REBAR": "D10",      # 경계요소 수평 철근
-            "BE_HORZ_SPACE": 0.2,        # 경계요소 수평 간격
-            "BE_VERT_SPACE": 0.1,        # 경계요소 수직 간격
-            "DE": 0.05, "DW": 0.05,
+            "ITEMS": [
+                {
+                    "STORY": "1F",
+                    "VERTICAL_REBAR": "D13",     # 수직 철근
+                    "HORIZONTAL_REBAR": "D10",   # 수평 철근
+                    "END_REBAR": "D13",          # 단부 철근
+                    "BE_HORZ_REBAR": "D10",      # 경계요소 수평 철근
+                    "BE_HORZ_SPACE": 0.2,        # 경계요소 수평 간격
+                    "BE_VERT_SPACE": 0.1,        # 경계요소 수직 간격
+                    "DE": 0.05, "DW": 0.05,
+                },
+                {
+                    "STORY": "B1",
+                    "VERTICAL_REBAR": "D4",
+                    "HORIZONTAL_REBAR": "D10",
+                    "END_REBAR": "D5",
+                    "BE_HORZ_REBAR": "D13",
+                    "BE_HORZ_SPACE": 0.2,
+                    "BE_VERT_SPACE": 0.2,
+                    "DE": 0.05, "DW": 0.05,
+                },
+            ]
         }
     }
 }
@@ -6044,6 +6116,7 @@ print("GET:", requests.get(URI, headers=HEADERS).json())   # 최상위 키 "DCRE
                   "BAR_SECTOR_I": {
                     "type": "object",
                     "description": "I단 구간 철근",
+                    "required": ["MAIN_BAR_TOP", "MAIN_BAR_BOT", "SHEAR_BAR"],
                     "properties": {
                       "MAIN_BAR_TOP": {
                         "type": "object",
@@ -6142,12 +6215,12 @@ print("GET:", requests.get(URI, headers=HEADERS).json())   # 최상위 키 "DCRE
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| a | 상단 주철근 (레이어별) | `"MAIN_BAR_TOP"` | Object | — | 선택 |
-| b | 하단 주철근 (레이어별) | `"MAIN_BAR_BOT"` | Object | — | 선택 |
+| a | 상단 주철근 (레이어별) | `"MAIN_BAR_TOP"` | Object | — | **필수** |
+| b | 하단 주철근 (레이어별) | `"MAIN_BAR_BOT"` | Object | — | **필수** |
 | a/b→ | 레이어1 (필수) / 레이어2 (선택) | `"LAYER1"` / `"LAYER2"` | Object | — | LAYER1 **필수** |
 | — | 레이어 내 철근 규격 · 19종 (D4 ~ D57) | `"NAME"` | String (enum) | — | **필수** |
 | — | 레이어 내 철근 개수 | `"NUM"` | Integer | — | **필수** |
-| c | 스터럽(전단철근) | `"SHEAR_BAR"` | Object | — | 선택 |
+| c | 스터럽(전단철근) | `"SHEAR_BAR"` | Object | — | **필수** |
 | c→ | 스터럽 규격 / 다리 수 / 간격 | `"NAME"` / `"LEG"` / `"DIST"` | String / Integer / Number | — | **필수** |
 | d | 표피철근(skin bar, 있으면 사용) | `"SKIN_BAR"` | Object | — | 선택 |
 | d→ | 표피철근 규격 / 개수 | `"NAME"` / `"NUM"` | String / Integer | — | **필수** |
@@ -6821,7 +6894,7 @@ print("GET:", requests.get(URI, headers=HEADERS).json())   # 최상위 키 "REBW
                     "required": ["NAME", "NUM", "ROW"],
                     "properties": {
                       "NAME": { "type": "string", "description": "주철근 규격 (전체 19종: D4 ~ D57)", "enum": ["D4", "D5", "D6", "D7", "D8"] },
-                      "NUM": { "type": "integer", "description": "철근 총 개수" },
+                      "NUM": { "type": "integer", "description": "철근 총 개수", "minItems": 4 },
                       "ROW": { "type": "integer", "description": "철근 열(row) 수" }
                     }
                   },
@@ -6885,7 +6958,7 @@ print("GET:", requests.get(URI, headers=HEADERS).json())   # 최상위 키 "REBW
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
 | a | 주철근 규격 · 19종 (D4 ~ D57) | `"NAME"` | String (enum) | — | **필수** |
-| b | 철근 총 개수 | `"NUM"` | Integer | — | **필수** |
+| b | 철근 총 개수 (min 4) | `"NUM"` | Integer | — | **필수** |
 | c | 열(row) 수 | `"ROW"` | Integer | — | **필수** |
 
 **`SHEAR_BAR_END` / `SHEAR_BAR_CEN` 객체 (동일 구조)**

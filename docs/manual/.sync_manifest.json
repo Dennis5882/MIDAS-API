@@ -4,7 +4,7 @@
   "33016922742937": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/33016922742937-MIDAS-API-Online-Manual",
    "title": "MIDAS API Online Manual",
-   "updated_at": "2026-07-14T10:12:02Z"
+   "updated_at": "2026-07-24T07:59:01Z"
   },
   "35409287717657": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35409287717657-Main-Control-Data",
@@ -1989,17 +1989,17 @@
   "49511531295257": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49511531295257-Story-Drift-X-Y-Combine-Story-Result-Table",
    "title": "Story Drift(X,Y,Combine) - Story Result Table",
-   "updated_at": "2025-12-23T08:30:10Z"
+   "updated_at": "2026-07-24T05:44:20Z"
   },
   "49511597474713": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49511597474713-Story-Displacement-X-Y-Combined-Story-Result-Table",
    "title": "Story Displacement(X,Y,Combined) - Story Result Table",
-   "updated_at": "2025-11-06T06:27:22Z"
+   "updated_at": "2026-07-24T02:09:38Z"
   },
   "49511717907097": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49511717907097-Story-Shear-Force-R-S-Analysis-Story-Result-Table",
    "title": "Story Shear Force(R.S.Analysis) - Story Result Table",
-   "updated_at": "2025-11-06T01:50:36Z"
+   "updated_at": "2026-07-24T06:38:49Z"
   },
   "49511816211737": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49511816211737-Story-Shear-Force-Coefficient-R-S-Analysis-Story-Result-Table",
@@ -2009,57 +2009,57 @@
   "49511927443481": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49511927443481-Story-Mode-Shape-Story-Result-Table",
    "title": "Story Mode Shape - Story Result Table",
-   "updated_at": "2025-11-06T06:29:40Z"
+   "updated_at": "2026-07-24T06:08:28Z"
   },
   "49511990423833": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49511990423833-Story-Eccentricity-Story-Result-Table",
    "title": "Story Eccentricity - Story Result Table",
-   "updated_at": "2025-11-06T02:04:01Z"
+   "updated_at": "2026-07-24T06:01:05Z"
   },
   "49512035391641": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49512035391641-Overturning-Moment-Story-Result-Table",
    "title": "Overturning Moment - Story Result Table",
-   "updated_at": "2025-11-06T06:50:45Z"
+   "updated_at": "2026-07-22T06:48:43Z"
   },
   "49512116327065": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49512116327065-Story-Axial-Force-Sum-Story-Result-Table",
    "title": "Story Axial Force Sum - Story Result Table",
-   "updated_at": "2025-11-06T06:34:21Z"
+   "updated_at": "2026-07-24T02:13:40Z"
   },
   "49512411760665": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49512411760665-Story-Shear-Force-Ratio-Story-Result-Table",
    "title": "Story Shear Force Ratio - Story Result Table",
-   "updated_at": "2025-11-06T02:01:19Z"
+   "updated_at": "2026-07-24T06:33:00Z"
   },
   "49512818237849": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49512818237849-Story-Stability-Coefficient-Story-Result-Table",
    "title": "Story Stability Coefficient - Story Result Table",
-   "updated_at": "2025-11-06T06:53:06Z"
+   "updated_at": "2026-07-24T06:52:29Z"
   },
   "49512900149017": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49512900149017-Torsional-Irregularity-Check-Story-Result-Table",
    "title": "Torsional Irregularity Check - Story Result Table",
-   "updated_at": "2026-06-08T05:03:14Z"
+   "updated_at": "2026-07-24T07:07:14Z"
   },
   "49513005384089": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49513005384089-Torsional-Amplification-Factor-Story-Result-Table",
    "title": "Torsional Amplification Factor - Story Result Table",
-   "updated_at": "2025-11-06T06:55:08Z"
+   "updated_at": "2026-07-24T07:02:33Z"
   },
   "49513107644057": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49513107644057-Stiffness-Irregularity-Check-Soft-Story-Story-Result-Table",
    "title": "Stiffness Irregularity Check (Soft Story) - Story Result Table",
-   "updated_at": "2025-11-07T00:50:29Z"
+   "updated_at": "2026-07-22T07:30:02Z"
   },
   "49513198751385": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49513198751385-Capacity-Irregularity-Check-Weak-Story-Story-Result-Table",
    "title": "Capacity Irregularity Check(Weak Story) - Story Result Table",
-   "updated_at": "2025-11-06T02:11:02Z"
+   "updated_at": "2026-07-22T06:46:13Z"
   },
   "49513284077721": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49513284077721-Criteria-for-Regularity-in-Plan-Story-Result-Table",
    "title": "Criteria for Regularity in Plan - Story Result Table",
-   "updated_at": "2025-11-06T02:11:52Z"
+   "updated_at": "2026-07-22T06:49:15Z"
   },
   "49513305580569": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49513305580569-Ultimate-Story-Shear-For-Check-Story-Result-Table",
@@ -2069,7 +2069,7 @@
   "49513398732953": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49513398732953-Wall-Force-Analysis-Result-Table",
    "title": "Wall Force - Analysis Result Table",
-   "updated_at": "2025-11-04T00:15:05Z"
+   "updated_at": "2026-07-22T07:19:09Z"
   },
   "49513466793113": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49513466793113-Story-Data",
@@ -2114,17 +2114,17 @@
   "49513980544793": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49513980544793-Modify-Column-Rebar-Data",
    "title": "Modify Column Rebar Data",
-   "updated_at": "2026-06-25T01:45:32Z"
+   "updated_at": "2026-07-21T02:12:24Z"
   },
   "49513985245849": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49513985245849-Modify-Beam-Rebar-Data",
    "title": "Modify Beam Rebar Data",
-   "updated_at": "2026-06-25T08:20:32Z"
+   "updated_at": "2026-07-21T02:05:12Z"
   },
   "49514033006745": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49514033006745-Modify-Wall-Rebar-Data",
    "title": "Modify Wall Rebar Data",
-   "updated_at": "2026-06-25T08:20:37Z"
+   "updated_at": "2026-07-21T02:20:38Z"
   },
   "49514136996889": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49514136996889-Story-Mass-Summary",
@@ -2144,17 +2144,17 @@
   "49514295460889": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49514295460889-Concrete-Design-Beam-Design-Forces",
    "title": "Concrete Design - Beam Design Forces",
-   "updated_at": "2025-11-04T00:18:18Z"
+   "updated_at": "2026-07-24T07:43:07Z"
   },
   "49514320078489": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49514320078489-Concrete-Design-Column-Design-Forces",
    "title": "Concrete Design - Column Design Forces",
-   "updated_at": "2025-11-04T00:18:19Z"
+   "updated_at": "2026-07-24T07:57:52Z"
   },
   "49514395318041": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49514395318041-Concrete-Design-Brace-Design-Forces",
    "title": "Concrete Design - Brace Design Forces",
-   "updated_at": "2025-11-04T00:18:18Z"
+   "updated_at": "2026-07-24T07:50:24Z"
   },
   "49514433321881": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49514433321881-Concrete-Design-Wall-Design-Forces",
@@ -2169,7 +2169,7 @@
   "49514560567961": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49514560567961-SRC-Design-SRC-Beam-Design-Forces",
    "title": "SRC Design - SRC Beam Design Forces",
-   "updated_at": "2025-11-04T00:18:19Z"
+   "updated_at": "2026-07-24T08:02:16Z"
   },
   "49514609393049": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49514609393049-SRC-Design-SRC-Column-Design-Forces",
@@ -2179,12 +2179,12 @@
   "49514621265305": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49514621265305-Cold-Formed-Design-Cold-Formed-Steel-Member-Design-Forces",
    "title": "Cold Formed Design - Cold Formed Steel Member Design Forces",
-   "updated_at": "2025-11-04T00:18:17Z"
+   "updated_at": "2026-07-24T07:54:17Z"
   },
   "49514653408793": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49514653408793-Story-Calc-OPT",
    "title": "Story Calc OPT",
-   "updated_at": "2025-11-04T00:19:06Z"
+   "updated_at": "2026-07-21T02:49:14Z"
   },
   "49514705474457": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49514705474457-Story-Check-Parameter",
@@ -2199,7 +2199,7 @@
   "49514773501721": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49514773501721-Story-Properties",
    "title": "Story Properties",
-   "updated_at": "2025-11-04T00:19:05Z"
+   "updated_at": "2026-07-21T04:40:31Z"
   },
   "49514964272665": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49514964272665-Member-Assignment",
@@ -2229,7 +2229,7 @@
   "52149417728665": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/52149417728665-Design-Steel-Code",
    "title": "Design Steel Code",
-   "updated_at": "2025-11-05T03:12:45Z"
+   "updated_at": "2026-07-21T01:25:33Z"
   },
   "56371398681241": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/56371398681241-Time-History-Output-Option",
@@ -2869,7 +2869,7 @@
   "57567874715289": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/57567874715289-DESIGN-RC-KDS-41-20-2022-DCRM-WALL-Design-Criteria-for-Rebars-by-Wall-Member",
    "title": "DESIGN/RC/KDS-41-20-2022/DCRM-WALL : Design Criteria for Rebars by Wall Member",
-   "updated_at": "2026-05-08T04:15:21Z"
+   "updated_at": "2026-07-21T08:15:48Z"
   },
   "57568269363737": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/57568269363737-Design-Code",
@@ -2909,7 +2909,7 @@
   "57711427405209": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/57711427405209-KDS-41-20-2022",
    "title": "KDS 41 20 : 2022",
-   "updated_at": "2026-07-03T07:17:47Z"
+   "updated_at": "2026-07-21T00:51:06Z"
   },
   "57711471216537": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/57711471216537-AIK-SRC2K",
@@ -3094,7 +3094,7 @@
   "58746274895769": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/58746274895769-Weight-Irregularity-Check-Story-Result-Table",
    "title": "Weight Irregularity Check - Story Result Table",
-   "updated_at": "2026-06-10T05:59:25Z"
+   "updated_at": "2026-07-24T07:14:15Z"
   },
   "58908673370521": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/58908673370521-Static-Wind-Load-KDS-41-12-2022",
@@ -3179,7 +3179,7 @@
   "59358972353817": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/59358972353817-Modify-Brace-Rebar-Data",
    "title": "Modify Brace Rebar Data",
-   "updated_at": "2026-06-25T08:20:35Z"
+   "updated_at": "2026-07-21T02:29:47Z"
   },
   "59358984494233": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/59358984494233-Modify-Beam-Rebar-Data",

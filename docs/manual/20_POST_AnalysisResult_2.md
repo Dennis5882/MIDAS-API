@@ -9,7 +9,7 @@
 > **인증 헤더:** `MAPI-Key: <발급된 키>`  
 > **출처:** [MIDAS API Online Manual](https://support.midasuser.com/hc/en-us/articles/33016922742937)
 
-이 파트는 해석 결과 테이블 중 **판(Plate)·평면응력(Plane Stress)·평면변형률(Plane Strain)·축대칭(Axisymmetric)·솔리드(Solid)·링크(Link)·모드(Mode)·텐던(Tendon)·시공단계 합성단면(Composite Section for C.S.)** 결과를 다룹니다. 모든 엔드포인트는 **공통 URI `{base url}/post/TABLE`** 를 사용하며 `POST` 메서드만 지원합니다. 요청 바디의 `"Argument"` 객체에서 `TABLE_TYPE` 값으로 테이블 종류를 결정합니다.
+이 파트는 해석 결과 테이블 중 **판(Plate)·평면응력(Plane Stress)·평면변형률(Plane Strain)·축대칭(Axisymmetric)·솔리드(Solid)·링크(Link)·모드(Mode)·텐던(Tendon)·시공단계 합성단면(Composite Section for C.S.)·벽체(Wall)** 결과를 다룹니다. 모든 엔드포인트는 **공통 URI `{base url}/post/TABLE`** 를 사용하며 `POST` 메서드만 지원합니다. 요청 바디의 `"Argument"` 객체에서 `TABLE_TYPE` 값으로 테이블 종류를 결정합니다.
 
 ---
 
@@ -27,7 +27,7 @@
 
 ### 공통 Request 구조 및 파라미터
 
-전처리 테이블(18장)보다 확장된 구조로, `UNIT`·`STYLES`·`COMPONENTS`·`NODE_ELEMS`·`LOAD_CASE_NAMES`·`OPT_CS`·`STAGE_STEP`를 지원합니다. **아래 파라미터 표는 본 파트의 38개 테이블 전체에 공통 적용**되며, 각 절에서는 `TABLE_TYPE` enum과 응답 `HEAD` 열, 대표 예시만 별도 기술합니다.
+전처리 테이블(18장)보다 확장된 구조로, `UNIT`·`STYLES`·`COMPONENTS`·`NODE_ELEMS`·`LOAD_CASE_NAMES`·`OPT_CS`·`STAGE_STEP`를 지원합니다. **아래 파라미터 표는 본 파트의 39개 테이블 전체에 공통 적용**되며, 각 절에서는 `TABLE_TYPE` enum과 응답 `HEAD` 열, 대표 예시만 별도 기술합니다.
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
@@ -3075,6 +3075,100 @@ head = table.get("HEAD", [])
 for row in table.get("DATA", []):
     d = dict(zip(head, row))
     print(f"  Elem {d['Elem']} 단면{d['SectionPart']}: Axial={d['Axial']}, Moment-y={d['Moment-y']}")
+```
+
+---
+
+## 39. Wall Force
+
+> **기능:** 벽체(Wall) 요소의 부재력/모멘트를 층(Story)·레벨(top/bot)별로 추출합니다. 일반 Plate Force와 달리 `STORY_NAMES`로 층을 지정할 수 있고, 응답에 상/하단(Part: `top`/`bot`) 값이 함께 제공됩니다.
+>
+> ℹ️ **2026-07-22 신규 반영:** 공식 매뉴얼에서 이번에 확인된 항목으로, 이전 버전 문서에는 누락되어 있었습니다.
+
+### `TABLE_TYPE`
+
+| 값 | 설명 |
+| --- | --- |
+| `"WALL_FORCE_MOMENT"` | 벽체 부재력/모멘트 (층·상하단별) |
+
+### Response HEAD
+
+`["Index", "Story", "Level", "Wall", "Load", "Part", "Axial", "Shear-y", "Shear-z", "Torsion", "Moment-y", "Moment-z", "Part", "Axial", "Shear-y", "Shear-z", "Torsion", "Moment-y", "Moment-z"]`
+
+> HEAD의 `Part`·`Axial`·... 열이 두 번 반복되는 것은 각각 상단(`top`)·하단(`bot`) 값을 의미합니다.
+
+### 전용 파라미터
+
+공통 파라미터(`TABLE_NAME`/`TABLE_TYPE`/`EXPORT_PATH`/`UNIT`/`STYLES`/`COMPONENTS`/`NODE_ELEMS`/`LOAD_CASE_NAMES`) 외에 아래 항목을 추가로 지원합니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 단면 위치 | `"SECT_POSITION"` | String | — | Optional |
+| 2 | 결과 파트(top/bot 등) | `"PARTS"` | Array [String] | — | Optional |
+| 3 | 층 이름 지정 | `"STORY_NAMES"` | Array [String] | All | Optional |
+
+### Request / Response JSON
+
+**POST Request Body**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "WALL_FORCE_MOMENT",
+    "TABLE_TYPE": "WALL_FORCE_MOMENT",
+    "UNIT": { "FORCE": "kN", "DIST": "m" },
+    "STYLES": { "FORMAT": "Fixed", "PLACE": 3 },
+    "NODE_ELEMS": { "KEYS": [1, 2, 3] },
+    "LOAD_CASE_NAMES": ["gLCB6(CB)"],
+    "STORY_NAMES": ["1F"],
+    "COMPONENTS": ["Story", "Level", "Wall", "Load", "Part", "Axial", "Shear-y", "Shear-z", "Torsion", "Moment-y", "Moment-z", "Part", "Axial", "Shear-y", "Shear-z", "Torsion", "Moment-y", "Moment-z"]
+  }
+}
+```
+
+**POST Response Body**
+
+```json
+{
+  "WALL_FORCE_MOMENT": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "Story", "Level", "Wall", "Load", "Part", "Axial", "Shear-y", "Shear-z", "Torsion", "Moment-y", "Moment-z", "Part", "Axial", "Shear-y", "Shear-z", "Torsion", "Moment-y", "Moment-z"],
+    "DATA": [
+      ["1", "1F", "0.000", "1", "gLCB6", "top", "-8546.789", "0.000", "-57.818", "0.000", "114.403", "0.000", "bot", "-8750.140", "0.000", "-57.818", "0.000", "-174.688", "0.000"]
+    ]
+  }
+}
+```
+
+### Python Example
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/gen"   # Gen NX
+HEADERS = {
+    "Content-Type": "application/json",
+    "MAPI-Key": "YOUR_MAPI_KEY"
+}
+
+# ── POST: 벽체 부재력(층별) 추출 ───────────────────────────────────
+payload = {
+    "Argument": {
+        "TABLE_NAME": "WALL_FORCE_MOMENT",
+        "TABLE_TYPE": "WALL_FORCE_MOMENT",
+        "UNIT": {"FORCE": "kN", "DIST": "m"},
+        "NODE_ELEMS": {"KEYS": [1, 2, 3]},
+        "LOAD_CASE_NAMES": ["gLCB6(CB)"],
+        "STORY_NAMES": ["1F"]
+    }
+}
+resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
+table = resp.json().get("WALL_FORCE_MOMENT", {})
+head = table.get("HEAD", [])
+for row in table.get("DATA", []):
+    d = dict(zip(head, row))
+    print(f"  Wall {d['Wall']} ({d['Story']}): Axial={d['Axial']}")
 ```
 
 ---

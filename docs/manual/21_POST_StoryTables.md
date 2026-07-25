@@ -137,6 +137,60 @@
 ["Index", "Load Case", "Story", "Story Height", "P-Delta Incremental Factor", "Allowable Story Drift Ratio", "Maximum Drift of All Vertical Elements/Shear-Weighted Average Drift of Vertical Elements", "Maximum Drift of All Vertical Elements/Node", "Maximum Drift of All Vertical Elements/Story Drift", "Maximum Drift of All Vertical Elements/Modified Drift", "Maximum Drift of All Vertical Elements/Story Drift Ratio", "Drift at the Center of Mass/Remark", "Drift at the Center of Mass/Story Drift", "Drift at the Center of Mass/Modified Drift", "Drift at the Center of Mass/Drift Factor", "Drift at the Center of Mass/Story Drift Ratio", "Average Drift of Vertical Elements/Remark", "Average Drift of Vertical Elements/Story Drift", "Average Drift of Vertical Elements/Modified Drift", "Average Drift of Vertical Elements/Drift Factor", "Average Drift of Vertical Elements/Story Drift Ratio", "Drift of a Vertical Line on Selected Node/Remark", "Drift of a Vertical Line on Selected Node/Story Drift", "Drift of a Vertical Line on Selected Node/Modified Drift", "Drift of a Vertical Line on Selected Node/Drift Factor", "Drift of a Vertical Line on Selected Node/Story Drift Ratio", "Average Drift of Vertical Lines on Selected Nodes/Remark", "Average Drift of Vertical Lines on Selected Nodes/Story Drift", "Average Drift of Vertical Lines on Selected Nodes/Modified Drift", "Average Drift of Vertical Lines on Selected Nodes/Drift Factor", "Average Drift of Vertical Lines on Selected Nodes/Story Drift Ratio"]
 ```
 
+### `ADDITIONAL` — 층간변위 세부 설정 (2026-07-24 공식 반영)
+
+> ℹ️ 공식 매뉴얼에 `"ADDITIONAL"` 요청 객체가 추가로 문서화되어 있어 반영합니다. 층간변위 허용비 판정 방식(Method 1/2)과 조합(Comb) 테이블의 추가 산출 방식을 세부 제어합니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 세부 설정 객체 | `"ADDITIONAL"` | Object | — | Optional |
+| 1-1 | └ 층간변위비 판정 파라미터 | `ADDITIONAL.SET_STORY_DRIFT_PARAMS` | Object | — | Optional |
+| 1-1-1 | 　　└ 판정 방식: `true`=Method 1(응답수정계수), `false`=Method 2(변위증폭계수) | `SET_STORY_DRIFT_PARAMS.RESPONSE_MOD_FACTOR_CHECK` | Boolean | `false` | Optional |
+| 1-1-2 | 　　└ (Method 1) 응답수정계수 값 — `RESPONSE_MOD_FACTOR_CHECK: true`일 때만 | `SET_STORY_DRIFT_PARAMS.RESPONSE_MOD_FACTOR_VALUE` | Number | `1` | Optional |
+| 1-1-3 | 　　└ (Method 2) 변위증폭계수(Cd) — `RESPONSE_MOD_FACTOR_CHECK: false`일 때만 | `SET_STORY_DRIFT_PARAMS.DEFLECTION_AMPL_FACTOR_VALUE` | Number | `1` | Optional |
+| 1-1-4 | 　　└ (Method 2) 중요도계수 | `SET_STORY_DRIFT_PARAMS.IMPORTANCE_FACTOR_VALUE` | Number | `1.5` | Optional |
+| 1-1-5 | 　　└ 스케일 계수 | `SET_STORY_DRIFT_PARAMS.SCALE_FACTOR_VALUE` | Number | `1` | Optional |
+| 1-1-6 | 　　└ 허용 층간변위비 | `SET_STORY_DRIFT_PARAMS.ALLOWABLE_RATIO` | Number | `0.015` | Optional |
+| 1-1-7 | 　　└ P-Delta 검토용 수직하중 조합 목록 | `SET_STORY_DRIFT_PARAMS.LCOMS` | Array [Object] | — | Optional |
+| 1-1-7-1 | 　　　　└ 하중케이스명 / 계수 | `LCOMS[].NAME` / `LCOMS[].FACTOR` | String / Number | — | Optional |
+| 1-1-8 | 　　└ Beta 값 설정 | `SET_STORY_DRIFT_PARAMS.BETA` | Object | — | Optional |
+| 1-1-8-1 | 　　　　└ 방식: `"FIXED"`(1.0 고정) / `"USER"`(층별 직접 입력) | `BETA.FIX_USER_CHECK` | String | `"FIXED"` | Optional |
+| 1-1-8-2 | 　　　　└ 적용 시작/종료 층 — `FIX_USER_CHECK: "USER"`일 때만 | `BETA.NAME_FROM` / `BETA.NAME_TO` | String | — | Optional |
+| 1-1-8-3 | 　　　　└ 사용자 지정 Beta 값 — `FIX_USER_CHECK: "USER"`일 때만 | `BETA.VALUE` | Number | `0` | Optional |
+| 1-2 | └ (`STORY_DRIFT_COMB` 전용) 추가 산출 방식 선택 | `ADDITIONAL.SET_STORY_DRIFT_CALCULATION_METHOD` | Object | `DRIFT_AT_THE_CENTER_OF_MASS` | Optional |
+| 1-2-1 | 　　└ 질량중심 변위 | `SET_STORY_DRIFT_CALCULATION_METHOD.DRIFT_AT_THE_CENTER_OF_MASS` | Boolean | `true` | Optional |
+| 1-2-2 | 　　└ 수직요소 평균변위 | `SET_STORY_DRIFT_CALCULATION_METHOD.AVERAGE_DRIFT_OF_VERTICAL_ELEMENTS` | Boolean | `false` | Optional |
+| 1-2-3 | 　　└ 선택 절점 기준 수직선 변위 (X_DIR/Y_DIR/COMBINED **Required**) | `SET_STORY_DRIFT_CALCULATION_METHOD.DRIFT_OF_A_VERTICAL_LINE_ON_SELECTED_NODE` | Object | — | Optional |
+| 1-2-4 | 　　└ 선택 절점(복수) 기준 수직선 평균변위 (X_DIR/Y_DIR/COMBINED 배열, **Required**) | `SET_STORY_DRIFT_CALCULATION_METHOD.AVERAGE_DRIFT_OF_VERTICAL_LINES_ON_SELECTED_NODES` | Array [Object] | — | Optional |
+| 1-2-5 | 　　└ 전단력 가중 평균변위 | `SET_STORY_DRIFT_CALCULATION_METHOD.SHEAR_WEIGHTED_AVERAGE_DRIFT_OF_VERTICAL_ELEMENTS` | Boolean | `false` | Optional |
+
+**요청 예시 — `ADDITIONAL` 포함 (Comb)**
+
+```json
+{
+  "Argument": {
+    "TABLE_TYPE": "STORY_DRIFT_COMB",
+    "LOAD_CASE_NAMES": ["RX(RS)", "RY(RS)"],
+    "STYLES": { "FORMAT": "Fixed", "PLACE": 4 },
+    "ADDITIONAL": {
+      "SET_STORY_DRIFT_PARAMS": {
+        "RESPONSE_MOD_FACTOR_CHECK": true,
+        "RESPONSE_MOD_FACTOR_VALUE": 3,
+        "SCALE_FACTOR_VALUE": 4.0,
+        "ALLOWABLE_RATIO": 0.03
+      },
+      "SET_STORY_DRIFT_CALCULATION_METHOD": {
+        "DRIFT_AT_THE_CENTER_OF_MASS": true,
+        "AVERAGE_DRIFT_OF_VERTICAL_ELEMENTS": true,
+        "DRIFT_OF_A_VERTICAL_LINE_ON_SELECTED_NODE": { "X_DIR": 109 },
+        "AVERAGE_DRIFT_OF_VERTICAL_LINES_ON_SELECTED_NODES": { "X_DIR": [262, 260] },
+        "SHEAR_WEIGHTED_AVERAGE_DRIFT_OF_VERTICAL_ELEMENTS": true
+      }
+    }
+  }
+}
+```
+
 ### Request / Response JSON
 
 **POST Request Body — X방향 층간변위**
@@ -487,6 +541,28 @@ for row in table.get("DATA", []):
 ["Index", "Story", "Level", "X", "Y", "Mode", "UX", "UY", "UZ", "RX", "RY", "RZ"]
 ```
 
+### 전용 파라미터 — 모드 필터 (2026-07-24 공식 반영)
+
+> ℹ️ 공식 매뉴얼에 조회할 모드를 선택적으로 필터링하는 `"MODES"` 요청 배열이 문서화되어 있어 반영합니다. 지정하지 않으면 전체 모드가 반환됩니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 조회할 모드 번호 목록 (`"Mode" + 번호`, 예: `"Mode1"`) | `"MODES"` | Array [String] | All | Optional |
+
+**요청 예시 — `MODES` 포함**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "STORY_MODE_SHAPE",
+    "TABLE_TYPE": "STORY_MODE_SHAPE",
+    "UNIT": { "FORCE": "kN", "DIST": "m" },
+    "STYLES": { "FORMAT": "Fixed", "PLACE": 6 },
+    "MODES": ["Mode1", "Mode2"]
+  }
+}
+```
+
 ### Request / Response JSON
 
 **POST Request Body**
@@ -569,6 +645,53 @@ for row in table.get("DATA", []):
 ["Story", "Level", "Load", "Type", "No", "Angle1", "Force1", "Ratio1", "Angle2", "Force2", "Ratio2"]
 ```
 
+응답 본문에는 위 `DATA` 외에도 부재유형별 층전단력 합계를 정리한 `"SUB_TABLES"` 배열이 함께 포함됩니다. 자세한 내용은 아래 `SUB_TABLES` 항목을 참고하십시오.
+
+### `ADDITIONAL` — 각도 및 대상 층 설정 (2026-07-24 공식 반영)
+
+> ℹ️ 공식 매뉴얼에 대상 층을 지정하는 `"STORY_NAMES"` 요청 배열과 `"ADDITIONAL"` 요청 객체가 추가로 문서화되어 있어 반영합니다. `ADDITIONAL.SET_ANGLE.ANGLE`은 Angle1/Angle2 산정 기준각으로, 이 테이블에서는 **필수 입력(Required)** 입니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 대상 층 이름 목록 | `"STORY_NAMES"` | Array [String] | All | Optional |
+| 2 | 세부 설정 객체 | `"ADDITIONAL"` | Object | — | Optional |
+| 2-1 | └ 각도 설정 | `ADDITIONAL.SET_ANGLE` | Object | — | **Required** |
+| 2-1-1 | 　　└ Angle1 입력값 (Angle2 = Angle1 + 90°) | `SET_ANGLE.ANGLE` | Number | — | **Required** |
+
+**요청 예시 — `STORY_NAMES` / `ADDITIONAL` 포함**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "Example",
+    "TABLE_TYPE": "STORY_SHEAR_FORCE_RATIO",
+    "UNIT": { "FORCE": "kN", "DIST": "m" },
+    "STYLES": { "FORMAT": "Fixed", "PLACE": 12 },
+    "LOAD_CASE_NAMES": ["EX(ST)"],
+    "STORY_NAMES": ["2F"],
+    "ADDITIONAL": {
+      "SET_ANGLE": { "ANGLE": 33.5 }
+    }
+  }
+}
+```
+
+### `SUB_TABLES` — 층전단력 합계 하위 테이블 (2026-07-24 공식 반영)
+
+> ℹ️ 공식 매뉴얼에 응답 본문 최상위에 부재유형별 층전단력 합계를 정리한 `"SUB_TABLES"` 배열이 추가로 문서화되어 있어 반영합니다. 배열의 각 원소는 하위 테이블 이름을 Key로 갖는 객체이며, 각 하위 테이블은 자체 `HEAD`/`DATA` 구조를 갖습니다.
+
+| No. | 설명 | Key | Value 타입 | 비고 |
+| --- | --- | --- | --- | --- |
+| 1 | 하위 테이블 목록 | `"SUB_TABLES"` | Array [Object] | 응답 전용 (Read Only) |
+| 1-1 | └ 선형 합산 층전단력 | `"LINEAR SUMMATION OF STORY SHEAR FORCE"` | Object | `HEAD`/`DATA` 구조 |
+| 1-2 | └ 수치 합산 층전단력 | `"NUMERICAL SUMMATION OF STORY SHEAR FORCE"` | Object | `HEAD`/`DATA` 구조 |
+
+**`SUB_TABLES` 하위 테이블 HEAD** (Type = `"Sum"` 행은 부재유형 합계이며 `Ratio1`/`Ratio2`는 빈 문자열로 반환됨)
+
+```json
+["Story", "Level", "Load", "Type", "No", "Angle1", "Force1", "Ratio1", "Angle2", "Force2", "Ratio2"]
+```
+
 ### Request / Response JSON
 
 **POST Request Body**
@@ -596,6 +719,28 @@ for row in table.get("DATA", []):
     "DATA": [
       ["1", "2F", "5.000000000000", "EX", "Frame(Beam)", "129", "33.500000000000", "28.665741744457", "0.007935020134", "123.500000000000", "-22.438153697157", "0.009384022933"],
       ["2", "2F", "5.000000000000", "EX", "Frame(Beam)", "130", "33.500000000000", "797.380554817400", "0.220724473589", "123.500000000000", "-544.234513929400", "0.227608261730"]
+    ],
+    "SUB_TABLES": [
+      {
+        "LINEAR SUMMATION OF STORY SHEAR FORCE": {
+          "HEAD": ["Story", "Level", "Load", "Type", "No", "Angle1", "Force1", "Ratio1", "Angle2", "Force2", "Ratio2"],
+          "DATA": [
+            ["2F", "", "EX", "Frame(Beam)", "", "33.500000000000", "797.380554817400", "0.220724473589", "123.500000000000", "-544.234513929400", "0.227608261730"],
+            ["2F", "", "EX", "Wall", "", "33.500000000000", "2815.180127076000", "0.779275526411", "123.500000000000", "-1846.867240428000", "0.772391738270"],
+            ["2F", "", "EX", "Sum", "", "33.500000000000", "3612.560681894000", "", "123.500000000000", "-2391.101754358000", ""]
+          ]
+        }
+      },
+      {
+        "NUMERICAL SUMMATION OF STORY SHEAR FORCE": {
+          "HEAD": ["Story", "Level", "Load", "Type", "No", "Angle1", "Force1", "Ratio1", "Angle2", "Force2", "Ratio2"],
+          "DATA": [
+            ["2F", "", "EX", "Frame(Beam)", "", "33.500000000000", "797.380554817400", "0.220724473589", "123.500000000000", "-544.234513929400", "0.227608261730"],
+            ["2F", "", "EX", "Wall", "", "33.500000000000", "2815.180127076000", "0.779275526411", "123.500000000000", "-1846.867240428000", "0.772391738270"],
+            ["2F", "", "EX", "Sum", "", "33.500000000000", "3612.560681894000", "", "123.500000000000", "-2391.101754358000", ""]
+          ]
+        }
+      }
     ]
   }
 }
@@ -714,6 +859,40 @@ for row in table.get("DATA", []):
 
 ```json
 ["Index", "Load Case", "Story", "Level", "Story Height", "Reduction Factor", "Angle1", "Overturning Moment by Vertical Member Types/Frame/Value", "Overturning Moment by Vertical Member Types/Frame/Ratio", "Overturning Moment by Vertical Member Types/Wall/Value", "Overturning Moment by Vertical Member Types/Wall/Ratio", "Sum of Story Force1 * Distance", "Overturning Moment1", "Angle2", "Overturning Moment by Vertical Member Types/Frame/Value", "Overturning Moment by Vertical Member Types/Frame/Ratio", "Overturning Moment by Vertical Member Types/Wall/Value", "Overturning Moment by Vertical Member Types/Wall/Ratio", "Sum of Story Force2 * Distance", "Overturning Moment2"]
+```
+
+### `ADDITIONAL` — 전도모멘트 산정 조건 (2026-07-24 공식 반영)
+
+> ℹ️ 공식 매뉴얼에 `"ADDITIONAL"` 요청 객체가 추가로 문서화되어 있어 반영합니다. 전도모멘트 산정 기준각(Angle1/Angle2)과 응답스펙트럼 스케일 계수, 감소계수(Reduction Factor) 산정 방식을 세부 제어합니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 세부 설정 객체 | `"ADDITIONAL"` | Object | — | Optional |
+| 1-1 | └ 각도 설정 | `ADDITIONAL.SET_ANGLE` | Object | — | Optional |
+| 1-1-1 | 　　└ Angle1 입력값 (Angle2 = Angle1 + 90°) | `SET_ANGLE.ANGLE` | Number | `0` | Optional |
+| 1-2 | └ 전도모멘트 산정 파라미터 | `ADDITIONAL.SET_OVERTURNING_MOMENT_PARAMS` | Object | — | Optional |
+| 1-2-1 | 　　└ 응답스펙트럼 스케일 계수 | `SET_OVERTURNING_MOMENT_PARAMS.SF_FOR_RS` | Number | `1` | Optional |
+| 1-2-2 | 　　└ 감소계수(Reduction Factor) 산정 방식: `"FIXED"`(1.0 고정) / `"AUTO"`(자동 산정) | `SET_OVERTURNING_MOMENT_PARAMS.DEFINE_RF` | String | `"FIXED"` | Optional |
+
+**요청 예시 — `ADDITIONAL` 포함**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "Example",
+    "TABLE_TYPE": "OVERTURNING_MOMENT",
+    "UNIT": { "FORCE": "kN", "DIST": "m" },
+    "STYLES": { "FORMAT": "Fixed", "PLACE": 12 },
+    "LOAD_CASE_NAMES": ["Rx(RS)", "Ry(RS)"],
+    "ADDITIONAL": {
+      "SET_ANGLE": { "ANGLE": 33.5 },
+      "SET_OVERTURNING_MOMENT_PARAMS": {
+        "SF_FOR_RS": 0,
+        "DEFINE_RF": "AUTO"
+      }
+    }
+  }
+}
 ```
 
 ### Request / Response JSON
@@ -864,6 +1043,57 @@ for row in table.get("DATA", []):
 ["Index", "Load Case", "Story", "Story Height", "Vertical Load", "Story Shear Force", "Modified Story Drift", "Beta", "Stability Coefficient", "Allowable Limit", "Remark", "P-Delta Incremental Factor"]
 ```
 
+### `ADDITIONAL` — 안정계수 산정 파라미터 (2026-07-24 공식 반영)
+
+> ℹ️ 공식 매뉴얼에 `"ADDITIONAL"` 요청 객체가 추가로 문서화되어 있어 반영합니다. 안정계수(θ) 산정에 사용되는 변위증폭계수·중요도계수 등의 파라미터와 Beta 값, 층간변위 산정 방식을 세부 제어합니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 세부 설정 객체 | `"ADDITIONAL"` | Object | — | Optional |
+| 1-1 | └ 안정계수 산정 파라미터 | `ADDITIONAL.SET_STABILITY_COEFFICIENT_PARAMS` | Object | — | Optional |
+| 1-1-1 | 　　└ 변위증폭계수(Cd) | `SET_STABILITY_COEFFICIENT_PARAMS.DEFLECTION_AMPL_FACTOR_VALUE` | Number | System | Optional |
+| 1-1-2 | 　　└ 중요도계수 | `SET_STABILITY_COEFFICIENT_PARAMS.IMPORTANCE_FACTOR_VALUE` | Integer | System | Optional |
+| 1-1-3 | 　　└ 스케일 계수 | `SET_STABILITY_COEFFICIENT_PARAMS.SCALE_FACTOR_VALUE` | Integer | System | Optional |
+| 1-1-4 | 　　└ P-Delta 검토용 수직하중 조합 목록 | `SET_STABILITY_COEFFICIENT_PARAMS.LCOMS` | Array [Object] | System | Optional |
+| 1-1-4-1 | 　　　　└ 하중케이스명 / 계수 | `LCOMS[].NAME` / `LCOMS[].FACTOR` | String / Number | — | Optional |
+| 1-1-5 | 　　└ Beta 값 설정 | `SET_STABILITY_COEFFICIENT_PARAMS.BETA` | Object | — | Optional |
+| 1-1-5-1 | 　　　　└ 방식: `"FIXED"`(1.0 고정) / `"USER"`(층별 직접 입력) | `BETA.FIX_USER_CHECK` | String | System | Optional |
+| 1-1-5-2 | 　　　　└ 적용 시작/종료 층 — `FIX_USER_CHECK: "USER"`일 때만 | `BETA.NAME_FROM` / `BETA.NAME_TO` | String | — | Optional |
+| 1-1-5-3 | 　　　　└ 사용자 지정 Beta 값 — `FIX_USER_CHECK: "USER"`일 때만 | `BETA.VALUE` | Number | — | Optional |
+| 1-2 | └ 층간변위 산정 방식 선택 | `ADDITIONAL.SET_CALCULATION_METHOD` | Object | — | Optional |
+| 1-2-1 | 　　└ 방식: `"Drift on the Center of Mass"` / `"Max. Drift of Outer Extreme Points"` / `"Max. Drift of All Vertical Elements"` | `SET_CALCULATION_METHOD.STORY_DRIFT_METHOD` | String | — | Optional |
+
+**요청 예시 — `ADDITIONAL` 포함**
+
+```json
+{
+  "Argument": {
+    "TABLE_TYPE": "STORY_STABILITY_COEFFICIENT_X",
+    "LOAD_CASE_NAMES": ["RX(RS)"],
+    "STYLES": { "FORMAT": "Fixed", "PLACE": 12 },
+    "ADDITIONAL": {
+      "SET_STABILITY_COEFFICIENT_PARAMS": {
+        "DEFLECTION_AMPL_FACTOR_VALUE": 2,
+        "IMPORTANCE_FACTOR_VALUE": 5,
+        "SCALE_FACTOR_VALUE": 2,
+        "LCOMS": [
+          { "NAME": "DL", "FACTOR": 1 }
+        ],
+        "BETA": {
+          "FIX_USER_CHECK": "USER",
+          "NAME_FROM": "1F",
+          "NAME_TO": "12F",
+          "VALUE": 2
+        }
+      },
+      "SET_CALCULATION_METHOD": {
+        "STORY_DRIFT_METHOD": "Max. Drift of All Vertical Elements"
+      }
+    }
+  }
+}
+```
+
 ### Request / Response JSON
 
 **POST Request Body — X방향**
@@ -936,6 +1166,35 @@ for row in table.get("DATA", []):
 
 ```json
 ["Index", "Load Case", "Story", "Level", "Story Height", "Average Value of Extreme Points/Story Drift", "Average Value of Extreme Points/1.2*Story Drift", "Maximum Value/Node", "Maximum Value/Story Drift", "Remark"]
+```
+
+### `ADDITIONAL` — 비틀림 불규칙 검토 대상 극단부 절점 선택 (2026-07-24 공식 반영)
+
+> ℹ️ 공식 매뉴얼에 `"ADDITIONAL"` 요청 객체가 추가로 문서화되어 있어 반영합니다. 비틀림 불규칙 검토에 사용할 극단부(Extreme Points) 절점을 자동 계산 대신 사용자가 직접 지정할 수 있습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 세부 설정 객체 | `"ADDITIONAL"` | Object | — | Optional |
+| 1-1 | └ 비틀림 불규칙 검토 대상 극단부 절점 선택 | `ADDITIONAL.SELECT_IRREGULAR_ENDS` | Object | — | Required |
+| 1-1-1 | 　　└ 절점 선택 방식: `false`=자동 계산 / `true`=사용자 지정 | `SELECT_IRREGULAR_ENDS.USER_DEFINE` | Boolean | — | Required |
+| 1-1-2 | 　　└ 극단부 절점 번호 2개 지정 — `USER_DEFINE: true`일 때만 | `SELECT_IRREGULAR_ENDS.SELECT_NODES` | Array [Integer] | — | Required |
+
+**요청 예시 — `ADDITIONAL` 포함**
+
+```json
+{
+  "Argument": {
+    "TABLE_TYPE": "TORSIONAL_IRREGULARITY_X",
+    "LOAD_CASE_NAMES": ["RX(RS)"],
+    "STYLES": { "FORMAT": "Fixed", "PLACE": 4 },
+    "ADDITIONAL": {
+      "SELECT_IRREGULAR_ENDS": {
+        "USER_DEFINE": true,
+        "SELECT_NODES": [1, 37]
+      }
+    }
+  }
+}
 ```
 
 ### Request / Response JSON
@@ -1012,6 +1271,35 @@ for row in table.get("DATA", []):
 ["Index", "Load Case", "Story", "Level", "Story Height", "Average Displacement of Extreme Points", "Maximum Displacement/Node", "Maximum Displacement/Displacement", "Torsional Amplification Factor", "Note"]
 ```
 
+### `ADDITIONAL` — 비틀림 증폭계수 산정 대상 극단부 절점 선택 (2026-07-24 공식 반영)
+
+> ℹ️ 공식 매뉴얼에 `"ADDITIONAL"` 요청 객체가 추가로 문서화되어 있어 반영합니다. 비틀림 증폭계수(Ax) 산정에 사용할 극단부(Extreme Points) 절점을 자동 계산 대신 사용자가 직접 지정할 수 있습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 세부 설정 객체 | `"ADDITIONAL"` | Object | — | Optional |
+| 1-1 | └ 비틀림 증폭계수 산정 대상 극단부 절점 선택 | `ADDITIONAL.SELECT_IRREGULAR_ENDS` | Object | — | Required |
+| 1-1-1 | 　　└ 절점 선택 방식: `false`=자동 계산 / `true`=사용자 지정 | `SELECT_IRREGULAR_ENDS.USER_DEFINE` | Boolean | — | Required |
+| 1-1-2 | 　　└ 극단부 절점 번호 2개 지정 — `USER_DEFINE: true`일 때만 | `SELECT_IRREGULAR_ENDS.SELECT_NODES` | Array [Integer] | — | Required |
+
+**요청 예시 — `ADDITIONAL` 포함**
+
+```json
+{
+  "Argument": {
+    "TABLE_TYPE": "TORSIONAL_AMPLIFICATION_FACTOR_X",
+    "LOAD_CASE_NAMES": ["RX(RS)"],
+    "STYLES": { "FORMAT": "Fixed", "PLACE": 4 },
+    "ADDITIONAL": {
+      "SELECT_IRREGULAR_ENDS": {
+        "USER_DEFINE": true,
+        "SELECT_NODES": [424, 1]
+      }
+    }
+  }
+}
+```
+
 ### Request / Response JSON
 
 **POST Request Body — X방향**
@@ -1086,6 +1374,36 @@ for row in table.get("DATA", []):
 ["Index", "Load Case", "Story", "Level", "Story Height", "Story Drift", "Story Shear Force", "Story Stiffness", "Upper Story Stiffness/0.7Ku1", "Upper Story Stiffness/0.8Ku123", "Story Stiffness Ratio", "Story Drift Angle Ratio", "Remark"]
 ```
 
+### `ADDITIONAL` — 층강성 산정방식 설정 (2026-07-24 공식 반영)
+
+> ℹ️ 공식 매뉴얼에 `"ADDITIONAL"` 요청 객체가 추가로 문서화되어 있어 반영합니다. 연층(Soft Story) 판정에 사용할 층간변위 산정방식과 층강성 산정방식을 지정합니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 세부 설정 객체 | `"ADDITIONAL"` | Object | — | Optional |
+| 1-1 | └ 산정방식 설정 | `ADDITIONAL.SET_CALCULATION_METHOD` | Object | — | Required |
+| 1-1-1 | 　　└ 층간변위 산정방식: `"Drift at the Center of Mass"`(질량중심 변위) / `"Max. Drift of Outer Extreme Points"`(외곽 최대변위) / `"Max. Drfit of All Vertical Elements"`(전 수직요소 최대변위) | `SET_CALCULATION_METHOD.STORY_DRIFT_METHOD` | String | `"Drift at the Center of Mass"` | Optional |
+| 1-1-2 | 　　└ 층강성 산정방식: `"1 / Story Drift Ratio"`(층간변위비 역수) / `"Story Shear / Story Drift"`(층전단력/층간변위) | `SET_CALCULATION_METHOD.STORY_STIFFNESS_METHOD` | String | `"1 / Story Drift Ratio"` | Optional |
+
+**요청 예시 — `ADDITIONAL` 포함**
+
+```json
+{
+  "Argument": {
+    "TABLE_TYPE": "STIFFNESS_IRREGULARITY_X",
+    "UNIT": { "FORCE": "kN", "DIST": "m" },
+    "STYLES": { "FORMAT": "Fixed", "PLACE": 4 },
+    "LOAD_CASE_NAMES": ["RX(RS)"],
+    "ADDITIONAL": {
+      "SET_CALCULATION_METHOD": {
+        "STORY_DRIFT_METHOD": "Drift at the Center of Mass",
+        "STORY_STIFFNESS_METHOD": "1 / Story Drift Ratio"
+      }
+    }
+  }
+}
+```
+
 ### Request / Response JSON
 
 **POST Request Body — X방향**
@@ -1157,6 +1475,33 @@ for row in table.get("DATA", []):
 
 ```json
 ["Index", "Story", "Level", "Story Height", "Angle1", "Story Shear Strength1", "Upper Story Shear Strength1", "Story Shear Strength Ratio1", "Remark1", "Angle2", "Story Shear Strength2", "Upper Story Shear Strength2", "Story Shear Strength Ratio2", "Remark2"]
+```
+
+### `ADDITIONAL` — 강도 산정 각도 설정 (2026-07-24 공식 반영)
+
+> ℹ️ 공식 매뉴얼에 `"ADDITIONAL"` 요청 객체가 추가로 문서화되어 있어 반영합니다. 전단강도(Story Shear Strength)를 산정할 기준 각도(Angle1)를 지정하며, Angle2는 Angle1 + 90°로 자동 산정됩니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 세부 설정 객체 | `"ADDITIONAL"` | Object | — | Optional |
+| 1-1 | └ 각도 설정 | `ADDITIONAL.SET_ANGLE` | Object | — | Required |
+| 1-1-1 | 　　└ Angle1 입력 각도(°) — Angle2 = Angle1 + 90° | `SET_ANGLE.ANGLE` | Number | — | Required |
+
+**요청 예시 — `ADDITIONAL` 포함**
+
+```json
+{
+  "Argument": {
+    "TABLE_TYPE": "CAPACITY_IRREGULARITY",
+    "UNIT": { "FORCE": "kN", "DIST": "m" },
+    "STYLES": { "FORMAT": "Fixed", "PLACE": 4 },
+    "ADDITIONAL": {
+      "SET_ANGLE": {
+        "ANGLE": 33.5
+      }
+    }
+  }
+}
 ```
 
 ### Request / Response JSON
@@ -1374,6 +1719,31 @@ for row in table.get("DATA", []):
 
 ```json
 ["Index", "Load Case", "Story", "Level", "Story Height", "Story Weight", "Adjacent Story Weight/1.25M(Lower)", "Adjacent Story Weight/0.75M(Lower)", "Story Weight Ratio", "Story Drift Angle Ratio", "Remark"]
+```
+
+### `SET_CALCULATION_METHOD` — 층간변위 산정방식 설정 (2026-07-24 공식 반영)
+
+> ℹ️ 공식 매뉴얼에 `"SET_CALCULATION_METHOD"` 요청 필드가 추가로 문서화되어 있어 반영합니다. 다른 테이블과 달리 `"ADDITIONAL"` 객체로 감싸지 않고 `"Argument"` 바로 하위(= `"TABLE_TYPE"`, `"UNIT"` 등과 동일 레벨)에 위치합니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 산정방식 설정 (`"ADDITIONAL"`이 아닌 `"Argument"` 최상위 필드) | `"SET_CALCULATION_METHOD"` | Object | — | Optional |
+| 1-1 | └ 층간변위 산정방식: `"Drift at the Center of Mass"`(질량중심 변위) / `"Max. Drift of Outer Extreme Points"`(외곽 최대변위) / `"Max. Drift of All Vertical Elements"`(전 수직요소 최대변위) | `SET_CALCULATION_METHOD.STORY_DRIFT_METHOD` | String | `""` | Optional |
+
+**요청 예시 — `SET_CALCULATION_METHOD` 포함**
+
+```json
+{
+  "Argument": {
+    "TABLE_TYPE": "WEIGHT_IRREGULARITY_X",
+    "UNIT": { "FORCE": "kgf", "DIST": "mm" },
+    "STYLES": { "FORMAT": "Fixed", "PLACE": 6 },
+    "LOAD_CASE_NAMES": ["DL(ST)"],
+    "SET_CALCULATION_METHOD": {
+      "STORY_DRIFT_METHOD": "Drift at the Center of Mass"
+    }
+  }
+}
 ```
 
 ### Request / Response JSON

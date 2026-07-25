@@ -1,7 +1,7 @@
 # MIDAS NX Open API — JSON Manual Index
 
 > **출처:** [MIDAS API Online Manual](https://support.midasuser.com/hc/ko/articles/33016922742937-MIDAS-API-Online-Manual)  
-> **최초 생성:** 2024.05.28 · **공식 최종 편집:** 2026.07.14 · **이 파일 동기화:** 2026-07-19  
+> **최초 생성:** 2024.05.28 · **공식 최종 편집:** 2026.07.24 · **이 파일 동기화:** 2026-07-25  
 > **대상 제품:** MIDAS Civil NX · MIDAS Gen NX
 
 ---
@@ -29,7 +29,7 @@
 | [17_DB_Bridge.md](./17_DB_Bridge.md) | DB – Bridge Specialization | 거더·캠버·케이블 결과 설정 (4개) |
 | [18_POST_PreProcess.md](./18_POST_PreProcess.md) | POST – Pre-Process Tables | 중량·질량·하중·재료·단면·층 요약 (~10개) |
 | [19_POST_AnalysisResult_1.md](./19_POST_AnalysisResult_1.md) | POST – Analysis Result Tables Part 1 | 반력·변위·트러스·케이블·보 결과 (12개) |
-| [20_POST_AnalysisResult_2.md](./20_POST_AnalysisResult_2.md) | POST – Analysis Result Tables Part 2 | 판·평면·축대칭·솔리드·링크·모드·텐던·시공단계 (38개) |
+| [20_POST_AnalysisResult_2.md](./20_POST_AnalysisResult_2.md) | POST – Analysis Result Tables Part 2 | 판·평면·축대칭·솔리드·링크·모드·텐던·시공단계·벽체 (39개) |
 | [21_POST_StoryTables.md](./21_POST_StoryTables.md) | POST – Analysis Story Tables | 층변위·층전단·층비틀림·불규칙 검토 (17개) |
 | [22_POST_TH_HY_Pushover.md](./22_POST_TH_HY_Pushover.md) | POST – TH / HY / Pushover Result Tables | 시간이력·수화열·푸시오버 결과 (28개) |
 | [23_POST_Design.md](./23_POST_Design.md) | POST – Design Tables | P-M·Steel·RC·SRC·냉간성형 설계 결과 (~10개) |
