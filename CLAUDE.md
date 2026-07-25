@@ -1,0 +1,83 @@
+# CLAUDE.md
+
+이 저장소에서 작업할 때 지켜야 할 규칙과 맥락입니다.
+
+## 이 저장소는 무엇인가
+
+**MIDAS NX Open API**(MIDAS Gen NX / Civil NX)에 대한 사람이 직접 큐레이션한 **JSON 스키마 매뉴얼**
+저장소입니다. 코드 라이브러리가 아니라 문서 저장소입니다.
+
+- `docs/manual/01_DOC.md` ~ `27_Design_SRC_AIKSRC2K.md` — 27개 챕터, 총 ~270개 엔드포인트를
+  MIDAS 공식 Zendesk 온라인 매뉴얼 기준으로 문서화. `docs/manual/INDEX.md`가 전체 목차/개수 색인.
+- `docs/AUTHENTICATION.md` — 인증, GET/PUT 워크플로, 방화벽 가이드 등 Quick Tips.
+- `examples/` — Python/VBA/JavaScript/curl/기타 언어 예제.
+- `scripts/manual_sync/` — 공식 사이트와의 정기 동기화 도구 (아래 참고).
+
+## 스코프: 이 저장소에만 집중
+
+**형제 저장소 `MIDAS-API-NX-SDK`(Python SDK)는 건드리지 않습니다.** 이 저장소는 순수 문서이고
+SDK는 별도 프로젝트입니다. SDK 관련 작업 요청이 아니라면 그 저장소를 참조하거나 수정하지 않습니다.
+
+## 매뉴얼 동기화 워크플로 (`scripts/manual_sync/`)
+
+목적: 공식 Zendesk Help Center("JSON Manual" 섹션, 651개 아티클, `SECTION_ID = 30087500371097`)와
+`docs/manual/*.md`를 정기적으로 맞추는 것. 설계 원칙은 **목록 비교는 AI 없이, 실제 패치가 필요한
+항목만 AI 호출** — 자세한 흐름은 `scripts/manual_sync/README.md` 참고.
+
+```bash
+cd scripts/manual_sync
+python fetch_manifest.py     # 스냅샷 갱신 (.sync_manifest.json)
+python check_diff.py         # 변경 여부만 확인 (exit 0=없음, 1=있음)
+python validate_manual.py    # 패치 후 항상 실행 — JSON 코드블록 + TOC 앵커 검증
+```
+
+**정기 업데이트 체크(`정기 업데이트 체크`) 요청을 받으면:**
+1. `check_diff.py`로 변경된 아티클 id 목록을 뽑는다.
+2. 플래그된 아티클마다 원문을 다시 읽고, 매뉴얼과 필드 단위로 대조한다 — 타임스탬프만 갱신된
+   화장빨 변경(cosmetic bump)과 실제 스키마/내용 변경을 반드시 구분한다. 타임스탬프 diff만 보고
+   변경됐다고 가정하지 않는다.
+3. 실제 변경 건만 `docs/manual/*.md`에 반영, 필요 시 `INDEX.md`(날짜·항목 개수)도 갱신.
+4. `validate_manual.py` 통과 확인 후 `fetch_manifest.py`로 매니페스트 재스냅샷.
+5. `check_diff.py`를 다시 돌려 `has_diff: false`인지 확인.
+6. 커밋·푸시는 사용자가 명시적으로 지시할 때만 진행한다 (자동 push 없음 — 아래 참고).
+
+규모가 크면(예: 20~30개 아티클 동시 플래그) 병렬 서브에이전트로 나눠서: 1차는 리서치/대조
+전담(원문 vs 매뉴얼 비교, 실제 변경 여부만 판정), 2차는 1차에서 확정된 사실만 가지고 실제 패치를
+적용하는 편집 전담으로 분리하면 효율적이다. 편집 에이전트에게는 반드시 원문 파일 경로, 대상 섹션,
+정확한 필드 diff, 따라 할 스타일 템플릿 섹션을 구체적으로 지정한다.
+
+### 알려진 환경 이슈
+- **`python3`는 이 머신에서 깨진 Windows Store 스텁을 가리킨다.** 반드시 `python`(3.13.5) 사용.
+- **`check_diff.py`의 stdout이 Windows 콘솔(cp949)에서 `UnicodeEncodeError`를 낼 수 있다**
+  (`\xa0` 등 미인코딩 문자). `PYTHONIOENCODING=utf-8`을 설정하고 결과를 파일로 리다이렉트해서
+  읽는 방식으로 우회한다 (직접 stdout 캡처에 의존하지 않음).
+
+## `docs/manual/*.md` 문서 관례
+
+각 엔드포인트 섹션은 다음 순서를 따른다:
+1. `### TABLE_TYPE` (또는 해당 엔드포인트의) enum/스펙 표
+2. `### Response HEAD`
+3. (해당 시) `### \`ADDITIONAL\` — <설명> (<날짜> 공식 반영)` — 요청에 중첩 config 객체가 추가된 경우
+4. `### Request / Response JSON`
+5. `### Python Example`
+
+파라미터 표는 `| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |` 컬럼을 쓰고, 중첩 필드는
+`└` / `　　└`(전각 공백 들여쓰기)로 표시한다.
+
+**표 마크다운 스타일:** 새로 추가하는 표는 반드시 spaced separator(`| --- | --- |`)를 쓴다.
+compact(`|---|---|`)는 MD060 린트에 걸린다. **단, 기존에 이미 있던 compact 스타일 표는 건드리지
+않는다** — 이미 걸려 있지 않고, 이번 작업 범위가 아니다.
+
+MD024(중복 헤딩)/MD036(강조를 헤딩처럼 사용) 경고는 `20_POST_AnalysisResult_2.md`,
+`21_POST_StoryTables.md`, `26_Design_RC_KDS41202022.md` 등 기존 챕터 전체에 이미 깔린 파일 전역
+컨벤션이다. 새 섹션이 같은 패턴을 따라가면서 같은 경고가 나는 것은 정상 — "고쳐야 할 것"이 아니다.
+
+새 엔드포인트를 챕터에 추가할 때 챕터 소속 판단이 애매하면(예: 결과 테이블이 POST 챕터 여러 개에
+걸칠 수 있는 경우) 공식 아티클 자체의 제목과 각 챕터 문서 서두에 명시된 스코프(예: "17개" 같은
+개수 문구)를 근거로 판단한다.
+
+## Git 컨벤션
+
+- **커밋·푸시는 사용자가 명시적으로 지시했을 때만 수행한다.** "커밋 푸시" 같은 명확한 지시가
+  없으면 변경사항을 만들어도 커밋하지 않는다.
+- 커밋 전 `git status --short`로 의도한 파일만 스테이징됐는지 확인.
