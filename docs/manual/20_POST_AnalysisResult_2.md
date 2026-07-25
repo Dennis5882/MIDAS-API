@@ -121,6 +121,7 @@
 | 36 | [Tendon Approximate Loss](#36-tendon-approximate-loss) | `TNDN_APPROX_LOSS_FORCE` / `TNDN_APPROX_LOSS_STRESS` |
 | 37 | [Composite Section for C.S. (Force and Stress)](#37-composite-section-for-cs-force-and-stress) | `COMPSECTBEAMFORCE` / `COMPSECTBEAMSTRESS` |
 | 38 | [Composite Section for C.S. (Self-Constraint Force and Stress)](#38-composite-section-for-cs-self-constraint-force-and-stress) | `SELF_CONST_BEAM_FORCE` / `SELF_CONST_BEAM_STRESS` |
+| 39 | [Wall Force](#39-wall-force) | `WALL_FORCE_MOMENT` |
 
 ---
 
@@ -3107,6 +3108,8 @@ for row in table.get("DATA", []):
 | 2 | 결과 파트(top/bot 등) | `"PARTS"` | Array [String] | — | Optional |
 | 3 | 층 이름 지정 | `"STORY_NAMES"` | Array [String] | All | Optional |
 
+> ⚠️ `SECT_POSITION`·`PARTS`는 공식 아티클의 **JSON Schema에만 등장**하고 Specifications 표·요청 예제에는 설명이 없습니다(`STORY_NAMES`만 표에 기재됨). 위 설명은 키 이름과 응답 구조에서 추정한 것이므로, 공식 설명이 추가되면 갱신이 필요합니다.
+
 ### Request / Response JSON
 
 **POST Request Body**
@@ -3165,10 +3168,15 @@ payload = {
 }
 resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
 table = resp.json().get("WALL_FORCE_MOMENT", {})
-head = table.get("HEAD", [])
+
+# 주의: 이 테이블은 HEAD에 Part·Axial·… 열이 top/bot 두 번 반복되므로
+# 다른 절처럼 dict(zip(head, row))로 감싸면 bot 값이 top 값을 덮어씁니다.
+# 위치 인덱스로 상·하단을 분리해서 읽습니다.
 for row in table.get("DATA", []):
-    d = dict(zip(head, row))
-    print(f"  Wall {d['Wall']} ({d['Story']}): Axial={d['Axial']}")
+    story, wall, load = row[1], row[3], row[4]
+    top = row[5:12]    # Part, Axial, Shear-y, Shear-z, Torsion, Moment-y, Moment-z
+    bot = row[12:19]   # 동일 순서의 하단 값
+    print(f"  Wall {wall} ({story}, {load}): Axial top={top[1]} / bot={bot[1]}")
 ```
 
 ---
