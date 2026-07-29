@@ -469,14 +469,53 @@ midas_api("POST", "/db/TDMF", tdmf_data)
 | 5 (ACI) | Volume/Surface Ratio | `"VOL"` | Number | - | **Required** |
 | 7 (ACI) | Curing Method • Moist: `"MOIST"` • Steam: `"STEAM"` | `"CMETHOD"` | String | `"MOIST"` | Optional |
 
+#### ¹⁾ Code Name 코드표 (`TDMT.CODE`)
+
+| 표시명 | `"CODE"` |
+| --- | --- |
+| CEB-FIP (2010) | `"CEB_FIP_2010"` |
+| CEB-FIP (1990) | `"CEB"` |
+| CEB-FIP (1978) | `"CEB_FIP_1978"` |
+| ACI | `"ACI"` |
+| PCA | `"PCA"` |
+| Combined (ACI & PCA) | `"COMBINED"` |
+| AASHTO | `"AASHTO"` |
+| JAPAN (JSCE2012) | `"JSCE_12"` |
+| JAPAN (JSCE2007) | `"JSCE_07"` |
+| Japanese Standard | `"JAPAN"` |
+| JAPAN (JSCE) | `"JSCE"` |
+| INDIA (IRC:18-2000) | `"INDIA_IRC_18_2000"` |
+| INDIA (IRC:112-2011) | `"INDIA_IRC_112_2011"` |
+| European | `"EUROPEAN"` |
+| AS 5100.5-2017 | `"AS_5100_5_2017"` |
+| AS 5100.5-2016 | `"AS_5100_5_2016"` |
+| AS/RTA 5100.5-2011 | `"AS_RTA_5100_5_2011"` |
+| AS 3600-2009 | `"AS_3600_2009"` |
+| NZ Bridge (SP/M/022) | `"NEWZEALAND"` |
+| Russian | `"RUSSIAN"` |
+| Chinese Standard | `"CHINESE"` |
+| China (JTG D62-2004) | `"JTG"` |
+| China (JTG3362-2018) | `"CHINA_JTG3362_2018"` |
+| **KDS-2016** | **`"KDS_2016"`** |
+| KCI-USD12 | `"KSI_USD12"` |
+| KSCE 2010 | `"KSCE_2010"` |
+| Korea Standard | `"KS"` |
+| User Defined | `"USER_DEFINED"` |
+
+> ⚠️ **2026-07-25 정정:** `CODE` 값은 `"KDS2016"`(구분자 없음)이 아니라 **`"KDS_2016"`**(언더스코어)입니다.
+> 이전 버전 문서와 아래 예제가 잘못 표기되어 있었습니다. 공식 아티클의 Request Examples
+> (`"KDS-2016, KCI-USD12, KSCE 2010, Korea Standard"` 예제)에서 실제 페이로드로 확인했습니다.
+> `/db/TDME`(§7)의 동일 계열 필드 `CODENAME`은 이와 달리 `"KDS-2016"`(하이픈)을 쓰므로
+> 혼동하지 마십시오 — 두 엔드포인트가 같은 한국 기준에 서로 다른 리터럴을 씁니다.
+
 ### Request Body
 
 ```json
 {
   "Assign": {
     "1": {
-      "NAME": "KDS2016",
-      "CODE": "KDS2016",
+      "NAME": "KDS-2016",
+      "CODE": "KDS_2016",
       "STR": 24000,
       "HU": 70,
       "MSIZE": 0.2,
@@ -495,7 +534,7 @@ tdmt_data = {
     "Assign": {
         "1": {
             "NAME": "Creep_C24_KDS",
-            "CODE": "KDS2016",
+            "CODE": "KDS_2016",  # 주의: 언더스코어 표기 (TDME의 CODENAME은 하이픈 "KDS-2016")
             "STR": 24000,        # 압축강도 (kPa)
             "HU": 70,            # 상대습도 (%)
             "MSIZE": 0.2,        # 부재 공칭 크기 (m)
@@ -550,6 +589,36 @@ midas_api("POST", "/db/TDMT", tdmt_data)
 | 6 (ACI/KDS) | Factor, b | `"B"` | Number | - | **Required** |
 | 5 (CEB-FIP 1990/Ohzagi) | Cement Type ²⁾ | `"iCTYPE"` | Integer | - | **Required** |
 
+#### ¹⁾ Code Name 코드표 (`TDME.CODENAME`)
+
+| No. | 표시명 | `"CODENAME"` |
+| --- | --- | --- |
+| 1 | ACI | `"ACI"` |
+| 2 | CEB-FIP (2010) | `"CEB-FIP(2010)"` |
+| 3 | CEB-FIP (1990) | `"CEB-FIP(1990)"` |
+| 4 | Ohzagi | `"Ohzagi"` |
+| 5 | European | `"European"` |
+| 6 | INDIA (IRC:18-2000) | `"INDIA(IRC:18-2000)"` |
+| 7 | CEB-FIP (1978) | `"CEB-FIP(1978)"` |
+| 8 | AS 5100.5-2017 | `"AS 5100.5-2017"` |
+| 9 | AS 5100.5-2016 | `"AS 5100.5-2016"` |
+| 10 | AS/RTA 5100.5-2011 | `"AS/RTA 5100.5-2011"` |
+| 11 | AS 3600-2009 | `"AS 3600-2009"` |
+| 12 | INDIA (IRC:112-2011) | `"INDIA(IRC:112-2011)"` |
+| 13 | INDIA (IRC:112-2020) | `"INDIA(IRC:112-2020)"` |
+| 14 | Russian | `"Russian"` |
+| 15 | GILBERT AND RANZI | `"GILBERT AND RANZI"` |
+| 16 | Japan (Hydration) | `"Japan(hydration)"` |
+| 17 | Japan (Elastic) | `"Japan(elastic)"` |
+| 18 | **KDS-2016** | **`"KDS-2016"`** |
+| 19 | KCI-USD12 | `"KCI-USD12"` |
+| 20 | Korean Standard | `"Korean Standard"` |
+
+> ⚠️ **2026-07-25 정정:** `CODENAME` 값은 `"KDS2016"`(구분자 없음)이 아니라 **`"KDS-2016"`**(하이픈)입니다.
+> 이전 버전 문서와 아래 예제가 잘못 표기되어 있었습니다. `/db/TDMT`(§6)의 `CODE` 필드는 같은
+> 한국 기준을 언더스코어 표기 `"KDS_2016"`으로 쓰므로, 두 엔드포인트의 표기가 서로 다릅니다 —
+> 엔드포인트별로 정확한 리터럴을 확인하십시오.
+
 ### Request Body
 
 ```json
@@ -558,7 +627,7 @@ midas_api("POST", "/db/TDMT", tdmt_data)
     "1": {
       "NAME": "TDME_KDS2016",
       "TYPE": "CODE",
-      "CODENAME": "KDS2016",
+      "CODENAME": "KDS-2016",
       "STRENGTH": 24000
     }
   }
@@ -573,7 +642,7 @@ tdme_data = {
         "1": {
             "NAME": "CompStr_C24_KDS",
             "TYPE": "CODE",
-            "CODENAME": "KDS2016",
+            "CODENAME": "KDS-2016",  # 주의: 하이픈 표기 (TDMT의 CODE는 언더스코어 "KDS_2016")
             "STRENGTH": 24000
         }
     }
