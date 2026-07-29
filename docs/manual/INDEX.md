@@ -1,7 +1,7 @@
 # MIDAS NX Open API — JSON Manual Index
 
 > **출처:** [MIDAS API Online Manual](https://support.midasuser.com/hc/ko/articles/33016922742937-MIDAS-API-Online-Manual)  
-> **최초 생성:** 2024.05.28 · **공식 최종 편집:** 2026.07.24 · **이 파일 동기화:** 2026-07-25  
+> **최초 생성:** 2024.05.28 · **공식 최종 편집:** 2026.07.29 · **이 파일 동기화:** 2026-07-29  
 > **대상 제품:** MIDAS Civil NX · MIDAS Gen NX
 
 ---

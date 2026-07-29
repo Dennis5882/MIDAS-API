@@ -161,14 +161,12 @@
 | 1-2-1 | 　　└ 질량중심 변위 | `SET_STORY_DRIFT_CALCULATION_METHOD.DRIFT_AT_THE_CENTER_OF_MASS` | Boolean | `true` | Optional |
 | 1-2-2 | 　　└ 수직요소 평균변위 | `SET_STORY_DRIFT_CALCULATION_METHOD.AVERAGE_DRIFT_OF_VERTICAL_ELEMENTS` | Boolean | `false` | Optional |
 | 1-2-3 | 　　└ 선택 절점 기준 수직선 변위 (X_DIR/Y_DIR/COMBINED **Required**) | `SET_STORY_DRIFT_CALCULATION_METHOD.DRIFT_OF_A_VERTICAL_LINE_ON_SELECTED_NODE` | Object | — | Optional |
-| 1-2-4 | 　　└ 선택 절점(복수) 기준 수직선 평균변위 (X_DIR/Y_DIR/COMBINED 배열, **Required**) | `SET_STORY_DRIFT_CALCULATION_METHOD.AVERAGE_DRIFT_OF_VERTICAL_LINES_ON_SELECTED_NODES` | Array [Object] | — | Optional |
+| 1-2-4 | 　　└ 선택 절점(복수) 기준 수직선 평균변위 (X_DIR/Y_DIR/COMBINED 배열, **Required**) | `SET_STORY_DRIFT_CALCULATION_METHOD.AVERAGE_DRIFT_OF_VERTICAL_LINES_ON_SELECTED_NODES` | Object | — | Optional |
 | 1-2-5 | 　　└ 전단력 가중 평균변위 | `SET_STORY_DRIFT_CALCULATION_METHOD.SHEAR_WEIGHTED_AVERAGE_DRIFT_OF_VERTICAL_ELEMENTS` | Boolean | `false` | Optional |
 
-> ⚠️ **방향 Key 표기가 공식 문서 내에서 불일치합니다.** 위 표(공식 Specifications 표 기준)는 `"X_DIR"`·`"Y_DIR"`·`"COMBINED"`(언더스코어)로 기재되어 있으나, **공식 요청 예제는 `"X-DIR"`(하이픈)** 을 사용합니다. 아래 예제는 공식 예제를 그대로 옮긴 것이므로 하이픈 표기입니다. 실제 동작하는 예제 쪽 표기(`X-DIR`)를 먼저 시도하고, 거부되면 표 표기(`X_DIR`)로 바꿔 보십시오.
->
-> 같은 맥락으로 `AVERAGE_DRIFT_OF_VERTICAL_LINES_ON_SELECTED_NODES`는 공식 표에서 `Array [Object]`로 기재되어 있으나, 공식 예제에서는 방향 Key를 갖는 **단일 객체**(`{ "X-DIR": [262, 260] }`)로 나타납니다.
+> ℹ️ **2026-07-29 공식 정정 반영:** 이전에는 방향 Key가 Specifications 표(`X_DIR`)와 요청 예제(`X-DIR`) 사이에서 불일치했고, `AVERAGE_DRIFT_OF_VERTICAL_LINES_ON_SELECTED_NODES`의 Value 타입도 `Array [Object]`로 잘못 기재되어 있었습니다. 공식 문서가 두 항목 모두 정정되어(`X_DIR`로 통일, 타입은 `Object`로 수정) 아래 예제도 그에 맞춰 갱신했습니다.
 
-**요청 예시 — `ADDITIONAL` 포함 (Comb, 공식 예제 원문 그대로)**
+**요청 예시 — `ADDITIONAL` 포함 (Comb)**
 
 ```json
 {
@@ -186,8 +184,8 @@
       "SET_STORY_DRIFT_CALCULATION_METHOD": {
         "DRIFT_AT_THE_CENTER_OF_MASS": true,
         "AVERAGE_DRIFT_OF_VERTICAL_ELEMENTS": true,
-        "DRIFT_OF_A_VERTICAL_LINE_ON_SELECTED_NODE": { "X-DIR": 109 },
-        "AVERAGE_DRIFT_OF_VERTICAL_LINES_ON_SELECTED_NODES": { "X-DIR": [262, 260] },
+        "DRIFT_OF_A_VERTICAL_LINE_ON_SELECTED_NODE": { "X_DIR": 109 },
+        "AVERAGE_DRIFT_OF_VERTICAL_LINES_ON_SELECTED_NODES": { "X_DIR": [262, 260] },
         "SHEAR_WEIGHTED_AVERAGE_DRIFT_OF_VERTICAL_ELEMENTS": true
       }
     }
