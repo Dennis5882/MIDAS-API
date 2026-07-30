@@ -1063,9 +1063,9 @@ for row in table.get("DATA", []):
 | 1-1-5-2 | 　　　　└ 적용 시작/종료 층 — `FIX_USER_CHECK: "USER"`일 때만 | `BETA.NAME_FROM` / `BETA.NAME_TO` | String | — | Optional |
 | 1-1-5-3 | 　　　　└ 사용자 지정 Beta 값 — `FIX_USER_CHECK: "USER"`일 때만 | `BETA.VALUE` | Number | — | Optional |
 | 1-2 | └ 층간변위 산정 방식 선택 | `ADDITIONAL.SET_CALCULATION_METHOD` | Object | — | Optional |
-| 1-2-1 | 　　└ 방식: `"Drift at the Center of Mass"`(질량중심 변위) / `"Max. Drift of Outer Extreme Points"`(외곽 최대변위) / `"Max. Drift of All Vertical Elements"`(전 수직요소 최대변위) | `SET_CALCULATION_METHOD.STORY_DRIFT_METHOD` | String | — | Optional |
+| 1-2-1 | 　　└ 방식: `"Drift on the Center of Mass"`(질량중심 변위) / `"Max. Drift of Outer Extreme Points"`(외곽 최대변위) / `"Max. Drift of All Vertical Elements"`(전 수직요소 최대변위) | `SET_CALCULATION_METHOD.STORY_DRIFT_METHOD` | String | — | Optional |
 
-> ⚠️ **`STORY_DRIFT_METHOD` 값 표기 주의.** 이 테이블의 공식 Specifications 표는 첫 번째 값을 `"Drfit on the Center of Mass"`로 적고 있으나, 이는 공식 문서의 오타입니다(`Drfit` → `Drift`, `on` → `at`). 동일한 enum을 문서화한 [13. Stiffness Irregularity Check](#13-stiffness-irregularity-check-soft-story)·[17. Weight Irregularity Check](#17-weight-irregularity-check) 공식 아티클과 이 아티클의 요청 예제는 모두 `"Drift at the Center of Mass"` 형태를 사용하므로, 위 표에는 정규 표기를 기재했습니다. 다음 동기화 때 "원문과 다르다"고 되돌리지 마십시오.
+> ℹ️ **2026-07-30 공식 확인 — `STORY_DRIFT_METHOD` 값 정정.** 이 테이블의 공식 Specifications 표는 첫 번째 값을 `"Drfit on the Center of Mass"`로 적고 있습니다. 이전 버전 문서는 [13. Stiffness Irregularity Check](#13-stiffness-irregularity-check-soft-story)·[17. Weight Irregularity Check](#17-weight-irregularity-check)와 동일 enum이라 가정하고 `"Drift at the Center of Mass"`로 정정해 실었으나, **이는 잘못된 교정이었습니다.** 공식 담당자 확인 결과(Jira MAPI-2009) API는 제품 UI 문구를 그대로 따르도록 설계되어 있고, 이 테이블(Story Stability Coefficient)이 속한 제품 화면은 실제로 "Drift **on**"을 사용하며 "Drift at"을 쓰는 것은 Weight Irregularity Check뿐입니다. 즉 오타는 철자(`Drfit`→`Drift`)뿐이고 전치사(`on`)는 의도된 표기이므로, 위 표는 철자만 정정한 `"Drift on the Center of Mass"`로 기재했습니다.
 
 **요청 예시 — `ADDITIONAL` 포함**
 
