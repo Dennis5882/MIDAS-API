@@ -877,20 +877,112 @@ print(result)
 | 1 | Point Load | `"POINT_LOAD"` | Number | – | Required |
 | 2 | Point Distance | `"POINT_DIST"` | Number | – | Required |
 
+### Parameters – VEH_KSCE_LSD15 (`STANDARD_CODE: "KSCE-LSD15"` 전용)
+
+> ℹ️ **2026-07-30 반영.** `STANDARD_CODE`가 `"KSCE-LSD15"`일 때는 `VEH_DEFAULT` 대신 이 전용 객체를 사용합니다(공식 매뉴얼의 별도 아티클 ["Vehicles - KSCE-LSD15"](https://support.midasuser.com/hc/en-us/articles/35958367637273-Vehicles-KSCE-LSD15)에만 문서화되어 있어 이전 버전에는 누락돼 있었습니다). 공식 Specifications 표는 표준 차량(Standard)·사용자 정의 Truck/Lane(1st·2nd Model)·Train·Lane 5가지 상황별로 필수/선택 여부가 달라지므로, 아래 표는 JSON Schema 기준으로 전체 필드를 통합해 실었습니다 — 실제 필수 여부는 `USER_LOAD_TYPE`/`LENGTH_LANE` 조합에 따라 달라지니 예제를 참고하십시오.
+
+| No. | Description | Key | Value Type | Default | Required |
+|-----|-------------|-----|-----------|---------|----------|
+| 1 | Load Type · `"KL-510LNE"` 전용 — `0`=75% of Design Load / `1`=25% of Design Load | `"LOAD_TYPE"` | Integer | `0` | Optional |
+| 2 | Lane Loaded Length (User Defined Truck/Lane 전용) | `"LOADED_LENGTH"` | Number | `60` | Optional |
+| 3 | Distribution Load Not Exceeding Loaded Length | `"W1"` | Number | `12.7` | Optional |
+| 4 | Distribution Load Exceeding Loaded Length | `"W2"` | Number | `12.7` | Optional |
+| 5 | Spacing dD1 (User Defined Train 전용) | `"D1"` | Number | `0` | Optional |
+| 6 | Spacing dD2 (User Defined Train 전용) | `"D2"` | Number | `0` | Optional |
+| 7 | Exponent to Calculate Distribution Load of W2 | `"EXP"` | Number | `0.1` | Optional |
+| 8 | Dynamic Load Allowance (%) | `"DYN_LOAD_ALLOWANCE"` | Number | `0` | Optional |
+| 9 | Length of Lane Load · `0`=1st Model / `1`=2nd Model | `"LENGTH_LANE"` | Integer | — | Required |
+| 10 | Length of Lane Load(User) — `LENGTH_LANE: 0`일 때 | `"LENGTH_LANE_USER"` | Number | `0` | Optional |
+| 11 | Convert Point Load to Distributed Load | `"CONVERT_DIST_LOAD"` | Boolean | `false` | Optional |
+| 12 | Number of Uniform Load (Lane 전용) · N개면 N-1 | `"UNIFORM_LOAD_NUM"` | Number | `0` | Optional |
+| 13 | Uniform Load Distance (Lane 전용) | `"UNIFORM_LOAD_DIST"` | Number | `0` | Optional |
+| 14 | Uniform Load (Lane 전용) | `"UNIFORM_LOAD_W"` | Number | — | Required |
+| 15 | Uniform Load Length (Lane 전용) | `"UNIFORM_LOAD_LOAD_LENGTH_L"` | Number | — | Required |
+| 16 | 축하중 배열 | `"POINT_ITEMS"` | Array [Object] | — | Required |
+| 16-1 | └ 하중(Load) | `POINT_ITEMS[].POINT_LOAD` | Number | — | Required |
+| 16-2 | └ 간격(Spacing) | `POINT_ITEMS[].POINT_DIST` | Number | — | Required |
+| 16-3 | └ 등분포 환산 길이 — `CONVERT_DIST_LOAD: true`일 때 | `POINT_ITEMS[].POINT_DIST2` | Number | `0` | Optional |
+
+**요청 예시 — 표준 차량(Standard)**
+
+```json
+{
+  "Assign": {
+    "1": {
+      "MVLD_CODE": 13,
+      "VEHICLE_LOAD_NAME": "ST_KL-510TRK",
+      "VEHICLE_LOAD_NUM": 1,
+      "VEHICLE_TYPE_NAME": "KL-510TRK",
+      "STANDARD_CODE": "KSCE-LSD15",
+      "VEH_KSCE_LSD15": {
+        "LOAD_TYPE": 0,
+        "DYN_LOAD_ALLOWANCE": 25,
+        "LENGTH_LANE": 0,
+        "LENGTH_LANE_USER": 0,
+        "CONVERT_DIST_LOAD": false,
+        "POINT_ITEMS": [
+          { "POINT_LOAD": 48, "POINT_DIST": 3.6 },
+          { "POINT_LOAD": 135, "POINT_DIST": 1.2 },
+          { "POINT_LOAD": 135, "POINT_DIST": 7.2 },
+          { "POINT_LOAD": 192, "POINT_DIST": 0 }
+        ]
+      }
+    }
+  }
+}
+```
+
+**요청 예시 — 사용자 정의(User Defined) Truck/Lane**
+
+```json
+{
+  "Assign": {
+    "8": {
+      "MVLD_CODE": 13,
+      "VEHICLE_LOAD_NAME": "UD_Truck/Lane1",
+      "VEHICLE_LOAD_NUM": 2,
+      "USER_LOAD_TYPE": "Truck/Lane",
+      "VEH_KSCE_LSD15": {
+        "LOADED_LENGTH": 60,
+        "W1": 12.7,
+        "W2": 12.7,
+        "EXP": 0.1,
+        "DYN_LOAD_ALLOWANCE": 25,
+        "LENGTH_LANE": 0,
+        "LENGTH_LANE_USER": 1.5,
+        "CONVERT_DIST_LOAD": true,
+        "POINT_ITEMS": [
+          { "POINT_LOAD": 100, "POINT_DIST": 0.2, "POINT_DIST2": 0.45 }
+        ]
+      }
+    }
+  }
+}
+```
+
 ### Python 예제
 
 ```python
-# KSCE-LSD15 기준 사전 정의 차량
+# KSCE-LSD15 기준 사전 정의 차량 — MVLD_CODE는 KSCE-LSD15 전용 코드(13)를 사용
 result = mv_post("MVHL", {
     "1": {
-        "MVLD_CODE": 1,   # KSCE-LSD15 코드 인덱스
+        "MVLD_CODE": 13,   # KSCE-LSD15 코드
         "VEHICLE_LOAD_NAME": "KL-510FTG",
         "VEHICLE_LOAD_NUM": 1,
         "VEHICLE_TYPE_NAME": "ST_KL-510FTG",
         "STANDARD_CODE": "KSCE-LSD15",
-        "VEH_DEFAULT": {
-            "DYN_LOAD_ALLOWANCE": 0,
-            "CENT_F": False,
+        "VEH_KSCE_LSD15": {
+            "LOAD_TYPE": 0,
+            "DYN_LOAD_ALLOWANCE": 15,
+            "LENGTH_LANE": 0,
+            "LENGTH_LANE_USER": 0,
+            "CONVERT_DIST_LOAD": False,
+            "POINT_ITEMS": [
+                {"POINT_LOAD": 38.4, "POINT_DIST": 3.6},
+                {"POINT_LOAD": 108, "POINT_DIST": 1.2},
+                {"POINT_LOAD": 108, "POINT_DIST": 7.2},
+                {"POINT_LOAD": 153.6, "POINT_DIST": 0},
+            ],
         },
     }
 })

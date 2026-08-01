@@ -4,7 +4,7 @@
   "33016922742937": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/33016922742937-MIDAS-API-Online-Manual",
    "title": "MIDAS API Online Manual",
-   "updated_at": "2026-07-29T15:36:08Z"
+   "updated_at": "2026-07-30T07:14:44Z"
   },
   "35409287717657": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35409287717657-Main-Control-Data",
@@ -679,7 +679,7 @@
   "35958367637273": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35958367637273-Vehicles-KSCE-LSD15",
    "title": "Vehicles - KSCE-LSD15",
-   "updated_at": "2025-03-07T01:45:49Z"
+   "updated_at": "2026-07-30T06:51:25Z"
   },
   "35958523379353": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35958523379353-Vehicles-China",
@@ -1009,12 +1009,12 @@
   "35990806887065": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35990806887065-Load-Combinations-General",
    "title": "Load Combinations - General",
-   "updated_at": "2025-12-01T08:20:27Z"
+   "updated_at": "2026-07-30T07:43:23Z"
   },
   "35990864052249": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35990864052249-Load-Combinations-Concrete-Design",
    "title": "Load Combinations - Concrete Design",
-   "updated_at": "2025-12-01T08:19:57Z"
+   "updated_at": "2026-07-30T07:40:10Z"
   },
   "35990929861913": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35990929861913-Load-Combinations-Steel-Design",
@@ -1024,17 +1024,17 @@
   "35991038731161": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35991038731161-Load-Combinations-SRC-Design",
    "title": "Load Combinations - SRC Design",
-   "updated_at": "2025-12-01T08:21:33Z"
+   "updated_at": "2026-07-30T07:50:51Z"
   },
   "35991080923033": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35991080923033-Load-Combinations-Composite-Steel-Girder-Design",
    "title": "Load Combinations - Composite Steel Girder Design",
-   "updated_at": "2025-12-01T08:20:57Z"
+   "updated_at": "2026-07-30T07:55:34Z"
   },
   "35991142266265": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35991142266265-Load-Combinations-Seismic-Design",
    "title": "Load Combinations - Seismic Design",
-   "updated_at": "2025-12-01T08:19:54Z"
+   "updated_at": "2026-07-30T06:02:33Z"
   },
   "35991257189017": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35991257189017-Cutting-Line",
@@ -1784,7 +1784,7 @@
   "36021337973017": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/36021337973017-P-M-Interaction-Diagram",
    "title": "P-M Interaction Diagram",
-   "updated_at": "2024-11-08T06:42:22Z"
+   "updated_at": "2026-07-30T05:10:50Z"
   },
   "36704969941913": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/36704969941913-Time-History-Text-Node-Results",
@@ -1814,12 +1814,12 @@
   "36705962238873": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/36705962238873-Pushover-Text-Displacement-Result",
    "title": "Pushover Text - Displacement Result",
-   "updated_at": "2025-08-14T04:49:00Z"
+   "updated_at": "2026-07-30T04:58:40Z"
   },
   "36706062373657": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/36706062373657-Pushover-Text-Element-Result-Beam-Truss",
    "title": "Pushover Text - Element Result(Beam, Truss)",
-   "updated_at": "2025-08-14T05:23:28Z"
+   "updated_at": "2026-07-30T07:15:27Z"
   },
   "36706217576217": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/36706217576217-Pushover-Text-Element-Result-Wall",
@@ -1834,7 +1834,7 @@
   "36706383777817": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/36706383777817-Pushover-Text-Elastic-Link-Result",
    "title": "Pushover Text - Elastic Link Result",
-   "updated_at": "2025-08-14T04:50:08Z"
+   "updated_at": "2026-07-30T05:02:03Z"
   },
   "39233604772633": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/39233604772633-Section-Properties-PSC-Value",
@@ -1939,17 +1939,17 @@
   "43835303404825": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/43835303404825-Material-Table",
    "title": "Material Table",
-   "updated_at": "2025-02-25T02:43:13Z"
+   "updated_at": "2026-07-30T04:35:31Z"
   },
   "43835398107801": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/43835398107801-Section-Table",
    "title": "Section Table",
-   "updated_at": "2025-02-25T02:46:17Z"
+   "updated_at": "2026-07-30T04:44:04Z"
   },
   "43835481307161": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/43835481307161-Restraint-Supports-Table",
    "title": "Restraint Supports Table",
-   "updated_at": "2025-02-25T02:48:10Z"
+   "updated_at": "2026-07-30T04:41:15Z"
   },
   "44613910309401": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/44613910309401-Element-Stiffness-Scale-Factor",
@@ -1959,7 +1959,7 @@
   "44662732910233": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/44662732910233-Steel-Code-Check",
    "title": "Steel Code Check",
-   "updated_at": "2025-11-04T00:16:11Z"
+   "updated_at": "2026-07-30T04:15:11Z"
   },
   "49510398353945": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49510398353945-Element-Stiffness-Scale-Factor",
@@ -2059,12 +2059,12 @@
   "49513284077721": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49513284077721-Criteria-for-Regularity-in-Plan-Story-Result-Table",
    "title": "Criteria for Regularity in Plan - Story Result Table",
-   "updated_at": "2026-07-22T06:49:15Z"
+   "updated_at": "2026-07-30T07:06:04Z"
   },
   "49513305580569": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49513305580569-Ultimate-Story-Shear-For-Check-Story-Result-Table",
    "title": "Ultimate Story Shear For Check - Story Result Table",
-   "updated_at": "2025-11-06T07:09:20Z"
+   "updated_at": "2026-07-30T07:12:23Z"
   },
   "49513398732953": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49513398732953-Wall-Force-Analysis-Result-Table",
@@ -2129,17 +2129,17 @@
   "49514136996889": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49514136996889-Story-Mass-Summary",
    "title": "Story Mass Summary",
-   "updated_at": "2025-11-21T06:54:03Z"
+   "updated_at": "2026-07-30T04:53:27Z"
   },
   "49514148775705": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49514148775705-Story-Load-Summary",
    "title": "Story Load Summary",
-   "updated_at": "2025-11-04T00:17:29Z"
+   "updated_at": "2026-07-30T04:48:35Z"
   },
   "49514231584921": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49514231584921-Story-Weight",
    "title": "Story Weight",
-   "updated_at": "2025-11-04T00:18:20Z"
+   "updated_at": "2026-07-30T04:55:53Z"
   },
   "49514295460889": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49514295460889-Concrete-Design-Beam-Design-Forces",
@@ -2159,12 +2159,12 @@
   "49514433321881": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49514433321881-Concrete-Design-Wall-Design-Forces",
    "title": "Concrete Design - Wall Design Forces",
-   "updated_at": "2025-11-04T00:18:18Z"
+   "updated_at": "2026-07-30T04:22:56Z"
   },
   "49514496461593": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49514496461593-Steel-Design-Steel-Member-Design-Forces",
    "title": "Steel Design - Steel Member Design Forces",
-   "updated_at": "2025-11-04T00:19:06Z"
+   "updated_at": "2026-07-30T04:19:34Z"
   },
   "49514560567961": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49514560567961-SRC-Design-SRC-Beam-Design-Forces",
@@ -2174,7 +2174,7 @@
   "49514609393049": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49514609393049-SRC-Design-SRC-Column-Design-Forces",
    "title": "SRC Design - SRC Column Design Forces",
-   "updated_at": "2025-11-04T00:18:19Z"
+   "updated_at": "2026-07-30T01:39:02Z"
   },
   "49514621265305": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49514621265305-Cold-Formed-Design-Cold-Formed-Steel-Member-Design-Forces",
@@ -2194,17 +2194,17 @@
   "49514751862425": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49514751862425-Story-Irregularity-Check-Parameter",
    "title": "Story Irregularity Check Parameter",
-   "updated_at": "2026-06-10T05:37:31Z"
+   "updated_at": "2026-07-30T06:12:50Z"
   },
   "49514773501721": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49514773501721-Story-Properties",
    "title": "Story Properties",
-   "updated_at": "2026-07-21T04:40:31Z"
+   "updated_at": "2026-07-30T06:31:51Z"
   },
   "49514964272665": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49514964272665-Member-Assignment",
    "title": "Member Assignment",
-   "updated_at": "2025-11-04T00:18:17Z"
+   "updated_at": "2026-07-30T05:16:25Z"
   },
   "50694881913241": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/50694881913241-Resultant-Force-Diagram-Result-Display",
@@ -3099,12 +3099,12 @@
   "58908673370521": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/58908673370521-Static-Wind-Load-KDS-41-12-2022",
    "title": "Static Wind Load - KDS(41-12:2022)",
-   "updated_at": "2026-06-18T09:56:27Z"
+   "updated_at": "2026-07-30T05:33:31Z"
   },
   "58908676674585": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/58908676674585-Static-Seismic-Load-KDS-41-17-00-2019",
    "title": "Static Seismic Load - KDS(41-17-00:2019)",
-   "updated_at": "2026-06-18T09:56:23Z"
+   "updated_at": "2026-07-30T05:36:37Z"
   },
   "58908922148249": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/58908922148249-Static-Wind-Load-User-Type",
@@ -3119,17 +3119,17 @@
   "59050520760473": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/59050520760473-Gust-Factor-Calculator",
    "title": "Gust Factor Calculator",
-   "updated_at": "2026-06-18T09:56:31Z"
+   "updated_at": "2026-07-30T06:39:07Z"
   },
   "59054671269145": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/59054671269145-Load-Combination-Steel-KDS-41-30-2022",
    "title": "Load Combination (Steel) - KDS 41 30 : 2022",
-   "updated_at": "2026-06-18T09:56:44Z"
+   "updated_at": "2026-07-30T06:58:24Z"
   },
   "59054699524889": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/59054699524889-Load-Combination-Concrete-KDS-41-20-2022",
    "title": "Load Combination (Concrete) - KDS 41 20 : 2022",
-   "updated_at": "2026-06-18T09:56:33Z"
+   "updated_at": "2026-07-30T06:53:11Z"
   },
   "59056886354201": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/59056886354201-Load-Combination-SRC-AIK-SRC2K",
@@ -3144,12 +3144,12 @@
   "59057595762329": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/59057595762329-Load-Combination-General-KDS-2022",
    "title": "Load Combination (General) - KDS : 2022",
-   "updated_at": "2026-06-18T09:56:37Z"
+   "updated_at": "2026-07-30T06:46:54Z"
   },
   "59057831082265": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/59057831082265-Load-Combination-SRC-KDS-41-SRC-2022",
    "title": "Load Combination (SRC) - KDS 41 SRC : 2022",
-   "updated_at": "2026-06-18T09:56:40Z"
+   "updated_at": "2026-07-30T07:03:51Z"
   },
   "59120800558361": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/59120800558361-DESIGN-RC-DRC-RC-Design-Code",

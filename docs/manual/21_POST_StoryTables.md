@@ -1653,6 +1653,34 @@ for row in table.get("DATA", []):
 ["Index", "Story", "Load Case", "Angle", "Applied Shear Force (Ve)", "Clockwise/Ultimate Shear Force1 (Vp)/Column", "Clockwise/Ultimate Shear Force1 (Vp)/Wall", "Clockwise/Ultimate Shear Force1 (Vp)/SUM", "Clockwise/Ratio1", "Clockwise/Beta1", "Counter-Clockwise/Ultimate Shear Force2 (Vp)/Column", "Counter-Clockwise/Ultimate Shear Force2 (Vp)/Wall", "Counter-Clockwise/Ultimate Shear Force2 (Vp)/SUM", "Counter-Clockwise/Ratio2", "Counter-Clockwise/Beta2", "MIN", "Remark"]
 ```
 
+### `ADDITIONAL` — 전단력 산정 각도 설정 (2026-07-30 공식 반영)
+
+> ℹ️ 공식 매뉴얼에 `"ADDITIONAL"` 요청 객체가 추가로 문서화되어 있어 반영합니다. [14. Capacity Irregularity Check](#14-capacity-irregularity-check-weak-story)와 동일한 패턴으로, 전단력을 산정할 기준 각도(Angle)를 지정합니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 세부 설정 객체 | `"ADDITIONAL"` | Object | — | Optional |
+| 1-1 | └ 각도 설정 | `ADDITIONAL.SET_ANGLE` | Object | — | Optional |
+| 1-1-1 | 　　└ 산정 각도(°) | `SET_ANGLE.ANGLE` | Number | — | Optional |
+
+**요청 예시 — `ADDITIONAL` 포함**
+
+```json
+{
+  "Argument": {
+    "TABLE_TYPE": "ULTIMATE_STORY_SHEAR_FORCE_CHECK",
+    "UNIT": { "FORCE": "kN", "DIST": "m" },
+    "STYLES": { "FORMAT": "Fixed", "PLACE": 4 },
+    "LOAD_CASE_NAMES": ["Rx(RS)"],
+    "ADDITIONAL": {
+      "SET_ANGLE": {
+        "ANGLE": 0
+      }
+    }
+  }
+}
+```
+
 ### Request / Response JSON
 
 **POST Request Body**
