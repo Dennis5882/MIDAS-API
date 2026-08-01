@@ -881,9 +881,9 @@ print(result)
 
 > ℹ️ **2026-07-30 반영.** `STANDARD_CODE`가 `"KSCE-LSD15"`일 때는 `VEH_DEFAULT` 대신 이 전용 객체를 사용합니다(공식 매뉴얼의 별도 아티클 ["Vehicles - KSCE-LSD15"](https://support.midasuser.com/hc/en-us/articles/35958367637273-Vehicles-KSCE-LSD15)에만 문서화되어 있어 이전 버전에는 누락돼 있었습니다). 공식 Specifications 표는 표준 차량(Standard)·사용자 정의 Truck/Lane(1st·2nd Model)·Train·Lane 5가지 상황별로 필수/선택 여부가 달라지므로, 아래 표는 JSON Schema 기준으로 전체 필드를 통합해 실었습니다 — 실제 필수 여부는 `USER_LOAD_TYPE`/`LENGTH_LANE` 조합에 따라 달라지니 예제를 참고하십시오.
 
-| No. | Description | Key | Value Type | Default | Required |
-|-----|-------------|-----|-----------|---------|----------|
-| 1 | Load Type · `"KL-510LNE"` 전용 — `0`=75% of Design Load / `1`=25% of Design Load | `"LOAD_TYPE"` | Integer | `0` | Optional |
+| No. | Description | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Load Type ¹⁾ — `0`=75% of Design Load / `1`=25% of Design Load | `"LOAD_TYPE"` | Integer | `0` | Optional |
 | 2 | Lane Loaded Length (User Defined Truck/Lane 전용) | `"LOADED_LENGTH"` | Number | `60` | Optional |
 | 3 | Distribution Load Not Exceeding Loaded Length | `"W1"` | Number | `12.7` | Optional |
 | 4 | Distribution Load Exceeding Loaded Length | `"W2"` | Number | `12.7` | Optional |
@@ -902,6 +902,8 @@ print(result)
 | 16-1 | └ 하중(Load) | `POINT_ITEMS[].POINT_LOAD` | Number | — | Required |
 | 16-2 | └ 간격(Spacing) | `POINT_ITEMS[].POINT_DIST` | Number | — | Required |
 | 16-3 | └ 등분포 환산 길이 — `CONVERT_DIST_LOAD: true`일 때 | `POINT_ITEMS[].POINT_DIST2` | Number | `0` | Optional |
+
+> ¹⁾ 공식 Specifications 표에는 `LOAD_TYPE`이 `"KL-510LNE"` 전용이라 적혀 있지만, 공식 Request Examples는 `KL-510TRK`·`KL-510FTG` 표준 차량 예제에도 `"LOAD_TYPE": 0`을 그대로 포함합니다. 필드 자체는 모든 표준 차량 요청에 공통으로 실려 있고(기본값 `0`), 값 `1`(25% of Design Load)이 실제로 의미를 갖는 건 `KL-510LNE`뿐인 것으로 판단됩니다 — CLAUDE.md 원칙에 따라 예제를 기준으로 반영.
 
 **요청 예시 — 표준 차량(Standard)**
 
@@ -2490,13 +2492,22 @@ post("LLAN", {
     },
 })
 
-# Step 3: 차량 정의 (KSCE-LSD15 기본 차량)
+# Step 3: 차량 정의 (KSCE-LSD15 표준 차량 — MVLD_CODE 13 + VEH_KSCE_LSD15 스키마 사용)
 post("MVHL", {
     "1": {
-        "MVLD_CODE": 1, "VEHICLE_LOAD_NAME": "KL-510FTG",
-        "VEHICLE_LOAD_NUM": 1, "VEHICLE_TYPE_NAME": "ST_KL-510FTG",
+        "MVLD_CODE": 13, "VEHICLE_LOAD_NAME": "KL-510FTG",
+        "VEHICLE_LOAD_NUM": 1, "VEHICLE_TYPE_NAME": "KL-510FTG",
         "STANDARD_CODE": "KSCE-LSD15",
-        "VEH_DEFAULT": {"DYN_LOAD_ALLOWANCE": 0, "CENT_F": False},
+        "VEH_KSCE_LSD15": {
+            "LOAD_TYPE": 0, "DYN_LOAD_ALLOWANCE": 15,
+            "LENGTH_LANE": 0, "LENGTH_LANE_USER": 0, "CONVERT_DIST_LOAD": False,
+            "POINT_ITEMS": [
+                {"POINT_LOAD": 38.4, "POINT_DIST": 3.6},
+                {"POINT_LOAD": 108, "POINT_DIST": 1.2},
+                {"POINT_LOAD": 108, "POINT_DIST": 7.2},
+                {"POINT_LOAD": 153.6, "POINT_DIST": 0},
+            ],
+        },
     }
 })
 

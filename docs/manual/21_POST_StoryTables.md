@@ -1655,7 +1655,7 @@ for row in table.get("DATA", []):
 
 ### `ADDITIONAL` — 전단력 산정 각도 설정 (2026-07-30 공식 반영)
 
-> ℹ️ 공식 매뉴얼에 `"ADDITIONAL"` 요청 객체가 추가로 문서화되어 있어 반영합니다. [14. Capacity Irregularity Check](#14-capacity-irregularity-check-weak-story)와 동일한 패턴으로, 전단력을 산정할 기준 각도(Angle)를 지정합니다.
+> ℹ️ 공식 매뉴얼에 `"ADDITIONAL"` 요청 객체가 추가로 문서화되어 있어 반영합니다. [14. Capacity Irregularity Check](#14-capacity-irregularity-check-weak-story)와 필드 구성은 동일하지만(전단력을 산정할 기준 각도(Angle) 지정), 공식 Specifications 표 기준으로 **여기서는 `SET_ANGLE`/`ANGLE` 모두 Optional**입니다 — 14장은 Required이므로 필수 여부가 서로 다릅니다.
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 | --- | --- | --- | --- | --- | --- |
