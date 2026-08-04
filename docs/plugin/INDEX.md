@@ -37,7 +37,7 @@ Manual과 같지만, 문서 성격은 다르다:
 리서치/편집 분리 서브에이전트 패턴을 그대로 재사용한다.
 
 - Guide: 4/4 작성 완료
-- Plug-in Item: 45/52 작성 완료 (원문 53건 중 "Image Capture Generator"는 "Easy Capture
+- Plug-in Item: 50/52 작성 완료 (원문 53건 중 "Image Capture Generator"는 "Easy Capture
   Generator"와 동일 URL의 별칭이라 1건으로 병합)
 
 ---
@@ -106,11 +106,11 @@ Manual과 같지만, 문서 성격은 다르다:
 | 43 | Stiffness Auto Tuner | [tools/Stiffness_Auto_Tuner.md](tools/Stiffness_Auto_Tuner.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/58178248491161-Stiffness-Auto-Tuner) |
 | 44 | Substructure Generator | [tools/Substructure_Generator.md](tools/Substructure_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/60317101122329-Substructure-Generator) |
 | 45 | [TAIWAN2014] Building Wind Loads Generator | [tools/TAIWAN2014_Building_Wind_Loads_Generator.md](tools/TAIWAN2014_Building_Wind_Loads_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/52808991968665--TAIWAN2014-Building-Wind-Loads-Generator) |
-| 46 | Temperature Gradient Stress Generator | [tools/Temperature_Gradient_Stress_Generator.md](tools/Temperature_Gradient_Stress_Generator.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/40708129121817-Temperature-Gradient-Stress-Generator) |
-| 47 | Temperature Load Calculator for Bridges (HK) | [tools/Temperature_Load_Calculator_for_Bridges_HK.md](tools/Temperature_Load_Calculator_for_Bridges_HK.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/40663607747737-Temperature-Load-Calculator-for-bridges-HK) |
-| 48 | Tendon Profile | [tools/Tendon_Profile.md](tools/Tendon_Profile.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/45306728128921-Tendon-Profile) |
-| 49 | Traffic Lane Generator | [tools/Traffic_Lane_Generator.md](tools/Traffic_Lane_Generator.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/60315550956825-Traffic-Lane-Generator) |
-| 50 | Thailand DPT Code Auto Searching | [tools/Thailand_DPT_Code_Auto_Searching.md](tools/Thailand_DPT_Code_Auto_Searching.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/52715682940313-Thailand-DPT-Code-Auto-Searching) |
+| 46 | Temperature Gradient Stress Generator | [tools/Temperature_Gradient_Stress_Generator.md](tools/Temperature_Gradient_Stress_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/40708129121817-Temperature-Gradient-Stress-Generator) |
+| 47 | Temperature Load Calculator for Bridges (HK) | [tools/Temperature_Load_Calculator_for_Bridges_HK.md](tools/Temperature_Load_Calculator_for_Bridges_HK.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/40663607747737-Temperature-Load-Calculator-for-bridges-HK) |
+| 48 | Tendon Profile | [tools/Tendon_Profile.md](tools/Tendon_Profile.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/45306728128921-Tendon-Profile) |
+| 49 | Traffic Lane Generator | [tools/Traffic_Lane_Generator.md](tools/Traffic_Lane_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/60315550956825-Traffic-Lane-Generator) |
+| 50 | Thailand DPT Code Auto Searching | [tools/Thailand_DPT_Code_Auto_Searching.md](tools/Thailand_DPT_Code_Auto_Searching.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/52715682940313-Thailand-DPT-Code-Auto-Searching) |
 | 51 | Tunnel Lining Generator | [tools/Tunnel_Lining_Generator.md](tools/Tunnel_Lining_Generator.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/35655721814937-Tunnel-Lining-Model) |
 | 52 | Wind Load Calculator for Bridges (HK) | [tools/Wind_Load_Calculator_for_Bridges_HK.md](tools/Wind_Load_Calculator_for_Bridges_HK.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/40645303004697-Wind-Load-Calculator-for-bridges-HK) |
 
