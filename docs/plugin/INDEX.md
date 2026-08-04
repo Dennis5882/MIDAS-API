@@ -37,7 +37,7 @@ Manual과 같지만, 문서 성격은 다르다:
 리서치/편집 분리 서브에이전트 패턴을 그대로 재사용한다.
 
 - Guide: 4/4 작성 완료
-- Plug-in Item: 10/52 작성 완료 (원문 53건 중 "Image Capture Generator"는 "Easy Capture
+- Plug-in Item: 15/52 작성 완료 (원문 53건 중 "Image Capture Generator"는 "Easy Capture
   Generator"와 동일 URL의 별칭이라 1건으로 병합)
 
 ---
@@ -71,11 +71,11 @@ Manual과 같지만, 문서 성격은 다르다:
 | 8 | [AS 1170.4:2024] Static Seismic Loads Generator | [tools/AS_1170_42024_Static_Seismic_Loads_Generator.md](tools/AS_1170_42024_Static_Seismic_Loads_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/46857988729753--AS-1170-4-2024-Static-Seismic-Loads-Generator) |
 | 9 | Assign Floor Loads | [tools/Assign_Floor_Loads.md](tools/Assign_Floor_Loads.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/52564358801049-Assign-Floor-Loads) |
 | 10 | Auto Saver | [tools/Auto_Saver.md](tools/Auto_Saver.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/35661003551385-Auto-Saver) |
-| 11 | Breakdown Load Combination | [tools/Breakdown_Load_Combination.md](tools/Breakdown_Load_Combination.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/35845551989401-Breakdown-Load-Combination) |
-| 12 | Concrete Material Set EN1992-1-1 | [tools/Concrete_Material_Set_EN1992_1_1.md](tools/Concrete_Material_Set_EN1992_1_1.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/45536334603161-Concrete-Material-Set-EN1992-1-1) |
-| 13 | Concurrent Force Calculator | [tools/Concurrent_Force_Calculator.md](tools/Concurrent_Force_Calculator.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/60341711486361-Concurrent-Force-Calculator) |
-| 14 | Convert Load Combination into SDS Format | [tools/Convert_Load_Combination_into_SDS_Format.md](tools/Convert_Load_Combination_into_SDS_Format.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/45496104876313-Convert-Load-Combinations-into-SDS-Format) |
-| 15 | Customized Load Combination | [tools/Customized_Load_Combination.md](tools/Customized_Load_Combination.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/41509743351193-Customized-Load-Combination) |
+| 11 | Breakdown Load Combination | [tools/Breakdown_Load_Combination.md](tools/Breakdown_Load_Combination.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/35845551989401-Breakdown-Load-Combination) |
+| 12 | Concrete Material Set EN1992-1-1 | [tools/Concrete_Material_Set_EN1992_1_1.md](tools/Concrete_Material_Set_EN1992_1_1.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/45536334603161-Concrete-Material-Set-EN1992-1-1) |
+| 13 | Concurrent Force Calculator | [tools/Concurrent_Force_Calculator.md](tools/Concurrent_Force_Calculator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/60341711486361-Concurrent-Force-Calculator) |
+| 14 | Convert Load Combination into SDS Format | [tools/Convert_Load_Combination_into_SDS_Format.md](tools/Convert_Load_Combination_into_SDS_Format.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/45496104876313-Convert-Load-Combinations-into-SDS-Format) |
+| 15 | Customized Load Combination | [tools/Customized_Load_Combination.md](tools/Customized_Load_Combination.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/41509743351193-Customized-Load-Combination) |
 | 16 | CS Report Generator | [tools/CS_Report_Generator.md](tools/CS_Report_Generator.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/56841756166681-CS-Report-Generator) |
 | 17 | Dynamic Analysis of Rail Bridge | [tools/Dynamic_Analysis_of_Rail_Bridge.md](tools/Dynamic_Analysis_of_Rail_Bridge.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/60340982021529-Dynamic-Analysis-of-Rail-Bridge) |
 | 18 | Easy Capture Generator[^1] | [tools/Easy_Capture_Generator.md](tools/Easy_Capture_Generator.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/35639906272025-Easy-Capture-Generator) |
