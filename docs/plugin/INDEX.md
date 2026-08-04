@@ -37,7 +37,7 @@ Manual과 같지만, 문서 성격은 다르다:
 리서치/편집 분리 서브에이전트 패턴을 그대로 재사용한다.
 
 - Guide: 4/4 작성 완료
-- Plug-in Item: 5/52 작성 완료 (원문 53건 중 "Image Capture Generator"는 "Easy Capture
+- Plug-in Item: 10/52 작성 완료 (원문 53건 중 "Image Capture Generator"는 "Easy Capture
   Generator"와 동일 URL의 별칭이라 1건으로 병합)
 
 ---
@@ -66,11 +66,11 @@ Manual과 같지만, 문서 성격은 다르다:
 | 3 | Alignment Local Axis for Element | [tools/Alignment_Local_Axis_for_Element.md](tools/Alignment_Local_Axis_for_Element.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/35679369131289-Alignment-Local-Axis-for-Element) |
 | 4 | Alignment Generator | [tools/Alignment_Generator.md](tools/Alignment_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/40709970824729-Alignment-Generator) |
 | 5 | Artificial Earthquake Generator | [tools/Artificial_Earthquake_Generator.md](tools/Artificial_Earthquake_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/35656036758937-Artificial-Earthquake-Generator) |
-| 6 | Artificial Earthquake Correlation Checker | [tools/Artificial_Earthquake_Correlation_Checker.md](tools/Artificial_Earthquake_Correlation_Checker.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/35650468767385-Artificial-Earthquake-Correlation-Checker) |
-| 7 | [AS/NZS 1170.2:2021] Building Wind Loads Generator | [tools/AS_NZS_1170_22021_Building_Wind_Loads_Generator.md](tools/AS_NZS_1170_22021_Building_Wind_Loads_Generator.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/46935970426905--AS-1170-2-2021-Building-Wind-Loads-Generator) |
-| 8 | [AS 1170.4:2024] Static Seismic Loads Generator | [tools/AS_1170_42024_Static_Seismic_Loads_Generator.md](tools/AS_1170_42024_Static_Seismic_Loads_Generator.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/46857988729753--AS-1170-4-2024-Static-Seismic-Loads-Generator) |
-| 9 | Assign Floor Loads | [tools/Assign_Floor_Loads.md](tools/Assign_Floor_Loads.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/52564358801049-Assign-Floor-Loads) |
-| 10 | Auto Saver | [tools/Auto_Saver.md](tools/Auto_Saver.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/35661003551385-Auto-Saver) |
+| 6 | Artificial Earthquake Correlation Checker | [tools/Artificial_Earthquake_Correlation_Checker.md](tools/Artificial_Earthquake_Correlation_Checker.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/35650468767385-Artificial-Earthquake-Correlation-Checker) |
+| 7 | [AS/NZS 1170.2:2021] Building Wind Loads Generator | [tools/AS_NZS_1170_22021_Building_Wind_Loads_Generator.md](tools/AS_NZS_1170_22021_Building_Wind_Loads_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/46935970426905--AS-1170-2-2021-Building-Wind-Loads-Generator) |
+| 8 | [AS 1170.4:2024] Static Seismic Loads Generator | [tools/AS_1170_42024_Static_Seismic_Loads_Generator.md](tools/AS_1170_42024_Static_Seismic_Loads_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/46857988729753--AS-1170-4-2024-Static-Seismic-Loads-Generator) |
+| 9 | Assign Floor Loads | [tools/Assign_Floor_Loads.md](tools/Assign_Floor_Loads.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/52564358801049-Assign-Floor-Loads) |
+| 10 | Auto Saver | [tools/Auto_Saver.md](tools/Auto_Saver.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/35661003551385-Auto-Saver) |
 | 11 | Breakdown Load Combination | [tools/Breakdown_Load_Combination.md](tools/Breakdown_Load_Combination.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/35845551989401-Breakdown-Load-Combination) |
 | 12 | Concrete Material Set EN1992-1-1 | [tools/Concrete_Material_Set_EN1992_1_1.md](tools/Concrete_Material_Set_EN1992_1_1.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/45536334603161-Concrete-Material-Set-EN1992-1-1) |
 | 13 | Concurrent Force Calculator | [tools/Concurrent_Force_Calculator.md](tools/Concurrent_Force_Calculator.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/60341711486361-Concurrent-Force-Calculator) |
