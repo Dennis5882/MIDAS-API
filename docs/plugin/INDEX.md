@@ -37,7 +37,7 @@ Manual과 같지만, 문서 성격은 다르다:
 리서치/편집 분리 서브에이전트 패턴을 그대로 재사용한다.
 
 - Guide: 4/4 작성 완료
-- Plug-in Item: 40/52 작성 완료 (원문 53건 중 "Image Capture Generator"는 "Easy Capture
+- Plug-in Item: 45/52 작성 완료 (원문 53건 중 "Image Capture Generator"는 "Easy Capture
   Generator"와 동일 URL의 별칭이라 1건으로 병합)
 
 ---
@@ -101,11 +101,11 @@ Manual과 같지만, 문서 성격은 다르다:
 | 38 | Response Spectrum Generator | [tools/Response_Spectrum_Generator.md](tools/Response_Spectrum_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/45716286965273-Response-Spectrum-Generator) |
 | 39 | Rigid Link Generator | [tools/Rigid_Link_Generator.md](tools/Rigid_Link_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/35651417232025-Rigid-Link-Generator) |
 | 40 | Seismic Hazard Map | [tools/Seismic_Hazard_Map.md](tools/Seismic_Hazard_Map.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/35658068066841-Seismic-Hazard-Map) |
-| 41 | Series Load | [tools/Series_Load.md](tools/Series_Load.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/45545604010521-Series-Load) |
-| 42 | SPACE GASS Converter | [tools/SPACE_GASS_Converter.md](tools/SPACE_GASS_Converter.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/35824220762521-SPACE-GASS-Converter) |
-| 43 | Stiffness Auto Tuner | [tools/Stiffness_Auto_Tuner.md](tools/Stiffness_Auto_Tuner.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/58178248491161-Stiffness-Auto-Tuner) |
-| 44 | Substructure Generator | [tools/Substructure_Generator.md](tools/Substructure_Generator.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/60317101122329-Substructure-Generator) |
-| 45 | [TAIWAN2014] Building Wind Loads Generator | [tools/TAIWAN2014_Building_Wind_Loads_Generator.md](tools/TAIWAN2014_Building_Wind_Loads_Generator.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/52808991968665--TAIWAN2014-Building-Wind-Loads-Generator) |
+| 41 | Series Load | [tools/Series_Load.md](tools/Series_Load.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/45545604010521-Series-Load) |
+| 42 | SPACE GASS Converter | [tools/SPACE_GASS_Converter.md](tools/SPACE_GASS_Converter.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/35824220762521-SPACE-GASS-Converter) |
+| 43 | Stiffness Auto Tuner | [tools/Stiffness_Auto_Tuner.md](tools/Stiffness_Auto_Tuner.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/58178248491161-Stiffness-Auto-Tuner) |
+| 44 | Substructure Generator | [tools/Substructure_Generator.md](tools/Substructure_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/60317101122329-Substructure-Generator) |
+| 45 | [TAIWAN2014] Building Wind Loads Generator | [tools/TAIWAN2014_Building_Wind_Loads_Generator.md](tools/TAIWAN2014_Building_Wind_Loads_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/52808991968665--TAIWAN2014-Building-Wind-Loads-Generator) |
 | 46 | Temperature Gradient Stress Generator | [tools/Temperature_Gradient_Stress_Generator.md](tools/Temperature_Gradient_Stress_Generator.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/40708129121817-Temperature-Gradient-Stress-Generator) |
 | 47 | Temperature Load Calculator for Bridges (HK) | [tools/Temperature_Load_Calculator_for_Bridges_HK.md](tools/Temperature_Load_Calculator_for_Bridges_HK.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/40663607747737-Temperature-Load-Calculator-for-bridges-HK) |
 | 48 | Tendon Profile | [tools/Tendon_Profile.md](tools/Tendon_Profile.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/45306728128921-Tendon-Profile) |
