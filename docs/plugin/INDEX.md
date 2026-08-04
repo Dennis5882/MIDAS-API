@@ -37,7 +37,7 @@ Manual과 같지만, 문서 성격은 다르다:
 리서치/편집 분리 서브에이전트 패턴을 그대로 재사용한다.
 
 - Guide: 4/4 작성 완료
-- Plug-in Item: 25/52 작성 완료 (원문 53건 중 "Image Capture Generator"는 "Easy Capture
+- Plug-in Item: 30/52 작성 완료 (원문 53건 중 "Image Capture Generator"는 "Easy Capture
   Generator"와 동일 URL의 별칭이라 1건으로 병합)
 
 ---
@@ -86,11 +86,11 @@ Manual과 같지만, 문서 성격은 다르다:
 | 23 | Floor Transition | [tools/Floor_Transition.md](tools/Floor_Transition.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/35681919947673-Floor-Transition) |
 | 24 | GEN NX to Staad Converter | [tools/GEN_NX_to_Staad_Converter.md](tools/GEN_NX_to_Staad_Converter.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/56728677543321-GEN-NX-to-Staad-Converter) |
 | 25 | Group Pile | [tools/Group_Pile.md](tools/Group_Pile.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/45354275911321-Group-Pile) |
-| 26 | Inertial Forces Controller | [tools/Inertial_Forces_Controller.md](tools/Inertial_Forces_Controller.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/40706127836953-Inertial-Forces-Controller) |
-| 27 | Iterative Response Spectrum | [tools/Iterative_Response_Spectrum.md](tools/Iterative_Response_Spectrum.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/50959239482393-Iterative-Response-Spectrum) |
-| 28 | Line to Plate Converter | [tools/Line_to_Plate_Converter.md](tools/Line_to_Plate_Converter.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/60469083421593-Line-To-Plate-Converter) |
-| 29 | Load Effect for Load Combination | [tools/Load_Effect_for_Load_Combination.md](tools/Load_Effect_for_Load_Combination.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/35649669387289-Load-Effect-for-Load-Combination) |
-| 30 | Local Axis | [tools/Local_Axis.md](tools/Local_Axis.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/45537498601881-Local-Axis) |
+| 26 | Inertial Forces Controller | [tools/Inertial_Forces_Controller.md](tools/Inertial_Forces_Controller.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/40706127836953-Inertial-Forces-Controller) |
+| 27 | Iterative Response Spectrum | [tools/Iterative_Response_Spectrum.md](tools/Iterative_Response_Spectrum.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/50959239482393-Iterative-Response-Spectrum) |
+| 28 | Line to Plate Converter | [tools/Line_to_Plate_Converter.md](tools/Line_to_Plate_Converter.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/60469083421593-Line-To-Plate-Converter) |
+| 29 | Load Effect for Load Combination | [tools/Load_Effect_for_Load_Combination.md](tools/Load_Effect_for_Load_Combination.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/35649669387289-Load-Effect-for-Load-Combination) |
+| 30 | Local Axis | [tools/Local_Axis.md](tools/Local_Axis.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/45537498601881-Local-Axis) |
 | 31 | Mirror Tapered Section | [tools/Mirror_Tapered_Section.md](tools/Mirror_Tapered_Section.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/35651585867801-Mirror-Tapered-Section) |
 | 32 | [MS 1553:2002] Building Wind Loads Generator | [tools/MS_15532002_Building_Wind_Loads_Generator.md](tools/MS_15532002_Building_Wind_Loads_Generator.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/47130265330841--MS-1553-2002-Building-Wind-Loads-Generator) |
 | 33 | Nastran Importer | [tools/Nastran_Importer.md](tools/Nastran_Importer.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/45548001795865-Nastran-Importer) |
