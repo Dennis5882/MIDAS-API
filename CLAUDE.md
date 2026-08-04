@@ -9,36 +9,53 @@
 
 - `docs/manual/01_DOC.md` ~ `27_Design_SRC_AIKSRC2K.md` — 27개 챕터, 총 ~270개 엔드포인트를
   MIDAS 공식 Zendesk 온라인 매뉴얼 기준으로 문서화. `docs/manual/INDEX.md`가 전체 목차/개수 색인.
+- `docs/plugin/` — MIDAS Plug-in(MIDAS API + Python으로 만든, GUI에 내장된 완성형 자동화 도구)
+  문서. `docs/manual/`과 별개 폴더인 이유와 문서 성격 차이는 `docs/plugin/INDEX.md` 상단 참고.
+  `INDEX.md`가 카탈로그이자 진행 상태(작성/미작성) 트래커 — 개별 툴 문서는 점진적으로 채워나가는
+  중이니 상태를 먼저 확인할 것.
 - `docs/AUTHENTICATION.md` — 인증, GET/PUT 워크플로, 방화벽 가이드 등 Quick Tips.
 - `examples/` — Python/VBA/JavaScript/curl/기타 언어 예제.
-- `scripts/manual_sync/` — 공식 사이트와의 정기 동기화 도구 (아래 참고).
+- `scripts/manual_sync/` — 공식 사이트와의 정기 동기화 도구, `docs/manual`·`docs/plugin` 둘 다
+  대상 (아래 참고).
 
 ## 스코프: 이 저장소에만 집중
 
 **형제 저장소 `MIDAS-API-NX-SDK`(Python SDK)는 건드리지 않습니다.** 이 저장소는 순수 문서이고
 SDK는 별도 프로젝트입니다. SDK 관련 작업 요청이 아니라면 그 저장소를 참조하거나 수정하지 않습니다.
 
-## 매뉴얼 동기화 워크플로 (`scripts/manual_sync/`)
+## 매뉴얼/플러그인 동기화 워크플로 (`scripts/manual_sync/`)
 
-목적: 공식 Zendesk Help Center("JSON Manual" 섹션, 651개 아티클, `SECTION_ID = 30087500371097`)와
-`docs/manual/*.md`를 정기적으로 맞추는 것. 설계 원칙은 **목록 비교는 AI 없이, 실제 패치가 필요한
-항목만 AI 호출** — 자세한 흐름은 `scripts/manual_sync/README.md` 참고.
+목적: 공식 Zendesk Help Center 두 섹션과 각각의 로컬 문서를 정기적으로 맞추는 것. 설계 원칙은
+**목록 비교는 AI 없이, 실제 패치가 필요한 항목만 AI 호출** — 자세한 흐름은
+`scripts/manual_sync/README.md` 참고.
+
+| 섹션 이름(`--section`) | Zendesk 대상 | 추적 방식 | 로컬 문서 |
+| --- | --- | --- | --- |
+| `manual` | JSON Manual 섹션(651개 아티클, `section_id=30087500371097`) | 섹션 목록 API 그대로 사용 | `docs/manual/*.md` |
+| `plugin` | Plug-in 섹션(`section_id=35681419399961`) | ⚠️ 섹션 목록 API가 랜딩 페이지 1건만 반환하므로, `common.py`의 `PLUGIN_ARTICLE_IDS`(57개 고정 목록)를 1건씩 개별 조회 | `docs/plugin/**/*.md` |
 
 ```bash
 cd scripts/manual_sync
-python fetch_manifest.py     # 스냅샷 갱신 (.sync_manifest.json)
-python check_diff.py         # 변경 여부만 확인 (exit 0=없음, 1=있음)
-python validate_manual.py    # 패치 후 항상 실행 — JSON 코드블록 + TOC 앵커 검증
+python fetch_manifest.py                  # 스냅샷 갱신, 인자 없으면 manual+plugin 전체
+python fetch_manifest.py --section plugin # 특정 섹션만
+python check_diff.py                      # 변경 여부 확인 (exit 0=둘 다 없음, 1=하나라도 있음)
+python validate_manual.py                 # 패치 후 항상 실행 — docs/manual+docs/plugin 모두 검증
 ```
 
 **"정기 업데이트 체크" 요청을 받으면:**
 
-1. `check_diff.py`로 변경된 아티클 id 목록을 뽑는다.
-2. 플래그된 아티클마다 원문을 다시 읽고, 매뉴얼과 필드 단위로 대조한다 — 타임스탬프만 갱신된
-   화장빨 변경(cosmetic bump)과 실제 스키마/내용 변경을 반드시 구분한다. 타임스탬프 diff만 보고
+1. `check_diff.py`로 두 섹션 각각의 변경된 아티클 id 목록을 뽑는다.
+2. 플래그된 아티클마다 원문을 다시 읽고, 문서와 필드/내용 단위로 대조한다 — 타임스탬프만 갱신된
+   화장빨 변경(cosmetic bump)과 실제 내용 변경을 반드시 구분한다. 타임스탬프 diff만 보고
    변경됐다고 가정하지 않는다.
-3. 실제 변경 건만 `docs/manual/*.md`에 반영, 필요 시 `INDEX.md`(날짜·항목 개수)도 갱신.
-4. `validate_manual.py` 통과 확인 후 `fetch_manifest.py`로 매니페스트 재스냅샷.
+   - `plugin` 섹션에서 랜딩 article(id `35639730101529`, "Plug-in Online Manual")이 변경으로
+     잡히면, 이는 실제 내용 변경이 아니라 **Plug-in 목록 자체가 추가/삭제/개명됐다는 신호**일 수
+     있다. 랜딩 페이지를 재스크래핑해 링크 목록을 다시 뽑고, `docs/plugin/INDEX.md` 및
+     `common.py`의 `PLUGIN_ARTICLE_IDS`와 대조해서 갱신한다.
+3. 실제 변경 건만 해당 문서(`docs/manual/*.md` 또는 `docs/plugin/**/*.md`)에 반영, 필요 시
+   `INDEX.md`(날짜·항목 개수·상태)도 갱신. `docs/plugin`의 "⬜ 미작성" 항목은 diff가 없어도
+   당연히 그대로 둔다 — 작성 여부는 아직 정기 점검 대상이 아니다.
+4. `validate_manual.py` 통과 확인 후 `fetch_manifest.py`로 해당 섹션 매니페스트 재스냅샷.
 5. `check_diff.py`를 다시 돌려 `has_diff: false`인지 확인.
 6. 커밋·푸시는 사용자가 명시적으로 지시할 때만 진행한다 (자동 push 없음 — 아래 참고).
 
@@ -116,6 +133,26 @@ MD024(중복 헤딩)/MD036(강조를 헤딩처럼 사용) 경고는 `20_POST_Ana
 새 엔드포인트를 챕터에 추가할 때 챕터 소속 판단이 애매하면(예: 결과 테이블이 POST 챕터 여러 개에
 걸칠 수 있는 경우) 공식 아티클 자체의 제목과 각 챕터 문서 서두에 명시된 스코프(예: "17개" 같은
 개수 문구)를 근거로 판단한다.
+
+## `docs/plugin/*.md` 문서 관례
+
+`docs/manual`의 Key/Value 스키마 표 관례를 그대로 쓰지 않는다 — Plug-in 원문은 REST 엔드포인트
+스펙이 아니라 GUI 사용법 워크스루이기 때문. 개별 툴 문서(`docs/plugin/tools/*.md`)는 다음 순서를
+따른다 (`docs/plugin/INDEX.md` 하단에 동일 템플릿이 있음):
+
+1. 개요(Intro) 2. 지원 버전(Developed with) 3. 주요 기능(Benefits, 있으면) 4. 사용 방법(UI
+필드별 설명, 표 가능) 5. 참고/제약사항(Note) 6. *(확인된 경우만)* 관련 JSON API 엔드포인트 —
+Plug-in이 내부적으로 호출하는 것으로 보이는 `docs/manual/*` 엔드포인트가 있으면 상호 링크,
+불확실하면 추측해서 넣지 않는다 7. 원문 링크.
+
+**개별 툴 문서(`tools/*.md`) 52건은 점진적으로 작성한다** — 한 번에 다 채우지 않는다.
+`docs/plugin/INDEX.md`의 "상태" 컬럼이 ⬜(미작성)인 항목은 사용자가 요청할 때(또는 배치로)
+원문을 다시 스크래핑해 위 템플릿에 맞춰 작성하고, 상태를 ✅로 갱신한다. 규모가 크면 위
+"매뉴얼/플러그인 동기화 워크플로"에서 설명한 리서치/편집 분리 서브에이전트 패턴을 그대로
+재사용한다. `guide/` 아래 4개 개념·개발 가이드 문서는 이미 전체 작성되어 있다.
+
+파일명은 번호가 아니라 툴 이름을 슬러그화한 것을 쓴다(`tools/Alignment_Editor.md` 등) — 신규
+Plug-in이 수시로 추가되는 flat 목록이라 번호를 매기면 삽입할 때마다 재번호가 필요해지기 때문.
 
 ## Git 컨벤션
 

@@ -1,6 +1,6 @@
-"""Validate docs/manual/*.md: every ```json block must parse, and every TOC link must
-resolve to a real GitHub-generated heading anchor. No AI involved — run after any
-AI-assisted patch to catch mistakes before committing.
+"""Validate docs/manual/*.md and docs/plugin/**/*.md: every ```json block must parse, and
+every TOC link must resolve to a real GitHub-generated heading anchor. No AI involved — run
+after any AI-assisted patch to catch mistakes before committing.
 
 Exit code 0 -> all clean. Exit code 1 -> problems found (printed to stdout).
 """
@@ -11,7 +11,10 @@ import re
 import sys
 
 REPO_ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
-MANUAL_DIR = os.path.join(REPO_ROOT, "docs", "manual")
+TARGET_DIRS = [
+    os.path.join(REPO_ROOT, "docs", "manual"),
+    os.path.join(REPO_ROOT, "docs", "plugin"),
+]
 
 
 def gh_anchor(h):
@@ -58,16 +61,20 @@ def validate_file(path):
 
 
 def main():
-    files = sorted(glob.glob(os.path.join(MANUAL_DIR, "*.md")), key=os.path.basename)
+    files = []
+    for d in TARGET_DIRS:
+        files += glob.glob(os.path.join(d, "**", "*.md"), recursive=True)
+    files = sorted(set(files), key=lambda p: os.path.relpath(p, REPO_ROOT))
     total_bad = 0
     total_missing = 0
-    print(f"{'file':45} {'json':>5} {'bad':>4} {'links':>6} {'miss':>5}")
+    print(f"{'file':55} {'json':>5} {'bad':>4} {'links':>6} {'miss':>5}")
     for f in files:
         r = validate_file(f)
         total_bad += len(r["bad_json"])
         total_missing += len(r["missing_anchors"])
         flag = " <<<" if r["bad_json"] or r["missing_anchors"] else ""
-        print(f"{os.path.basename(f):45} {r['json_blocks']:>5} {len(r['bad_json']):>4} "
+        rel = os.path.relpath(f, REPO_ROOT)
+        print(f"{rel:55} {r['json_blocks']:>5} {len(r['bad_json']):>4} "
               f"{r['toc_links']:>6} {len(r['missing_anchors']):>5}{flag}")
         if r["bad_json"]:
             print("   bad json:", r["bad_json"][:3])
