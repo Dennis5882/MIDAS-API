@@ -37,7 +37,7 @@ Manual과 같지만, 문서 성격은 다르다:
 리서치/편집 분리 서브에이전트 패턴을 그대로 재사용한다.
 
 - Guide: 4/4 작성 완료
-- Plug-in Item: 20/52 작성 완료 (원문 53건 중 "Image Capture Generator"는 "Easy Capture
+- Plug-in Item: 25/52 작성 완료 (원문 53건 중 "Image Capture Generator"는 "Easy Capture
   Generator"와 동일 URL의 별칭이라 1건으로 병합)
 
 ---
@@ -81,11 +81,11 @@ Manual과 같지만, 문서 성격은 다르다:
 | 18 | Easy Capture Generator[^1] | [tools/Easy_Capture_Generator.md](tools/Easy_Capture_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/35639906272025-Easy-Capture-Generator) |
 | 19 | Easy Load Combinations | [tools/Easy_Load_Combinations.md](tools/Easy_Load_Combinations.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/45543036560921-Easy-Load-Combinations) |
 | 20 | Element Information | [tools/Element_Information.md](tools/Element_Information.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/35649982873625-Element-Information) |
-| 21 | [Eurocode] Fatigue Analysis for Composite Girder Bridge | [tools/Eurocode_Fatigue_Analysis_for_Composite_Girder_Bridge.md](tools/Eurocode_Fatigue_Analysis_for_Composite_Girder_Bridge.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/49393118303897-Road-bridge-Concrete-Fatigue-for-Composite-Section) |
-| 22 | Flared Pier | [tools/Flared_Pier.md](tools/Flared_Pier.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/45352026157593-Flared-Pier) |
-| 23 | Floor Transition | [tools/Floor_Transition.md](tools/Floor_Transition.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/35681919947673-Floor-Transition) |
-| 24 | GEN NX to Staad Converter | [tools/GEN_NX_to_Staad_Converter.md](tools/GEN_NX_to_Staad_Converter.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/56728677543321-GEN-NX-to-Staad-Converter) |
-| 25 | Group Pile | [tools/Group_Pile.md](tools/Group_Pile.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/45354275911321-Group-Pile) |
+| 21 | [Eurocode] Fatigue Analysis for Composite Girder Bridge | [tools/Eurocode_Fatigue_Analysis_for_Composite_Girder_Bridge.md](tools/Eurocode_Fatigue_Analysis_for_Composite_Girder_Bridge.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/49393118303897-Road-bridge-Concrete-Fatigue-for-Composite-Section) |
+| 22 | Flared Pier | [tools/Flared_Pier.md](tools/Flared_Pier.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/45352026157593-Flared-Pier) |
+| 23 | Floor Transition | [tools/Floor_Transition.md](tools/Floor_Transition.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/35681919947673-Floor-Transition) |
+| 24 | GEN NX to Staad Converter | [tools/GEN_NX_to_Staad_Converter.md](tools/GEN_NX_to_Staad_Converter.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/56728677543321-GEN-NX-to-Staad-Converter) |
+| 25 | Group Pile | [tools/Group_Pile.md](tools/Group_Pile.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/45354275911321-Group-Pile) |
 | 26 | Inertial Forces Controller | [tools/Inertial_Forces_Controller.md](tools/Inertial_Forces_Controller.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/40706127836953-Inertial-Forces-Controller) |
 | 27 | Iterative Response Spectrum | [tools/Iterative_Response_Spectrum.md](tools/Iterative_Response_Spectrum.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/50959239482393-Iterative-Response-Spectrum) |
 | 28 | Line to Plate Converter | [tools/Line_to_Plate_Converter.md](tools/Line_to_Plate_Converter.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/60469083421593-Line-To-Plate-Converter) |
