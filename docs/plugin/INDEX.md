@@ -37,7 +37,7 @@ Manual과 같지만, 문서 성격은 다르다:
 리서치/편집 분리 서브에이전트 패턴을 그대로 재사용한다.
 
 - Guide: 4/4 작성 완료
-- Plug-in Item: 50/52 작성 완료 (원문 53건 중 "Image Capture Generator"는 "Easy Capture
+- Plug-in Item: 52/52 작성 완료 (원문 53건 중 "Image Capture Generator"는 "Easy Capture
   Generator"와 동일 URL의 별칭이라 1건으로 병합)
 
 ---
@@ -111,8 +111,8 @@ Manual과 같지만, 문서 성격은 다르다:
 | 48 | Tendon Profile | [tools/Tendon_Profile.md](tools/Tendon_Profile.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/45306728128921-Tendon-Profile) |
 | 49 | Traffic Lane Generator | [tools/Traffic_Lane_Generator.md](tools/Traffic_Lane_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/60315550956825-Traffic-Lane-Generator) |
 | 50 | Thailand DPT Code Auto Searching | [tools/Thailand_DPT_Code_Auto_Searching.md](tools/Thailand_DPT_Code_Auto_Searching.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/52715682940313-Thailand-DPT-Code-Auto-Searching) |
-| 51 | Tunnel Lining Generator | [tools/Tunnel_Lining_Generator.md](tools/Tunnel_Lining_Generator.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/35655721814937-Tunnel-Lining-Model) |
-| 52 | Wind Load Calculator for Bridges (HK) | [tools/Wind_Load_Calculator_for_Bridges_HK.md](tools/Wind_Load_Calculator_for_Bridges_HK.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/40645303004697-Wind-Load-Calculator-for-bridges-HK) |
+| 51 | Tunnel Lining Generator | [tools/Tunnel_Lining_Generator.md](tools/Tunnel_Lining_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/35655721814937-Tunnel-Lining-Model) |
+| 52 | Wind Load Calculator for Bridges (HK) | [tools/Wind_Load_Calculator_for_Bridges_HK.md](tools/Wind_Load_Calculator_for_Bridges_HK.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/40645303004697-Wind-Load-Calculator-for-bridges-HK) |
 
 [^1]: 원문 페이지에는 "Image Capture Generator"라는 이름으로도 한 번 더 나열되어 있으나 같은
     URL(`35639906272025-Easy-Capture-Generator`)을 가리키는 동일 아티클이다.
