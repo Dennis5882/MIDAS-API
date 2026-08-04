@@ -37,7 +37,7 @@ Manual과 같지만, 문서 성격은 다르다:
 리서치/편집 분리 서브에이전트 패턴을 그대로 재사용한다.
 
 - Guide: 4/4 작성 완료
-- Plug-in Item: 30/52 작성 완료 (원문 53건 중 "Image Capture Generator"는 "Easy Capture
+- Plug-in Item: 35/52 작성 완료 (원문 53건 중 "Image Capture Generator"는 "Easy Capture
   Generator"와 동일 URL의 별칭이라 1건으로 병합)
 
 ---
@@ -91,11 +91,11 @@ Manual과 같지만, 문서 성격은 다르다:
 | 28 | Line to Plate Converter | [tools/Line_to_Plate_Converter.md](tools/Line_to_Plate_Converter.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/60469083421593-Line-To-Plate-Converter) |
 | 29 | Load Effect for Load Combination | [tools/Load_Effect_for_Load_Combination.md](tools/Load_Effect_for_Load_Combination.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/35649669387289-Load-Effect-for-Load-Combination) |
 | 30 | Local Axis | [tools/Local_Axis.md](tools/Local_Axis.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/45537498601881-Local-Axis) |
-| 31 | Mirror Tapered Section | [tools/Mirror_Tapered_Section.md](tools/Mirror_Tapered_Section.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/35651585867801-Mirror-Tapered-Section) |
-| 32 | [MS 1553:2002] Building Wind Loads Generator | [tools/MS_15532002_Building_Wind_Loads_Generator.md](tools/MS_15532002_Building_Wind_Loads_Generator.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/47130265330841--MS-1553-2002-Building-Wind-Loads-Generator) |
-| 33 | Nastran Importer | [tools/Nastran_Importer.md](tools/Nastran_Importer.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/45548001795865-Nastran-Importer) |
-| 34 | Node Controller | [tools/Node_Controller.md](tools/Node_Controller.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/35654598923161-Node-Controller) |
-| 35 | P-Y Curve Generator | [tools/P_Y_Curve_Generator.md](tools/P_Y_Curve_Generator.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/52596776672537-P-Y-Curve-Generator) |
+| 31 | Mirror Tapered Section | [tools/Mirror_Tapered_Section.md](tools/Mirror_Tapered_Section.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/35651585867801-Mirror-Tapered-Section) |
+| 32 | [MS 1553:2002] Building Wind Loads Generator | [tools/MS_15532002_Building_Wind_Loads_Generator.md](tools/MS_15532002_Building_Wind_Loads_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/47130265330841--MS-1553-2002-Building-Wind-Loads-Generator) |
+| 33 | Nastran Importer | [tools/Nastran_Importer.md](tools/Nastran_Importer.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/45548001795865-Nastran-Importer) |
+| 34 | Node Controller | [tools/Node_Controller.md](tools/Node_Controller.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/35654598923161-Node-Controller) |
+| 35 | P-Y Curve Generator | [tools/P_Y_Curve_Generator.md](tools/P_Y_Curve_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/52596776672537-P-Y-Curve-Generator) |
 | 36 | Rebar Auto Generator | [tools/Rebar_Auto_Generator.md](tools/Rebar_Auto_Generator.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/60470400396953-Rebar-Auto-Generator) |
 | 37 | Rebar Spacing Converter | [tools/Rebar_Spacing_Converter.md](tools/Rebar_Spacing_Converter.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/35649267067545-Rebar-Spacing-Converter) |
 | 38 | Response Spectrum Generator | [tools/Response_Spectrum_Generator.md](tools/Response_Spectrum_Generator.md) | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/45716286965273-Response-Spectrum-Generator) |
