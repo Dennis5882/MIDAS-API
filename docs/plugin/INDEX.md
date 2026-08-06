@@ -22,7 +22,7 @@ Manual과 같지만, 문서 성격은 다르다:
 | 대상 독자 | REST API를 직접 호출하는 개발자 | GUI에서 완성된 도구를 쓰는 엔지니어(+직접 Plug-in을 만들려는 개발자) |
 | 원문 성격 | 엔드포인트별 Key/Value 스키마 표 | 스크린샷 기반 GUI 사용법 워크스루 |
 | 문서 단위 | 챕터(엔드포인트 그룹) | 개별 Plug-in 툴 1개 = 파일 1개 |
-| Zendesk 섹션 | JSON Manual (651개 아티클) | Plug-in (Introduction 4건 + Plug-in Item 53건) |
+| Zendesk 섹션 | JSON Manual (651개 아티클) | Plug-in (Introduction 4건 + Plug-in Item 57건) |
 
 **따라서 `docs/manual`의 "TABLE_TYPE 표 → Response HEAD → Request/Response JSON → Python 예제"
 관례를 그대로 적용하지 않는다.** 대신 [아래 템플릿](#toolsmd-개별-문서-템플릿)을 따른다.
@@ -37,8 +37,9 @@ Manual과 같지만, 문서 성격은 다르다:
 리서치/편집 분리 서브에이전트 패턴을 그대로 재사용한다.
 
 - Guide: 4/4 작성 완료
-- Plug-in Item: 52/52 작성 완료 (원문 53건 중 "Image Capture Generator"는 "Easy Capture
-  Generator"와 동일 URL의 별칭이라 1건으로 병합)
+- Plug-in Item: 56/56 작성 완료 (원문 53건 중 "Image Capture Generator"는 "Easy Capture
+  Generator"와 동일 URL의 별칭이라 1건으로 병합 + 2026-08-06 랜딩 페이지 재확인 시 신규 발견
+  4건 추가)
 
 ---
 
@@ -53,7 +54,7 @@ Manual과 같지만, 문서 성격은 다르다:
 
 ---
 
-## Plug-in Item — 개별 툴 (53건, 고유 52건)
+## Plug-in Item — 개별 툴 (57건, 고유 56건)
 
 원문 페이지는 하위 카테고리 없이 알파벳순 flat 목록이라, 이 표도 원문 순서를 그대로 따른다.
 파일명은 번호를 매기지 않고 툴 이름을 슬러그화한 것 — 신규 Plug-in이 추가돼도 기존 파일 재번호가
@@ -113,9 +114,19 @@ Manual과 같지만, 문서 성격은 다르다:
 | 50 | Thailand DPT Code Auto Searching | [tools/Thailand_DPT_Code_Auto_Searching.md](tools/Thailand_DPT_Code_Auto_Searching.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/52715682940313-Thailand-DPT-Code-Auto-Searching) |
 | 51 | Tunnel Lining Generator | [tools/Tunnel_Lining_Generator.md](tools/Tunnel_Lining_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/35655721814937-Tunnel-Lining-Model) |
 | 52 | Wind Load Calculator for Bridges (HK) | [tools/Wind_Load_Calculator_for_Bridges_HK.md](tools/Wind_Load_Calculator_for_Bridges_HK.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/40645303004697-Wind-Load-Calculator-for-bridges-HK) |
+| 53 | Floor Load Table Generator | [tools/Floor_Load_Table_Generator.md](tools/Floor_Load_Table_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/ko/articles/49475987573657-Floor-Load-Table-Generator) |
+| 54 | Easy Result Table | [tools/Easy_Result_Table.md](tools/Easy_Result_Table.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/ko/articles/49504449511705-Easy-Result-Table) |
+| 55 | Bulk Tabular Result Exporter | [tools/Bulk_Tabular_Result_Exporter.md](tools/Bulk_Tabular_Result_Exporter.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/ko/articles/60848073556633-Bulk-Tabular-Result-Exporter) |
+| 56 | Skew Grillage Geometry Generator | [tools/Skew_Grillage_Geometry_Generator.md](tools/Skew_Grillage_Geometry_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/ko/articles/60848423734169-Skew-Grillage-Geometry-Generator) |
 
 [^1]: 원문 페이지에는 "Image Capture Generator"라는 이름으로도 한 번 더 나열되어 있으나 같은
     URL(`35639906272025-Easy-Capture-Generator`)을 가리키는 동일 아티클이다.
+
+> **2026-08-06 발견:** No. 53~56 4건은 랜딩 페이지(`Plug-in Online Manual`, id
+> `35639730101529`)의 `updated_at`이 갱신되어 재확인한 결과 새로 발견된 아티클이다. 그중
+> "Floor Load Table Generator"·"Easy Result Table"은 원문 생성일이 2025-08-04/05로 이전부터
+> 존재했으나 랜딩 페이지에는 최근에야 링크된 것으로 보이고, "Bulk Tabular Result
+> Exporter"·"Skew Grillage Geometry Generator"는 2026-08-06 당일 생성된 신규 아티클이다.
 
 ---
 

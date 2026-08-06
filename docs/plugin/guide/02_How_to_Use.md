@@ -1,7 +1,7 @@
 # How to use MIDAS Plug-ins
 
 > **원문:** [How to use MIDAS Plug-ins](https://support.midasuser.com/hc/en-us/articles/35694950947353-How-to-use-MIDAS-Plug-ins)
-> **원문 작성:** 2024-07-30 · **원문 최종 편집:** 2024-07-30
+> **원문 작성:** 2024-07-30 · **원문 최종 편집:** 2025-05-29 (2026-08-04 재확인, 내용 변경 없음 — 타임스탬프만 갱신된 cosmetic bump)
 
 ---
 

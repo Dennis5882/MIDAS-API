@@ -1,7 +1,7 @@
 # A Guide to Creating Plug-in for Developers
 
 > **원문:** [A Guide to Creating Plug-in for Developers](https://support.midasuser.com/hc/ko/articles/44321750649369-A-Guide-to-Creating-Plug-in-for-Developers)
-> **원문 작성/편집:** 2025-03-10
+> **원문 작성:** 2025-03-10 · **원문 최종 편집:** 2025-05-19 (2026-08-04 재확인, 내용 변경 없음 — 타임스탬프만 갱신된 cosmetic bump)
 
 ---
 

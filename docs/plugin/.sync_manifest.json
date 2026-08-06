@@ -1,10 +1,10 @@
 {
- "article_count": 57,
+ "article_count": 61,
  "articles": {
   "35639730101529": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/35639730101529-Plug-in-Online-Manual",
    "title": "Plug-in Online Manual",
-   "updated_at": "2026-07-27T05:41:25Z"
+   "updated_at": "2026-08-06T08:16:31Z"
   },
   "35639906272025": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/35639906272025-Easy-Capture-Generator",
@@ -29,7 +29,7 @@
   "35650468767385": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/35650468767385-Artificial-Earthquake-Correlation-Checker",
    "title": "Artificial Earthquake Correlation Checker",
-   "updated_at": "2025-08-01T06:09:41Z"
+   "updated_at": "2026-08-05T04:34:21Z"
   },
   "35651417232025": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/35651417232025-Rigid-Link-Generator",
@@ -44,7 +44,7 @@
   "35651992652441": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/35651992652441-Pile-Spring",
    "title": "Pile Spring",
-   "updated_at": "2025-08-01T06:28:42Z"
+   "updated_at": "2026-08-05T04:16:47Z"
   },
   "35654598923161": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/35654598923161-Node-Controller",
@@ -59,7 +59,7 @@
   "35656036758937": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/35656036758937-Artificial-Earthquake-Generator",
    "title": "Artificial Earthquake Generator",
-   "updated_at": "2025-08-01T06:08:47Z"
+   "updated_at": "2026-08-05T04:45:47Z"
   },
   "35658068066841": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/35658068066841-Seismic-Hazard-Map",
@@ -69,37 +69,37 @@
   "35661003551385": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/35661003551385-Auto-Saver",
    "title": "Auto Saver",
-   "updated_at": "2025-08-01T06:10:52Z"
+   "updated_at": "2026-08-05T04:18:38Z"
   },
   "35679369131289": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/35679369131289-Alignment-Local-Axis-for-Element",
    "title": "Alignment Local Axis for Element",
-   "updated_at": "2025-08-01T05:14:17Z"
+   "updated_at": "2026-08-05T04:23:07Z"
   },
   "35681919947673": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/35681919947673-Floor-Transition",
    "title": "Floor Transition",
-   "updated_at": "2025-08-01T06:14:15Z"
+   "updated_at": "2026-08-05T04:14:11Z"
   },
   "35693347852569": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/35693347852569-Introduction-to-MIDAS-Plug-in",
    "title": "Introduction to MIDAS Plug-in",
-   "updated_at": "2025-05-29T23:55:01Z"
+   "updated_at": "2026-08-05T04:08:24Z"
   },
   "35694950947353": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/35694950947353-How-to-use-MIDAS-Plug-ins",
    "title": "How to use MIDAS Plug-ins",
-   "updated_at": "2025-05-29T23:55:54Z"
+   "updated_at": "2026-08-05T04:09:03Z"
   },
   "35824220762521": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/35824220762521-SPACE-GASS-Converter",
    "title": "SPACE GASS Converter",
-   "updated_at": "2025-08-01T06:36:47Z"
+   "updated_at": "2026-08-05T04:40:28Z"
   },
   "35845551989401": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/35845551989401-Breakdown-Load-Combination",
    "title": "Breakdown Load Combination",
-   "updated_at": "2025-08-01T06:11:44Z"
+   "updated_at": "2026-08-05T04:30:47Z"
   },
   "40645303004697": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/40645303004697-Wind-Load-Calculator-for-bridges-HK",
@@ -114,7 +114,7 @@
   "40706127836953": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/40706127836953-Inertial-Forces-Controller",
    "title": "Inertial Forces Controller",
-   "updated_at": "2025-08-01T06:17:03Z"
+   "updated_at": "2026-08-05T04:24:36Z"
   },
   "40708129121817": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/40708129121817-Temperature-Gradient-Stress-Generator",
@@ -159,12 +159,12 @@
   "45496104876313": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/45496104876313-Convert-Load-Combinations-into-SDS-Format",
    "title": "Convert Load Combinations into SDS Format",
-   "updated_at": "2025-08-01T05:41:16Z"
+   "updated_at": "2026-08-05T04:41:13Z"
   },
   "45536334603161": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/45536334603161-Concrete-Material-Set-EN1992-1-1",
    "title": "Concrete Material Set EN1992-1-1",
-   "updated_at": "2025-08-01T05:38:12Z"
+   "updated_at": "2026-08-05T04:37:56Z"
   },
   "45537498601881": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/45537498601881-Local-Axis",
@@ -174,7 +174,7 @@
   "45543036560921": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/45543036560921-Easy-Load-Combinations",
    "title": "Easy Load Combinations",
-   "updated_at": "2025-08-01T06:00:13Z"
+   "updated_at": "2026-08-05T04:32:11Z"
   },
   "45545604010521": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/45545604010521-Series-Load",
@@ -184,7 +184,7 @@
   "45548001795865": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/45548001795865-Nastran-Importer",
    "title": "Nastran Importer",
-   "updated_at": "2025-08-01T06:22:21Z"
+   "updated_at": "2026-08-05T04:43:43Z"
   },
   "45716286965273": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/45716286965273-Response-Spectrum-Generator",
@@ -210,6 +210,16 @@
    "html_url": "https://support.midasuser.com/hc/ko/articles/49393118303897--Eurocode-Fatigue-Analysis-for-Composite-Girder-Bridge",
    "title": "[Eurocode] Fatigue Analysis for Composite Girder Bridge",
    "updated_at": "2026-01-06T02:08:36Z"
+  },
+  "49475987573657": {
+   "html_url": "https://support.midasuser.com/hc/ko/articles/49475987573657-Floor-Load-Table-Generator",
+   "title": "Floor Load Table Generator",
+   "updated_at": "2026-07-27T06:32:02Z"
+  },
+  "49504449511705": {
+   "html_url": "https://support.midasuser.com/hc/ko/articles/49504449511705-Easy-Result-Table",
+   "title": "Easy Result Table",
+   "updated_at": "2026-07-27T09:19:58Z"
   },
   "50959239482393": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/50959239482393-Iterative-Response-Spectrum",
@@ -285,6 +295,16 @@
    "html_url": "https://support.midasuser.com/hc/ko/articles/60470400396953-Rebar-Auto-Generator",
    "title": "Rebar Auto Generator",
    "updated_at": "2026-07-29T05:18:53Z"
+  },
+  "60848073556633": {
+   "html_url": "https://support.midasuser.com/hc/ko/articles/60848073556633-Bulk-Tabular-Result-Exporter",
+   "title": "Bulk Tabular Result Exporter",
+   "updated_at": "2026-08-06T08:19:49Z"
+  },
+  "60848423734169": {
+   "html_url": "https://support.midasuser.com/hc/ko/articles/60848423734169-Skew-Grillage-Geometry-Generator",
+   "title": "Skew Grillage Geometry Generator",
+   "updated_at": "2026-08-06T08:12:01Z"
   }
  },
  "section_id": "plugin"
