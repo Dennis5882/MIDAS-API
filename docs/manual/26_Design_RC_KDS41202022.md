@@ -9,7 +9,15 @@
 > **인증 헤더:** `MAPI-Key: <발급된 키>`  
 > **출처:** [MIDAS API Online Manual](https://support.midasuser.com/hc/en-us/articles/33016922742937)
 
-이 파트는 **철근콘크리트(RC) 설계 코드 KDS 41 20:2022** 관련 엔드포인트 **69개**를 다룹니다. 모든 엔드포인트는 공통 URI 접두사 **`{base url}/DESIGN/RC/KDS-41-20-2022/<CODE>`** 를 사용합니다.
+이 파트는 **철근콘크리트(RC) 설계 코드 KDS 41 20:2022** 관련 엔드포인트 **70개**(공통 접두사
+`KDS-41-20-2022/<CODE>` 엔드포인트 69개 + RC 설계 코드 선택 엔드포인트 `DRC` 1개)를 다룹니다.
+`DRC`를 제외한 69개는 공통 URI 접두사 **`{base url}/DESIGN/RC/KDS-41-20-2022/<CODE>`** 를
+사용합니다.
+
+> ⚠️ **2026-08-06 신규 엔드포인트 발견:** `DESIGN/RC/DRC`(활성 RC 설계 코드 선택)는 원문
+> 생성일이 2026-06-18로 이전부터 있었으나, 챕터 개요 아티클("KDS 41 20 : 2022")에 이 항목을
+> 담은 새 "Design Code" 그룹이 2026-08-06에 추가되면서 발견되었다. `KDS-41-20-2022` 접두사를
+> 쓰지 않는 별도 URI(`DESIGN/RC/DRC`)라 번호 체계에 영향 없이 `## 0.`으로 추가한다.
 
 - **`"Assign"` 방식:** 설계 코드·부재 파라미터 설정 엔드포인트는 요청 바디에서 `"Assign"` 객체를 사용하며, 각 키는 문자열 ID(예: `"1"`) 또는 부재 번호입니다.
 - **`"Argument"` 방식:** 설계 수행(ANAL)·결과 테이블(TABLE)·리포트(REPORT) 엔드포인트는 POST 전용이며 `"Argument"` 객체로 대상·옵션을 지정합니다.
@@ -22,10 +30,11 @@
 
 ---
 
-## Endpoint 목록 (69개)
+## Endpoint 목록 (70개)
 
 | No. | Endpoint | 기능 | Active Methods |
 |-----|----------|------|----------------|
+| 0 | [`DRC`](#0-designrcdrc--rc-설계-코드-선택) | RC 설계 코드 선택 (`KDS-41-20-2022` 접두사 미사용) | GET · PUT · DELETE |
 | 1 | [`DCO`](#1-designrckds-41-20-2022dco--콘크리트-설계-코드-옵션) | 콘크리트 설계 코드 옵션 | GET · PUT · DELETE |
 | 2 | [`DCTL`](#2-designrckds-41-20-2022dctl--프레임-정의) | 프레임 정의 | GET · PUT · DELETE |
 | 3 | [`LLRF`](#3-designrckds-41-20-2022llrf--활하중-저감계수) | 활하중 저감계수 | GET · PUT · DELETE |
@@ -95,6 +104,114 @@
 | 67 | [`TABLE`](#67-designrckds-41-20-2022table--기둥-설계력column-design-forces) | 기둥 설계력(Column Design Forces) | POST |
 | 68 | [`TABLE`](#68-designrckds-41-20-2022table--가새-설계력brace-design-forces) | 가새 설계력(Brace Design Forces) | POST |
 | 69 | [`TABLE`](#69-designrckds-41-20-2022table--보-설계력beam-design-forces) | 보 설계력(Beam Design Forces) | POST |
+
+---
+
+## 0. `DESIGN/RC/DRC` — RC 설계 코드 선택
+
+> **기능:** 현재 프로젝트에 적용할 **RC 설계 코드**를 선택합니다. 이 챕터의 나머지 69개
+> 엔드포인트(`KDS-41-20-2022/<CODE>`)와 달리 URI가 `KDS-41-20-2022` 접두사를 쓰지 않는
+> 별도의 상위 선택 엔드포인트입니다.
+
+### Input URI
+
+```
+{base url}/DESIGN/RC/DRC
+```
+
+### Active Methods
+
+`GET` · `PUT` · `DELETE`
+
+### JSON Schema
+
+```json
+{
+  "type": "object",
+  "required": [
+    "Assign"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "Assign": {
+      "type": "object",
+      "description": "Keyed object (dictionary). Each property name is an ID string (e.g., \"1\").",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "maxProperties": 1,
+      "patternProperties": {
+        "^[0-9]+$": {
+          "type": "object",
+          "required": [
+            "DGNCODE"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "DGNCODE": {
+              "type": "string",
+              "description": "Design Code",
+              "enum": [
+                "KDS 41 20 : 2022"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+### 파라미터
+
+| No. | 설명 | Key | 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Assign 래퍼 (ID 문자열 키, 1개) | `"Assign"` | Object | — | **필수** |
+| 2 | RC 설계 코드 · 현재 `"KDS 41 20 : 2022"` 1개 값만 지원 | `"DGNCODE"` | String (enum) | — | **필수** |
+
+### Request / Response JSON
+
+**PUT Request Body**
+
+```json
+{
+  "Assign": {
+    "1": {
+      "DGNCODE": "KDS 41 20 : 2022"
+    }
+  }
+}
+```
+
+**GET Response Body**
+
+```json
+{
+  "DCON": {
+    "1": {
+      "DGNCODE": "KDS 41 20 : 2022"
+    }
+  }
+}
+```
+
+> ⚠️ **응답 최상위 키 주의:** GET 응답의 최상위 키는 `"DCON"`이며(엔드포인트명 `DRC`도,
+> 옵션 엔드포인트 `DCO`도 아님), 원문 Response 예제 그대로다.
+
+### Python 예제
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/gen"
+HEADERS = {"MAPI-Key": "<발급된 키>", "Content-Type": "application/json"}
+URI = f"{BASE_URL}/DESIGN/RC/DRC"
+
+# RC 설계 코드 선택 (PUT): KDS 41 20:2022
+payload = {"Assign": {"1": {"DGNCODE": "KDS 41 20 : 2022"}}}
+print("PUT:", requests.put(URI, headers=HEADERS, json=payload).json())
+print("GET:", requests.get(URI, headers=HEADERS).json())
+```
 
 ---
 

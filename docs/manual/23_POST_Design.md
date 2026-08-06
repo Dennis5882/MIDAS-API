@@ -540,6 +540,15 @@ for row in brace["DATA"]:
 | `Story` | 층 이름 |
 | `Part` | 벽체 위치 (`Top`/`Bottom` 등) |
 
+### ADDITIONAL — `STORY_NAMES` 요청 파라미터 (2026-08-05 공식 반영)
+
+층 이름으로 결과를 필터링하는 `STORY_NAMES` 파라미터가 추가되었습니다. `#3~#10` 공통
+파라미터 표(위 "공통 사항" 섹션)에는 없는, **Wall Design Forces 전용** 파라미터입니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 9 | 층 이름 지정 (예: `["1F", "2F"]`) | `"STORY_NAMES"` | Array [String] | All | Optional |
+
 ### Request / Response JSON
 
 **POST Request Body**
