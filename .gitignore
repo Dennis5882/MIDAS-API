@@ -3,6 +3,13 @@ __pycache__/
 
 # 공식 매뉴얼 오류 제보 등 외부 전달용 산출물 (저장소 관리 대상 아님)
 *.docx
+*.pptx
 
 # 로컬 전용 MCP 서버 설정 (예: 회사 Jira 연동) — 공개 저장소에 올리지 않음
 .mcp.json
+
+# 로그인 세션(쿠키 등)이 담기는 Selenium 프로필 — 절대 커밋 금지
+scripts/zendesk_login_scrape/chrome_profile/
+# 스크래핑 산출물(대용량 영상 등) — 필요 시 개별적으로 커밋
+scripts/zendesk_login_scrape/output/
+docs/plugin_cases/videos/
