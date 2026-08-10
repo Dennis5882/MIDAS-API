@@ -9,7 +9,7 @@
 > **인증 헤더:** `MAPI-Key: <발급된 키>`  
 > **출처:** [MIDAS API Online Manual](https://support.midasuser.com/hc/en-us/articles/33016922742937)
 
-이 파트는 해석 결과 테이블 중 **반력·변위·트러스·케이블·보** 결과를 다룹니다. 모든 엔드포인트는 **공통 URI `{base url}/post/TABLE`** 를 사용하며 `POST` 메서드만 지원합니다. 요청 바디의 `"Argument"` 객체에서 `TABLE_TYPE` 값으로 테이블 종류를 결정합니다.
+이 파트는 해석 결과 테이블 중 **반력·변위·트러스·케이블·보·동시 절점력(Concurrent Joint Force)** 결과를 다룹니다. 모든 엔드포인트는 **공통 URI `{base url}/post/TABLE`** 를 사용하며 `POST` 메서드만 지원합니다. 요청 바디의 `"Argument"` 객체에서 `TABLE_TYPE` 값으로 테이블 종류를 결정합니다.
 
 ---
 
@@ -27,7 +27,7 @@
 
 ### 공통 Request 구조 및 파라미터
 
-전처리 테이블(18장)보다 확장된 구조로, `UNIT`·`STYLES`·`COMPONENTS`·`NODE_ELEMS`·`LOAD_CASE_NAMES`·`OPT_CS`·`STAGE_STEP`를 지원합니다. **아래 파라미터 표는 12개 테이블 전체에 공통 적용**되며, 각 절에서는 `TABLE_TYPE` enum과 응답 `HEAD` 열, 대표 예시만 별도 기술합니다.
+전처리 테이블(18장)보다 확장된 구조로, `UNIT`·`STYLES`·`COMPONENTS`·`NODE_ELEMS`·`LOAD_CASE_NAMES`·`OPT_CS`·`STAGE_STEP`를 지원합니다. **아래 파라미터 표는 13개 테이블 전체에 공통 적용**되며, 각 절에서는 `TABLE_TYPE` enum과 응답 `HEAD` 열, 대표 예시만 별도 기술합니다.
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
@@ -95,6 +95,7 @@
 | 10 | [Beam Stress](#10-beam-stress) | `BEAMSTRESS` / `BEAMSTRESS7DOF` |
 | 11 | [Beam Stress (Equivalent)](#11-beam-stress-equivalent) | `BEAMSTRESSDETAIL` |
 | 12 | [Beam Stress (PSC)](#12-beam-stress-psc) | `BEAMSTRESSPSC` / `BEAMSTRESS7DOFPSC` |
+| 13 | [Concurrent Joint Force](#13-concurrent-joint-force) | `CONCURRENT_JOINT_FORCE` |
 
 ---
 
@@ -1044,6 +1045,101 @@ head = table.get("HEAD", [])
 for row in table.get("DATA", []):
     d = dict(zip(head, row))
     print(f"  Elem {d['Elem']} 위치{d['SectionPosition']}: 합계응력={d['Sig-xx(Summation)']}")
+```
+
+---
+
+## 13. Concurrent Joint Force
+
+> **기능:** 지정한 반력 절점(`NODE_KEY`)의 반력 성분이 극값(max/min)을 이루는 시점에 대해, 지정된
+> 하중케이스 목록의 절점력을 동시(concurrent) 값으로 추출합니다. 이동하중(Moving Load) 해석에서
+> `(MV:max)` / `(MV:min)` 계열 하중케이스와 함께 주로 사용됩니다.
+
+### `TABLE_TYPE`
+
+| 값 | 설명 |
+| --- | --- |
+| `"CONCURRENT_JOINT_FORCE"` | 동시 절점력(Concurrent Joint Force) |
+
+> ⚠️ 이 테이블 타입은 공통 파라미터 표(위 "공통 Request 구조 및 파라미터")의 10개 항목 외에
+> `"ADDITIONAL"` 객체가 **Required**로 추가됩니다. 다른 12개 테이블에는 없는 이 타입 전용 항목입니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 11 | 반력 극값 기준 추가 설정 | `"ADDITIONAL"` | Object | — | **Required** |
+| 11-1 | └ 반력 절점 기준 설정 | `ADDITIONAL.SET_REACTION_PARAMS` | Object | — | **Required** |
+| 11-1-1 | 　└ 반력 절점 ID | `SET_REACTION_PARAMS.NODE_KEY` | Integer | — | **Required** |
+| 11-1-2 | 　└ 반력 성분 사용 여부 6자리(0/1), 순서 Fx·Fy·Fz·Mx·My·Mz | `SET_REACTION_PARAMS.COMPONENT` | String | — | **Required** |
+
+### Response HEAD
+
+응답 `HEAD`/`DATA`는 `COMPONENTS`에 지정한 `"Elem./Component"` + `9[J]/Fx`~`10[I]/Mz` 12개 열
+블록이, 조회 대상 요소 개수만큼 반복되어 하나의 `HEAD` 배열에 이어붙는 구조입니다(기본 `"Index"`,
+`"Elem."`, `"Load"` 3열 + 요소별 12열 × N). `DATA`는 요소가 아니라 **성분(Fx/Fy/Fz/Mx/My/Mz)별로
+한 행**을 이루며, 각 행 안에서 요소별 블록이 반복됩니다.
+
+### Request / Response JSON
+
+**POST Request Body**
+
+```json
+{
+  "Argument": {
+    "TABLE_TYPE": "CONCURRENT_JOINT_FORCE",
+    "LOAD_CASE_NAMES": ["case_01(MV:max)"],
+    "TABLE_NAME": "Concurrent Joint Forces",
+    "ADDITIONAL": {
+      "SET_REACTION_PARAMS": {
+        "NODE_KEY": 10,
+        "COMPONENT": "111111"
+      }
+    },
+    "UNIT": { "FORCE": "KN", "DIST": "M" }
+  }
+}
+```
+
+**POST Response Body (발췌)**
+
+```json
+{
+  "Concurrent Joint Forces": {
+    "FORCE": "KN",
+    "DIST": "M",
+    "HEAD": ["Index", "Elem.", "Load", "Elem./Component", "9[J]/Fx", "9[J]/Fy", "9[J]/Fz", "9[J]/Mx", "9[J]/My", "9[J]/Mz", "10[I]/Fx", "10[I]/Fy", "10[I]/Fz", "10[I]/Mx", "10[I]/My", "10[I]/Mz"],
+    "DATA": [
+      ["1", "9[J]", "case_01(max)", "Fz", "0.0", "0.0", "437.017", "-558.415", "938.805", "0.0"]
+    ]
+  }
+}
+```
+
+### Python Example
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/civil"
+HEADERS = {
+    "Content-Type": "application/json",
+    "MAPI-Key": "YOUR_MAPI_KEY"
+}
+
+# ── POST: 반력 절점 10의 극값 시점 동시 절점력 추출 ──────────────────
+payload = {
+    "Argument": {
+        "TABLE_TYPE": "CONCURRENT_JOINT_FORCE",
+        "TABLE_NAME": "Concurrent Joint Forces",
+        "LOAD_CASE_NAMES": ["case_01(MV:max)"],
+        "ADDITIONAL": {
+            "SET_REACTION_PARAMS": {"NODE_KEY": 10, "COMPONENT": "111111"}
+        },
+        "UNIT": {"FORCE": "KN", "DIST": "M"}
+    }
+}
+resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
+table = resp.json().get("Concurrent Joint Forces", {})
+print(f"동시 절점력 {len(table.get('DATA', []))}행")
 ```
 
 ---

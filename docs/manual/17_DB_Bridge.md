@@ -8,7 +8,7 @@
 > **인증 헤더:** `MAPI-Key: <발급된 키>`  
 > **출처:** [MIDAS API Online Manual](https://support.midasuser.com/hc/en-us/articles/33016922742937)
 
-이 파트는 교량 특화 결과 설정을 다룹니다. 거더 다이어그램(Girder Diagram), 캠버 제어(General / FCM Camber), 케이블 미지하중계수 제약(Unknown Load Factor Constraints)을 포함합니다.
+이 파트는 교량 특화 결과 설정을 다룹니다. 거더 다이어그램(Girder Diagram) 정의·이미지 Export, 캠버 제어(General / FCM Camber), 케이블 미지하중계수 제약(Unknown Load Factor Constraints)을 포함합니다.
 
 ---
 
@@ -20,6 +20,7 @@
 | 2 | [`/db/GCMB`](#2-dbgcmb--general-camber-control) | 일반 캠버 제어 | POST, GET, PUT, DELETE |
 | 3 | [`/db/CAMB`](#3-dbcamb--fcm-camber-control) | FCM 캠버 제어 | POST, GET, PUT, DELETE |
 | 4 | [`/db/ULFC`](#4-dbulfc--cable-control--unknown-load-factor-constraints) | 케이블 제어 – 미지하중계수 제약 | POST, GET, PUT, DELETE |
+| 5 | [`/ope/GSBG`](#5-opegsbg--bridge-girder-diagram-image-export) | 교량 거더 다이어그램 이미지 Export | POST |
 
 ---
 
@@ -577,6 +578,122 @@ resp = requests.get(f"{BASE_URL}/db/ULFC", headers=HEADERS)
 for key, val in resp.json().get("ULFC", {}).items():
     cond = "등호" if val.get("EQ") else "부등호"
     print(f"  [{key}] {val['NAME']} ({val['TYPE']}) {cond} 제약")
+```
+
+---
+
+## 5. `/ope/GSBG` — Bridge Girder Diagram Image Export
+
+> **기능:** [`/db/GSBG`](#1-dbgsbg--bridge-girder-diagrams)로 정의한 거더 다이어그램(응력 또는
+> 부재력)을 지정 시공단계 구간에 대해 이미지 파일(bmp/jpg/emf)로 저장(export)합니다. `db/GSBG`가
+> 다이어그램 그룹을 **정의**하는 엔드포인트라면, 이 엔드포인트는 그 결과를 **이미지로 뽑아내는**
+> 별도의 OPE(Operation) 엔드포인트입니다.
+
+### Input URI
+
+```
+{base url}/ope/GSBG
+```
+
+### Active Methods
+
+`POST`
+
+### Parameters
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 하중케이스/조합 이름 | `"LC_NAME"` | String | — | **Required** |
+| 2 | 다이어그램 타입 · 응력: `0` / 부재력: `1` | `"DGRM_TYPE"` | Integer (enum) | — | **Required** |
+| 3 | 일괄 처리 여부 (생략 시 `true`) | `"BATCH"` | Boolean | `true` | Optional |
+| 4 | X축 타입 · 거리: `0` / 절점: `1` | `"X_AXIS_TYPE"` | Integer (enum) | `0` | Optional |
+| **BATCH = true(생략 포함)** | | | | | |
+| 5 | Export할 출력 그룹 이름 목록(문자열 배열) | `"BATCH_LIST"` | Array [String] | — | **Required** |
+| **BATCH = false** | | | | | |
+| 6 | 교량 거더 요소 그룹 | `"BRDG_GROUP"` | String | — | **Required** |
+| 7 | 성분 · 응력(DGRM_TYPE=0): Sax `0` / +Sby `1` / −Sby `2` / +Sbz `3` / −Sbz `4` / Combined `5` / 7th DOF `6` · 부재력(DGRM_TYPE=1): Fx `0` / Fy `1` / Fz `2` / Mx `3` / My `4` / Mz `5` / Mb `6` / Mt `7` / Mw `8` | `"COMPONENTS"` | Integer (enum) | `0` | Optional |
+| 8 | (응력·Combined일 때) 응력 표시 위치 · Maximum `0` / 1(−y,+z) `1` / 2(+y,+z) `2` / 3(+y,−z) `3` / 4(−y,−z) `4` | `"COMBINED_COMP"` | Integer (enum) | `0` | Optional |
+| 9 | (응력·7th DOF일 때) 7th DOF 타입 · Sax(Warping) `0` / Ssy(Mt) `1` / Ssy(Mw) `2` / Ssz(Mt) `3` / Ssz(Mw) `4` / Combined(Ssy) `5` / Combined(Ssz) `6` | `"7TH_DOF_TYPE"` | Integer (enum) | `0` | Optional |
+| **DGRM_TYPE = 0(응력)에서만** | | | | | |
+| 10 | 허용응력선 표시 | `"STRESS_LINE"` | Object | — | Optional |
+| (1) | 허용응력선 표시 여부 | `STRESS_LINE.OPT_USE` | Boolean | `false` | Optional |
+| (2) | 압축 허용응력(OPT_USE=true 시) | `STRESS_LINE.COMP` | Integer | — | 조건부 **Required** |
+| (3) | 인장 허용응력(OPT_USE=true 시) | `STRESS_LINE.TENS` | Integer | — | 조건부 **Required** |
+| 11 | 다이어그램 생성 대상 시공단계 목록 | `"STAGE_LIST"` | Array [String] | — | **Required** |
+| 12 | 생성 이미지 저장 경로 | `"EXPORT_PATH"` | String | — | **Required** |
+| 13 | 저장 이미지 확장자 · `"bmp"` / `"jpg"` / `"emf"` | `"EXTENSION"` | String (enum) | — | **Required** |
+
+> ⚠️ 원문 Specifications 표에는 응력 성분 `−Sbz`(4번)가 `"Sbz" 4`로 오타 표기되어 있다. JSON
+> Schema의 설명("3: +Sbz, 4: -Sbz")을 근거로 위 표에서는 `−Sbz`로 정정했다.
+> `BATCH=true`일 때는 `BRDG_GROUP`·`COMPONENTS`·`COMBINED_COMP`·`7TH_DOF_TYPE`을 최상위에 함께
+> 보내면 안 되고, `BATCH=false`일 때는 반대로 `BATCH_LIST`를 보내면 안 된다(원문 JSON Schema
+> `allOf`/`if-then` 제약).
+
+### Request / Response JSON
+
+**POST Request Body — 응력, Batch 방식**
+
+```json
+{
+  "Argument": {
+    "LC_NAME": "Dead Load",
+    "DGRM_TYPE": 0,
+    "BATCH": true,
+    "X_AXIS_TYPE": 1,
+    "STRESS_LINE": {"OPT_USE": true, "COMP": 210000, "TENS": 180000},
+    "BATCH_LIST": ["Stress_Combined_Left", "Stress_7thDOF_Right", "Stress_Girder_Center"],
+    "STAGE_LIST": ["CS1", "CS2"],
+    "EXPORT_PATH": "C:\\Temp\\GSBG\\StressBatch",
+    "EXTENSION": "jpg"
+  }
+}
+```
+
+**POST Request Body — 부재력, 단일 그룹 방식**
+
+```json
+{
+  "Argument": {
+    "LC_NAME": "Dead Load",
+    "DGRM_TYPE": 1,
+    "BATCH": false,
+    "X_AXIS_TYPE": 0,
+    "BRDG_GROUP": "BG_RIGHT",
+    "COMPONENTS": 8,
+    "STAGE_LIST": ["CS1", "CS2"],
+    "EXPORT_PATH": "C:\\Temp\\GSBG\\ForceSingle",
+    "EXTENSION": "jpg"
+  }
+}
+```
+
+### Python Example
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/civil"
+HEADERS = {
+    "Content-Type": "application/json",
+    "MAPI-Key": "YOUR_MAPI_KEY"
+}
+
+# ── POST: 응력 다이어그램 이미지 일괄 저장(BATCH) ──────────────────
+payload = {
+    "Argument": {
+        "LC_NAME": "Dead Load",
+        "DGRM_TYPE": 0,
+        "BATCH": True,
+        "X_AXIS_TYPE": 1,
+        "STRESS_LINE": {"OPT_USE": True, "COMP": 210000, "TENS": 180000},
+        "BATCH_LIST": ["Stress_Combined_Left", "Stress_7thDOF_Right", "Stress_Girder_Center"],
+        "STAGE_LIST": ["CS1", "CS2"],
+        "EXPORT_PATH": "C:\\Temp\\GSBG\\StressBatch",
+        "EXTENSION": "jpg"
+    }
+}
+resp = requests.post(f"{BASE_URL}/ope/GSBG", json=payload, headers=HEADERS)
+print("POST:", resp.status_code, resp.json())
 ```
 
 ---

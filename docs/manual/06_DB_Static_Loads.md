@@ -30,8 +30,8 @@
 | 17 | [/db/EPST](#17-dbepst--static-earth-pressure) | Static Earth Pressure |
 | 18 | [/db/EPSE](#18-dbepse--seismic-earth-pressure) | Seismic Earth Pressure |
 | 19 | [/db/POSL](#19-dbposl--parameter-of-seismic-loads) | Parameter of Seismic Loads |
-| 20 | [/db/SWIND](#20-dbswind--static-wind-load) | Static Wind Load (KDS 41-12:2022) |
-| 21 | [/db/SSEIS](#21-dbsseis--static-seismic-load) | Static Seismic Load (KDS 41-17-00:2019) |
+| 20 | [/db/SWIND](#20-dbswind--static-wind-load) | Static Wind Load (KDS 41-12:2022 / User Type) |
+| 21 | [/db/SSEIS](#21-dbsseis--static-seismic-load) | Static Seismic Load (KDS 41-17-00:2019 / User Type) |
 
 ---
 
@@ -1724,7 +1724,7 @@ midas_api("DELETE", "/db/POSL", {"Assign": {"1": {}}})
 
 ## 20. /db/SWIND — Static Wind Load
 
-> KDS 41-12:2022 기반 정적 풍하중을 정의합니다. `INPUT_METHOD`에 따라 Simplified / General / Vortex Shedding 방법이 선택됩니다.
+> KDS 41-12:2022 기반 정적 풍하중을 정의합니다. `INPUT_METHOD`에 따라 Simplified / General / Vortex Shedding 방법이 선택됩니다. `WIND_CODE`를 `"USER TYPE"`으로 지정하면 층별 풍압을 직접 입력하는 방식도 사용할 수 있습니다(아래 ADDITIONAL 참고).
 
 **Input URI:** `{base url}/db/SWIND`  
 **Active Methods:** `POST, GET, PUT, DELETE`
@@ -1850,11 +1850,63 @@ all_swind = midas_api("GET", "/db/SWIND")
 midas_api("DELETE", "/db/SWIND", {"Assign": {"1": {}}})
 ```
 
+### ADDITIONAL — `WIND_CODE = "USER TYPE"` 변형 (2026-08-07 공식 반영)
+
+> KDS(41-12:2022) 계산식 대신 층별 풍압을 직접 입력하는 방식입니다. `WIND_CODE`를 `"USER TYPE"`으로
+> 지정하면 위 `PARAMETERS` 객체 대신 `STORY_WIND_PRESSURE` 배열을 사용합니다.
+
+| No. | Description | Key | Value Type | Default | Required |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Wind Load Code (`"USER TYPE"`) | `"WIND_CODE"` | string (enum) | - | Required |
+| 2 | Description | `"DESC"` | string | `""` | Optional |
+| 3 | Wind Eccentricity Option X (0=Positive / 1=Negative / 2=None) | `"WIND_ECCEN_X"` | integer (enum) | `2` | Optional |
+| 4 | Wind Eccentricity Option Y (0=Positive / 1=Negative / 2=None) | `"WIND_ECCEN_Y"` | integer (enum) | `2` | Optional |
+| 5 | Scale Factor X | `"SCALE_FACTOR_X"` | number | - | Required |
+| 6 | Scale Factor Y | `"SCALE_FACTOR_Y"` | number | - | Required |
+| 7 | User-defined Story-level Wind Pressure | `"STORY_WIND_PRESSURE"` | array [object] | - | Required |
+| (1) | Story Name | `"STORY_NAME"` | string | - | Required |
+| (2) | Wind Pressure X | `"PRESS_X"` | number | - | Required |
+| (3) | Wind Pressure Y | `"PRESS_Y"` | number | - | Required |
+| 8 | Additional Story-level Wind Load | `"ADDITIONAL_LOAD"` | array [object] | - | Optional |
+| (1) | Story Name | `"STORY_NAME"` | string | - | Optional |
+| (2) | Along-wind Load X | `"ALONG_X"` | number | - | Optional |
+| (3) | Along-wind Load Y | `"ALONG_Y"` | number | - | Optional |
+| (4) | Torsional Wind Load RZ | `"TORSIONAL_RZ"` | number | - | Optional |
+
+> ⚠️ `ELEV`, `LOAD_H`, `LOAD_BX`, `LOAD_BY` 등 GET 응답에만 나타나는 층 기하 필드는 원문 JSON
+> Schema 기준 요청 페이로드에 보내면 안 되는 것으로 명시되어 있어 위 표에서 제외했다.
+
+```json
+{
+  "Assign": {
+    "1": {
+      "LC_NAME": "WX",
+      "WIND_CODE": "USER TYPE",
+      "DESC": "",
+      "WIND_ECCEN_X": 2,
+      "WIND_ECCEN_Y": 2,
+      "SCALE_FACTOR_X": 1,
+      "SCALE_FACTOR_Y": 1,
+      "STORY_WIND_PRESSURE": [
+        {"STORY_NAME": "RF", "PRESS_X": 1.2, "PRESS_Y": 1},
+        {"STORY_NAME": "3F", "PRESS_X": 1, "PRESS_Y": 0.8},
+        {"STORY_NAME": "2F", "PRESS_X": 0.8, "PRESS_Y": 0.6},
+        {"STORY_NAME": "1F", "PRESS_X": 0.6, "PRESS_Y": 0.4}
+      ],
+      "ADDITIONAL_LOAD": [
+        {"STORY_NAME": "RF", "ALONG_X": 10, "ALONG_Y": 8, "TORSIONAL_RZ": 2.5},
+        {"STORY_NAME": "3F", "ALONG_X": 7, "ALONG_Y": 5, "TORSIONAL_RZ": 1.5}
+      ]
+    }
+  }
+}
+```
+
 ---
 
 ## 21. /db/SSEIS — Static Seismic Load
 
-> KDS 41-17-00:2019 기반 등가정적 지진하중을 정의합니다.
+> KDS 41-17-00:2019 기반 등가정적 지진하중을 정의합니다. `SEIS_CODE`를 `"USER TYPE"`으로 지정하면 층별 지진력을 직접 입력하는 방식도 사용할 수 있습니다(아래 ADDITIONAL 참고).
 
 **Input URI:** `{base url}/db/SSEIS`  
 **Active Methods:** `POST, GET, PUT, DELETE`
@@ -1960,6 +2012,65 @@ all_sseis = midas_api("GET", "/db/SSEIS")
 
 # 삭제
 midas_api("DELETE", "/db/SSEIS", {"Assign": {"2": {}}})
+```
+
+### ADDITIONAL — `SEIS_CODE = "USER TYPE"` 변형 (2026-08-07 공식 반영)
+
+> KDS(41-17-00:2019) 계산식 대신 층별 지진력을 직접 입력하는 방식입니다. `SEIS_CODE`를
+> `"USER TYPE"`으로 지정하면 위 `PARAMETERS` 객체 대신 `SEISMIC_FORCE` 배열을 사용합니다.
+
+| No. | Description | Key | Value Type | Default | Required |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Seismic Load Code (`"USER TYPE"`) | `"SEIS_CODE"` | string (enum) | - | Required |
+| 2 | Description | `"DESC"` | string | `""` | Optional |
+| 3 | Scale Factor X | `"SCALE_FACTOR_X"` | number | - | Required |
+| 4 | Scale Factor Y | `"SCALE_FACTOR_Y"` | number | - | Required |
+| 5 | Accidental Eccentricity X (0=Positive / 1=Negative / 2=None) | `"ACCIDENT_ECCEN_X"` | integer (enum) | `0` | Optional |
+| 6 | Accidental Eccentricity Y (0=Positive / 1=Negative / 2=None) | `"ACCIDENT_ECCEN_Y"` | integer (enum) | `0` | Optional |
+| 7 | Consider Accidental Torsion | `"ACCIDENT_TORSION"` | boolean | `false` | Optional |
+| 8 | Consider Inherent Torsion | `"INHERENT_TORSION"` | boolean | `false` | Optional |
+| 9 | User-defined Story-level Seismic Force | `"SEISMIC_FORCE"` | array [object] | - | Required |
+| (1) | Story Name | `"STORY_NAME"` | string | - | Required |
+| (2) | Seismic Force X | `"FORCE_X"` | number | - | Required |
+| (3) | Seismic Force Y | `"FORCE_Y"` | number | - | Required |
+| 10 | Additional Story-level Seismic Load | `"ADDITIONAL_LOAD"` | object | - | Optional |
+| (1) | Story Name | `"STORY_NAME"` | string | - | Required |
+| (2) | Additional Seismic Load X | `"ALONG_X"` | number | - | Required |
+| (3) | Additional Seismic Load Y | `"ALONG_Y"` | number | - | Required |
+| (4) | Additional Torsional Seismic Load RZ | `"TORSIONAL_RZ"` | number | - | Required |
+
+> ⚠️ 원문 Request Example에는 `"INHERENT_TORSION"`이 `"NHERENT_TORSION"`(앞 글자 I 누락)으로
+> 오타 표기되어 있다. JSON Schema와 Specifications 표는 둘 다 `"INHERENT_TORSION"`으로 일관되게
+> 표기하므로, 예제가 표보다 우선한다는 원칙에도 불구하고 이 경우는 예제 쪽의 명백한 오타로 판단해
+> 아래 예제에서 정정했다.
+
+```json
+{
+  "Assign": {
+    "1": {
+      "SEIS_CODE": "USER TYPE",
+      "DESC": "",
+      "SCALE_FACTOR_X": 1,
+      "SCALE_FACTOR_Y": 1,
+      "ACCIDENT_ECCEN_X": 0,
+      "ACCIDENT_ECCEN_Y": 0,
+      "ACCIDENT_TORSION": false,
+      "INHERENT_TORSION": false,
+      "SEISMIC_FORCE": [
+        {"STORY_NAME": "Roof", "FORCE_X": 1250.5, "FORCE_Y": 1180.75},
+        {"STORY_NAME": "Story3", "FORCE_X": 980.25, "FORCE_Y": 925.5},
+        {"STORY_NAME": "Story2", "FORCE_X": 710, "FORCE_Y": 665.25},
+        {"STORY_NAME": "Story1", "FORCE_X": 420.75, "FORCE_Y": 390.5}
+      ],
+      "ADDITIONAL_LOAD": {
+        "STORY_NAME": "Roof",
+        "ALONG_X": 35.5,
+        "ALONG_Y": 28.25,
+        "TORSIONAL_RZ": 12.75
+      }
+    }
+  }
+}
 ```
 
 ---
