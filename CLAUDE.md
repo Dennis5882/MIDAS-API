@@ -99,8 +99,9 @@ python validate_manual.py                 # 패치 후 항상 실행 — docs/ma
 ### 공식 담당자에게 보내는 오류 제보
 
 발견한 공식 문서 오류는 모아서 Word 문서로 정리해 전달한다 (`python-docx` 사용, 이 머신에
-설치되어 있음). 산출물은 `*.docx` 로 `.gitignore` 처리되어 있으니 저장소에 커밋하지 않는다.
-가장 최근 제보: `MIDAS_API_Manual_오류제보_20260725.docx` (2026-07-25, 20건).
+설치되어 있음). 산출물은 `docs/error_reports/`에 보관하며 `*.docx`는 `.gitignore` 처리되어
+있으니 저장소에 커밋하지 않는다. 가장 최근 제보: `docs/error_reports/MIDAS_API_Manual_오류제보_20260725.docx`
+(2026-07-25, 20건) — 처리 현황은 Jira `MAPI-2008`(하위 `MAPI-2009`~`MAPI-2013`)에서 추적한다.
 제보 문서에는 인용 문자열을 원문 그대로 넣고, **실제 API 동작은 검증하지 않았음**을 명시해서
 정본 판단은 담당자에게 남긴다.
 
