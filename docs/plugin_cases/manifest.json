@@ -1,0 +1,162 @@
+[
+  {
+    "index": 1,
+    "title": "WALL STACKER",
+    "article_md": "articles/01_WALL_STACKER.md",
+    "article_url": "https://support.midasuser.com/hc/ko/articles/60809600655385-WALL-STACKER",
+    "video_file": "videos/01_WALL_STACKER.mp4",
+    "video_url": "https://landing.midasuser.com/hubfs/outsourcing/page/KR/GEN%20NX/%EA%B3%B5%EB%AA%A8%EC%A0%84%20%EC%BB%A8%ED%85%90%EC%B8%A0/Wall%20Stacker%20SE_%ED%95%98%EB%A6%AC%EB%B3%B4.mp4"
+  },
+  {
+    "index": 2,
+    "title": "WallMarkAutoMapper",
+    "article_md": "articles/02_WallMarkAutoMapper.md",
+    "article_url": "https://support.midasuser.com/hc/ko/articles/60809496186521-WallMarkAutoMapper",
+    "video_file": "videos/02_WallMarkAutoMapper.mp4",
+    "video_url": "https://landing.midasuser.com/hubfs/outsourcing/page/KR/GEN%20NX/%EA%B3%B5%EB%AA%A8%EC%A0%84%20%EC%BB%A8%ED%85%90%EC%B8%A0/Wall%20Mark%20Auto%20Mapper_%EB%82%98%EB%8A%94%EA%B0%90%EC%9E%90.mp4"
+  },
+  {
+    "index": 3,
+    "title": "VibrationAnalysisAssistant",
+    "article_md": "articles/03_VibrationAnalysisAssistant.md",
+    "article_url": "https://support.midasuser.com/hc/ko/articles/60809469562649-VibrationAnalysisAssistant",
+    "video_file": "videos/03_VibrationAnalysisAssistant.mp4",
+    "video_url": "https://landing.midasuser.com/hubfs/outsourcing/page/KR/GEN%20NX/%EA%B3%B5%EB%AA%A8%EC%A0%84%20%EC%BB%A8%ED%85%90%EC%B8%A0/Vibration%20Analysis%20Assistant_%EB%82%98%EB%8A%94%EA%B0%90%EC%9E%90.mp4"
+  },
+  {
+    "index": 4,
+    "title": "AutoGenerationCmFactor",
+    "article_md": "articles/04_AutoGenerationCmFactor.md",
+    "article_url": "https://support.midasuser.com/hc/ko/articles/60729138404761-AutoGenerationCmFactor",
+    "video_file": "videos/04_AutoGenerationCmFactor.mp4",
+    "video_url": "https://landing.midasuser.com/hubfs/outsourcing/page/KR/GEN%20NX/%EA%B3%B5%EB%AA%A8%EC%A0%84%20%EC%BB%A8%ED%85%90%EC%B8%A0/Auto%20Generation%20Cm%20Factor_%EC%A0%9C%EB%A1%9C.mp4"
+  },
+  {
+    "index": 5,
+    "title": "WallStiffnessAuto",
+    "article_md": "articles/05_WallStiffnessAuto.md",
+    "article_url": "https://support.midasuser.com/hc/ko/articles/60729084287897-WallStiffnessAuto",
+    "video_file": "videos/05_WallStiffnessAuto.mp4",
+    "video_url": "https://landing.midasuser.com/hubfs/outsourcing/page/KR/GEN%20NX/%EA%B3%B5%EB%AA%A8%EC%A0%84%20%EC%BB%A8%ED%85%90%EC%B8%A0/WallStiffnessAuto_%EB%AF%BC%EC%84%B1.mp4"
+  },
+  {
+    "index": 6,
+    "title": "WallHelper",
+    "article_md": "articles/06_WallHelper.md",
+    "article_url": "https://support.midasuser.com/hc/ko/articles/60729121274521-WallHelper",
+    "video_file": "videos/06_WallHelper.mp4",
+    "video_url": "https://landing.midasuser.com/hubfs/outsourcing/page/KR/GEN%20NX/%EA%B3%B5%EB%AA%A8%EC%A0%84%20%EC%BB%A8%ED%85%90%EC%B8%A0/Wall%20Helper_%EB%8B%89%EB%84%A4%EC%9E%84%EC%9D%80%20%EC%98%81%EC%96%B4%EB%A1%9C%20%EB%8B%89%EB%84%A4%EC%9E%84.mp4"
+  },
+  {
+    "index": 7,
+    "title": "ScaleUp",
+    "article_md": "articles/07_ScaleUp.md",
+    "article_url": "https://support.midasuser.com/hc/ko/articles/60728766698777-ScaleUp",
+    "video_file": "videos/07_ScaleUp.mp4",
+    "video_url": "https://landing.midasuser.com/hubfs/outsourcing/page/KR/GEN%20NX/%EA%B3%B5%EB%AA%A8%EC%A0%84%20%EC%BB%A8%ED%85%90%EC%B8%A0/Scale%20Up%20SE_%ED%95%98%EB%A6%AC%EB%B3%B4.mp4"
+  },
+  {
+    "index": 8,
+    "title": "ScaffoldModel",
+    "article_md": "articles/08_ScaffoldModel.md",
+    "article_url": "https://support.midasuser.com/hc/ko/articles/60728663462809-ScaffoldModel",
+    "video_file": "videos/08_ScaffoldModel.mp4",
+    "video_url": "https://landing.midasuser.com/hubfs/outsourcing/page/KR/GEN%20NX/%EA%B3%B5%EB%AA%A8%EC%A0%84%20%EC%BB%A8%ED%85%90%EC%B8%A0/Scaffold-Model_%EB%A1%9C%EC%82%AC22.mp4"
+  },
+  {
+    "index": 9,
+    "title": "RCRebarOptimizer",
+    "article_md": "articles/09_RCRebarOptimizer.md",
+    "article_url": "https://support.midasuser.com/hc/ko/articles/60728648218265-RCRebarOptimizer",
+    "video_file": "videos/09_RCRebarOptimizer.mp4",
+    "video_url": "https://landing.midasuser.com/hubfs/outsourcing/page/KR/GEN%20NX/%EA%B3%B5%EB%AA%A8%EC%A0%84%20%EC%BB%A8%ED%85%90%EC%B8%A0/RCRebarOptimizer_%ED%94%BC%EC%B9%B4%ED%94%BC%EC%B9%B4%EB%B6%80.mp4"
+  },
+  {
+    "index": 10,
+    "title": "RCBeamDeflectionCheck",
+    "article_md": "articles/10_RCBeamDeflectionCheck.md",
+    "article_url": "https://support.midasuser.com/hc/ko/articles/60728330684697-RCBeamDeflectionCheck",
+    "video_file": "videos/10_RCBeamDeflectionCheck.mp4",
+    "video_url": "https://landing.midasuser.com/hubfs/outsourcing/page/KR/GEN%20NX/%EA%B3%B5%EB%AA%A8%EC%A0%84%20%EC%BB%A8%ED%85%90%EC%B8%A0/RC%20Beam%20Deflection%20Check_%EC%8A%A4%ED%83%80%EB%9F%AC%EB%B8%8C%ED%94%BC%EC%89%AC.mp4"
+  },
+  {
+    "index": 11,
+    "title": "PlantFrameBuilder",
+    "article_md": "articles/11_PlantFrameBuilder.md",
+    "article_url": "https://support.midasuser.com/hc/ko/articles/60728306572441-PlantFrameBuilder",
+    "video_file": "videos/11_PlantFrameBuilder.mp4",
+    "video_url": "https://landing.midasuser.com/hubfs/outsourcing/page/KR/GEN%20NX/%EA%B3%B5%EB%AA%A8%EC%A0%84%20%EC%BB%A8%ED%85%90%EC%B8%A0/Plant%20Frame%20Builder_Haydn.mp4"
+  },
+  {
+    "index": 12,
+    "title": "OTChecker",
+    "article_md": "articles/12_OTChecker.md",
+    "article_url": "https://support.midasuser.com/hc/ko/articles/60728235211801-OTChecker",
+    "video_file": "videos/12_OTChecker.mp4",
+    "video_url": "https://landing.midasuser.com/hubfs/outsourcing/page/KR/GEN%20NX/%EA%B3%B5%EB%AA%A8%EC%A0%84%20%EC%BB%A8%ED%85%90%EC%B8%A0/OT%20Checker%20SE_%ED%95%98%EB%A6%AC%EB%B3%B4.mp4"
+  },
+  {
+    "index": 13,
+    "title": "ModelingDataReport",
+    "article_md": "articles/13_ModelingDataReport.md",
+    "article_url": "https://support.midasuser.com/hc/ko/articles/60728254615449-ModelingDataReport",
+    "video_file": "videos/13_ModelingDataReport.mp4",
+    "video_url": "https://landing.midasuser.com/hubfs/outsourcing/page/KR/GEN%20NX/%EA%B3%B5%EB%AA%A8%EC%A0%84%20%EC%BB%A8%ED%85%90%EC%B8%A0/Modeling%20Data%20Report_%EB%AF%B8%EC%8A%B7%ED%97%A4%EB%A6%AC.mp4"
+  },
+  {
+    "index": 14,
+    "title": "GenSnap",
+    "article_md": "articles/14_GenSnap.md",
+    "article_url": "https://support.midasuser.com/hc/ko/articles/60728171680281-GenSnap",
+    "video_file": "videos/14_GenSnap.mp4",
+    "video_url": "https://landing.midasuser.com/hubfs/outsourcing/page/KR/GEN%20NX/%EA%B3%B5%EB%AA%A8%EC%A0%84%20%EC%BB%A8%ED%85%90%EC%B8%A0/Gen%20Snap_%EB%8F%84%ED%86%A0%EB%A6%AC%EB%A1%B1.mp4"
+  },
+  {
+    "index": 15,
+    "title": "EasyApartmentBuilder",
+    "article_md": "articles/15_EasyApartmentBuilder.md",
+    "article_url": "https://support.midasuser.com/hc/ko/articles/60728140059161-EasyApartmentBuilder",
+    "video_file": "videos/15_EasyApartmentBuilder.mp4",
+    "video_url": "https://landing.midasuser.com/hubfs/outsourcing/page/KR/GEN%20NX/%EA%B3%B5%EB%AA%A8%EC%A0%84%20%EC%BB%A8%ED%85%90%EC%B8%A0/Easy%20Apartment%20Builder%20-%20%EC%9D%B4%ED%98%84%ED%8C%8C%ED%8C%8C.mp4"
+  },
+  {
+    "index": 16,
+    "title": "CRANE LOADER",
+    "article_md": "articles/16_CRANE_LOADER.md",
+    "article_url": "https://support.midasuser.com/hc/ko/articles/60726976341017-CRANE-LOADER",
+    "video_file": "videos/16_CRANE_LOADER.mp4",
+    "video_url": "https://landing.midasuser.com/hubfs/outsourcing/page/KR/GEN%20NX/%EA%B3%B5%EB%AA%A8%EC%A0%84%20%EC%BB%A8%ED%85%90%EC%B8%A0/Crane%20Loader%20SE%20_%20%ED%95%98%EB%A6%AC%EB%B3%B4.mp4"
+  },
+  {
+    "index": 17,
+    "title": "BUOY CHECKER",
+    "article_md": "articles/17_BUOY_CHECKER.md",
+    "article_url": "https://support.midasuser.com/hc/ko/articles/60726911770905-BUOY-CHECKER",
+    "video_file": "videos/17_BUOY_CHECKER.mp4",
+    "video_url": "https://landing.midasuser.com/hubfs/outsourcing/page/KR/GEN%20NX/%EA%B3%B5%EB%AA%A8%EC%A0%84%20%EC%BB%A8%ED%85%90%EC%B8%A0/Buoy%20Checker%20SE_%ED%95%98%EB%A6%AC%EB%B3%B4.mp4"
+  },
+  {
+    "index": 18,
+    "title": "AutoWallRebarData",
+    "article_md": "articles/18_AutoWallRebarData.md",
+    "article_url": "https://support.midasuser.com/hc/ko/articles/60726629959961-AutoWallRebarData",
+    "video_file": "videos/18_AutoWallRebarData.mp4",
+    "video_url": "https://landing.midasuser.com/hubfs/outsourcing/page/KR/GEN%20NX/%EA%B3%B5%EB%AA%A8%EC%A0%84%20%EC%BB%A8%ED%85%90%EC%B8%A0/Auto%20Will%20RebarData_KKam.mp4"
+  },
+  {
+    "index": 19,
+    "title": "AutoSteel",
+    "article_md": "articles/19_AutoSteel.md",
+    "article_url": "https://support.midasuser.com/hc/ko/articles/60726583359129-AutoSteel",
+    "video_file": "videos/19_AutoSteel.mp4",
+    "video_url": "https://landing.midasuser.com/hubfs/outsourcing/page/KR/GEN%20NX/%EA%B3%B5%EB%AA%A8%EC%A0%84%20%EC%BB%A8%ED%85%90%EC%B8%A0/Auto%20Steel_%EB%8F%84%ED%86%A0%EB%A6%AC%EB%A1%B1.mp4"
+  },
+  {
+    "index": 20,
+    "title": "SolarStructureModeling",
+    "article_md": "articles/20_SolarStructureModeling.md",
+    "article_url": "https://support.midasuser.com/hc/ko/articles/60714775742489-SolarStructureModeling",
+    "video_file": "videos/20_SolarStructureModeling.mp4",
+    "video_url": "https://landing.midasuser.com/hubfs/outsourcing/page/KR/GEN%20NX/%EA%B3%B5%EB%AA%A8%EC%A0%84%20%EC%BB%A8%ED%85%90%EC%B8%A0/Solar%20Structure%20Modeling_3%EC%A4%91%EB%8C%80%201%EC%86%8C%EB%8C%80%EC%9E%A5.mp4"
+  }
+]
