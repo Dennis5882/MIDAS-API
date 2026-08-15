@@ -37,9 +37,9 @@ Manual과 같지만, 문서 성격은 다르다:
 리서치/편집 분리 서브에이전트 패턴을 그대로 재사용한다.
 
 - Guide: 4/4 작성 완료
-- Plug-in Item: 56/56 작성 완료 (원문 53건 중 "Image Capture Generator"는 "Easy Capture
+- Plug-in Item: 58/58 작성 완료 (원문 53건 중 "Image Capture Generator"는 "Easy Capture
   Generator"와 동일 URL의 별칭이라 1건으로 병합 + 2026-08-06 랜딩 페이지 재확인 시 신규 발견
-  4건 추가)
+  4건 추가 + 2026-08-15 랜딩 페이지 재확인 시 신규 발견 2건 추가)
 
 ---
 
@@ -54,7 +54,7 @@ Manual과 같지만, 문서 성격은 다르다:
 
 ---
 
-## Plug-in Item — 개별 툴 (57건, 고유 56건)
+## Plug-in Item — 개별 툴 (59건, 고유 58건)
 
 원문 페이지는 하위 카테고리 없이 알파벳순 flat 목록이라, 이 표도 원문 순서를 그대로 따른다.
 파일명은 번호를 매기지 않고 툴 이름을 슬러그화한 것 — 신규 Plug-in이 추가돼도 기존 파일 재번호가
@@ -118,6 +118,8 @@ Manual과 같지만, 문서 성격은 다르다:
 | 54 | Easy Result Table | [tools/Easy_Result_Table.md](tools/Easy_Result_Table.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/ko/articles/49504449511705-Easy-Result-Table) |
 | 55 | Bulk Tabular Result Exporter | [tools/Bulk_Tabular_Result_Exporter.md](tools/Bulk_Tabular_Result_Exporter.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/ko/articles/60848073556633-Bulk-Tabular-Result-Exporter) |
 | 56 | Skew Grillage Geometry Generator | [tools/Skew_Grillage_Geometry_Generator.md](tools/Skew_Grillage_Geometry_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/ko/articles/60848423734169-Skew-Grillage-Geometry-Generator) |
+| 57 | CS454 Load Assessment Combinations | [tools/CS454_Load_Assessment_Combinations.md](tools/CS454_Load_Assessment_Combinations.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/ko/articles/60997850893209-CS454-Load-Assessment-Combinations) |
+| 58 | CS454 Moving Load Generator | [tools/CS454_Moving_Load_Generator.md](tools/CS454_Moving_Load_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/ko/articles/60998764028185-CS454-Moving-Load-Generator) |
 
 [^1]: 원문 페이지에는 "Image Capture Generator"라는 이름으로도 한 번 더 나열되어 있으나 같은
     URL(`35639906272025-Easy-Capture-Generator`)을 가리키는 동일 아티클이다.
@@ -127,6 +129,11 @@ Manual과 같지만, 문서 성격은 다르다:
 > "Floor Load Table Generator"·"Easy Result Table"은 원문 생성일이 2025-08-04/05로 이전부터
 > 존재했으나 랜딩 페이지에는 최근에야 링크된 것으로 보이고, "Bulk Tabular Result
 > Exporter"·"Skew Grillage Geometry Generator"는 2026-08-06 당일 생성된 신규 아티클이다.
+>
+> **2026-08-15 발견:** No. 57~58 2건도 마찬가지로 랜딩 페이지 `updated_at` 갱신(2026-08-10)을
+> 계기로 재확인해 발견했다. 두 아티클 모두 2026-08-10 당일 생성된 신규 아티클("C" 카테고리,
+> "CS Report Generator" 다음 순서로 랜딩 페이지에 링크됨)이며, 영어 원문만 존재(한국어 번역
+> 미제공)한다.
 
 ---
 

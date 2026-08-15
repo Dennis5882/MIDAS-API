@@ -1,10 +1,10 @@
 {
- "article_count": 61,
+ "article_count": 63,
  "articles": {
   "35639730101529": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/35639730101529-Plug-in-Online-Manual",
    "title": "Plug-in Online Manual",
-   "updated_at": "2026-08-06T08:16:31Z"
+   "updated_at": "2026-08-10T04:52:21Z"
   },
   "35639906272025": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/35639906272025-Easy-Capture-Generator",
@@ -259,12 +259,12 @@
   "58178248491161": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/58178248491161-Stiffness-Auto-Tuner",
    "title": "Stiffness Auto Tuner",
-   "updated_at": "2026-05-22T06:15:12Z"
+   "updated_at": "2026-08-13T07:55:10Z"
   },
   "60307252076441": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/60307252076441-Alignment-Editor",
    "title": "Alignment Editor",
-   "updated_at": "2026-07-29T05:15:31Z"
+   "updated_at": "2026-08-10T10:36:57Z"
   },
   "60315550956825": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/60315550956825-Traffic-Lane-Generator",
@@ -305,6 +305,16 @@
    "html_url": "https://support.midasuser.com/hc/ko/articles/60848423734169-Skew-Grillage-Geometry-Generator",
    "title": "Skew Grillage Geometry Generator",
    "updated_at": "2026-08-06T08:12:01Z"
+  },
+  "60997850893209": {
+   "html_url": "https://support.midasuser.com/hc/ko/articles/60997850893209-CS454-Load-Assessment-Combinations",
+   "title": "CS454 Load Assessment Combinations",
+   "updated_at": "2026-08-10T04:30:43Z"
+  },
+  "60998764028185": {
+   "html_url": "https://support.midasuser.com/hc/ko/articles/60998764028185-CS454-Moving-Load-Generator",
+   "title": "CS454 Moving Load Generator",
+   "updated_at": "2026-08-10T04:47:30Z"
   }
  },
  "section_id": "plugin"

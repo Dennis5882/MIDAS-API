@@ -1,7 +1,7 @@
 # Stiffness Auto Tuner
 
 > **원문:** [Stiffness Auto Tuner](https://support.midasuser.com/hc/en-us/articles/58178248491161-Stiffness-Auto-Tuner)
-> **원문 작성:** 2026-05-22 · **원문 최종 편집:** 2026-05-22
+> **원문 작성:** 2026-05-22 · **원문 최종 편집:** 2026-08-13
 
 ---
 
@@ -16,12 +16,14 @@ Stiffness Factor를 수정하고 해석을 재실행하는 반복적인 수작�
 
 ## 지원 버전
 
-- `MIDAS GEN NX 2026 V105 R1 KR`
+- `MIDAS GEN NX 2026 v2.2`
 - 적용 기준: KDS 41 20 2022 RC — Beam check는 Beam Check 결과 사용, Wall check는 Wall
   Design 결과 사용
 
 ## 주요 기능
 
+- **보·벽체 일괄 적용:** 보(Beam)와 벽체(Wall)를 한 번에 대상으로 설정하여, 각 부재의
+  Stiffness Factor 조정 및 반복 해석을 일괄 수행 가능(2026-08-13 원문 개정으로 추가).
 - **자동 반복(Automatic iteration):** 해석 수행, 설계 결과 조회, 사용자가 설정한 목표비
   기준 Stiffness Factor 갱신을 반복 수행.
 - **모델 기반 요소 선택:** MIDAS GEN NX에서 선택한 대상 부재를 Plug-in과 바로 동기화.
@@ -34,16 +36,17 @@ Stiffness Factor를 수정하고 해석을 재실행하는 반복적인 수작�
 
 | 단계 | 설명 |
 | --- | --- |
-| 1 | Plug-in을 실행하고 수행할 작업 선택 — 보 요소 조정은 **Beam Stiffness Tuner**, 벽체 요소 조정은 **Wall Stiffness Tuner** |
+| 1 | Plug-in을 실행하고 상위 탭에서 보 또는 벽체에 대한 조건을 입력(2026-08-13 원문 개정 — 이전에는 **Beam Stiffness Tuner**/**Wall Stiffness Tuner**를 별도 Plug-in으로 선택했으나, 하나의 화면에서 탭으로 전환하는 방식으로 변경됨) |
 | 2 | MIDAS 모델에서 대상 부재를 선택하고 **Sync from product** 클릭. 보 강성 조정은 선택된 보 요소를, 벽체 강성 조정은 선택된 벽체 요소를 Wall ID·층 정보 기준으로 가져옴 |
 | 3 | 필요 시 특정 Section 또는 Wall ID에 할당된 부재를 일괄 선택 가능 |
 | 4 | (옵션) 보에 이미 적용된 Section Stiffness Factor를 함께 고려할지 설정. 활성화하면 Element Stiffness Factor뿐 아니라 기존 Section Stiffness Factor도 고려해 더 작은 값을 기준으로 해석·설계 수행 |
 | 5 | **Decrement Stiffness Step Value** 설정. 지정한 간격에 따라 100%부터 낮은 값까지 강성 저감 순서를 생성해 **Stiffness decrement sequence**에 표시 |
 | 6 | **Value to insert**에 값을 입력하면 Stiffness decrement sequence에 추가됨. **Value to delete**로 시퀀스에서 값 삭제 가능 |
 | 7 | **Iteration Number**와 **Target Ratio** 입력. Target Ratio는 추가 강성 저감이 필요한지 판단하는 설계비 기준값 |
-| 8 | 최종 결과 대화상자 검토 — 목표비를 여전히 초과하는 부재, 최소 강성 한계에 도달한 부재, 선택 요소에 적용된 최종 강성값을 요약해 보여줌 |
-| 9 | 최종 반복이 끝나면 MIDAS 모델에 강성 그룹이 자동 생성되고, 선택된 요소가 최종 강성비 기준으로 해당 그룹에 할당됨 |
-| Back | 메인 페이지로 돌아가 보/벽체 강성 튜닝 Plug-in 중 선택 가능 |
+| 8 | **Analysis scope**에서 보와 벽체를 모두 실행 단계에 포함할지, 개별로 실행할지 설정(2026-08-13 원문 개정으로 추가) |
+| 9 | 최종 결과 대화상자 검토 — 목표비를 여전히 초과하는 부재, 최소 강성 한계에 도달한 부재, 선택 요소에 적용된 최종 강성값을 요약해 보여줌 |
+| 10 | 최종 반복이 끝나면 MIDAS 모델에 강성 그룹이 자동 생성되고, 선택된 요소가 최종 강성비 기준으로 해당 그룹에 할당됨 |
+| Back | 메인 페이지로 이동 |
 | Refresh | 모델을 새로 열었거나 모델 정보가 변경됐을 때 최신 정보로 Plug-in 갱신 |
 
 ## 결론 (원문)
