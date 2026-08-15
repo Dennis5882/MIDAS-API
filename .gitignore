@@ -13,3 +13,6 @@ scripts/zendesk_login_scrape/chrome_profile/
 # 스크래핑 산출물(대용량 영상 등) — 필요 시 개별적으로 커밋
 scripts/zendesk_login_scrape/output/
 docs/plugin_cases/videos/
+
+# 로컬 전용 권한 승인 기록 — 팀 공용 allowlist(.claude/settings.json)와 별개, 커밋 안 함
+.claude/settings.local.json
