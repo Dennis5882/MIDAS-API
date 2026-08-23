@@ -1063,9 +1063,9 @@ for row in table.get("DATA", []):
 | 1-1-5-2 | 　　　　└ 적용 시작/종료 층 — `FIX_USER_CHECK: "USER"`일 때만 | `BETA.NAME_FROM` / `BETA.NAME_TO` | String | — | Optional |
 | 1-1-5-3 | 　　　　└ 사용자 지정 Beta 값 — `FIX_USER_CHECK: "USER"`일 때만 | `BETA.VALUE` | Number | — | Optional |
 | 1-2 | └ 층간변위 산정 방식 선택 | `ADDITIONAL.SET_CALCULATION_METHOD` | Object | — | Optional |
-| 1-2-1 | 　　└ 방식: `"Drift on the Center of Mass"`(질량중심 변위) / `"Max. Drift of Outer Extreme Points"`(외곽 최대변위) / `"Max. Drift of All Vertical Elements"`(전 수직요소 최대변위) | `SET_CALCULATION_METHOD.STORY_DRIFT_METHOD` | String | — | Optional |
+| 1-2-1 | 　　└ 방식: `"Drift at the Center of Mass"`(질량중심 변위) / `"Max. Drift of Outer Extreme Points"`(외곽 최대변위) / `"Max. Drift of All Vertical Elements"`(전 수직요소 최대변위) | `SET_CALCULATION_METHOD.STORY_DRIFT_METHOD` | String | — | Optional |
 
-> ℹ️ **2026-07-30 공식 확인 — `STORY_DRIFT_METHOD` 값 정정.** 이 테이블의 공식 Specifications 표는 첫 번째 값을 `"Drfit on the Center of Mass"`로 적고 있습니다. 이전 버전 문서는 [13. Stiffness Irregularity Check](#13-stiffness-irregularity-check-soft-story)·[17. Weight Irregularity Check](#17-weight-irregularity-check)와 동일 enum이라 가정하고 `"Drift at the Center of Mass"`로 정정해 실었으나, **이는 잘못된 교정이었습니다.** 공식 담당자 확인 결과(Jira MAPI-2009) API는 제품 UI 문구를 그대로 따르도록 설계되어 있고, 이 테이블(Story Stability Coefficient)이 속한 제품 화면은 실제로 "Drift **on**"을 사용하며 "Drift at"을 쓰는 것은 Weight Irregularity Check뿐입니다. 즉 오타는 철자(`Drfit`→`Drift`)뿐이고 전치사(`on`)는 의도된 표기이므로, 위 표는 철자만 정정한 `"Drift on the Center of Mass"`로 기재했습니다.
+> ℹ️ **2026-08-20 공식 반영 — `STORY_DRIFT_METHOD` 값 `"Drift at the Center of Mass"`로 최종 통일.** 이 값의 표기는 두 차례 뒤집혔던 이력이 있어 근거를 남긴다. (1) 2026-07-30 시점에는 공식 담당자가 "이 테이블이 속한 제품 화면은 실제로 'Drift on'을 쓴다"고 확인해줘 철자만 정정한 `"Drift on the Center of Mass"`로 기재했다(Jira MAPI-2009). (2) 이후 API가 실제로는 `SET_STORY_DRIFT_METHOD`(무시됨)와 `SET_CALCULATION_METHOD.STORY_DRIFT_METHOD` 두 구조가 혼재해 값이 적용되는지조차 확인이 어렵다는 별도 이슈가 제기됐고(Jira MAPI-2375), 담당 개발자가 검토 끝에 "at으로 통일하겠습니다"(2026-08-10)라고 결정 — 제품 UI와 API enum을 모두 `"Drift at the Center of Mass"`로 맞추는 쪽으로 정리됐다. 공식 아티클도 2026-08-20에 이 값으로 갱신되어 [13. Stiffness Irregularity Check](#13-stiffness-irregularity-check-soft-story)·[17. Weight Irregularity Check](#17-weight-irregularity-check)와 동일해졌다. 즉 이전 "on" 표기는 그 시점 기준으로는 정확했으나 이후 제품 자체가 "at"으로 바뀐 것이며, 오타 되돌림이 아니다.
 
 **요청 예시 — `ADDITIONAL` 포함**
 
