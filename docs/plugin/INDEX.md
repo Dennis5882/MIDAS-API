@@ -37,9 +37,13 @@ Manual과 같지만, 문서 성격은 다르다:
 리서치/편집 분리 서브에이전트 패턴을 그대로 재사용한다.
 
 - Guide: 4/4 작성 완료
-- Plug-in Item: 58/58 작성 완료 (원문 53건 중 "Image Capture Generator"는 "Easy Capture
+- Plug-in Item: 63/63 작성 완료 (원문 53건 중 "Image Capture Generator"는 "Easy Capture
   Generator"와 동일 URL의 별칭이라 1건으로 병합 + 2026-08-06 랜딩 페이지 재확인 시 신규 발견
-  4건 추가 + 2026-08-15 랜딩 페이지 재확인 시 신규 발견 2건 추가)
+  4건 추가 + 2026-08-15 랜딩 페이지 재확인 시 신규 발견 2건 추가 + 2026-08-24 랜딩 페이지
+  재확인 시 신규 발견 5건 추가. "Response Spectrum Generator"도 랜딩 페이지에 지역 코드별
+  별칭("[Peru E.030:2026]", "[SNZ TS 1170.5:2025]")으로 두 번 더 나열되나 동일 아티클이라
+  건수에 포함하지 않음 — 해당 코드들은 [Response_Spectrum_Generator.md](tools/Response_Spectrum_Generator.md)의
+  "적용 기준"에 이미 반영돼 있음)
 
 ---
 
@@ -54,7 +58,7 @@ Manual과 같지만, 문서 성격은 다르다:
 
 ---
 
-## Plug-in Item — 개별 툴 (59건, 고유 58건)
+## Plug-in Item — 개별 툴 (64건, 고유 63건)
 
 원문 페이지는 하위 카테고리 없이 알파벳순 flat 목록이라, 이 표도 원문 순서를 그대로 따른다.
 파일명은 번호를 매기지 않고 툴 이름을 슬러그화한 것 — 신규 Plug-in이 추가돼도 기존 파일 재번호가
@@ -120,6 +124,11 @@ Manual과 같지만, 문서 성격은 다르다:
 | 56 | Skew Grillage Geometry Generator | [tools/Skew_Grillage_Geometry_Generator.md](tools/Skew_Grillage_Geometry_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/ko/articles/60848423734169-Skew-Grillage-Geometry-Generator) |
 | 57 | CS454 Load Assessment Combinations | [tools/CS454_Load_Assessment_Combinations.md](tools/CS454_Load_Assessment_Combinations.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/ko/articles/60997850893209-CS454-Load-Assessment-Combinations) |
 | 58 | CS454 Moving Load Generator | [tools/CS454_Moving_Load_Generator.md](tools/CS454_Moving_Load_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/ko/articles/60998764028185-CS454-Moving-Load-Generator) |
+| 59 | CS454 Auto Lane Generator | [tools/CS454_Auto_Lane_Generator.md](tools/CS454_Auto_Lane_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/ko/articles/61259225090329-CS454-Auto-Lane-Generator) |
+| 60 | Eurocode Auto Lane Generator | [tools/Eurocode_Auto_Lane_Generator.md](tools/Eurocode_Auto_Lane_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/ko/articles/61259174909849-Eurocode-Auto-Lane-Generator) |
+| 61 | Eurocode Load Combinations Plugin | [tools/Eurocode_Load_Combinations_Plugin.md](tools/Eurocode_Load_Combinations_Plugin.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/ko/articles/61259382041369-Eurocode-Load-Combinations) |
+| 62 | Eurocode Moving Load Case Generator | [tools/Eurocode_Moving_Load_Case_Generator.md](tools/Eurocode_Moving_Load_Case_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/ko/articles/61259043302041-Eurocode-Moving-Load-Case-Generator) |
+| 63 | Load Combination Contribution Analyzer | [tools/Load_Combination_Contribution_Analyzer.md](tools/Load_Combination_Contribution_Analyzer.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/ko/articles/61258768334233-Load-Combination-Contribution-Analyzer) |
 
 [^1]: 원문 페이지에는 "Image Capture Generator"라는 이름으로도 한 번 더 나열되어 있으나 같은
     URL(`35639906272025-Easy-Capture-Generator`)을 가리키는 동일 아티클이다.
@@ -134,6 +143,14 @@ Manual과 같지만, 문서 성격은 다르다:
 > 계기로 재확인해 발견했다. 두 아티클 모두 2026-08-10 당일 생성된 신규 아티클("C" 카테고리,
 > "CS Report Generator" 다음 순서로 랜딩 페이지에 링크됨)이며, 영어 원문만 존재(한국어 번역
 > 미제공)한다.
+>
+> **2026-08-24 발견:** No. 59~63 5건도 정기 점검 중 랜딩 페이지 `updated_at` 갱신
+> (2026-08-10 → 2026-08-18)을 계기로 재확인해 발견했다. 5건 모두 2026-08-18 당일 생성된
+> 신규 아티클이며("C" 카테고리에 CS454 Auto Lane Generator, "E" 카테고리에 Eurocode 3종,
+> "L" 카테고리에 Load Combination Contribution Analyzer), `/ko/` 경로로만 링크돼 있으나
+> 본문은 영어로만 작성돼 있다(한국어 번역 미제공). "Eurocode Load Combinations Plugin"
+> 아티클은 다른 문서와 달리 GUI 사용법이 아닌 버전 릴리스 노트 형식으로 작성돼 있어, 해당
+> 문서의 "사용 방법" 절은 비워 두었다.
 
 ---
 
