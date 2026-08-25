@@ -264,6 +264,272 @@
 
 ---
 
+#### 1-2-E. China Type
+
+> ⚠️ 2026-08-25 확인: 이전 문서에는 China/Japan/Taiwan/India/Other Countries Type이 전혀
+> 문서화되어 있지 않았음(MVHL과 동일한 유형의 누락). 원문
+> [Response Spectrum Functions - China](https://support.midasuser.com/hc/en-us/articles/39473334759065)
+> 기준, 9개 코드 중 가장 최신·대표적인 GB50011-2010만 전체 필드를 문서화하고 나머지 8개는
+> SPEC_CODE 매핑표로 정리(SECT/TDMT 원칙).
+
+| SPEC_CODE 값 | 설명 |
+| --- | --- |
+| `"CH2010"` | China (GB50011-2010) — 아래 대표 예시 |
+| `"GB50111_2006"` | China (GB50111-2006) |
+| `"CH2001"` | China (GB50011-2001) |
+| `"CHSH2003"` | China Shanghai (DGJ08-9-2003) |
+| `"CH_BRG89"` | China (JTJ004-89) |
+| `"JTG/T 2231-01-2020"` | China (JTG/T 2231-01-2020) |
+| `"JTG/T B02-01-2008"` | China (JTG/T B02-01-2008) |
+| `"CH_GBJ111_87"` | China (GBJ11-87) |
+| `"CJJ 166-2011"` | China (CJJ 166-2011) |
+
+**GB50011-2010 추가 파라미터**
+
+| No. | 설명 | Key | Value Type | Default | Required |
+| --- | --- | --- | --- | --- | --- |
+| 8-(2) | 설계 지진 등급(Seismic Fortification Intensity) | `SFI`(STR) | String | `"0.05g"` | Optional |
+| 8-(3) | 지반 종류(I0/I1/II/III/IV) | `SC_`(STR) | String | `"I0"` | Optional |
+| 8-(4) | 지진 영향(Frequent/Middle/Scarce) | `EQ_`(STR) | String | – | Required |
+| 9-(1) | 근원 유형(0/1/2) | `NSC`(OPT) | Integer | 0 | Optional |
+| 9-(2) | 공칭 횡력(0=전단력차, 1=관성력) | `nLForce`(OPT) | Integer | 0 | Optional |
+| 10-(1) | 설계 특성 주기 [Tg, Tg1, Tg2] (GB50011-2010은 Tg만 사용) | `aTG`(VAL) | Array[Number,3] | – | Required |
+| 10-(2) | 감쇠비 | `DP`(VAL) | Number | – | Required |
+| 10-(3) | 최대 지진영향계수 | `MaxEQ`(VAL) | Number | – | Required |
+| 10-(4) | 최대 주기 | `PERIOD`(VAL) | Number | – | Required |
+
+**Request Body 예시 (GB50011-2010)**
+
+```json
+{
+  "Assign": {
+    "5": {
+      "NAME": "China(GB50011-10)",
+      "iTYPE": 1,
+      "iMETHOD": 0,
+      "SCALE": 1,
+      "GRAV": 9.806,
+      "DRATIO": 0.05,
+      "STR": { "SPEC_CODE": "CH2010", "SFI": "0.10g", "SC_": "II", "EQ_": "MIDDLE" },
+      "OPT": { "NSC": 1, "nLForce": 0 },
+      "VAL": { "aTG": [0.4, 0, 0], "DP": 0.05, "MaxEQ": 0.23, "PERIOD": 6 },
+      "CALC_OPT": true
+    }
+  }
+}
+```
+
+---
+
+#### 1-2-F. Japan Type
+
+| SPEC_CODE 값 | 설명 |
+| --- | --- |
+| `"JPN2000"` | Japan (Arch. 2000) |
+| `"JP_BRG2017"` | Japan (Bridge 2017, MIDAS CIVIL NX JP 버전 전용) |
+| `"JP_BRG2012"` | Japan (Bridge 2012, MIDAS CIVIL NX JP 버전 전용) |
+| `"JP_BRG2002"` | Japan (Bridge 2002) |
+
+**JPN2000(Arch.2000) 추가 파라미터**
+
+| No. | 설명 | Key | Value Type | Default | Required |
+| --- | --- | --- | --- | --- | --- |
+| 9-(1) | 지진 지역 계수(Z) 0=1.0/1=0.9/2=0.8/3=0.7 | `iSEISZONEFACTOR`(OPT) | Integer | 0 | Optional |
+| 9-(2) | 지반 종류(I/II/III) | `SOILCLASS`(OPT) | Integer | 0 | Optional |
+| 10-(1) | 최대 주기 | `PERIOD`(VAL) | Number | – | Required |
+| 10-(2) | 밑면 전단력 계수(Co) | `CO`(VAL) | Number | – | Required |
+
+**Bridge2017/2012/2002 공통 추가 파라미터** (SPEC_CODE만 다름)
+
+| No. | 설명 | Key | Value Type | Default | Required |
+| --- | --- | --- | --- | --- | --- |
+| 9-(1) | 지반 종류(I/II/III) | `SOILCLASS`(OPT) | Integer | 0 | Optional |
+| 9-(2) | 지진 지역(Bridge2017/2012: A1/A2/B1/B2/C, Bridge2002: A/B/C) | `iSEISZONE`(OPT) | Integer | 0 | Optional |
+| 9-(3) | 지진 입력 방법(Level1/Level2 Type I/Level2 Type II) | `iEQMETHOD`(OPT) | Integer | 0 | Optional |
+| 10-(1) | 최대 주기 | `PERIOD`(VAL) | Number | – | Required |
+| 10-(2) | 수정 계수(Cz) — ⚠️ MIDAS가 다른 값으로 자동 계산해 입력값이 무시됨 | `CZ`(VAL) | Number | – | Required |
+
+**Request Body 예시 (JPN2000)**
+
+```json
+{
+  "Assign": {
+    "6": {
+      "NAME": "JP2000",
+      "iTYPE": 1,
+      "iMETHOD": 0,
+      "SCALE": 1,
+      "GRAV": 9.806,
+      "DRATIO": 0.05,
+      "STR": { "SPEC_CODE": "JPN2000" },
+      "OPT": { "iSEISZONEFACTOR": 2, "SOILCLASS": 1 },
+      "VAL": { "PERIOD": 6, "CO": 0.2 },
+      "CALC_OPT": true
+    }
+  }
+}
+```
+
+---
+
+#### 1-2-G. Taiwan Type
+
+> ⚠️ 원문 [Response Spectrum Functions - Taiwan](https://support.midasuser.com/hc/en-us/articles/39473471043737)
+> 자체가 7개 코드를 다루는 대형 아티클이라, 가장 최신인 Taiwan(2022)만 전체 필드를 문서화한다.
+
+| SPEC_CODE 값 | 설명 |
+| --- | --- |
+| `"TAIWAN(2022)"` | Taiwan 2022 — 아래 대표 예시 |
+| `"TAIWAN06"` | Taiwan 2006 |
+| `"TAIWAN99H"` | Taiwan 1999 Horizontal |
+| `"TAIWAN99V"` | Taiwan 1999 Vertical |
+| `"TAIWAN(2011)"` | Taiwan Bridge 98 |
+| `"TAIWAN89H_BRG"` | Taiwan Bridge 89 Horizontal |
+| `"TAIWAN89V_BRG"` | Taiwan Bridge 89 Vertical |
+
+**Taiwan(2022) 추가 파라미터**
+
+| No. | 설명 | Key | Value Type | Default | Required |
+| --- | --- | --- | --- | --- | --- |
+| 9-(1) | 지반 종류(Type1/2/3/User Input) | `SOILCLASS`(OPT) | Integer | 0 | Optional |
+| 9-(2) | 지진 구역(General/Near Fault/Taipei Basin) | `iSEISZONE`(OPT) | Integer | 0 | Optional |
+| 9-(3) | 스펙트럼 방향(0=수평/1=수직) | `iSPECTYPE`(OPT) | Integer | 0 | Optional |
+| 9-(4) | 스펙트럼 용도(0=Design/1=Small-Medium/2=Maximum) | `iSPECUSE`(OPT) | Integer | 0 | Optional |
+| 9-(5) | 세부 구역(Taipei Basin I~IV/User Input, 구역이 Taipei Basin일 때) | `iSUBZONE`(OPT) | Integer | 0 | Optional |
+| 10-(1) | 수평 스펙트럼 가속도 [Sds,Sd1,Sms,Sm1] (General/Near Fault 구역) | `aSRA`(VAL) | Array[Number,4] | – | Required |
+| 10-(2) | 대만분지 스펙트럼 가속도 [Sds_t,Sd1_t,Sms_t,Sm1_t] (Taipei Basin 구역) | `aSRA_T`(VAL) | Array[Number,4] | – | Required |
+| 10-(3) | 근단층 지진 영향 [Nda,Ndv,Nma,Nmv] (Near Fault 구역) | `aNSF`(VAL) | Array[Number,4] | – | Required |
+| 10-(4) | 지반 증폭 계수 [Fda,Fdv,Fma,Fmv] (General/Near Fault 구역) | `aSMF`(VAL) | Array[Number,4] | – | Required |
+| 10-(5) | 감쇠비(%) | `DP`(VAL) | Number | – | Required |
+| 10-(6) | 최대 주기 | `PERIOD`(VAL) | Number | – | Required |
+| 10-(7) | 중요도 계수(I) | `IF`(VAL) | Number | – | Required |
+| 10-(8) | 지진 증폭 계수(ay) | `SMFACTOR`(VAL) | Number | – | Required |
+| 10-(9) | 반응 수정 계수(R) | `RMFACTOR`(VAL) | Number | – | Required |
+| 10-(10) | 기본 주기(T1) | `FUNDAMENTAL_PERIOD`(VAL) | Number | – | Required |
+
+**Request Body 예시 (Taiwan 2022, Near Fault Zone)**
+
+```json
+{
+  "Assign": {
+    "7": {
+      "NAME": "Taiwan(2022)",
+      "iTYPE": 1,
+      "iMETHOD": 0,
+      "SCALE": 1,
+      "GRAV": 9.806,
+      "DRATIO": 0.05,
+      "STR": { "SPEC_CODE": "TAIWAN(2022)" },
+      "OPT": {"SOILCLASS": 0, "iSEISZONE": 1, "iSPECTYPE": 0, "iSPECUSE": 1, "iSUBZONE": 0},
+      "VAL": {
+        "aSRA": [0.5, 0.3, 0.7, 0.4],
+        "aSRA_T": [0.6, 0.8, 1.6, 1.6],
+        "aNSF": [0.8, 0.45, 1, 0.6],
+        "aSMF": [1, 1, 1, 1],
+        "DP": 5, "PERIOD": 6, "IF": 1, "SMFACTOR": 1, "RMFACTOR": 1.6,
+        "FUNDAMENTAL_PERIOD": 0.09
+      },
+      "CALC_OPT": true
+    }
+  }
+}
+```
+
+---
+
+#### 1-2-H. India Type
+
+| SPEC_CODE 값 | 설명 |
+| --- | --- |
+| `"IS1893(2016)"` | India (IS1893:2016) |
+| `"IS2002"` | India (IS1893:2002) |
+| `"IRC:SP:114-2018"` | India (IRC:SP:114-2018) |
+
+**공통 추가 파라미터 (3개 코드 공통)**
+
+| No. | 설명 | Key | Value Type | Default | Required |
+| --- | --- | --- | --- | --- | --- |
+| 9-(1) | 지반 종류(I=Rock/Hard·II=Medium·III=Soft) | `SOILCLASS`(OPT) | Integer | 0 | Optional |
+| 9-(2) | 지진 구역(II 0.10/III 0.16/IV 0.24/V 0.36, IRC:SP:114-2018은 User Defined=4도 지원) | `iSEISZONE`(OPT) | Integer | 0 | Optional |
+| 10-(1) | 감쇠비(%) | `DP`(VAL) | Number | – | Required |
+| 10-(2) | 최대 주기 | `PERIOD`(VAL) | Number | – | Required |
+| 10-(3) | 중요도 계수(I) | `IE`(VAL) | Number | – | Required |
+| 10-(4) | 반응 저감 계수(R) | `R_`(VAL) | Number | – | Required |
+| 10-(5) | 감쇠 배율 계수(값 1 고정) | `DPFAC`(VAL) | Integer | – | Required |
+| 10-(6) | 사용자 정의 지진구역 값 (IRC:SP:114-2018, `iSEISZONE`=4일 때만) | `USERDEFSEISZONE`(VAL) | Number | – | Required |
+
+**Request Body 예시 (IS1893:2016)**
+
+```json
+{
+  "Assign": {
+    "8": {
+      "NAME": "IS1893(2016)",
+      "iTYPE": 1,
+      "iMETHOD": 0,
+      "SCALE": 1,
+      "GRAV": 9.806,
+      "DRATIO": 0.05,
+      "STR": { "SPEC_CODE": "IS1893(2016)" },
+      "OPT": { "SOILCLASS": 0, "iSEISZONE": 0 },
+      "VAL": { "DP": 5, "PERIOD": 6, "IE": 1, "R_": 3, "DPFAC": 1 },
+      "CALC_OPT": true
+    }
+  }
+}
+```
+
+---
+
+#### 1-2-I. Other Countries Type
+
+> ⚠️ 원문 [Response Spectrum Functions - Other Countries](https://support.midasuser.com/hc/en-us/articles/39508838720153)
+> 가 8개 국가 코드를 다루는 대형 아티클이라, 가장 필드가 단순한 Canada(NBC95)만 전체 문서화하고
+> 나머지는 SPEC_CODE 매핑만 남긴다.
+
+| SPEC_CODE 값 | 설명 |
+| --- | --- |
+| `"NBC95"` | Canada (NBC 1995) — 아래 대표 예시 |
+| `"NTC2018"` | Italy (NTC 2018) |
+| `"DPWH-LRFD BSDS(2013)"` | Philippines (DPWH-LRFD BSDS 2013) |
+| `"AS 5100.2(2017)"` | Australia (AS 5100.2:2017) |
+| `"NSR-10"` | Colombia (NSR-10) |
+| `"P100-1(2013)"` | Romania (P100-1:2013) |
+| `"SP 268.1325800.2016"` | Russia (SP 268.1325800.2016) |
+| `"DPT.1301/1302-61:2018"` | Thailand (DPT.1301/1302-61:2018) |
+
+**Canada NBC95 추가 파라미터**
+
+| No. | 설명 | Key | Value Type | Default | Required |
+| --- | --- | --- | --- | --- | --- |
+| 9-(1) | 가속도 구역(Za, 0~6) | `ZA`(OPT) | Integer | 0 | Optional |
+| 9-(2) | 속도 구역(Zv, 0~6) | `ZV`(OPT) | Integer | 0 | Optional |
+| 10-(1) | 최대 주기 | `PERIOD`(VAL) | Number | – | Required |
+| 10-(2) | 구역 속도비(v) | `V`(VAL) | Number | – | Required |
+
+**Request Body 예시 (Canada NBC95)**
+
+```json
+{
+  "Assign": {
+    "9": {
+      "NAME": "NBC1995",
+      "iTYPE": 1,
+      "iMETHOD": 0,
+      "SCALE": 1,
+      "GRAV": 9.806,
+      "DRATIO": 0.05,
+      "STR": { "SPEC_CODE": "NBC95" },
+      "OPT": { "ZA": 2, "ZV": 3 },
+      "VAL": { "PERIOD": 6, "V": 0.15 },
+      "CALC_OPT": true
+    }
+  }
+}
+```
+
+---
+
 ### 1-3. Python 예제 코드
 
 ```python
@@ -408,13 +674,19 @@ print("SPFC DELETE/1:", resp.status_code)
 |-----|------|-----|------------|---------|----------|
 | 24 | 우발 편심 적용 | `bACCECC` | Boolean | false | Optional |
 | 25 | 편심 데이터 (true=자동, false=사용자 정의) | `bACCECC_AUTO` | Boolean | - | Required |
-| 26 | 편심 비율 | `ACCECC_PERTCENT` | Number | - | Required |
+| 26 | 편심 비율 | `ACCECC_PERCENT` | Number | - | Required |
 | 27 | GL 이하 편심 고려 여부 | `bACCECC_CONSIDER_GL` | Boolean | - | Required |
-| 28 | 최소 우발 비틀림 모멘트 제한 | `bACCECC_LIMIT_MIN` | Boolean | - | Required |
+| 28 | 최소 우발 비틀림 모멘트 제한 | `bACCECC_MINIMUM_TORSION` | Boolean | - | Required |
 | 29 | 편심 목록 | `aACCECC_ECCEN_LIST` | Array[Object] | - | Required |
 | (1) | 층 이름 | `STORY` | String | - | Required |
 | (2) | Cross 방향 위치 | `CROSS` | Number | - | Required |
-| (3) | Along 방향 위치 | `Along` | Number | - | Required |
+| (3) | Along 방향 위치 | `ALONG` | Number | - | Required |
+
+> ⚠️ 2026-08-25 확인: 원문 Specifications 표는 `ACCECC_PERTCENT`(오타, 스키마는 `ACCECC_PERCENT`)와
+> 28번 Key를 27번과 동일한 `bACCECC_CONSIDER_GL`로 중복 오기(스키마는 `bACCECC_MINIMUM_TORSION`)
+> 하고 있음. 이 4개 필드는 원문 Request 예제에 등장하지 않아 표와 대조할 예제가 없으므로,
+> CLAUDE.md 원칙에 따라 JSON Schema를 근거로 정정(원문
+> [Response Spectrum Load Cases](https://support.midasuser.com/hc/en-us/articles/35963719599641)).
 
 **비소산 요소 설계 파라미터** *(GEN NX only)*
 
@@ -810,10 +1082,15 @@ Hyper-S 비선형 시간이력 전역 제어를 정의합니다.
 
 **HINGE_OPT 서브 파라미터**
 
-| 설명 | Key | Value Type |
-|------|-----|------------|
-| P-스프링 지점 처리 | `PSPRING_SUP` | Integer |
-| 요소 데이터 | `EL` | Integer |
+| 설명 | Key | Value Type | Default | Required |
+|------|-----|------------|---------|----------|
+| Point Spring Support (0=비선형 특성 적용, 1=선형으로 간주) | `PSPRING_SUP` | Integer(enum) | 0 | Optional |
+| Elastic Link (0=비선형 특성 적용, 1=선형으로 간주) | `EL` | Integer(enum) | 1 | Optional |
+
+> ⚠️ 2026-08-25 확인: 이전 문서는 `PSPRING_SUP`을 "P-스프링 지점 처리", `EL`을 "요소 데이터"로만
+> 표기해 실제 의미(둘 다 0/1 enum — 비선형 특성 적용 여부)와 기본값이 누락돼 있었음. 원문
+> [Time History Global Control (THGC-M1)](https://support.midasuser.com/hc/en-us/articles/56510942223513)
+> 기준으로 정정.
 
 ### 4-3. Request Body 예시
 
@@ -1078,9 +1355,17 @@ COMMON 추가 파라미터: `ENDTIME`, `INC`, `iOUT`, `INITMETHOD`, `iMDTYPE`
 
 COMMON 추가 파라미터: `ENDTIME`, `INC`, `iOUT`, `INITMETHOD`, `iMDTYPE`
 
+추가 파라미터: 아래 [6-8. 반복 제어 파라미터](#6-8-반복-제어-파라미터-nonlinear-공통) 공통 필드 +
+
+| No. | 설명 | Key | Value Type | Default | Required |
+|-----|------|-----|------------|---------|----------|
+| 2 | 최소 스텝 크기 | `MINSSS` | Number | - | Required |
+
 ### 6-6. Nonlinear + Direct Integration (Transient)
 
-COMMON 추가 파라미터: `ENDTIME`, `INC`, `iOUT`, `iGEOM`, `INITMETHOD`, `iMDTYPE`
+COMMON 추가 파라미터: `ENDTIME`, `INC`, `iOUT`, `iGEOM`, `INITMETHOD`, `iMDTYPE`(1=Modal,
+2=Mass & Stiffness Proportional, 3=Strain Energy Proportional, **4=Element Mass & Stiffness
+Proportional** — ⚠️ 4번째 값이 이전 문서에 누락돼 있었음)
 
 추가 파라미터:
 
@@ -1090,7 +1375,16 @@ COMMON 추가 파라미터: `ENDTIME`, `INC`, `iOUT`, `iGEOM`, `INITMETHOD`, `iM
 | 3 | Gamma 값 | `GAMMA` | Number | 0.5 | Optional |
 | 4 | Beta 값 | `BETA` | Number | 0.25 | Optional |
 | 5 | 반복 수행 여부 | `bITER` | Boolean | true | Optional |
-| 6 | 감쇠 매트릭스 업데이트 여부 | `DMUPDATE` | Boolean | false | Optional |
+| 6 | 감쇠 매트릭스 업데이트 여부 (Modal·Strain Energy: 미사용 / M&S·Element M&S: 사용) | `DMUPDATE` | Boolean | false | Optional |
+
+추가 파라미터(아래 [6-8. 반복 제어 파라미터](#6-8-반복-제어-파라미터-nonlinear-공통) 공통 필드 +):
+
+| No. | 설명 | Key | Value Type | Default | Required |
+|-----|------|-----|------------|---------|----------|
+| A | 수렴 실패 허용 | `bCONV` | Boolean | true | Optional |
+| B | 최소 스텝 크기 | `MINSSS` | Number | - | Required |
+| C | 에너지 노름 사용 | `bEN` | Boolean | false | Optional |
+| D | 에너지 노름 값(bEN=true 시) | `EN` | Number | 0.001 | Optional |
 
 ### 6-7. Nonlinear + Static
 
@@ -1104,16 +1398,87 @@ COMMON 추가 파라미터: `ENDTIME`, `iISTEP` (증분 스텝), `iOUT`, `iGEOM`
 | 3 | 반복 수행 여부 | `bITER` | Boolean | true | Optional |
 | 4 | 증분 방법 (0=하중 제어, 1=변위 제어) | `iINCCTRL` | Integer | 0 | Optional |
 
-### 6-8. 감쇠 파라미터 (Modal 감쇠 – iMDTYPE=1)
+**증분 방법(iINCCTRL) 세부 파라미터**
+
+> ⚠️ 2026-08-25 확인: 이전 문서는 `iINCCTRL` 옵션만 소개하고 각 방식(하중 제어/변위 제어)의
+> 실제 하위 필드가 전혀 문서화돼 있지 않았음.
+
+| No. | 설명 | Key | Value Type | Default | Required |
+|-----|------|-----|------------|---------|----------|
+| Load Control (iINCCTRL=0) | | | | | |
+| (1) | Scale Factor | `SCALE` | Number | 1 | Required |
+| Displacement Control (iINCCTRL=1) | | | | | |
+| (1) | Displacement Control Option (0=Global Control, 1=Master Node Control) | `iCTRL` | Integer | - | Required |
+| (2) | Displacement (Global: 최대 병진 변위 / Master Node: 최대 변위) | `TINC` | Number | - | Required |
+| (3) | Master Node No. (iCTRL=1일 때) | `MNODE` | Integer | - | Required |
+| (4) | Master Direction (1=DX, 2=DY, 3=DZ, iCTRL=1일 때) | `MDIR` | Integer | - | Required |
+
+추가 파라미터(아래 [6-8. 반복 제어 파라미터](#6-8-반복-제어-파라미터-nonlinear-공통) 공통 필드 +):
+
+| No. | 설명 | Key | Value Type | Default | Required |
+|-----|------|-----|------------|---------|----------|
+| A | 수렴 실패 허용 | `bCONV` | Boolean | true | Optional |
+| B | 최대 부분 스텝 수 | `iMSTEP` | Integer | - | Required |
+| C | 에너지 노름 사용 | `bEN` | Boolean | false | Optional |
+| D | 에너지 노름 값(bEN=true 시) | `EN` | Number | 0.001 | Optional |
+
+### 6-8. 반복 제어 파라미터 (Nonlinear 공통)
+
+> ⚠️ 2026-08-25 확인: Nonlinear + Modal/Direct Integration/Static 3개 모드 모두에 적용되는
+> 공통 반복 제어 필드(`iMAXITER`~`dTOL`)가 이전 문서에 전혀 없었음. 원문
+> [Time History Load Cases](https://support.midasuser.com/hc/en-us/articles/35963903917593)의
+> "Iteration Control for Nonlinear Type" 각주 기준으로 보강.
+
+| No. | 설명 | Key | Value Type | Default | Required |
+|-----|------|-----|------------|---------|----------|
+| 1 | 최대 반복 횟수 | `iMAXITER` | Integer | - | Required |
+| 2 | 변위 노름 사용 | `bDN` | Boolean | true | Optional |
+| 3 | 변위 노름 값(bDN=true 시) | `DN` | Number | 0.001 | Optional |
+| 4 | 하중 노름 사용 | `bFN` | Boolean | false | Optional |
+| 5 | 하중 노름 값(bFN=true 시) | `FN` | Number | 0.001 | Optional |
+| 6 | 선형 탐색 방법 사용 | `bULSM` | Boolean | false | Optional |
+| 7 | 선형 탐색 시작 반복 수(bULSM=true 시) | `ULSM` | Integer | 5 | Optional |
+| 8 | Runge-Kutta 방법 (0=Fehlberg, 1=Cash-Karp) | `iRKM` | Integer | 0 | Optional |
+| 9 | 허용 오차 | `dTOL` | Number | 1e-08 | Optional |
+
+이 표에 더해 Modal(6-5)은 `MINSSS`, Direct Integration(6-6)은 `bCONV`/`MINSSS`/`bEN`/`EN`,
+Static(6-7)은 `bCONV`/`iMSTEP`/`bEN`/`EN`이 각각 모드별로 추가된다.
+
+### 6-9. 감쇠 파라미터
+
+**Modal 감쇠 (iMDTYPE=1)**
 
 | 설명 | Key | Value Type |
 |------|-----|------------|
 | 전체 모드 감쇠비 | `DALL` | Number |
-| 모드별 감쇠비 오버라이드 목록 | `aMDAMPING` | Array[Object] |
+| 모드별 감쇠비 오버라이드 목록 | `aDAMP` | Array[Object] |
 | - 모드 번호 | `iMODE` | Integer |
 | - 감쇠비 | `DAMPING` | Number |
 
-### 6-9. Request Body 예시
+> ⚠️ 2026-08-25 확인: 이전 문서는 Key를 `aMDAMPING`으로 잘못 기재하고 있었음(원문 스키마·모든
+> Request 예제 모두 `aDAMP`). 실제 API 호출 시 필드가 무시될 수 있는 오류였음.
+
+**Mass & Stiffness Proportional 감쇠 (iMDTYPE=2)**
+
+> ⚠️ 2026-08-25 확인: 이 감쇠 방식의 하위 필드가 이전 문서(§6 THIS)에 전혀 문서화돼 있지
+> 않았음(§2 SPLC의 동일 항목만 문서화돼 있었음).
+
+| No. | 설명 | Key | Value Type | Required |
+|-----|------|-----|------------|----------|
+| 1 | 계수 산정 방식 (1=직접 지정, 2=모달 감쇠로부터 계산) | `iCOEF` | Integer | Required |
+| iCOEF=1(직접 지정) | | | | |
+| 2 | 질량 비례 사용 여부 | `bMASSP` | Boolean | Required |
+| 3 | 질량 비례 계수(bMASSP=true 시) | `MASSC` | Number | Required |
+| 4 | 강성 비례 사용 여부 | `bSTIFFP` | Boolean | Required |
+| 5 | 강성 비례 계수(bSTIFFP=true 시) | `STIFFC` | Number | Required |
+| iCOEF=2(모달 감쇠로부터 계산) | | | | |
+| 2 | 계산 방법 (1=주파수, 2=주기) | `iCALC` | Integer | Required |
+| 3 | 모드1 주파수/주기 | `FP1` | Number | Required |
+| 4 | 모드1 감쇠비 | `DR1` | Number | Required |
+| 5 | 모드2 주파수/주기 | `FP2` | Number | Required |
+| 6 | 모드2 감쇠비 | `DR2` | Number | Required |
+
+### 6-10. Request Body 예시
 
 **Linear + Modal + Transient**
 
@@ -1172,7 +1537,7 @@ COMMON 추가 파라미터: `ENDTIME`, `iISTEP` (증분 스텝), `iOUT`, `iGEOM`
 }
 ```
 
-**Nonlinear + Static**
+**Nonlinear + Static (Load Control)**
 
 ```json
 {
@@ -1189,15 +1554,69 @@ COMMON 추가 파라미터: `ENDTIME`, `iISTEP` (증분 스텝), `iOUT`, `iGEOM`
         "iGEOM": 0,
         "INITMETHOD": "INIT"
       },
-      "bCUMULATE": false,
+      "bCUMULATE": true,
+      "iINCCTRL": 0,
+      "SCALE": 1,
       "bITER": true,
-      "iINCCTRL": 0
+      "bCONV": true,
+      "iMSTEP": 10,
+      "iMAXITER": 10,
+      "bDN": true,
+      "DN": 0.001,
+      "bFN": true,
+      "FN": 0.001,
+      "bEN": true,
+      "EN": 0.001,
+      "iRKM": 0,
+      "dTOL": 1e-08,
+      "bULSM": true,
+      "ULSM": 5
     }
   }
 }
 ```
 
-### 6-10. Python 예제 코드
+**Nonlinear + Static (Displacement Control – Master Node)**
+
+```json
+{
+  "Assign": {
+    "4": {
+      "COMMON": {
+        "NAME": "TH_NL_Static_Disp",
+        "DESC": "",
+        "iATYPE": 2,
+        "iAMETHOD": 3,
+        "iISTEP": 1,
+        "iOUT": 1,
+        "iGEOM": 0,
+        "INITLOAD": 0,
+        "INITMETHOD": "ORDER",
+        "bSUBSEQ": true,
+        "SUBSEQ": 1
+      },
+      "bCUMULATE": false,
+      "iINCCTRL": 1,
+      "iCTRL": 1,
+      "TINC": 0.02,
+      "MNODE": 1,
+      "MDIR": 2,
+      "bITER": true,
+      "bCONV": true,
+      "iMSTEP": 10,
+      "iMAXITER": 10,
+      "bDN": true,
+      "DN": 0.001,
+      "iRKM": 0,
+      "dTOL": 1e-08,
+      "bULSM": false,
+      "ULSM": 5
+    }
+  }
+}
+```
+
+### 6-11. Python 예제 코드
 
 ```python
 import requests
@@ -1299,11 +1718,13 @@ Hyper-S 비선형 시간이력 하중 케이스를 정의합니다.
 | 2 | 설명 | `DESC` | String | - | Optional |
 | 3 | 해석 케이스 옵션 | `ANAL_CASE` | Object | - | Required |
 | (1) | 해석 타입 (0=Linear, 1=Nonlinear) | `ANAL_TYPE` | Integer(enum) | - | Required |
-| (2) | 해석 방법 (0=Modal, 1=Direct Integration) | `ANAL_METHOD` | Integer(enum) | - | Required |
-| (3) | 시간이력 타입 (0=Transient, 1=Periodic) | `TH_TYPE` | Integer(enum) | - | Optional |
+| (2) | 해석 방법 (0=Modal, 1=Direct Integration, **2=Static**) | `ANAL_METHOD` | Integer(enum) | - | Required |
+| (3) | 시간이력 타입 (0=Transient, 1=Periodic) — Nonlinear+Direct Integration/Static은 Periodic 거부 | `TH_TYPE` | Integer(enum) | - | Optional |
+| 3-a | 기하 비선형 타입 (0=None, 1=P-Delta, 2=Large Displacements, ANAL_TYPE=Nonlinear 시) | `GEOM_NL_TYPE` | Integer(enum) | 0 | Optional |
 | 4 | 종료 시간 | `ENDTIME` | Number | - | Required |
 | 5 | 시간 증분 | `TIME_INC` | Number | - | Required |
 | 6 | 출력 스텝 증분 수 | `OUTPUT_STEP` | Integer | 1 | Required |
+| 6-a | 증분 스텝 수 (Nonlinear+Static일 때 사실상 필수) | `INC_STEP` | Integer | 1 | Optional |
 | 7 | 초기 하중 방법 (`"INIT"` / `"ORDER"`) | `INIT_METHOD` | String(enum) | - | Required |
 | 8 | 초기 하중 사용 (INIT_METHOD=INIT 시) | `USE_INIT_LOAD` | Boolean | - | Required |
 | 9 | D/V/A 결과 누적 (USE_INIT_LOAD=true 시) | `CUM_DVA` | Boolean | false | Required |
@@ -1315,7 +1736,7 @@ Hyper-S 비선형 시간이력 하중 케이스를 정의합니다.
 | (4) | 하중 케이스명 | `CASE` | String | - | Required |
 | 12 | 최종 스텝 가속도 유지 | `KEEP_ACC` | Boolean | false | Optional |
 | 13 | 감쇠 설정 | `DAMPING` | Object | - | Required |
-| (1) | 감쇠 방법 (0=Direct Modal, 1=M&S Proportional, 2=StrainEnergy, 3=Modal+Element) | `DAMPING_METHOD` | Integer(enum) | - | Required |
+| (1) | 감쇠 방법 (0=Direct Modal, 1=M&S Proportional, 2=Strain Energy, 3=Element M&S — Modal+Element(3) 조합은 거부됨) | `DAMPING_METHOD` | Integer(enum) | - | Required |
 | (2) | 전체 모드 감쇠비 (DAMPING_METHOD=0 시) | `ALL_DAMPING_RATIO` | Number | - | Required |
 | (3) | 모드별 감쇠비 오버라이드 목록 | `MODAL_DAMPING_RATIO` | Array[Object] | - | Optional |
 | - 모드 번호 | `MODE_NO` | Integer | - | Required |
@@ -1327,11 +1748,66 @@ Hyper-S 비선형 시간이력 하중 케이스를 정의합니다.
 | - 최대 반복 횟수 | `MAX_ITER` | Integer | - | - |
 | - 수렴 판정 기준 (NORM_CTRL) | `NORM_CTRL` | Object | - | - |
 | - 강성 업데이트 방식 | `STIFF_UPD_SCHEME` | Integer | - | - |
-| - 강성 업데이트 전 반복 횟수 | `ITER_BEF_UPDATE` | Integer | - | - |
+| - 강성 업데이트 전 반복 횟수 (STIFF_UPD_SCHEME=0일 때만 지정 가능) | `ITER_BEF_UPDATE` | Integer | - | - |
 | - 최대 이분법 수준 | `MAX_BISECT_LEVEL` | Integer | - | - |
 | - 스마트 이분법 | `SMART_BISECT` | Boolean | - | - |
 | - 발산 임계값 | `DIVERGENCE_THRESHOLD` | Number | - | - |
 | - 선형 탐색 옵션 (LINE_SEARCH) | `LINE_SEARCH` | Object | - | - |
+| (3) | 감쇠 매트릭스 업데이트 (0/1/2, DAMPING_METHOD가 M&S(1)/Element M&S(3)일 때만) | `DAMP_UPDATE` | Integer(enum) | - | Optional |
+
+> ⚠️ 2026-08-25 확인: 이전 문서는 다음 3개를 완전히 누락하고 있었음(원문
+> [Time History Load Cases (THIS-M1)](https://support.midasuser.com/hc/en-us/articles/56538335819673)
+> 기준). ANAL_METHOD의 세 번째 값(Static=2, 단 Linear+Static 조합은 서버가 거부)이 스펙에서
+> 통째로 빠져 있었고, `GEOM_NL_TYPE`은 스키마 설명 자체가 "Schema 값 1↔DB 값 2, Schema 값
+> 2↔DB 값 1"로 저장 시 뒤바뀐다고 명시하고 있어 원문 그대로 옮겨 적었으니 실제 연동 전 재확인
+> 권장. `DAMPING_METHOD=1`(M&S Proportional)의 세부 계수 입력 구조도 전혀 없었다.
+
+**M&S Proportional 감쇠 세부 필드 (DAMPING_METHOD=1)**
+
+| No. | 설명 | Key | Value Type | Default | Required |
+|-----|------|-----|------------|---------|----------|
+| 1 | 계수 산정 방식 (0=Direct Specification, 1=Calculate from Modal Damping) | `COEF_INPUT` | Integer(enum) | - | Required |
+| COEF_INPUT=0 | | | | | |
+| 2 | 질량 비례 사용 (USE_MASS/USE_STIFF 중 최소 1개는 true) | `USE_MASS` | Boolean | - | Optional |
+| 3 | 질량 계수(Rm) | `MASS_VALUE` | Number | - | Optional |
+| 4 | 강성 비례 사용 | `USE_STIFF` | Boolean | - | Optional |
+| 5 | 강성 계수(Rk) | `STIFF_VALUE` | Number | - | Optional |
+| COEF_INPUT=1 | | | | | |
+| 2 | 계산 기준 (0=Frequency, 1=Period) | `COEF_CALC` | Integer(enum) | - | Required |
+| 3 | 모드1 주파수(COEF_CALC=0) / 주기(COEF_CALC=1) | `FREQ1`/`PERIOD1` | Number | - | Required |
+| 4 | 모드1 감쇠비 | `DR1` | Number | - | Required |
+| 5 | 모드2 주파수(FREQ1≠FREQ2)/주기(PERIOD1≠PERIOD2) | `FREQ2`/`PERIOD2` | Number | - | Required |
+| 6 | 모드2 감쇠비 | `DR2` | Number | - | Required |
+
+**증분 제어 (ANAL_METHOD=2 Static 전용, `INC_CTRL`)**
+
+| No. | 설명 | Key | Value Type | Default | Required |
+|-----|------|-----|------------|---------|----------|
+| 1 | 증분 방법 (0=Load Control, 1=Displacement Control) | `INC_METHOD` | Integer(enum) | - | Required |
+| INC_METHOD=0 | | | | | |
+| 2 | Scale Factor | `SF` | Number | 1 | Optional |
+| INC_METHOD=1(`DISP_CTRL` 오브젝트) | | | | | |
+| 2 | 제어 옵션 (0=Global, 1=Master Node Control) | `CTRL_OPT` | Integer(enum) | - | Required |
+| 3 | 최대 병진 변위(Global 전용) | `MAX_TRANS_DISP` | Number | - | Optional |
+| 4 | Master Node No.(Master Node Control 전용) | `MASTER_NODE` | Integer | - | Optional |
+| 5 | Master Direction(0/1/2, Master Node Control 전용) | `MASTER_DIR` | Integer(enum) | - | Optional |
+| 6 | 최대 변위(Master Node Control 전용) | `MAX_DISP` | Number | - | Optional |
+
+**시간 적분 방법 (ANAL_METHOD=1 Direct Integration 전용, `TIME_PARAM`)**
+
+| No. | 설명 | Key | Value Type | Default | Required |
+|-----|------|-----|------------|---------|----------|
+| 1 | 적분 방법 (0=Newmark, 1=HHT) | `METHOD` | Integer(enum) | - | Required |
+| 2 | Newmark 방법 타입(METHOD=0) 0=Constant/1=Linear Accel./2=User Input | `NEWMARK_METHOD` | Integer(enum) | - | Optional |
+| 3 | Gamma(NEWMARK_METHOD=2 시) | `GAMMA` | Number | 0.5 | Optional |
+| 4 | Beta(NEWMARK_METHOD=2 시) | `BETA` | Number | 0.25 | Optional |
+
+**비선형 경계요소 해석 (`BOUNDARY_NL_ANAL`)**
+
+| No. | 설명 | Key | Value Type | Default | Required |
+|-----|------|-----|------------|---------|----------|
+| 1 | 적분법 (0=Fehlberg, 1=Cash-Karp, 2=Dormand-Prince) | `METHOD` | Integer(enum) | 0 | Optional |
+| 2 | 허용 오차 | `TOL` | Number | 1e-08 | Optional |
 
 ### 7-3. Request Body 예시
 

@@ -962,6 +962,264 @@ print(result)
 }
 ```
 
+### Parameters – 국가별 전용 VEH_XX 객체
+
+> ⚠️ **2026-08-25 확인.** 이전 문서는 `VEH_DEFAULT`가 모든 `STANDARD_CODE`에 공통 적용되는 것처럼
+> 기재돼 있었으나, 실제로는 AASHTO Standard/LRFD·PENNDOT·Korea(KS-RB)·Taiwan 5개 코드만
+> `VEH_DEFAULT`를 쓰고, 나머지 국가는 각자 전용 객체(`VEH_CA`/`VEH_BS`/`VEH_EUROCODE`/`VEH_AU`/
+> `VEH_PL`/`VEH_RU`/`VEH_ZA`/`VEH_CN`/`VEH_IN`)를 씁니다(KSCE-LSD15의 `VEH_KSCE_LSD15`와 동일한
+> 패턴). 아래에 국가별 스키마를 추가합니다. Canada/Australia/South Africa/China/Poland는 하위
+> 모드 전체를, BS/Eurocode/Russia/India는 원문 자체가 매우 방대(다중 표준·10개 이상 하위모드
+> 혼재)해 대표 모드만 문서화합니다(SECT/TDMT와 동일한 "대표 예시" 원칙) — 전체 하위모드는 각
+> 문서의 원문 링크를 참고하십시오.
+
+**VEH_CA (Canada, `STANDARD_CODE: "CANADA"`)** — [원문](https://support.midasuser.com/hc/en-us/articles/35957455014041)
+
+| No. | Description | Key | Value Type | Default | Required |
+| --- | --- | --- | --- | --- | --- |
+| 표준 차량 공통 | | | | | |
+| 1 | Dynamic Load Allowance Option · Auto:`0` · User:`1` | `"DYNA_FACTOR"`(`DYNA` 하위) | Integer | `0` | Optional |
+| 2 | Dynamic Load Factor — 1축만 사용 | `"DYNA_FACT_1_AXLE"`(`DYNA` 하위) | Number | 0 | Optional |
+| 3 | Dynamic Load Factor — 2축 또는 1·2·3축 사용 | `"DYNA_FACT_2_AXLE"`(`DYNA` 하위) | Number | 0 | Optional |
+| 4 | Dynamic Load Factor — 3축(1·2·3축 조합 제외) 이상 사용 | `"DYNA_FACT_3_AXLE"`(`DYNA` 하위) | Number | 0 | Optional |
+| User Defined Vehicle - Truck/Lane 추가 | | | | | |
+| 5 | Uniform Distribution Load | `"UNIFORM_LOAD"` | Number | 0 | Optional |
+| 6 | Axle Load 배열 · `POINT_LOAD`/`POINT_DIST` | `"LOAD_ITEMS"` | Array [Object] | - | Optional |
+| User Defined Vehicle - Permit Truck 추가 | | | | | |
+| 7 | Permit Load | `"PERMIT_LOAD"` | Object | - | Required |
+| (1) | └ Impact Factor | `PERMIT_LOAD.IMPACT_FACTOR` | Number | 0 | Optional |
+| (2) | └ Axle Types 배열 · `AXLE_TYPE`/`EVENLY_DIST_LOAD`/`SYMMETRIC_VEHICLE`/`POINT_ITEMS`(`POINT_LOAD`/`POINT_DIST`) | `PERMIT_LOAD.AXLE_TYPES` | Array [Object] | - | Required |
+| (3) | └ Permit Load 배열 · `AXLE_TYPE`/`SPACING`/`EQUAL_J_NVSIDX` | `PERMIT_LOAD.PERMIT_LOADS` | Array [Object] | - | Required |
+
+```python
+# Canada 표준 차량 (CL-625 Truck, Auto Dynamic Load)
+result = mv_post("MVHL", {
+    "1": {
+        "MVLD_CODE": 8,
+        "VEHICLE_LOAD_NAME": "CA(Auto)_CL-625Truck",
+        "VEHICLE_LOAD_NUM": 1,
+        "VEHICLE_TYPE_NAME": "CL-625Truck",
+        "STANDARD_CODE": "CANADA",
+        "VEH_CA": {"DYN_LOAD_ALLOWANCE": 0, "DYNA": {"DYNA_FACTOR": 0}},
+    }
+})
+```
+
+**VEH_AU (Australia, `STANDARD_CODE: "AUSTRALIA"`)** — [원문](https://support.midasuser.com/hc/en-us/articles/35957830747033)
+
+| No. | Description | Key | Value Type | Default | Required |
+| --- | --- | --- | --- | --- | --- |
+| AS 5100.2 - Road Traffic | | | | | |
+| 1 | Dynamic Load Allowance | `"DYN_LOAD_ALLOWANCE"` | Number | 0 | Optional |
+| 2 | Fatigue Option (`"M1600 without UDL"` 전용) | `"FATIGUE"` | Boolean | `false` | Optional |
+| AS 5100.2 - Rail Traffic Load | | | | | |
+| 3 | Dynamic Load Allowance — Bending Moment | `"DYN_LOAD_ALLOWANCE"` | Number | 0 | Optional |
+| 4 | Dynamic Load Allowance — All Other Effects | `"DYN_LOAD_ALLOWANCE2"` | Number | 0 | Optional |
+| 5 | Increment of Distance | `"INCRE_LENGTH"` | Number | - | Required |
+| AS 5100.2 - Heavy Load Platform & Rating Vehicles | | | | | |
+| 6 | Uniform Distribution Load(`"L44 Lane Load"`, 재하길이 150m 초과 시) | `"W2"` | Number | 0 | Optional |
+| User Defined - Truck/Lane | | | | | |
+| 7 | Variable Spacing(D6~D7) Option | `"VAR_SPACING"` | Boolean | `false` | Optional |
+| 8 | Fatigue Option | `"FATIGUE"` | Boolean | `false` | Optional |
+| 9 | Uniform Distribution Load(`FATIGUE`=true 시) | `"UNIFORM_LOAD"` | Number | 0 | Optional |
+| 10 | Axle Load 배열 · `POINT_LOAD`/`POINT_DIST` | `"LOAD_ITEMS"` | Array [Object] | - | Optional |
+| User Defined - Train | | | | | |
+| 11 | Uniform Distribution Load | `"W1"` | Number | 0 | Optional |
+| 12 | Loaded Length | `"D1"` | Number | 0 | Optional |
+| User Defined - Rail Traffic Load | | | | | |
+| 13 | Group Number | `"GROUP_NUM"` | Integer | - | Required |
+| User Defined - Permit Truck | | | | | |
+| 14 | Permit Load(구조는 VEH_CA와 동일) | `"PERMIT_LOAD"` | Object | - | Required |
+
+```python
+# Australia AS 5100.2 Road Traffic (M1600)
+result = mv_post("MVHL", {
+    "1": {
+        "MVLD_CODE": 14,
+        "VEHICLE_LOAD_NAME": "AU(Road)_M1600",
+        "VEHICLE_LOAD_NUM": 1,
+        "VEHICLE_TYPE_NAME": "M1600",
+        "STANDARD_CODE": "ROAD TRAFFIC",
+        "VEH_AU": {"DYN_LOAD_ALLOWANCE": 0.3},
+    }
+})
+```
+
+**VEH_ZA (South Africa, `STANDARD_CODE: "NA"`/`"NB"`/`"NC"`)** — [원문](https://support.midasuser.com/hc/en-us/articles/35958066812057)
+
+| No. | Description | Key | Value Type | Default | Required |
+| --- | --- | --- | --- | --- | --- |
+| NA Type | | | | | |
+| 1 | Unit Length for Loaded Length Increment Option | `"INCRE_LENGTH"` | Boolean | `false` | Optional |
+| 2 | Increment Length | `"INCRE_LENGTH_VALUE"` | Number | 0 | Optional |
+| NB Type | | | | | |
+| 3 | Number of Unit (36 또는 24) | `"UNIT_NUM"` | Number | - | Required(표준)/Integer,Required(User) |
+| NC Type | | | | | |
+| 4 | Consider Load Area Giving Opposite Contribution | `"OPPOSITE"` | Boolean | `false` | Optional |
+| User Defined - NA Type 추가 | | | | | |
+| 5 | Uniform Distribution Load(재하길이 이하) | `"W1"` | Number | - | Required |
+| 6 | Uniform Distribution Load(재하길이 초과) | `"W2"` | Number | - | Required |
+| 7 | Uniform Distribution Load(재하길이 초과, 추가) | `"W3"` | Number | - | Required |
+| 8 | Loaded Length | `"LOADED_LENGTH"` | Number | - | Required |
+| 9 | Axle Load(Pa) | `"PA"` | Number | 0 | Optional |
+| User Defined - NB Type 추가 | | | | | |
+| 10 | Axle Load(Pb) | `"PB"` | Number | - | Required |
+| 11 | Distance between Axle Load(End) | `"D1"` | Number | 0 | Optional |
+| 12 | Distance between Axle Load(Middle) | `"D2"` | Number | 0 | Optional |
+| 13 | Factor to Calculate D3~D6 | `"DELTA"` | Number | 0 | Optional |
+| User Defined - NC Type 추가 | | | | | |
+| 14 | Uniform Distribution Load | `"PRESSURE_LOAD"` | Number | - | Required |
+| 15 | Number of Load [a,b,c] | `"NUM_LOAD_ARRAY"` | Array [Integer, 3] | - | Required |
+| 16 | Different Discrete Lengths | `"POINT_DIST_ARRAY"` | Array [Object, 3] | - | Required |
+| User Defined - Permit Truck 추가 | | | | | |
+| 17 | Permit Load(구조는 VEH_CA와 동일) | `"PERMIT_LOAD"` | Object | - | Required |
+
+```python
+# South Africa NA Type 표준 차량
+result = mv_post("MVHL", {
+    "1": {
+        "MVLD_CODE": 16,
+        "VEHICLE_LOAD_NAME": "ZA(TMH7)_NA",
+        "VEHICLE_LOAD_NUM": 1,
+        "VEHICLE_TYPE_NAME": "TMH7",
+        "STANDARD_CODE": "NA",
+        "VEH_ZA": {"INCRE_LENGTH": False},
+    }
+})
+```
+
+**VEH_CN (China, `STANDARD_CODE`는 JTG/JTJ/CJJ/TB 등 원문 ¹⁾표 참고)** — [원문](https://support.midasuser.com/hc/en-us/articles/35958523379353)
+
+| No. | Description | Key | Value Type | Default | Required |
+| --- | --- | --- | --- | --- | --- |
+| 표준 차량 공통 | | | | | |
+| 1 | Impact Factor (z) | `"IMPACT_COEF"` | Number | 0 | Optional |
+| 2 | Width | `"CROWD_WIDTH"` | Number | 0 | Optional |
+| 3 | Distance Between Center of Vehicles | `"DD"` | Number | 0 | Optional |
+| User Defined - Truck/Lane 공통 | | | | | |
+| 4 | Truck/Lane Type · Crawler:`1` · Lane1:`0` · GC:`2` · Lane2:`5` | `"TRUCK_TYPE"` | Integer | - | Required |
+| 5 | Axle Load(P), Lane1 전용 | `"P_"` | Number | 0 | Optional |
+| 6 | Distribution Load 1(Qm), Lane1 전용 | `"QM"` | Number | 0 | Optional |
+| 7 | Distribution Load 2(Qq)/Uniform Load(qk), Lane1·2 | `"QQ"` | Number | 0 | Optional |
+| 8 | Axle Load(Pk) L≤, Lane2 전용 | `"PA"` | Number | 0 | Optional |
+| 9 | Loaded Length(L≤), Lane2 전용 | `"D1"` | Number | 0 | Optional |
+| 10 | Axle Load(Pk) L≥, Lane2 전용 | `"PB"` | Number | 0 | Optional |
+| 11 | Loaded Length(L≥), Lane2 전용 | `"D2"` | Number | 0 | Optional |
+| 12 | Uniform Distribution Load(dW1), Crawler 전용 | `"W_TRAILER"` | Number | 0 | Optional |
+| 13 | Loaded Length(dD1), Crawler 전용 | `"D_TRAILER"` | Number | 0 | Optional |
+| 14 | Axle Load 배열 · `POINT_LOAD`/`POINT_DIST` | `"LOAD_ITEMS"` | Array [Object] | - | Optional |
+| User Defined - Train/Exceptional | | | | | |
+| 15 | Train/Exceptional Type · Type1:`1` · Type2:`2` · Type3:`3` · Subway:`4` | `"TRAIN_TYPE"` | Integer | - | Required |
+| 16 | Distribution Load dW1/dW2, Type1·3 전용 | `"W1"`/`"W2"` | Number | 0 | Optional |
+| 17 | Spacing dD1/dD2, Type1·3 전용 | `"D1"`/`"D2"` | Number | 0 | Optional |
+| 18 | Distance to Front/Rear of Heavy Vehicle, Type2 전용 | `"FD"`/`"BD"` | Number | 0 | Optional |
+| 19 | Impact Factor Reduction Coefficient, Subway 전용 | `"IMPACT_COEF"` | Number | 0 | Optional |
+| 20 | Axle Load[P1~P4]/Distance[D1~D3], Subway 전용 | `"P_SUBWAY"`/`"D_SUBWAY"` | Array [Number,4]/[Number,3] | 0 | Optional |
+| 21 | Distance between Carriages(dD)/Number of Carriage(1~15), Subway 전용 | `"CARRIAGE_DIST"`/`"NUM_CARRIAGE"` | Number/Integer | 0/- | Optional/Required |
+| 22 | Axle load for Negative Influence Line(Po), Subway 전용 | `"P_OPPOSITE"` | Number | 0 | Optional |
+| 23 | 추가 축하중 배열(Type2 Heavy Vehicle용) · `POINT_LOAD`/`POINT_DIST` | `"LOAD_ITEMS2"` | Array [Object] | - | Optional |
+| User Defined - Crowd | | | | | |
+| 24 | Crowd Load Type1 | `"VEHICLE_LOAD_USER_NUM"` | Integer | - | Required |
+| 25 | Uniform Distribution Load(Type1) | `"W_CROWD"` | Number | 0 | Optional |
+| 26 | Distribution Load dW/Loaded Length(Type2) | `"W_PRES_1"`/`"D1"`, `"W_PRES_2"`/`"D2"` | Number | 0 | Optional |
+| 27 | Width(Type2) | `"DB"` | Number | 0 | Optional |
+
+```python
+# China Lane Load 1 (Truck/Lane 사용자정의)
+result = mv_post("MVHL", {
+    "1": {
+        "MVLD_CODE": 3,
+        "VEHICLE_LOAD_NAME": "CN_UD_Lane1",
+        "VEHICLE_LOAD_NUM": 2,
+        "USER_LOAD_TYPE": "Truck/Lane",
+        "VEH_CN": {"TRUCK_TYPE": 0, "P_": 130, "QM": 10.5, "QQ": 7},
+    }
+})
+```
+
+**VEH_PL (Poland, `STANDARD_CODE`는 원문 ¹⁾표 참고)** — [원문](https://support.midasuser.com/hc/en-us/articles/35957893970457)
+
+| No. | Description | Key | Value Type | Default | Required |
+| --- | --- | --- | --- | --- | --- |
+| PN-85/S-10030 Road Bridge & User Truck/Lane 공통 | | | | | |
+| 1 | Select Vehicle / Load Type · Vehicle S:`0` · K:`1` · 2S:`2` · Walkway:`3` | `"SEL_VEHICLE"`(표준)/`"SUB_TYPE"`(User) | String/Integer | - | Required |
+| 2 | Uniform Distribution Pressure Load(K·S 차량용) | `"PRESSURE_LOAD"` | Number | -(표준,Read Only)/0(User) | - |
+| 3 | Horizontal Distance(2S 차량 전용) | `"DSPACE"` | Number | -(표준,Read Only)/0(User) | - |
+| 4 | Dynamic Amplification Factor Option | `"DYNAMIC_AMP_FACTOR"` | Boolean | `false` | Optional |
+| 5 | Factor Type · Auto:`false` · User Input:`true` | `"USER_INPUT"` | Boolean | `false` | Optional |
+| 6 | Factor Value | `"AMP"` | Number | 0 | Optional |
+| 7 | Axle Load 배열 · `POINT_LOAD`/`POINT_DIST` | `"LOAD_ITEMS"` | Array [Object] | - | Optional |
+| Military Load Class 공통 | | | | | |
+| 8 | Select Vehicle(표준) / Load Type(User: Tracked=`0`, Wheeled=`1`) | `"SEL_VEHICLE"`/`"SUB_TYPE"` | String/Integer | - | Required |
+| 9 | Nose to Tail Distance | `"NOSE_TAIL_DIST"` | Number | 0 | Optional |
+| 10 | Number of Vehicle | `"NUM_VEHICLE"` | Integer/Number | 0 | Optional |
+| 11 | Total Load(P)/Tracked Length(D), Tracked Vehicle 전용 | `"TOTAL_LOAD"`/`"TRACKED_LENGTH"` | Number | 0 | Optional |
+| 12 | Wheel Spacing | `"WHEEL_SPACING"` | Number | 0 | Optional |
+| User Defined - Permit Truck | | | | | |
+| 13 | Permit Load(구조는 VEH_CA와 동일) | `"PERMIT_LOAD"` | Object | - | Required |
+
+```python
+# Poland 표준 Vehicle K (PN-85/S-10030 Road Bridge)
+result = mv_post("MVHL", {
+    "1": {
+        "MVLD_CODE": 15,
+        "VEHICLE_LOAD_NAME": "PL_VehicleK",
+        "VEHICLE_LOAD_NUM": 1,
+        "VEHICLE_TYPE_NAME": "Vehicle K",
+        "STANDARD_CODE": "PN-85/S-10030 - RoadBridge",
+        "VEH_PL": {"SEL_VEHICLE": "Vehicle K", "DYNAMIC_AMP_FACTOR": False},
+    }
+})
+```
+
+**BS·Eurocode·Russia·India — 대표 모드만 문서화.** 아래 4개 코드는 원문 자체가 여러 표준(예: BS는
+BD37/01·BD21/01·BS5400·CS454·CS458 혼재, Russia는 AK/SK/N14/N11/Subway Trains/Tramcars/NK-80/
+NG-60/Walkway 등 10개 이상 하위모드)을 담고 있어 가장 대표적인 모드만 필드 표로 남기고 나머지는
+원문 링크로 안내합니다.
+
+| 국가 | VEH_XX | 대표 모드 | 대표 모드 주요 필드 | 원문 |
+| --- | --- | --- | --- | --- |
+| BS | `VEH_BS` | HA(BD37/01·BD21/01) | `"LANE_FACTOR"`(0=BD37/01, 1=BD21/01, 2=User), `"ADD_DATA_BD2101"`(Boolean), `"ADD_DATA_AL"`(Number,Required), `"ADD_DATA_CATEGORY"`/`"ADD_DATA_LOAD_LEVEL"`(Integer), `"LANE_FACTOR_ARRAY"`(Array[Number,4], User 전용) — HB는 `"UNIT_NUM"`(Number,Required)만 추가 | [Vehicles - BS](https://support.midasuser.com/hc/en-us/articles/35957522468889) |
+| Eurocode | `VEH_EUROCODE` | EN 1991-2:2003 Load Model 1 | `"SUB_TYPE"`(Integer,Required, Standard Code), `"TANDEM_ADJUST_VALUES"`(Array[Number,3]), `"UDL_ADJUST_VALUES"`(Array[Number,4]), `"AMP_VALUES"`(Array[Number,2], [Tandem,UDL] ψ계수) | [Vehicles - Eurocode](https://support.midasuser.com/hc/en-us/articles/35957725805977) |
+| Russia | `VEH_RU` | Road/Railway Bridge (AK) | `"SUB_TYPE"`(Integer,Required), `"RUSSIA_K"`(Integer,Required), `"FATIGUE"`(Boolean), `"SAME_LOADED_L"`(Boolean), `"DYNA_FACTOR"`(0=Auto/1=User), `"DYNA_FACTOR_VALUE"`/`"DYNA_FACTOR_UDL_VALUE"`(User 시 Required), `"LOAD_FACTOR"`(0=Auto/1=User), `"LOAD_FACTOR_VALUE"`/`"LOAD_FACTOR_UDL_VALUE"`(User 시 Required), `"LANE_FACTORS_1"`/`"LANE_FACTORS_1_UDL"`(Array[Number,3]) | [Vehicles - Russia](https://support.midasuser.com/hc/en-us/articles/35958016039577) |
+| India | `VEH_IN` | IRC:6 Standard Load | 대부분 표준 차량(Class A/B/AA/70R/40R 등)은 `VEH_IN` 없이 `STANDARD_CODE`만으로 정의됨. Footway 타입만 `"FOOTWAY"`(Number,Required)·`"FOOTWAY_WIDTH"`(Number,Required) 추가 필요 | [Vehicles - India](https://support.midasuser.com/hc/en-us/articles/35958578983065) |
+
+```python
+# BS BD37/01 HA 표준 차량
+mv_post("MVHL", {"1": {
+    "MVLD_CODE": 10, "VEHICLE_LOAD_NAME": "BS_(BD37)_HA", "VEHICLE_LOAD_NUM": 1,
+    "VEHICLE_TYPE_NAME": "HA", "STANDARD_CODE": "BSBD37/01",
+    "VEH_BS": {"LANE_FACTOR": 0},
+}})
+
+# Eurocode EN1991-2 Load Model 1
+mv_post("MVHL", {"1": {
+    "MVLD_CODE": 11, "VEHICLE_LOAD_NAME": "EU_(R)_LoadModel1", "VEHICLE_LOAD_NUM": 1,
+    "VEHICLE_TYPE_NAME": "LoadModel1",
+    "VEH_EUROCODE": {"SUB_TYPE": 19, "AMP_VALUES": [0.75, 0.4],
+                      "TANDEM_ADJUST_VALUES": [1, 1, 1], "UDL_ADJUST_VALUES": [1, 1, 1, 1]},
+}})
+
+# Russia AK (Auto Dynamic/Load Factor)
+mv_post("MVHL", {"1": {
+    "MVLD_CODE": 12, "VEHICLE_LOAD_NAME": "RU_(RB)_AK_Auto", "VEHICLE_LOAD_NUM": 1,
+    "VEHICLE_TYPE_NAME": "AK",
+    "VEH_RU": {"SUB_TYPE": 1, "RUSSIA_K": 14, "DYNA_FACTOR": 0, "FATIGUE": True,
+               "LOAD_FACTOR": 0, "LANE_FACTORS_1": [1, 0.6, 0.3],
+               "LANE_FACTORS_1_UDL": [1, 0.6, 0.3], "SAME_LOADED_L": True},
+    "LOAD_ITEMS": [{"POINT_LOAD": 10, "POINT_DIST": 1.5}, {"POINT_LOAD": 10, "POINT_DIST": 0}],
+}})
+
+# India IRC:6 Class A (VEH_IN 불필요) / Footway (VEH_IN 필요)
+mv_post("MVHL", {
+    "1": {"MVLD_CODE": 7, "VEHICLE_LOAD_NAME": "IN(IRC6)_ClassA", "VEHICLE_LOAD_NUM": 1,
+          "VEHICLE_TYPE_NAME": "ClassA", "STANDARD_CODE": "IRC:6-2000"},
+    "6": {"MVLD_CODE": 7, "VEHICLE_LOAD_NAME": "IN(IRC6)_Footway", "VEHICLE_LOAD_NUM": 1,
+          "VEHICLE_TYPE_NAME": "Footway", "STANDARD_CODE": "IRC:6-2000",
+          "VEH_IN": {"FOOTWAY": 4.903325, "FOOTWAY_WIDTH": 3}},
+})
+```
+
 ### Python 예제
 
 ```python
@@ -1178,14 +1436,56 @@ print(result)
 
 ### Parameters – DEFAULT (Korea – 추가 필드)
 
-| No. | Description | Key | Value Type |
-|-----|-------------|-----|-----------|
-| 1 | Lane Factor Type (0=Multi-Lane KS Rail, 1=MPF) | `"LANE_FACTOR_TYPE"` | Integer |
-| 2 | 2-Lane Factor L1 | `"_2_LANE_FACTOR_1"` | Number |
-| 3 | 2-Lane Factor L2 | `"_2_LANE_FACTOR_2"` | Number |
-| 4~7 | 3+ Lane Factors (L1~L4) | `"_3_LANE_FACTOR_1"` ~ `"_3_LANE_FACTOR_4"` | Number |
+| No. | Description | Key | Value Type | Required |
+|-----|-------------|-----|-----------|----------|
+| 1 | Lane Factor Type (0=Multi-Lane KS Rail, 1=MPF) | `"LANE_FACTOR_TYPE"` | Integer | Required |
+| 2 | 2-Lane Factor L1 | `"_2_LANE_FACTOR_1"` | Number | Required |
+| 3 | 2-Lane Factor L2 | `"_2_LANE_FACTOR_2"` | Number | Required |
+| 4~7 | 3+ Lane Factors (L1~L4) | `"_3_LANE_FACTOR_1"` ~ `"_3_LANE_FACTOR_4"` | Number | Required |
+
+> ⚠️ 2026-08-25 확인: 위 표는 원문 Value Type 컬럼만 있고 Required 컬럼이 없어 이전 문서도 생략했으나,
+> Specifications 표 원문을 다시 보면 4개 필드 모두 Required로 표기돼 있어 보강함(원문 아티클
+> [Moving Load Cases](https://support.midasuser.com/hc/en-us/articles/35959068573209)).
+
+### Parameters – DEFAULT (Australia – 추가 필드)
+
+> ⚠️ 2026-08-25 확인: 이전 문서는 Australia도 KSCE-LSD15/AASHTO 계열과 동일 구조라고 암묵 가정하고
+> 있었으나, 실제로는 `LOAD_MODEL`(0~3)·`LOAD_COMB_TYPE`(하중계수 종류)·`FATIGUE`(Load Model 1
+> 전용) 3개 필드가 추가되고, Heavy Load Platform(`LOAD_MODEL=2`)은 `DEFAULT` 대신/함께 별도
+> `ASL` 객체를 씁니다.
+
+| No. | Description | Key | Value Type | Required |
+|-----|-------------|-----|-----------|----------|
+| 1 | Select Load Model · General:`0` · Fatigue:`1` · Heavy Load Platform:`2` · Rail Traffic Load:`3` | `"LOAD_MODEL"` | Integer | Required |
+| 2 | Load Factor Type for Design Combination · Ultimate:`0` · Serviceability:`1` | `"LOAD_COMB_TYPE"` | Integer | Required |
+| 3 | Fatigue Option (`LOAD_MODEL`=1 Load Model Fatigue 전용) | `"FATIGUE"` | Boolean | Required |
+
+**ASL (Australia Heavy Load Platform 병용, `LOAD_MODEL`=2)**
+
+| No. | Description | Key | Value Type | Required |
+|-----|-------------|-----|-----------|----------|
+| 1 | Unobstructed Lane Scale Factor(예: 0.5) | `"MULTIPLE_FACTOR"` | Number | Required |
+| 2 | Load Case Data — Heavy Load 차량 이름 | `"VEHICLE_LOAD_NAME"` | String | Required |
+| 3 | Load Case Data — M1600/S1600 차량 이름 | `"VEHICLE_LOAD_NAME2"` | String | Required |
+| 4 | Min. Number of Loaded Lanes | `"MIN_LOADED_LANE"` | Integer | Required |
+| 5 | Max. Number of Loaded Lanes | `"MAX_LOADED_LANE"` | Integer | Required |
+| 6 | Defined Lane | `"LINE_ITEMS"` | Object | Required |
+| (1) | └ Selected Lanes | `LINE_ITEMS.NA_LLAN_NAMES` | Array[String] | Required |
+| (2) | └ Heavy Load Lanes Start | `LINE_ITEMS.STRAD_LLAN1_NAMES` | Array[String] | Required |
+| (3) | └ Heavy Load Lanes End | `LINE_ITEMS.STRAD_LLAN2_NAMES` | Array[String] | Required |
+
+### Parameters – DEFAULT (Russia – 추가 필드)
+
+> ⚠️ 2026-08-25 확인: Russia는 `LANE_FACTOR_TYPE`/`SCALE_FACTORS`가 없는 대신 `LOAD_COMB_TYPE`
+> (한계상태 그룹)이 추가됩니다.
+
+| No. | Description | Key | Value Type | Required |
+|-----|-------------|-----|-----------|----------|
+| 1 | Load Combination Type · Limit State Group I:`0` · Group I - Fatigue:`1` · Group II:`2` | `"LOAD_COMB_TYPE"` | Integer | Required |
 
 ### Parameters – PERMIT_LOAD (TYPE=1)
+
+> AASHTO LRFD·Canada·Australia에서만 지원됩니다.
 
 | No. | Description | Key | Value Type | Required |
 |-----|-------------|-----|-----------|----------|
@@ -1195,6 +1495,9 @@ print(result)
 
 ### Parameters – AUTO_OPTIMIZE (TYPE=2)
 
+> AASHTO Standard/LRFD·PENNDOT·Canada·Australia·Russia에서 지원됩니다. `LOAD_MODEL`·`FATIGUE`는
+> Australia 전용 추가 필드입니다(⚠️ 2026-08-25 보강).
+
 | No. | Description | Key | Value Type | Required |
 |-----|-------------|-----|-----------|----------|
 | 1 | Multiple Presence Factor | `"SCALE_FACTORS"` | Array[Number, 6] | Required |
@@ -1202,7 +1505,23 @@ print(result)
 | 3 | Loaded Lane Name | `"LANE_NAME"` | String | Required |
 | 4 | Min. Number of Vehicle | `"MIN_NUM_VEHICLE"` | Integer | Required |
 | 5 | Max. Number of Vehicle | `"MAX_NUM_VEHICLE"` | Integer | Required |
-| 6 | Optimize Items | `"OPTIMIZE_ITEMS"` | Array[Object] | Required |
+| 6 | Select Load Model (Australia 전용, 값은 DEFAULT의 LOAD_MODEL과 동일) | `"LOAD_MODEL"` | Integer | Optional |
+| 7 | Fatigue Option (Australia 전용) | `"FATIGUE"` | Boolean | Optional |
+| 8 | Optimize Items · `VEHICLE_TYPE`("VL"/"VC")/`VEHICLE_NAME`/`SCALE_FACTOR` | `"OPTIMIZE_ITEMS"` | Array[Object] | Required |
+
+### 코드별 지원 Load Type ¹⁾
+
+| 코드 | General Load | Load Case for Permit Vehicle | Moving Load Optimization |
+| --- | --- | --- | --- |
+| KSCE-LSD15 | O | - | - |
+| Korea | O | - | - |
+| AASHTO Standard | O | - | O |
+| AASHTO LRFD | O | O | O |
+| PENNDOT | O | - | O |
+| Taiwan | O | - | - |
+| Canada | O | O | O |
+| Australia | O | O | O |
+| Russia | O | - | O |
 
 ### Python 예제
 
@@ -1284,6 +1603,7 @@ print(result)
 | 6 | Scale Factor for Highway/New Urban Bridge | `"SCALE_FACTOR_N"` | Array[Number, 8] | – | Required |
 | 7 | Scale Factor for JTG B01-2014 | `"SCALE_FACTOR_JTG"` | Array[Number, 8] | – | Required |
 | 8 | Combination Option (0=Combined, 1=Independent) | `"LOADING_EFFECT"` | Integer | – | Required |
+| General Load(`OPT_AUTO_OPTIMIZE`=false) | | | | | |
 | 9 | Sub-Load Cases | `"SUB_LOAD_ITEMS"` | Array[Object] | – | Required |
 | (i) | Vehicle Type (`"VL"` / `"VC"`) | `"VEHICLE_TYPE"` | String | – | Required |
 | (ii) | Vehicle Class Name | `"VEHICLE_CLASS"` | String | – | Required |
@@ -1291,10 +1611,24 @@ print(result)
 | (iv) | Min. Number of Loaded Lanes | `"MIN_NUM_LOADED_LANES"` | Integer | – | Required |
 | (v) | Max. Number of Loaded Lanes | `"MAX_NUM_LOADED_LANES"` | Integer | – | Required |
 | (vi) | Selected Lanes | `"SELECTED_LANES"` | Array[String] | – | Required |
+| Moving Load Optimization(`OPT_AUTO_OPTIMIZE`=true) | | | | | |
+| 9 | Min. Vehicle Distance | `"MIN_VEHICLE_DIST"` | Number | – | Required |
+| 10 | Loaded Lane Name | `"LOADED_LANE_NAME"` | String | – | Required |
+| 11 | Min. Number of Vehicle | `"MIN_NUM_VEHICLE"` | Integer | – | Required |
+| 12 | Max. Number of Vehicle | `"MAX_NUM_VEHICLE"` | Integer | – | Required |
+| 13 | Assignment Vehicle | `"AUTO_OPTIMIZE_ITEMS"` | Array[Object] | – | Required |
+| (i) | Vehicle Type (`"VL"` / `"VC"`) | `"VEHICLE_TYPE"` | String | – | Required |
+| (ii) | Vehicle Class Name | `"VEHICLE_NAME"` | String | – | Required |
+| (iii) | Scale Factor | `"SCALE_FACTOR"` | Number | – | Required |
+
+> ⚠️ 2026-08-25 확인: 이전 문서는 `OPT_AUTO_OPTIMIZE` 필드만 소개하고 실제 `true`일 때 쓰이는
+> Moving Load Optimization 필드 5개(`MIN_VEHICLE_DIST`~`AUTO_OPTIMIZE_ITEMS`)가 누락돼 있었음
+> (원문 [Moving Load Cases - China](https://support.midasuser.com/hc/en-us/articles/35960417354649)).
 
 ### Python 예제
 
 ```python
+# General Load
 result = mv_post("MVLDch", {
     "1": {
         "LCNAME": "MV_China_1",
@@ -1318,6 +1652,27 @@ result = mv_post("MVLDch", {
     }
 })
 print(result)
+
+# Moving Load Optimization
+mv_post("MVLDch", {
+    "2": {
+        "LCNAME": "MV_China_Opt",
+        "DESC": "",
+        "OPT_AUTO_OPTIMIZE": True,
+        "BRIDGE_TYPE": 2,
+        "SCALE_FACTOR_O":   [1, 1, 0.80, 0.67, 0.60, 0.55, 0.55, 0.55],
+        "SCALE_FACTOR_N":   [1, 1, 0.78, 0.67, 0.60, 0.55, 0.52, 0.50],
+        "SCALE_FACTOR_JTG": [1.2, 1, 0.78, 0.67, 0.60, 0.55, 0.52, 0.50],
+        "MIN_VEHICLE_DIST": 1,
+        "LOADED_LANE_NAME": "LL_01",
+        "MAX_NUM_VEHICLE": 2,
+        "LOADING_EFFECT": 0,
+        "AUTO_OPTIMIZE_ITEMS": [
+            {"VEHICLE_NAME": "CH(CJJ11)_C-CD(A/B)", "VEHICLE_TYPE": "VL", "SCALE_FACTOR": 1},
+            {"VEHICLE_NAME": "CH(CJJ11)_C-CL(A)", "VEHICLE_TYPE": "VL", "SCALE_FACTOR": 1},
+        ],
+    }
+})
 ```
 
 ---
@@ -1366,11 +1721,32 @@ print(result)
 | **General Load** | | | | | |
 | 6 | Number of Loaded Lanes | `"NUM_LOADED_LANES"` | Integer | – | Required |
 | 7 | Sub-Load Cases | `"SUB_LOAD_ITEMS"` | Array[Object] | – | Required |
+| (i) | Scale Factor | `"SCALE_FACTOR"` | Number | – | Required |
+| (ii) | Min. Number of Loaded Lanes | `"MIN_NUM_LOADED_LANES"` | Integer | – | Required |
+| (iii) | Max. Number of Loaded Lanes | `"MAX_NUM_LOADED_LANES"` | Integer | – | Required |
+| (iv) | Vehicle | `"VEHICLE_CLASS_1"` | String | – | Required |
+| (v) | Selected Lanes | `"SELECTED_LANES"` | Array[String] | – | Required |
+| **Auto Live Load Combinations (OPT_AUTO_LL=true)** | | | | | |
+| 6 | Number of Loaded Lanes | `"NUM_LOADED_LANES"` | Integer | – | Required |
+| 7 | Sub-Load Cases | `"SUB_LOAD_ITEMS"` | Array[Object] | – | Required |
+| (i) | Scale Factor | `"SCALE_FACTOR"` | Number | – | Required |
+| (ii) | Vehicle Class I | `"VEHICLE_CLASS_1"` | String | – | Required |
+| (iii) | Vehicle Class II | `"VEHICLE_CLASS_2"` | String | – | Required |
+| (iv) | Vehicle Footway | `"FOOTWAY"` | String | – | Required |
+| (v) | Carriageway Width | `"CARRIAGE_WAY_WIDTH"` | Number | – | Read Only |
+| (vi) | Carriageway Loading | `"CARRIAGE_WAY_LOADING"` | Number | – | Read Only |
+| (vii) | Selected Lanes for Carriageway | `"SELECTED_LANES"` | Array[String] | – | Required |
+| (viii) | Selected Lanes for Footway | `"SELECTED_FOOTWAY_LANES"` | Array[String] | – | Required |
 | **Permit Vehicle (OPT_LC_FOR_PERMIT_LOAD=true)** | | | | | |
 | 6 | Permit Vehicle ID | `"PERMIT_VEHICLE"` | Integer | – | Required |
 | 7 | Reference Lane ID | `"REF_LANE"` | Integer | – | Required |
 | 8 | Eccentricity | `"ECCEN"` | Number | – | Required |
 | 9 | Scale Factor | `"PERMIT_SCALE_FACTOR"` | Number | – | Required |
+
+> ⚠️ 2026-08-25 확인: 이전 문서는 `SUB_LOAD_ITEMS`를 "Array[Object]"로만 표기하고 실제 하위 필드가
+> 전부 누락돼 있었음(General Load·Auto Live Load Combinations 모드가 서로 다른 하위 구조를 씀).
+> 원문 [Moving Load Cases - India](https://support.midasuser.com/hc/en-us/articles/35961164029593)
+> 기준으로 보강.
 
 ### Python 예제
 
@@ -1393,6 +1769,29 @@ result = mv_post("MVLDid", {
     }
 })
 print(result)
+
+# Auto Live Load Combinations
+mv_post("MVLDid", {
+    "2": {
+        "LCNAME": "MV_India_AutoLL",
+        "DESC": "",
+        "OPT_AUTO_LL": True,
+        "SCALE_FACTOR": [1, 0.9, 0.8, 0.8],
+        "NUM_LOADED_LANES": 2,
+        "SUB_LOAD_ITEMS": [
+            {
+                "VEHICLE_CLASS_1": "IN(IRC6)_ClassA",
+                "VEHICLE_CLASS_2": "IN(IRC6)_Class40R",
+                "FOOTWAY": "IN(IRC6)_Footway",
+                "SCALE_FACTOR": 1,
+                "CARRIAGE_WAY_WIDTH": 0,
+                "CARRIAGE_WAY_LOADING": 0,
+                "SELECTED_LANES": ["LL_01", "LL_02"],
+                "SELECTED_FOOTWAY_LANES": ["LL_03"],
+            }
+        ],
+    }
+})
 ```
 
 ---
@@ -1444,13 +1843,44 @@ print(result)
 | 1 | Load Case Name | `"LCNAME"` | String | – | Required |
 | 2 | Description | `"DESC"` | String | `""` | Optional |
 | 3 | Moving Load Optimization | `"bAUTOOPTIMIZE"` | Boolean | false | Optional |
-| 4 | Load Model (`"STANDER"` / `"SPECAIL"` / `"ALL_MODE_1"`) | `"LOADMODEL"` | String | – | Required |
+| 4 | Load Model · Standard(BD37/01,BS5400):`"STANDER"` · Special(BD86/11):`"SPECAIL"` · CS454 ALL Mode1:`"ALL_MODE_1"` · CS454 ALL Mode2:`"ALL_MODE_2"` | `"LOADMODEL"` | String | – | Required |
 | 5 | Auto Live Load Combination | `"bAUTOLIVELOADCOMB"` | Boolean | false | Optional |
-| 6 | Design Combination Factor Type (`"ULTIMATE"` / `"SERVICEABIL"`) | `"DGNCOMBFACTORTYPE"` | String | – | Required |
-| 7 | Combination Method (`"COMB_1"` / `"COMB_2_3"`) | `"COMBMETHOD"` | String | – | Required |
-| 8 | Standard Load Case Data | `"LCDATA_STANDARD"` | Object | – | Required (when STANDER) |
-| 9 | Special Load Case Data | `"LCDATA_SPECIAL"` | Object | – | Required (when SPECAIL) |
-| 10 | All Mode Load Case Data | `"LCDATA_ALLMODE"` | Object | – | Required (when ALL_MODE_1) |
+| 6 | Design Combination Factor Type · `"bAUTOLIVELOADCOMB"`=true 시 · Ultimate:`"ULTIMATE"` · Serviceability:`"SERVICEABIL"` | `"DGNCOMBFACTORTYPE"` | String | – | Required |
+| 7 | Combination Method · `"bAUTOLIVELOADCOMB"`=true 시 · Comb.1:`"COMB_1"` · Comb.2/3:`"COMB_2_3"` | `"COMBMETHOD"` | String | – | Required |
+| 8 | Standard Load Case Data(General, `LOADMODEL`="STANDER") | `"LCDATA_STANDARD"` | Object | – | Required |
+| 9 | Special Load Case Data(General, `LOADMODEL`="SPECAIL") | `"LCDATA_SPECIAL"` | Object | – | Required |
+| 10 | CS 454 Assessment Data(General, `LOADMODEL`="ALL_MODE_1"/"ALL_MODE_2") | `"LCDATA_ALLMODE"` | Object | – | Required |
+| 11 | Standard Load Case Data(Optimization, `bAUTOOPTIMIZE`=true & `LOADMODEL`="STANDER") | `"LCDATA_STANDARD_OPTI"` | Object | – | Required |
+| 12 | Special Load Case Data(Optimization, `LOADMODEL`="SPECAIL") | `"LCDATA_SPECIAL_OPTI"` | Object | – | Required |
+| 13 | CS 454 Assessment Data(Optimization, `LOADMODEL`="ALL_MODE_1"/"ALL_MODE_2") | `"LCDATA_ALLMODE_OPTI"` | Object | – | Required |
+
+**LCDATA_STANDARD (`LOADMODEL`="STANDER", General Load 시 대표 예시)**
+
+| No. | Description | Key | Value Type | Required |
+| --- | --- | --- | --- | --- |
+| 1 | Loading Effect(`"INDEPEND"`) | `"LOADINGEFFECT"` | String | Required |
+| 2 | Sub-Load Cases | `"SUBLOADDATA"` | Array [Object] | Required |
+| (1) | └ Scale Factor | `SUBLOADDATA[].SCALEFACTOR` | Number | Required |
+| (2) | └ Number of Loaded Lanes | `SUBLOADDATA[].NUMLOADEDLANE` | Integer | Required |
+| (3) | └ Vehicle Name | `SUBLOADDATA[].VEHICLE_NAME` | String | Required |
+| (4) | └ Selected Lanes | `SUBLOADDATA[].SELECTEDLANES` | Array [String] | Required |
+| (5) | └ HB Straddling Two Lanes(`STARDD_LANE_1`/`STARDD_LANE_2`) | `SUBLOADDATA[].STRAD_LANE` | Array [Object] | Required |
+
+> ⚠️ 2026-08-25 확인: 이전 문서는 `LOADMODEL` 4번째 값 `"ALL_MODE_2"`가 누락돼 있었고,
+> `LCDATA_STANDARD`/`LCDATA_SPECIAL`/`LCDATA_ALLMODE` 하위 필드 전체와 Moving Load Optimization
+> 전용 3개 객체(`LCDATA_STANDARD_OPTI`/`LCDATA_SPECIAL_OPTI`/`LCDATA_ALLMODE_OPTI`)가 완전히
+> 누락돼 있었음. 원문 자체가 4개 Load Model × General/Optimization 2개 모드 = 8개에 가까운
+> 조합을 다루는 대형 아티클이라(SECT/TDMT와 동일 원칙), 가장 대표적인 `LCDATA_STANDARD`만 전체
+> 필드를 싣고 나머지 5개 객체는 아래 요약표로 정리한다 — 전체 필드는 원문
+> [Moving Load Cases - BS](https://support.midasuser.com/hc/en-us/articles/35961459443737) 참고.
+
+| 객체 | 사용 조건 | 주요 필드 |
+| --- | --- | --- |
+| `LCDATA_SPECIAL` | General, `LOADMODEL`="SPECAIL" | `VEHICLE_NAME`(표준차량)·`SPECIAL_VIHICLE_NAME`(특수차량)·`SELECTEDLANES`·`STRAD_LANE`(모두 String/Array[String]/Array[Object], Required) |
+| `LCDATA_ALLMODE` | General, `LOADMODEL`="ALL_MODE_1"/"ALL_MODE_2" | `LCDATA_SPECIAL`과 동일 4필드 + `REMAINING_LANE`(Array[String], ALL_MODE_1 전용) |
+| `LCDATA_STANDARD_OPTI` | Optimization, `LOADMODEL`="STANDER" | `LOADINGEFFECT` + `OPTI_BASE`(`MINVEHLDIST`/`ASSIGN_LANE`/`NUMLOADEDLANES`) + `OPTI_VEHICLE_BASE`(Array, `VEHICLE_TYPE`"VL"/"VC"·`VEHICLE_NAME`·`SCALE_FACTOR`) |
+| `LCDATA_SPECIAL_OPTI` | Optimization, `LOADMODEL`="SPECAIL" | `VEHICLE_NAME`·`SPECIAL_VIHICLE_NAME` + `OPTI_BASE`(위와 동일 3필드) |
+| `LCDATA_ALLMODE_OPTI` | Optimization, `LOADMODEL`="ALL_MODE_1"/"ALL_MODE_2" | `LCDATA_SPECIAL_OPTI`와 동일 + `REMAINING_LANE`(ALL_MODE_1 전용) |
 
 ### Python 예제
 
@@ -1651,7 +2081,7 @@ print(result)
 | 6 | Load Case – Vehicle | `"VHLNAME1"` | String | – | Required (LM1/3/4) |
 | 7 | Load Case – Footway | `"VHLNAME2"` | String | – | Optional (LM1) / Required (LM3/4, Optimization) |
 | 8 | Selected Lanes | `"SLN_LIST"` | Array[String] | – | Required (LM1/3/4) |
-| 9 | Remaining Area | `"SRA_LIST"` | Array[String] | – | Required (LM1/3) |
+| 9 | Remaining Area | `"SRA_LIST"` | Array[String] | – | Required (LM1/3/4) |
 | 10 | Footway Lanes (LM1) | `"FLN_LIST"` | Array[String] | – | Required (LM1) |
 | 11 | Straddling Lanes — `(1)` Start Lane `"NAME1"`, `(2)` End Lane `"NAME2"` | `"STL_LIST"` | Array[Object] | – | Required (LM4) |
 | 12 | Loading Effect (Combined: `0` / Independent: `1`) | `"OPT_COMB"` | String | – | Required (LM2/5) |
@@ -1741,13 +2171,49 @@ print(result)
 | 3 | Moving Load Optimization | `"bAUTO_OPTIMIZE"` | Boolean | false | Optional |
 | 4 | Load Case for Permit Vehicle | `"bPERMIT_LOAD"` | Boolean | false | Optional |
 | 5 | Load Model (1=Vehicle S/2S/Permit, 2=Vehicle K, 3=Military) | `"LOAD_MODEL"` | Integer | – | Required |
+| **General Load(`bAUTO_OPTIMIZE`=false, `bPERMIT_LOAD`=false)** | | | | | |
 | 6 | Sub-Load Cases | `"DEFAULT"` | Object | – | Required |
-| (1) | Loading Effect (`"COMBINED"` / `"INDEPENDENT"`) ¹⁾ | `"COMB_OPTION"` | String | – | Required |
-| (2) | Sub-Load Data | `"SUB_LOAD_DATAS"` | Array[Object] | – | Required |
-| (3) | Vehicle Name ²⁾ | `"VEHICLE_LOAD_NAME"` | String | – | Required |
+| **Vehicle S/2S/Permit(LOAD_MODEL=1)** | | | | | |
+| (1) | Loading Effect(`"COMBINED"`/`"INDEPENDENT"`) | `DEFAULT.COMB_OPTION` | String | – | Required |
+| (2) | Sub-Load Data | `DEFAULT.SUB_LOAD_DATAS` | Array[Object] | – | Required |
+| (2-i) | └ Vehicle Name | `SUB_LOAD_DATAS[].VEHICLE_NAME` | String | – | Required |
+| (2-ii) | └ Scale Factor | `SUB_LOAD_DATAS[].SCALE_FACTOR` | Number | – | Required |
+| (2-iii) | └ Min. Number of Loaded Lane | `SUB_LOAD_DATAS[].MIN_LOADED_LANE` | Integer | – | Required |
+| (2-iv) | └ Max. Number of Loaded Lane | `SUB_LOAD_DATAS[].MAX_LOADED_LANE` | Integer | – | Required |
+| (2-v) | └ Selected Lanes | `SUB_LOAD_DATAS[].LANE_NAMES` | Array[String] | – | Required |
+| **Vehicle K/Military(LOAD_MODEL=2/3)** | | | | | |
+| (1) | Vehicle Name | `DEFAULT.VEHICLE_LOAD_NAME` | String | – | Required |
+| (2) | Sub-Load Data | `DEFAULT.SUB_LOAD_DATAS` | Array[Object] | – | Required |
+| (2-i) | └ Selected Lanes | `SUB_LOAD_DATAS[].LANE_NAMES` | Array[String] | – | Required |
+| **Moving Load Optimization(`bAUTO_OPTIMIZE`=true)** | | | | | |
+| 6 | Sub-Load Cases | `"AUTO_OPTIMIZE"` | Object | – | Required |
+| **Vehicle S/2S(LOAD_MODEL=1)** | | | | | |
+| (1) | Min. Vehicle Distance | `AUTO_OPTIMIZE.MIN_VEHL_DIST` | Number | – | Required |
+| (2) | Loaded Lane | `AUTO_OPTIMIZE.LANE_NAME` | String | – | Required |
+| (3) | Min. Number of Vehicle | `AUTO_OPTIMIZE.MIN_NUM_VEHICLE` | Integer | – | Required |
+| (4) | Max. Number of Vehicle | `AUTO_OPTIMIZE.MAX_NUM_VEHICLE` | Integer | – | Required |
+| (5) | Loading Effect(`"COMBINED"`/`"INDEPENDENT"`) | `AUTO_OPTIMIZE.COMB_OPTION` | String | – | Required |
+| (6) | Sub-Load Cases | `AUTO_OPTIMIZE.OPTIMIZE_ITEMS` | Array[Object] | – | Required |
+| (6-i) | └ Vehicle Type(`"VL"`/`"VC"`) | `OPTIMIZE_ITEMS[].VEHICLE_TYPE` | String | – | Required |
+| (6-ii) | └ Vehicle Name | `OPTIMIZE_ITEMS[].VEHICLE_NAME` | String | – | Required |
+| (6-iii) | └ Scale Factor | `OPTIMIZE_ITEMS[].SCALE_FACTOR` | Number | – | Required |
+| **Vehicle K/Military(LOAD_MODEL=2/3)** | | | | | |
+| (1) | Vehicle Name | `AUTO_OPTIMIZE.VEHICLE_LOAD_NAME` | String | – | Required |
+| (2) | Min. Vehicle Distance | `AUTO_OPTIMIZE.MIN_VEHL_DIST` | Number | – | Required |
+| (3) | Loaded Lane | `AUTO_OPTIMIZE.LANE_NAME` | String | – | Required |
+| (4) | Number of Loaded Lanes | `AUTO_OPTIMIZE.NUM_LOADED_LANES` | Integer | – | Required |
+| **Load Case for Permit Vehicle(`bPERMIT_LOAD`=true)** | | | | | |
+| 5 | Permit Vehicle | `"PERMIT_LOAD"` | Object | – | Required |
+| (1) | Vehicle Name | `PERMIT_LOAD.VEHICLE_LOAD_NAME` | String | – | Required |
+| (2) | Reference Lane | `PERMIT_LOAD.REF_LANE` | String | – | Required |
+| (3) | Eccentricity | `PERMIT_LOAD.ECC` | Number | – | Required |
+| (4) | Scale Factor | `PERMIT_LOAD.SCALE_FACTOR` | Number | – | Required |
 
-> ¹⁾ Vehicle S/2S/Permit 타입에서만 사용  
-> ²⁾ Vehicle K, Military 타입에서는 `"VEHICLE_LOAD_NAME"` 최상위 키로 지정
+> ⚠️ 2026-08-25 확인: 이전 문서는 General Load(`DEFAULT`)의 하위 필드조차 표에 없이 예제로만
+> 암시돼 있었고, Moving Load Optimization(`AUTO_OPTIMIZE`)과 Permit Vehicle(`PERMIT_LOAD`)
+> 객체는 완전히 누락돼 있었음. 원문
+> [Moving Load Cases - Poland](https://support.midasuser.com/hc/en-us/articles/35961922701209)
+> 기준으로 전체 보강.
 
 ### Python 예제
 
@@ -1774,6 +2240,40 @@ result = mv_post("MVLDpl", {
     }
 })
 print(result)
+
+# Moving Load Optimization (Vehicle K)
+mv_post("MVLDpl", {
+    "2": {
+        "LCNAME": "MV_PL_Opt_VehicleK",
+        "DESC": "",
+        "LOAD_MODEL": 2,
+        "bAUTO_OPTIMIZE": True,
+        "bPERMIT_LOAD": False,
+        "AUTO_OPTIMIZE": {
+            "VEHICLE_LOAD_NAME": "VehicleK",
+            "MIN_VEHL_DIST": 1,
+            "LANE_NAME": "L1",
+            "NUM_LOADED_LANES": 2,
+        },
+    }
+})
+
+# Load Case for Permit Vehicle
+mv_post("MVLDpl", {
+    "3": {
+        "LCNAME": "MV_PL_Permit",
+        "DESC": "",
+        "LOAD_MODEL": 1,
+        "bAUTO_OPTIMIZE": False,
+        "bPERMIT_LOAD": True,
+        "PERMIT_LOAD": {
+            "VEHICLE_LOAD_NAME": "UD_PermitTruck",
+            "REF_LANE": "L1",
+            "ECC": 1.2,
+            "SCALE_FACTOR": 1,
+        },
+    }
+})
 ```
 
 ---
@@ -2275,7 +2775,7 @@ print(result)
 | 3 | Lane Name | `"LANE_NAME"` | String | Required |
 | 4 | Element Type (`"BEAM"` / `"TRUSS"` / `"PLATE"`) | `"ELEMTYPE"` | String | Required |
 | 5 | Factor Type: `"EFF_SPAN_LEN_AUTO"` | `"FACT_TYPE"` | String | Required |
-| 6 | Parts (Beam: [i, 1/4, 1/2, 3/4, j] / Plate: [cent, i, j, k, l]) | `"PARTS"` | Array[Boolean] | Required |
+| 6 | Parts (Beam: [i, 1/4, 1/2, 3/4, j] / Plate: [cent, i, j, k, l]) | `"PARTS"` | Array[Boolean] | Required (Beam/Plate만 — ⚠️ Truss 예제에는 `PARTS` 필드 자체가 없음, 2026-08-25 확인) |
 | 7 | Components (Beam: [My_max, My_min, Mz_max, Mz_min, Fx_max, Fx_min] / Truss: [Max, Min] / Plate: [Mxx_max, Mxx_min, Myy_max, Myy_min, Fxx_max, Fxx_min, Fyy_max, Fyy_min]) | `"COMPONENTS"` | Array[Boolean] | Required |
 
 ### Python 예제

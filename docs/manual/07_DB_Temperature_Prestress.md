@@ -876,26 +876,63 @@ midas_api("DELETE", "/db/TDNT", {"Assign": {"1": {}}})
 | 22 | Grad. Rot. Angle Type · `"X"` · `"Y"` | `"GR_AXIS"` | String | `"Y"` | Optional |
 | 23 | Grad. Rot. Angle | `"GR_ANGLE"` | Number | 0 | Optional |
 
-**프로파일 좌표 (INPUT=2D):**
+**프로파일 좌표 (INPUT=2D, CURVE="SPLINE"):**
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
 | 24 | Profile in x-y plane | `"PROFY"` | Array \[Object\] | - | Required |
 | (1) | Coordinates \[x, y\] | `"PT"` | Array \[Number, 2\] | - | Required |
-| (2) | Fix Option (Spline) | `"bFIX"` | Boolean | `false` | Optional |
-| (3) | Radius – degree (Spline) / length (Round) | `"R"` / `"RADIUS"` | Number | 0 | Optional |
+| (2) | Fix Option | `"bFIX"` | Boolean | `false` | Optional |
+| (3) | Radius (degree) | `"R"` | Number | 0 | Optional |
 | 25 | Profile in x-z plane | `"PROFZ"` | Array \[Object\] | - | Required |
 | (1) | Coordinates \[x, y\] | `"PT"` | Array \[Number, 2\] | - | Required |
+| (2) | Fix Option | `"bFIX"` | Boolean | `false` | Optional |
+| (3) | Radius (degree) | `"R"` | Number | 0 | Optional |
 | (4) | BOT Option (ELEMENT 타입 전용) | `"bBOTZ"` | Boolean | `false` | Optional |
 
-**프로파일 좌표 (INPUT=3D):**
+**프로파일 좌표 (INPUT=2D, CURVE="ROUND"):**
+
+> ⚠️ 2025-08-25 확인: 기존 문서는 Spline 타입 프로파일 구조(`bFIX`/`R`)만 다루고 Round 타입 구조가
+> 누락되어 있었다(원문 [Tendon Profile](https://support.midasuser.com/hc/en-us/articles/35954555962137)
+> 재대조로 발견). Round 타입은 `bFIX`/`R` 대신 `RADIUS`·`OPT`·`ANGLE`·`HEIGHT`·`RADIUS2`를 쓴다.
+> 원문 Specifications 표는 `RADIUS`의 Value Type을 "Boolean"으로 표기했으나, 예제(`RADIUS": 0, 20` 등
+> 숫자값)와 모순되므로 CLAUDE.md 원칙(예제 우선)에 따라 Number로 기재한다.
+
+| No. | Description | Key | Value Type | Default | Required |
+|-----|-------------|-----|-----------|---------|----------|
+| 24 | Profile in x-y plane | `"PROFY"` | Array \[Object\] | - | Required |
+| (1) | Coordinates \[x, y\] | `"PT"` | Array \[Number, 2\] | - | Required |
+| (2) | Radius (length) | `"RADIUS"` | Number | 0 | Optional |
+| (3) | Add Option · None: `"NONE"` · Left: `"LEFT"` · Right: `"RIGHT"` | `"OPT"` | String | `"NONE"` | Optional |
+| (4) | Angle (`OPT`="LEFT"/"RIGHT" 일 때) | `"ANGLE"` | Number | 0 | Optional |
+| (5) | Height (`OPT`="LEFT"/"RIGHT" 일 때) | `"HEIGHT"` | Number | 0 | Optional |
+| (6) | Radius – length (`OPT`="LEFT"/"RIGHT" 일 때) | `"RADIUS2"` | Number | 0 | Optional |
+| 25 | Profile in x-z plane | `"PROFZ"` | Array \[Object\] | - | Required |
+| (1) | Coordinates \[x, y\] | `"PT"` | Array \[Number, 2\] | - | Required |
+| (2) | Radius (length) | `"RADIUS"` | Number | 0 | Optional |
+| (3) | Add Option · None: `"NONE"` · Left: `"LEFT"` · Right: `"RIGHT"` | `"OPT"` | String | `"NONE"` | Optional |
+| (4) | BOT Option (ELEMENT 타입 전용) | `"bBOTZ"` | Boolean | `false` | Optional |
+| (5) | Angle (`OPT`="LEFT"/"RIGHT" 일 때) | `"ANGLE"` | Number | 0 | Optional |
+| (6) | Height (`OPT`="LEFT"/"RIGHT" 일 때) | `"HEIGHT"` | Number | 0 | Optional |
+| (7) | Radius – length (`OPT`="LEFT"/"RIGHT" 일 때) | `"RADIUS2"` | Number | 0 | Optional |
+
+**프로파일 좌표 (INPUT=3D, CURVE="SPLINE"):**
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
 | 24 | 3D Profile | `"PROF"` | Array \[Object\] | - | Required |
 | (1) | Coordinates \[x, y, z\] | `"PT"` | Array \[Number, 3\] | - | Required |
-| (2) | Fix Option (Spline) | `"bFIX"` | Boolean | `false` | Optional |
-| (3) | Radius – degree \[Ry, Rz\] (Spline) / length (Round) | `"R"` / `"RADIUS"` | Array or Number | 0 | Optional |
+| (2) | Fix Option | `"bFIX"` | Boolean | `false` | Optional |
+| (3) | Radius – degree \[Ry, Rz\] | `"R"` | Array \[Number, 2\] | 0 | Optional |
+
+**프로파일 좌표 (INPUT=3D, CURVE="ROUND"):**
+
+| No. | Description | Key | Value Type | Default | Required |
+|-----|-------------|-----|-----------|---------|----------|
+| 24 | 3D Profile | `"PROF"` | Array \[Object\] | - | Required |
+| (1) | Coordinates \[x, y, z\] | `"PT"` | Array \[Number, 3\] | - | Required |
+| (2) | Fix Option | `"bFIX"` | Boolean | `false` | Optional |
+| (3) | Radius (length) | `"RADIUS"` | Number | 0 | Optional |
 
 ### Python 예제
 
