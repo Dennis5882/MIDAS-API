@@ -155,6 +155,11 @@ def midas_api(method: str, endpoint: str, body=None):
 | 19 | Approver Date | `"ADATE"` | String | - | Optional |
 | 20 | Comments | `"COMMENT"` | String | - | Optional |
 
+> ⚠️ 원문 Specifications 표 18번 항목은 Key가 `"APROVE"`(P 1개)로 오타 표기돼 있다. JSON Schema와
+> Request Example은 둘 다 `"APPROVE"`(P 2개)로 일관되게 쓰고 있어(예제가 표보다 우선), 위 표는
+> 정상 표기를 실었다. 다음 동기화 때 "원문과 다르다"고 되돌리지 말 것(아티클 id `35801869341337`,
+> 2026-08-25 확인 — 오류제보 대상).
+
 ### Python 예제
 
 ```python
@@ -372,14 +377,18 @@ print(result)
 |-----|-------------|-----|------------|---------|----------|
 | 1 | Structure Type · `0`=3-D / `1`=X-Z Plane / `2`=Y-Z Plane / `3`=X-Y Plane / `4`=Constraint RZ | `"STYP"` | Integer | System | Optional |
 | 2 | Mass Type · `1`=Lumped Mass / `2`=Consistent Mass | `"MASS"` | Integer | - | Optional |
-| 3 | Consider Offset | `"bMASSOFFSET"` | Boolean | - | Optional |
-| 4 | Convert Self-Weight to Mass | `"bSELFWEIGHT"` | Boolean | - | Optional |
-| 5 | Structure Mass Type (자중→질량 변환 시) | `"SMASS"` | Integer | - | Optional |
+| 3 | Consider Off-diagonal Masses | `"bMASSOFFSET"` | Boolean | `false` | Optional |
+| 4 | Convert Self-Weight to Mass | `"bSELFWEIGHT"` | Boolean | `false` | Optional |
+| 5 | Structure Mass Type (자중→질량 변환 시) · `1`=Convert to X,Y,Z / `2`=Convert to X,Y / `3`=Convert to Z | `"SMASS"` | Integer | `1` | Optional |
 | 6 | Gravity Acceleration (m/s²) | `"GRAV"` | Number | System | Optional |
 | 7 | Initial Temperature | `"TEMP"` | Number | 0 | Optional |
-| 8 | Align Top of Beam Section | `"bALIGNBEAM"` | Boolean | - | Optional |
-| 9 | Align Top of Slab (Plate) | `"bALIGNSLAB"` | Boolean | - | Optional |
-| 10 | Considering Rotational Rigid | `"bROTRIGID"` | Boolean | - | Optional |
+| 8 | Align Top of Beam Section | `"bALIGNBEAM"` | Boolean | `false` | Optional |
+| 9 | Align Top of Slab (Plate) | `"bALIGNSLAB"` | Boolean | `false` | Optional |
+| 10 | Considering Rotational Rigid | `"bROTRIGID"` | Boolean | `false` | Optional |
+
+> ⚠️ **2026-08-25 재확인 정정:** `bMASSOFFSET`/`bSELFWEIGHT`/`bALIGNBEAM`/`bALIGNSLAB`/`bROTRIGID`
+> 기본값이 이전에는 `-`(미기재)였으나, 원문 Specifications 표(아티클 id `35802404495257`)에
+> 모두 `false`로 명시돼 있어 정정했다. `SMASS`도 기본값 `1`이 명시돼 있어 함께 반영.
 
 #### Structure Type (`STYP`) 상세
 
@@ -756,9 +765,13 @@ print(result)
 |-----|-------------|-----|------------|---------|----------|
 | 1 | Plane Name | `"NAME"` | String | - | **Required** |
 | 2 | Plane Type · `1`=3 Points / `2`=X-Y Plane / `3`=X-Z Plane / `4`=Y-Z Plane | `"TYPE"` | Integer | - | **Required** |
-| 3 | Tolerance | `"TOL"` | Number | - | Optional |
+| 3 | Tolerance | `"TOL"` | Number | `0` | Optional |
 | 4 | Point Data (TYPE=1 시) · 1st/2nd/3rd 점 좌표 `[X, Y, Z]` | `"POINT"[].ITEM"` | Array [Number] | - | Required (TYPE=1) |
-| 5 | Coordinate (TYPE=2,3,4 시) · Z/Y/X 위치 | `"COORD"` | Number | - | Required (TYPE≠1) |
+| 5 | Coordinate (TYPE=2,3,4 시) · Z/Y/X 위치 | `"COORD"` | Number | `0` | Optional |
+
+> ⚠️ **2026-08-25 재확인 정정:** `TOL` 기본값 `-`→`0`, `COORD`는 원문 Specifications 표에
+> Required가 아닌 **Optional(기본값 0)**로 명시돼 있어 정정(아티클 id `35805287066649`).
+> TYPE=1일 때만 쓰이지 않는 값이므로 실무상 "조건부 필수"처럼 보이지만, 원문 표기는 Optional.
 
 #### Plane Type 상세
 

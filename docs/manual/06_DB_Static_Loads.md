@@ -764,7 +764,7 @@ midas_api("DELETE", "/db/NBOF", {"Assign": {"1": {}}})
 | 2 | Description | `"DESC"` | String | - | Required |
 | 3 | Element Type | `"ELEM_TYPE"` | String | - | Required |
 | 4 | Pressure Load items | `"PRESSURE_LOAD_ITEMS"` | Array \[Object\] | - | Required |
-| (1) | Load Case Name | `"CMD"` | String | 0 | Required |
+| (1) | Load Case Name | `"LOADCASENAME"` | String | - | Required |
 | (2) | Load Type (`"Uniform"` / `"Linear"`) | `"LOADTYPE"` | String | - | Required |
 | (3) | Load P1 ¹⁾ | `"LOAD_P1"` | Number | - | Required |
 | (4) | Load P2 ¹⁾ | `"LOAD_P2"` | Number | 0 | Optional |
@@ -1091,8 +1091,13 @@ midas_api("DELETE", "/db/PNLD", {"Assign": {"2": {}}})
 | 14 | Loading Boundary Connecting Node | `"CONNECT_NODE"` | Array \[Integer, 15\] | - | Optional |
 | **SELECT_TYPE = "IN_GROUP"** | | | | | |
 | 13 | Element Group Name | `"ELEM_GROUP"` | String | - | Optional |
-| **SELECT_TYPE = "SOLID"** | | | | | |
+| **ELEM_TYPE = "SOLID"** | | | | | |
 | 14 | Solid Face No. (1~6) | `"FACE_NO"` | Integer | - | Optional |
+
+> ⚠️ 원문은 이 조건을 "SELECT_TYPE이 SOLID일 때"로 적고 있으나, `SELECT_TYPE`의 실제 enum은
+> `"ON_PLANE"`/`"IN_GROUP"`뿐이라 `"SOLID"` 값을 가질 수 없다(4번 `ELEM_TYPE`의 enum이
+> `"PLATE"`/`"SOLID"`). `FACE_NO`는 Solid 요소 전용 필드이므로 실제로는 `ELEM_TYPE`
+> 조건으로 정정했다(원문 자체의 오기로 판단, 오류제보 대상).
 
 ### Python 예제
 
@@ -1565,7 +1570,7 @@ midas_api("DELETE", "/db/EPST", {"Assign": {"1": {}}})
       "LAYER_PARAM": "SINGLE",
       "LAYER_LV": 0,
       "SOIL_PROP": "Soil-1",
-      "SEL_TYPE": "ELEM",
+      "SEL_TYPE": "ELEMENT",
       "ELEM_TYPE": "PLANAR",
       "NODE_LIST": [3461, 3831, 4856, 5597],
       "ELEM_LIST": [18451],

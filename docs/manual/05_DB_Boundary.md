@@ -149,21 +149,51 @@ midas_api("DELETE", "/db/CONS", {"Assign": {"10": {}}})
 
 ### 요청 파라미터
 
+> ⚠️ **2026-08-25 재확인 전면 정정.** 이전 버전은 COMP/TENS/MULTI 세 타입을 하나로 묶어
+> `DIR`(1~4)·`DV`·존재하지 않는 `"SK"` 필드로 잘못 기재하고 있었다(아티클 id
+> `35945908301081`). 실제로는 **COMP/TENS는 `STIFF`(단일 강성값)**, **MULTI는
+> `FUNCTION`(MLFC 함수 ID)**을 쓰며, `DIR`은 0~6(Vector 포함) enum이고 `DV`는 `DIR=6`
+> (Vector)일 때만 쓰는 방향 벡터다. LINEAR 타입의 `Cr`(감쇠계수 배열)도 누락돼 있었다.
+
 | No. | 설명 | 키 | 타입 | 기본값 | 필수 |
-|-----|------|----|------|--------|------|
+| --- | --- | --- | --- | --- | --- |
 | 1 | Point Spring (배열로 삽입) | `"ITEMS"` | Array[Object] | — | Required |
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Spring Type · `"LINEAR"` / `"COMP"` / `"TENS"` / `"MULTI"` | `"TYPE"` | String | — | Required |
 | (3) | Boundary Group Name | `"GROUP_NAME"` | String | Blank | Optional |
 | (4) | Create Function Type · 0=점 스프링 함수, 1=면 스프링 함수 | `"FormType"` | Integer | 0 | Optional |
-| — | **LINEAR 전용** | | | | |
+
+#### LINEAR 전용
+
+| No. | 설명 | 키 | 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
 | (5) | Spring Stiffness `[SDx, SDy, SDz, SRx, SRy, SRz]` | `"SDR"` | Array[Number,6] | — | Required |
 | (6) | Fixed Option `[SDx, SDy, SDz, SRx, SRy, SRz]` | `"F_S"` | Array[Boolean,6] | false | Optional |
-| (7) | Damping Constant | `"DAMPING"` | Boolean | — | Optional |
-| — | **COMP / TENS / MULTI 전용** | | | | |
-| (5) | Direction · 1=Dx, 2=Dy, 3=Dz, 4=Dy&Dz | `"DIR"` | Integer | — | Required |
-| (6) | Displacement Values `[Disp_1, Disp_2, Disp_3]` | `"DV"` | Array[Number] | — | Required |
-| (7) | Spring Stiffness Values `[K_1, K_2, K_3]` | `"SK"` | Array[Number] | — | Required |
+| (7) | Damping Constant 사용 여부 | `"DAMPING"` | Boolean | false | Optional |
+| (8) | Damping `[Cx, Cy, Cz, CRx, CRy, CRz]` | `"Cr"` | Array[Number,6] | 0 | Optional |
+
+#### COMP(Compression-Only) / TENS(Tension-Only) 전용
+
+| No. | 설명 | 키 | 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (5) | Stiffness | `"STIFF"` | Number | — | Required |
+| (6) | Direction · Dx(+):0 / Dx(–):1 / Dy(+):2 / Dy(–):3 / Dz(+):4 / Dz(–):5 / Vector:6 | `"DIR"` | Integer | — | Required |
+| (7) | Normal Vector(`DIR`=6일 때) | `"DV"` | Array[Number,3] | 0 | Optional |
+
+#### MULTI(Multi-Linear) 전용
+
+| No. | 설명 | 키 | 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (5) | Force-Deformation 함수 ID(`/db/MLFC`에서 정의) | `"FUNCTION"` | Integer | — | Required |
+| (6) | Direction · Dx(+):0 / Dx(–):1 / Dy(+):2 / Dy(–):3 / Dz(+):4 / Dz(–):5 / Vector:6 | `"DIR"` | Integer | — | Required |
+| (7) | Normal Vector(`DIR`=6일 때) | `"DV"` | Array[Number,3] | 0 | Optional |
+
+#### By Surface Spring Function 전용(`FormType`=1일 때 공통 추가)
+
+| No. | 설명 | 키 | 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (9) | Width of Frame | `"EFFAREA"` | Number | 0 | Optional |
+| (10) | Modulus of Subgrade Reaction `[Kx, Ky, Kz]` | `"DK"` | Array[Number,3] | 0 | Optional |
 
 ### 요청 바디 예시
 
@@ -173,14 +203,28 @@ midas_api("DELETE", "/db/CONS", {"Assign": {"10": {}}})
     "2": {
       "ITEMS": [{
         "ID": 1, "TYPE": "LINEAR", "GROUP_NAME": "Service",
-        "SDR": [1000, 500, 500, 0, 0, 0],
-        "F_S": [false, false, false, false, false, false]
+        "SDR": [33000, 34000, 35000, 33000000, 34000000, 35000000],
+        "F_S": [false, false, false, false, false, false],
+        "DAMPING": true,
+        "Cr": [1, 2, 3, 4, 5, 6]
       }]
     },
     "4": {
       "ITEMS": [{
         "ID": 1, "TYPE": "COMP", "GROUP_NAME": "Service",
-        "DIR": 4, "DV": [0, 0, 0], "SK": [1000, 0, 0]
+        "DIR": 4, "DV": [0, 0, 0], "STIFF": 1000000
+      }]
+    },
+    "6": {
+      "ITEMS": [{
+        "ID": 1, "TYPE": "TENS", "GROUP_NAME": "Service",
+        "DIR": 6, "DV": [0, -1, -1], "STIFF": 1000000
+      }]
+    },
+    "8": {
+      "ITEMS": [{
+        "ID": 1, "TYPE": "MULTI", "GROUP_NAME": "Service",
+        "DIR": 4, "DV": [0, 0, 0], "FUNCTION": 1
       }]
     }
   }
@@ -192,7 +236,7 @@ midas_api("DELETE", "/db/CONS", {"Assign": {"10": {}}})
 ```python
 # --- NSPR: 점 스프링 배정 ---
 
-# 절점 2: 선형 스프링 (수평 Kx=1000, Ky=500 kN/m)
+# 절점 2: 선형 스프링 (수평 Kx=33000, Ky=34000, Kz=35000 kN/m)
 nspr_linear = {
     "Assign": {
         "2": {
@@ -200,14 +244,14 @@ nspr_linear = {
                 "ID": 2,
                 "TYPE": "LINEAR",
                 "GROUP_NAME": "Foundation_Spring",
-                "SDR": [1000.0, 500.0, 500.0, 0.0, 0.0, 0.0],
+                "SDR": [33000.0, 34000.0, 35000.0, 33000000.0, 34000000.0, 35000000.0],
                 "F_S": [False, False, False, False, False, False]
             }]
         }
     }
 }
 
-# 절점 4: 압축 전용 스프링 (토압 방향)
+# 절점 4: 압축 전용 스프링 — DIR=6(Vector), DV로 방향 지정 (토압 방향)
 nspr_comp = {
     "Assign": {
         "4": {
@@ -215,9 +259,9 @@ nspr_comp = {
                 "ID": 4,
                 "TYPE": "COMP",
                 "GROUP_NAME": "Soil_Spring",
-                "DIR": 4,            # Dy & Dz
-                "DV": [0.0, 0.0, 0.0],
-                "SK": [2000.0, 0.0, 0.0]
+                "DIR": 6,            # Vector 방식
+                "DV": [0.0, -1.0, -1.0],
+                "STIFF": 2000000.0
             }]
         }
     }
@@ -242,17 +286,37 @@ all_nspr = midas_api("GET", "/db/NSPR")
 
 ### 요청 파라미터
 
+> ⚠️ **2026-08-25 재확인 정정.** 21항 배열의 인덱스-행렬위치 매핑이 실제로는 "대각항 6개
+> 먼저, 그다음 비대각항을 행 순서로" 배치되는 방식이다(아티클 id `35946004118169`, footnote
+> ¹⁾). 이전 버전이 적어둔 표준 상삼각(K11,K12,K13,...,K22,K23,...) 순서와 다르므로, 그
+> 순서대로 배열을 채우면 완전히 다른 스프링 위치에 값이 들어간다 — 실무에 영향이 큰
+> 정정이라 아래 표·예제를 원문 그대로 교체했다.
+
 | No. | 설명 | 키 | 타입 | 기본값 | 필수 |
-|-----|------|----|------|--------|------|
+| --- | --- | --- | --- | --- | --- |
 | 1 | General Spring Name | `"NAME"` | String | — | Required |
 | 2 | Stiffness Matrix Option | `"OPT_STIFFNESS"` | Boolean | false | Optional |
-| 3 | Stiffness Matrix (상삼각 21항) | `"SPRING"` | Array[Number,21] | 0 | Optional |
+| 3 | Stiffness Matrix (21항) ¹⁾ | `"SPRING"` | Array[Number,21] | 0 | Optional |
 | 4 | Mass Matrix Option | `"OPT_MASS"` | Boolean | false | Optional |
-| 5 | Mass Matrix (상삼각 21항) | `"MASS"` | Array[Number,21] | 0 | Optional |
+| 5 | Mass Matrix (21항) ¹⁾ | `"MASS"` | Array[Number,21] | 0 | Optional |
 | 6 | Damping Matrix Option | `"OPT_DAMPING"` | Boolean | false | Optional |
-| 7 | Damping Matrix (상삼각 21항) | `"DAMPING"` | Array[Number,21] | 0 | Optional |
+| 7 | Damping Matrix (21항) ¹⁾ | `"DAMPING"` | Array[Number,21] | 0 | Optional |
 
 > **주의:** `SPRING`/`MASS`/`DAMPING` 배열은 옵션 플래그가 `true`일 때만 유효합니다.
+
+#### ¹⁾ 21항 배열 인덱스 ↔ 행렬 위치(Row, Column) 매핑 (1-based)
+
+| 인덱스(0-based) | 위치 | 인덱스 | 위치 | 인덱스 | 위치 |
+| --- | --- | --- | --- | --- | --- |
+| 0 | (1,1) | 7 | (1,3) | 14 | (2,6) |
+| 1 | (2,2) | 8 | (1,4) | 15 | (3,4) |
+| 2 | (3,3) | 9 | (1,5) | 16 | (3,5) |
+| 3 | (4,4) | 10 | (1,6) | 17 | (3,6) |
+| 4 | (5,5) | 11 | (2,3) | 18 | (4,5) |
+| 5 | (6,6) | 12 | (2,4) | 19 | (4,6) |
+| 6 | (1,2) | 13 | (2,5) | 20 | (5,6) |
+
+대각항(1,1)~(6,6) 6개가 먼저 오고, 그 뒤로 (1,2)부터 행 순서대로 비대각항이 이어진다.
 
 ### 요청 바디 예시
 
@@ -261,39 +325,38 @@ all_nspr = midas_api("GET", "/db/NSPR")
   "Assign": {
     "3": {
       "NAME": "GS_Damping",
-      "OPT_STIFFNESS": true,
-      "SPRING": [1000, 0, 0, 0, 0, 0, 500, 0, 0, 0, 0, 500, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      "OPT_DAMPING": true,
-      "DAMPING": [50, 0, 0, 0, 0, 0, 30, 0, 0, 0, 0, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      "SPRING": [1, 7, 12, 16, 19, 21, 2, 3, 4, 5, 6, 8, 9, 10, 11, 13, 14, 15, 17, 18, 20],
+      "MASS": [1, 7, 12, 16, 19, 21, 2, 3, 4, 5, 6, 8, 9, 10, 11, 13, 14, 15, 17, 18, 20]
     }
   }
 }
 ```
 
+> 위 예제는 원문 그대로 값 자체가 배열 내 위치를 나타내는 자리표시자(placeholder)이며,
+> `OPT_STIFFNESS`/`OPT_MASS`/`OPT_DAMPING` 옵션 플래그는 원문 예제에 없다 — 실제 사용 시
+> 사용할 행렬에 해당하는 옵션을 `true`로 함께 보내야 한다.
+
 ### Python 예제
 
 ```python
 # --- GSTP: 일반 스프링 타입 정의 ---
-# 상삼각 행렬 21항 순서: K11, K12, K13, K14, K15, K16,
-#                           K22, K23, K24, K25, K26,
-#                               K33, K34, K35, K36,
-#                                   K44, K45, K46,
-#                                       K55, K56,
-#                                           K66
+# 21항 순서(0-based): 0~5=대각항(1,1)~(6,6), 6~10=(1,2)~(1,6),
+#                      11~14=(2,3)~(2,6), 15~17=(3,4)~(3,6),
+#                      18~19=(4,5)~(4,6), 20=(5,6)
 
 gstp_data = {
     "Assign": {
         "1": {
             "NAME": "Foundation_GS",
             "OPT_STIFFNESS": True,
-            # Kx=1000, Ky=800, Kz=800, 회전 0 (대각항만 값)
+            # 대각항만 값(비대각항 전부 0): idx0~5 = Kxx,Kyy,Kzz,Krxrx,Kryry,Krzrz
             "SPRING": [
-                1000, 0, 0, 0, 0, 0,
-                      800, 0, 0, 0, 0,
-                           800, 0, 0, 0,
-                                0, 0, 0,
-                                   0, 0,
-                                      0
+                1000, 800, 800, 0, 0, 0,   # 대각항: Kx=1000, Ky=800, Kz=800, 회전 0
+                0, 0, 0, 0, 0,              # (1,2)~(1,6)
+                0, 0, 0, 0,                 # (2,3)~(2,6)
+                0, 0, 0,                    # (3,4)~(3,6)
+                0, 0,                       # (4,5)~(4,6)
+                0                           # (5,6)
             ]
         }
     }
@@ -371,6 +434,7 @@ midas_api("POST", "/db/GSPR", gspr_data)
 | (4) | Edge/Face 선택 · FRAME: Local x=2, y=0, z=1 · PLANAR/SOLID: Edge#1∼4=0∼3 | `"EDGE_FACE"` | Integer | 0 | Optional |
 | (5) | Spring Type · 0=Linear, 1=Comp.-Only, 2=Tens.-Only | `"SPRING_TYPE"` | Integer | 0 | Optional |
 | (6) | Modulus of Subgrade Reaction Ks | `"MODULUS"` | Number | — | Required |
+| (7) | Width(FRAME 전용) | `"WIDTH"` | Number | — | Required(FRAME) |
 
 ### 요청 바디 예시 (FRAME / PLANAR / SOLID)
 
@@ -455,6 +519,11 @@ midas_api("POST", "/db/SSPS", ssps_data)
 
 ### LINK 타입별 추가 파라미터
 
+> ⚠️ 원문 Specifications 표는 `"LINK"` 값을 `"MULTI LINEAR"`·`"RAIL INTERACT"`(공백 포함)로
+> 적고 있으나, JSON Schema·Request Example은 모두 공백 없는 `"MULTILINEAR"`·`"RAILINTERACT"`를
+> 쓴다(예제가 표보다 우선). 아래는 정상 표기이니 되돌리지 말 것(아티클 id `35946439146649`,
+> 2026-08-25 확인 — 오류제보 대상).
+
 | LINK 값 | 설명 | 추가 키 |
 |---------|------|---------|
 | `"GEN"` | General (6자유도 스프링) | `SDR[6]`, `R_S[6]`, `bSHEAR`, `DR[2]` |
@@ -462,8 +531,8 @@ midas_api("POST", "/db/SSPS", ssps_data)
 | `"SADDLE"` | 안장 (교량 받침 특화) | (없음) |
 | `"TENS"` | Tension-Only | `SDR[6]` (Dx만 유효) |
 | `"COMP"` | Compression-Only | `SDR[6]` (Dx만 유효) |
-| `"MULTILINEAR"` | Multi-Linear | `DIR`, `MLFC`(함수 ID), `bSHEAR`, `DRENDI` |
-| `"RAILINTERACT"` | Rail Track Interaction | `DIR`, `RLFC`(함수 ID), `bSHEAR`, `DRENDI` |
+| `"MULTILINEAR"` | Multi-Linear | `DIR`(0=Dx/1=Dy/2=Dz/3=Rx/4=Ry/5=Rz), `MLFC`(함수 ID), `bSHEAR`, `DRENDI` |
+| `"RAILINTERACT"` | Rail Track Interaction | `DIR`(**1=Dy/2=Dz만 유효** — Multi-Linear와 enum 범위가 다름), `RLFC`(함수 ID), `bSHEAR`, `DRENDI` |
 
 `SDR` / `R_S` 배열 순서: `[SDx, SDy, SDz, SRx, SRy, SRz]`  
 `DIR` 값: 0=Dx, 1=Dy, 2=Dz, 3=Rx, 4=Ry, 5=Rz
@@ -629,6 +698,14 @@ midas_api("POST", "/db/RIGD", rigd_data)
 
 ### 요청 파라미터 (공통)
 
+> ⚠️ **2026-08-25 재확인 보강:** 공통 필드 뒤에 `DIST_RATIO_DY`/`DIST_RATIO_DZ`/
+> `COUPLED_INPUT_METHOD` 3개가 누락돼 있었다(아티클 id `35946764618905`). 이 원문은
+> `APPLICATION_TYPE`/`APPLICATION_TYPE_D` 조합 14가지마다 별도 파라미터 세트(장치별
+> 상세 물성)를 갖는 6000줄 이상의 방대한 문서라, 위 "APPLICATION_TYPE 조합표"에 정리한
+> 개요 수준으로만 다루고 조합별 상세 필드는(SDVI/SDVE/SDST/SDHY/SDIS로 참조되는 것
+> 외의 FORCE 계열 GAP/HOOK/HS/LRBI/FPSI/TFPSI 등) 전수 기재하지 않는다(SECT/TDMT/FIMP와
+> 동일 원칙).
+
 | No. | 설명 | 키 | 타입 | 필수 |
 |-----|------|----|------|------|
 | 1 | General Link Property Name | `"PROPERTY_NAME"` | String | Required |
@@ -641,6 +718,9 @@ midas_api("POST", "/db/RIGD", rigd_data)
 | 8 | Mass (Total) | `"TOTAL_MASS"` | Number | Optional |
 | 9 | Lumped Mass Ratio | `"L_MASS_RATIO"` | Number | Optional |
 | 10 | Shear Spring Location Option | `"OPT_SHEAR_SPR_LOC"` | Boolean | Optional |
+| 11 | Distance Ratio from End I (Dy) | `"DIST_RATIO_DY"` | Number | Optional |
+| 12 | Distance Ratio from End I (Dz) | `"DIST_RATIO_DZ"` | Number | Optional |
+| 13 | Coupled Input Method | `"COUPLED_INPUT_METHOD"` | Integer | Optional |
 
 ### 요청 바디 예시
 
@@ -776,7 +856,12 @@ midas_api("POST", "/db/NLNK", nlnk_data)
 
 ## 10. `/db/NLNK-M1` — General Link (Hyper-S)
 
-Hyper-S 솔버 전용 일반 링크 배정 엔드포인트입니다. 공식 사이트의 JSON 스키마 예제는 제공되지 않으나, 파라미터 구조는 NLNK에 준합니다.
+Hyper-S 솔버 전용 일반 링크 배정 엔드포인트입니다.
+
+> ⚠️ **2026-08-25 재확인 전면 보강.** 이전 버전은 "공식 사이트에 JSON 스키마 예제가 없다"고
+> 적고 3개 필드짜리 스텁으로 남겨져 있었으나, 실제로는 아티클 id `56511465190937`(928줄)에
+> 온전한 스펙이 있다 — 이번 정기점검 재대조로 발견. 구조는 9번 절 `/db/NLNK`와 거의 동일
+> (좌표계·입력방식 분기까지 동일)하며, `IEHP_NAME`(비선형 힌지 속성)만 빠져 있다.
 
 **Endpoint:** `{base url}/db/NLNK-M1`  
 **Methods:** `POST` · `GET` · `PUT` · `DELETE`
@@ -788,19 +873,58 @@ Hyper-S 솔버 전용 일반 링크 배정 엔드포인트입니다. 공식 사�
 | 1 | General Link Property Name | `"PROP_NAME"` | String | — | Required |
 | 2 | Node 1 ID | `"NODE1"` | Integer | — | Required |
 | 3 | Node 2 ID | `"NODE2"` | Integer | — | Required |
+| 4 | Reference Coordinate System · 0=Element, 1=Global | `"REF_SYSTEM"` | Integer | — | Required |
+| 5 (REF_SYSTEM=0) | Beta Angle | `"BETA_ANGLE"` | Number | 0 | Required |
+| 6 (REF_SYSTEM=1) | Input Method · 0=Angle, 1=3 Points, 2=Vector | `"INPUT_METHOD"` | Integer | — | Required |
+| 7 (INPUT_METHOD=0) | Angle Values `[about X, about y', about z'']` | `"ANGLE_VALUES"` | Array[Object] | — | Required |
+| 8 (INPUT_METHOD=1) | Point Values `[P0[3], P1[3], P2[3]]` | `"POINT_VALUES"` | Array[Object] | — | Required |
+| 9 (INPUT_METHOD=2) | Vector Values `[V1[3], V2[3]]` | `"VECTOR_VALUES"` | Array[Object] | — | Required |
+| 10 | Boundary Group Name | `"GROUP_NAME"` | String | — | Optional |
+
+각 `ANGLE_VALUES`/`POINT_VALUES`/`VECTOR_VALUES` 배열 원소는 `{"VALUE": [x, y, z]}` 형태의
+object다(NLNK와 동일).
+
+### 요청 바디 예시
+
+```json
+{
+  "Assign": {
+    "1": {
+      "PROP_NAME": "NLL_PROP_1",
+      "NODE1": 101,
+      "NODE2": 102,
+      "REF_SYSTEM": 0,
+      "BETA_ANGLE": 0,
+      "GROUP_NAME": "Boundary Group 1"
+    },
+    "2": {
+      "PROP_NAME": "NLL_PROP_1",
+      "NODE1": 101,
+      "NODE2": 102,
+      "REF_SYSTEM": 1,
+      "INPUT_METHOD": 0,
+      "ANGLE_VALUES": [{ "VALUE": [0, 0, 0] }],
+      "GROUP_NAME": "Boundary Group 1"
+    }
+  }
+}
+```
 
 ### Python 예제
 
 ```python
 # --- NLNK-M1: Hyper-S 전용 일반 링크 배정 ---
-# Hyper-S 솔버 사용 시에만 유효
+# Hyper-S 솔버 사용 시에만 유효, 구조는 /db/NLNK와 동일(IEHP_NAME 제외)
 
 nlnk_m1_data = {
     "Assign": {
         "1": {
             "PROP_NAME": "GL_HyperS_Prop",
             "NODE1": 20,
-            "NODE2": 21
+            "NODE2": 21,
+            "REF_SYSTEM": 0,
+            "BETA_ANGLE": 0,
+            "GROUP_NAME": "Isolation_Level_1"
         }
     }
 }
@@ -1177,13 +1301,25 @@ NLLP의 `APPLICATION_TYPE_D="VI"`에서 참조됩니다.
 | 3 | Damper Model · 0=Single Dashpot, 1=Kelvin(Voigt), 2=Maxwell | `"DAMPER_TYPE"` | Integer | Required |
 | 4 | Dashpot Type · 0=Linear Elastic, 1=Bilinear, 2=Exponential | `"DASHPOT_TYPE"` | Integer | Required |
 | 5 | Input Type · 0=감쇠비 α₁, 1=감쇠상수 C₁ | `"INPUT_TYPE"` | Integer | Required |
-| 6 | Property Data (DOF별 6항목) | `"ITEM"` | Array[Object,6] | Required |
+| 6 | Input Type (Exponential Function Type용) | `"INPUT_TYPE_EXFN"` | Integer | Required |
+| 7 | Property Data (DOF별 6항목) | `"ITEM"` | Array[Object,6] | Required |
 | (1) | DOF 활성화 여부 | `"OPT_DOF"` | Boolean | Required |
 | (2) | 초기 감쇠계수 CE | `"CE"` | Number | Required |
 | (3) | 최대 감쇠력 P₁ | `"P1"` | Number | Required |
 | (4) | 이차 감쇠계수 C₁ | `"C1"` | Number | Required |
 | (5) | 감쇠 감소 계수 α₁ | `"ALPHA1"` | Number | Required |
 | (6) | 초기 강성 K₀ | `"K0"` | Number | Required |
+| (7) | 감쇠력(Exponential, Damping Force) | `"EXFN_PY"` | Number | Required |
+| (8) | 기준 속도(Exponential, Reference Velocity) | `"EXFN_VY"` | Number | Required |
+| (9) | 감쇠 지수(Exponential, Damping Exponent) | `"EXFN_DE"` | Number | Required |
+| (10) | 감쇠계수(Exponential, Damping Coefficient) | `"EXFN_DC"` | Number | Required |
+| (11) | Exponential 초기 감쇠계수 사용 여부 | `"OPT_EXFN_CE"` | Boolean | Required |
+| (12) | Exponential 초기 감쇠계수 값 | `"EXFN_CE"` | Number | Required |
+
+> ⚠️ **2026-08-25 재확인 보강:** `INPUT_TYPE_EXFN`(최상위)과 `ITEM[]`의 (7)~(12) 6개
+> Exponential Function Type(`DASHPOT_TYPE=2`) 전용 필드가 누락돼 있었다. 원문 Request
+> Example을 보면 `DASHPOT_TYPE` 값과 무관하게 `ITEM[]` 각 원소가 항상 12개 필드를 모두
+> 포함해 전송한다(아티클 id `35947995586713`).
 
 ### 요청 바디 예시
 
@@ -1199,13 +1335,14 @@ NLLP의 `APPLICATION_TYPE_D="VI"`에서 참조됩니다.
       "DAMPER_TYPE": 0,
       "DASHPOT_TYPE": 0,
       "INPUT_TYPE": 0,
+      "INPUT_TYPE_EXFN": 0,
       "ITEM": [
-        { "OPT_DOF": true, "CE": 500, "P1": 1000, "C1": 200, "ALPHA1": 0.5, "K0": 0 },
-        { "OPT_DOF": false, "CE": 0, "P1": 0, "C1": 0, "ALPHA1": 1, "K0": 0 },
-        { "OPT_DOF": false, "CE": 0, "P1": 0, "C1": 0, "ALPHA1": 1, "K0": 0 },
-        { "OPT_DOF": false, "CE": 0, "P1": 0, "C1": 0, "ALPHA1": 1, "K0": 0 },
-        { "OPT_DOF": false, "CE": 0, "P1": 0, "C1": 0, "ALPHA1": 1, "K0": 0 },
-        { "OPT_DOF": false, "CE": 0, "P1": 0, "C1": 0, "ALPHA1": 1, "K0": 0 }
+        { "OPT_DOF": true, "CE": 13000, "P1": 0, "C1": 0, "ALPHA1": 0, "K0": 0,
+          "EXFN_PY": 1, "EXFN_VY": 1, "EXFN_DE": 0.3, "EXFN_DC": 1,
+          "OPT_EXFN_CE": false, "EXFN_CE": 1 },
+        { "OPT_DOF": false, "CE": 0, "P1": 0, "C1": 0, "ALPHA1": 0, "K0": 0,
+          "EXFN_PY": 1, "EXFN_VY": 1, "EXFN_DE": 0.3, "EXFN_DC": 1,
+          "OPT_EXFN_CE": false, "EXFN_CE": 1 }
       ]
     }
   }
@@ -1217,9 +1354,16 @@ NLLP의 `APPLICATION_TYPE_D="VI"`에서 참조됩니다.
 ```python
 # --- SDVI: 점성 댐퍼 물성 정의 ---
 # ITEM 배열 순서: Dx, Dy, Dz, Rx, Ry, Rz
+# DASHPOT_TYPE 값과 무관하게 ITEM 각 원소는 12개 필드를 모두 전송해야 함
 
-def make_dof_item(active, CE=0, P1=0, C1=0, alpha1=1.0, K0=0):
-    return {"OPT_DOF": active, "CE": CE, "P1": P1, "C1": C1, "ALPHA1": alpha1, "K0": K0}
+def make_dof_item(active, CE=0, P1=0, C1=0, alpha1=1.0, K0=0,
+                   exfn_py=1, exfn_vy=1, exfn_de=0.3, exfn_dc=1,
+                   opt_exfn_ce=False, exfn_ce=1):
+    return {
+        "OPT_DOF": active, "CE": CE, "P1": P1, "C1": C1, "ALPHA1": alpha1, "K0": K0,
+        "EXFN_PY": exfn_py, "EXFN_VY": exfn_vy, "EXFN_DE": exfn_de, "EXFN_DC": exfn_dc,
+        "OPT_EXFN_CE": opt_exfn_ce, "EXFN_CE": exfn_ce
+    }
 
 sdvi_data = {
     "Assign": {
@@ -1236,6 +1380,7 @@ sdvi_data = {
             "DAMPER_TYPE": 2,       # Maxwell 모델
             "DASHPOT_TYPE": 2,      # 지수함수 타입
             "INPUT_TYPE": 0,        # 감쇠비 α₁ 입력
+            "INPUT_TYPE_EXFN": 0,
             "ITEM": [
                 make_dof_item(True,  CE=500, P1=1000, C1=200, alpha1=0.5),  # Dx 활성
                 make_dof_item(False),   # Dy 비활성
@@ -1263,11 +1408,29 @@ NLLP의 `APPLICATION_TYPE_D="VE"`에서 참조됩니다.
 
 ### 요청 파라미터
 
+> ⚠️ **2026-08-25 재확인 전면 보강.** 이전 버전은 `COMMON`/`MATERIAL_TYPE`/`SHEAR_AREA` 3개
+> 필드만 있었으나, 원문(아티클 id `35948062417049`)의 실제 Request Example은 이 아래 14개
+> 필드를 추가로 전송한다 — 표만 보고는 알 수 없고 Request Example로만 확인 가능했다.
+
 | No. | 설명 | 키 | 타입 | 필수 |
 |-----|------|----|------|------|
 | 1 | Common Data (SDVI와 동일 구조) | `"COMMON"` | Object | Required |
 | 2 | Material Type · `"GR100"` / `"GR300"` / `"SR05"` / `"GR400"` / `"CST"` / `"TRC"` | `"MATERIAL_TYPE"` | String | Required |
 | 3 | Shear Area | `"SHEAR_AREA"` | Number | Required |
+| 4 | Thickness | `"THICKNESS"` | Number | Required |
+| 5 | Multiplier | `"MULTIPL"` | Number | Required |
+| 6 | Direction(`"Dx"`/`"Dy"`/`"Dz"` 등) | `"DIR"` | String | Required |
+| 7 | Frequency | `"FREQ"` | Number | Required |
+| 8 | Stiffness Factor | `"STIFF_FACTOR"` | Number | Required |
+| 9 | Damping Factor | `"DAMP_FACTOR"` | Number | Required |
+| 10 | Reference Temperature | `"REF_T"` | Number | Required |
+| 11 | Limit Deformation | `"LIMIT_DEF"` | Number | Required |
+| 12 | Effective Stiffness | `"EFF_STIFF"` | Number | Required |
+| 13 | Equivalent Damping | `"EQUI_DAMP"` | Number | Required |
+| 14 | Use Mount Stiffness | `"OPT_MOUNT_STIFF"` | Boolean | Required |
+| 15 | Mount Stiffness | `"MOUNT_STIFF"` | Number | Required |
+| 16 | Use Kinetic Friction | `"OPT_KINETIC_FRIC"` | Boolean | Required |
+| 17 | Kinetic Friction | `"KINETIC_FRIC"` | Number | Required |
 
 ### 요청 바디 예시
 
@@ -1277,10 +1440,24 @@ NLLP의 `APPLICATION_TYPE_D="VE"`에서 참조됩니다.
     "1": {
       "COMMON": {
         "NAME": "Viscoelastic01", "DESC": "", "INPUT_METHOD": 0,
-        "PRODUCT_NAME": "VE-200", "TYPE_NUMBER": "VE200-A"
+        "PRODUCT_NAME": "", "TYPE_NUMBER": ""
       },
       "MATERIAL_TYPE": "GR100",
-      "SHEAR_AREA": 0.05
+      "SHEAR_AREA": 0.2,
+      "THICKNESS": 0.02,
+      "MULTIPL": 1,
+      "DIR": "Dx",
+      "FREQ": 0,
+      "STIFF_FACTOR": 1,
+      "DAMP_FACTOR": 1,
+      "REF_T": 20,
+      "LIMIT_DEF": 0.3,
+      "EFF_STIFF": 0,
+      "EQUI_DAMP": 0,
+      "OPT_MOUNT_STIFF": true,
+      "MOUNT_STIFF": 1200,
+      "OPT_KINETIC_FRIC": false,
+      "KINETIC_FRIC": 0
     }
   }
 }
@@ -1302,7 +1479,21 @@ sdve_data = {
                 "TYPE_NUMBER": "GR100-200"
             },
             "MATERIAL_TYPE": "GR100",   # SUMITOMO GR100 재료
-            "SHEAR_AREA": 0.05          # 전단 면적 (m²)
+            "SHEAR_AREA": 0.2,          # 전단 면적 (m²)
+            "THICKNESS": 0.02,          # 두께 (m)
+            "MULTIPL": 1,               # 배수(적층 개수 등)
+            "DIR": "Dx",
+            "FREQ": 0,
+            "STIFF_FACTOR": 1,
+            "DAMP_FACTOR": 1,
+            "REF_T": 20,                # 기준 온도 (°C)
+            "LIMIT_DEF": 0.3,           # 한계 변형
+            "EFF_STIFF": 0,
+            "EQUI_DAMP": 0,
+            "OPT_MOUNT_STIFF": True,
+            "MOUNT_STIFF": 1200,
+            "OPT_KINETIC_FRIC": False,
+            "KINETIC_FRIC": 0
         }
     }
 }
@@ -1322,11 +1513,30 @@ NLLP의 `APPLICATION_TYPE_D="ST"`에서 참조됩니다.
 
 ### 요청 파라미터
 
+> ⚠️ **2026-08-25 재확인 전면 정정.** 원문 Specifications 표는 이 엔드포인트에 `MATERIAL_TYPE`
+> (SUMITOMO GR100 등)·`MULTIPL` 필드가 있는 것으로 적어놓았으나, 이는 **17번 절 SDVE(점탄성
+> 댐퍼) 페이지 내용이 잘못 섞여 들어간 것**으로 판단된다 — JSON Schema와 실제 Request
+> Example 어디에도 `MATERIAL_TYPE`은 없다. 대신 실제로는 `K0`/`P1`/`ALPHA1`/`KB`와 이력모델별
+> 하위 객체(`BL2`/`LY2`/`LY3`/`IK2`)가 쓰인다(아티클 id `35948150053529`, 오류제보 대상).
+
 | No. | 설명 | 키 | 타입 | 필수 |
 |-----|------|----|------|------|
 | 1 | Common Data | `"COMMON"` | Object | Required |
 | 2 | Direction | `"DIR"` | String | Required |
-| 3 | Hysteresis Model · `"BL2"` 등 | `"SDST_HYS_MODEL"` | String | Required |
+| 3 | Hysteresis Model · Degrading Bilinear: `"BL2"` / Low Yielding Steel(LY2): `"LY2"` / Low Yielding Steel(LY3): `"LY3"` / Isotropic-Kinematic(IK2): `"IK2"` | `"SDST_HYS_MODEL"` | String | Required |
+| 4 | Initial Stiffness (K0) | `"K0"` | Number | Required |
+| 5 | Yield Strength (P1) | `"P1"` | Number | Required |
+| 6 | Stiffness Factor (α1) | `"ALPHA1"` | Number | Required |
+| 7 | Mounting Parts Stiffness (Kb) | `"KB"` | Number | Required |
+
+#### `SDST_HYS_MODEL` 별 하위 객체
+
+| Model | Key | 하위 필드 |
+| --- | --- | --- |
+| `"BL2"` | `"BL2"` | `BETA`(Exponent in Unloading Stiffness Calculation) |
+| `"LY2"` | `"LY2"` | `ALPHA2`(Stiffness Factor), `THETA`(Strength Factor) |
+| `"LY3"` | `"LY3"` | `ALPHA2`, `THETA`, `GAMMA`(Stiffness Ratio) |
+| `"IK2"` | `"IK2"` | `GAMMA`(Isotropic Factor) |
 
 ### 요청 바디 예시
 
@@ -1336,10 +1546,15 @@ NLLP의 `APPLICATION_TYPE_D="ST"`에서 참조됩니다.
     "1": {
       "COMMON": {
         "NAME": "SteelDamper01", "DESC": "", "INPUT_METHOD": 0,
-        "PRODUCT_NAME": "SD-300", "TYPE_NUMBER": "SD300-A"
+        "PRODUCT_NAME": "", "TYPE_NUMBER": ""
       },
       "DIR": "Dx",
-      "SDST_HYS_MODEL": "BL2"
+      "SDST_HYS_MODEL": "BL2",
+      "K0": 1000,
+      "P1": 100,
+      "ALPHA1": 0.2,
+      "KB": 2000,
+      "BL2": { "BETA": 0 }
     }
   }
 }
@@ -1361,7 +1576,12 @@ sdst_data = {
                 "TYPE_NUMBER": "SD300-B"
             },
             "DIR": "Dx",
-            "SDST_HYS_MODEL": "BL2"     # Bilinear 이력 모델
+            "SDST_HYS_MODEL": "BL2",     # Degrading Bilinear 이력 모델
+            "K0": 1000,                  # 초기 강성
+            "P1": 100,                   # 항복강도
+            "ALPHA1": 0.2,               # 강성 계수
+            "KB": 2000,                  # 부착부 강성
+            "BL2": {"BETA": 0}           # BL2 모델 전용 파라미터
         }
     }
 }
@@ -1381,12 +1601,24 @@ NLLP의 `APPLICATION_TYPE_D="HY"`에서 참조됩니다.
 
 ### 요청 파라미터
 
+> ⚠️ **2026-08-25 재확인 보강.** `P1`/`P2`/`ALPHA1`/`ALPHA2`/`BETA`/`Phi`/`LAMBDA` 7개
+> 필드가 누락돼 있었다(아티클 id `35948292269977`). 원문 표에는 `MULTIPL`(Multiplier)도
+> 있으나 JSON Schema·Request Example 어디에도 나타나지 않아(SDST/SDVE 표에서 반복적으로
+> 발견된 것과 같은 원문 오류로 판단) 표에 넣지 않았다.
+
 | No. | 설명 | 키 | 타입 | 필수 |
 |-----|------|----|------|------|
 | 1 | Common Data | `"COMMON"` | Object | Required |
 | 2 | Hysteresis Model · `"DegradingBiLinear"` 등 | `"SDHY_HYS_MODEL"` | String | Required |
 | 3 | Number of Shear Springs (MSS 전단 스프링 수) | `"MSS"` | Integer | Required |
-| 4 | Initial Stiffness K₀ | `"K0"` | Number | Required |
+| 4 | K0 Initial Stiffness | `"K0"` | Number | Required |
+| 5 | P1 Yield Strength | `"P1"` | Number | Required |
+| 6 | P2 Yield Strength | `"P2"` | Number | Required |
+| 7 | Alpha1 Stiffness Factor | `"ALPHA1"` | Number | Required |
+| 8 | Alpha2 Stiffness Factor | `"ALPHA2"` | Number | Required |
+| 9 | Beta(Exponent in Unloading Stiffness Calculation) | `"BETA"` | Number | Required |
+| 10 | Phi | `"Phi"` | Number | Required |
+| 11 | Lambda | `"LAMBDA"` | Number | Required |
 
 ### 요청 바디 예시
 
@@ -1396,11 +1628,18 @@ NLLP의 `APPLICATION_TYPE_D="HY"`에서 참조됩니다.
     "1": {
       "COMMON": {
         "NAME": "HystereticIsolator01", "DESC": "", "INPUT_METHOD": 0,
-        "PRODUCT_NAME": "HI-500", "TYPE_NUMBER": "HI500-A"
+        "PRODUCT_NAME": "", "TYPE_NUMBER": ""
       },
       "SDHY_HYS_MODEL": "DegradingBiLinear",
       "MSS": 8,
-      "K0": 5000
+      "K0": 1000,
+      "P1": 100,
+      "P2": 0,
+      "ALPHA1": 1,
+      "ALPHA2": 0,
+      "BETA": 0.5,
+      "Phi": 0,
+      "LAMBDA": 8
     }
   }
 }
@@ -1423,7 +1662,14 @@ sdhy_data = {
             },
             "SDHY_HYS_MODEL": "DegradingBiLinear",
             "MSS": 8,           # 전단 스프링 분할 수
-            "K0": 5000.0        # 초기 강성 (kN/m)
+            "K0": 5000.0,       # 초기 강성 (kN/m)
+            "P1": 100.0,        # 1차 항복강도
+            "P2": 0.0,          # 2차 항복강도
+            "ALPHA1": 1.0,
+            "ALPHA2": 0.0,
+            "BETA": 0.5,
+            "Phi": 0.0,
+            "LAMBDA": 8.0
         }
     }
 }
@@ -1443,29 +1689,64 @@ NLLP의 `APPLICATION_TYPE_D="IS"`에서 참조됩니다.
 
 ### 요청 파라미터
 
+> ⚠️ **2026-08-25 재확인 전면 정정.** 이전 버전은 (1) `SDIS_DEV_TYPE` 세 번째 값을 `"SB"`로
+> 잘못 기재(실제로는 **`"SLD"`**, 데이터 객체 키만 `"SB"`), (2) LRB의 `DX`/`OPT_CONS_NONL`/
+> `BETA`/`ALPHA`/`SIGMA_V`를 서로 같은 레벨의 형제 필드로 잘못 기재(실제로는 **`DX`가
+> `{OPT_CONS_NONL, BETA, ALPHA, SIGMA_V}`를 담는 하위 객체**), (3) LRB의 `KE`·`K0`(이름이
+> 비슷하지만 별개인 두 초기강성 필드) 중 `K0`을 누락, (4) NRB Data가 `KH` 하나뿐인 것으로
+> 잘못 기재(실제로는 `AR`/`TR`/`KH`/`DX{...}` 4+4개), (5) SB Data의 `QD`(Index)·`Pi_VALUE`를
+> 누락한 채 작성돼 있었다. 원문 JSON Schema + Request Example 대조로 전면 재작성했다
+> (아티클 id `35948330042649`, 오류제보 대상).
+
 | No. | 설명 | 키 | 타입 | 필수 |
 |-----|------|----|------|------|
 | 1 | Common Data | `"COMMON"` | Object | Required |
-| 2 | Device Type · `"LRB"` / `"NRB"` / `"SB"` | `"SDIS_DEV_TYPE"` | String | Required |
+| 2 | Device Type · `"LRB"` / `"NRB"` / `"SLD"`(데이터는 `"SB"` 객체에 담김) | `"SDIS_DEV_TYPE"` | String | Required |
 | 3 | Number of Shear Springs | `"MSS"` | Integer | Required |
 | 4 | Adjustment Parameter τk | `"TAU_K"` | Number | Required |
 | 5 | Adjustment Parameter τq | `"TAU_Q"` | Number | Required |
 | 6 | Vertical Stiffness Kv | `"KV"` | Number | Required |
 | 7 | LRB Data (SDIS_DEV_TYPE="LRB"일 때) | `"LRB"` | Object | Required |
-| — | Hysteresis Model | `"SDIS_HYS_MODEL"` | String | Required |
-| — | Rubber Cross Section Area AR | `"AR"` | Number | Required |
-| — | Total Thickness of Rubber TR | `"TR"` | Number | Required |
-| — | Initial Stiffness KE | `"KE"` | Number | Required |
-| — | 2nd Stiffness K2 | `"K2"` | Number | Required |
-| — | Characteristic Strength QD | `"QD"` | Number | Required |
 | 8 | NRB Data (SDIS_DEV_TYPE="NRB"일 때) | `"NRB"` | Object | Required |
-| — | Horizontal Stiffness KH | `"KH"` | Number | Required |
-| 9 | SB Data (SDIS_DEV_TYPE="SB"일 때) | `"SB"` | Object | Required |
-| — | Area of Sliding Head AS | `"AS"` | Number | Required |
-| — | Initial Stiffness K₀ | `"K0"` | Number | Required |
-| — | Frictional Factor μ₀ | `"MU0"` | Number | Required |
+| 9 | SB Data (SDIS_DEV_TYPE="SLD"일 때) | `"SB"` | Object | Required |
 
-### 요청 바디 예시 (LRB)
+**`LRB` 객체**
+
+| No. | 설명 | 키 | 타입 | 필수 |
+| --- | --- | --- | --- | --- |
+| (1) | Hysteresis Model | `"SDIS_HYS_MODEL"` | String | Required |
+| (2) | Initial Stiffness Ke | `"KE"` | Number | Required |
+| (3) | Rubber Cross Section Area AR | `"AR"` | Number | Required |
+| (4) | Total Thickness of Rubber TR | `"TR"` | Number | Required |
+| (5) | Initial Stiffness K0(KE와 별개 필드) | `"K0"` | Number | Required |
+| (6) | 2nd Stiffness K2 | `"K2"` | Number | Required |
+| (7) | Characteristic Strength QD | `"QD"` | Number | Required |
+| (8) | Vertical Direction Properties | `"DX"` | Object | Optional |
+| (8)-i | Use Consider Vertical Direction Nonlinearity(`DX` 하위) | `"OPT_CONS_NONL"` | Boolean | Optional |
+| (8)-ii | Tensile Stiffness Reduction Factor β(`DX` 하위) | `"BETA"` | Number | Optional |
+| (8)-iii | Tensile Stiffness Reduction Ratio α(`DX` 하위) | `"ALPHA"` | Number | Optional |
+| (8)-iv | Tensile Limit Strength(`DX` 하위) | `"SIGMA_V"` | Number | Optional |
+
+**`NRB` 객체**
+
+| No. | 설명 | 키 | 타입 | 필수 |
+| --- | --- | --- | --- | --- |
+| (1) | Rubber Cross Section Area AR | `"AR"` | Number | Required |
+| (2) | Total Thickness of Rubber TR | `"TR"` | Number | Required |
+| (3) | Horizontal Stiffness KH | `"KH"` | Number | Required |
+| (4) | Vertical Direction Properties(`DX`, LRB와 동일 구조) | `"DX"` | Object | Optional |
+
+**`SB` 객체**(SDIS_DEV_TYPE=`"SLD"`)
+
+| No. | 설명 | 키 | 타입 | 필수 |
+| --- | --- | --- | --- | --- |
+| (1) | Area of Sliding Head AS | `"AS"` | Number | Required |
+| (2) | Initial Stiffness K0 | `"K0"` | Number | Required |
+| (3) | Index Qd | `"QD"` | Integer | Required |
+| (4) | Pi | `"Pi_VALUE"` | Number | Required |
+| (5) | Frictional Factor μ0 | `"MU0"` | Number | Required |
+
+### 요청 바디 예시 (LRB / NRB / SLD)
 
 ```json
 {
@@ -1479,10 +1760,27 @@ NLLP의 `APPLICATION_TYPE_D="IS"`에서 참조됩니다.
       "TAU_K": 1.0, "TAU_Q": 1.0, "KV": 150000,
       "LRB": {
         "SDIS_HYS_MODEL": "BiLinear",
-        "AR": 0.196, "TR": 0.15, "KE": 20000, "K2": 2000,
-        "QD": 80, "DX": 0, "OPT_CONS_NONL": false,
-        "BETA": 0.1, "ALPHA": 0.5, "SIGMA_V": 3000
+        "KE": 20000, "AR": 0.196, "TR": 0.15, "K0": 20000, "K2": 2000, "QD": 80,
+        "DX": { "OPT_CONS_NONL": false, "BETA": 0.1, "ALPHA": 0.5, "SIGMA_V": 3000 }
       }
+    },
+    "3": {
+      "COMMON": {
+        "NAME": "NRB_Isolator_01", "DESC": "", "INPUT_METHOD": 0,
+        "PRODUCT_NAME": "", "TYPE_NUMBER": ""
+      },
+      "SDIS_DEV_TYPE": "NRB", "MSS": 8,
+      "TAU_K": 1.0, "KV": 150000,
+      "NRB": { "AR": 0.196, "TR": 0.15, "KH": 1200 }
+    },
+    "4": {
+      "COMMON": {
+        "NAME": "SlidingBearing_01", "DESC": "", "INPUT_METHOD": 0,
+        "PRODUCT_NAME": "", "TYPE_NUMBER": ""
+      },
+      "SDIS_DEV_TYPE": "SLD", "MSS": 8,
+      "TAU_K": 1.0, "TAU_Q": 1.0, "KV": 150000,
+      "SB": { "AS": 0.05, "K0": 100000, "QD": 2, "Pi_VALUE": 0, "MU0": 0.05 }
     }
   }
 }
@@ -1512,16 +1810,18 @@ sdis_lrb_data = {
             "KV": 150000.0,         # 수직 강성 (kN/m)
             "LRB": {
                 "SDIS_HYS_MODEL": "BiLinear",   # 이력 모델
+                "KE": 20000.0,  # 초기 강성 Ke (kN/m)
                 "AR": 0.196,    # 고무 단면적 (m²)
                 "TR": 0.150,    # 고무 총 두께 (m)
-                "KE": 20000.0,  # 초기 강성 (kN/m)
+                "K0": 20000.0,  # 초기 강성 K0 (KE와 별개 필드, kN/m)
                 "K2": 2000.0,   # 이차 강성 (kN/m)
                 "QD": 80.0,     # 특성강도 (kN)
-                "DX": 0,        # 수직 방향 설정
-                "OPT_CONS_NONL": False,
-                "BETA": 0.1,
-                "ALPHA": 0.5,
-                "SIGMA_V": 3000.0   # 인장 강도 한계 (kN/m²)
+                "DX": {                  # 수직 방향 특성(선택)
+                    "OPT_CONS_NONL": False,
+                    "BETA": 0.1,
+                    "ALPHA": 0.5,
+                    "SIGMA_V": 3000.0    # 인장 강도 한계 (kN/m²)
+                }
             }
         }
     }
@@ -1542,6 +1842,11 @@ midas_api("POST", "/db/SDIS", sdis_lrb_data)
 
 ### 요청 파라미터
 
+> ⚠️ **2026-08-25 재확인 정정.** `SLAVES[]`의 필드가 `TYPE`에 따라 다르다 — 이전 버전은 두
+> 타입 모두 `COEFF`를 쓰는 것으로 잘못 기재했으나, 실제로는 **`"EX"`만 `COEFF`+`DOF`
+> 조합**을 쓰고(원소마다 개별 DOF 지정), **`"WD"`는 `WEIGHT"` 하나만** 쓴다(아티클 id
+> `35948507217689`).
+
 | No. | 설명 | 키 | 타입 | 기본값 | 필수 |
 |-----|------|----|------|--------|------|
 | 1 | Linear Constraints (배열로 삽입) | `"ITEMS"` | Array[Object] | — | Required |
@@ -1549,9 +1854,22 @@ midas_api("POST", "/db/SDIS", sdis_lrb_data)
 | (2) | Load Group Name | `"GROUP_NAME"` | String | Blank | Optional |
 | (3) | DOF of Constraint Node (6자리: DX∼RZ) | `"SLAVE_TYPE"` | String(6) | — | Required |
 | (4) | Constraint Type · `"EX"`=Explicit, `"WD"`=Weighted Displacement | `"TYPE"` | String | — | Required |
-| (5) | Independent Nodes (Explicit: 등변위 / WD: 계수 곱) | `"SLAVES"` | Array[Object] | — | Required |
-| i | Node ID | `"NODE_KEY"` | Integer | — | Required |
-| ii | Coefficient | `"COEFF"` | Number | — | Required |
+| (5) | Independent Nodes | `"SLAVES"` | Array[Object] | — | Required |
+
+**`TYPE="EX"`(Explicit)일 때 `SLAVES[]`**
+
+| No. | 설명 | 키 | 타입 | 필수 |
+| --- | --- | --- | --- | --- |
+| i | Node ID | `"NODE_KEY"` | Integer | Required |
+| ii | Coefficient | `"COEFF"` | Number | Required |
+| iii | Degree of Freedom · DX:0/DY:1/DZ:2/RX:3/RY:4/RZ:5 | `"DOF"` | Integer | Required |
+
+**`TYPE="WD"`(Weighted Displacement)일 때 `SLAVES[]`**
+
+| No. | 설명 | 키 | 타입 | 필수 |
+| --- | --- | --- | --- | --- |
+| i | Node ID | `"NODE_KEY"` | Integer | Required |
+| ii | Weight | `"WEIGHT"` | Number | Required |
 
 ### 요청 바디 예시
 
@@ -1563,8 +1881,8 @@ midas_api("POST", "/db/SDIS", sdis_lrb_data)
         "ID": 1, "GROUP_NAME": "Service", "SLAVE_TYPE": "100000",
         "TYPE": "EX",
         "SLAVES": [
-          { "NODE_KEY": 10, "COEFF": 1.0 },
-          { "NODE_KEY": 11, "COEFF": -1.0 }
+          { "NODE_KEY": 22, "COEFF": 0.5, "DOF": 0 },
+          { "NODE_KEY": 23, "COEFF": 0.5, "DOF": 1 }
         ]
       }]
     }
@@ -1576,8 +1894,8 @@ midas_api("POST", "/db/SDIS", sdis_lrb_data)
 
 ```python
 # --- MCON: 선형 구속조건 (층 다이어프램 구속 대안) ---
-# EX 타입: 두 절점의 특정 DOF를 등변위 구속
-# WD 타입: 가중치 곱 변위 구속 (경사 지붕, 비정형 구조 등)
+# EX 타입: NODE_KEY+COEFF+DOF 조합으로 등변위/가중 구속 (DOF는 원소별 개별 지정)
+# WD 타입: NODE_KEY+WEIGHT만 사용 (경사 지붕, 비정형 구조 등)
 
 mcon_data = {
     "Assign": {
@@ -1589,8 +1907,8 @@ mcon_data = {
                 "SLAVE_TYPE": "100000",   # DX만 활성
                 "TYPE": "EX",
                 "SLAVES": [
-                    {"NODE_KEY": 5,  "COEFF":  1.0},
-                    {"NODE_KEY": 10, "COEFF": -1.0}
+                    {"NODE_KEY": 5,  "COEFF":  1.0, "DOF": 0},
+                    {"NODE_KEY": 10, "COEFF": -1.0, "DOF": 0}
                 ]
             }]
         },
@@ -1602,8 +1920,8 @@ mcon_data = {
                 "SLAVE_TYPE": "110001",   # DX, DY, RZ
                 "TYPE": "WD",
                 "SLAVES": [
-                    {"NODE_KEY": 10, "COEFF": 0.5},
-                    {"NODE_KEY": 15, "COEFF": 0.5}
+                    {"NODE_KEY": 10, "WEIGHT": 0.5},
+                    {"NODE_KEY": 15, "WEIGHT": 0.5}
                 ]
             }]
         }

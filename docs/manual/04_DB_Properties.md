@@ -484,24 +484,33 @@ midas_api("POST", "/db/TDMF", tdmf_data)
 | JAPAN (JSCE2007) | `"JSCE_07"` |
 | Japanese Standard | `"JAPAN"` |
 | JAPAN (JSCE) | `"JSCE"` |
+| INDIA (IRC:112-2020) | `"INDIA_IRC_112_2020"` |
 | INDIA (IRC:18-2000) | `"INDIA_IRC_18_2000"` |
 | INDIA (IRC:112-2011) | `"INDIA_IRC_112_2011"` |
 | European | `"EUROPEAN"` |
+| AS 5100.5-2017 Amd 2:2024 | `"AS_2017_AMD_2024"` |
 | AS 5100.5-2017 | `"AS_5100_5_2017"` |
 | AS 5100.5-2016 | `"AS_5100_5_2016"` |
 | AS/RTA 5100.5-2011 | `"AS_RTA_5100_5_2011"` |
+| AS 3600-2018 Amd 2:2021 | `"AS_2018_AMD_2021"` |
 | AS 3600-2009 | `"AS_3600_2009"` |
+| NZ Bridge (SP/M/022 Amd 4:2022) | `"NEWZEALAND_2022"` |
 | NZ Bridge (SP/M/022) | `"NEWZEALAND"` |
 | Russian | `"RUSSIAN"` |
 | Chinese Standard | `"CHINESE"` |
 | China (JTG D62-2004) | `"JTG"` |
 | China (JTG3362-2018) | `"CHINA_JTG3362_2018"` |
+| China (JTG/T D65-06-2015) | `"CHJTG_T_D65_2015"` |
 | **KDS-2016** | **`"KDS_2016"`** |
 | KCI-USD12 | `"KSI_USD12"` |
 | KSCE 2010 | `"KSCE_2010"` |
 | Korea Standard | `"KS"` |
 | User Defined | `"USER_DEFINED"` |
 
+> ⚠️ **2026-08-25 재확인 보강:** 코드표에 누락돼 있던 5개 항목(`INDIA_IRC_112_2020`,
+> `AS_2017_AMD_2024`, `AS_2018_AMD_2021`, `NEWZEALAND_2022`, `CHJTG_T_D65_2015`)을
+> 원문(아티클 id `35808006330009`) 대조로 추가했다.
+>
 > ⚠️ **2026-07-25 정정:** `CODE` 값은 `"KDS2016"`(구분자 없음)이 아니라 **`"KDS_2016"`**(언더스코어)입니다.
 > 이전 버전 문서와 아래 예제가 잘못 표기되어 있었습니다. 공식 아티클의 Request Examples
 > (`"KDS-2016, KCI-USD12, KSCE 2010, Korea Standard"` 예제)에서 실제 페이로드로 확인했습니다.
@@ -577,17 +586,97 @@ midas_api("POST", "/db/TDMT", tdmt_data)
 }
 ```
 
-### Specifications (공통 + ACI/KDS)
+### Specifications
+
+> ⚠️ **2026-08-25 재확인 전면 정정.** 이전 버전은 `A`/`B`(Factor a, b) 그룹을 "ACI/KDS"로
+> 묶어 **`KDS-2016`도 A/B 계수를 쓰는 것처럼 잘못 기재**하고 있었다. 원문(아티클 id
+> `35808102389401`) 대조 결과 A/B 계수 그룹은 **`ACI`·`Korean Standard`**(CODENAME
+> `"Korean Standard"`, 20번 — `KDS-2016`과는 다른 별개 코드)이며, **`KDS-2016`은 실제로는
+> `iCTYPE`(Cement Type) + `DENSITY`(Weight Density) 그룹**(`GILBERT AND RANZI`와 동일 구조)에
+> 속한다. 한국 사용자가 가장 많이 쓸 코드에서 필수 필드가 틀려 있던 것이라 전체 표를
+> 코드 그룹별로 다시 작성했다.
 
 | No. | Description | Key | Value Type | Default | Required |
-|-----|-------------|-----|------------|---------|----------|
+| --- | --- | --- | --- | --- | --- |
 | 1 | Material Name | `"NAME"` | String | - | **Required** |
-| 2 | Material Type • Code: `"CODE"` • User: `"USER"` | `"TYPE"` | String | - | **Required** |
-| 3 (CODE) | Code Name ¹⁾ | `"CODENAME"` | String | - | **Required** |
-| 4 (CODE) | Compression Strength | `"STRENGTH"` | Number | - | **Required** |
-| 5 (ACI/KDS) | Factor, a | `"A"` | Number | - | **Required** |
-| 6 (ACI/KDS) | Factor, b | `"B"` | Number | - | **Required** |
-| 5 (CEB-FIP 1990/Ohzagi) | Cement Type ²⁾ | `"iCTYPE"` | Integer | - | **Required** |
+| 2 | Material Type · Code: `"CODE"` / User: `"USER"` | `"TYPE"` | String | - | **Required** |
+| 3 (TYPE=CODE) | Code Name ¹⁾ | `"CODENAME"` | String | - | **Required** |
+| 4 (TYPE=CODE) | Compression Strength | `"STRENGTH"` | Number | - | **Required** |
+
+공통 4개 필드만으로 끝나는 코드: `INDIA(IRC:18-2000)` · `CEB-FIP(1978)` · `AS 5100.5-2017` ·
+`AS 5100.5-2016` · `AS/RTA 5100.5-2011` · `AS 3600-2009`.
+
+#### `ACI`, `Korean Standard` 전용 추가 필드
+
+| No. | Description | Key | Value Type | Default | Required |
+| --- | --- | --- | --- | --- | --- |
+| 5 | Factor, a | `"A"` | Number | - | **Required** |
+| 6 | Factor, b | `"B"` | Number | - | **Required** |
+
+#### `CEB-FIP(1990)` · `Ohzagi` · `European` · `INDIA(IRC:112-2011)` · `KCI-USD12` 전용 추가 필드
+
+| No. | Description | Key | Value Type | Default | Required |
+| --- | --- | --- | --- | --- | --- |
+| 5 | Cement Type ²⁾ | `"iCTYPE"` | Integer | - | **Required** |
+
+#### `CEB-FIP(2010)` · `INDIA(IRC:112-2020)` 전용 추가 필드
+
+| No. | Description | Key | Value Type | Default | Required |
+| --- | --- | --- | --- | --- | --- |
+| 5 | Cement Type ²⁾ | `"iCTYPE"` | Integer | - | **Required** |
+| 6 | Aggregate Type · Basalt/dense limestone: `0` / Quartzite: `1` / Limestone: `2` / Sandstone: `3` | `"nAGGRE"` | Integer | - | **Required** |
+
+#### `Russian` 전용 추가 필드
+
+| No. | Description | Key | Value Type | Default | Required |
+| --- | --- | --- | --- | --- | --- |
+| 5 | Cement Type ²⁾ | `"iCTYPE"` | Integer | - | **Required** |
+| 6 | Curing Method · Natural Cure: `0` / Steam Cure: `1` | `"CMETH"` | Integer | - | **Required** |
+| 7 | Concrete Type · Heavy Concrete: `0` / Fine-Grained Concrete: `1` | `"CTYPE"` | Integer | - | **Required** |
+| 8 | Maximum Aggregate Size | `"MAXS"` | Number | - | **Required** |
+| 9 | Specific Content of the Cement Paste | `"PZ"` | Number | - | **Required** |
+
+> ⚠️ 이 그룹의 `"CTYPE"`(Concrete Type, Integer)는 최상위 `"TYPE"`(Code/User 구분, String)과
+> 이름이 겹치지만 다른 필드다. 원문 그대로 옮겼다.
+
+#### `GILBERT AND RANZI`, **`KDS-2016`** 전용 추가 필드
+
+| No. | Description | Key | Value Type | Default | Required |
+| --- | --- | --- | --- | --- | --- |
+| 5 | Cement Type ²⁾ | `"iCTYPE"` | Integer | - | **Required** |
+| 6 | Weight Density | `"DENSITY"` | Number | - | **Required** |
+
+#### `Japan (Hydration)` 전용 추가 필드
+
+| No. | Description | Key | Value Type | Default | Required |
+| --- | --- | --- | --- | --- | --- |
+| 5 | Tensile Strength Factor | `"TENS_STRN_FACTOR"` | Number | - | **Required** |
+| 6 | Use Concrete Data Option | `"bUSE"` | Boolean | `false` | Optional |
+| 7 (bUSE=false) | Factor, a | `"A"` | Number | - | **Required** |
+| 8 (bUSE=false) | Factor, b | `"B"` | Number | - | **Required** |
+| 9 (bUSE=false) | Factor, d | `"D"` | Number | - | **Required** |
+| 7 (bUSE=true) | Cement Type ²⁾ | `"iCTYPE"` | Integer | - | **Required** |
+
+#### `Japan (Elastic)` 전용 추가 필드
+
+| No. | Description | Key | Value Type | Default | Required |
+| --- | --- | --- | --- | --- | --- |
+| 5 | Elastic Cement Type · Normal Type: `0` / Rapid Type: `1` | `"iECTYPE"` | Integer | - | **Required** |
+
+#### `TYPE = "USER"` (User Defined) 전용 필드
+
+| No. | Description | Key | Value Type | Default | Required |
+| --- | --- | --- | --- | --- | --- |
+| 5 | Scale Factor | `"SCALE"` | Number | - | **Required** |
+| 6 | Function Data (Array of `{TIME, COMP, TENS, ELAST}`) | `"SCALE"` | Array [Object] | - | **Required** |
+| (1) | Time (day) | `"TIME"` | Number | - | **Required** |
+| (2) | Compression Strength | `"COMP"` | Number | - | **Required** |
+| (3) | Tensile Strength | `"TENS"` | Number | - | **Required** |
+| (4) | Elastic Modulus | `"ELAST"` | Number | - | **Required** |
+
+> ⚠️ 원문 Specifications 표가 "Scale Factor"(Number)와 "Function Data"(Array[Object]) 두
+> 필드 모두에 Key `"SCALE"`을 중복 표기하고 있다. 오타로 보이나 실제 키 이름이 무엇인지
+> 확인할 예제가 없어 원문 그대로 옮기고 이 주석으로 남긴다(오류제보 대상).
 
 #### ¹⁾ Code Name 코드표 (`TDME.CODENAME`)
 
@@ -628,11 +717,17 @@ midas_api("POST", "/db/TDMT", tdmt_data)
       "NAME": "TDME_KDS2016",
       "TYPE": "CODE",
       "CODENAME": "KDS-2016",
-      "STRENGTH": 24000
+      "STRENGTH": 30000,
+      "iCTYPE": 1,
+      "DENSITY": 230
     }
   }
 }
 ```
+
+> ⚠️ `KDS-2016`은 `STRENGTH`만으로는 완성되지 않는다 — `iCTYPE`(Cement Type)과
+> `DENSITY`(Weight Density)가 함께 **Required**다. 위 예제는 원문 Request Example
+> (아티클 id `35808102389401`)의 실제 페이로드를 그대로 옮긴 것이다.
 
 ### Python 예제
 
@@ -643,6 +738,8 @@ tdme_data = {
             "NAME": "CompStr_C24_KDS",
             "TYPE": "CODE",
             "CODENAME": "KDS-2016",  # 주의: 하이픈 표기 (TDMT의 CODE는 언더스코어 "KDS_2016")
+            "iCTYPE": 1,   # Cement Type (KDS-2016은 STRENGTH만으로 부족 — iCTYPE/DENSITY 필수)
+            "DENSITY": 230,  # Weight Density
             "STRENGTH": 24000
         }
     }
@@ -789,36 +886,83 @@ midas_api("POST", "/db/TMAT", tmat_data)
       "MODEL_TYPE": { "description": "Model Type", "type": "string" },
       "TRESCA":     { "description": "Tresca",     "type": "object" },
       "VMISES":     { "description": "Von Mises",  "type": "object" },
-      "MOHRCL":     { "description": "Mohr-Coulomb","type": "object" }
+      "MOHRCL":     { "description": "Mohr-Coulomb","type": "object" },
+      "DRUCKER":    { "description": "Drucker-Prager","type": "object" },
+      "MASONRY":    { "description": "Masonry",    "type": "object" },
+      "CONCDMG":    { "description": "Concrete Damage","type": "object" }
     }
   }
 }
 ```
 
+> ⚠️ **2026-08-25 재확인 보강.** 이전 버전은 `MODEL_TYPE`이 `"DP"`(Drucker-Prager)·`"MA"`
+> (Masonry)·`"DM"`(Concrete Damage)일 때 필요한 `DRUCKER`/`MASONRY`/`CONCDMG` 객체 구조가
+> 통째로 빠져 있었다. 또 Tresca/Von-Mises/Mohr-Coulomb 공통 파라미터 중 `HARDENING_COEF`가
+> 실제로는 **Required**(원문 기준, `OPT_HARDENING`이 기본값 `0`=Activated일 때)인데 이전
+> 버전은 Optional로 잘못 기재했었다. 원문(아티클 id `35808376517913`) 재대조로 전면 보강.
+
 ### Specifications
 
 | No. | Description | Key | Value Type | Default | Required |
-|-----|-------------|-----|------------|---------|----------|
+| --- | --- | --- | --- | --- | --- |
 | 1 | Plastic Material Name | `"NAME"` | String | - | **Required** |
-| 2 | Model Type • `"TR"` (Tresca) • `"VM"` (Von-Mises) • `"MC"` (Mohr-Coulomb) • `"DP"` (Drucker-Prager) • `"MA"` (Masonry) • `"DM"` (Concrete Damage) | `"MODEL_TYPE"` | String | - | **Required** |
+| 2 | Model Type · `"TR"`(Tresca) / `"VM"`(Von-Mises) / `"MC"`(Mohr-Coulomb) / `"DP"`(Drucker-Prager) / `"MA"`(Masonry) / `"DM"`(Concrete Damage) | `"MODEL_TYPE"` | String | - | **Required** |
 
 #### Tresca / Von-Mises 공통 파라미터 (`"TRESCA"` or `"VMISES"` object)
 
-| Key | Description | Required |
-|-----|-------------|----------|
-| `"INIT_YIELD_STRESS"` | Initial Uniaxial Yield Stress | **Required** |
-| `"OPT_HARDENING"` | Hardening Option (0: Active, 1: Inactive) | Optional |
-| `"HARDENING_TYPE"` | `"ISO"` / `"KIN"` / `"MIX"` | Optional |
-| `"HARDENING_COEF"` | Hardening Coefficient | Optional |
-| `"BACK_STRESS_COEF"` | Back Stress Coefficient (MIX only) | Optional |
+| Key | Description | Default | Required |
+| --- | --- | --- | --- |
+| `"INIT_YIELD_STRESS"` | Initial Uniaxial Yield Stress | - | **Required** |
+| `"OPT_HARDENING"` | Hardening Option · Activated: `0` / Inactivated: `1` | `0` | Optional |
+| `"HARDENING_TYPE"` | (`OPT_HARDENING`=0일 때만) `"ISO"` / `"KIN"` / `"MIX"` | `"ISO"` | Optional |
+| `"HARDENING_COEF"` | (`OPT_HARDENING`=0일 때) Hardening Coefficient | - | **Required** |
+| `"BACK_STRESS_COEF"` | (`HARDENING_TYPE`=`"MIX"`일 때) Back Stress Coefficient | - | **Required** |
 
-#### Mohr-Coulomb 파라미터 (`"MOHRCL"` object)
+#### Mohr-Coulomb / Drucker-Prager 공통 파라미터 (`"MOHRCL"` or `"DRUCKER"` object)
+
+| Key | Description | Default | Required |
+| --- | --- | --- | --- |
+| `"INIT_COHESION"` | Initial Cohesion | - | **Required** |
+| `"INIT_FRIC_ANGLE"` | Initial Friction Angle (deg) | - | **Required** |
+| `"OPT_HARDENING"` | Hardening Option · Activated: `0` / Inactivated: `1` | `0` | Optional |
+| `"HARDENING_TYPE"` | (`OPT_HARDENING`=0일 때만) `"ISO"` / `"KIN"` / `"MIX"` | `"ISO"` | Optional |
+| `"HARDENING_COEF"` | (`OPT_HARDENING`=0일 때) Hardening Coefficient | - | **Required** |
+| `"BACK_STRESS_COEF"` | (`HARDENING_TYPE`=`"MIX"`일 때) Back Stress Coefficient | - | **Required** |
+
+#### Masonry 파라미터 (`"MASONRY"` object)
+
+Brick(`"BM"`)·Bed Joint(`"BED_JOINT"`)·Head Joint(`"HEAD_JOINT"`) 3개 재료 object가 각각
+아래와 동일한 하위 구조를 가짐(모두 **Required**):
+
+| Key | Description |
+| --- | --- |
+| `"YOUNG_S_MODULUS"` | Young's Modulus |
+| `"POSSIONS_S_RATIO"` | Poisson's Ratio |
+| `"TENSION_STRENGTH"` | Tensile Strength |
+| `"SOFTENING_PARAMETER"`(BM) / `"HARDENING_PARAM"`(BED_JOINT·HEAD_JOINT) | Stiffness Reduction Factor |
+
+여기에 형상 정보 object `"GEOM"`이 추가로 필요(**Required**):
 
 | Key | Description | Required |
-|-----|-------------|----------|
-| `"INIT_COHESION"` | Initial Cohesion | **Required** |
-| `"INIT_FRIC_ANGLE"` | Initial Friction Angle (deg) | **Required** |
-| `"OPT_HARDENING"` | Hardening Option | Optional |
+| --- | --- | --- |
+| `"BRICK_LENGTH"` | Brick Length | **Required** |
+| `"BRICK_HEIGHT"` | Brick Height | **Required** |
+| `"THICKNESS_BED"` | Thickness of Bed | **Required** |
+| `"THICKNESS_HEAD"` | Thickness of Head | **Required** |
+| `"COORD_TYPE"` | Material Coordinate System(수직/수평) · Global-Y/Global-X: `0` / Local-y/Local-z: `-1` / Global-Z/Angle: `-4` | **Required** |
+| `"COORD_ANGLE"` | (`COORD_TYPE`=`-4`일 때) Global X축 기준 각도 | **Required** |
+
+#### Concrete Damage 파라미터 (`"CONCDMG"` object)
+
+| Key | Description | Required |
+| --- | --- | --- |
+| `"DILIATION_ANGLE"` | Dilation Angle | **Required** |
+| `"ECCEN"` | Eccentricity | **Required** |
+| `"FBO_FCO"` | fbo/fco | **Required** |
+| `"K"` | K | **Required** |
+| `"VISCOSITY_PARAM"` | Viscosity Parameter | **Required** |
+| `"COMP_ITEMS"` | Compressive Behavior — Array of `{INELASTIC_STRAIN, YIELD_STRESS, DAMAGE}` | **Required** |
+| `"TENSILE_ITEMS"` | Tensile Behavior — Array of `{INELASTIC_STRAIN, YIELD_STRESS, DAMAGE}` | **Required** |
 
 ### Request Body
 
@@ -1346,7 +1490,10 @@ midas_api("POST", "/db/THIK", thik_data)
       "YVAR":     { "description": "Section shape y-axis variation", "type": "string" },
       "ZEXP":     { "description": "Z axis Exponent",                "type": "number" },
       "ZFROM":    { "description": "Z axis Symmetric Plane",         "type": "string" },
-      "ZDIST":    { "description": "Z axis Symmetric Distance",      "type": "number" }
+      "ZDIST":    { "description": "Z axis Symmetric Distance",      "type": "number" },
+      "YEXP":     { "description": "Y axis Exponent",                "type": "number" },
+      "YFROM":    { "description": "Y axis Symmetric Plane",         "type": "string" },
+      "YDIST":    { "description": "Y axis Symmetric Distance",      "type": "number" }
     }
   }
 }
@@ -1354,15 +1501,21 @@ midas_api("POST", "/db/THIK", thik_data)
 
 ### Specifications
 
+> ⚠️ **2026-08-25 재확인 보강:** Y축 다항식 계열 필드(`YEXP`/`YFROM`/`YDIST`)가 누락돼 있어
+> Z축과 대칭으로 추가했다(아티클 id `35942955627673`).
+
 | No. | Description | Key | Value Type | Default | Required |
-|-----|-------------|-----|------------|---------|----------|
+| --- | --- | --- | --- | --- | --- |
 | 1 | Tapered Group Name | `"NAME"` | String | - | **Required** |
 | 2 | Element No. list | `"ELEMLIST"` | Array[Integer] | - | **Required** |
-| 3 | Z-axis Section Shape Variation • Linear: `"LINEAR"` • Polynomial: `"POLY"` | `"ZVAR"` | String | - | **Required** |
-| 4 | Y-axis Section Shape Variation | `"YVAR"` | String | - | **Required** |
-| 5 (POLY only) | Z axis Exponent | `"ZEXP"` | Number | - | **Required** |
-| 6 (POLY only) | Z axis Symmetric Plane from i or j | `"ZFROM"` | String | `"i"` | Optional |
-| 7 (POLY only) | Z axis Symmetric Plane Distance (m) | `"ZDIST"` | Number | 0 | Optional |
+| 3 | Z-axis Section Shape Variation · Linear: `"LINEAR"` / Polynomial: `"POLY"` | `"ZVAR"` | String | - | **Required** |
+| 4 | Y-axis Section Shape Variation · Linear: `"LINEAR"` / Polynomial: `"POLY"` | `"YVAR"` | String | - | **Required** |
+| 5 (ZVAR=POLY) | Z axis Exponent | `"ZEXP"` | Number | - | **Required** |
+| 6 (ZVAR=POLY) | Z axis Symmetric Plane from i or j | `"ZFROM"` | String | `"i"` | Optional |
+| 7 (ZVAR=POLY) | Z axis Symmetric Plane Distance (m) | `"ZDIST"` | Number | 0 | Optional |
+| 8 (YVAR=POLY) | Y axis Exponent | `"YEXP"` | Number | - | **Required** |
+| 9 (YVAR=POLY) | Y axis Symmetric Plane from i or j | `"YFROM"` | String | `"i"` | Optional |
+| 10 (YVAR=POLY) | Y axis Symmetric Plane Distance (m) | `"YDIST"` | Number | 0 | Optional |
 
 ### Request Body
 
@@ -1403,8 +1556,13 @@ midas_api("POST", "/db/TSGR", tsgr_data)
 
 ### Specifications
 
+> ⚠️ **2026-08-25 재확인 보강:** 변단면(Tapered) J단 계수 11개 필드(`W_SF`·`IPART`·`bDiffIJ`·
+> `J1`~`J8`)가 통째로 빠져 있었다(아티클 id `35943174833177`). J단 필드는 I단과 이름 규칙이
+> 달라 `AREA_SF_J`가 아니라 **`J1`~`J8`**(순서대로 Area/Asy/Asz/Ixx/Iyy/Izz/Weight/Warping)로
+> 표기되므로 원문 그대로 옮겼다.
+
 | No. | Description | Key | Value Type | Default | Required |
-|-----|-------------|-----|------------|---------|----------|
+| --- | --- | --- | --- | --- | --- |
 | 1 | Stiffness Items (Array of Objects) | `"ITEMS"` | Array[Object] | - | **Required** |
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Boundary Group Name | `"GROUP_NAME"` | String | Blank | Optional |
@@ -1415,6 +1573,17 @@ midas_api("POST", "/db/TSGR", tsgr_data)
 | (7) | Iyy Scale Factor (I) | `"IYY_SF"` | Number | 1 | Optional |
 | (8) | Izz Scale Factor (I) | `"IZZ_SF"` | Number | 1 | Optional |
 | (9) | Weight Scale Factor | `"WGT_SF"` | Number | 1 | Optional |
+| (10) | Warping Scale Factor (I) | `"W_SF"` | Number | 1 | Optional |
+| (11) | Composite Section 적용 시점 · Before만: `1` / After만: `2` / Before+After: `3` | `"IPART"` | Integer | 1 | Optional |
+| (12) | Tapered Section — J단 별도 값 사용 여부 | `"bDiffIJ"` | Boolean | `true` | Optional |
+| (13) | Area Scale Factor (J, Tapered) | `"J1"` | Number | 1 | Optional |
+| (14) | Asy Scale Factor (J) | `"J2"` | Number | 1 | Optional |
+| (15) | Asz Scale Factor (J) | `"J3"` | Number | 1 | Optional |
+| (16) | Ixx Scale Factor (J) | `"J4"` | Number | 1 | Optional |
+| (17) | Iyy Scale Factor (J) | `"J5"` | Number | 1 | Optional |
+| (18) | Izz Scale Factor (J) | `"J6"` | Number | 1 | Optional |
+| (19) | Weight Scale Factor (J) | `"J7"` | Number | 1 | Optional |
+| (20) | Warping Scale Factor (J) | `"J8"` | Number | 1 | Optional |
 
 ### Request Body
 
@@ -1465,16 +1634,56 @@ midas_api("POST", "/db/SECF", secf_data)
 
 ### Specifications
 
+> ⚠️ **2026-08-25 재확인 전면 보강.** 이전 버전은 전단철근(`SBAR_ITEMS`) 중 대각철근(DR) 4개
+> 필드만 있고 SBW·TR·SR·Enclosing Stirrup 및 종방향철근(`MBAR_ITEMS`) 전체가 통째로 빠져
+> 있었다(아티클 id `35943227821465`). 원문 그대로 전체 필드를 보강했다.
+
 | No. | Description | Key | Value Type | Default | Required |
-|-----|-------------|-----|------------|---------|----------|
+| --- | --- | --- | --- | --- | --- |
 | 1 | Same Rebar Data at i and j-end (Longitudinal) | `"OPT_MBAR_J"` | Boolean | - | **Required** |
 | 2 | Same Shear Rebar Data at i and j-end | `"OPT_SBAR_J"` | Boolean | - | **Required** |
 | 3 | Cracked Section | `"OPT_CRACKED"` | Boolean | - | **Required** |
-| 4 | Shear Reinforcement Data [i-section, j-section] | `"SBAR_ITEMS"` | Array[Object] | - | **Required** |
-| (1) | Diagonal Reinforcement (DR) | `"OPT_DR"` | Boolean | false | Optional |
+| 4 | Shear Reinforcement Data (Array, Index 0=i-section / 1=j-section) | `"SBAR_ITEMS"` | Array[Object] | - | **Required** |
+| 5 | Longitudinal Reinforcement Data (Array, Index 0=i-section / 1=j-section) | `"MBAR_ITEMS"` | Array[Object] | - | **Required** |
+
+#### `SBAR_ITEMS[]` — 전단철근
+
+| No. | Description | Key | Value Type | Default | Required |
+| --- | --- | --- | --- | --- | --- |
+| (1) | Diagonal Reinforcement (DR) | `"OPT_DR"` | Boolean | `false` | Optional |
 | (2) | [DR] Pitch | `"DR_PITCH"` | Number | - | Optional |
 | (3) | [DR] Angle | `"DR_THETA"` | Number | - | Optional |
 | (4) | [DR] Area | `"DR_AW"` | Number | - | Optional |
+| (5) | Steel Bar for Web (SBW) | `"OPT_SBW"` | Boolean | `false` | Optional |
+| (6) | [SBW] Pitch | `"SBW_PITCH"` | Number | - | Optional |
+| (7) | [SBW] Angle | `"SBW_ANGLE"` | Number | - | Optional |
+| (8) | [SBW] Area | `"SBW_AP"` | Number | - | Optional |
+| (9) | [SBW] Pre-force | `"SBW_PS"` | Number | - | Optional |
+| (10) | [SBW] Shear Reduction Factor | `"SBW_FACTOR"` | Number | - | Optional |
+| (11) | Torsional Reinforcement (TR) | `"OPT_TR"` | Boolean | `false` | Optional |
+| (12) | [TR] Pitch | `"TR_PITCH"` | Number | - | Optional |
+| (13) | [TR] Area (Web) | `"TR_AWT"` | Number | - | Optional |
+| (14) | [TR] Area (Longitudinal) | `"TR_ALT"` | Number | - | Optional |
+| (15) | Stirrup Exist | `"OPT_SR"` | Boolean | `false` | Optional |
+| (16) | [SR] Pitch | `"SR_PITCH"` | Number | - | Optional |
+| (17) | [SR] Area | `"SR_AW"` | Number | - | Optional |
+| (18) | Enclosing Stirrup | `"OPT_LBAR_FLG"` | Boolean | `false` | Optional |
+| (19) | (Enclosed 단면적 산정용) Cover Thickness | `"LBAR_THICK"` | Number | - | Optional |
+| (20) | Include Flange/Cantilever · Off: `0` / On: `1` | `"LBAR_INC_FC"` | Integer | - | Optional |
+
+#### `MBAR_ITEMS[]` — 종방향철근
+
+| No. | Description | Key | Value Type | Default | Required |
+| --- | --- | --- | --- | --- | --- |
+| (1) | Section Position · `"I"` / `"J"` | `"IJ"` | String | - | **Required** |
+| (2) | Bar Name | `"NAME"` | String | - | **Required** |
+| (3) | Reference Y · Centroid: `0` / Left: `1` | `"REF_Y"` | Integer | - | **Required** |
+| (4) | Distance from Reference (Y-dir) | `"Y"` | Number | 0 | Optional |
+| (5) | Reference Z · Top: `0` / Bottom: `1` | `"REF_Z"` | Integer | - | **Required** |
+| (6) | Distance from Reference (Z-dir) | `"Z"` | Number | 0 | Optional |
+| (7) | Number of Rebar | `"NUM"` | Integer | - | **Required** |
+| (8) | Spacing between Rebars | `"SPACING"` | Number | 0 | Optional |
+| (9) | Part | `"PART"` | Integer | - | - |
 
 ### Request Body
 
@@ -1488,6 +1697,9 @@ midas_api("POST", "/db/SECF", secf_data)
       "SBAR_ITEMS": [
         { "OPT_DR": false },
         { "OPT_DR": false }
+      ],
+      "MBAR_ITEMS": [
+        { "IJ": "I", "NAME": "D25", "REF_Y": 0, "Y": 0, "REF_Z": 1, "Z": 0.05, "NUM": 4, "SPACING": 0.15 }
       ]
     }
   }
@@ -1697,14 +1909,35 @@ midas_api("POST", "/db/SECF", secf_data)
 
 ### Specifications
 
+> ⚠️ **2026-08-25 재확인 전면 보강.** Cover(피복) 관련 Beam 필드 2개와 GEN 전용 Wall 관련
+> 필드 9개가 통째로 빠져 있었다(아티클 id `35944093809689`). 기존 Request Body 예제도
+> `CoverDivNumNy`/`CoverDivNumNz`처럼 원문에 없는 키를 쓰고 있었는데, 실제 키는
+> `BeamDivNumNyCover`/`BeamDivNumNzCover`다 — 원문 Examples 그대로 교체했다.
+
 | No. | Description | Key | Value Type | Default | Required |
-|-----|-------------|-----|------------|---------|----------|
-| 1 | Reference Location for Distributed Hinges • I-End: 0 • Center: 1 • J-End: 2 | `"BEAM_LOC"` | Integer | - | **Required** |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Reference Location for Distributed Hinges · I-End: `0` / Center: `1` / J-End: `2` | `"BEAM_LOC"` | Integer | - | **Required** |
 | 2 | Consider Reinforcement Area | `"OPT_ConsiderRebarArea1D"` | Boolean | - | **Required** |
-| 3 | Fiber Beam Areas Core • Auto Size: 0 • Equal-Size: 1 | `"FAreaSizeCore"` | Integer | - | **Required** |
-| 4 | Number of Divisions (Beam-Column) Ny | `"BeamDivNumNy"` | Integer | - | **Required** |
-| 5 | Number of Divisions (Beam-Column) Nz | `"BeamDivNumNz"` | Integer | - | **Required** |
-| 6 | Fiber Beam Areas Cover • Auto: 0 • Equal: 1 | `"FAreaSizeCover"` | Integer | - | **Required** |
+| 3 | Fiber Beam Areas Core · Auto Size: `0` / Equal-Size: `1` | `"FAreaSizeCore"` | Integer | - | **Required** |
+| 4 | Number of Divisions(Beam-Column) — Ny (y-dir) | `"BeamDivNumNy"` | Integer | - | **Required** |
+| 5 | Number of Divisions(Beam-Column) — Nz (z-dir) | `"BeamDivNumNz"` | Integer | - | **Required** |
+| 6 | Fiber Beam Areas Cover · Auto Size: `0` / Equal-Size: `1` | `"FAreaSizeCover"` | Integer | - | **Required** |
+| 7 | Number of divisions(Beam-Column, Cover) — Ny | `"BeamDivNumNyCover"` | Integer | - | **Required** |
+| 8 | Number of divisions(Beam-Column, Cover) — Nz | `"BeamDivNumNzCover"` | Integer | - | **Required** |
+
+#### GEN 전용 필드 (Wall/벽체)
+
+| No. | Description | Key | Value Type | Default | Required |
+| --- | --- | --- | --- | --- | --- |
+| 9 | Consider Out of Plane Nonlinearity of Plate Type | `"WallConsOut"` | Boolean | - | **Required** |
+| 10 | Fiber Wall Areas Core | `"WAreaSize"` | Integer | - | **Required** |
+| 11 | Number of divisions — z, Core | `"WallDivNumZ"` | Integer | - | **Required** |
+| 12 | Number of divisions — y, Core | `"WallDivNumY"` | Integer | - | **Required** |
+| 13 | Fiber Wall Areas Cover | `"WAreaSizeCover"` | Integer | - | **Required** |
+| 14 | Number of divisions — z, Cover | `"WallDivNumZCover"` | Integer | - | **Required** |
+| 15 | Number of divisions — y, Cover | `"WallDivNumYCover"` | Integer | - | **Required** |
+| 16 | Wall, Consider Rebar Area | `"OPT_ConsiderRebarAreaWall"` | Boolean | - | **Required** |
+| 17 | Shear Spring Location | `"dR"` | Number | - | **Required** |
 
 ### Request Body
 
@@ -1713,17 +1946,30 @@ midas_api("POST", "/db/SECF", secf_data)
   "Assign": {
     "1": {
       "BEAM_LOC": 1,
-      "BeamDivNumNy": 15, "BeamDivNumNz": 20,
-      "WallConsOut": false, "WallDivNumZ": 8, "WallDivNumY": 1,
-      "dR": 0.4, "WAreaSize": "AUTO",
+      "BeamDivNumNy": 15,
+      "BeamDivNumNz": 20,
+      "WallConsOut": false,
+      "WallDivNumZ": 8,
+      "WallDivNumY": 1,
+      "dR": 0.4,
+      "WAreaSize": "AUTO",
       "OPT_ConsiderRebarArea1D": false,
       "OPT_ConsiderRebarAreaWall": false,
-      "FAreaSizeCore": 1, "FAreaSizeCover": 1,
-      "CoverDivNumNy": 3, "CoverDivNumNz": 3
+      "FAreaSizeCore": 1,
+      "FAreaSizeCover": 1,
+      "WAreaSizeCover": 1,
+      "BeamDivNumNyCover": 20,
+      "BeamDivNumNzCover": 15,
+      "WallDivNumZCover": 8,
+      "WallDivNumYCover": 1
     }
   }
 }
 ```
+
+> ⚠️ 원문 Specifications 표는 `"WAreaSize"`를 Integer로 명시하지만, 원문 Request Example은
+> 문자열 `"AUTO"`를 그대로 전송한다. 이 저장소 관례상 예제가 표보다 우선하므로 예제 값을
+> 그대로 옮겼다 — 실제 전송 시 표기(Integer vs `"AUTO"`)에 유의할 것.
 
 ---
 
@@ -1847,15 +2093,24 @@ result = midas_api("GET", "/db/IEHG-PSS-M1")
 | 2 | Material Type • Concrete: `"CONC"` • Steel: `"STEEL"` | `"MATL_TYPE"` | String | - | **Required** |
 | 3 | Hysteresis Model ¹⁾ | `"HYS_MODEL"` | String | - | **Required** |
 
+> ⚠️ FIMP 원문(아티클 id `35944335180569`)은 콘크리트(Kent&Park·Japanese Standard·Mander 등)와
+> 강재(Bilinear·Menegotto-Pinto 등) 다수의 이력 모델을 다루는 5900줄 이상의 방대한 문서다.
+> 이 저장소는 그중 가장 많이 쓰이는 **Kent & Park 모델만 대표로 상세 기재**하며, 나머지
+> 모델은 `MATL_TYPE`/`HYS_MODEL` 조합으로 존재한다는 사실만 남기고 전수 기재하지 않는다.
+
 #### Concrete — Kent & Park (`"HYS_MODEL": "KPM"`)
 
-| Key | Description |
-|-----|-------------|
-| `"KENPAR"."FC"` | Concrete Strength (fc') |
-| `"KENPAR"."EC0"` | Peak Strain (εc0) |
-| `"KENPAR"."K"` | Strength/Strain Factor |
-| `"KENPAR"."ECU"` | Ultimate Strain |
-| `"KENPAR"."PARTIAL_FACT"` | Partial Safety Factor |
+| Key | Description | Required |
+| --- | --- | --- |
+| `"KENPAR"."FC"` | Concrete Strength (fc') | **Required** |
+| `"KENPAR"."PARTIAL_FACT"` | Partial Safety Factor | **Required** |
+| `"KENPAR"."K"` | Strength/Strain Factor | **Required** |
+| `"KENPAR"."EC0"` | Peak Strain (εc0) | **Required** |
+| `"KENPAR"."EC1_METHOD"` | Hardening Strain Method · Manual: `0` / Calculation: `1` | **Required** |
+| `"KENPAR"."EC1"` | Hardening Strain Manual (εc1) | **Required** |
+| `"KENPAR"."Z"` | Hardening Strain Calculation (Z) | **Required** |
+| `"KENPAR"."ECU"` | Ultimate Strain (εcu) | **Required** |
+| `"KENPAR"."STRENGTH_AFTER"` | Strength After Critical Strain · Zero: `0` / Keep: `1` | **Required** |
 
 ### Request Body
 
@@ -1869,10 +2124,14 @@ result = midas_api("GET", "/db/IEHG-PSS-M1")
       "CONC": {
         "KENPAR": {
           "FC": 30000,
-          "EC0": 0.002,
+          "PARTIAL_FACT": 1.0,
           "K": 1.0,
+          "EC0": 0.002,
+          "EC1_METHOD": 1,
+          "EC1": 0.0035,
+          "Z": 100,
           "ECU": 0.003,
-          "PARTIAL_FACT": 1.0
+          "STRENGTH_AFTER": 0
         }
       }
     }
@@ -1891,11 +2150,15 @@ fimp_data = {
             "HYS_MODEL": "KPM",
             "CONC": {
                 "KENPAR": {
-                    "FC": 24000,    # 압축강도 (kPa)
-                    "EC0": 0.002,   # 최대 변형률
+                    "FC": 24000,          # 압축강도 (kPa)
+                    "PARTIAL_FACT": 1.0,
                     "K": 1.0,
+                    "EC0": 0.002,         # 최대 변형률
+                    "EC1_METHOD": 1,      # 0=수동 입력, 1=계산
+                    "EC1": 0.0035,
+                    "Z": 100,
                     "ECU": 0.003,
-                    "PARTIAL_FACT": 1.0
+                    "STRENGTH_AFTER": 0   # 0=극한변형률 이후 강도 0, 1=강도 유지
                 }
             }
         }
@@ -1916,8 +2179,13 @@ midas_api("POST", "/db/FIMP", fimp_data)
 
 ### Specifications
 
+> ⚠️ **2026-08-25 재확인 전면 보강.** `FIBR_BASE[]`의 실제 섬유별 속성(REBAR_NAME/AREA/좌표/
+> 재료 연결 등) 8개 필드와 상위 레벨의 모니터링 섬유 지정 2개 필드가 통째로 빠져 있었다
+> (아티클 id `35944476555801`). 또한 `FIBR_BASE_KEY`는 표에 Boolean으로 적혀 있었으나 원문
+> JSON Schema·Request Example 모두 **Integer**(섬유 식별 키 값, 예: `752`)로 다뤄 정정했다.
+
 | No. | Description | Key | Value Type | Default | Required |
-|-----|-------------|-----|------------|---------|----------|
+| --- | --- | --- | --- | --- | --- |
 | 1 | Fiber Division Name | `"NAME"` | String | - | **Required** |
 | 2 | Assigned Section ID | `"SECT_KEY"` | Integer | - | **Required** |
 | 3 | Assign Type | `"ASSIGN_TYPE"` | Integer | - | **Required** |
@@ -1925,7 +2193,18 @@ midas_api("POST", "/db/FIMP", fimp_data)
 | 5 | Inelastic Material Properties Color (6 elements) | `"FIMP_COLOR"` | Array[Object, 6] | - | Optional |
 | (1) R/G/B | Color components | `"R"` `"G"` `"B"` | Integer | 0 | Optional |
 | 6 | Fiber Division Base Data | `"FIBR_BASE"` | Array[Object] | - | **Required** |
-| (1) | Base Key | `"FIBR_BASE_KEY"` | Boolean | - | **Required** |
+| (1) | Fiber Base Key | `"FIBR_BASE_KEY"` | Integer | - | **Required** |
+| (2) | Rebar Name | `"REBAR_NAME"` | String | - | **Required** |
+| (3) | Area | `"AREA"` | Number | - | **Required** |
+| (4) | Center Y | `"CENTER_Y"` | Number | - | **Required** |
+| (5) | Center Z | `"CENTER_Z"` | Number | - | **Required** |
+| (6) | Fiber Material ID(`FIMP_NAME`/`FIMP_COLOR` 배열의 몇 번째 재료인지) | `"FIBER_MATL_ID"` | Number | - | **Required** |
+| (7) | Area Consider Rebar | `"AREA_CONSIDER_REBAR"` | Number | - | **Required** |
+| (8) | Is Rebar | `"OPT_IS_REBAR"` | Boolean | - | **Required** |
+| (9) | Fiber 외곽 다각형 Point Y 목록 | `"POINT_Y"` | Array[Number] | - | **Required** |
+| (10) | Fiber 외곽 다각형 Point Z 목록 | `"POINT_Z"` | Array[Number] | - | **Required** |
+| 7 | Monitored Fiber 사용 여부 | `"OPT_MONITORED_FIBER"` | Boolean | - | **Required** |
+| 8 | Monitored Fiber(`FIBR_BASE` 각 항목에 대응하는 0/1 플래그 배열) | `"MONITORED_FIBER"` | Array[Integer] | - | **Required** |
 
 ### Request Body
 
@@ -1948,7 +2227,22 @@ midas_api("POST", "/db/FIMP", fimp_data)
         {"R": 0, "G": 128, "B": 0},
         {"R": 0, "G": 128, "B": 0}
       ],
-      "FIBR_BASE": [{"FIBR_BASE_KEY": true}]
+      "FIBR_BASE": [
+        {
+          "FIBR_BASE_KEY": 752,
+          "REBAR_NAME": "",
+          "AREA": 0.00688072,
+          "CENTER_Y": -1.05047e-16,
+          "CENTER_Z": 1.06179,
+          "FIBER_MATL_ID": 1,
+          "AREA_CONSIDER_REBAR": 0,
+          "OPT_IS_REBAR": false,
+          "POINT_Y": [0.0527429, 0.0527429, -0.0527429, -0.0527429, 0],
+          "POINT_Z": [1.08596, 1.029, 1.029, 1.08596, 1.1025]
+        }
+      ],
+      "OPT_MONITORED_FIBER": true,
+      "MONITORED_FIBER": [0, 0, 0, 0, 0, 0]
     }
   }
 }
@@ -1966,14 +2260,52 @@ midas_api("POST", "/db/FIMP", fimp_data)
 
 ### Specifications
 
+> ⚠️ **2026-08-25 재확인 전면 보강.** 이 엔드포인트는 감쇠비 지정 두 가지 방식 —
+> **Strain Energy Proportional**(변형에너지 비례, 모드별 감쇠비 계산)과
+> **Element Mass & Stiffness Proportional**(Rayleigh 감쇠 계수 직접/모드 기반 산정) — 을
+> 함께 다루는데, 이전 버전은 Strain Energy 쪽 일부(3개 필드)만 있고 Element Mass & Stiffness
+> Proportional 계열 18개 필드(그룹별 오버라이드용 `GROUP_DAMPING_ITEMS[]`의 13개 하위 필드
+> 포함) 전체와 그룹 우선순위 4개 필드가 통째로 빠져 있었다(아티클 id `35944577940633`).
+
+#### Strain Energy Proportional
+
 | No. | Description | Key | Value Type | Default | Required |
-|-----|-------------|-----|------------|---------|----------|
-| 1 | Strain Energy Proportional | `"bExistStrain"` | Boolean | - | **Required** |
-| 2 | Damping Ratio Items | `"STRAIN_GROUP_ITEMS"` | Array[Object] | - | **Required** |
-| (1) | Damping Ratio Type • Material: `"MATERIAL"` • Structure Group: `"STRUCTURE"` • Boundary: `"BOUNDARY"` | `"GROUP_TYPE"` | String | - | **Required** |
-| (2) | Damping Ratio Name | `"GROUP_NAME"` | String | - | **Required** |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Strain Energy Proportional 사용 여부 | `"bExistStrain"` | Boolean | - | **Required** |
+| 2 | Damping Ratio Items(재료/구조군/경계군별 감쇠비) | `"STRAIN_GROUP_ITEMS"` | Array[Object] | - | **Required** |
+| (1) | Damping Ratio Type · Material: `"MATERIAL"` / Structure Group: `"STRUCTURE"` / Boundary: `"BOUNDARY"` | `"GROUP_TYPE"` | String | - | **Required** |
+| (2) | Damping Ratio Name(재료는 ID, 구조군/경계군은 이름) | `"GROUP_NAME"` | String | - | **Required** |
 | (3) | Damping Ratio | `"DAMPING_RATIO"` | Number | - | **Required** |
 | 3 | Calculate Only When Used | `"OPT_CALC_WHEN_USED"` | Boolean | - | **Required** |
+| 4 | Priority: Material Data vs Structure Group · Material: `0` / Structure Group: `1` | `"STRAIN_GROUP_PRIORITY"` | Integer | - | **Required** |
+| 5 | Priority between Structure Groups · Smallest: `0` / Largest: `1` | `"STRAIN_VALUE_PRIORITY"` | Integer | - | **Required** |
+
+#### Element Mass & Stiffness Proportional
+
+| No. | Description | Key | Value Type | Default | Required |
+| --- | --- | --- | --- | --- | --- |
+| 6 | Element Mass & Stiffness Proportional 사용 여부 | `"bExistElement"` | Boolean | - | **Required** |
+| 7 | (미지정 요소) Mass Proportional 옵션 | `"OPT_MASS_PROP_DEFAULT"` | Boolean | `false` | Optional |
+| 8 | (미지정 요소) Stiffness Proportional 옵션 | `"OPT_STIFF_PROP_DEFAULT"` | Boolean | `false` | Optional |
+| 9 | 직접 입력/모드 기반 산정 · Direct: `0` / Calculate from Modal Damping: `1` | `"DIRECT_CALC_MODE_DEFAULT"` | Integer | - | **Required** |
+| 10 | Mass Proportional 값 | `"MASS_COEF_DEFAULT"` | Number | - | **Required** |
+| 11 | Stiffness Proportional 값 | `"STIFF_COEF_DEFAULT"` | Number | - | **Required** |
+| 12 | 계수 산정 기준 · Frequency: `0` / Period: `1` | `"FREQ_PERIOD_MODE_DEFAULT"` | Integer | - | **Required** |
+| 13 | Frequency Mode 1 | `"FREQ_MODE_1_DEFAULT"` | Number | - | **Required** |
+| 14 | Frequency Mode 2 | `"FREQ_MODE_2_DEFAULT"` | Number | - | **Required** |
+| 15 | Period Mode 1 | `"PERIOD_MODE_1_DEFAULT"` | Number | - | **Required** |
+| 16 | Period Mode 2 | `"PERIOD_MODE_2_DEFAULT"` | Number | - | **Required** |
+| 17 | Damping Ratio Mode 1 | `"DAMPING_MODE_1_DEFAULT"` | Number | - | **Required** |
+| 18 | Damping Ratio Mode 2 | `"DAMPING_MODE_2_DEFAULT"` | Number | - | **Required** |
+| 19 | 그룹별 Rayleigh 감쇠 오버라이드 | `"GROUP_DAMPING_ITEMS"` | Array[Object] | - | **Required** |
+| 20 | Priority: Material Data vs Structure Group(요소 쪽) | `"ELEM_GROUP_PRIORITY"` | Integer | - | **Required** |
+| 21 | Priority between Structure Groups(요소 쪽) | `"ELEM_VALUE_PRIORITY"` | Integer | - | **Required** |
+
+`GROUP_DAMPING_ITEMS[]`는 위 7~18번과 동일한 의미의 필드를 그룹 단위로 오버라이드하며,
+`"_DEFAULT"` 접미사만 빠진 이름을 쓴다: `GROUP_TYPE`/`GROUP_NAME`(위 `STRAIN_GROUP_ITEMS`와
+동일한 3-way 규칙) + `STIFF_COEF`/`OPT_STIFF_PROP`/`MASS_COEF`/`OPT_MASS_PROP`/
+`DIRECT_CALC_MODE`/`FREQ_PERIOD_MODE`/`FREQ_MODE_1`/`FREQ_MODE_2`/`PERIOD_MODE_1`/
+`PERIOD_MODE_2`/`DAMPING_RATIO_MODE`/`DAMPING_RATIO_MODE_1`/`DAMPING_RATIO_MODE_2`.
 
 ### Request Body
 
@@ -1981,15 +2313,40 @@ midas_api("POST", "/db/FIMP", fimp_data)
 {
   "Assign": {
     "1": {
-      "bExistStrain": true,
-      "STIFF_COEF_DEFAULT": 0.0849,
-      "MASS_COEF_DEFAULT": 0.0419,
+      "STIFF_COEF_DEFAULT": 0.0848826377636192,
+      "MASS_COEF_DEFAULT": 0.04188790133333333,
       "OPT_CALC_WHEN_USED": true,
       "OPT_MASS_PROP_DEFAULT": true,
       "OPT_STIFF_PROP_DEFAULT": true,
+      "DIRECT_CALC_MODE_DEFAULT": 1,
+      "FREQ_PERIOD_MODE_DEFAULT": 0,
+      "FREQ_MODE_1_DEFAULT": 0.1,
+      "FREQ_MODE_2_DEFAULT": 0.2,
+      "PERIOD_MODE_1_DEFAULT": 0,
+      "PERIOD_MODE_2_DEFAULT": 0,
+      "DAMPING_MODE_1_DEFAULT": 0.06,
+      "DAMPING_MODE_2_DEFAULT": 0.07,
+      "bExistElement": true,
+      "bExistStrain": true,
+      "GROUP_DAMPING_ITEMS": [
+        {
+          "GROUP_TYPE": "MATERIAL", "GROUP_NAME": "1",
+          "STIFF_COEF": 0.005787452574792216, "OPT_STIFF_PROP": true,
+          "MASS_COEF": 0.06854383854545451, "OPT_MASS_PROP": true,
+          "DIRECT_CALC_MODE": 1, "FREQ_PERIOD_MODE": 0,
+          "FREQ_MODE_1": 0.5, "FREQ_MODE_2": 0.6,
+          "PERIOD_MODE_1": 0, "PERIOD_MODE_2": 0,
+          "DAMPING_RATIO_MODE": 0,
+          "DAMPING_RATIO_MODE_1": 0.02, "DAMPING_RATIO_MODE_2": 0.02
+        }
+      ],
       "STRAIN_GROUP_ITEMS": [
-        { "GROUP_TYPE": "MATERIAL", "GROUP_NAME": "1", "DAMPING_RATIO": 0.05 }
-      ]
+        { "GROUP_TYPE": "MATERIAL", "GROUP_NAME": "1", "DAMPING_RATIO": 0.02 }
+      ],
+      "ELEM_GROUP_PRIORITY": 0,
+      "ELEM_VALUE_PRIORITY": 0,
+      "STRAIN_GROUP_PRIORITY": 0,
+      "STRAIN_VALUE_PRIORITY": 0
     }
   }
 }
@@ -1998,19 +2355,32 @@ midas_api("POST", "/db/FIMP", fimp_data)
 ### Python 예제
 
 ```python
-# 재료 1번 감쇠비 5% 설정
+# 재료 1번 Strain Energy 감쇠비 2% + Rayleigh 계수(Frequency Mode 1/2 = 0.1/0.2Hz) 설정
 grdp_data = {
     "Assign": {
         "1": {
             "bExistStrain": True,
+            "bExistElement": True,
             "OPT_CALC_WHEN_USED": True,
             "OPT_MASS_PROP_DEFAULT": True,
             "OPT_STIFF_PROP_DEFAULT": True,
+            "DIRECT_CALC_MODE_DEFAULT": 1,   # 1=모드 기반 산정
+            "FREQ_PERIOD_MODE_DEFAULT": 0,   # 0=Frequency 기준
+            "FREQ_MODE_1_DEFAULT": 0.1,
+            "FREQ_MODE_2_DEFAULT": 0.2,
+            "PERIOD_MODE_1_DEFAULT": 0,
+            "PERIOD_MODE_2_DEFAULT": 0,
+            "DAMPING_MODE_1_DEFAULT": 0.06,
+            "DAMPING_MODE_2_DEFAULT": 0.07,
             "STIFF_COEF_DEFAULT": 0.0849,
             "MASS_COEF_DEFAULT": 0.0419,
             "STRAIN_GROUP_ITEMS": [
                 {"GROUP_TYPE": "MATERIAL", "GROUP_NAME": "1", "DAMPING_RATIO": 0.05}
-            ]
+            ],
+            "ELEM_GROUP_PRIORITY": 0,
+            "ELEM_VALUE_PRIORITY": 0,
+            "STRAIN_GROUP_PRIORITY": 0,
+            "STRAIN_VALUE_PRIORITY": 0
         }
     }
 }
@@ -2041,6 +2411,7 @@ midas_api("POST", "/db/GRDP", grdp_data)
 | (7) | Izz (Moment of Inertia, z-axis) | `"IZZ_SF"` | Number | 1.0 | Optional |
 | (8) | Weight | `"WGT_SF"` | Number | 1.0 | Optional |
 | (9) | Boundary Group Name | `"GROUP_NAME"` | String | Blank | Optional |
+| (10) | Part(합성단면 전용) · Before: `"Before"` / After: `"After"` / All: `"All"` | `"iPart"` | String | `"Before"` | Optional |
 
 ### Request Body
 
@@ -2054,12 +2425,16 @@ midas_api("POST", "/db/GRDP", grdp_data)
         "ASY_SF": 0.6, "ASZ_SF": 0.7,
         "IXX_SF": 0.8, "IYY_SF": 0.8, "IZZ_SF": 0.9,
         "WGT_SF": 0.95,
-        "GROUP_NAME": ""
+        "GROUP_NAME": "",
+        "iPart": "All"
       }]
     }
   }
 }
 ```
+
+> ⚠️ **2026-08-25 재확인 보강:** 합성단면 전용 필드 `iPart`(Before/After/All)가 누락돼 있어
+> 추가했다(아티클 id `44613910309401`).
 
 ### Python 예제
 
@@ -2096,8 +2471,16 @@ midas_api("POST", "/db/ESSF", essf_data)
 
 ### Specifications
 
+> ⚠️ **2026-08-25 재확인.** 원문 Specifications 표 4번 항목은 Key가 `"RABAR_CODENAME"`(오타,
+> E 누락)으로 적혀 있으나 JSON Schema·Request Example은 모두 `"REBAR_CODENAME"`으로 일관
+> 표기한다(예제가 표보다 우선) — 아래는 정상 표기, 되돌리지 말 것(아티클 id `35993732216985`).
+> 또한 `DATA1.DESIGN` 하위에 `bLAMBDA`/`dLAMBDA`/`bTRANSFER`/`dTRANSFERFCI` 4개 필드가 JSON
+> Schema에는 있으나 원문 Specifications 표·Request Example 어디에도 설명이나 예시가 없다 —
+> 경량콘크리트 λ계수·프리스트레스 전달강도 관련으로 추정되나 필수 여부·기본값을 확인할 근거가
+> 없어 참고용으로만 표기한다.
+
 | No. | Description | Key | Value Type | Default | Required |
-|-----|-------------|-----|------------|---------|----------|
+| --- | --- | --- | --- | --- | --- |
 | 1 | Material Type (Concrete: `"CONC"`) | `"TYPE"` | String | - | **Required** |
 | 2 | Material Name | `"NAME"` | String | - | **Required** |
 | 3 | Concrete Material Information | `"DATA1"` | Object | - | **Required** |
@@ -2105,7 +2488,11 @@ midas_api("POST", "/db/ESSF", essf_data)
 | 3-(3) | Material Grade | `"DATA1.CODEMATLNAME"` | String | - | **Required** |
 | 3-(4) | Material Design Values | `"DATA1.DESIGN"` | Object | - | **Required** |
 | 3-(4)-i | Strength | `"DATA1.DESIGN.C_FC"` | Number | - | GET only |
-| 3-(4)-ii | Strength (Initial) | `"DATA1.DESIGN.C_FCI"` | Number | - | GET only |
+| 3-(4)-ii | (추정) Lambda 적용 여부 ⚠️표·예제에 근거 없음 | `"DATA1.DESIGN.bLAMBDA"` | Boolean | - | 불명 |
+| 3-(4)-iii | (추정) Lambda 값 ⚠️표·예제에 근거 없음 | `"DATA1.DESIGN.dLAMBDA"` | Number | - | 불명 |
+| 3-(4)-iv | Strength (Initial) | `"DATA1.DESIGN.C_FCI"` | Number | - | GET only |
+| 3-(4)-v | (추정) Transfer 적용 여부 ⚠️표·예제에 근거 없음 | `"DATA1.DESIGN.bTRANSFER"` | Boolean | - | 불명 |
+| 3-(4)-vi | (추정) Transfer 시 fci 값 ⚠️표·예제에 근거 없음 | `"DATA1.DESIGN.dTRANSFERFCI"` | Number | - | 불명 |
 | 4 | Rebar Code Name | `"REBAR_CODENAME"` | String | - | **Required** |
 | 5 | Main Rebar Name | `"MAINREBAR_REBARNAME"` | String | - | **Required** |
 | 6 | Sub Rebar Name | `"SUBREBAR_REBARNAME"` | String | Blank | Optional |

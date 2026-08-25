@@ -606,6 +606,10 @@ midas_api("POST", "/db/ELEM", elem_body)
 
 ### Specifications
 
+> ⚠️ `iMETHOD`을 생략하면 원문 기준 기본값은 `1`(Angle)이다(2026-08-25 확인, 아티클 id
+> `35807178748569`). 아래 4개 표는 방식별로 나눠 정리했으나 실제로는 `iMETHOD` 하나의
+> 필드가 4가지 방식을 선택한다.
+
 #### iMETHOD = 1 (Angle)
 
 | No. | Description | Key | Value Type | Default | Required |
