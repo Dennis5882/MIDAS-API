@@ -881,13 +881,15 @@ for row in table.get("DATA", []):
 
 ## 9. Story Load Summary Table
 
-> **기능:** 층별·하중케이스별 하중 요약(집중·보·바닥·압력·자중·합계)을 X/Y/Z 방향별로 추출합니다.
+> **기능:** 층별 하중 요약(집중·보·바닥·압력·자중·합계)을 X/Y/Z 방향별로 추출합니다.
 >
-> ⚠️ **2026-08-05 원문 갱신 반영:** `TABLE_TYPE` enum 값이 `STORY_LOAD_SUMMARY_X/Y/Z`에서
-> `STORY_LOAD_X/Y/Z`로 변경됐고(같은 챕터의 `STORY_MASS`/`STORY_MASS_X` 명명 규칙과 통일),
-> `UNIT`·`STYLES`·`COMPONENTS`(8번 Story Mass Summary Table과 동일한 구조)와 `LOAD_CASE_NAMES`
-> 파라미터가 추가로 노출된다. `LOAD_CASE_NAMES`는 원문 Request 예제에는 있으나 Specifications
-> 표에는 없는 상태라(원문 자체의 표/예제 불일치), 이 저장소 관례상 예제를 우선해 반영한다.
+> ⚠️ **2026-08-25 재확인 후 정정:** 이전 버전(2026-08-05 기재)은 원문을 8번 Story Mass Summary
+> Table과 혼동해 `UNIT`·`STYLES`·`COMPONENTS`·`LOAD_CASE_NAMES` 파라미터와 `TABLE_TYPE` 값
+> `"STORY_LOAD_X/Y/Z"`를 잘못 기재했었다. 원문(아티클 id `49514148775705`, `updated_at`
+> 2026-08-05T07:40:56Z — 이번 재확인 시점과 동일 버전)을 직접 재스크래핑해 대조한 결과
+> Specifications 표에는 `TABLE_NAME`·`TABLE_TYPE`·`EXPORT_PATH` 3개 파라미터만 있고, Request
+> 예제 3종(X/Y/Z) 모두 `TABLE_TYPE` 값이 `"STORY_LOAD_SUMMARY_X/Y/Z"`임을 확인해 아래 내용을
+> 전면 정정했다.
 
 ### JSON Schema
 
@@ -903,11 +905,7 @@ for row in table.get("DATA", []):
         "properties": {
           "TABLE_NAME": { "type": "string" },
           "TABLE_TYPE": { "type": "string" },
-          "EXPORT_PATH": { "type": "string" },
-          "UNIT": { "type": "object" },
-          "STYLES": { "type": "object" },
-          "COMPONENTS": { "type": "array" },
-          "LOAD_CASE_NAMES": { "type": "array" }
+          "EXPORT_PATH": { "type": "string" }
         }
       }
     }
@@ -918,20 +916,10 @@ for row in table.get("DATA", []):
 ### Parameters
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
-|-----|------|-----|-----------|--------|------|
+| --- | --- | --- | --- | --- | --- |
 | 1 | 테이블 이름 | `"TABLE_NAME"` | String | Empty | Optional |
-| 2 | 결과 테이블 타입 · X방향: `"STORY_LOAD_X"` / Y방향: `"STORY_LOAD_Y"` / Z방향: `"STORY_LOAD_Z"` | `"TABLE_TYPE"` | String | — | **Required** |
+| 2 | 결과 테이블 타입 · X방향: `"STORY_LOAD_SUMMARY_X"` / Y방향: `"STORY_LOAD_SUMMARY_Y"` / Z방향: `"STORY_LOAD_SUMMARY_Z"` | `"TABLE_TYPE"` | String | — | **Required** |
 | 3 | 결과 테이블 저장 경로 | `"EXPORT_PATH"` | String | — | Optional |
-| 4 | 응답 단위 설정 | `"UNIT"` | Object | System | Optional |
-| 4-1 | └ 힘 단위 | `UNIT.FORCE` | String | — | Optional |
-| 4-2 | └ 길이 단위 | `UNIT.DIST` | String | — | Optional |
-| 4-3 | └ 열 단위 | `UNIT.HEAT` | String | — | Optional |
-| 4-4 | └ 온도 단위 | `UNIT.TEMP` | String | — | Optional |
-| 5 | 응답 숫자 형식 | `"STYLES"` | Object | System | Optional |
-| 5-1 | └ 숫자 형식 · `"Default"` / `"Fixed"` / `"Scientific"` / `"General"` | `STYLES.FORMAT` | String | — | Optional |
-| 5-2 | └ 소수 자릿수 (0~15) | `STYLES.PLACE` | Integer | — | Optional |
-| 6 | 결과 테이블 표시 열 | `"COMPONENTS"` | Array [String] | All | Optional |
-| 7 | 하중케이스 이름 지정(예: `["DL (ST)"]`) ⚠️ 원문 Specifications 표에는 없고 Request 예제에만 등장 | `"LOAD_CASE_NAMES"` | Array [String] | All | Optional |
 
 ### Request / Response JSON
 
@@ -941,11 +929,8 @@ for row in table.get("DATA", []):
 {
   "Argument": {
     "TABLE_NAME": "StoryLoadZ",
-    "TABLE_TYPE": "STORY_LOAD_Z",
-    "UNIT": { "FORCE": "KN", "DIST": "M" },
-    "STYLES": { "FORMAT": "Fixed", "PLACE": 3 },
-    "COMPONENTS": ["Load", "Story", "Level", "Concent", "Beam", "Floor", "Pressure", "SelfWeight", "Sum"],
-    "LOAD_CASE_NAMES": ["DL (ST)"]
+    "TABLE_TYPE": "STORY_LOAD_SUMMARY_Z",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\story_load_summary_z_Out.JSON"
   }
 }
 ```
@@ -983,10 +968,8 @@ for direction in ["X", "Y", "Z"]:
     payload = {
         "Argument": {
             "TABLE_NAME": f"StoryLoad_{direction}",
-            "TABLE_TYPE": f"STORY_LOAD_{direction}",
-            "UNIT": {"FORCE": "KN", "DIST": "M"},
-            "STYLES": {"FORMAT": "Fixed", "PLACE": 3},
-            "COMPONENTS": ["Load", "Story", "Level", "Concent", "Beam", "Floor", "Pressure", "SelfWeight", "Sum"]
+            "TABLE_TYPE": f"STORY_LOAD_SUMMARY_{direction}",
+            "EXPORT_PATH": f"C:\\\\MIDAS\\\\Result\\\\story_load_summary_{direction.lower()}_Out.JSON"
         }
     }
     resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
