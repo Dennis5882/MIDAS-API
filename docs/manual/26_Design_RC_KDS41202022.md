@@ -600,7 +600,7 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 {
   "Assign": {
     "1": {
-      "DESIGN_CD": "KDS 41 20 : 2022 ",
+      "DESIGN_CD": "KDS 41 20 : 2022",
       "MOM_CALC_MTHD": "Equivalent",
       "EXP_COND": "etc",
       "PM_CRV_CALC": "KeepMPConstant",
@@ -648,7 +648,7 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 {
   "DCORC": {
     "1": {
-      "DESIGN_CD": "KDS 41 20 : 2022 ",
+      "DESIGN_CD": "KDS 41 20 : 2022",
       "SEISMIC_PROV": true,
       "TORS_DES": true,
       "MOM_REDIST_FACT": 1,
@@ -2924,6 +2924,10 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
   }
 }
 ```
+
+> ⚠️ **2026-08-26 확인 (article id `59398794726041`):** GET 응답 예제의 `"CODE"` 값이
+> `"STANDARD"`(대문자)로, PUT 요청 예제·JSON Schema의 `oneOf`("Standard")와 대소문자가
+> 다르다 — 원문 자체의 모순이며, 예제 원문을 그대로 유지한다.
 
 ### Python 예제
 
@@ -5547,18 +5551,18 @@ print("GET:", requests.get(URI, headers=HEADERS).json())   # 최상위 키 "DCRM
 ```json
 {
   "Assign": {
-    "976": {
+    "3": {
       "ITEMS": [
         {
           "STORY": "1F",
-          "VERTICAL_REBAR": "D13",
-          "HORIZONTAL_REBAR": "D10",
-          "END_REBAR": "D13",
-          "BE_HORZ_REBAR": "D10",
-          "BE_HORZ_SPACE": 0.2,
-          "BE_VERT_SPACE": 0.1,
-          "DE": 0.05,
-          "DW": 0.05
+          "VERTICAL_REBAR": "D22",
+          "HORIZONTAL_REBAR": "D32",
+          "END_REBAR": "D5",
+          "BE_HORZ_REBAR": "D13",
+          "BE_HORZ_SPACE": 1.6404199475065615,
+          "BE_VERT_SPACE": 1.6404199475065615,
+          "DE": 1.6404199475065615,
+          "DW": 1.6404199475065615
         },
         {
           "STORY": "B1",
@@ -5566,10 +5570,36 @@ print("GET:", requests.get(URI, headers=HEADERS).json())   # 최상위 키 "DCRM
           "HORIZONTAL_REBAR": "D10",
           "END_REBAR": "D5",
           "BE_HORZ_REBAR": "D13",
-          "BE_HORZ_SPACE": 0.2,
-          "BE_VERT_SPACE": 0.2,
-          "DE": 0.05,
-          "DW": 0.05
+          "BE_HORZ_SPACE": 1.6404199475065615,
+          "BE_VERT_SPACE": 1.6404199475065615,
+          "DE": 1.6404199475065615,
+          "DW": 1.6404199475065615
+        }
+      ]
+    },
+    "14": {
+      "ITEMS": [
+        {
+          "STORY": "1F",
+          "VERTICAL_REBAR": "D25",
+          "HORIZONTAL_REBAR": "D32",
+          "END_REBAR": "D5",
+          "BE_HORZ_REBAR": "D13",
+          "BE_HORZ_SPACE": 1.6404199475065615,
+          "BE_VERT_SPACE": 1.6404199475065615,
+          "DE": 1.6404199475065615,
+          "DW": 1.6404199475065615
+        },
+        {
+          "STORY": "B1",
+          "VERTICAL_REBAR": "D4",
+          "HORIZONTAL_REBAR": "D32",
+          "END_REBAR": "D41",
+          "BE_HORZ_REBAR": "D13",
+          "BE_HORZ_SPACE": 1.6404199475065615,
+          "BE_VERT_SPACE": 1.6404199475065615,
+          "DE": 1.6404199475065615,
+          "DW": 1.6404199475065615
         }
       ]
     }
@@ -5582,18 +5612,18 @@ print("GET:", requests.get(URI, headers=HEADERS).json())   # 최상위 키 "DCRM
 ```json
 {
   "DCRMW": {
-    "976": {
+    "3": {
       "ITEMS": [
         {
           "STORY": "1F",
-          "VERTICAL_REBAR": "D13",
-          "HORIZONTAL_REBAR": "D10",
-          "END_REBAR": "D13",
-          "BE_HORZ_REBAR": "D10",
-          "BE_HORZ_SPACE": 0.2,
-          "BE_VERT_SPACE": 0.1,
-          "DE": 0.05,
-          "DW": 0.05
+          "VERTICAL_REBAR": "D22",
+          "HORIZONTAL_REBAR": "D32",
+          "END_REBAR": "D5",
+          "BE_HORZ_REBAR": "D13",
+          "BE_HORZ_SPACE": 1.6404199475065615,
+          "BE_VERT_SPACE": 1.6404199475065615,
+          "DE": 1.6404199475065615,
+          "DW": 1.6404199475065615
         },
         {
           "STORY": "B1",
@@ -5601,10 +5631,36 @@ print("GET:", requests.get(URI, headers=HEADERS).json())   # 최상위 키 "DCRM
           "HORIZONTAL_REBAR": "D10",
           "END_REBAR": "D5",
           "BE_HORZ_REBAR": "D13",
-          "BE_HORZ_SPACE": 0.2,
-          "BE_VERT_SPACE": 0.2,
-          "DE": 0.05,
-          "DW": 0.05
+          "BE_HORZ_SPACE": 1.6404199475065615,
+          "BE_VERT_SPACE": 1.6404199475065615,
+          "DE": 1.6404199475065615,
+          "DW": 1.6404199475065615
+        }
+      ]
+    },
+    "14": {
+      "ITEMS": [
+        {
+          "STORY": "1F",
+          "VERTICAL_REBAR": "D25",
+          "HORIZONTAL_REBAR": "D32",
+          "END_REBAR": "D5",
+          "BE_HORZ_REBAR": "D13",
+          "BE_HORZ_SPACE": 1.6404199475065615,
+          "BE_VERT_SPACE": 1.6404199475065615,
+          "DE": 1.6404199475065615,
+          "DW": 1.6404199475065615
+        },
+        {
+          "STORY": "B1",
+          "VERTICAL_REBAR": "D4",
+          "HORIZONTAL_REBAR": "D32",
+          "END_REBAR": "D41",
+          "BE_HORZ_REBAR": "D13",
+          "BE_HORZ_SPACE": 1.6404199475065615,
+          "BE_VERT_SPACE": 1.6404199475065615,
+          "DE": 1.6404199475065615,
+          "DW": 1.6404199475065615
         }
       ]
     }
@@ -7412,9 +7468,33 @@ print(res.json())   # {"message": "success"}
       ],
       [
         "859", "511", "10.200", "RG1", "0.4500", "0.7000", "0.0000", "0.0000",
+        "24000.0", "400000", "400000", "M", "0.00000", "26", "0.0000",
+        "2-D25", "310.677", "6", "0.0015", "4-D25",
+        "162.023", "6", "0.0004", "3-D13 @310", "OK"
+      ],
+      [
+        "859", "511", "10.200", "RG1", "0.4500", "0.7000", "0.0000", "0.0000",
         "24000.0", "400000", "400000", "J", "438.788", "6", "0.0022",
         "5-D25", "80.1426", "8", "0.0005", "3-D25",
         "227.693", "6", "0.0004", "3-D13 @310", "OK"
+      ],
+      [
+        "860", "511", "10.200", "RG1", "0.4500", "0.7000", "0.0000", "0.0000",
+        "24000.0", "400000", "400000", "I", "371.955", "6", "0.0019",
+        "4-D25", "116.748", "6", "0.0007", "3-D25",
+        "216.899", "6", "0.0004", "3-D13 @310", "OK"
+      ],
+      [
+        "860", "511", "10.200", "RG1", "0.4500", "0.7000", "0.0000", "0.0000",
+        "24000.0", "400000", "400000", "M", "0.00000", "26", "0.0000",
+        "2-D25", "322.462", "6", "0.0016", "4-D25",
+        "157.086", "6", "0.0004", "3-D13 @310", "OK"
+      ],
+      [
+        "860", "511", "10.200", "RG1", "0.4500", "0.7000", "0.0000", "0.0000",
+        "24000.0", "400000", "400000", "J", "401.826", "6", "0.0020",
+        "4-D25", "104.378", "11", "0.0007", "3-D25",
+        "222.756", "6", "0.0004", "3-D13 @310", "OK"
       ]
     ]
   }
@@ -7793,6 +7873,13 @@ print("POST:", res.status_code, res.json())   # {"message": "success"}
         "0.0000", "0.0000", "2-D13 @200", "2-D13 @200", "OK"
       ],
       [
+        "1058", "100", "D300", "0.0000", "0.3000", "3059149", "4.0000",
+        "6.1E+07", "4.1E+07", "5", "119777", "950.018", "110012", "0.009",
+        "32.2447", "3733.91", "0.009", "0.03394", "45.000000", "0.0008",
+        "4-0-D16", "47", "47", "0.00000", "0.00000", "0.000", "0.000",
+        "0.0000", "0.0000", "2-D7  @200", "2-D7  @200", "OK"
+      ],
+      [
         "1059", "100", "D300", "0.0000", "0.3000", "3059149", "4.0000",
         "6.1E+07", "4.1E+07", "7", "119777", "9088.78", "14275.4", "0.637",
         "3543.83", "5584.15", "0.635", "0.38991", "86.471081", "0.0008",
@@ -8164,6 +8251,24 @@ print("POST:", res.status_code, res.json())   # {"message": "success"}
         "0.0054", "14-5-D22", "228.405", "0.790", "0.0004", "2-D10 @200", "OK"
       ],
       [
+        "867", "511", "RG1", "0.4500", "0.7000", "10.200", "24000.0",
+        "400000", "400000", "6", "4258.45", "0.00000", "-", "0.000",
+        "397.106", "458.078", "0.867", "0.867", "0.000", "-", "0.000000",
+        "0.0046", "12-4-D22", "220.031", "0.743", "0.0004", "2-D10 @220", "OK"
+      ],
+      [
+        "868", "511", "RG1", "0.4500", "0.7000", "10.200", "24000.0",
+        "400000", "400000", "6", "4258.45", "0.00000", "-", "0.000",
+        "406.835", "458.078", "0.888", "0.888", "0.000", "-", "0.000000",
+        "0.0046", "12-4-D22", "221.859", "0.749", "0.0004", "2-D10 @220", "OK"
+      ],
+      [
+        "871", "512", "RG2", "0.4000", "0.7000", "7.2000", "24000.0",
+        "400000", "400000", "15", "3581.52", "0.00000", "-", "0.000",
+        "220.147", "311.586", "0.707", "0.707", "0.000", "-", "0.000000",
+        "0.0031", "8-3-D22", "120.289", "0.416", "0.0003", "2-D10 @200", "OK"
+      ],
+      [
         "873", "513", "RG3", "0.6000", "0.8000", "9.0000", "24000.0",
         "400000", "400000", "6", "6467.23", "0.00000", "-", "0.000",
         "787.844", "789.010", "0.999", "0.999", "0.000", "-", "0.000000",
@@ -8375,9 +8480,9 @@ print(res.json())
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
 | 1 | Argument 래퍼 | `"Argument"` | Object | — | **필수** |
-| 2 | 벽체 ID · 층 조합 목록 | `"SELECTIONS"` | Array[Object] | — | **필수** |
-| 2.1 | 벽체 ID 지정 (`KEYS`=각각, `TO`=범위 예 `"10to20"`) | `"WALL_IDS"` | Object | — | 필수 |
-| 2.2 | 대상 층 이름 목록 (예 `["B1F", "1F"]`) | `"STORY"` | Array[String] | — | 필수 |
+| 2 | 벽체 ID · 층 조합 목록 (생략 시 전체 벽체·전체 층 대상) | `"SELECTIONS"` | Array[Object] | — | 선택 |
+| 2.1 | 벽체 ID 지정 (`KEYS`=각각, `TO`=범위 예 `"10to20"`, 생략 시 전체 벽체) | `"WALL_IDS"` | Object | — | 선택 |
+| 2.2 | 대상 층 이름 목록 (예 `["B1F", "1F"]`, 생략 시 전체 층) | `"STORY"` | Array[String] | — | 선택 |
 
 ### Request / Response JSON
 
@@ -8462,6 +8567,8 @@ print("POST:", res.status_code, res.json())   # {"message": "success"}
         "TABLE_TYPE": { "type": "string", "enum": ["WID+STORY", "WID"] },
         "SELECTIONS": {
           "type": "array",
+          "description": "List of wall and story selections to include. If omitted or empty, all walls and all stories are included.",
+          "minItems": 0,
           "items": {
             "type": "object",
             "properties": {
@@ -8476,9 +8583,27 @@ print("POST:", res.status_code, res.json())   # {"message": "success"}
             }
           }
         },
-        "PRI_SORT": { "type": "integer", "enum": [0, 1], "default": 1 },
+        "PRI_SORT": {
+          "type": "integer",
+          "description": "Sorting criteria for WID+STORY output (by WID or Story)",
+          "default": 1,
+          "oneOf": [
+            { "title": "Story", "const": 0 },
+            { "title": "WID", "const": 1 }
+          ]
+        },
+        "PRI_SORT_WID": {
+          "type": "integer",
+          "description": "Sorting criteria for WID output (by Wall Mark or WID)",
+          "default": 1,
+          "oneOf": [
+            { "title": "WallMark", "const": 0 },
+            { "title": "WID", "const": 1 }
+          ]
+        },
         "RESULT": { "type": "integer", "enum": [0, 1, 2], "default": 0 },
-        "TABLE_NAME": { "type": "string" },
+        "TABLE_NAME": { "type": "string", "default": "RC Wall Design Result" },
+        "EXPORT_PATH": { "type": "string", "description": "Result Table Save Path" },
         "UNIT": { "type": "object" },
         "STYLES": { "type": "object" },
         "COMPONENTS": { "type": "array", "items": { "type": "string" } }
@@ -8495,11 +8620,13 @@ print("POST:", res.status_code, res.json())   # {"message": "success"}
 | 1 | Argument 래퍼 | `"Argument"` | Object | — | **필수** |
 | 2 | 표 타입 (`"WID+STORY"`=벽체+층별, `"WID"`=벽체별) | `"TABLE_TYPE"` | String (enum) | — | **필수** |
 | 3 | 벽체 ID · 층 조합 목록 (`WALL_IDS`+`STORY`) | `"SELECTIONS"` | Array[Object] | — | 선택 |
-| 4 | 정렬 기준 (`0`/`1`) | `"PRI_SORT"` | Integer | `1` | 선택 |
-| 5 | 결과 필터 (`0`=All, `1`=OK, `2`=NG) | `"RESULT"` | Integer | `0` | 선택 |
-| 6 | 표 제목 · 단위 · 포맷 · 표시 열 | `"TABLE_NAME"`/`"UNIT"`/`"STYLES"`/`"COMPONENTS"` | 각 타입 | — | 선택 |
+| 4 | 정렬 기준 (`0`=Story, `1`=WID) — `TABLE_TYPE`=WID+STORY 출력용 | `"PRI_SORT"` | Integer (oneOf) | `1` | 선택 |
+| 5 | 정렬 기준 (`0`=WallMark, `1`=WID) — `TABLE_TYPE`=WID 출력용 | `"PRI_SORT_WID"` | Integer (oneOf) | `1` | 선택 |
+| 6 | 결과 필터 (`0`=All, `1`=OK, `2`=NG) | `"RESULT"` | Integer | `0` | 선택 |
+| 7 | 결과 파일 저장 경로 | `"EXPORT_PATH"` | String | — | 선택 |
+| 8 | 표 제목 · 단위 · 포맷 · 표시 열 | `"TABLE_NAME"`/`"UNIT"`/`"STYLES"`/`"COMPONENTS"` | 각 타입 | — | 선택 |
 
-**응답 `COMPONENTS`(열) 설명** (13개 열)
+**응답 `COMPONENTS`(열) 설명 — 아래 예제에 쓰인 13개 열**
 
 | 열 | 의미 |
 |----|------|
@@ -8508,6 +8635,14 @@ print("POST:", res.status_code, res.json())   # {"message": "success"}
 | `Mcy` / `Mcz` / `Rat-My` / `Rat-Mz` | y·z축 소요모멘트 및 휨비 |
 | `Vu` / `Rat-V` | 소요전단 · 전단비 |
 | `CHK` | 판정 (`OK`/`NG`) |
+
+> ⚠️ **2026-08-26 확인 (article id `57442273865625`):** `COMPONENTS` 스키마의 실제 `enum`은 위
+> 13개 열보다 훨씬 많은 **35개** 선택 가능 열을 정의합니다 — 위 13개 외에 `Lw`, `HTw`, `hw`,
+> `phiPn.max`, `phiPny`, `phiPnz`, `LCB_Mc`, `phiMny`, `phiMnz`, `BE`, `BEREBAR`, `BEL`,
+> `LCB_Vu`, `phiVn`, `As-V`, `V-Rebar`, `As-H`, `H-Rebar`, `End-Rebar`, `BarLayer`, `fck`,
+> `fy`, `fys`, `WallMark`(스키마 enum 표기, 아래 Request/Response 예제는 공백이 있는
+> `"Wall Mark"`를 사용 — 원문 자체의 표기 불일치)도 지정할 수 있다. 이 표는 예제에서 실제로
+> 쓰인 13개 열만 설명하며, 나머지 22개 열은 원문에 개별 설명이 없어 열 이름만 확인했다.
 
 > **참고:** 벽체 테이블은 다른 부재와 달리 응답이 `HEAD`/`DATA` 배열이 아니라 `data.COMPONENTS`(열 이름 배열) + `data.ROWS`(열 이름을 키로 갖는 객체 배열) 구조입니다.
 
@@ -8568,10 +8703,28 @@ print("POST:", res.status_code, res.json())   # {"message": "success"}
         "Vu": "184.000", "Rat-V": "0.254", "CHK": "OK"
       },
       {
+        "WID": 3, "Story": "3F", "Wall Mark": "W3",
+        "Pu": "1940.000", "Rat-Py": "0.327", "Rat-Pz": "0.306",
+        "Mcy": "548.000", "Mcz": "421.000", "Rat-My": "0.442", "Rat-Mz": "0.381",
+        "Vu": "294.000", "Rat-V": "0.392", "CHK": "OK"
+      },
+      {
         "WID": 10, "Story": "3F", "Wall Mark": "W10",
         "Pu": "4580.000", "Rat-Py": "0.684", "Rat-Pz": "0.652",
         "Mcy": "1450.000", "Mcz": "1125.000", "Rat-My": "0.768", "Rat-Mz": "0.704",
         "Vu": "642.000", "Rat-V": "0.726", "CHK": "OK"
+      },
+      {
+        "WID": 11, "Story": "3F", "Wall Mark": "W11",
+        "Pu": "4720.000", "Rat-Py": "0.701", "Rat-Pz": "0.668",
+        "Mcy": "1525.000", "Mcz": "1194.000", "Rat-My": "0.782", "Rat-Mz": "0.719",
+        "Vu": "668.000", "Rat-V": "0.748", "CHK": "OK"
+      },
+      {
+        "WID": 12, "Story": "3F", "Wall Mark": "W12",
+        "Pu": "4955.000", "Rat-Py": "0.724", "Rat-Pz": "0.691",
+        "Mcy": "1604.000", "Mcz": "1268.000", "Rat-My": "0.812", "Rat-Mz": "0.742",
+        "Vu": "704.000", "Rat-V": "0.781", "CHK": "OK"
       }
     ]
   }
@@ -8632,17 +8785,19 @@ for row in data["ROWS"]:
   "properties": {
     "Argument": {
       "type": "object",
-      "required": ["REPORT_TYPE", "SELECTIONS", "EXPORT_PATH", "OUTPUT_NAME"],
+      "required": ["REPORT_TYPE", "EXPORT_PATH", "OUTPUT_NAME"],
       "additionalProperties": false,
       "properties": {
-        "REPORT_TYPE": { "type": "string", "enum": ["WID+STORY", "WID"] },
+        "REPORT_TYPE": { "type": "string", "enum": ["WID+STORY", "WID"], "default": "WID+STORY" },
         "CURRENT_MODE_WID_STORY": {
           "type": "string",
+          "description": "Report output mode for WID+STORY (Detail supported)",
           "enum": ["Graphic", "Detail", "Summary", "PMCurve"]
         },
         "CURRENT_MODE_WID": {
           "type": "string",
-          "enum": ["Graphic", "Detail", "Summary", "PMCurve"]
+          "description": "Report output mode for WID (Detail not supported)",
+          "enum": ["Graphic", "Summary", "PMCurve"]
         },
         "SELECTIONS": {
           "type": "array",
@@ -8674,9 +8829,9 @@ for row in data["ROWS"]:
 |-----|------|-----|------|--------|------|
 | 1 | Argument 래퍼 | `"Argument"` | Object | — | **필수** |
 | 2 | 리포트 타입 (`"WID+STORY"`/`"WID"`) | `"REPORT_TYPE"` | String (enum) | — | **필수** |
-| 3 | 출력 모드 (벽체+층) — `"Graphic"`/`"Detail"`/`"Summary"`/`"PMCurve"` | `"CURRENT_MODE_WID_STORY"` | String (oneOf) | — | 조건부 (WID+STORY) |
-| 4 | 출력 모드 (벽체) — 동일 enum | `"CURRENT_MODE_WID"` | String (oneOf) | — | 조건부 (WID) |
-| 5 | 벽체 ID · 층 조합 목록 (`WALL_IDS`+`STORY`) | `"SELECTIONS"` | Array[Object] | — | **필수** |
+| 3 | 출력 모드 (벽체+층, Detail 지원) — `"Graphic"`/`"Detail"`/`"Summary"`/`"PMCurve"` | `"CURRENT_MODE_WID_STORY"` | String (oneOf) | — | 조건부 (WID+STORY) |
+| 4 | 출력 모드 (벽체, Detail 미지원) — `"Graphic"`/`"Summary"`/`"PMCurve"` | `"CURRENT_MODE_WID"` | String (oneOf) | — | 조건부 (WID) |
+| 5 | 벽체 ID · 층 조합 목록 (`WALL_IDS`+`STORY`, 생략 시 전체) | `"SELECTIONS"` | Array[Object] | — | 선택 |
 | 6 | 저장 디렉터리 경로 | `"EXPORT_PATH"` | String | — | **필수** |
 | 7 | 출력 파일 기본 이름 | `"OUTPUT_NAME"` | String | — | **필수** |
 
@@ -8941,9 +9096,89 @@ print("POST:", res.status_code, res.json())   # {"message": "success"}
         "2-D22", "220.513", "6", "0.0009", "2-D10 @160", "OK"
       ],
       [
+        "1065", "T1", "1.0000", "0.7000", "1.0000", "0.5000", "2",
+        "1048.87", "6", "0.0038", "11-D22", "0.00000", "200", "0.0000",
+        "2-D22", "214.847", "6", "0.0009", "2-D10 @160", "OK"
+      ],
+      [
+        "1065", "T1", "1.0000", "0.7000", "1.0000", "0.5000", "3",
+        "845.696", "5", "0.0044", "12-D22", "0.00000", "200", "0.0000",
+        "2-D22", "193.595", "6", "0.0009", "2-D10 @160", "OK"
+      ],
+      [
+        "1065", "N", "1.0000", "0.5000", "1.0000", "0.5000", "4",
+        "0.00000", "", "0.0000", "None", "0.00000", "", "0.0000",
+        "None", "-", "-", "-", "-", "OK"
+      ],
+      [
+        "1065", "N", "1.0000", "0.5000", "1.0000", "0.5000", "5",
+        "0.00000", "", "0.0000", "None", "0.00000", "", "0.0000",
+        "None", "-", "-", "-", "-", "OK"
+      ],
+      [
+        "1065", "N", "1.0000", "0.5000", "1.0000", "0.5000", "6",
+        "0.00000", "", "0.0000", "None", "0.00000", "", "0.0000",
+        "None", "-", "-", "-", "-", "OK"
+      ],
+      [
         "1065", "T2", "1.0000", "0.5000", "1.0000", "0.7000", "7",
         "50.1371", "5", "0.0002", "9-D22", "0.00000", "200", "0.0000",
         "2-D22", "47.9404", "5", "0.0000", "2-D10 @210", "OK"
+      ],
+      [
+        "1065", "T2", "1.0000", "0.5000", "1.0000", "0.7000", "8",
+        "39.4785", "5", "0.0001", "9-D22", "0.00000", "200", "0.0000",
+        "2-D22", "42.5657", "5", "0.0000", "2-D10 @290", "OK"
+      ],
+      [
+        "1065", "T2", "1.0000", "0.5000", "1.0000", "0.7000", "9",
+        "8.21148", "5", "0.0000", "9-D22", "0.00000", "200", "0.0000",
+        "2-D22", "19.4192", "5", "0.0000", "2-D10 @310", "OK"
+      ],
+      [
+        "1073", "T1", "1.0000", "0.7000", "1.0000", "0.5000", "1",
+        "2555.66", "5", "0.0128", "13-13-D22", "0.00000", "200", "0.0000",
+        "2-D22", "365.532", "5", "0.0010", "2-D10 @140", "N"
+      ],
+      [
+        "1073", "T1", "1.0000", "0.7000", "1.0000", "0.5000", "2",
+        "2376.23", "5", "0.0107", "13-13-D22", "0.00000", "200", "0.0000",
+        "2-D22", "352.311", "5", "0.0010", "2-D10 @140", "N"
+      ],
+      [
+        "1073", "T1", "1.0000", "0.7000", "1.0000", "0.5000", "3",
+        "2036.18", "5", "0.0086", "13-13-D22", "0.00000", "200", "0.0000",
+        "2-D22", "328.341", "5", "0.0010", "2-D10 @140", "N"
+      ],
+      [
+        "1073", "N", "1.0000", "0.5000", "1.0000", "0.5000", "4",
+        "0.00000", "", "0.0000", "None", "0.00000", "", "0.0000",
+        "None", "-", "-", "-", "-", "OK"
+      ],
+      [
+        "1073", "N", "1.0000", "0.5000", "1.0000", "0.5000", "5",
+        "0.00000", "", "0.0000", "None", "0.00000", "", "0.0000",
+        "None", "-", "-", "-", "-", "OK"
+      ],
+      [
+        "1073", "N", "1.0000", "0.5000", "1.0000", "0.5000", "6",
+        "0.00000", "", "0.0000", "None", "0.00000", "", "0.0000",
+        "None", "-", "-", "-", "-", "OK"
+      ],
+      [
+        "1073", "T2", "1.0000", "0.5000", "1.0000", "0.7000", "7",
+        "341.337", "5", "0.0028", "8-D22", "0.00000", "200", "0.0000",
+        "2-D22", "193.540", "5", "0.0010", "2-D10 @140", "OK"
+      ],
+      [
+        "1073", "T2", "1.0000", "0.5000", "1.0000", "0.7000", "8",
+        "247.220", "5", "0.0016", "5-D22", "0.00000", "200", "0.0000",
+        "2-D22", "182.791", "5", "0.0010", "2-D10 @140", "OK"
+      ],
+      [
+        "1073", "T2", "1.0000", "0.5000", "1.0000", "0.7000", "9",
+        "76.1395", "5", "0.0004", "4-D22", "0.00000", "200", "0.0000",
+        "2-D22", "158.821", "5", "0.0000", "2-D10 @310", "OK"
       ]
     ]
   }
@@ -11842,7 +12077,7 @@ print(res.json())   # {"message": "success"}
 }
 ```
 
-**Response Body** (대표 DATA 2개 객체, 각 객체 키 수 = COMPONENTS 15개)
+**Response Body** (DATA 5개 객체, 각 객체 키 수 = COMPONENTS 15개)
 
 ```json
 {
@@ -11906,6 +12141,57 @@ print(res.json())   # {"message": "success"}
       "phiVn": 406.474,
       "Rat-V": 0.553,
       "CHK_STR": "OK",
+      "CHK_RBR": "OK"
+    },
+    {
+      "WID": 10,
+      "Story": "3F",
+      "Wall Mark": "W3F-10",
+      "Pu": 1842.37,
+      "Rat-Py": 0.573,
+      "Rat-Pz": 0.618,
+      "Mcy": 438.92,
+      "Mcz": 512.68,
+      "Rat-My": 0.782,
+      "Rat-Mz": 0.846,
+      "Vu": 286.54,
+      "phiVn": 412.882,
+      "Rat-V": 0.694,
+      "CHK_STR": "OK",
+      "CHK_RBR": "OK"
+    },
+    {
+      "WID": 11,
+      "Story": "3F",
+      "Wall Mark": "W3F-11",
+      "Pu": 2168.94,
+      "Rat-Py": 0.684,
+      "Rat-Pz": 0.732,
+      "Mcy": 526.34,
+      "Mcz": 638.15,
+      "Rat-My": 0.891,
+      "Rat-Mz": 0.957,
+      "Vu": 342.61,
+      "phiVn": 421.933,
+      "Rat-V": 0.812,
+      "CHK_STR": "OK",
+      "CHK_RBR": "OK"
+    },
+    {
+      "WID": 12,
+      "Story": "3F",
+      "Wall Mark": "W3F-12",
+      "Pu": 2385.76,
+      "Rat-Py": 0.745,
+      "Rat-Pz": 0.801,
+      "Mcy": 612.48,
+      "Mcz": 724.93,
+      "Rat-My": 0.936,
+      "Rat-Mz": 1.034,
+      "Vu": 398.27,
+      "phiVn": 450.532,
+      "Rat-V": 0.884,
+      "CHK_STR": "NG",
       "CHK_RBR": "OK"
     }
   ]

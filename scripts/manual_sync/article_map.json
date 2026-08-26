@@ -2689,5 +2689,357 @@
       "verified_at": "2026-08-26",
       "note": "MATCH"
     }
+  },
+  "26_Design_RC_KDS41202022.md": {
+    "0. DRC": {
+      "article_id": "59120800558361",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "1. DCO": {
+      "article_id": "59398215969561",
+      "verified_at": "2026-08-27",
+      "note": "Request/Response 예제의 DESIGN_CD 값에 있던 존재하지 않는 trailing space 제거 (repo 자체 오타)"
+    },
+    "2. DCTL": {
+      "article_id": "57399235907097",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "3. LLRF": {
+      "article_id": "59398737034009",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "4. LCTB": {
+      "article_id": "57400849512089",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "5. SRDF": {
+      "article_id": "59398928723865",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "6. EQCT": {
+      "article_id": "57401739847065",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "7. ULCT": {
+      "article_id": "57424526808345",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "8. SUEQ": {
+      "article_id": "57401718595481",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "9. SDGN": {
+      "article_id": "57401906803225",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "10. SCOL": {
+      "article_id": "57402506763289",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "11. MBTP": {
+      "article_id": "57401721345305",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "12. MEMB": {
+      "article_id": "59398810145817",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "13. MATD": {
+      "article_id": "59398794726041",
+      "verified_at": "2026-08-27",
+      "note": "MATCH. GET 응답 예제 CODE 값이 대문자 STANDARD로, 스키마 oneOf/PUT 예제의 Standard와 표기가 다른 원문 자체 모순 확인, 예제 원문 유지 + 주석 추가"
+    },
+    "14. LENG": {
+      "article_id": "57401130563353",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "15. KFAC": {
+      "article_id": "57401483836313",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "16. CMFT": {
+      "article_id": "57401571080345",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "17. FMAG": {
+      "article_id": "57401658783385",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "18. MLLR": {
+      "article_id": "57401688698393",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "19. HCBM": {
+      "article_id": "57401028854553",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "20. MRFT": {
+      "article_id": "57402191658777",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "21. TRFT": {
+      "article_id": "57402250238617",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "22. MCMB": {
+      "article_id": "57402267791001",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "23. DFBA": {
+      "article_id": "57402315435545",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "24. PMDM": {
+      "article_id": "57402389191065",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "25. WMAK": {
+      "article_id": "57402556185625",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "26. BEMW": {
+      "article_id": "57402573014169",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "27. REXC": {
+      "article_id": "57424760263833",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "28. LMRR": {
+      "article_id": "57475390140313",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "29. DCRM-BEAM": {
+      "article_id": "57402955647769",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "30. DCRM-COLUMN": {
+      "article_id": "57403168622873",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "31. DCRM-BRACE": {
+      "article_id": "57403194027033",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "32. DCRM-WALL": {
+      "article_id": "57567874715289",
+      "verified_at": "2026-08-27",
+      "note": "Request/Response 예제가 원문이 아닌 자체 단순화 값으로 대체되어 있던 것을 원문 예제(벽체 ID 3/14, 값 1.6404199475065615)로 교체"
+    },
+    "33. DCRE": {
+      "article_id": "57404666280729",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "34. DCREM": {
+      "article_id": "57407575510937",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "35. REBB": {
+      "article_id": "59236057502873",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "36. REBC": {
+      "article_id": "59236266281625",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "37. REBW": {
+      "article_id": "59236271208729",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "38. REBR": {
+      "article_id": "59236188355097",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "39. BD-ANAL": {
+      "article_id": "57426912432793",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "40. BD-TABLE": {
+      "article_id": "57426948142105",
+      "verified_at": "2026-08-27",
+      "note": "Response DATA가 6행(부재 859/860 각 I/M/J) 중 2행만 남아있던 것을 원문 전체로 보강"
+    },
+    "41. BD-REPORT": {
+      "article_id": "57427789377433",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "42. CD-ANAL": {
+      "article_id": "57429905171225",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "43. CD-TABLE": {
+      "article_id": "57430243603225",
+      "verified_at": "2026-08-27",
+      "note": "Response DATA가 3행(915/1058/1059) 중 1058행이 누락되어 있던 것을 보강"
+    },
+    "44. CD-REPORT": {
+      "article_id": "57430321588249",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "45. BRD-ANAL": {
+      "article_id": "57430416643225",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "46. BRD-TABLE": {
+      "article_id": "57430428520601",
+      "verified_at": "2026-08-27",
+      "note": "Response DATA가 5행 중 789/873 2행만 남아있던 것을 원문 전체(867/868/871 포함)로 보강"
+    },
+    "47. BRD-REPORT": {
+      "article_id": "57430481485081",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "48. WD-ANAL": {
+      "article_id": "57430514941209",
+      "verified_at": "2026-08-27",
+      "note": "SELECTIONS/WALL_IDS/STORY가 실제로는 선택사항인데 필수로 잘못 표기되어 있던 것을 정정"
+    },
+    "49. WD-TABLE": {
+      "article_id": "57442273865625",
+      "verified_at": "2026-08-27",
+      "note": "PRI_SORT_WID·EXPORT_PATH 필드 누락 보강, PRI_SORT 설명 정정(Story/WID), Response ROWS가 5개 중 2개만 남아있던 것을 원문 전체로 보강, COMPONENTS enum이 예제 13개 외 35개 전체 선택 가능함을 주석으로 명시(WallMark 표기 불일치 포함)"
+    },
+    "50. WD-REPORT": {
+      "article_id": "57442429841561",
+      "verified_at": "2026-08-27",
+      "note": "SELECTIONS를 필수로 잘못 표기, CURRENT_MODE_WID enum에 없는 Detail이 포함되어 있던 것을 정정"
+    },
+    "51. HCD-ANAL": {
+      "article_id": "57456785885465",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "52. HCD-TABLE": {
+      "article_id": "57457041716889",
+      "verified_at": "2026-08-27",
+      "note": "Response DATA가 18행(부재 1065/1073 각 9행, NG 사례 포함) 중 2행만 남아있던 것을 원문 전체로 보강"
+    },
+    "53. HCD-REPORT": {
+      "article_id": "57457044886169",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "54. BC-ANAL": {
+      "article_id": "57457104239129",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "55. BC-TABLE": {
+      "article_id": "57457223050521",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "56. BC-REPORT": {
+      "article_id": "57457268302233",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "57. CC-ANAL": {
+      "article_id": "57457806251929",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "58. CC-TABLE": {
+      "article_id": "57458140117657",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "59. CC-REPORT": {
+      "article_id": "57458112575641",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "60. BRC-ANAL": {
+      "article_id": "57458218715417",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "61. BRC-TABLE": {
+      "article_id": "57458359943449",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "62. BRC-REPORT": {
+      "article_id": "57458379586713",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "63. WC-ANAL": {
+      "article_id": "57458454433689",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "64. WC-TABLE": {
+      "article_id": "57458599023897",
+      "verified_at": "2026-08-27",
+      "note": "Response DATA가 5행(NG 사례 WID 12 포함) 중 2행만 남아있던 것을 원문 전체로 보강"
+    },
+    "65. WC-REPORT": {
+      "article_id": "57458710549913",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "66. CDESIGN": {
+      "article_id": "57458836502553",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "67. TABLE-Column": {
+      "article_id": "57459388328601",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "68. TABLE-Brace": {
+      "article_id": "57459768200217",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "69. TABLE-Beam": {
+      "article_id": "57474262026905",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    }
   }
 }
