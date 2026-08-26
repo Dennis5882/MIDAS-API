@@ -256,7 +256,37 @@ print("STAG PUT/1:", resp.status_code)
 | (12) | 비틀림 저항 강성 스케일 계수 | `IXX` | Number | 1 | Optional |
 | (13) | 관성 모멘트 (y축) 강성 스케일 계수 | `IYY` | Number | 1 | Optional |
 | (14) | 관성 모멘트 (z축) 강성 스케일 계수 | `IZZ` | Number | 1 | Optional |
-| (15) | 워핑 상수 강성 스케일 계수 | `IW` | Number | 1 | Optional |
+| (15) | 자중 강성 스케일 계수 | `WAREA` | Number | 1 | Optional |
+| (16) | 워핑 상수 강성 스케일 계수 | `IW` | Number | 1 | Optional |
+| 6 | 공칭 치수(h) 자동 계산 옵션 | `OPT_UPDATE_ALL_H` | Boolean | - | Optional |
+
+> ⚠️ **2026-08-25 확인:** `WAREA`(자중 스케일 계수)는 원문 Specifications 표에는 (14) `IZZ`
+> 다음 항목이 곧바로 (15) `IW`로 이어져 있어 아예 빠져 있지만, JSON Schema와 Request Example
+> (아래 2-3 예제의 각 파트에 `"WAREA": 1`)에는 `IZZ`와 `IW` 사이에 명시돼 있다 — 원문 표 자체의
+> 누락이며 예제가 표보다 우선(CLAUDE.md 원칙)이라 반영했다(아티클 id `35987625234201`).
+> `OPT_UPDATE_ALL_H`도 원문 표·예제 모두에 없고 JSON Schema에만 존재 — 예제로 확인되지 않은
+> 스키마 전용 필드임을 밝혀 둔다.
+
+`vPARTINFO`의 각 파트에는 이 외에도 JSON Schema에만 존재하고 원문 표·예제 어디에도 나오지 않는
+아래 필드들이 있다. 용도(추정: 중립축까지의 거리는 GET 응답 시의 계산 결과, `STIFF_USER*` 3종은
+`TYPE="USER"`일 때의 사용자 정의 강성 입력)는 필드명·설명에서 추정한 것으로 공식 문서에 설명이
+없어 확정된 것은 아니다.
+
+| 설명 | Key | Value Type | 비고 |
+| --- | --- | --- | --- |
+| Y축 중립축까지 거리 | `CY` | Number | (추정) 결과 조회 시 값 |
+| Z축 중립축까지 거리 | `CZ` | Number | (추정) 결과 조회 시 값 |
+| Y축 중립축까지 거리 – I단 (테이퍼) | `CYI` | Number | (추정) 결과 조회 시 값 |
+| Z축 중립축까지 거리 – I단 (테이퍼) | `CZI` | Number | (추정) 결과 조회 시 값 |
+| Y축 중립축까지 거리 – J단 (테이퍼) | `CYJ` | Number | (추정) 결과 조회 시 값 |
+| Z축 중립축까지 거리 – J단 (테이퍼) | `CZJ` | Number | (추정) 결과 조회 시 값 |
+| 사용자 정의 강성 (일반) | `STIFF_USER` | Object | (추정) `TYPE="USER"` 시 사용 |
+| 사용자 정의 강성 – I단 (테이퍼) | `STIFF_USER_TAPERED_I` | Object | (추정) `TYPE="USER"`+테이퍼 시 사용 |
+| 사용자 정의 강성 – J단 (테이퍼) | `STIFF_USER_TAPERED_J` | Object | (추정) `TYPE="USER"`+테이퍼 시 사용 |
+
+`STIFF_USER`/`STIFF_USER_TAPERED_I`/`STIFF_USER_TAPERED_J` 3종은 모두 동일한 하위 구조
+(`AREA`/`ASY`/`ASZ`/`IXX`/`IYY`/`IZZ`/`CYP`/`CYM`/`CZP`/`CZM`/`QYB`/`QZB`/`X1`~`X4`/`Y1`~`Y4`/`IW`,
+전부 Number, 설명은 스키마상 "Partial stiffness"로만 표기)를 가진다.
 
 ### 2-3. Request Body 예시
 

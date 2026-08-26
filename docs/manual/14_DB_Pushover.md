@@ -973,7 +973,7 @@ print("GET:", resp.json())
 
 | No. | 설명 | Key | Value 타입 | 기본값/enum | 필수 |
 |-----|------|-----|-----------|-------------|------|
-| 1 | 기하비선형 유형 (None: 0 / P-Delta: 1 / Large Displacements: 2). GEO_NONL_TYPE이 1 또는 2이면 INIT_LOAD_TYPE은 반드시 0이어야 함 | `GEO_NONL_TYPE` | integer (enum) | - | 필수 |
+| 1 | 기하비선형 유형 (None: 0 / Large Displacements: 1 / P-Delta: 2). GEO_NONL_TYPE이 1 또는 2이면 INIT_LOAD_TYPE은 반드시 0이어야 함 | `GEO_NONL_TYPE` | integer (enum) | - | 필수 |
 | 2 | 초기하중 유형 (비선형 정적해석 수행: 0 / 정적·시공단계 해석 결과 가져오기: 1) | `INIT_LOAD_TYPE` | integer (enum) | - | 필수 |
 | 3 | 초기하중 하중케이스 목록 (INIT_LOAD_TYPE=1일 때 IGNORE_ELEM 지정 불가) | `INIT_LOAD_LIST` | array [object] | - | 선택 |
 | 3-1 | └ 하중케이스 이름 (길이 ≥1) | `INIT_LOAD_LIST[].LC_NAME` | string | - | 필수 (배열 사용 시) |
@@ -1038,6 +1038,14 @@ print("GET:", resp.json())
 | 8 | Pushover 기타(Misc) 옵션 | `MISC` | object | - | 선택 |
 | 8-1 | └ 해석 후 Pushover 곡선 결과 표시 | `MISC.SHOW_GRAPH_AFTER` | boolean | - | 필수 |
 | 8-2 | └ 해석 중 Pushover 곡선 표시 | `MISC.SHOW_GRAPH_DURING` | boolean | - | 필수 |
+
+> ⚠️ **2026-08-26 확인:** `GEO_NONL_TYPE`의 enum 순서를 이전엔 None:0/P-Delta:1/Large
+> Displacements:2로 잘못 기재했다. 원문 JSON Schema의 description은 단어 나열 순서가
+> "None / P-Delta / Large Displacements"라 이를 그대로 따른 것이 원인으로 보이나, 원문
+> Specifications 표는 명시적으로 None:0/**Large Displacements:1**/**P-Delta:2**로 번호를
+> 매겨 놓았다(스키마 설명 문구와 표가 서로 모순 — 표가 우선). 09장 `/db/THGC-M1`의 동명 필드
+> `GEO_NONL_TYPE`도 0=None/1=Large Disp/2=P-Delta로 동일 순서라 교차 확인됨(아티클 id
+> `56511008007705`).
 
 ### Request / Response JSON
 
@@ -1380,9 +1388,13 @@ print("DELETE:", resp.status_code)
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
 | 1 | 요소 ID | `"ID"` | Integer | — | **Required** |
-| 2 | 요소 타입 (예: `"BEAM"`, `"TRUSS"`, `"WALL"` 등) | `"TYPE"` | String | — | **Required** |
+| 2 | 요소 타입 · Beam/Column: `"BEAM"` / Wall(⚠️ Gen NX 전용): `"WALL"` / Truss: `"TRUSS"` / General Link: `"G-LINK"` | `"TYPE"` | String | — | **Required** |
 | 3 | 푸시오버 힌지 타입 (예: `"Myz_15"`) | `"HINGE_TYPE"` | String | — | **Required** |
 | 4 | 파이버 키 | `"FIBER_KEY"` | Integer | — | **Required** |
+
+> ⚠️ **2026-08-26 확인:** `TYPE`은 원문에서 `"BEAM"`/`"WALL"`/`"TRUSS"`/`"G-LINK"` 4개 값으로
+> 한정된 enum이며, `"WALL"`에는 원문상 "MIDAS GEN NX only" 아이콘이 붙어 있다 — 이전 문서는
+> "예:" 표기로 비한정 나열하며 `"G-LINK"`를 누락하고 있었다(아티클 id `35992838417049`).
 
 ### Request / Response JSON
 
@@ -1530,7 +1542,7 @@ for key, val in hinges.items():
 | 7 | 증분 방법 · 하중제어: `"LOAD"` / 변위제어: `"DISP"` | `"INCRE_METHOD"` | String | — | **Required** |
 | 8 | 스테핑 제어 옵션(`INCRE_METHOD="LOAD"`일 때) · 자동: `"AUTO"` / 등분할(1/nstep): `"EQUAL"` / 증분제어함수: `"INC_FUNC"` | `"STEPCTRLOPTION"` | String | — | **Required** |
 | 9 | 증분제어함수 키 (`STEPCTRLOPTION="INC_FUNC"`일 때) | `"INCFUNC_KEY"` | Integer | — | **Required** |
-| 10 | 해석 정지 조건 – 현재 강성비(Cs) | `"STIFF_RATIO"` | Number | — | **Required** |
+| 10 | 현재 강성비(Cs) (`INCRE_METHOD="LOAD"`일 때) | `"STIFF_RATIO"` | Number | — | **Required** |
 | 11 | 변위 제어 옵션(`INCRE_METHOD="DISP"`일 때) · 전체: `"GLOBAL"` / 마스터 노드: `"NODE"` | `"DISPCTRLOPTION"` | String | — | **Required** |
 | 12 | 최대 병진 변위(`DISPCTRLOPTION="GLOBAL"`) | `"GLOBAL_MAX_DISP"` | Number | — | **Required** |
 | 13 | 마스터 노드 ID(`DISPCTRLOPTION="NODE"`) | `"MASTERNODE"` | Integer | — | **Required** |
@@ -1715,6 +1727,13 @@ for key, val in cases.items():
 ### Active Methods
 
 `GET` · `PUT` · `DELETE`
+
+> ⚠️ **2026-08-26 확인:** 원문 아티클의 Active Methods 표는 `POST, GET, PUT, DELETE`로
+> 표기돼 있으나(아티클 id `56506753403673`), 이 챕터의 다른 모든 Hyper-S(`-M1`) 엔드포인트와
+> 챕터 서두의 안내("Hyper-S 솔버 전용 엔드포인트는 POST를 지원하지 않습니다")가 일관되게
+> POST 미지원을 전제한다. 원문이 다른 엔드포인트용 템플릿을 복사하며 트리밍하지 않은 것인지,
+> 실제로 이 엔드포인트만 POST를 지원하는지 원문만으로는 판단할 수 없어 실기 확인 전까지
+> `GET`/`PUT`/`DELETE`로 유지한다.
 
 ### JSON Schema
 
@@ -2000,6 +2019,15 @@ for key, val in cases.items():
 ```
 
 > 참고: 원본 스키마는 `CTRL_OPT`/`LOADPATTERN`의 조건부(`if`/`then`) 규칙을 `allOf` 하위에서 `unevaluatedProperties: false`와 함께 각 분기(LOAD/DISP, LOAD/ACC/MODE/NOR_MODE)별로 필드 전체를 재선언하는 방식으로 표현합니다. 위 스키마는 필드 정의 중복을 생략하고 조건부 `required`/`not` 규칙만 표시했으며, 실제 필드 목록·타입·enum은 상단 `CTRL_OPT`/`LOADPATTERN.items` 정의와 동일합니다.
+>
+> ⚠️ **2026-08-26 확인:** 원문 JSON Schema는 `LOADPATTERN.items`의 `DIR`·`MODE` 필드
+> description을 둘 다 `"Load Case (...)"`로 잘못 표기하고 있다(`LCNAME`의 설명을 복붙한 것으로
+> 추정). 위 스키마에는 실제 의미(`DIR`="Direction (Uniform Acceleration용)",
+> `MODE`="Mode (값 > 0. 1개 항목만 허용)")로 정정해 실었으니, 다음 동기화 때 원문과 다르다고
+> 되돌리지 말 것(아티클 id `56506753403673`). 같은 이유로 `NLTYPE`/`INCRE_METHOD`/
+> `DISPCTRLOPTION`의 schema description도 원문은 잘려 있으나(예: `NLTYPE`은 "None"만 남고
+> "/ P-Delta / Large Displacements"가 누락) 아래 표는 Specifications 표 기준 전체 enum으로
+> 보강해 실었다.
 
 ### Parameters
 

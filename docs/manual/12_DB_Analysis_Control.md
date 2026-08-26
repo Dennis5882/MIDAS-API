@@ -450,8 +450,15 @@ set_buckling_control()
 | 3 | Number of Generations for Each GL-link Force | `"iGNUM"` | Integer | - | Required |
 | 4 | Load Cases | `"vRITZ"` | Array [Object] | - | Required |
 | (1) | Load Case Type (Ground Acc.: `"GROUND"` / General: `"CASE"`) | `"KIND"` | String | - | Required |
-| (2) | Load Case Name (General: 정의된 이름 / Ground Acc.: `"ACCX"`,`"ACCY"`,`"ACCZ"`) | `"CASE"` | String | - | Required |
-| (3) | Number of Generations | `"iNOG"` | Integer | Blank | Optional |
+| (2) | Load Case Name (`KIND="CASE"`일 때) | `"CASE"` | String | - | Required |
+| (3) | Ground Acc. 방향 (`KIND="GROUND"`일 때, `"ACCX"`/`"ACCY"`/`"ACCZ"`) | `"GROUND"` | String | - | Required |
+| (4) | Number of Generations | `"iNOG"` | Integer | Blank | Optional |
+
+> ⚠️ **2026-08-25 확인:** 원문 Specifications 표는 (2)번 항목의 Key를 `"CASE"` 하나로만
+> 표기해 General/Ground Acc. 두 분기를 뭉뚱그렸지만, JSON Schema는 `CASE`와 `GROUND`를 별개
+> 속성으로 선언하고 있고 원문 예제·아래 로컬 예제 모두 Ground Acc. 항목엔 `"GROUND"` 키를 쓴다
+> (표가 자기 예제와도 모순). 예제·스키마 우선 원칙에 따라 표를 분리해 정정(아티클 id
+> `35989224565273`).
 
 ### Request Body — Subspace Iteration
 
@@ -481,9 +488,6 @@ set_buckling_control()
     "1": {
       "TYPE": "LANCZOS",
       "iFREQ": 100,
-      "iITER": 20,
-      "iDIM": 1,
-      "TOL": 1e-10,
       "bMINMAX": false,
       "FRMIN": 0,
       "FRMAX": 0,
@@ -492,6 +496,10 @@ set_buckling_control()
   }
 }
 ```
+
+> ⚠️ **2026-08-25 확인:** 이전 예제에는 Subspace Iteration(`TYPE="EIGEN"`) 전용 필드인 `iITER`/
+> `iDIM`/`TOL`이 잘못 섞여 있었다(위 Lanczos 파라미터 표에도 없는 필드). 원문 Lanczos 예제에
+> 없는 필드라 삭제(아티클 id `35989224565273`).
 
 ### Request Body — Ritz Vectors
 
@@ -1094,13 +1102,19 @@ set_moving_load_control()
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
 | 21 | Impact Factor 사용 | `"bIF"` | Boolean | false | Optional |
-| 22 | Code Type | `"iCODETYPE"` | Integer | - | Optional |
-| 23 | Natural Frequency Method | `"iNFM"` | Integer | - | Optional |
-| 24 | Span Length (L) | `"iSLCM"` | Integer | - | Optional |
+| 22 | Code Type (`0`=JTG D60-2015/JTG04 / `1`=Other Codes / `2`=TB 10002-2017 / `3`=Q/CR 9300-2018) | `"iCODETYPE"` | Integer | - | Required |
+| 23 | Natural Frequency Method (`iCODETYPE`=0일 때 필수. `0`=User Input / `1`=Simple Beam / `2`=Continuous Beam / `3`=Arch Bridge / `4`=Cable Stayed Bridge / `5`=Suspension Bridge) | `"iNFM"` | Integer | - | Required (조건부) |
+| 24 | Span Length (`0`=Span Length by Lane Input / `1`=Loaded Length by Influence Line) | `"iSLCM"` | Integer | - | Required |
 | 25 | Vehicle Load Class 사용 | `"bBC"` | Boolean | false | Optional |
-| 26 | Vehicle Load Class Type | `"iBC"` | Integer | - | Optional |
-| 27 | Frequency Data (JTG D60-2015/JTG 04) | `"FREQ"` | Object | - | Optional |
-| 28 | Bridge Data (기타 코드) | `"BRIDGE1"` | Object | - | Optional |
+| 26 | Vehicle Load Class Type (`0`=Class I / `1`=Class II) | `"iBC"` | Integer | 0 | Required |
+| 27 | Frequency Data (`iCODETYPE`=0일 때 필수) | `"FREQ"` | Object | - | Required (조건부) |
+| 28 | Bridge Data — Other Codes (`iCODETYPE`=1일 때 필수) | `"BRIDGE1"` | Object | - | Required (조건부) |
+| 29 | Bridge Data — TB 10002-2017 / Q·CR 9300-2018 (`iCODETYPE`=2 또는 3일 때 필수) | `"BRIDGE2"` | Object | - | Required (조건부) |
+
+> ⚠️ **2026-08-25 확인:** `iCODETYPE`/`iNFM`/`iSLCM`/`iBC` 4개 필드 모두 원문 Specifications
+> 표에 enum 값 목록이 있는데도 이전 문서엔 누락돼 있었고, Required 여부도 실제로는 (조건부)
+> Required인데 Optional로 잘못 기재돼 있었다. `BRIDGE2` 객체(TB 10002-2017/Q·CR 9300-2018
+> 코드 전용)는 통째로 누락돼 있어 아래에 별도 표로 신규 추가했다(아티클 id `35989644995609`).
 
 **FREQ 객체 주요 키** (교량 형식별 진동수 산정 파라미터):
 
@@ -1111,15 +1125,53 @@ set_moving_load_control()
 | `"ARCH_N"`/`"ARCH_F"`/`"ARCH_L"`/`"ARCH_E"`/`"ARCH_IC"`/`"ARCH_MC"` | 아치교 n/f/L/E/Ic/mc | `"CABL_A"`/`"CABL_L"` | 사장교 a/L |
 | `"SUSP_L"`/`"SUSP_E"`/`"SUSP_I"`/`"SUSP_HG"`/`"SUSP_M"` | 현수교 L/E/I/Hg/m | | |
 
-**BRIDGE1 객체 주요 키**:
+**BRIDGE1 객체 — `"BTYPE"`(Bridge Type: `"RC"` / `"STEEL"` / `"MBRG"`(Old Urban Bridge) /
+`"TRAIN"`(Train·Subway))별 필드:**
 
-| Key | 설명 |
-|-----|------|
-| `"BTYPE"` | Bridge Type (String) |
-| `"RC_C1L1"`/`"RC_C1F1"`/`"RC_C1L2"`/`"RC_C1F2"` | RC Case1 L1/F1/L2/F2 |
-| `"RC_bCASE2"`, `"RC_C2L1"`/`"RC_C2F1"`/`"RC_C2L2"`/`"RC_C2F2"`, `"RC_GROUP"` | RC Case2 활성 / 값 / 구조그룹 |
-| `"STL_C1V1"`/`"STL_C1V2"`, `"STL_bCASE2"`, `"STL_C2V1"`/`"STL_C2V2"`, `"STL_GROUP"` | Steel Case1/Case2 값 / 구조그룹 |
-| `"MBRG_RL1"` … | 차로하중 충격계수 등 |
+| Key | 설명 | Value Type |
+| --- | --- | --- |
+| `"RC_C1L1"`/`"RC_C1F1"`/`"RC_C1L2"`/`"RC_C1F2"` | RC — Case 1 L1/F1/L2/F2 | Number |
+| `"RC_bCASE2"` | RC — Case 2 사용 여부 | Boolean (기본 false) |
+| `"RC_C2L1"`/`"RC_C2F1"`/`"RC_C2L2"`/`"RC_C2F2"` | RC — Case 2 L1/F1/L2/F2 (`RC_bCASE2`=true 시) | Number |
+| `"RC_GROUP"` | RC — 구조 그룹명 | String |
+| `"STL_C1V1"`/`"STL_C1V2"` | Steel — Case 1 V1/V2 | Number |
+| `"STL_bCASE2"` | Steel — Case 2 사용 여부 | Boolean (기본 false) |
+| `"STL_C2V1"`/`"STL_C2V2"` | Steel — Case 2 V1/V2 (`STL_bCASE2`=true 시) | Number |
+| `"STL_GROUP"` | Steel — 구조 그룹명 | String |
+| `"MBRG_RL1"`/`"MBRG_RF1"`/`"MBRG_RL2"`/`"MBRG_RF2"`/`"MBRG_RF3"`/`"MBRG_RF4"` | Old Urban Bridge — 차로하중 충격계수 L1/F1/L2/F2/F3/F4 | Number |
+| `"MBRG_CF1"`/`"MBRG_CF2"`/`"MBRG_CF3"` | Old Urban Bridge — 차량하중 충격계수 F1/F2/F3 | Number |
+| `"TRAIN_SUB_TYPE"` | Train — Sub-Type(`"SIMPLE"`/`"COMPOSITE"`/`"RCCONC"`/`"RCARCH"`) | String |
+| `"TRAIN_NUMERATOR"`/`"TRAIN_DENOMINATOR"` | Train — Value 1 / Value 2 | Number |
+| `"TRAIN_H"` | Train — Surcharge Thickness (`TRAIN_SUB_TYPE="RCCONC"` 전용) | Number |
+| `"TRAIN_bCLSL"` | Train — Apply Loaded Span Length (`RCCONC` 전용, `0`=미고려/`1`=고려) | Integer |
+| `"TRAIN_LAMBDA"`/`"TRAIN_F"` | Train — Lambda / f (`RCARCH` 전용) | Number |
+| `"TRAIN_bALSL"` | Train — Apply Loaded Span Length (`RCARCH` 전용, `0`=미고려/`1`=고려) | Integer |
+| `"TRAIN_GROUP"` | Train — 구조 그룹명 | String |
+
+**BRIDGE2 객체** (`iCODETYPE`=2 TB 10002-2017 / 3 Q·CR 9300-2018 전용) — `"BTYPE"`(Bridge Type:
+`"RAILWAY"`(Passenger-Freight Mixed Line·Heavy Haul Railway Bridge) / `"RAILBRG"`(High Speed·
+Intercity Railway Bridge) / `"RAILCUL"`(High Speed·Intercity Railway Culvert))별 필드:
+
+| Key | 설명 | Value Type |
+| --- | --- | --- |
+| `"METHOD"` | RAILWAY — Sub-Type(`"SIMPLE"`/`"COMPOSITE"`/`"RCCONC"`/`"RCARCH"`) | String |
+| `"SIMPLE_U"`/`"SIMPLE_L"` | RAILWAY(`METHOD="SIMPLE"`) — Value 1/2 | Number |
+| `"COMPO_U"`/`"COMPO_L"` | RAILWAY(`METHOD="COMPOSITE"`) — Value 1/2 | Number |
+| `"CONC_U"`/`"CONC_L"`/`"CONC_H"` | RAILWAY(`METHOD="RCCONC"`) — Value 1/2, Surcharge Thickness | Number |
+| `"ARCH_U"`/`"ARCH_L"`/`"ARCH_LAMBDA"`/`"ARCH_F"` | RAILWAY(`METHOD="RCARCH"`) — Value 1/2, Lambda, f | Number |
+| `"bCHECK"` | RAILWAY(`RCCONC`/`RCARCH`) — Apply Loaded Span Length 여부 | Boolean (기본 false) |
+| `"GROUP"` | RAILWAY(`RCCONC`/`RCARCH`) — 구조 그룹명 | String |
+| `"MU1"`/`"MU2"`/`"MU3"` | RAILBRG·RAILCUL 공통 — mu 산정용 Value 1/2/3 | Number |
+| `"bLFAI"` | RAILBRG·RAILCUL 공통 — Apply Loaded Span Length 여부 | Boolean (기본 false) |
+| `"LFAI"` | RAILBRG·RAILCUL 공통 — Lfai (`bLFAI`=false 시) | Number |
+| `"bCHECK"` | RAILBRG 전용 — Apply Loaded Span Length (`bLFAI`=true 시) | Boolean (기본 false) |
+| `"bLENGTH"` | RAILCUL 전용 — Apply Loaded Span Length (`bLFAI`=true 시) | Boolean (기본 false) |
+| `"MUR1"`/`"MUR2"`/`"MUR3"` | RAILCUL 전용 — mu Reduction 산정용 Value 1/2/3 | Number |
+| `"HC"` | RAILCUL 전용 — Surcharge Thickness | Number |
+| `"GROUP"` | RAILBRG·RAILCUL 공통 — 구조 그룹명 | String |
+
+> `BRIDGE2.bCHECK`/`GROUP` 키는 RAILWAY 분기와 RAILBRG 분기가 이름을 공유한다(원문 표에서도
+> 동일 Key로 재사용) — `BTYPE`으로 분기를 구분해서 해석할 것.
 
 ### Request Body (요약 예시)
 
@@ -1590,14 +1642,18 @@ set_settlement_control()
 | 9 | Number of Load Steps | `"NUMBER_STEPS"` | Integer | - | Required |
 | 10 | Maximum Number of Iterations/Load Step | `"MAX_ITERATIONS"` | Integer | - | Required |
 | 11 | Initial Force Ratio for Unit Arc-Length | `"INITIAL_FORCE_RATIO_ARC_LEN"` | Number | - | Required |
-| 12 | Maximum Displacement Bound | `"MAXIMUM_DISPLACEMENT"` | Number | - | Required |
+| 12 | Maximum Displacement Bound | `"MAXIMUM_DISPLACEMENT"` | Number | 0 | Optional |
 | 13 | Load Case Specific Data | `"ARCLEN_ITEMS"` | Array [Object] | - | Required |
 | (1) | Iteration Method (`"ARC"`) | `"ITERATION_METHOD"` | String | "ARC" | Optional |
 | (2) | Load Case Name | `"LCNAME"` | String | - | Required |
 | (3) | Initial Force Ratio for Unit Arc-Length | `"INITIAL_FORCE_RATIO_ARC_LEN"` | Number | - | Required |
 | (4) | Number of Steps | `"NUMBER_STEPS"` | Number | - | Required |
 | (5) | Max Iterations/Increment Step | `"MAX_ITERATIONS"` | Integer | - | Required |
-| (6) | Maximum Displacement | `"MAXIMUM_DISPLACEMENT"` | Number | - | Required |
+| (6) | Maximum Displacement | `"MAXIMUM_DISPLACEMENT"` | Number | 0 | Optional |
+
+> ⚠️ **2026-08-25 확인:** `MAXIMUM_DISPLACEMENT`(상단 12번, `ARCLEN_ITEMS`(6) 모두)가 원문
+> Specifications 표·예제 둘 다 기본값 `0`/Optional인데 이전엔 Required로 잘못 기재돼 있었다
+> (아티클 id `35990229420441`).
 
 ### Parameters — Displacement-Control (`ITERATION_METHOD = "DISP"`)
 
@@ -1789,31 +1845,60 @@ Hyper-S(MEC) 솔버용 비선형 해석 제어입니다. `LC_SCOPE`로 적용 �
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 1 | Load Case Scope (전체 적용: `"ALL"` 등) | `"LC_SCOPE"` | String (enum) | - | Required |
+| 1 | Load Case Scope (전체: `"ALL"` / 선택: `"SELECT"`, 기본 `"ALL"`) | `"LC_SCOPE"` | String (enum) | "ALL" | Optional |
+| 6 | Load Case Name (`LC_SCOPE="SELECT"`로 신규 생성 시 필수. 기존 항목 수정 시 미지정하면 기존 값 유지) | `"LOAD_CASE"` | String | - | Required (조건부) |
 | 2 | Nonlinear Type (`"GEOM"` / `"MATL"` / `"GEOM_MATL"`) | `"NONLINEAR_TYPE"` | String (enum) | - | Required |
 | 3 | Iteration Method (Force: `"FORCE"` / Arc Length: `"ARC"` / Displacement: `"DISP"`) | `"ITER_METHOD"` | String (enum) | - | Required |
 | 4 | Load Steps 설정 | `"LOAD_STEPS"` | Object | - | Required |
 | 5 | Convergence Criteria | `"CONV_CRITERIA"` | Object | - | Required |
+| 7 | 고급 설정 (미지정 시 서버 기본값 적용) | `"ADVANCED"` | Object | - | Optional |
 
-### Parameters — LOAD_STEPS 객체
+> ⚠️ **2026-08-25 확인:** `LOAD_CASE`(6번)가 이전 문서엔 전혀 없었다 — `LC_SCOPE="SELECT"`로
+> 신규 항목을 만들 때 필수인 필드다. `ADVANCED`(7번) 객체도 통째로 누락돼 있었다(아티클 id
+> `56506850582425`). 원문 JSON Schema에 이례적으로 상세한 구현 주석이 함께 실려 있어 이를
+> 근거로 반영했다.
 
-| Key | Value Type | Description |
-|-----|------------|-------------|
-| `"STEP_MODE"` | String (enum) | 스텝 모드 (`"AUTO"` 등) |
-| `"NUMBER_STEPS"` | Integer | 스텝 수 |
-| `"OUTPUT"` | String (enum) | 출력 (`"EVERY"` / `"LAST"`) |
-| `"MIN_ARC_RATIO"` | Number | (Arc) 최소 호장 비율 |
-| `"MAX_ARC_RATIO"` | Number | (Arc) 최대 호장 비율 |
-| `"MAX_ARC_INCREMENTS"` | Integer | (Arc) 최대 호장 증분 수 |
+### Parameters — LOAD_STEPS 객체 (`ITER_METHOD`별 사용 필드가 다름)
+
+| Key | Value Type | Default | Description |
+| --- | --- | --- | --- |
+| `"STEP_MODE"` | String (enum: `"AUTO"`/`"MANUAL"`) | - | 스텝 모드 (Required). `ITER_METHOD="ARC"`일 때는 UI상 `"AUTO"`로 고정 |
+| `"NUMBER_STEPS"` | Integer (≥1) | 1 | 스텝 수 (`STEP_MODE="AUTO"`일 때 필수) |
+| `"OUTPUT"` | String (enum: `"EVERY"`/`"LAST"`) | "EVERY" | 중간 출력 (`STEP_MODE="AUTO"`일 때 필수) |
+| `"MANUAL_STEPS"` | Array [Number] (≥1개) | - | 사용자 정의 스텝 목록 (`STEP_MODE="MANUAL"`일 때) |
+| `"MIN_ARC_RATIO"` | Number (>0) | 0.25 | (`ITER_METHOD="ARC"`) 최소 호장 조정 비율 |
+| `"MAX_ARC_RATIO"` | Number (>0) | 4.0 | (`ITER_METHOD="ARC"`) 최대 호장 조정 비율 |
+| `"MAX_ARC_INCREMENTS"` | Integer (≥1) | 100 | (`ITER_METHOD="ARC"`) 최대 호장 증분 수 |
+| `"MASTER_NODE"` | Integer | 0 | (`ITER_METHOD="DISP"`) 주 절점 ID |
+| `"MAX_DISP"` | Number (0 금지) | - | (`ITER_METHOD="DISP"`) 최대 변위 — 서버가 0을 채우면 검증 실패하므로 명시적 값 필수 |
+| `"DIRECTION"` | String (enum: `"DX"`/`"DY"`/`"DZ"`) | "DX" | (`ITER_METHOD="DISP"`) 방향 |
+| `"REF_NODE"` | Object | - | (`ITER_METHOD="DISP"`) 기준(상대) 절점 — 하위 `OPT_USE`(Boolean, Required)/`NODE`(Integer, `OPT_USE=false`시 기본 0) |
 
 ### Parameters — CONV_CRITERIA 객체
 
-`DISP`(변위) / `LOAD`(하중) / `WORK`(일) 각각:
+`DISP`(변위) / `LOAD`(하중) / `WORK`(일) 각각 — 최소 1개는 `OPT_USE=true`:
 
-| Key | Value Type | Description |
-|-----|------------|-------------|
-| `"OPT_USE"` | Boolean | 해당 기준 사용 여부 |
-| `"VALUE"` | Number | 허용오차 (OPT_USE = true일 때 필수) |
+| Key | Value Type | Default | Description |
+| --- | --- | --- | --- |
+| `"OPT_USE"` | Boolean | - | 해당 기준 사용 여부 (Required) |
+| `"VALUE"` | Number (0 초과 1 이하) | 0.001 | 허용오차 (`OPT_USE=true`일 때 필수) |
+
+### Parameters — ADVANCED 객체 (고급 비선형 설정, 전체 Optional — 미지정 시 서버 기본값 사용)
+
+| Key | Value Type | Default | Description |
+| --- | --- | --- | --- |
+| `"OPT_USE_DEFAULT"` | Boolean | - | 기본 설정 사용 여부 (Required — true면 아래 필드 모두 미지정 허용) |
+| `"STIFF_UPDATE_SCHEME"` | String (enum: `"CUSTOM"`/`"FULL_NEWTON_RAPHSON"`/`"INITIAL_STIFF"`) | - | 강성 갱신 방식 |
+| `"ITER_BEFORE_STIFF_UPDATE"` | Integer | - | 강성 갱신 전 반복 횟수 (`CUSTOM`이 아니면 방식별 서버 자동값 적용) |
+| `"OPT_TERMINATE_ON_FAILED_CONV"` | Boolean | false | 수렴 실패 시 해석 종료 여부 |
+| `"MAX_ITER_PER_INCREMENT"` | Integer | 50 | 증분당 최대 반복 횟수 |
+| `"MAX_BISECTION_LEVEL"` | Integer (0~20) | 5 | 최대 이분(Bisection) 단계 |
+| `"OPT_SMART_BISECTION"` | Boolean | false | Smart Bisection 사용 여부 |
+| `"DIVERGENCE_THRESHOLD"` | Number | 3 | 발산 판정 임계값 |
+| `"OPT_ENABLE_LINE_SEARCH"` | Boolean | true | Line Search 사용 여부 |
+| `"LINE_SEARCH_OPTION"` | String (enum: `"AUTO"`/`"MANUAL"`) | - | Line Search 방식 |
+| `"MAX_LINE_SEARCH_PER_ITER"` | Integer | 4 | 반복당 최대 Line Search 횟수 |
+| `"LINE_SEARCH_TOL"` | Number | 0.5 | Line Search 허용오차 |
 
 ### Request Body — Force Control
 
@@ -1857,6 +1942,32 @@ Hyper-S(MEC) 솔버용 비선형 해석 제어입니다. `LC_SCOPE`로 적용 �
       "CONV_CRITERIA": {
         "DISP": { "OPT_USE": true, "VALUE": 0.001 },
         "LOAD": { "OPT_USE": true, "VALUE": 0.001 }
+      }
+    }
+  }
+}
+```
+
+### Request Body — Displacement Control
+
+```json
+{
+  "Assign": {
+    "1": {
+      "LC_SCOPE": "ALL",
+      "NONLINEAR_TYPE": "MATL",
+      "ITER_METHOD": "DISP",
+      "LOAD_STEPS": {
+        "STEP_MODE": "AUTO",
+        "NUMBER_STEPS": 15,
+        "OUTPUT": "EVERY",
+        "MASTER_NODE": 101,
+        "MAX_DISP": 0.05,
+        "DIRECTION": "DX",
+        "REF_NODE": { "OPT_USE": false }
+      },
+      "CONV_CRITERIA": {
+        "WORK": { "OPT_USE": true, "VALUE": 0.001 }
       }
     }
   }
@@ -1937,6 +2048,17 @@ update_nonlinear_control_m1_arc()
 | (1) | Erection Load Case Name | `"LTYPECC"` | String | - | Required |
 | (2) | Load Type for C.S ⁴⁾ | `"EREC"` | String | - | Required |
 | (3) | Load Case Name List | `"vLCNAME"` | Array [String] | - | Required |
+| 8 | Secondary Dead Load Effect for Grid Model (MIDAS Civil NX JP 버전 전용) | `"bSDLE"` | Boolean | false | Optional |
+| 9 | Load Case Name List (Grid Analysis Load, JP 버전 전용) | `"vSDLE"` | Array [String] | - | Required |
+
+> **⁴⁾ `EREC` 값 목록** (Erection Load Type for C.S.): Dead Load: `"D"` / Dead Load of Component
+> and Attachments: `"DC"` / Dead Load of Wearing Surfaces and Utilities: `"DW"` / Earth Pressure:
+> `"EP"` / Live Load: `"L"` / Wind Load on Structure: `"W"` / Temperature: `"T"` / Temperature
+> Gradient: `"TPG"` / Earthquake: `"E"` / Erection Load: `"ER"`.
+>
+> ⚠️ **2026-08-25 확인:** `bSDLE`/`vSDLE`(9번)와 `EREC`의 값 목록(각주 ⁴⁾)이 이전 문서엔 없었다
+> — `bSDLE`/`vSDLE`는 STCT-M1 절엔 이미 있었으나 STCT 본절에는 누락돼 있었다(아티클 id
+> `35990281053465`).
 
 ### Parameters — Cable-Pretension / Initial Force Control
 
@@ -1955,17 +2077,23 @@ update_nonlinear_control_m1_arc()
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
 | - | Initial Tangent Displacement 사용 | `"bITD"` | Boolean | false | Optional |
-| - | Initial Tangent Displacement Type (`"GROUP"` 등) | `"ITD"` | String | - | Optional |
-| - | Structure Group Name | `"GROUP"` | String | - | Optional |
+| - | Initial Tangent Displacement Type (All: `"ALL"` / Structure Group: `"GROUP"`) | `"ITD"` | String | "ALL" | Optional |
+| - | Structure Group Name (`ITD`="GROUP"일 때) | `"GROUP"` | String | - | Required (조건부) |
 | - | Lack-of-Fit Force Control 사용 | `"bLFFC"` | Boolean | false | Optional |
-| - | Lack-of-Fit Group Name | `"LFFGR"` | String | - | Optional |
+| - | Lack-of-Fit Group Name (`bLFFC`=true일 때) | `"LFFGR"` | String | - | Required (조건부) |
 | - | Apply Camber Displacement to C.S. | `"bCAMBER"` | Boolean | false | Optional |
 | - | Calculate Concurrent Forces of Frame | `"bCALC_CFF"` | Boolean | false | Optional |
 | - | Calculate Output of Each Part of Composite Section | `"bCALC_CSP"` | Boolean | false | Optional |
 | - | Self-constrained Forces & Stresses | `"bSELFCONS"` | Boolean | false | Optional |
 | - | Save Output of Construction Stage | `"bSAVE_OCS"` | Boolean | false | Optional |
 | - | Stress Decrease 사용 / 옵션 / 상수 | `"bSD"` / `"iSDOPT"` / `"SDCONST"` | Boolean / Integer / Number | - | Optional |
-| - | Bi-Section Control | `"iBSC"` | Integer | 0 | Optional |
+| - | Beam Section Property Option (Constant: 0 / Change with Tendon: 1) | `"iBSC"` | Integer | 0 | Optional |
+
+> ⚠️ **2026-08-25 확인:** `iBSC`는 이전 문서에 "Bi-Section Control"(이분법 반복제어)로 잘못
+> 라벨링돼 있었으나, 원문 표는 "Beam Section Property Option"(보 단면 물성 변경 방식,
+> 0=Constant/1=Change with Tendon)으로 완전히 다른 개념이다 — 이분법 관련 제어는 별도의
+> `BSSTEP`/`ADSTEP`(아래 Nonlinear Analysis 절)가 담당한다. `ITD` 기본값도 `-`→`"ALL"`로,
+> `GROUP`/`LFFGR`는 각각 조건부 Required로 정정(아티클 id `35990281053465`).
 
 ### Parameters — Linear & Independent Stage
 
@@ -1997,9 +2125,10 @@ update_nonlinear_control_m1_arc()
 | - | Creep & Shrinkage 사용 | `"bCNS"` | Boolean | false | Optional |
 | - | Creep & Shrinkage Type (`"CREEP"`/`"SHRINK"`/`"BOTH"`) | `"TYPE"` | String | - | Optional |
 | - | Number of Creep Iterations | `"iITER_CR"` | Integer | - | Optional |
-| - | Creep Tolerance | `"TOL_CR"` | Number | - | Optional |
+| - | Creep Tolerance | `"TOL_CR"` | Number | 0 | Optional |
 | - | Only User's Creep Coefficient | `"bOUCC"` | Boolean | false | Optional |
-| - | Internal Time Step for Creep 사용 / 값 | `"bITS"` / `"iITS"` | Boolean / Integer | - | Optional |
+| - | Internal Time Step for Creep 사용 | `"bITS"` | Boolean | false | Optional |
+| - | Internal Time Step for Creep 값 | `"iITS"` | Integer | - | Required |
 | - | Auto Time Step Generation for Large Time Gap | `"bATS"` | Boolean | false | Optional |
 | - | Time Gap Steps (T>10 / >100 / >1000 / >5000 / >10000) | `"iT10"` / `"iT100"` / `"iT1K"` / `"iT5K"` / `"iT10K"` | Integer | - | Optional |
 | - | Tendon Tension Loss Effect (Creep&Shrinkage) | `"bTTLE_CS"` | Boolean | false | Optional |
@@ -2007,6 +2136,10 @@ update_nonlinear_control_m1_arc()
 | - | Variation of Comp. Strength | `"bVAR"` | Boolean | false | Optional |
 | - | Tendon Tension Loss Effect (Elastic Shortening) 사용 / 타입 | `"bTTLE_ES"` / `"iTTLE_ES"` | Boolean / Integer | - | Optional |
 | - | Apply Time Dependent Elastic Modulus to Post C.S | `"bAPPLY_ELA"` | Boolean | false | Optional |
+
+> ⚠️ **2026-08-25 확인:** `TOL_CR` 기본값 `-`→`0`, `iITS`는 원문 표에서 `bITS`와 분리된 별도
+> 행으로 Required 표기돼 있어(이전엔 `bITS`/`iITS`를 하나로 묶어 `-`/Optional로 잘못 기재) 정정
+> (아티클 id `35990281053465`).
 
 ### Request Body — Linear Analysis and Independent Stage
 
@@ -2166,15 +2299,27 @@ Hyper-S(MEC) 솔버용 시공단계 해석 제어입니다. 기능별로 중첩 
 | 8 | Initial Force Control | `"INITIAL_CONTROL"` | Object | - | Optional |
 | 9 | Initial Displacement Control | `"INITIAL_DISP"` | Object | - | Optional |
 | 10 | Stress Decrease Control | `"STRESS_DECREASE"` | Object | - | Optional |
+| 11 | Beam Section Property Option (Constant: 0 / Change with Tendon: 1) | `"iBSC"` | Integer | 1 | Optional |
+| 12 | Frame Output 설정 | `"FRAME_OUTPUT"` | Object | - | Optional |
+| 13 | Save Output of Current Stage (Beam/Truss) | `"bSAVE_OCS"` | Boolean | false | Optional |
+| 14 | Nonlinear Analysis Control (`iINC_NLA` ≠ 0일 때) | `"NONL_CONTROL"` | Object | - | Optional |
+
+> ⚠️ **2026-08-25 확인:** `iBSC`/`FRAME_OUTPUT`/`bSAVE_OCS`/`NONL_CONTROL` 4개 필드가 통째로
+> 누락돼 있었다. 특히 `iBSC`는 레거시 `STCT`(17번 절)와 이름은 같지만 **기본값이 다르다**
+> (STCT는 0, STCT-M1은 1)(아티클 id `57053813627673`).
 
 ### Parameters — ANAL_TYPE 객체
 
 | Key | Value Type | Description |
 |-----|------------|-------------|
-| `"iINC_NLA"` | Integer | 해석 타입 (Linear: 0 / Nonlinear: 1 / Material Nonlinear: 2) |
-| `"iNLA_TYPE"` | Integer | 단계 옵션 (Independent: 0 / Accumulative: 1) |
-| `"bINC_PDL"` | Boolean | Include P-Delta Effect |
-| `"bINC_TDE"` | Boolean | Include Time Dependent Effect |
+| `"iINC_NLA"` | Integer | 해석 타입 (Linear: 0 / Geometric Nonlinear: 1 / Material Nonlinear: 2 / Geometric+Material Nonlinear: 3) |
+| `"iNLA_TYPE"` | Integer | 단계 옵션 (Independent: 0 / Accumulative: 1) — `iINC_NLA`=2 또는 3이면 `iNLA_TYPE`=1만 허용 |
+| `"bIEMF"` | Boolean | Include Equilibrium Element Nodal Forces (`iINC_NLA`=1 & `iNLA_TYPE`=0일 때만) |
+| `"bINC_PDL"` | Boolean | Include P-Delta Effect (`iINC_NLA`=0일 때만) |
+| `"bINC_TDE"` | Boolean | Include Time Dependent Effect (`iNLA_TYPE`=1 & `iINC_NLA`∈{0,1}일 때만) |
+
+> ⚠️ **2026-08-25 확인:** `iINC_NLA`에 4번째 값(3 = Geometric+Material Nonlinear 동시 고려)이
+> 추가돼 있었고, `bIEMF`가 통째로 누락돼 있었다(아티클 id `57053813627673`).
 
 ### Parameters — RESTART_CS_ANAL 객체
 
@@ -2197,7 +2342,7 @@ Hyper-S(MEC) 솔버용 시공단계 해석 제어입니다. 기능별로 중첩 
 |-----|------------|-------------|
 | `"CREEP_SHRINKAGE"` | Object | 크리프·건조수축 설정 |
 | `"CREEP_SHRINKAGE.OPT_USE"` | Boolean | 사용 여부 |
-| `"CREEP_SHRINKAGE.TYPE"` | String | (`"CREEP"`/`"SHRINK"`/`"BOTH"`) |
+| `"CREEP_SHRINKAGE.TYPE"` | String | (`"CREEP"`/`"SHRINKAGE"`/`"BOTH"`) |
 | `"CREEP_SHRINKAGE.bOUCC"` | Boolean | Only User's Creep Coefficient |
 | `"CREEP_SHRINKAGE.INTERNAL_STEP"` | Object | `{ "OPT_USE": bool, "iITS": int }` |
 | `"CREEP_SHRINKAGE.AUTO_TIME_STEP"` | Object | `{ "OPT_USE": bool, "iT10","iT100","iT1K","iT5K","iT10K": int }` |
@@ -2206,6 +2351,24 @@ Hyper-S(MEC) 솔버용 시공단계 해석 제어입니다. 기능별로 중첩 
 | `"bVAR"` | Boolean | Variation of Comp. Strength |
 | `"bAPPLY_ELA"` | Boolean | Apply Time Dep. Elastic Modulus to Post C.S |
 | `"bTTLE_ES"` / `"iTTLE_ES"` | Boolean / Integer | Tendon Tension Loss (Elastic Shortening) / Type |
+
+> ⚠️ **2026-08-25 확인:** `CREEP_SHRINKAGE.TYPE`의 두 번째 enum 값은 레거시 `STCT`(17번 절)의
+> `"SHRINK"`와 달리 STCT-M1에서는 **`"SHRINKAGE"`**로 표기된다 — 원문 JSON Schema·Specifications
+> 표 양쪽에서 일관되게 확인됨(아티클 id `57053813627673`). 이전 문서는 STCT와 동일하게
+> `"SHRINK"`로 잘못 기재돼 있었다.
+
+### Parameters — NONL_CONTROL 객체 (`iINC_NLA` ≠ 0일 때 사용 — 레거시 `NLCT`/`NLCT-M1`에 대응)
+
+| Key | Value Type | Default | Description |
+| --- | --- | --- | --- |
+| `"iLSTEP"` | Integer (≥1) | - | 증분 스텝 수 |
+| `"INTOUT"` | String (enum: `"EVERY"`/`"LAST"`) | "LAST" | 중간 출력 요청 |
+| `"ADVANCED"` | Object | - | 고급 설정 — 하위 `USE_DEF_SETTINGS`(Boolean, Required, 기본 true)/`STIFF_UPD_SCHEME`(Integer enum 0=Custom·1=Full Newton-Raphson·2=Initial Stiffness, `USE_DEF_SETTINGS=false`일 때)/`ITER_BEF_UPDATE`(Integer, `STIFF_UPD_SCHEME=0`일 때만)/`TERMINATE_ON_FAIL_CONV`(Boolean)/`MAX_ITER_INCREMENT`(Integer)/`MAX_BISECT_LEVEL`(Integer)/`SMART_BISECT`(Boolean)/`DIVERG_THRESH`(Number)/`ENABLE_LINE_SEARCH`(Boolean, 기본 true)/`LINE_SEARCH`(Object, `ENABLE_LINE_SEARCH=true`일 때 필수 — 하위 `OPT_USE`(Boolean,Required)/`LINE_SEARCH_TYPE`(enum `"AUTO"`/`"USER"`, 기본 AUTO)/`MAX_LN_SRCH_ITER`(Integer, `LINE_SEARCH_TYPE="USER"`일 때)/`LN_SEARCH_TOL`(Number, 〃)) |
+| `"DISP"`/`"LOAD"`/`"WORK"` | Object | - | 변위/하중/일 수렴기준 — 각각 하위 `OPT_USE`(Boolean, Required, 기본 false)/`VALUE`(Number >0, `OPT_USE=true`일 때 필수) |
+
+> `ADVANCED`의 Key 이름은 §16 `NLCT-M1`의 `ADVANCED` 객체(`STIFF_UPDATE_SCHEME`/`ITER_BEFORE_STIFF_UPDATE`/…, 문자열 enum)와 유사하지만 **이름과 타입이 다르다**
+> (STCT-M1은 `STIFF_UPD_SCHEME`/`ITER_BEF_UPDATE`/… 및 정수 enum, `LINE_SEARCH`도 중첩 객체) —
+> 같은 개념이라도 엔드포인트별로 직렬화가 다르므로 혼용하지 말 것(아티클 id `57053813627673`).
 
 ### Parameters — 나머지 객체
 
@@ -2287,6 +2450,37 @@ Hyper-S(MEC) 솔버용 시공단계 해석 제어입니다. 기능별로 중첩 
         "OPT_USE": true,
         "iSDOPT": 1,
         "SDCONST": 1
+      },
+      "iBSC": 1,
+      "FRAME_OUTPUT": {
+        "bCALC_CFF": true,
+        "bCALC_CSP": true,
+        "bSELFCONS": true
+      },
+      "bSAVE_OCS": true,
+      "NONL_CONTROL": {
+        "iLSTEP": 10,
+        "INTOUT": "EVERY",
+        "ADVANCED": {
+          "USE_DEF_SETTINGS": false,
+          "STIFF_UPD_SCHEME": 0,
+          "ITER_BEF_UPDATE": 3,
+          "TERMINATE_ON_FAIL_CONV": true,
+          "MAX_ITER_INCREMENT": 30,
+          "MAX_BISECT_LEVEL": 5,
+          "SMART_BISECT": true,
+          "DIVERG_THRESH": 10,
+          "ENABLE_LINE_SEARCH": true,
+          "LINE_SEARCH": {
+            "OPT_USE": true,
+            "LINE_SEARCH_TYPE": "USER",
+            "MAX_LN_SRCH_ITER": 5,
+            "LN_SEARCH_TOL": 0.8
+          }
+        },
+        "DISP": { "OPT_USE": true, "VALUE": 0.001 },
+        "LOAD": { "OPT_USE": true, "VALUE": 0.001 },
+        "WORK": { "OPT_USE": true, "VALUE": 0.000001 }
       }
     }
   }
@@ -2342,6 +2536,37 @@ def update_construction_stage_control_m1():
                 "INITIAL_CONTROL": {
                     "bCONV": True, "bTRUSS": True, "bBEAM": True,
                     "bCHANGE_CABLE": True, "bAPPLY_IMF": True
+                },
+                "iBSC": 1,               # Change with Tendon
+                "FRAME_OUTPUT": {
+                    "bCALC_CFF": True,
+                    "bCALC_CSP": True,
+                    "bSELFCONS": True
+                },
+                "bSAVE_OCS": True,
+                "NONL_CONTROL": {        # iINC_NLA != 0 일 때 사용 (레거시 NLCT/NLCT-M1 대응)
+                    "iLSTEP": 10,
+                    "INTOUT": "EVERY",
+                    "ADVANCED": {
+                        "USE_DEF_SETTINGS": False,
+                        "STIFF_UPD_SCHEME": 0,       # Custom
+                        "ITER_BEF_UPDATE": 3,
+                        "TERMINATE_ON_FAIL_CONV": True,
+                        "MAX_ITER_INCREMENT": 30,
+                        "MAX_BISECT_LEVEL": 5,
+                        "SMART_BISECT": True,
+                        "DIVERG_THRESH": 10,
+                        "ENABLE_LINE_SEARCH": True,
+                        "LINE_SEARCH": {
+                            "OPT_USE": True,
+                            "LINE_SEARCH_TYPE": "USER",
+                            "MAX_LN_SRCH_ITER": 5,
+                            "LN_SEARCH_TOL": 0.8
+                        }
+                    },
+                    "DISP": {"OPT_USE": True, "VALUE": 0.001},
+                    "LOAD": {"OPT_USE": True, "VALUE": 0.001},
+                    "WORK": {"OPT_USE": True, "VALUE": 0.000001}
                 }
             }
         }

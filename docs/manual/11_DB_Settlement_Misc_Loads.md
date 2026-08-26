@@ -359,26 +359,36 @@ create_load_sequence()
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
 | 1 | Wave Load Name | `"NAME"` | String | - | Required |
-| 2 | Description | `"DESC"` | String | - | Optional |
+| 2 | Description | `"DESC"` | String | Blank | Optional |
 | 3 | Use Static Load Generation | `"bSTLD"` | Boolean | false | Optional |
 | 4 | Use Time History Load Generation | `"bTHIS"` | Boolean | false | Optional |
 | 5 | Time History Load Case Name | `"NAME_THIS"` | String | - | Optional |
-| 6 | Vertical Coordinate (`"GLOBAL_X"` / `"GLOBAL_Y"` / `"GLOBAL_Z"`) | `"VERT_COORD"` | String | `"GLOBAL_Z"` | Required |
+| 6 | Vertical Coordinate (`"GLOBAL_X"`(⚠️ 미확인) / `"GLOBAL_Y"` / `"GLOBAL_Z"`) | `"VERT_COORD"` | String | `"GLOBAL_Z"` | Required |
 | 7 | Water Weight Density | `"DENSITY"` | Number | - | Required |
 | 8 | Water Depth | `"DEPTH"` | Number | - | Required |
 | 9 | Use Self Weight | `"bSELFW"` | Boolean | false | Optional |
 | 10 | Use Buoyancy Load | `"bBUOYANT"` | Boolean | false | Optional |
 
+> ⚠️ **2026-08-25 확인:** 원문 Specifications 표는 `VERT_COORD`의 옵션으로 `"GLOBAL_Y"`/`"GLOBAL_Z"`
+> 2개만 불릿으로 제시하며(JSON Schema·예제에도 enum 목록 없음), `"GLOBAL_X"`는 원문 어디에도
+> 근거가 없다. 실제로 존재할 가능성이 높은 값(X/Y/Z 3축 구조 관례상)이라 삭제하지 않고 미확인
+> 표시만 남긴다(아티클 id `35988728179097`).
+
 ### Parameters — COEF 객체 (항력·관성력 계수)
 
 | No. | Description | Key | Value Type | Required |
 |-----|-------------|-----|------------|----------|
-| 1 | Type (`"CONST"` / `"GROUP"`) | `"TYPE"` | String | Required |
+| 1 | Type (`"CONST"`(Constant) / ⚠️미확인(Linear Interpolation, 리터럴 값 원문 미공개)) | `"TYPE"` | String | Required |
 | 2 | Coefficients – Slender Element Array | `"COEF_S"` | Array [Object] | Optional |
 | 3 | Coefficients – Rigid Element Array | `"COEF_R"` | Array [Object] | Optional |
 | 4 | Override Coefficients with Structure Group | `"bOVER"` | Boolean | Optional |
 | 5 | Override Slender Element Array | `"OVER_S"` | Array [Object] | Optional |
 | 6 | Override Rigid Element Array | `"OVER_R"` | Array [Object] | Optional |
+
+> ⚠️ **2026-08-25 확인:** 원문 Specifications 표는 `TYPE`의 두 옵션을 "Constant"/"Linear
+> Interpolation" 설명만 제시할 뿐 리터럴 문자열은 표·JSON Schema 어디에도 없다. 예제로 확인되는
+> 값은 `"CONST"` 하나뿐이라 이전 문서의 `"GROUP"` 표기(구조그룹별 재정의 기능인 `bOVER`와 혼동한
+> 것으로 추정)를 삭제하고 미확인으로 정정(아티클 id `35988728179097`).
 
 **COEF_S / COEF_R / OVER_S / OVER_R 항목 구조:**
 
@@ -430,14 +440,20 @@ create_load_sequence()
 | 1 | Flood Condition (Structure Group Names) | `"FLOOD_GRUP"` | Array [String] | Optional |
 | 2 | Marine Growth Data | `"GROWTH"` | Array [Object] | Optional |
 | 3 | Grid X Size | `"GRID_X"` | Integer | Optional |
-| 4 | Grid Z Size | `"GRID_Z"` | Integer | Optional |
+| 4 | Grid Y Size | `"GRID_Z"` | Integer | Optional |
 | 5 | User Defined Grid Data (2D Array) | `"USERGRID"` | Array [Array [Object]] | Optional |
 | 6 | Trajectory Grid Data (2D Array) | `"TRAJ"` | Array [Array [Object]] | Optional |
-| 7 | Crest Critical Position (`"MAX"` / `"MANUAL"`) | `"CREST"` | String | Optional |
-| 8 | Crest Position Unit | `"UNIT"` | String | Optional |
+| 7 | Crest Critical Position (리터럴 값 원문 미공개, 예제 확인값 `"MXM"`) | `"CREST"` | String | Optional |
+| 8 | Crest Position Unit (리터럴 값 원문 미공개, 예제 확인값 `"PHASE"`) | `"UNIT"` | String | Optional |
 | 9 | Initial Position | `"INITAL_POS"` | Number | Optional |
 | 10 | Increase Step | `"STEP"` | Number | Optional |
 | 11 | Number of Positions | `"POS"` | Integer | Optional |
+
+> ⚠️ **2026-08-25 확인:** Key `"GRID_Z"`의 설명은 원문 Specifications 표·JSON Schema 둘 다
+> 일관되게 "Grid Y Size"로 표기하고 있어(오타가 아니라 원문 자체가 그렇게 명명) 정정. `"CREST"`/
+> `"UNIT"`은 원문 표에 옵션 불릿이 없어 이전 문서의 `"MAX"`/`"MANUAL"`/`"m"` 표기가 근거 없는
+> 추정치였음을 확인 — 공식 Request Example에서 실제 확인되는 값(`"MXM"`/`"PHASE"`)으로 아래
+> 예제·Python 코드도 함께 정정했다(아티클 id `35988728179097`).
 
 **GROWTH 항목 구조:**
 
@@ -523,8 +539,8 @@ create_load_sequence()
       "GRID_Z": 10,
       "bSELFW": true,
       "bBUOYANT": true,
-      "CREST": "MAX",
-      "UNIT": "m",
+      "CREST": "MXM",
+      "UNIT": "PHASE",
       "INITAL_POS": 0.0,
       "STEP": 1.0,
       "POS": 10
@@ -609,8 +625,8 @@ def create_wave_load():
                 "GRID_Z": 10,
                 "bSELFW": True,      # 자중 포함
                 "bBUOYANT": True,    # 부력 포함
-                "CREST": "MAX",
-                "UNIT": "m",
+                "CREST": "MXM",      # Crest Critical Position (원문 예제 확인값)
+                "UNIT": "PHASE",     # Crest Position Unit (원문 예제 확인값)
                 "INITAL_POS": 0.0,
                 "STEP": 1.0,
                 "POS": 10
@@ -1080,7 +1096,7 @@ post("/db/WVLD", {"Assign": {
         "FLOOD_GRUP": [], "GROWTH": [],
         "GRID_X": 5, "GRID_Z": 5,
         "bSELFW": True, "bBUOYANT": True,
-        "CREST": "MAX", "UNIT": "m",
+        "CREST": "MXM", "UNIT": "PHASE",
         "INITAL_POS": 0.0, "STEP": 1.0, "POS": 5
     }
 }})
