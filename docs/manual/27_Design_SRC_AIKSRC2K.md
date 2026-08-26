@@ -5657,6 +5657,8 @@ print(res.json())
 }
 ```
 
+> ⚠️ **2026-08-27 확인 (article id `59471948895129`):** GET/PUT 응답 예제의 `"CODE"` 값이 `"STANDARD"`(대문자)로, PUT 요청 예제·JSON Schema의 `oneOf`("Standard")와 대소문자가 다르다 — 원문 자체의 모순이며, 예제 원문을 그대로 유지한다. (26장 MATD와 동일한 패턴.)
+
 ### Python 예제
 
 ```python

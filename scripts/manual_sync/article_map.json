@@ -3041,5 +3041,142 @@
       "verified_at": "2026-08-27",
       "note": "MATCH"
     }
+  },
+  "27_Design_SRC_AIKSRC2K.md": {
+    "1. DSRC": {
+      "article_id": "57465267608345",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "2. DCO": {
+      "article_id": "57465303138329",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "3. DCTL": {
+      "article_id": "57465737477273",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "4. LLRF": {
+      "article_id": "57465892856857",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "5. LCTB": {
+      "article_id": "57465890420505",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "6. LENG": {
+      "article_id": "57466007733785",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "7. KFAC": {
+      "article_id": "57466103707801",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "8. LTSR": {
+      "article_id": "57466235159577",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "9. CMFT": {
+      "article_id": "57466258537625",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "10. FMAG": {
+      "article_id": "57466283605657",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "11. MLLR": {
+      "article_id": "57466533347993",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "12. SUEQ": {
+      "article_id": "57466547756313",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "13. MBTP": {
+      "article_id": "57466577314201",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "14. EQCT": {
+      "article_id": "57466649126041",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "15. BC-ANAL": {
+      "article_id": "57471631056153",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "16. BC-TABLE": {
+      "article_id": "57471707745945",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "17. BC-REPORT": {
+      "article_id": "57471700233369",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "18. CC-ANAL": {
+      "article_id": "57471905977241",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "19. CC-TABLE": {
+      "article_id": "57471932075033",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "20. CC-REPORT": {
+      "article_id": "57471918632857",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "21. OCHECK": {
+      "article_id": "57472245522201",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "22. TABLE (보)": {
+      "article_id": "57473503612569",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "23. TABLE (기둥)": {
+      "article_id": "57473614628889",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "24. MATD": {
+      "article_id": "59471948895129",
+      "verified_at": "2026-08-27",
+      "note": "MATCH. GET/PUT 응답 예제 CODE 값이 대문자 STANDARD로, 스키마 oneOf/요청 예제의 Standard와 대소문자가 다른 원문 자체 모순 확인 (26장 MATD와 동일 패턴), 예제 원문 유지 + 주석 추가"
+    },
+    "25. MCRD": {
+      "article_id": "59472022302617",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "26. MEMB": {
+      "article_id": "59472072271385",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    },
+    "27. MRBD": {
+      "article_id": "59472130238873",
+      "verified_at": "2026-08-27",
+      "note": "MATCH"
+    }
   }
 }
