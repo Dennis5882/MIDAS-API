@@ -28,7 +28,7 @@
 | 9 | [`/ope/STOR`](#9-opestor--story-calculation) | 층 계산 옵션 | POST |
 | 10 | [`/ope/STORY_PARAM`](#10-opestory_param--story-check-parameter) | 층 검토 파라미터 | GET, POST |
 | 11 | [`/ope/STORY_IRR_PARAM`](#11-opestory_irr_param--story-irregularity-check-parameter) | 층 불규칙성 검토 파라미터 | GET, POST |
-| 12 | [`/ope/STORPROP`](#12-opestorprop--story-properties) | 층 속성 결과 | POST |
+| 12 | [`/ope/STORYPROP`](#12-opestoryprop--story-properties) | 층 속성 결과 | POST |
 | 13 | [`/ope/MEMB`](#13-opememb--member-assignment) | 부재(Member) 배정 | POST |
 | 14 | [`/ope/GUSTFACTOR`](#14-opegustfactor--gust-factor-calculator) | 거스트영향계수 계산기 | POST |
 | 15 | [`/ope/LCOM-GEN`](#15-opelcom-gen--load-combination-general--kds2022--aik-src2k) | 하중조합(일반) 자동 생성 | POST |
@@ -414,7 +414,15 @@ print("POST (ParametricUnequal):", resp.status_code, resp.json())
         ["Peri:O", "1.780000", "m"],
         ["Peri:I", "0.000000", "m"],
         ["Center:y", "0.150000", "m"],
-        ["Center:z", "0.150000", "m"]
+        ["Center:z", "0.150000", "m"],
+        ["y1", "-0.150000", "m"],
+        ["z1", "0.150000", "m"],
+        ["y2", "0.150000", "m"],
+        ["z2", "0.150000", "m"],
+        ["y3", "0.150000", "m"],
+        ["z3", "-0.150000", "m"],
+        ["y4", "-0.150000", "m"],
+        ["z4", "-0.150000", "m"]
       ]
     }
   }
@@ -738,7 +746,7 @@ print("POST:", resp.status_code, resp.json())
 | 7 | 하중 값 | `"LOAD"` | Object | — | **Required** |
 | 7-1 | └ 방향 · 국부x/y/z(`"LX"`/`"LY"`/`"LZ"`), 전체X/Y/Z(`"GX"`/`"GY"`/`"GZ"`); `UNIPRESSURE`/`TRAPRESSURE`는 `ADD_H` 설정에 따라 `LY`/`LZ`만 가능 | `LOAD.DIR` | String | — | **Required** |
 | 7-2 | └ 투영 여부 (METHOD=0→기본 false, METHOD=1→기본 true) | `LOAD.USE_PROJECTION` | Boolean | System | Optional |
-| 7-3 | └ 거리 타입(`CURVED` 제외 모든 타입) · 상대: `0` / 절대: `1` | `LOAD.TYPE` | Integer | — | **Required** |
+| 7-3 | └ 거리 타입(모든 타입 공통, `CURVED` 포함) · 상대: `0` / 절대: `1` | `LOAD.TYPE` | Integer | — | **Required** |
 | 7-4 | └ 거리 배열 [x1,x2,x3,x4] (`CURVED` 제외) | `LOAD.D` | Array [Number, 4] | — | **Required** |
 | 7-5 | └ 크기 배열 [P1,P2,P3,P4] (`CURVED` 제외) | `LOAD.P` | Array [Number, 4] | — | **Required** |
 | 7-6 | └ 곡선식 계수 a (`CURVED` 전용) | `LOAD.A` | Number | — | **Required** |
@@ -748,6 +756,11 @@ print("POST:", resp.status_code, resp.json())
 | 8-1 | └ 활성화 | `COPY.USE` | Boolean | `false` | — |
 | 8-2 | └ 복사 축 · `"X"`/`"Y"`/`"Z"` | `COPY.AXIS` | String | — | — |
 | 8-3 | └ 복사 거리 (예: `"10@3.0"`) | `COPY.DIST` | String | — | — |
+
+> ⚠️ 2026-08-26 확인 (article id `35994879160857`): `LOAD.TYPE`(7-3)는 이전 버전 문서에 "`CURVED`
+> 제외 모든 타입"으로 적혀 있었으나, 공식 Specifications 표에는 그런 예외 없이 모든 `TYPE`
+> 값에 공통 적용되는 필드로 명시되어 있어 정정함. `CURVED` 전용으로 제외되는 것은 `LOAD.D`/`LOAD.P`
+> (7-4/7-5)이며 대신 `LOAD.A`/`LOAD.B`/`LOAD.C`(7-6~7-8)가 쓰인다.
 
 ### Request / Response JSON
 
@@ -967,9 +980,9 @@ print("POST (복사):", resp.status_code, resp.json())
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
 | 1 | 메셔 설정 | `"MESHER"` | Object | — | **Required** |
-| 1-1 | └ 자동 메시 방법 · 노드: `"Nodes"` / 선요소: `"Line Elements"` / 평면요소: `"Planar Elements"` | `MESHER.METHOD` | String | `"Line Elements"` | Optional |
+| 1-1 | └ 자동 메시 방법 · 노드: `"Nodes"` / 선요소: `"LineElements"` / 평면요소: `"PlanarElements"` | `MESHER.METHOD` | String | `"LineElements"` | Optional |
 | 1-2 | └ 메시 대상 요소/노드 목록 | `MESHER.TARGETS` | Array [Integer] | — | **Required** |
-| 1-3 | └ 메시 형태 · 사각형: `"Quadrilateral"` / 사각+삼각: `"Quad and Triangle"` / 삼각형: `"Triangle"` | `MESHER.TYPE` | String | `"Quadrilateral"` | Optional |
+| 1-3 | └ 메시 형태 · 사각형: `"Quadrilateral"` / 사각+삼각: `"Quadandtriangle"` / 삼각형: `"Triangle"` | `MESHER.TYPE` | String | `"Quadrilateral"` | Optional |
 | 1-4 | └ 내부 도메인 메시 생성 여부 | `MESHER.MESH_INNER_DOMAIN` | Boolean | `false` | Optional |
 | 1-5 | └ 영역 내 노드 고려 옵션 | `MESHER.INCLUDE_INTERIOR_NODES` | Object | — | Optional |
 | 1-5-a | 　└ 활성화 | `INCLUDE_INTERIOR_NODES.OPT_CHECK` | Boolean | `true` | Optional |
@@ -981,17 +994,23 @@ print("POST (복사):", resp.status_code, resp.json())
 | 2-1 | └ 길이 기준 (`DIV`와 동시 사용 불가) | `MESH_SIZE.LENGTH` | Number | — | **Required** |
 | 2-2 | └ 분할수 기준 (`LENGTH`와 동시 사용 불가) | `MESH_SIZE.DIV` | Number | — | **Required** |
 | 3 | 요소 속성 | `"PROPERTY"` | Object | — | **Required** |
-| 3-1 | └ 요소 타입 · `"Plate"`/`"Plane Stress"`/`"Plane Strain"`/`"Axisymmetric"` | `PROPERTY.ELEMENT_TYPE` | String | `"Plate"` | Optional |
+| 3-1 | └ 요소 타입 · `"Plate"`/`"PlaneStress"`/`"PlaneStrain"`/`"Axisymmetric"` | `PROPERTY.ELEMENT_TYPE` | String | `"Plate"` | Optional |
 | 3-2 | └ 요소 세부 타입 | `PROPERTY.ELEMENT_SUB_TYPE` | Object | — | Optional |
 | 3-2-a | 　└ 판 두께 타입(`ELEMENT_TYPE="Plate"`일 때) · `"Thick"`/`"Thin"` | `ELEMENT_SUB_TYPE.TYPE` | String | `"Thick"` | Optional |
-| 3-2-b | 　└ Drilling DOF 사용(`Plate`/`Plane Stress`일 때) | `ELEMENT_SUB_TYPE.WITH_DRILLING_DOF` | Boolean | `true` | Optional |
+| 3-2-b | 　└ Drilling DOF 사용(`Plate`/`PlaneStress`일 때) | `ELEMENT_SUB_TYPE.WITH_DRILLING_DOF` | Boolean | `true` | Optional |
 | 3-3 | └ 재료 번호 | `PROPERTY.MATERIAL` | Integer | — | **Required** |
-| 3-4 | └ 두께 번호(`Plate`/`Plane Stress`일 때) | `PROPERTY.THICKNESS` | Integer | — | Optional |
+| 3-4 | └ 두께 번호(`Plate`/`PlaneStress`일 때) | `PROPERTY.THICKNESS` | Integer | — | Optional |
 | 4 | 도메인 이름 | `"DOMAIN_NAME"` | Object | — | **Required** |
 | 4-1 | └ 이름 | `DOMAIN_NAME.NAME` | String | — | **Required** |
 | 5 | 추가 옵션 | `"ADDITIONAL_OPTION"` | Object | — | Optional |
 | 5-1 | └ 원본 선/경계 요소 삭제 | `ADDITIONAL_OPTION.DELETE_LINE_ELEM` | Boolean | `false` | Optional |
 | 5-2 | └ 원본 선/경계 요소 재분할 | `ADDITIONAL_OPTION.SUBDIVIDE_LINE_ELEM` | Boolean | `true` | Optional |
+
+> ⚠️ 2026-08-26 확인 (article id `35736427971225`): 공식 Specifications 표는 `MESHER.METHOD`/
+> `MESHER.TYPE`/`PROPERTY.ELEMENT_TYPE`의 열거값을 사람이 읽기 좋게 띄어 쓴 형태(예: `"Line Elements"`,
+> `"Quad and Triangle"`, `"Plane Stress"`)로 적어 두었으나, 실제 Request Example·Response에서는
+> 공백 없는 리터럴(`"LineElements"`, `"Quadandtriangle"`, `"PlaneStress"`)이 쓰인다. 예제가 실제
+> 동작하는 페이로드이므로 이를 기준으로 정정함.
 
 ### Request / Response JSON
 
@@ -1159,15 +1178,21 @@ print("POST:", resp.status_code, resp.json())
 | 4-3 | └ 면 번호 1~6 (`SOLID_FACE` 전용) | `ELEMENT.FACE` | Integer | — | **Required**(SOLID_FACE일 때) |
 | 5 | 경계 정보 | `"BOUNDARY"` | Object | — | **Required** |
 | 5-1 | └ 경계 타입 · 선형: `"LINEAR"` / 압축전담: `"COMP"` / 인장전담: `"TENS"` / 다선형: `"MULTI"` | `BOUNDARY.TYPE` | String | — | **Required** |
-| 5-2 | └ 강성 [Kx,Ky,Kz] (LINEAR/MULTI) | `BOUNDARY.STIFF` | Array [Number, 3] | — | **Required**(해당 타입) |
-| 5-3 | └ 감쇠 고려 여부 (LINEAR/MULTI) | `BOUNDARY.bDAMP` | Boolean | — | **Required**(해당 타입) |
-| 5-4 | └ 감쇠상수 [Cx,Cy,Cz] (LINEAR/MULTI) | `BOUNDARY.DAMP` | Array [Number, 3] | — | **Required**(해당 타입) |
+| 5-2 | └ 강성 [Kx,Ky,Kz] (`CONVERT_TO="POINT_SPRING"`의 LINEAR/MULTI) | `BOUNDARY.STIFF` | Array [Number, 3] | — | **Required**(해당 타입) |
+| 5-3 | └ 감쇠 고려 여부 (`CONVERT_TO="POINT_SPRING"`의 LINEAR/MULTI) | `BOUNDARY.bDAMP` | Boolean | — | **Required**(해당 타입) |
+| 5-4 | └ 감쇠상수 [Cx,Cy,Cz] (`CONVERT_TO="POINT_SPRING"`의 LINEAR/MULTI) | `BOUNDARY.DAMP` | Array [Number, 3] | — | **Required**(해당 타입) |
 | 5-5 | └ 경계 방향(COMP/TENS/점스프링 외 모든 경우) · Normal(+): `0` / Normal(-): `1` / UCS-x(+): `2` / UCS-x(-): `3` / UCS-y(+): `4` / UCS-y(-): `5` / UCS-z(+): `6` / UCS-z(-): `7` | `BOUNDARY.DIR` | Integer | — | **Required**(해당 타입) |
 | 5-6 | └ 지반반력계수 (COMP/TENS/탄성링크 전체) | `BOUNDARY.SUBGRADE` | Number | — | **Required**(해당 타입) |
 | 5-7 | └ 한계강도 (MULTI/탄성링크 MULTI) | `BOUNDARY.PHU` | Number | — | **Required**(해당 타입) |
 | 5-8 | └ 탄성링크 길이 (`CONVERT_TO="ELASTIC_LINK"` 전체 타입) | `BOUNDARY.LENGTH` | Number | — | **Required**(탄성링크) |
 
 > **참고:** `BOUNDARY` 필드 필수 여부는 `CONVERT_TO`(점스프링/탄성링크)와 `BOUNDARY.TYPE`(선형/압축전담/인장전담/다선형) 조합에 따라 달라집니다. 자세한 조합은 위 표의 "필수" 열 조건을 참고하세요.
+>
+> ⚠️ 2026-08-26 확인 (article id `39772183634329`): `BOUNDARY.STIFF`/`bDAMP`/`DAMP`(5-2~5-4)는
+> 공식 Request Examples상 `CONVERT_TO="POINT_SPRING"`(점스프링 변환)일 때만 등장한다.
+> `CONVERT_TO="ELASTIC_LINK"`(탄성링크)는 `BOUNDARY.TYPE`이 LINEAR라도 `STIFF`/`bDAMP`/`DAMP`
+> 없이 `DIR`/`SUBGRADE`/`LENGTH`만 사용하므로, 이전 버전 문서의 "(LINEAR/MULTI)" 조건에 변환
+> 방식 범위를 명시하도록 정정함.
 
 ### Request / Response JSON
 
@@ -1527,7 +1552,13 @@ for name, info in stories.items():
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 국가 기준코드 설정 · `"NTC2012"` / `"NTC2008"` / `"KBC2009"` / `"NSR-10"` / `"NTC2018"` / `"NTCS2020"` / `"IS1893(2016)"` / `"IS16700(2023)"` | `"COUNTRY_CODE"` | String | — | **Required** |
+| 1 | 국가 기준코드 설정 · `"NTC2012"` / `"NTC2008"` / `"KBC2009"` / `"NSR-10"` / `"NTC2018"` / `"NTC2020"` / `"IS1893(2016)"` / `"IS16700(2023)"` | `"COUNTRY_CODE"` | String | — | **Required** |
+
+> ⚠️ 2026-08-26 확인 (article id `49514705474457`): 이전 버전 문서는 `"NTCS2020"`으로 표기했으나
+> 공식 Specifications 표에는 `"NTC2020"`(S 없음)으로 되어 있어 정정함. 예제에는 이 값이
+> 등장하지 않아 표로만 확인했으며, `STORY_IRR_PARAM`(11절)의 `COUNTRY_CODE` 목록에는 별도로
+> `"NTCS2020"`/`"NTCS2023"`이 존재하므로 두 엔드포인트가 서로 다른 리터럴을 쓰는 것일 수 있다 —
+> 오타인지 실제로 다른 코드인지는 공식 확인 필요.
 
 ### Python Example
 
@@ -1633,14 +1664,24 @@ print("GET:", resp.json())
 
 ---
 
-## 12. `/ope/STORPROP` — Story Properties
+## 12. `/ope/STORYPROP` — Story Properties
 
 > **기능:** 층별 중량, 표고, 재하높이, 재하폭(Bx/By) 등 층 속성 계산 결과를 지정한 단위·형식으로 조회합니다.
+>
+> ⚠️ 2026-08-26 확인 (article id `49514773501721`): 이전 버전 문서는 엔드포인트를 `/ope/STORPROP`로
+> 표기했으나, 공식 Input URI는 `/ope/STORYPROP`(STORY+PROP)이다. 응답 바디의 키(`"STORYPROP"`)는
+> 이전 버전에도 이미 올바르게 "Y"를 포함하고 있어 URI 표기와 내부적으로 불일치했던 것으로 판단,
+> URI·헤딩·Python 예제를 응답 키와 일치하도록 정정함. 또한 예제의 `FORMAT` 값이 `"Default"`로
+> 되어 있었으나 이는 표의 enum(`"Fixed"`/`"Scientific"`)에도 없는 값으로, 공식 예제의 `"Fixed"`로
+> 정정함. `HEAD` 배열의 `"LoadedH"`/`"LoadedBx"`/`"LoadedBy"`도 공백이 있는 공식 리터럴
+> `"Loaded H"`/`"Loaded Bx"`/`"Loaded By"`로 정정함(6·7절과 반대로, 이번엔 표기에서 공백이
+> 누락되어 있던 경우). 다만 `PLACE`의 Value 타입은 공식 표가 "String"으로 명시(예제는 정수
+> `4`)하는 자기모순이 있어, 판단을 보류하고 표기값을 그대로 유지함.
 
 ### Input URI
 
 ```
-{base url}/ope/STORPROP
+{base url}/ope/STORYPROP
 ```
 
 ### Active Methods
@@ -1656,7 +1697,7 @@ print("GET:", resp.json())
   "Argument": {
     "FORCE_UNIT": "KN",
     "LENGTH_UNIT": "M",
-    "FORMAT": "Default",
+    "FORMAT": "Fixed",
     "PLACE": 4
   }
 }
@@ -1669,7 +1710,7 @@ print("GET:", resp.json())
   "STORYPROP": {
     "FORCE": "KN",
     "LENGTH": "M",
-    "HEAD": ["Story", "Weight", "Elev.", "LoadedH", "LoadedBx", "LoadedBy"],
+    "HEAD": ["Story", "Weight", "Elev.", "Loaded H", "Loaded Bx", "Loaded By"],
     "DATA": [
       { "STORY": "Roof", "WEIGHT": "3256.1530", "ELEV": "50.0000", "LOADED_H": "2.0000", "LOADED_BX": "29.1000", "LOADED_BY": "36.0000" },
       { "STORY": "12F", "WEIGHT": "3984.8264", "ELEV": "46.0000", "LOADED_H": "4.0000", "LOADED_BX": "29.1000", "LOADED_BY": "36.0000" },
@@ -1704,11 +1745,11 @@ payload = {
     "Argument": {
         "FORCE_UNIT": "KN",
         "LENGTH_UNIT": "M",
-        "FORMAT": "Default",
+        "FORMAT": "Fixed",
         "PLACE": 4
     }
 }
-resp = requests.post(f"{BASE_URL}/ope/STORPROP", json=payload, headers=HEADERS)
+resp = requests.post(f"{BASE_URL}/ope/STORYPROP", json=payload, headers=HEADERS)
 result = resp.json().get("STORYPROP", {})
 for row in result.get("DATA", []):
     print(f"{row['STORY']}: 중량={row['WEIGHT']}{result['FORCE']}, 표고={row['ELEV']}{result['LENGTH']}")
@@ -1739,7 +1780,7 @@ for row in result.get("DATA", []):
   "Argument": {
     "ASSIGN_TYPE": "MANUAL",
     "SELECTION_TYPE": "SELECTION",
-    "ELEM_LIST": [640, 692],
+    "AELEM": [640, 692],
     "ALLOW_SINGLE": false
   }
 }
@@ -1775,9 +1816,16 @@ for row in result.get("DATA", []):
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
 | 1 | 배정 타입 · 수동: `"MANUAL"` / 자동: `"AUTO"` | `"ASSIGN_TYPE"` | String | — | **Required** |
-| 2 | 선택 타입 · 전체: `"ALL"` / 선택: `"SELECTION"` | `"SELECTION_TYPE"` | String | — | **Required** |
-| 3 | 대상 요소 목록 (`SELECTION_TYPE="ALL"`이면 무시됨) | `"ELEM_LIST"` | Array | — | 조건부 **Required** |
+| 2 | 선택 타입 · 전체: `"ALL"`(`ASSIGN_TYPE="AUTO"`일 때만 가능) / 선택: `"SELECTION"` | `"SELECTION_TYPE"` | String | — | **Required** |
+| 3 | 대상 요소 목록 (`SELECTION_TYPE="ALL"`이면 무시됨) | `"AELEM"` | Array | — | 조건부 **Required** |
 | 4 | 단일요소 부재 허용 여부 | `"ALLOW_SINGLE"` | Boolean | — | **Required** |
+
+> ⚠️ 2026-08-26 확인 (article id `49514964272665`): 공식 Specifications 표는 요소 목록 필드의
+> Key를 `"ELEM_LIST"`로 적어 두었으나, 실제 Request/Response Example(및 응답 바디의
+> `"AELEM"` 키)은 모두 `"AELEM"`을 사용한다. 예제가 표보다 우선하므로 `"AELEM"`으로 정정함
+> (표의 `"ELEM_LIST"`는 공식 오타로 판단, 오류제보 대상). 아울러 표의 `"SELETION_TYPE"`(C 누락)
+> 오타는 예제가 이미 `"SELECTION_TYPE"`으로 올바르며 우리 문서도 이미 그렇게 되어 있어 별도 수정
+> 불필요.
 
 ### Python Example
 
@@ -1795,7 +1843,7 @@ payload = {
     "Argument": {
         "ASSIGN_TYPE": "MANUAL",
         "SELECTION_TYPE": "SELECTION",
-        "ELEM_LIST": [640, 692],
+        "AELEM": [640, 692],
         "ALLOW_SINGLE": False
     }
 }
@@ -2501,7 +2549,7 @@ print(f"거스트영향계수 Gy = {result['GUST_FACTOR_Y']:.4f}")
 | No. | 설명 | Key | Value 타입 | 기본값/enum | 필수 |
 |---|---|---|---|---|---|
 | 1 | OPTION – 기존 조합에 추가할지 전체 대체할지 | `OPTION` | string (enum) | `ADD`, `REPLACE` | 필수 |
-| 2 | Add envelope option for LCOM-GEN (CONCRETE/STEEL 바디에만 존재) | `ADD_ENVELOPE` | boolean | 기본값 `true` | 선택 |
+| 2 | Add envelope option for LCOM-GEN (세 바디 CONCRETE/STEEL/SRC 공통) | `ADD_ENVELOPE` | boolean | 기본값 `true` | 선택 |
 | 3 | 설계 카테고리 선택 – 바디 구조 분기 키 | `CODE_SELECTION` | string (const) | `CONCRETE` \| `STEEL` \| `SRC` | 필수 |
 | 4 | 설계기준 코드 값. `CODE_SELECTION="CONCRETE"`일 때 const/기본값 `"KDS 41 20 : 2022"` | `DGNCODE` | string (const) | `KDS 41 20 : 2022` | 필수 (CONCRETE 바디에서) |
 | 4' | 설계기준 코드 값. `CODE_SELECTION="STEEL"`일 때 const/기본값 `"KDS 41 30 : 2022"` | `DGNCODE` | string (const) | `KDS 41 30 : 2022` | 필수 (STEEL 바디에서) |
@@ -2558,6 +2606,12 @@ print(f"거스트영향계수 Gy = {result['GUST_FACTOR_Y']:.4f}")
 > - `CODE_SELECTION="CONCRETE"`: `OPTION`, `CODE_SELECTION`, `DGNCODE`, `RS_SCALE_FACTOR`, `ORTHO_EFFECT`, `ADDITIONAL_LOAD`, `CS_ANALYSIS`, `PRESTRESS_LOSS`가 required (`WIND_LOAD_COMB`, `UNDERGROUND_LOAD`는 선택).
 > - `CODE_SELECTION="STEEL"`: `OPTION`, `CODE_SELECTION`, `DGNCODE`, `RS_SCALE_FACTOR`, `ORTHO_EFFECT`, `ADDITIONAL_LOAD`가 required (`WIND_LOAD_COMB`, `UNDERGROUND_LOAD`, `CS_ANALYSIS`, `PRESTRESS_LOSS`는 존재하지 않거나 선택).
 > - `CODE_SELECTION="SRC"`: `OPTION`, `CODE_SELECTION`, `DGNCODE`, `RS_SCALE_FACTOR`, `WIND_LOAD_COMB`, `ORTHO_EFFECT`, `ADDITIONAL_LOAD`, `UNDERGROUND_LOAD`가 required (`CS_ANALYSIS`, `PRESTRESS_LOSS`는 존재하지 않음).
+>
+> ⚠️ 2026-08-26 확인: 행 2(`ADD_ENVELOPE`)의 설명이 이전 버전에는 "CONCRETE/STEEL 바디에만
+> 존재"로 되어 있었으나, 위 JSON Schema 3개 `oneOf` 분기(CONCRETE/STEEL/SRC) 모두에
+> `ADD_ENVELOPE`가 동일하게 존재함을 공식 원문(SRC 분기 포함)으로 재확인 — 세 바디 공통 필드로
+> 정정. (바로 위 "참고" 요약 문구 자체는 애초에 `ADD_ENVELOPE`를 바디별 차이 항목으로 언급하지
+> 않아 이 오류와 모순되고 있었음.)
 
 ### Request / Response JSON
 
@@ -3734,6 +3788,13 @@ print(resp.json())
   }
 }
 ```
+
+> ⚠️ 2026-08-26 확인: 위 스키마의 `required: ["OPTION", "DGNCODE"]`는 `/ope/LCOM-SRC`
+> (AIK-SRC2K) 기준이다. `/ope/LCOM-GEN`(AIK-SRC2K)의 공식 스키마는
+> `required: ["OPTION", "DGNCODE", "RS_SCALE_FACTOR"]`로 `RS_SCALE_FACTOR`까지 필수이다 —
+> 두 엔드포인트가 이 한 가지 필드의 필수 여부만 다르고 나머지 구조는 동일해 "공통" 스키마로
+> 합쳐 표기했으나, `/ope/LCOM-GEN`에 그대로 검증 스키마로 사용하지 않도록 주의. 아래 Parameters
+> 표 3번 행에는 이 차이가 이미 반영되어 있다.
 
 ### Parameters
 

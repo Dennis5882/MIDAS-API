@@ -477,11 +477,16 @@ print("POST:", resp.status_code, resp.json())
           "IDENTITY_TYPE": {
             "type": "string",
             "description": "IdentityType",
-            "enum": ["Group", "NamedPlane", "LoadGroup", "BoundaryGroup"]
+            "enum": ["Group", "NamedPlane", "LoadGroup", "BoundaryGroup", "STORY"]
           },
           "IDENTITY_LIST": {
             "type": "array",
             "items": { "type": "string" }
+          },
+          "STORY_ACTIVE": {
+            "type": "string",
+            "description": "StoryActiveType (IDENTITY_TYPE=\"STORY\"일 때 사용)",
+            "enum": ["FLOOR", "ABOVE", "BELOW", "BOTH"]
           }
         }
       }
@@ -489,6 +494,12 @@ print("POST:", resp.status_code, resp.json())
   }
 }
 ```
+
+> ⚠️ 2026-08-26 확인 (article id `35523395368985`): 공식 원문에 `IDENTITY_TYPE="STORY"`(층별
+> 활성화) 모드가 신규 추가되었으나 원문 JSON Schema 자체는 갱신되지 않아 `STORY`/`STORY_ACTIVE`가
+> 빠져 있음(Specifications 표·Request Example에는 존재) — 예제·표 기준으로 스키마에 보강.
+> `IDENTITY_TYPE`의 값은 표에 `"Story"`로 적혀 있으나 실제 Request Example은 `"STORY"`(전체
+> 대문자)를 사용해 예제 기준으로 채택.
 
 ### Parameters
 
@@ -499,8 +510,9 @@ print("POST:", resp.status_code, resp.json())
 | 2 | Active | 노드 번호 목록 | `"N_LIST"` | Array [Integer] | **Required** |
 | 3 | Active | 요소 번호 목록 | `"E_LIST"` | Array [Integer] | **Required** |
 | 1 | Identity | 활성화 모드 · 아이덴티티 지정: `"Identity"` | `"ACTIVE_MODE"` | String | **Required** |
-| 2 | Identity | 아이덴티티 타입 · 구조그룹: `"Group"` / 명명평면: `"NamedPlane"` / 하중그룹: `"LoadGroup"` / 경계그룹: `"BoundaryGroup"` | `"IDENTITY_TYPE"` | String | **Required** |
-| 3 | Identity | 아이덴티티 이름 목록 | `"IDENTITY_LIST"` | Array [String] | **Required** |
+| 2 | Identity | 아이덴티티 타입 · 구조그룹: `"Group"` / 명명평면: `"NamedPlane"` / 하중그룹: `"LoadGroup"` / 경계그룹: `"BoundaryGroup"` / 층: `"STORY"` | `"IDENTITY_TYPE"` | String | **Required** |
+| 3 | Identity | 아이덴티티 이름 목록(`IDENTITY_TYPE="STORY"`일 때는 층 이름 목록) | `"IDENTITY_LIST"` | Array [String] | **Required** |
+| 4 | Identity | 층 활성화 방식(`IDENTITY_TYPE="STORY"`일 때만) · 해당 층만: `"FLOOR"` / 위쪽 포함: `"ABOVE"` / 아래쪽 포함: `"BELOW"` / 양쪽 포함: `"BOTH"` | `"STORY_ACTIVE"` | String | 조건부 **Required** |
 
 ### Request / Response JSON
 
@@ -534,6 +546,19 @@ print("POST:", resp.status_code, resp.json())
     "ACTIVE_MODE": "Identity",
     "IDENTITY_TYPE": "BoundaryGroup",
     "IDENTITY_LIST": ["Support", "Support2", "Support3"]
+  }
+}
+```
+
+**POST Request Body — Mode 3: Active by Identity (Story)**
+
+```json
+{
+  "Argument": {
+    "ACTIVE_MODE": "Identity",
+    "IDENTITY_TYPE": "STORY",
+    "IDENTITY_LIST": ["ROOF", "3F", "1F"],
+    "STORY_ACTIVE": "BELOW"
   }
 }
 ```
@@ -792,6 +817,12 @@ print("POST (All):", resp.status_code, resp.json())
 ```
 
 > **참고:** 원본 스키마에는 `MISC.GRID_MODEL_LOAD_LINE`가 누락되어 있으나 예제 및 Specifications에 존재하므로 포함했습니다(`GRID_MODEL_LOAD_LINE`은 MIDAS CIVIL NX JP 버전 전용). 또한 원본 스키마/예제의 `VIEWPPORT_GIZMO`는 오탈자이며 정식 Key는 `VIEWPORT_GIZMO`입니다.
+>
+> ⚠️ 2026-08-26 확인 (article id `35996157533977`): 원문 Examples에는 Node/Element/**Property**/
+> Boundary/Load/**MISC**/View 7종 예제가 있으나 이전 버전 문서엔 Property·MISC 2종이 누락되어
+> 있어 보강. Boundary/Load 예제는 원문이 전체 필드를 `true`로 나열하지만(단, 이는 표의
+> 상호배타(ˢ#⁾) 각주와 모순되는 원문 예제 자체의 문제로 판단, 오류제보 대상), 로컬 문서는 기존
+> 관례대로 대표 필드 일부만 발췌해 표기(값은 모두 정확).
 
 ### Parameters
 
@@ -1004,6 +1035,28 @@ print("POST (All):", resp.status_code, resp.json())
 }
 ```
 
+**POST Request Body — Property Display**
+
+```json
+{
+  "Argument": {
+    "PROPERTY": {
+      "MATERIAL_NUMBER": true,
+      "MATERIAL_NAME": true,
+      "PROPERTY_NUMBER": true,
+      "PROPERTY_NAME": true,
+      "SECTION_SHAPE": true,
+      "TAPERED_SECTION_GROUP": true,
+      "TIME_DEPENDENT_MATERIAL_LINK": true,
+      "INELASTIC_HINGE_NAME": true,
+      "INELASTIC_HINGE_SYMBOL": true,
+      "REINFORCEMENT_OF_SECTIONS": true,
+      "VIRTUAL_SECTION_LOCAL_AXIS": true
+    }
+  }
+}
+```
+
 **POST Request Body — Boundary Display**
 
 ```json
@@ -1046,6 +1099,31 @@ print("POST (All):", resp.status_code, resp.json())
       "PRESSURE_LOAD": true,
       "WIND_LOAD": true,
       "SEISMIC_LOAD": true
+    }
+  }
+}
+```
+
+**POST Request Body — MISC Display**
+
+```json
+{
+  "Argument": {
+    "MISC": {
+      "NODAL_MASS": true,
+      "LOAD_TO_MASS": true,
+      "TENDON_PROFILE_NAMES": true,
+      "TENDON_PROFILE_POINT": true,
+      "INITIAL_FORCES_FOR_GEOMETRIC_STIFFNESS": true,
+      "SETTLEMENT_GROUP": true,
+      "SETTLEMENT_GROUP_VALUE": true,
+      "HEAT_OF_HYDRATION_VALUE": true,
+      "HEAT_OF_HYDRATION_FUNC_NAME": true,
+      "HEAT_OF_HYDRATION_ELEMENT_CONVECTION_BOUNDARY": true,
+      "HEAT_OF_HYDRATION_PRESCRIBED_TEMPERATURE": true,
+      "HEAT_OF_HYDRATION_HEAT_SOURCE": true,
+      "HEAT_OF_HYDRATION_PIPE_COOLING_ELEMENT": true,
+      "GRID_MODEL_LOAD_LINE": true
     }
   }
 }

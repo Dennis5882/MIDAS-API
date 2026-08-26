@@ -133,8 +133,13 @@
 
 **`STORY_DRIFT_COMB`**
 
+> ⚠️ 2026-08-26 확인 (article id `49511531295257`): 아래 HEAD는 이전 버전에서 "Shear-Weighted
+> Average Drift of Vertical Elements" 블록(5열) 전체가 누락되고 일부 `Remark`/`Node` 열이
+> 다른 블록에 잘못 배치되어 있었습니다(공식 원문 오타가 아니라 이 저장소의 집필 실수). 공식
+> Response 예제(37열)를 기준으로 정정했습니다.
+
 ```json
-["Index", "Load Case", "Story", "Story Height", "P-Delta Incremental Factor", "Allowable Story Drift Ratio", "Maximum Drift of All Vertical Elements/Shear-Weighted Average Drift of Vertical Elements", "Maximum Drift of All Vertical Elements/Node", "Maximum Drift of All Vertical Elements/Story Drift", "Maximum Drift of All Vertical Elements/Modified Drift", "Maximum Drift of All Vertical Elements/Story Drift Ratio", "Drift at the Center of Mass/Remark", "Drift at the Center of Mass/Story Drift", "Drift at the Center of Mass/Modified Drift", "Drift at the Center of Mass/Drift Factor", "Drift at the Center of Mass/Story Drift Ratio", "Average Drift of Vertical Elements/Remark", "Average Drift of Vertical Elements/Story Drift", "Average Drift of Vertical Elements/Modified Drift", "Average Drift of Vertical Elements/Drift Factor", "Average Drift of Vertical Elements/Story Drift Ratio", "Drift of a Vertical Line on Selected Node/Remark", "Drift of a Vertical Line on Selected Node/Story Drift", "Drift of a Vertical Line on Selected Node/Modified Drift", "Drift of a Vertical Line on Selected Node/Drift Factor", "Drift of a Vertical Line on Selected Node/Story Drift Ratio", "Average Drift of Vertical Lines on Selected Nodes/Remark", "Average Drift of Vertical Lines on Selected Nodes/Story Drift", "Average Drift of Vertical Lines on Selected Nodes/Modified Drift", "Average Drift of Vertical Lines on Selected Nodes/Drift Factor", "Average Drift of Vertical Lines on Selected Nodes/Story Drift Ratio"]
+["Index", "Load Case", "Story", "Story Height", "P-Delta Incremental Factor", "Allowable Story Drift Ratio", "Maximum Drift of All Vertical Elements/Node", "Maximum Drift of All Vertical Elements/Story Drift", "Maximum Drift of All Vertical Elements/Modified Drift", "Maximum Drift of All Vertical Elements/Story Drift Ratio", "Maximum Drift of All Vertical Elements/Remark", "Drift at the Center of Mass/Story Drift", "Drift at the Center of Mass/Modified Drift", "Drift at the Center of Mass/Drift Factor", "Drift at the Center of Mass/Story Drift Ratio", "Drift at the Center of Mass/Remark", "Average Drift of Vertical Elements/Story Drift", "Average Drift of Vertical Elements/Modified Drift", "Average Drift of Vertical Elements/Drift Factor", "Average Drift of Vertical Elements/Story Drift Ratio", "Average Drift of Vertical Elements/Remark", "Drift of a Vertical Line on Selected Node/Node", "Drift of a Vertical Line on Selected Node/Story Drift", "Drift of a Vertical Line on Selected Node/Modified Drift", "Drift of a Vertical Line on Selected Node/Drift Factor", "Drift of a Vertical Line on Selected Node/Story Drift Ratio", "Drift of a Vertical Line on Selected Node/Remark", "Average Drift of Vertical Lines on Selected Nodes/Story Drift", "Average Drift of Vertical Lines on Selected Nodes/Modified Drift", "Average Drift of Vertical Lines on Selected Nodes/Drift Factor", "Average Drift of Vertical Lines on Selected Nodes/Story Drift Ratio", "Average Drift of Vertical Lines on Selected Nodes/Remark", "Shear-Weighted Average Drift of Vertical Elements/Story Drift", "Shear-Weighted Average Drift of Vertical Elements/Modified Drift", "Shear-Weighted Average Drift of Vertical Elements/Drift Factor", "Shear-Weighted Average Drift of Vertical Elements/Story Drift Ratio", "Shear-Weighted Average Drift of Vertical Elements/Remark"]
 ```
 
 ### `ADDITIONAL` — 층간변위 세부 설정 (2026-07-24 공식 반영)
@@ -231,23 +236,26 @@
   "Argument": {
     "TABLE_NAME": "Story Drift(Comb)",
     "TABLE_TYPE": "STORY_DRIFT_COMB",
-    "UNIT": { "FORCE": "kN", "DIST": "mm" },
+    "UNIT": { "FORCE": "kN", "DIST": "m" },
     "STYLES": { "FORMAT": "Fixed", "PLACE": 4 },
     "LOAD_CASE_NAMES": ["gLCB1(CB)"]
   }
 }
 ```
 
-**POST Response Body — 조합(Combined) 층간변위 (일부 열 예시)**
+**POST Response Body — 조합(Combined) 층간변위**
+
+> ⚠️ 2026-08-26 확인 (article id `49511531295257`): 이전 예시는 HEAD 열 순서·개수가 실제와 달라
+> DATA 값과 정합되지 않았습니다(37열). 공식 Response 예제의 실제 값으로 교체했습니다.
 
 ```json
 {
   "Story Drift(Comb)": {
     "FORCE": "kN",
-    "DIST": "mm",
-    "HEAD": ["Index", "Load Case", "Story", "Story Height", "P-Delta Incremental Factor", "Allowable Story Drift Ratio", "Maximum Drift of All Vertical Elements/Shear-Weighted Average Drift of Vertical Elements", "Maximum Drift of All Vertical Elements/Node", "Maximum Drift of All Vertical Elements/Story Drift", "Maximum Drift of All Vertical Elements/Modified Drift", "Maximum Drift of All Vertical Elements/Story Drift Ratio", "Drift at the Center of Mass/Remark", "Drift at the Center of Mass/Story Drift", "Drift at the Center of Mass/Modified Drift", "Drift at the Center of Mass/Drift Factor", "Drift at the Center of Mass/Story Drift Ratio", "Average Drift of Vertical Elements/Remark", "Average Drift of Vertical Elements/Story Drift", "Average Drift of Vertical Elements/Modified Drift", "Average Drift of Vertical Elements/Drift Factor", "Average Drift of Vertical Elements/Story Drift Ratio", "Drift of a Vertical Line on Selected Node/Remark", "Drift of a Vertical Line on Selected Node/Story Drift", "Drift of a Vertical Line on Selected Node/Modified Drift", "Drift of a Vertical Line on Selected Node/Drift Factor", "Drift of a Vertical Line on Selected Node/Story Drift Ratio", "Average Drift of Vertical Lines on Selected Nodes/Remark", "Average Drift of Vertical Lines on Selected Nodes/Story Drift", "Average Drift of Vertical Lines on Selected Nodes/Modified Drift", "Average Drift of Vertical Lines on Selected Nodes/Drift Factor", "Average Drift of Vertical Lines on Selected Nodes/Story Drift Ratio"],
+    "DIST": "m",
+    "HEAD": ["Index", "Load Case", "Story", "Story Height", "P-Delta Incremental Factor", "Allowable Story Drift Ratio", "Maximum Drift of All Vertical Elements/Node", "Maximum Drift of All Vertical Elements/Story Drift", "Maximum Drift of All Vertical Elements/Modified Drift", "Maximum Drift of All Vertical Elements/Story Drift Ratio", "Maximum Drift of All Vertical Elements/Remark", "Drift at the Center of Mass/Story Drift", "Drift at the Center of Mass/Modified Drift", "Drift at the Center of Mass/Drift Factor", "Drift at the Center of Mass/Story Drift Ratio", "Drift at the Center of Mass/Remark", "Average Drift of Vertical Elements/Story Drift", "Average Drift of Vertical Elements/Modified Drift", "Average Drift of Vertical Elements/Drift Factor", "Average Drift of Vertical Elements/Story Drift Ratio", "Average Drift of Vertical Elements/Remark", "Drift of a Vertical Line on Selected Node/Node", "Drift of a Vertical Line on Selected Node/Story Drift", "Drift of a Vertical Line on Selected Node/Modified Drift", "Drift of a Vertical Line on Selected Node/Drift Factor", "Drift of a Vertical Line on Selected Node/Story Drift Ratio", "Drift of a Vertical Line on Selected Node/Remark", "Average Drift of Vertical Lines on Selected Nodes/Story Drift", "Average Drift of Vertical Lines on Selected Nodes/Modified Drift", "Average Drift of Vertical Lines on Selected Nodes/Drift Factor", "Average Drift of Vertical Lines on Selected Nodes/Story Drift Ratio", "Average Drift of Vertical Lines on Selected Nodes/Remark", "Shear-Weighted Average Drift of Vertical Elements/Story Drift", "Shear-Weighted Average Drift of Vertical Elements/Modified Drift", "Shear-Weighted Average Drift of Vertical Elements/Drift Factor", "Shear-Weighted Average Drift of Vertical Elements/Story Drift Ratio", "Shear-Weighted Average Drift of Vertical Elements/Remark"],
     "DATA": [
-      ["1", "RX(RS)", "1F", "6.0000", "-", "0.0300", "48", "0.0042", "0.0505", "0.0084", "OK", "0.0041", "0.0487", "1.0379", "0.0081", "OK", "0.0041", "0.0489", "1.0333", "0.0082", "OK", "-", "-", "-", "-", "-", "0.0339", "0.4074", "0.1240", "0.0679", "NG"]
+      ["1", "RX(RS)", "10F", "4.0000", "1.0000", "0.0300", "404", "0.0012", "0.0142", "0.0035", "OK", "0.0011", "0.0129", "1.0996", "0.0032", "OK", "0.0011", "0.0130", "1.0916", "0.0032", "OK", "397", "0.0011", "0.0131", "1.0787", "0.0033", "OK", "0.0011", "0.0136", "1.0428", "0.0034", "OK", "0.0049", "0.0587", "0.2411", "0.0147", "OK"]
     ]
   }
 }
@@ -348,6 +356,25 @@ for row in table.get("DATA", []):
     "UNIT": { "FORCE": "kN", "DIST": "m" },
     "STYLES": { "FORMAT": "Fixed", "PLACE": 4 },
     "LOAD_CASE_NAMES": ["gLCB1(CB)"]
+  }
+}
+```
+
+**POST Response Body — 조합(Combined) 층 변위**
+
+> ⚠️ 2026-08-26 확인 (article id `49511597474713`): 이전 버전에 Response 예제가 누락되어 있어
+> 공식 예제를 그대로 추가했습니다.
+
+```json
+{
+  "STORY_DISPLACEMENT_COMB": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "LoadCase", "Node", "Story", "Level", "StoryHeight", "MaximumDisplacement", "AverageDisplacement", "Maximum/Average"],
+    "DATA": [
+      ["1", "gLCB1", "5004", "2F", "11.5000", "0.0000", "0.0076", "0.0073", "1.0442"],
+      ["2", "gLCB1", "48", "1F", "5.5000", "6.0000", "0.0034", "0.0031", "1.1066"]
+    ]
   }
 }
 ```
@@ -712,6 +739,10 @@ for row in table.get("DATA", []):
 
 **POST Response Body**
 
+> ⚠️ 2026-08-26 확인 (article id `49512411760665`): 이전 버전의 2번째 DATA 행은 실제로는
+> 아래 `SUB_TABLES`의 Frame(Beam) 합계 값을 개별 행(`No`)인 것처럼 잘못 옮겨 적은 것이었습니다
+> (원문 오타 아님). 공식 예제의 실제 2번째 행(No `135`)으로 교체했습니다.
+
 ```json
 {
   "STORY_SHEAR_FORCE_RATIO": {
@@ -720,7 +751,7 @@ for row in table.get("DATA", []):
     "HEAD": ["Index", "Story", "Level", "Load", "Type", "No", "Angle1", "Force1", "Ratio1", "Angle2", "Force2", "Ratio2"],
     "DATA": [
       ["1", "2F", "5.000000000000", "EX", "Frame(Beam)", "129", "33.500000000000", "28.665741744457", "0.007935020134", "123.500000000000", "-22.438153697157", "0.009384022933"],
-      ["2", "2F", "5.000000000000", "EX", "Frame(Beam)", "130", "33.500000000000", "797.380554817400", "0.220724473589", "123.500000000000", "-544.234513929400", "0.227608261730"]
+      ["2", "2F", "5.000000000000", "EX", "Frame(Beam)", "135", "33.500000000000", "17.983888493963", "0.004978155408", "123.500000000000", "-14.838673083899", "0.006205789050"]
     ],
     "SUB_TABLES": [
       {
@@ -973,6 +1004,11 @@ for row in table.get("DATA", []):
 
 ### Request / Response JSON
 
+> ⚠️ 2026-08-26 확인 (article id `49512116327065`): 아래 예제의 `DATA` 값은 공식 예제(단위
+> `FORCE: "LBF"`)를 그대로 가져온 것인데, 이전 버전에는 `UNIT.FORCE`가 `"kN"`으로 잘못
+> 표기되어 있었습니다(같은 수치가 두 단위계 모두에서 유효할 수 없음 — 원문 오타 아니라 이
+> 저장소의 집필 실수). `lbf`로 정정했습니다.
+
 **POST Request Body**
 
 ```json
@@ -980,7 +1016,7 @@ for row in table.get("DATA", []):
   "Argument": {
     "TABLE_NAME": "STORY_AXIAL_FORCE_SUM",
     "TABLE_TYPE": "STORY_AXIAL_FORCE_SUM",
-    "UNIT": { "FORCE": "kN", "DIST": "m" },
+    "UNIT": { "FORCE": "lbf", "DIST": "m" },
     "STYLES": { "FORMAT": "Fixed", "PLACE": 6 },
     "LOAD_CASE_NAMES": ["DL(ST)"]
   }
@@ -992,7 +1028,7 @@ for row in table.get("DATA", []):
 ```json
 {
   "STORY_AXIAL_FORCE_SUM": {
-    "FORCE": "kN",
+    "FORCE": "lbf",
     "DIST": "m",
     "HEAD": ["Index", "Load Case", "Story", "Level", "Story Height", "Axial Force Sum of Vertical Elements", "Center of Axial Forces/X Coordinate", "Center of Axial Forces/Y Coordinate"],
     "DATA": [
@@ -1386,10 +1422,15 @@ for row in table.get("DATA", []):
 | --- | --- | --- | --- | --- | --- |
 | 1 | 세부 설정 객체 | `"ADDITIONAL"` | Object | — | Optional |
 | 1-1 | └ 산정방식 설정 | `ADDITIONAL.SET_CALCULATION_METHOD` | Object | — | Required |
-| 1-1-1 | 　　└ 층간변위 산정방식: `"Drift at the Center of Mass"`(질량중심 변위) / `"Max. Drift of Outer Extreme Points"`(외곽 최대변위) / `"Max. Drift of All Vertical Elements"`(전 수직요소 최대변위) | `SET_CALCULATION_METHOD.STORY_DRIFT_METHOD` | String | `"Drift at the Center of Mass"` | Optional |
+| 1-1-1 | 　　└ 층간변위 산정방식: `"Drift at the Center of Mass"`(질량중심 변위) / `"Max. Drift of Outer Extreme Points"`(외곽 최대변위) / `"Max. Drift of All Vertical Elements"`(전 수직요소 최대변위) | `SET_CALCULATION_METHOD.STORY_DRIFT_METHOD` | String | `System` | Optional |
+| 1-1-2 | 　　└ 층강성 산정방식: `"1 / Story Drift Ratio"`(층간변위비 역수) / `"Story Shear / Story Drift"`(층전단력/층간변위) | `SET_CALCULATION_METHOD.STORY_STIFFNESS_METHOD` | String | `System` | Optional |
 
-> ⚠️ **`STORY_DRIFT_METHOD` 값 표기 주의.** 이 테이블의 공식 Specifications 표는 세 번째 값을 `"Max. Drfit of All Vertical Elements"`로 적고 있으나, 이는 공식 문서의 오타입니다(`Drfit` → `Drift`). [17. Weight Irregularity Check](#17-weight-irregularity-check) 공식 아티클은 동일 enum을 정상 표기로 기재하고 있어 위 표에는 정규 표기를 실었습니다. 다음 동기화 때 "원문과 다르다"고 되돌리지 마십시오.
-| 1-1-2 | 　　└ 층강성 산정방식: `"1 / Story Drift Ratio"`(층간변위비 역수) / `"Story Shear / Story Drift"`(층전단력/층간변위) | `SET_CALCULATION_METHOD.STORY_STIFFNESS_METHOD` | String | `"1 / Story Drift Ratio"` | Optional |
+> ⚠️ 2026-08-26 확인 (article id `49513107644057`): 이전 버전에는 공식 Specifications 표의
+> `"Max. Drfit of All Vertical Elements"` 오타(`Drfit`→`Drift`)를 지적하는 주석이 있었으나,
+> 재확인 결과 공식 원문이 이미 `"Drift"`로 정정되어 있습니다(더 이상 오타 아님 — 지난 동기화
+> 이후 공식 측이 수정한 것으로 보임). 또한 두 항목의 `기본값`이 이전 버전에는 각각
+> `"Drift at the Center of Mass"`/`"1 / Story Drift Ratio"`로 잘못 기재되어 있었는데, 공식
+> 표는 둘 다 `Default: System`으로 명시하므로 정정했습니다.
 
 **요청 예시 — `ADDITIONAL` 포함**
 

@@ -62,7 +62,9 @@
 | 이동하중 | `NAME(MV:all)` / `NAME(MV:max)` / `NAME(MV:min)` |
 | 침하하중 | `NAME(SM:all)` / `NAME(SM:max)` / `NAME(SM:min)` |
 
-> **참고:** `OPT_CS`·`STAGE_STEP`는 시공단계 결과 조회 시 사용합니다(Reaction–Local Surface Spring 제외). `STAGE_STEP` 항목은 `"CS1:001(first)"`, `"CS1:002(last)"` 형식입니다.
+> **참고:** `OPT_CS`·`STAGE_STEP`는 시공단계 결과 조회 시 사용합니다(Reaction의 Local–Surface
+> Spring 변형, Beam Force (Static Prestress), Concurrent Joint Force는 이 두 필드를 지원하지
+> 않음 — 각 절 참조). `STAGE_STEP` 항목은 `"CS1:001(first)"`, `"CS1:002(last)"` 형식입니다.
 
 ### 공통 Response 구조
 
@@ -90,9 +92,9 @@
 | 5 | [Cable Force](#5-cable-force) | `CABLEFORCE` |
 | 6 | [Cable Configuration](#6-cable-configuration) | `CABLECONFIG` |
 | 7 | [Cable Efficiency](#7-cable-efficiency) | `CABLEEFFIENCY` |
-| 8 | [Beam Force](#8-beam-force) | `BEAMFORCE` / `BEAMFORCEBYMAX` |
-| 9 | [Beam Force (Static Prestress)](#9-beam-force-static-prestress) | `BEAMFORCESIP` |
-| 10 | [Beam Stress](#10-beam-stress) | `BEAMSTRESS` / `BEAMSTRESS7DOF` |
+| 8 | [Beam Force](#8-beam-force) | `BEAMFORCE` / `BEAMFORCEVBM` |
+| 9 | [Beam Force (Static Prestress)](#9-beam-force-static-prestress) | `BEAMFORCESTP` |
+| 10 | [Beam Stress](#10-beam-stress) | `BEAMSTRESS` / `BEAMSTRESS7DOF` / `BEAMSTRESSVBM` |
 | 11 | [Beam Stress (Equivalent)](#11-beam-stress-equivalent) | `BEAMSTRESSDETAIL` |
 | 12 | [Beam Stress (PSC)](#12-beam-stress-psc) | `BEAMSTRESSPSC` / `BEAMSTRESS7DOFPSC` |
 | 13 | [Concurrent Joint Force](#13-concurrent-joint-force) | `CONCURRENT_JOINT_FORCE` |
@@ -111,9 +113,24 @@
 | `"REACTIONL"` | Local (국부 좌표계) |
 | `"REACTIONSURFACESPRING"` | Local – Surface Spring (면스프링 국부) |
 
+> ⚠️ 2026-08-26 확인 (article id `36009349748249`): 공식 Specifications 표·JSON Schema enum은
+> 모두 `"REACTIONSURFACESPRING"`으로 일치하나, "Reaction(Local-Surface Spring)" Request Example
+> 하나만 `"REACTIONLSURFACESPRING"`(L 추가)을 사용한다. 표·스키마 2곳이 일치하는 쪽을 채택하고
+> 예제 쪽의 단발성 오타로 판단했으나, 실제 API 동작은 검증하지 않았으므로 오류제보 대상으로 남김.
+
 ### Response HEAD
 
-`["Index", "Node", "Load", "FX", "FY", "FZ", "MX", "MY", "MZ", "Mb"]`
+`TABLE_TYPE` 값에 따라 응답 컬럼 구성이 다릅니다.
+
+- `REACTIONG`(Global): `["Index", "Node", "Load", "FX", "FY", "FZ", "MX", "MY", "MZ", "Mb"]` (시공단계 조회 시 `Load` 뒤에 `Stage`/`Step` 추가)
+- `REACTIONL`(Local): `["Index", "Node", "Load", "Fx", "Fy", "Fz", "Mx", "My", "Mz", "Mb"]` (Global과 동일 구조이나 필드명이 소문자)
+- `REACTIONSURFACESPRING`(Local-Surface Spring): `["Index", "ElementType", "SurfaceSpringType", "Element", "Load", "Node&Part", "Reaction/Area", "Reaction/Length", "Displacement"]`(완전히 다른 구조)
+
+> ⚠️ 2026-08-26 확인: `REACTIONG` 응답에는 `DATA` 배열과 별도로 최상위 `SUB_TABLES` 배열이
+> 추가되며, 그 안에 `SUMMATIONOFREACTIONFORCESPRINTOUT` 하위 테이블(`HEAD`: `["Load", "FX(kN)",
+> "FY(kN)", "FZ(kN)"]`, 시공단계 조회 시 `Stage`/`Step` 추가)이 포함된다. 이전 버전 문서에는
+> 반영되어 있지 않아 아래 예제에 추가함. `REACTIONL`/`REACTIONSURFACESPRING`에는 `SUB_TABLES`가
+> 없다.
 
 ### Request / Response JSON
 
@@ -153,7 +170,7 @@
 }
 ```
 
-**POST Response Body**
+**POST Response Body — 전역 반력(General/Post CS)**
 
 ```json
 {
@@ -163,6 +180,77 @@
     "HEAD": ["Index", "Node", "Load", "FX", "FY", "FZ", "MX", "MY", "MZ", "Mb"],
     "DATA": [
       ["1", "1", "DL", "3.082169679668", "0.536339553582", "160.905188552207", "-0.531870057302", "3.112177384191", "0.000000000000", "0.000000000000"]
+    ],
+    "SUB_TABLES": [
+      {
+        "SUMMATIONOFREACTIONFORCESPRINTOUT": {
+          "HEAD": ["Load", "FX(kN)", "FY(kN)", "FZ(kN)"],
+          "DATA": [
+            ["DL", "0.000000000000", "0.000000000000", "686.683352297500"]
+          ]
+        }
+      }
+    ]
+  }
+}
+```
+
+**POST Request Body — 국부 반력(Local)**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "Reaction(Local)",
+    "TABLE_TYPE": "REACTIONL",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": { "FORCE": "kN", "DIST": "m" },
+    "STYLES": { "FORMAT": "Fixed", "PLACE": 12 },
+    "COMPONENTS": ["Node", "Load", "Fx", "Fy", "Fz", "Mx", "My", "Mz", "Mb"],
+    "NODE_ELEMS": { "KEYS": [9] },
+    "LOAD_CASE_NAMES": ["DL(ST)"]
+  }
+}
+```
+
+**POST Response Body — 국부 반력(Local)**
+
+```json
+{
+  "Reaction(Local)": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "Node", "Load", "Fx", "Fy", "Fz", "Mx", "My", "Mz", "Mb"],
+    "DATA": [
+      ["1", "9", "DL", "-9.528467668945", "108.534577627514", "105.577135693819", "-2.014716071930", "-6.655711206332", "6.655708849960", "0.000000000000"]
+    ]
+  }
+}
+```
+
+**POST Request Body — 면스프링 국부 반력(Local-Surface Spring)**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "Reaction(Local-SurfaceSpring)",
+    "TABLE_TYPE": "REACTIONSURFACESPRING",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": { "FORCE": "kN", "DIST": "m" },
+    "STYLES": { "FORMAT": "Fixed", "PLACE": 12 }
+  }
+}
+```
+
+**POST Response Body — 면스프링 국부 반력(Local-Surface Spring)**
+
+```json
+{
+  "Reaction(Local-SurfaceSpring)": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "ElementType", "SurfaceSpringType", "Element", "Load", "Node&Part", "Reaction/Area", "Reaction/Length", "Displacement"],
+    "DATA": [
+      ["1", "PLATE", "Planar(Face)", "9", "UL", "5", "1.768850000000", "-", "-0.000901864"]
     ]
   }
 }
@@ -213,11 +301,23 @@ for row in table.get("DATA", []):
 
 ### Response HEAD
 
-`["Index", "Node", "Load", "DX", "DY", "DZ", "RX", "RY", "RZ"]`
+`["Index", "Node", "Load", "DX", "DY", "DZ", "RX", "RY", "RZ"]`(시공단계 조회 시 `Load` 뒤에 `Stage`/`Step` 추가)
+
+### 시공단계(Construction Stage) 전용 파라미터
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+|-----|------|-----|-----------|--------|------|
+| 1 | 시공단계 스텝 활성화 | `"OPT_CS"` | Boolean | `false` | Optional |
+| 2 | 시공단계 스텝 이름 목록 | `"STAGE_STEP"` | Array [String] | All | Optional |
+| 3 | 변위 표시 방식 · 누적: `"Accumulative"` / 현재: `"Current"` / 실제: `"Real"` | `"DISP_OPT"` | String | `"Accumulative"` | Optional |
+
+> ⚠️ 2026-08-26 확인 (article id `36009638400281`): `DISP_OPT`는 이전 버전 문서에 누락되어 있었음
+> — `OPT_CS=true`(시공단계 조회)일 때만 의미가 있는 필드로, 공식 Specifications 표·JSON Schema
+> 양쪽에 존재.
 
 ### Request / Response JSON
 
-**POST Request Body**
+**POST Request Body — 전역 변위(General/Post CS)**
 
 ```json
 {
@@ -232,7 +332,7 @@ for row in table.get("DATA", []):
 }
 ```
 
-**POST Response Body**
+**POST Response Body — 전역 변위(General/Post CS)**
 
 ```json
 {
@@ -242,6 +342,41 @@ for row in table.get("DATA", []):
     "HEAD": ["Index", "Node", "Load", "DX", "DY", "DZ", "RX", "RY", "RZ"],
     "DATA": [
       ["1", "43", "Self", "5.047e+00", "5.234e-10", "-6.718e-07", "0.000e+00", "-5.108e-03", "1.903e-07"]
+    ]
+  }
+}
+```
+
+**POST Request Body — 전역 변위(시공단계)**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "Displacement",
+    "TABLE_TYPE": "DISPLACEMENTG",
+    "UNIT": { "FORCE": "N", "DIST": "mm" },
+    "STYLES": { "FORMAT": "Scientific", "PLACE": 6 },
+    "COMPONENTS": ["Node", "Load", "Stage", "Step", "DX", "DY", "DZ", "RX", "RY", "RZ"],
+    "NODE_ELEMS": { "KEYS": [43] },
+    "LOAD_CASE_NAMES": ["Summation(CS)"],
+    "OPT_CS": true,
+    "STAGE_STEP": ["CS16:001(first)", "CS16:002(last)"],
+    "DISP_OPT": "Accumulative"
+  }
+}
+```
+
+**POST Response Body — 전역 변위(시공단계)**
+
+```json
+{
+  "Displacement": {
+    "FORCE": "N",
+    "DIST": "mm",
+    "HEAD": ["Index", "Node", "Load", "Stage", "Step", "DX", "DY", "DZ", "RX", "RY", "RZ"],
+    "DATA": [
+      ["1", "43", "Summation", "CS16", "001(first)", "-1.950282e+01", "-5.770649e-09", "-5.955365e-07", "0.000000e+00", "1.629373e-03", "2.975638e-06"],
+      ["2", "43", "Summation", "CS16", "002(last)", "-7.132734e+01", "2.112468e-08", "-6.235268e-07", "0.000000e+00", "1.215839e-03", "8.756069e-06"]
     ]
   }
 }
@@ -434,12 +569,18 @@ print(f"트러스 응력 {len(table.get('DATA', []))}행")
 
 ### Response HEAD
 
-`["Index", "Elem", "NodeI", "NodeJ", "Load", "Step", "Tension", "FX", "FY", "FZ", "Tension", "FX", "FY", "FZ"]`  
-(뒤쪽 4개 `Tension`·`FX`·`FY`·`FZ`는 J단 성분)
+- General/Post CS: `["Index", "Elem", "NodeI", "NodeJ", "Load", "Step", "Tension", "FX", "FY", "FZ", "Tension", "FX", "FY", "FZ"]`(뒤쪽 4개 `Tension`·`FX`·`FY`·`FZ`는 J단 성분)
+- 시공단계(Construction Stage): `Step` 앞에 `Stage`가 추가된 `["Index", "Elem", "NodeI", "NodeJ", "Load", "Stage", "Step", "Tension", "FX", "FY", "FZ", "Tension", "FX", "FY", "FZ"]`
+
+> ⚠️ 2026-08-26 확인 (article id `36010315199001`): 이전 버전 문서는 General/Post CS 응답 예제에
+> `OPT_CS: true`·`STAGE_STEP: ["nl_001"]`·`LOAD_CASE_NAMES: ["SelfWeight(CS)"]` 요청을 잘못 붙여
+> 놓아 실제로는 짝이 맞지 않는 요청/응답 조합이었음(`nl_001`은 시공단계 스텝이 아니라 Post-CS
+> 비선형 스텝 자동 라벨). 아래에 두 시나리오(General/Post CS, 시공단계)를 정확한 요청/응답 쌍으로
+> 분리해 정정.
 
 ### Request / Response JSON
 
-**POST Request Body**
+**POST Request Body — General/Post CS**
 
 ```json
 {
@@ -448,14 +589,12 @@ print(f"트러스 응력 {len(table.get('DATA', []))}행")
     "TABLE_TYPE": "CABLEFORCE",
     "UNIT": { "FORCE": "kN", "DIST": "m" },
     "STYLES": { "FORMAT": "Fixed", "PLACE": 6 },
-    "LOAD_CASE_NAMES": ["SelfWeight(CS)"],
-    "OPT_CS": true,
-    "STAGE_STEP": ["nl_001"]
+    "LOAD_CASE_NAMES": ["SelfWeight(ST)"]
   }
 }
 ```
 
-**POST Response Body**
+**POST Response Body — General/Post CS**
 
 ```json
 {
@@ -465,6 +604,37 @@ print(f"트러스 응력 {len(table.get('DATA', []))}행")
     "HEAD": ["Index", "Elem", "NodeI", "NodeJ", "Load", "Step", "Tension", "FX", "FY", "FZ", "Tension", "FX", "FY", "FZ"],
     "DATA": [
       ["1", "1", "1", "2", "SelfWeight", "nl_001", "27419.266299103001", "-26808.034545985502", "-0.002024057832", "-5757.208365377180", "27431.024313956001", "26808.034545985502", "0.002024057832", "5812.949225142650"]
+    ]
+  }
+}
+```
+
+**POST Request Body — 시공단계(Construction Stage)**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "CableForce",
+    "TABLE_TYPE": "CABLEFORCE",
+    "UNIT": { "FORCE": "kN", "DIST": "m" },
+    "STYLES": { "FORMAT": "Fixed", "PLACE": 6 },
+    "LOAD_CASE_NAMES": ["Summation(CS)"],
+    "OPT_CS": true,
+    "STAGE_STEP": ["CS2:001(last)"]
+  }
+}
+```
+
+**POST Response Body — 시공단계(Construction Stage)**
+
+```json
+{
+  "CableForce": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "Elem", "NodeI", "NodeJ", "Load", "Stage", "Step", "Tension", "FX", "FY", "FZ", "Tension", "FX", "FY", "FZ"],
+    "DATA": [
+      ["1", "1", "1", "2", "Summation", "CS2", "001(last)", "15538.648867201100", "-15187.887452924801", "-0.000971965905", "-3282.938216819810", "15550.520996389199", "15187.887452924801", "0.000971965905", "3338.679076585290"]
     ]
   }
 }
@@ -481,15 +651,13 @@ HEADERS = {
     "MAPI-Key": "YOUR_MAPI_KEY"
 }
 
-# ── POST: 케이블 장력 추출 (시공단계) ──────────────────────────────
+# ── POST: 케이블 장력 추출 (일반/Post CS) ──────────────────────────
 payload = {
     "Argument": {
         "TABLE_NAME": "CableForce",
         "TABLE_TYPE": "CABLEFORCE",
         "UNIT": {"FORCE": "kN", "DIST": "m"},
-        "LOAD_CASE_NAMES": ["SelfWeight(CS)"],
-        "OPT_CS": True,
-        "STAGE_STEP": ["nl_001"]
+        "LOAD_CASE_NAMES": ["SelfWeight(ST)"]
     }
 }
 resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
@@ -512,11 +680,19 @@ for row in table.get("DATA", []):
 
 ### Response HEAD
 
-`["Index", "Elem", "NodeI", "NodeJ", "Load", "Step", "TotalLength", "Elongation", "UnstrainedLength", "Sag", "HorizontalDistance", "VerticalDistance", "Gradient", "SkewAngle/IEnd", "SkewAngle/JEnd"]`
+- General/Post CS: `["Index", "Elem", "NodeI", "NodeJ", "Load", "Step", "TotalLength", "Elongation", "UnstrainedLength", "Sag", "HorizontalDistance", "VerticalDistance", "Gradient", "SkewAngle/IEnd", "SkewAngle/JEnd"]`
+- 시공단계(Construction Stage): `Step` 앞에 `Stage`가 추가되고, 대신 뒤쪽의 `SkewAngle/IEnd`·`SkewAngle/JEnd` 2개 컬럼이 응답에서 빠짐 — `["Index", "Elem", "NodeI", "NodeJ", "Load", "Stage", "Step", "TotalLength", "Elongation", "UnstrainedLength", "Sag", "HorizontalDistance", "VerticalDistance", "Gradient"]`(14컬럼)
+
+> ⚠️ 2026-08-26 확인 (article id `36011013418905`): 이전 버전 문서는 General/Post CS 응답 예제에
+> `OPT_CS: true`·`STAGE_STEP: ["nl_001"]`·`LOAD_CASE_NAMES: ["SelfWeight(CS)"]` 요청을 잘못 붙여
+> 놓아 실제로는 짝이 맞지 않는 요청/응답 조합이었음(5절 Cable Force와 동일한 문제). 아래에 두
+> 시나리오를 정확한 요청/응답 쌍으로 분리해 정정. 시공단계 응답이 `SkewAngle` 2개 컬럼을 아예
+> 빠뜨리는 것은 원문 자체의 특이사항으로, 원문의 시공단계 Request Example이 `COMPONENTS`에
+> `"IEnd"`/`"JEnd"`를 명시적으로 요청함에도 실제 응답엔 반영되지 않는 자기모순 — 오류제보 대상.
 
 ### Request / Response JSON
 
-**POST Request Body**
+**POST Request Body — General/Post CS**
 
 ```json
 {
@@ -525,14 +701,12 @@ for row in table.get("DATA", []):
     "TABLE_TYPE": "CABLECONFIG",
     "UNIT": { "FORCE": "kN", "DIST": "m" },
     "STYLES": { "FORMAT": "Fixed", "PLACE": 6 },
-    "LOAD_CASE_NAMES": ["SelfWeight(CS)"],
-    "OPT_CS": true,
-    "STAGE_STEP": ["nl_001"]
+    "LOAD_CASE_NAMES": ["SelfWeight(ST)"]
   }
 }
 ```
 
-**POST Response Body**
+**POST Response Body — General/Post CS**
 
 ```json
 {
@@ -542,6 +716,37 @@ for row in table.get("DATA", []):
     "HEAD": ["Index", "Elem", "NodeI", "NodeJ", "Load", "Step", "TotalLength", "Elongation", "UnstrainedLength", "Sag", "HorizontalDistance", "VerticalDistance", "Gradient", "SkewAngle/IEnd", "SkewAngle/JEnd"],
     "DATA": [
       ["1", "1", "1", "2", "SelfWeight", "nl_001", "16.511543914801", "0.055076495942", "16.456467418860", "0.004194907068", "16.140012646203", "3.482956316281", "0.215796380872", "12.121120396140", "12.233836223754"]
+    ]
+  }
+}
+```
+
+**POST Request Body — 시공단계(Construction Stage)**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "CableConfiguration",
+    "TABLE_TYPE": "CABLECONFIG",
+    "UNIT": { "FORCE": "kN", "DIST": "m" },
+    "STYLES": { "FORMAT": "Fixed", "PLACE": 12 },
+    "LOAD_CASE_NAMES": ["Summation(CS)"],
+    "OPT_CS": true,
+    "STAGE_STEP": ["CS2:001(last)"]
+  }
+}
+```
+
+**POST Response Body — 시공단계(Construction Stage)**
+
+```json
+{
+  "CableConfiguration": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "Elem", "NodeI", "NodeJ", "Load", "Stage", "Step", "TotalLength", "Elongation", "UnstrainedLength", "Sag", "HorizontalDistance", "VerticalDistance", "Gradient"],
+    "DATA": [
+      ["1", "1", "1", "2", "Summation", "CS2", "001(last)", "16.487684968322", "0.031217549462", "16.456467418860", "0.007390270826", "16.109363292361", "3.511679349731", "0.217989953172"]
     ]
   }
 }
@@ -558,15 +763,13 @@ HEADERS = {
     "MAPI-Key": "YOUR_MAPI_KEY"
 }
 
-# ── POST: 케이블 형상 정보 추출 ────────────────────────────────────
+# ── POST: 케이블 형상 정보 추출 (일반/Post CS) ─────────────────────
 payload = {
     "Argument": {
         "TABLE_NAME": "CableConfig",
         "TABLE_TYPE": "CABLECONFIG",
         "UNIT": {"FORCE": "kN", "DIST": "m"},
-        "LOAD_CASE_NAMES": ["SelfWeight(CS)"],
-        "OPT_CS": True,
-        "STAGE_STEP": ["nl_001"]
+        "LOAD_CASE_NAMES": ["SelfWeight(ST)"]
     }
 }
 resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
@@ -669,15 +872,35 @@ for row in table.get("DATA", []):
 | 값 | 설명 |
 |----|------|
 | `"BEAMFORCE"` | 보 부재력 (부재 위치별) |
-| `"BEAMFORCEBYMAX"` | 보 부재력 (최댓값 기준) |
+| `"BEAMFORCEVBM"` | 보 부재력 (최댓값 기준, View by Max Value) |
+
+> ⚠️ 2026-08-26 확인 (article id `36011262919705`): 두 번째 값은 이전 버전 문서에 `"BEAMFORCEBYMAX"`로
+> 되어 있었으나, 이는 공식 JSON Schema의 enum에서만 쓰인 값이고 실제 Request Example과
+> Specifications 표는 모두 `"BEAMFORCEVBM"`을 사용한다. 예제·표 기준으로 정정(스키마 오타로 판단,
+> 오류제보 대상).
+
+### 부재 위치(Parts) 지정 — 8~12절 공통
+
+`Beam Force`/`Beam Force (Static Prestress)`/`Beam Stress`/`Beam Stress (Equivalent)`/
+`Beam Stress (PSC)` 5개 테이블은 아래 `PARTS` 파라미터로 조회할 부재 위치를 지정할 수 있습니다
+(생략 시 전체 위치).
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+|-----|------|-----|-----------|--------|------|
+| 11 | 부재 위치 · I단: `"PartI"` / 1/4점: `"Part1/4"` / 2/4점: `"Part2/4"` / 3/4점: `"Part3/4"` / J단: `"PartJ"` | `"PARTS"` | Array [String] | All | Optional |
+
+> ⚠️ 2026-08-26 확인: 공식 Specifications 표는 값 표기를 `"Part I"`/`"Part J"`처럼 공백 포함으로
+> 적었고, JSON Schema의 `enum`은 `"Part1"`(자릿수 1, I가 아님)처럼 표기했으나, 실제 Request
+> Example은 둘 다와 다른 공백 없는 `"PartI"`/`"PartJ"`를 사용한다. 예제 기준으로 채택.
 
 ### Response HEAD
 
-`["Index", "Elem", "Load", "Part", "Axial", "Shear-y", "Shear-z", "Torsion", "Moment-y", "Moment-z", "Bi-Moment", "T-Moment", "W-Moment"]`
+- `BEAMFORCE`: `["Index", "Elem", "Load", "Part", "Axial", "Shear-y", "Shear-z", "Torsion", "Moment-y", "Moment-z", "Bi-Moment", "T-Moment", "W-Moment"]`
+- `BEAMFORCEVBM`: `Part` 뒤에 어느 성분이 최댓값을 낸 것인지 나타내는 `Component` 컬럼이 추가되고 Bi/T/W-Moment는 없음 — `["Index", "Elem", "Load", "Part", "Component", "Axial", "Shear-y", "Shear-z", "Torsion", "Moment-y", "Moment-z"]`
 
 ### Request / Response JSON
 
-**POST Request Body**
+**POST Request Body — BEAMFORCE**
 
 ```json
 {
@@ -693,7 +916,7 @@ for row in table.get("DATA", []):
 }
 ```
 
-**POST Response Body**
+**POST Response Body — BEAMFORCE**
 
 ```json
 {
@@ -708,6 +931,44 @@ for row in table.get("DATA", []):
   }
 }
 ```
+
+**POST Request Body — BEAMFORCEVBM(View by Max Value)**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "BeamForceViewByMaxValue",
+    "TABLE_TYPE": "BEAMFORCEVBM",
+    "UNIT": { "FORCE": "kN", "DIST": "m" },
+    "STYLES": { "FORMAT": "Fixed", "PLACE": 12 },
+    "COMPONENTS": ["Elem", "Load", "Part", "Component", "Axial", "Shear-y", "Shear-z", "Torsion", "Moment-y", "Moment-z"],
+    "NODE_ELEMS": { "KEYS": [2833] },
+    "LOAD_CASE_NAMES": ["STLENV_STR(CB:max)", "STLENV_STR(CB:min)"],
+    "PARTS": ["PartI", "PartJ"],
+    "ITEM_TO_DISPLAY": ["Axial", "Shear-y", "Shear-z", "Torsion", "Moment-y", "Moment-z"]
+  }
+}
+```
+
+**POST Response Body — BEAMFORCEVBM(View by Max Value)**
+
+```json
+{
+  "BeamForceViewByMaxValue": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "Elem", "Load", "Part", "Component", "Axial", "Shear-y", "Shear-z", "Torsion", "Moment-y", "Moment-z"],
+    "DATA": [
+      ["1", "2833", "STLENV_STR(max)", "I[781]", "Axial", "182.614058593750", "0.041735554695", "6.277819091797", "0.006796598315", "21.295148437500", "0.051163814545"],
+      ["2", "2833", "STLENV_STR(max)", "I[781]", "Shear-y", "180.999328125000", "0.041774380684", "6.222307861328", "0.006750476599", "21.106847412109", "0.051366916656"]
+    ]
+  }
+}
+```
+
+> ⚠️ 2026-08-26 확인: `ITEM_TO_DISPLAY`(`BEAMFORCEVBM` 전용, enum: `Axial`/`Shear-y`/`Shear-z`/
+> `Torsion`/`Moment-y`/`Moment-z`)는 이전 버전 문서에 누락되어 있었음 — 최댓값을 계산할 대상
+> 성분을 지정하는 필드로, 표시된 `Component` 값과 대응합니다.
 
 ### Python Example
 
@@ -749,7 +1010,13 @@ for row in table.get("DATA", []):
 
 | 값 | 설명 |
 |----|------|
-| `"BEAMFORCESIP"` | 보 부재력 (정적 프리스트레스) |
+| `"BEAMFORCESTP"` | 보 부재력 (정적 프리스트레스) |
+
+> ⚠️ 2026-08-26 확인 (article id `36011373070745`): 이전 버전 문서는 `"BEAMFORCESIP"`로
+> 표기했으나, 공식 JSON Schema enum만 그 값을 쓰고 실제 Request Example·Specifications 표는
+> 모두 `"BEAMFORCESTP"`를 사용한다. 예제·표 기준으로 정정(스키마 오타로 판단, 오류제보 대상).
+> `PARTS`(8절 공통 파라미터 참조, 값 예: `"PartI"`/`"PartJ"`)도 이 테이블에 적용되나 이전
+> 버전에는 누락되어 있었음.
 
 ### Response HEAD
 
@@ -763,11 +1030,12 @@ for row in table.get("DATA", []):
 {
   "Argument": {
     "TABLE_NAME": "BeamForcePS",
-    "TABLE_TYPE": "BEAMFORCESIP",
+    "TABLE_TYPE": "BEAMFORCESTP",
     "UNIT": { "FORCE": "kN", "DIST": "m" },
     "STYLES": { "FORMAT": "Fixed", "PLACE": 4 },
     "COMPONENTS": ["Elem", "Load", "Part", "Type", "Axial", "Shear-z", "Moment-y"],
-    "LOAD_CASE_NAMES": ["Prestress(ST)"]
+    "LOAD_CASE_NAMES": ["Prestress(ST)"],
+    "PARTS": ["PartI", "PartJ"]
   }
 }
 ```
@@ -802,7 +1070,7 @@ HEADERS = {
 payload = {
     "Argument": {
         "TABLE_NAME": "BeamForcePS",
-        "TABLE_TYPE": "BEAMFORCESIP",
+        "TABLE_TYPE": "BEAMFORCESTP",
         "UNIT": {"FORCE": "kN", "DIST": "m"},
         "LOAD_CASE_NAMES": ["Prestress(ST)"]
     }
@@ -824,14 +1092,36 @@ print(f"프리스트레스 부재력 {len(table.get('DATA', []))}행")
 |----|------|
 | `"BEAMSTRESS"` | 보 응력 |
 | `"BEAMSTRESS7DOF"` | 보 응력 (7th DOF – Warping 포함) |
+| `"BEAMSTRESSVBM"` | 보 응력 (최댓값 기준, View by Max Value) |
+
+> ⚠️ 2026-08-26 확인 (article id `36011455813273`): `BEAMSTRESSVBM`은 이전 버전 문서에 누락되어
+> 있었음 — 공식 JSON Schema의 enum에는 없으나 Specifications 표와 완전한 Request/Response
+> 예제가 존재해 실존하는 값으로 판단, 보강함(스키마가 예제·표보다 뒤처진 사례).
+
+### 부재 위치·단면위치(Parts / Section Position) 지정
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+|-----|------|-----|-----------|--------|------|
+| 11 | 부재 위치 · I단: `"PartI"` / 1/4점: `"Part1/4"` / 2/4점: `"Part2/4"` / 3/4점: `"Part3/4"` / J단: `"PartJ"` | `"PARTS"` | Array [String] | All | Optional |
+| 12 | 단면 위치(`BEAMSTRESS7DOF` 전용) · `"Pos-1"`/`"Pos-2"`/`"Pos-3"`/`"Pos-4"`/`"Max"` | `"SECTION_POSITION"` | Array [String] | All | Optional |
+| 13 | 최댓값 계산 대상 성분(`BEAMSTRESSVBM` 전용) · `Axial`/`Shear-y`/`Shear-z`/`Bend(+y)`/`Bend(-y)`/`Bend(+z)`/`Bend(-z)` | `"ITEM_TO_DISPLAY"` | Array [String] | All | Optional |
+
+> ⚠️ 2026-08-26 확인: 위 3개 파라미터(`PARTS`/`SECTION_POSITION`/`ITEM_TO_DISPLAY`) 모두 이전
+> 버전 문서에 누락되어 있었음.
 
 ### Response HEAD
 
-`["Index", "Elem", "Load", "Part", "Axial", "Shear-y", "Shear-z", "Bend(+y)", "Bend(-y)", "Bend(+z)", "Bend(-z)", "Cb(min/max)", "Cb1(-y+z)", "Cb2(+y+z)", "Cb3(+y-z)", "Cb4(-y-z)"]`
+- `BEAMSTRESS`: `["Index", "Elem", "Load", "Part", "Axial", "Shear-y", "Shear-z", "Bend(+y)", "Bend(-y)", "Bend(+z)", "Bend(-z)", "Cb(min/max)", "Cb1(-y+z)", "Cb2(+y+z)", "Cb3(+y-z)", "Cb4(-y-z)"]`
+- `BEAMSTRESSVBM`: `Part` 뒤에 `Component` 컬럼이 추가된 것 외에는 `BEAMSTRESS`와 동일 — `["Index", "Elem", "Load", "Part", "Component", "Axial", "Shear-y", "Shear-z", "Bend(+y)", "Bend(-y)", "Bend(+z)", "Bend(-z)", "Cb(min/max)", "Cb1(-y+z)", "Cb2(+y+z)", "Cb3(+y-z)", "Cb4(-y-z)"]`
+- `BEAMSTRESS7DOF`: 완전히 다른 구조 — `["Index", "Elem", "Load", "Part", "SectionPosition", "Sax(Warping)", "Ssy(Mt)", "Ssy(Mw)", "Ssz(Mt)", "Ssz(Mw)", "Cb(Ssy)", "Cb(Ssz)"]`
+
+> ⚠️ 2026-08-26 확인: 이전 버전 문서는 `BEAMSTRESS7DOF`도 `BEAMSTRESS`와 같은 HEAD를 쓰는 것으로
+> 오해할 수 있게 단일 HEAD만 표기했으나, 실제로는 7th DOF 전용 컬럼(`SectionPosition`,
+> `Sax(Warping)`, `Ssy/Ssz(Mt/Mw)`, `Cb(Ssy/Ssz)`)을 쓰는 별개 구조임을 명시.
 
 ### Request / Response JSON
 
-**POST Request Body**
+**POST Request Body — BEAMSTRESS**
 
 ```json
 {
@@ -847,7 +1137,7 @@ print(f"프리스트레스 부재력 {len(table.get('DATA', []))}행")
 }
 ```
 
-**POST Response Body**
+**POST Response Body — BEAMSTRESS**
 
 ```json
 {
@@ -857,6 +1147,73 @@ print(f"프리스트레스 부재력 {len(table.get('DATA', []))}행")
     "HEAD": ["Index", "Elem", "Load", "Part", "Axial", "Shear-y", "Shear-z", "Bend(+y)", "Bend(-y)", "Bend(+z)", "Bend(-z)", "Cb(min/max)", "Cb1(-y+z)", "Cb2(+y+z)", "Cb3(+y-z)", "Cb4(-y-z)"],
     "DATA": [
       ["1", "1", "Selfweight", "I", "0.0000", "0.0000", "1250.0000", "0.0000", "0.0000", "0.0000", "0.0000", "0.0000", "0.0000", "0.0000", "0.0000", "0.0000"]
+    ]
+  }
+}
+```
+
+**POST Request Body — BEAMSTRESS7DOF**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "BeamStress(7thDOF)",
+    "TABLE_TYPE": "BEAMSTRESS7DOF",
+    "UNIT": { "FORCE": "N", "DIST": "mm" },
+    "STYLES": { "FORMAT": "Fixed", "PLACE": 12 },
+    "COMPONENTS": ["Elem", "Load", "Part", "SectionPosition", "Sax(Warping)", "Ssy(Mt)", "Ssy(Mw)", "Ssz(Mt)", "Ssz(Mw)", "Cb(Ssy)", "Cb(Ssz)"],
+    "NODE_ELEMS": { "KEYS": [1] },
+    "LOAD_CASE_NAMES": ["EccentricLoads(ST)"],
+    "PARTS": ["PartI", "PartJ"],
+    "SECTION_POSITION": ["Pos-1", "Max"]
+  }
+}
+```
+
+**POST Response Body — BEAMSTRESS7DOF**
+
+```json
+{
+  "BeamStress(7thDOF)": {
+    "FORCE": "N",
+    "DIST": "mm",
+    "HEAD": ["Index", "Elem", "Load", "Part", "SectionPosition", "Sax(Warping)", "Ssy(Mt)", "Ssy(Mw)", "Ssz(Mt)", "Ssz(Mw)", "Cb(Ssy)", "Cb(Ssz)"],
+    "DATA": [
+      ["1", "1", "EccentricLoads", "I[1]", "Pos-1", "0.000000000000", "-0.000769832639", "0.014441854460", "-0.000722966974", "0.009767207099", "0.013672021820", "0.009044240125"],
+      ["2", "1", "EccentricLoads", "I[1]", "Max", "0.000000000000", "-0.000769832639", "0.014441854460", "-0.000722966974", "0.009767207099", "0.013672021820", "0.009044240125"]
+    ]
+  }
+}
+```
+
+**POST Request Body — BEAMSTRESSVBM(View by Max Value)**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "BeamStressViewByMaxValue",
+    "TABLE_TYPE": "BEAMSTRESSVBM",
+    "UNIT": { "FORCE": "kN", "DIST": "m" },
+    "STYLES": { "FORMAT": "Fixed", "PLACE": 12 },
+    "COMPONENTS": ["Elem", "Load", "Part", "Component", "Axial", "Shear-y", "Shear-z", "Bend(+y)", "Bend(-y)", "Bend(+z)", "Bend(-z)", "Cb(min/max)", "Cb1(-y+z)", "Cb2(+y+z)", "Cb3(+y-z)", "Cb4(-y-z)"],
+    "NODE_ELEMS": { "KEYS": [2833] },
+    "LOAD_CASE_NAMES": ["STLENV_SER(CB:max)", "STLENV_SER(CB:min)"],
+    "PARTS": ["PartI", "PartJ"],
+    "ITEM_TO_DISPLAY": ["Axial", "Shear-y", "Shear-z", "Bend(+y)", "Bend(-y)", "Bend(+z)", "Bend(-z)"]
+  }
+}
+```
+
+**POST Response Body — BEAMSTRESSVBM(View by Max Value)**
+
+```json
+{
+  "BeamStressViewByMaxValue": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "Elem", "Load", "Part", "Component", "Axial", "Shear-y", "Shear-z", "Bend(+y)", "Bend(-y)", "Bend(+z)", "Bend(-z)", "Cb(min/max)", "Cb1(-y+z)", "Cb2(+y+z)", "Cb3(+y-z)", "Cb4(-y-z)"],
+    "DATA": [
+      ["1", "2833", "STLENV_SER(max)", "I[781]", "Axial", "14501.204492710700", "10.364105217203", "1287.477776027480", "-190.557266825830", "190.557266825830", "-12261.744480687799", "32108.382246495301", "46800.144006031900", "2430.017278848780", "2048.902745197120", "46419.029472380200", "46800.144006031900"]
     ]
   }
 }
@@ -901,6 +1258,18 @@ print(f"보 응력 {len(table.get('DATA', []))}행")
 |----|------|
 | `"BEAMSTRESSDETAIL"` | 보 등가 응력 (상세) |
 
+### 부재 위치·단면위치(Parts / Section Position) 지정
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+|-----|------|-----|-----------|--------|------|
+| 11 | 부재 위치 · I단: `"PartI"` / 1/4점: `"Part1/4"` / 2/4점: `"Part2/4"` / 3/4점: `"Part3/4"` / J단: `"PartJ"` | `"PARTS"` | Array [String] | All | Optional |
+| 12 | 단면 위치(각형강관·I형강 단면의 응력 검토점 번호) · 최댓값: `"Maximum"` / 1~28번 위치: `"1"`~`"28"` | `"SECTION_POSITION"` | Array [String] | All | Optional |
+
+> ⚠️ 2026-08-26 확인 (article id `36011572000153`): `PARTS`·`SECTION_POSITION` 모두 이전 버전
+> 문서에 누락되어 있었음. `SECTION_POSITION`의 값 체계는 10절(Beam Stress) `BEAMSTRESS7DOF`의
+> `"Pos-1"`~`"Pos-4"`/`"Max"`와 다른, 이 테이블 전용의 번호(`"1"`~`"28"`)/`"Maximum"` 체계임에
+> 주의.
+
 ### Response HEAD
 
 `["Index", "Elem", "Load", "Part", "SectionPosition", "Normal", "Tau_xy", "Tau_xz", "Von-Mises", "Max-Shear", "Princ.(max)", "Princ.(min)"]`
@@ -918,7 +1287,9 @@ print(f"보 응력 {len(table.get('DATA', []))}행")
     "STYLES": { "FORMAT": "Fixed", "PLACE": 4 },
     "COMPONENTS": ["Elem", "Load", "Part", "SectionPosition", "Normal", "Tau_xy", "Tau_xz", "Von-Mises", "Max-Shear", "Princ.(max)", "Princ.(min)"],
     "NODE_ELEMS": { "KEYS": [32] },
-    "LOAD_CASE_NAMES": ["Selfweight(ST)"]
+    "LOAD_CASE_NAMES": ["Selfweight(ST)"],
+    "PARTS": ["PartI", "PartJ"],
+    "SECTION_POSITION": ["Maximum", "12"]
   }
 }
 ```
@@ -980,13 +1351,30 @@ for row in table.get("DATA", []):
 | `"BEAMSTRESSPSC"` | PSC 보 응력 |
 | `"BEAMSTRESS7DOFPSC"` | PSC 보 응력 (7th DOF – Warping 포함) |
 
+### 부재 위치·단면위치(Parts / Section Position) 지정
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+|-----|------|-----|-----------|--------|------|
+| 11 | 부재 위치 · I단: `"PartI"` / 1/4점: `"Part1/4"` / 2/4점: `"Part2/4"` / 3/4점: `"Part3/4"` / J단: `"PartJ"` | `"PARTS"` | Array [String] | All | Optional |
+| 12 | 단면 위치(`BEAMSTRESS7DOFPSC` 전용) · `"Pos-1"`~`"Pos-16"` / 최댓값: `"Max"` / 최솟값: `"Min"` / 전체: `"All"` | `"SECTION_POSITION"` | Array [String] | All | Optional |
+
+> ⚠️ 2026-08-26 확인 (article id `36011704177561`): `PARTS`·`SECTION_POSITION` 모두 이전 버전
+> 문서에 누락되어 있었음. `SECTION_POSITION`의 위치 개수(16개)는 10절 `BEAMSTRESS7DOF`(4개)보다
+> 많다 — PSC 단면이 더 세분화된 검토점을 갖기 때문으로 추정.
+
 ### Response HEAD
 
-`["Index", "Elem", "Load", "Part", "SectionPosition", "Sig-xx(Axial)", "Sig-xx(Moment-y)", "Sig-xx(Moment-z)", "Sig-xx(Bar)", "Sig-xx(Summation)", "Sig-zz", "Sig-xz(shear)", "Sig-xz(torsion)", "Sig-xz(bar)", "Sig-Is(shear)", "Sig-Is(shear+torsion)", "Sig-Ps(Max)", "Sig-Ps(Min)"]`
+- `BEAMSTRESSPSC`: `["Index", "Elem", "Load", "Part", "SectionPosition", "Sig-xx(Axial)", "Sig-xx(Moment-y)", "Sig-xx(Moment-z)", "Sig-xx(Bar)", "Sig-xx(Summation)", "Sig-zz", "Sig-xz(shear)", "Sig-xz(torsion)", "Sig-xz(bar)", "Sig-Is(shear)", "Sig-Is(shear+torsion)", "Sig-Ps(Max)", "Sig-Ps(Min)"]`
+- `BEAMSTRESS7DOFPSC`: 완전히 다른 구조 — `["Index", "Elem", "Load", "Part", "SectionPosition", "Sax(Warping)", "Ssy(Mt)", "Ssy(Mw)", "Ssz(Mt)", "Ssz(Mw)", "Combined(Ssy)", "Combined(Ssz)"]`
+
+> ⚠️ 2026-08-26 확인: `BEAMSTRESS7DOFPSC`는 10절 `BEAMSTRESS7DOF`와 개념은 유사하나(같은
+> Sax/Ssy/Ssz 구조) 마지막 두 컬럼명이 `Cb(Ssy)`/`Cb(Ssz)`가 아니라 `Combined(Ssy)`/
+> `Combined(Ssz)`로 다르게 표기되어 있음 — 원문에서 별개로 작성된 두 아티클 간 명명 불일치로
+> 판단(오류라기보다 정보성 기록, 오류제보 대상).
 
 ### Request / Response JSON
 
-**POST Request Body**
+**POST Request Body — BEAMSTRESSPSC**
 
 ```json
 {
@@ -1002,7 +1390,7 @@ for row in table.get("DATA", []):
 }
 ```
 
-**POST Response Body**
+**POST Response Body — BEAMSTRESSPSC**
 
 ```json
 {
@@ -1012,6 +1400,40 @@ for row in table.get("DATA", []):
     "HEAD": ["Index", "Elem", "Load", "Part", "SectionPosition", "Sig-xx(Axial)", "Sig-xx(Moment-y)", "Sig-xx(Moment-z)", "Sig-xx(Bar)", "Sig-xx(Summation)", "Sig-zz", "Sig-xz(shear)", "Sig-xz(torsion)", "Sig-xz(bar)", "Sig-Is(shear)", "Sig-Is(shear+torsion)", "Sig-Ps(Max)", "Sig-Ps(Min)"],
     "DATA": [
       ["1", "1", "Selfweight", "I", "1", "0.000e+00", "0.000e+00", "0.000e+00", "0.000e+00", "0.000e+00", "0.000e+00", "0.000e+00", "0.000e+00", "0.000e+00", "0.000e+00", "0.000e+00", "0.000e+00", "0.000e+00"]
+    ]
+  }
+}
+```
+
+**POST Request Body — BEAMSTRESS7DOFPSC**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "BeamStress(7thDOF)(PSC)",
+    "TABLE_TYPE": "BEAMSTRESS7DOFPSC",
+    "UNIT": { "FORCE": "N", "DIST": "mm" },
+    "STYLES": { "FORMAT": "Fixed", "PLACE": 12 },
+    "COMPONENTS": ["Elem", "Load", "Part", "SectionPosition", "Sax(Warping)", "Ssy(Mt)", "Ssy(Mw)", "Ssz(Mt)", "Ssz(Mw)", "Combined(Ssy)", "Combined(Ssz)"],
+    "NODE_ELEMS": { "KEYS": [1] },
+    "LOAD_CASE_NAMES": ["EccentricLoads(ST)"],
+    "PARTS": ["PartI", "PartJ"],
+    "SECTION_POSITION": ["Pos-7", "All"]
+  }
+}
+```
+
+**POST Response Body — BEAMSTRESS7DOFPSC**
+
+```json
+{
+  "BeamStress(7thDOF)(PSC)": {
+    "FORCE": "N",
+    "DIST": "mm",
+    "HEAD": ["Index", "Elem", "Load", "Part", "SectionPosition", "Sax(Warping)", "Ssy(Mt)", "Ssy(Mw)", "Ssz(Mt)", "Ssz(Mw)", "Combined(Ssy)", "Combined(Ssz)"],
+    "DATA": [
+      ["1", "1", "EccentricLoads", "I[1]", "Pos-7", "0.000000000000", "-0.000020377582", "-0.000013533950", "-0.023715019562", "-0.006463496296", "-0.000033911532", "-0.030178515858"],
+      ["2", "1", "EccentricLoads", "I[1]", "All", "0.000000000000", "-0.023715019562", "-0.023273488440", "0.023715021748", "-0.015750538530", "-0.039465558092", "-0.039465558092"]
     ]
   }
 }
@@ -1061,22 +1483,37 @@ for row in table.get("DATA", []):
 | --- | --- |
 | `"CONCURRENT_JOINT_FORCE"` | 동시 절점력(Concurrent Joint Force) |
 
-> ⚠️ 이 테이블 타입은 공통 파라미터 표(위 "공통 Request 구조 및 파라미터")의 10개 항목 외에
-> `"ADDITIONAL"` 객체가 **Required**로 추가됩니다. 다른 12개 테이블에는 없는 이 타입 전용 항목입니다.
+> ⚠️ 2026-08-26 확인 (article id `59520540732185`): 이 테이블은 공통 파라미터 표(위 "공통 Request
+> 구조 및 파라미터")가 아니라 **자기 자신만의 독립된 스키마**를 가지며, 공식 JSON Schema에
+> `"additionalProperties": false`가 걸려 있어 공통 항목 중 `NODE_ELEMS`/`OPT_CS`/`STAGE_STEP`는
+> **이 테이블에 존재하지 않고 사용할 수 없습니다**(전송 시 거부될 가능성). 허용되는 필드는
+> `TABLE_TYPE`/`LOAD_CASE_NAMES`/`TABLE_NAME`/`EXPORT_PATH`/`UNIT`/`STYLES`/`COMPONENTS`/
+> `ADDITIONAL` 8개뿐입니다. 또한 `LOAD_CASE_NAMES`는 다른 12개 테이블과 달리(공통 표는
+> Optional·기본값 All) 공식 스키마의 `required`에 포함되어 **Required**입니다.
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 | --- | --- | --- | --- | --- | --- |
-| 11 | 반력 극값 기준 추가 설정 | `"ADDITIONAL"` | Object | — | **Required** |
-| 11-1 | └ 반력 절점 기준 설정 | `ADDITIONAL.SET_REACTION_PARAMS` | Object | — | **Required** |
-| 11-1-1 | 　└ 반력 절점 ID | `SET_REACTION_PARAMS.NODE_KEY` | Integer | — | **Required** |
-| 11-1-2 | 　└ 반력 성분 사용 여부 6자리(0/1), 순서 Fx·Fy·Fz·Mx·My·Mz | `SET_REACTION_PARAMS.COMPONENT` | String | — | **Required** |
+| 1 | 하중케이스 이름 목록 | `"LOAD_CASE_NAMES"` | Array [String] | — | **Required** |
+| 2 | 반력 극값 기준 추가 설정 | `"ADDITIONAL"` | Object | — | **Required** |
+| 2-1 | └ 반력 절점 기준 설정 | `ADDITIONAL.SET_REACTION_PARAMS` | Object | — | **Required** |
+| 2-1-1 | 　└ 반력 절점 ID | `SET_REACTION_PARAMS.NODE_KEY` | Integer | — | **Required** |
+| 2-1-2 | 　└ 반력 성분 사용 여부 6자리(0/1), 순서 Fx·Fy·Fz·Mx·My·Mz | `SET_REACTION_PARAMS.COMPONENT` | String | — | **Required** |
 
 ### Response HEAD
 
-응답 `HEAD`/`DATA`는 `COMPONENTS`에 지정한 `"Elem./Component"` + `9[J]/Fx`~`10[I]/Mz` 12개 열
-블록이, 조회 대상 요소 개수만큼 반복되어 하나의 `HEAD` 배열에 이어붙는 구조입니다(기본 `"Index"`,
-`"Elem."`, `"Load"` 3열 + 요소별 12열 × N). `DATA`는 요소가 아니라 **성분(Fx/Fy/Fz/Mx/My/Mz)별로
-한 행**을 이루며, 각 행 안에서 요소별 블록이 반복됩니다.
+응답 `HEAD`는 기본 `"Index"`/`"Elem."`/`"Load"` 3열 뒤에, `"Elem./Component"` + `9[J]/Fx`~
+`10[I]/Mz`(반력 절점을 사이에 둔 두 인접 요소 × 6성분 = 12열) 13열짜리 블록이 **반력 성분 개수만큼
+(Fx/Fy/Fz/Mx/My/Mz 최대 6개)** 반복되어 이어붙습니다.
+
+`DATA`는 (이전 버전 문서와 반대로) **요소별로 한 행**을 이룹니다 — 절점 양옆의 두 요소(`9[J]`,
+`10[I]`) 각각이 한 행이 되며, 각 행 안에서 위 13열 블록이 반력 성분(Fx/Fy/Fz/Mx/My/Mz) 개수만큼
+반복됩니다(각 블록의 첫 칸이 `"Fx"`~`"Mz"` 라벨, 나머지 12칸이 그 성분이 극값을 이루는 시점의
+동시 절점력).
+
+> ⚠️ 2026-08-26 확인: 이전 버전 문서는 이 구조를 반대로 설명했습니다("성분별 한 행, 요소별 블록
+> 반복") — 실제로는 위처럼 요소별 한 행, 성분별 블록 반복입니다. 아래 예제는 공식 예제를 그대로
+> 옮긴 것입니다(1개 하중케이스 × 반력성분 6개 선택 시 81열: `Index`/`Elem.`/`Load` 3열 + 13열 ×
+> 6블록).
 
 ### Request / Response JSON
 
@@ -1099,20 +1536,52 @@ for row in table.get("DATA", []):
 }
 ```
 
-**POST Response Body (발췌)**
+**POST Response Body**
 
 ```json
 {
   "Concurrent Joint Forces": {
     "FORCE": "KN",
     "DIST": "M",
-    "HEAD": ["Index", "Elem.", "Load", "Elem./Component", "9[J]/Fx", "9[J]/Fy", "9[J]/Fz", "9[J]/Mx", "9[J]/My", "9[J]/Mz", "10[I]/Fx", "10[I]/Fy", "10[I]/Fz", "10[I]/Mx", "10[I]/My", "10[I]/Mz"],
+    "HEAD": [
+      "Index", "Elem.", "Load",
+      "Elem./Component", "9[J]/Fx", "9[J]/Fy", "9[J]/Fz", "9[J]/Mx", "9[J]/My", "9[J]/Mz", "10[I]/Fx", "10[I]/Fy", "10[I]/Fz", "10[I]/Mx", "10[I]/My", "10[I]/Mz",
+      "Elem./Component", "9[J]/Fx", "9[J]/Fy", "9[J]/Fz", "9[J]/Mx", "9[J]/My", "9[J]/Mz", "10[I]/Fx", "10[I]/Fy", "10[I]/Fz", "10[I]/Mx", "10[I]/My", "10[I]/Mz",
+      "Elem./Component", "9[J]/Fx", "9[J]/Fy", "9[J]/Fz", "9[J]/Mx", "9[J]/My", "9[J]/Mz", "10[I]/Fx", "10[I]/Fy", "10[I]/Fz", "10[I]/Mx", "10[I]/My", "10[I]/Mz",
+      "Elem./Component", "9[J]/Fx", "9[J]/Fy", "9[J]/Fz", "9[J]/Mx", "9[J]/My", "9[J]/Mz", "10[I]/Fx", "10[I]/Fy", "10[I]/Fz", "10[I]/Mx", "10[I]/My", "10[I]/Mz",
+      "Elem./Component", "9[J]/Fx", "9[J]/Fy", "9[J]/Fz", "9[J]/Mx", "9[J]/My", "9[J]/Mz", "10[I]/Fx", "10[I]/Fy", "10[I]/Fz", "10[I]/Mx", "10[I]/My", "10[I]/Mz",
+      "Elem./Component", "9[J]/Fx", "9[J]/Fy", "9[J]/Fz", "9[J]/Mx", "9[J]/My", "9[J]/Mz", "10[I]/Fx", "10[I]/Fy", "10[I]/Fz", "10[I]/Mx", "10[I]/My", "10[I]/Mz"
+    ],
     "DATA": [
-      ["1", "9[J]", "case_01(max)", "Fz", "0.0", "0.0", "437.017", "-558.415", "938.805", "0.0"]
+      [
+        "1", "9[J]", "case_01(max)",
+        "Fx", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000",
+        "Fy", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000",
+        "Fz", "0.000000000000", "0.000000000000", "437.017000000000", "-558.415000000000", "938.805000000000", "0.000000000000", "0.000000000000", "0.000000000000", "437.017000000000", "-558.415000000000", "938.805000000000", "0.000000000000",
+        "Mx", "0.000000000000", "0.000000000000", "-41.903300000000", "216.858000000000", "190.624000000000", "0.000000000000", "0.000000000000", "0.000000000000", "-41.903300000000", "216.858000000000", "190.624000000000", "0.000000000000",
+        "My", "0.000000000000", "0.000000000000", "399.782000000000", "-422.014000000000", "1067.630000000000", "0.000000000000", "0.000000000000", "0.000000000000", "399.782000000000", "-422.014000000000", "1067.630000000000", "0.000000000000",
+        "Mz", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000"
+      ],
+      [
+        "2", "10[I]", "case_01(max)",
+        "Fx", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000",
+        "Fy", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000",
+        "Fz", "0.000000000000", "0.000000000000", "437.017000000000", "-558.415000000000", "938.805000000000", "0.000000000000", "0.000000000000", "0.000000000000", "437.017000000000", "-558.415000000000", "938.805000000000", "0.000000000000",
+        "Mx", "0.000000000000", "0.000000000000", "-41.903300000000", "216.858000000000", "190.624000000000", "0.000000000000", "0.000000000000", "0.000000000000", "-41.903300000000", "216.858000000000", "190.624000000000", "0.000000000000",
+        "My", "0.000000000000", "0.000000000000", "399.782000000000", "-422.014000000000", "1067.630000000000", "0.000000000000", "0.000000000000", "0.000000000000", "399.782000000000", "-422.014000000000", "1067.630000000000", "0.000000000000",
+        "Mz", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000"
+      ]
     ]
   }
 }
 ```
+
+> ⚠️ 2026-08-26 확인: 공식 Response Example은 위 요청(`TABLE_NAME: "Concurrent Joint Forces"`)과
+> 짝을 이루는데도 응답 최상위 키가 요청한 `TABLE_NAME`이 아니라 리터럴 `"empty"`로 되어 있습니다
+> (`{"empty": {...}}`). 이 챕터의 다른 모든 테이블 및 공통 Response 구조(`{"<TABLE_NAME>": {...}}`)
+> 관례와 어긋나는데, 원문 저작 시 실제 값으로 치환하지 않은 복사·붙여넣기 실수인지, 이 엔드포인트만의
+> 실제 동작인지 판단할 근거가 없어 실제 API 동작은 검증하지 않았음을 전제로 오류제보 대상으로만
+> 남기고, 위 예제는 관례를 따라 `"Concurrent Joint Forces"` 키를 그대로 유지했습니다.
 
 ### Python Example
 

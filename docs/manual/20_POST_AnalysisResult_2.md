@@ -62,7 +62,18 @@
 | 이동하중 | `NAME(MV:all)` / `NAME(MV:max)` / `NAME(MV:min)` |
 | 침하하중 | `NAME(SM:all)` / `NAME(SM:max)` / `NAME(SM:min)` |
 
-> **참고:** `OPT_CS`·`STAGE_STEP`는 시공단계 결과 조회 시 사용합니다. 판/솔리드 변형률(비선형·시공단계), 텐던 신장량 등 `Step`·`Stage` 열을 포함하는 테이블에서 함께 지정합니다. `STAGE_STEP` 항목은 `"CS1:001(first)"`, `"CS1:002(last)"` 또는 `"nl_001"` 형식입니다.
+> **참고:** `OPT_CS`·`STAGE_STEP`는 시공단계 결과 조회 시 사용합니다. 판/솔리드 변형률(비선형·시공단계), 텐던 신장량 등 `Step`·`Stage` 열을 포함하는 테이블에서 함께 지정합니다. `STAGE_STEP` 항목은 `"CS1:001(first)"`, `"CS1:002(last)"` 또는 `"nl_001"` 형식입니다. 단 텐던 계열 일부(30·31·33·34·36절), 동시절점력류(19장 13절 유사 패턴), 텐던 배치(32절)는 이 두 필드를 지원하지 않으니 해당 절의 전용 파라미터를 확인하세요.
+
+> ⚠️ 2026-08-26 확인: 아래 두 파라미터는 이전 버전 문서에 전체가 누락되어 있었음 — 39개 테이블 중
+> 다수(1~19, 22~25절)에서 공식 스키마에 존재하나, 테이블마다 적용 여부가 달라 공통 표에 넣지
+> 않고 이 표로 정리합니다. 각 절에는 해당하는 것만 있으면 "전용 파라미터"로 별도 표기합니다.
+>
+> | 파라미터 | 설명 | Value 타입 | 기본값 | 적용 절(1~25절 기준) |
+> |---|---|---|---|---|
+> | `"AVERAGE_NODAL_RESULT"` | 절점 평균값 결과 옵션 | Boolean | `false` | 1,2,3,4,5,8,9,10,11,12,13,14,15,16,17,18,19,23,24,25 |
+> | `"NODE_FLAG"` (하위: `CENTER`/`NODES`, 둘 다 Boolean/`false`) | 요소 중심(Cent)/절점(Node)별 출력 여부 | Object | — | 3,4,5,6,7,10,11,14,15,18,19,22,23,24,25 |
+>
+> 20~21절(Solid Force Local/Global)은 원문에 두 파라미터 모두 없음을 확인(변경 없음).
 
 ### 공통 Response 구조
 
@@ -134,6 +145,8 @@
 | 값 | 설명 |
 |----|------|
 | `"PLATEFORCEL"` | Plate 부재력 (국부 좌표계, Local) |
+
+> ⚠️ 2026-08-26 확인: 이 테이블은 `"AVERAGE_NODAL_RESULT"`(Boolean, 기본값 `false`, Optional — 절점 평균값 결과 옵션)를 지원합니다(공통 사항의 적용 절 표 참조). 이전 버전 문서에 누락되어 있었음.
 
 ### Response HEAD
 
@@ -213,6 +226,8 @@ for row in table.get("DATA", []):
 |----|------|
 | `"PLATEFORCEG"` | Plate 부재력 (전역 좌표계, Global) |
 
+> ⚠️ 2026-08-26 확인: 이 테이블은 `"AVERAGE_NODAL_RESULT"`(Boolean, 기본값 `false`, Optional — 절점 평균값 결과 옵션)를 지원합니다(공통 사항의 적용 절 표 참조). 이전 버전 문서에 누락되어 있었음.
+
 ### Response HEAD
 
 `["Index", "Elem", "Load", "Node", "FX", "FY", "FZ", "MX", "MY", "MZ"]`
@@ -288,17 +303,25 @@ print(f"판 부재력(전역) {len(table.get('DATA', []))}행")
 |----|------|
 | `"PLATEFORCEUL"` | 단위 길이당 부재력 (국부 좌표계, Unit Length Local) |
 | `"PLATEFORCEUG"` | 단위 길이당 부재력 (전역 좌표계, Unit Length Global) |
-| `"PLATEFORCEULVBM"` | 단위 길이당 부재력 (국부, 최댓값 기준 by-max) |
-| `"PLATEFORCEUGVBM"` | 단위 길이당 부재력 (전역, 최댓값 기준 by-max) |
+| `"PLATEFORCEULVBM"` | 단위 길이당 부재력 (국부, 최댓값 기준, View by Max Value) |
+| `"PLATEFORCEUGVBM"` | 단위 길이당 부재력 (전역, 최댓값 기준, View by Max Value) |
 | `"PLATEFORCEWA"` | 단위 길이당 부재력 (Wood-Armer 설계 모멘트) |
+
+> ⚠️ 2026-08-26 확인 (article id `36012822385817`): 이 테이블은 `AVERAGE_NODAL_RESULT`/
+> `NODE_FLAG`(공통 사항 참조)에 더해 `ULVBM`/`UGVBM` 전용 `"ITEM_TO_DISPLAY"`(Array [String],
+> enum: `Fxx`/`Fyy`/`Fxy`/`Mxx`/`Myy`/`Mxy`/`Vxx`/`Vyy`, 기본값 All, Optional)를 지원합니다.
+> 또한 이전 버전 문서는 `PLATEFORCEUL`/`UG`용 Response HEAD 하나만 표기해 `ULVBM`/`UGVBM`·`WA`도
+> 같은 구조인 것으로 오인될 수 있었음 — 실제로는 아래처럼 3종류의 서로 다른 응답 구조를 가짐.
 
 ### Response HEAD
 
-`["Index", "Elem", "Load", "Node", "Fxx", "Fyy", "Fxy", "Fmax", "Fmin", "Angle", "Mxx", "Myy", "Mxy", "Mmax", "Mmin", "Angle", "Vxx", "Vyy"]`
+- `PLATEFORCEUL`/`PLATEFORCEUG`: `["Index", "Elem", "Load", "Node", "Fxx", "Fyy", "Fxy", "Fmax", "Fmin", "Angle", "Mxx", "Myy", "Mxy", "Mmax", "Mmin", "Angle", "Vxx", "Vyy"]`
+- `PLATEFORCEULVBM`/`PLATEFORCEUGVBM`: `Node` 뒤에 `Component` 컬럼이 추가되고 `Fmax`/`Fmin`/`Mmax`/`Mmin`/`Angle`은 빠짐 — `["Index", "Elem", "Load", "Node", "Component", "Fxx", "Fyy", "Fxy", "Mxx", "Myy", "Mxy", "Vxx", "Vyy"]`
+- `PLATEFORCEWA`(Wood-Armer): 완전히 다른 구조 — `Fxx`/`Fyy` 계열이 아예 없고, 4개 방향(Top Dir.1/Dir.2, Bot Dir.1/Dir.2)별 `Ma`/`Mb`/`Mab`/`W-AMoment` 블록이 반복 — `["Index", "Elem", "Load", "Node", "Ma", "Mb", "Mab", "W-AMomentTopDir.1", "Ma", "Mb", "Mab", "W-AMomentTopDir.2", "Ma", "Mb", "Mab", "W-AMomentBotDir.1", "Ma", "Mb", "Mab", "W-AMomentBotDir.2"]`
 
 ### Request / Response JSON
 
-**POST Request Body**
+**POST Request Body — PLATEFORCEUL**
 
 ```json
 {
@@ -314,7 +337,7 @@ print(f"판 부재력(전역) {len(table.get('DATA', []))}행")
 }
 ```
 
-**POST Response Body**
+**POST Response Body — PLATEFORCEUL**
 
 ```json
 {
@@ -324,6 +347,74 @@ print(f"판 부재력(전역) {len(table.get('DATA', []))}행")
     "HEAD": ["Index", "Elem", "Load", "Node", "Fxx", "Fyy", "Fxy", "Fmax", "Fmin", "Angle", "Mxx", "Myy", "Mxy", "Mmax", "Mmin", "Angle", "Vxx", "Vyy"],
     "DATA": [
       ["1", "592", "DL", "773", "-108.226897000000", "5.103138340000", "-0.000000011818", "5.103138340000", "-108.226897000000", "-89.999999994025", "1.744257540000", "0.141650776000", "0.000000000120", "1.744257540000", "0.141650776000", "0.000000004303", "-1.405381470000", "-0.000000000024"]
+    ]
+  }
+}
+```
+
+**POST Request Body — PLATEFORCEULVBM(View by Max Value)**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "PlateForce(UL:L)ViewByMaxValue",
+    "TABLE_TYPE": "PLATEFORCEULVBM",
+    "UNIT": { "FORCE": "kN", "DIST": "m" },
+    "STYLES": { "FORMAT": "Fixed", "PLACE": 12 },
+    "COMPONENTS": ["Elem", "Load", "Node", "Component", "Fxx", "Fyy", "Fxy", "Mxx", "Myy", "Mxy", "Vxx", "Vyy"],
+    "NODE_ELEMS": { "KEYS": [503] },
+    "LOAD_CASE_NAMES": ["STLENV_STR(CB:max)", "STLENV_STR(CB:min)"],
+    "AVERAGE_NODAL_RESULT": true,
+    "NODE_FLAG": { "CENTER": false, "NODES": true },
+    "ITEM_TO_DISPLAY": ["Fxx", "Fyy", "Fxy", "Mxx", "Myy", "Mxy", "Vxx", "Vyy"]
+  }
+}
+```
+
+**POST Response Body — PLATEFORCEULVBM(View by Max Value)**
+
+```json
+{
+  "PlateForce(UL:L)ViewByMaxValue": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "Elem", "Load", "Node", "Component", "Fxx", "Fyy", "Fxy", "Mxx", "Myy", "Mxy", "Vxx", "Vyy"],
+    "DATA": [
+      ["1", "503", "STLENV_STR(max)", "52", "Fxx", "14.643051500000", "14.413288400000", "28.554175400000", "6.211062100000", "11.092328400000", "11.090774500000", "23.467790500000", "69.014747700000"],
+      ["2", "503", "STLENV_STR(max)", "52", "Fyy", "14.643051500000", "14.413288400000", "28.554175400000", "6.211062100000", "11.092328400000", "11.090774500000", "23.467790500000", "69.014747700000"]
+    ]
+  }
+}
+```
+
+**POST Request Body — PLATEFORCEWA(Wood-Armer)**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "PlateForce(UnitLength:W-AMoment)",
+    "TABLE_TYPE": "PLATEFORCEWA",
+    "UNIT": { "FORCE": "kN", "DIST": "m" },
+    "STYLES": { "FORMAT": "Fixed", "PLACE": 12 },
+    "COMPONENTS": ["Elem", "Load", "Node", "Ma", "Mb", "Mab", "W-AMomentTopDir.1", "Ma", "Mb", "Mab", "W-AMomentTopDir.2", "Ma", "Mb", "Mab", "W-AMomentBotDir.1", "Ma", "Mb", "Mab", "W-AMomentBotDir.2"],
+    "NODE_ELEMS": { "KEYS": [592] },
+    "LOAD_CASE_NAMES": ["DL(ST)"],
+    "AVERAGE_NODAL_RESULT": true,
+    "NODE_FLAG": { "CENTER": false, "NODES": true }
+  }
+}
+```
+
+**POST Response Body — PLATEFORCEWA(Wood-Armer)**
+
+```json
+{
+  "PlateForce(UnitLength:W-AMoment)": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "Elem", "Load", "Node", "Ma", "Mb", "Mab", "W-AMomentTopDir.1", "Ma", "Mb", "Mab", "W-AMomentTopDir.2", "Ma", "Mb", "Mab", "W-AMomentBotDir.1", "Ma", "Mb", "Mab", "W-AMomentBotDir.2"],
+    "DATA": [
+      ["1", "592", "DL", "773", "1.744257540000", "0.141650776000", "0.000000000120", "0.054348959200", "1.744257540000", "0.141650776000", "0.000000000120", "0.105709883000", "1.744257540000", "0.141650776000", "0.000000000120", "1.788450260000", "1.744257540000", "0.141650776000", "0.000000000120", "0.237204424000"]
     ]
   }
 }
@@ -371,6 +462,8 @@ for row in table.get("DATA", []):
 | 값 | 설명 |
 |----|------|
 | `"PLATESTRESSL"` | Plate 응력 (국부 좌표계, Local) |
+
+> ⚠️ 2026-08-26 확인: 이 테이블은 `"AVERAGE_NODAL_RESULT"`(Boolean, 기본값 `false`, Optional)와 `"NODE_FLAG"`(Object: `CENTER`/`NODES`, 둘 다 Boolean·기본값 `false`, Optional) 모두 지원합니다(공통 사항의 적용 절 표 참조). 이전 버전 문서에 누락되어 있었음.
 
 ### Response HEAD
 
@@ -448,6 +541,8 @@ print(f"판 응력(국부) {len(table.get('DATA', []))}행")
 |----|------|
 | `"PLATESTRESSG"` | Plate 응력 (전역 좌표계, Global) |
 
+> ⚠️ 2026-08-26 확인: 이 테이블은 `"AVERAGE_NODAL_RESULT"`(Boolean, 기본값 `false`, Optional)와 `"NODE_FLAG"`(Object: `CENTER`/`NODES`, 둘 다 Boolean·기본값 `false`, Optional) 모두 지원합니다(공통 사항의 적용 절 표 참조). 이전 버전 문서에 누락되어 있었음.
+
 ### Response HEAD
 
 `["Index", "Elem", "Load", "Node", "Part", "Sig-XX", "Sig-YY", "Sig-ZZ", "Sig-XY", "Sig-YZ", "Sig-XZ", "Sig-Max", "Sig-Min", "ANG", "Sig-EFF", "Max-Shear", "Part", "Sig-XX", "Sig-YY", "Sig-ZZ", "Sig-XY", "Sig-YZ", "Sig-XZ", "Sig-Max", "Sig-Min", "ANG", "Sig-EFF", "Max-Shear"]`  
@@ -524,6 +619,8 @@ print(f"판 응력(전역) {len(table.get('DATA', []))}행")
 |----|------|
 | `"PLATESTRAINPL"` | Plate 변형률 (국부, 소성 Plastic Strain) |
 | `"PLATESTRAINTL"` | Plate 변형률 (국부, 전체 Total Strain) |
+
+> ⚠️ 2026-08-26 확인: 이 테이블은 `"NODE_FLAG"`(Object: `CENTER`/`NODES`, 둘 다 Boolean·기본값 `false`, Optional — 요소중심(Cent)/절점별 출력 여부)를 지원합니다(공통 사항의 적용 절 표 참조). 이전 버전 문서에 누락되어 있었음.
 
 ### Response HEAD
 
@@ -608,6 +705,8 @@ print(f"판 변형률(국부) {len(table.get('DATA', []))}행")
 | `"PLATESTRAINPG"` | Plate 변형률 (전역, 소성 Plastic Strain) |
 | `"PLATESTRAINTG"` | Plate 변형률 (전역, 전체 Total Strain) |
 
+> ⚠️ 2026-08-26 확인: 이 테이블은 `"NODE_FLAG"`(Object: `CENTER`/`NODES`, 둘 다 Boolean·기본값 `false`, Optional — 요소중심(Cent)/절점별 출력 여부)를 지원합니다(공통 사항의 적용 절 표 참조). 이전 버전 문서에 누락되어 있었음.
+
 ### Response HEAD
 
 `["Index", "Elem", "Load", "Step", "Node", "Part", "Strain-XX", "Strain-YY", "Strain-ZZ", "Strain-XY", "Strain-YZ", "Strain-XZ", "Strain-Max", "Strain-Min", "Angle", "Max-Shear", "Part", "Strain-XX", "Strain-YY", "Strain-ZZ", "Strain-XY", "Strain-YZ", "Strain-XZ", "Strain-Max", "Strain-Min", "Angle", "Max-Shear"]`  
@@ -690,6 +789,8 @@ print(f"판 변형률(전역) {len(table.get('DATA', []))}행")
 |----|------|
 | `"PLANESTRESSFL"` | 평면응력 요소 부재력 (국부 좌표계, Local) |
 
+> ⚠️ 2026-08-26 확인: 이 테이블은 `"AVERAGE_NODAL_RESULT"`(Boolean, 기본값 `false`, Optional — 절점 평균값 결과 옵션)를 지원합니다(공통 사항의 적용 절 표 참조). 이전 버전 문서에 누락되어 있었음.
+
 ### Response HEAD
 
 `["Index", "Elem", "Load", "Node", "Fx", "Fy"]`
@@ -766,6 +867,8 @@ for row in table.get("DATA", []):
 |----|------|
 | `"PLANESTRESSFG"` | 평면응력 요소 부재력 (전역 좌표계, Global) |
 
+> ⚠️ 2026-08-26 확인: 이 테이블은 `"AVERAGE_NODAL_RESULT"`(Boolean, 기본값 `false`, Optional — 절점 평균값 결과 옵션)를 지원합니다(공통 사항의 적용 절 표 참조). 이전 버전 문서에 누락되어 있었음.
+
 ### Response HEAD
 
 `["Index", "Elem", "Load", "Node", "FX", "FY", "FZ"]`
@@ -841,6 +944,8 @@ print(f"평면응력 부재력(전역) {len(table.get('DATA', []))}행")
 |----|------|
 | `"PLANESTRESSSL"` | 평면응력 요소 응력 (국부 좌표계, Local) |
 
+> ⚠️ 2026-08-26 확인: 이 테이블은 `"AVERAGE_NODAL_RESULT"`(Boolean, 기본값 `false`, Optional)와 `"NODE_FLAG"`(Object: `CENTER`/`NODES`, 둘 다 Boolean·기본값 `false`, Optional) 모두 지원합니다(공통 사항의 적용 절 표 참조). 이전 버전 문서에 누락되어 있었음.
+
 ### Response HEAD
 
 `["Index", "Elem", "Load", "Node", "Sig-xx", "Sig-yy", "Sig-xy", "Sig-Max", "Sig-Min", "Angle", "Sig-EFF", "Max-Shear"]`
@@ -854,22 +959,26 @@ print(f"평면응력 부재력(전역) {len(table.get('DATA', []))}행")
   "Argument": {
     "TABLE_NAME": "PlaneStressLocal",
     "TABLE_TYPE": "PLANESTRESSSL",
-    "UNIT": { "FORCE": "kN", "DIST": "m" },
+    "UNIT": { "FORCE": "N", "DIST": "mm" },
     "STYLES": { "FORMAT": "Fixed", "PLACE": 12 },
-    "COMPONENTS": ["Elem", "Load", "Node", "Sig-xx", "Sig-yy", "Sig-xy", "Sig-Max", "Sig-Min", "Sig-EFF", "Max-Shear"],
+    "COMPONENTS": ["Elem", "Load", "Node", "Sig-xx", "Sig-yy", "Sig-xy", "Sig-Max", "Sig-Min", "Angle", "Sig-EFF", "Max-Shear"],
     "NODE_ELEMS": { "KEYS": [1] },
     "LOAD_CASE_NAMES": ["DeadLoads(ST)"]
   }
 }
 ```
 
+> ⚠️ 2026-08-26 확인: `COMPONENTS`에 `"Angle"`이 누락되어 있었고(HEAD에는 이미 있었음), `UNIT`이
+> `kN`/`m`로 잘못 표기되어 있었음(DATA 값 자체는 원문 예제의 N/mm 값과 동일해 단위 표기만 불일치
+> — N/mm로 정정).
+
 **POST Response Body**
 
 ```json
 {
   "PlaneStressLocal": {
-    "FORCE": "kN",
-    "DIST": "m",
+    "FORCE": "N",
+    "DIST": "mm",
     "HEAD": ["Index", "Elem", "Load", "Node", "Sig-xx", "Sig-yy", "Sig-xy", "Sig-Max", "Sig-Min", "Angle", "Sig-EFF", "Max-Shear"],
     "DATA": [
       ["1", "1", "DeadLoads", "1", "9.923982961671", "1.180584451040", "-0.319470675593", "9.935640398605", "1.168927014105", "-2.089787188087", "9.405812140923", "4.967820199303"]
@@ -919,6 +1028,8 @@ for row in table.get("DATA", []):
 |----|------|
 | `"PLANESTRESSSG"` | 평면응력 요소 응력 (전역 좌표계, Global) |
 
+> ⚠️ 2026-08-26 확인: 이 테이블은 `"AVERAGE_NODAL_RESULT"`(Boolean, 기본값 `false`, Optional)와 `"NODE_FLAG"`(Object: `CENTER`/`NODES`, 둘 다 Boolean·기본값 `false`, Optional) 모두 지원합니다(공통 사항의 적용 절 표 참조). 이전 버전 문서에 누락되어 있었음.
+
 ### Response HEAD
 
 `["Index", "Elem", "Load", "Node", "Sig-XX", "Sig-YY", "Sig-ZZ", "Sig-XY", "Sig-YZ", "Sig-XZ", "Sig-Max", "Sig-Min", "Angle", "Sig-EFF", "Max-Shear"]`
@@ -932,22 +1043,25 @@ for row in table.get("DATA", []):
   "Argument": {
     "TABLE_NAME": "PlaneStressGlobal",
     "TABLE_TYPE": "PLANESTRESSSG",
-    "UNIT": { "FORCE": "kN", "DIST": "m" },
+    "UNIT": { "FORCE": "N", "DIST": "mm" },
     "STYLES": { "FORMAT": "Fixed", "PLACE": 12 },
-    "COMPONENTS": ["Elem", "Load", "Node", "Sig-XX", "Sig-YY", "Sig-ZZ", "Sig-XY", "Sig-YZ", "Sig-XZ", "Sig-Max", "Sig-Min", "Sig-EFF", "Max-Shear"],
+    "COMPONENTS": ["Elem", "Load", "Node", "Sig-XX", "Sig-YY", "Sig-ZZ", "Sig-XY", "Sig-YZ", "Sig-XZ", "Sig-Max", "Sig-Min", "Angle", "Sig-EFF", "Max-Shear"],
     "NODE_ELEMS": { "KEYS": [1] },
     "LOAD_CASE_NAMES": ["DeadLoads(ST)"]
   }
 }
 ```
 
+> ⚠️ 2026-08-26 확인: `COMPONENTS`에 `"Angle"`이 누락되어 있었고, `UNIT`이 `kN`/`m`로 잘못
+> 표기되어 있었음(값은 원문 N/mm 예제와 동일 — 10절과 동일 패턴).
+
 **POST Response Body**
 
 ```json
 {
   "PlaneStressGlobal": {
-    "FORCE": "kN",
-    "DIST": "m",
+    "FORCE": "N",
+    "DIST": "mm",
     "HEAD": ["Index", "Elem", "Load", "Node", "Sig-XX", "Sig-YY", "Sig-ZZ", "Sig-XY", "Sig-YZ", "Sig-XZ", "Sig-Max", "Sig-Min", "Angle", "Sig-EFF", "Max-Shear"],
     "DATA": [
       ["1", "1", "DeadLoads", "1", "9.923982961671", "1.180584451040", "0.000000000000", "-0.319470675593", "0.000000000000", "0.000000000000", "9.935640398605", "1.168927014105", "-2.089787188087", "9.405812140923", "4.967820199303"]
@@ -993,6 +1107,8 @@ print(f"평면응력 응력(전역) {len(table.get('DATA', []))}행")
 | 값 | 설명 |
 |----|------|
 | `"PLANESTRAINFL"` | 평면변형률 요소 부재력 (국부 좌표계, Local) |
+
+> ⚠️ 2026-08-26 확인: 이 테이블은 `"AVERAGE_NODAL_RESULT"`(Boolean, 기본값 `false`, Optional — 절점 평균값 결과 옵션)를 지원합니다(공통 사항의 적용 절 표 참조). 이전 버전 문서에 누락되어 있었음.
 
 ### Response HEAD
 
@@ -1069,6 +1185,8 @@ print(f"평면변형률 부재력(국부) {len(table.get('DATA', []))}행")
 |----|------|
 | `"PLANESTRAINFG"` | 평면변형률 요소 부재력 (전역 좌표계, Global) |
 
+> ⚠️ 2026-08-26 확인: 이 테이블은 `"AVERAGE_NODAL_RESULT"`(Boolean, 기본값 `false`, Optional — 절점 평균값 결과 옵션)를 지원합니다(공통 사항의 적용 절 표 참조). 이전 버전 문서에 누락되어 있었음.
+
 ### Response HEAD
 
 `["Index", "Elem", "Load", "Node", "FX", "FY", "FZ"]`
@@ -1144,6 +1262,8 @@ print(f"평면변형률 부재력(전역) {len(table.get('DATA', []))}행")
 |----|------|
 | `"PLANESTRAINSL"` | 평면변형률 요소 응력 (국부 좌표계, Local) |
 
+> ⚠️ 2026-08-26 확인: 이 테이블은 `"AVERAGE_NODAL_RESULT"`(Boolean, 기본값 `false`, Optional)와 `"NODE_FLAG"`(Object: `CENTER`/`NODES`, 둘 다 Boolean·기본값 `false`, Optional) 모두 지원합니다(공통 사항의 적용 절 표 참조). 이전 버전 문서에 누락되어 있었음.
+
 ### Response HEAD
 
 `["Index", "Elem", "Load", "Node", "Sig-xx", "Sig-yy", "Sig-zz", "Sig-xy", "Sig-P1", "Sig-P2", "Sig-P3", "Max-Shear", "Sig-EFF", "Sig-OCT"]`
@@ -1157,7 +1277,7 @@ print(f"평면변형률 부재력(전역) {len(table.get('DATA', []))}행")
   "Argument": {
     "TABLE_NAME": "PlaneStrainStressLocal",
     "TABLE_TYPE": "PLANESTRAINSL",
-    "UNIT": { "FORCE": "kN", "DIST": "m" },
+    "UNIT": { "FORCE": "N", "DIST": "mm" },
     "STYLES": { "FORMAT": "Fixed", "PLACE": 12 },
     "COMPONENTS": ["Elem", "Load", "Node", "Sig-xx", "Sig-yy", "Sig-zz", "Sig-xy", "Sig-P1", "Sig-P2", "Sig-P3", "Max-Shear", "Sig-EFF", "Sig-OCT"],
     "NODE_ELEMS": { "KEYS": [1] },
@@ -1166,13 +1286,15 @@ print(f"평면변형률 부재력(전역) {len(table.get('DATA', []))}행")
 }
 ```
 
+> ⚠️ 2026-08-26 확인: `UNIT`이 `kN`/`m`로 잘못 표기되어 있었음(값은 원문 N/mm 예제와 동일).
+
 **POST Response Body**
 
 ```json
 {
   "PlaneStrainStressLocal": {
-    "FORCE": "kN",
-    "DIST": "m",
+    "FORCE": "N",
+    "DIST": "mm",
     "HEAD": ["Index", "Elem", "Load", "Node", "Sig-xx", "Sig-yy", "Sig-zz", "Sig-xy", "Sig-P1", "Sig-P2", "Sig-P3", "Max-Shear", "Sig-EFF", "Sig-OCT"],
     "DATA": [
       ["1", "1", "DeadLoads", "1", "11.045924719309", "1.590139074056", "2.274491482806", "-0.288713831615", "11.054731825832", "2.274491482806", "1.581331967533", "4.736699929150", "9.146540205732", "4.311720402579"]
@@ -1222,6 +1344,8 @@ for row in table.get("DATA", []):
 |----|------|
 | `"PLANESTRAINSG"` | 평면변형률 요소 응력 (전역 좌표계, Global) |
 
+> ⚠️ 2026-08-26 확인: 이 테이블은 `"AVERAGE_NODAL_RESULT"`(Boolean, 기본값 `false`, Optional)와 `"NODE_FLAG"`(Object: `CENTER`/`NODES`, 둘 다 Boolean·기본값 `false`, Optional) 모두 지원합니다(공통 사항의 적용 절 표 참조). 이전 버전 문서에 누락되어 있었음.
+
 ### Response HEAD
 
 `["Index", "Elem", "Load", "Node", "Sig-XX", "Sig-YY", "Sig-ZZ", "Sig-XZ", "Sig-P1", "Sig-P2", "Sig-P3", "Max-Shear", "Sig-EFF", "Sig-OCT"]`
@@ -1235,7 +1359,7 @@ for row in table.get("DATA", []):
   "Argument": {
     "TABLE_NAME": "PlaneStrainStressGlobal",
     "TABLE_TYPE": "PLANESTRAINSG",
-    "UNIT": { "FORCE": "kN", "DIST": "m" },
+    "UNIT": { "FORCE": "N", "DIST": "mm" },
     "STYLES": { "FORMAT": "Fixed", "PLACE": 12 },
     "COMPONENTS": ["Elem", "Load", "Node", "Sig-XX", "Sig-YY", "Sig-ZZ", "Sig-XZ", "Sig-P1", "Sig-P2", "Sig-P3", "Max-Shear", "Sig-EFF", "Sig-OCT"],
     "NODE_ELEMS": { "KEYS": [1] },
@@ -1244,13 +1368,15 @@ for row in table.get("DATA", []):
 }
 ```
 
+> ⚠️ 2026-08-26 확인: `UNIT`이 `kN`/`m`로 잘못 표기되어 있었음(값은 원문 N/mm 예제와 동일).
+
 **POST Response Body**
 
 ```json
 {
   "PlaneStrainStressGlobal": {
-    "FORCE": "kN",
-    "DIST": "m",
+    "FORCE": "N",
+    "DIST": "mm",
     "HEAD": ["Index", "Elem", "Load", "Node", "Sig-XX", "Sig-YY", "Sig-ZZ", "Sig-XZ", "Sig-P1", "Sig-P2", "Sig-P3", "Max-Shear", "Sig-EFF", "Sig-OCT"],
     "DATA": [
       ["1", "1", "DeadLoads", "1", "11.045924719309", "2.274491482806", "1.590139074056", "-0.288713831615", "11.054731825832", "2.274491482806", "1.581331967533", "4.736699929150", "9.146540205732", "4.311720402579"]
@@ -1296,6 +1422,8 @@ print(f"평면변형률 응력(전역) {len(table.get('DATA', []))}행")
 | 값 | 설명 |
 |----|------|
 | `"AXISYMMETRICFL"` | 축대칭 요소 부재력 (국부 좌표계, Local) |
+
+> ⚠️ 2026-08-26 확인: 이 테이블은 `"AVERAGE_NODAL_RESULT"`(Boolean, 기본값 `false`, Optional — 절점 평균값 결과 옵션)를 지원합니다(공통 사항의 적용 절 표 참조). 이전 버전 문서에 누락되어 있었음.
 
 ### Response HEAD
 
@@ -1372,6 +1500,8 @@ print(f"축대칭 부재력(국부) {len(table.get('DATA', []))}행")
 |----|------|
 | `"AXISYMMETRICFG"` | 축대칭 요소 부재력 (전역 좌표계, Global) |
 
+> ⚠️ 2026-08-26 확인: 이 테이블은 `"AVERAGE_NODAL_RESULT"`(Boolean, 기본값 `false`, Optional — 절점 평균값 결과 옵션)를 지원합니다(공통 사항의 적용 절 표 참조). 이전 버전 문서에 누락되어 있었음.
+
 ### Response HEAD
 
 `["Index", "Elem", "Load", "Node", "FX", "FY", "FZ"]`
@@ -1446,6 +1576,8 @@ print(f"축대칭 부재력(전역) {len(table.get('DATA', []))}행")
 | 값 | 설명 |
 |----|------|
 | `"AXISYMMETRICSL"` | 축대칭 요소 응력 (국부 좌표계, Local) |
+
+> ⚠️ 2026-08-26 확인: 이 테이블은 `"AVERAGE_NODAL_RESULT"`(Boolean, 기본값 `false`, Optional)와 `"NODE_FLAG"`(Object: `CENTER`/`NODES`, 둘 다 Boolean·기본값 `false`, Optional) 모두 지원합니다(공통 사항의 적용 절 표 참조). 이전 버전 문서에 누락되어 있었음.
 
 ### Response HEAD
 
@@ -1524,6 +1656,8 @@ for row in table.get("DATA", []):
 | 값 | 설명 |
 |----|------|
 | `"AXISYMMETRICSG"` | 축대칭 요소 응력 (전역 좌표계, Global) |
+
+> ⚠️ 2026-08-26 확인: 이 테이블은 `"AVERAGE_NODAL_RESULT"`(Boolean, 기본값 `false`, Optional)와 `"NODE_FLAG"`(Object: `CENTER`/`NODES`, 둘 다 Boolean·기본값 `false`, Optional) 모두 지원합니다(공통 사항의 적용 절 표 참조). 이전 버전 문서에 누락되어 있었음.
 
 ### Response HEAD
 
@@ -1750,6 +1884,8 @@ print(f"솔리드 부재력(전역) {len(table.get('DATA', []))}행")
 |----|------|
 | `"SOLIDSL"` | 솔리드 요소 응력 (국부 좌표계, Local) |
 
+> ⚠️ 2026-08-26 확인: 이 테이블은 `"NODE_FLAG"`(Object: `CENTER`/`NODES`, 둘 다 Boolean·기본값 `false`, Optional — 요소중심(Cent)/절점별 출력 여부)를 지원합니다(공통 사항의 적용 절 표 참조). 이전 버전 문서에 누락되어 있었음.
+
 ### Response HEAD
 
 `["Index", "Elem", "Load", "Node", "Sig-xx", "Sig-yy", "Sig-zz", "Sig-xy", "Sig-yz", "Sig-xz", "Sig-P1", "Sig-P2", "Sig-P3", "Max-Shear", "Sig-EFF", "Sig-OCT", "Sig-P1/ux", "Sig-P1/uy", "Sig-P1/uz", "Sig-P2/ux", "Sig-P2/uy", "Sig-P2/uz", "Sig-P3/ux", "Sig-P3/uy", "Sig-P3/uz"]`
@@ -1828,6 +1964,8 @@ for row in table.get("DATA", []):
 |----|------|
 | `"SOLIDSG"` | 솔리드 요소 응력 (전역 좌표계, Global) |
 
+> ⚠️ 2026-08-26 확인: 이 테이블은 `"AVERAGE_NODAL_RESULT"`(Boolean, 기본값 `false`, Optional)와 `"NODE_FLAG"`(Object: `CENTER`/`NODES`, 둘 다 Boolean·기본값 `false`, Optional) 모두 지원합니다(공통 사항의 적용 절 표 참조). 이전 버전 문서에 누락되어 있었음.
+
 ### Response HEAD
 
 `["Index", "Elem", "Load", "Node", "Sig-XX", "Sig-YY", "Sig-ZZ", "Sig-XY", "Sig-YZ", "Sig-XZ", "Sig-P1", "Sig-P2", "Sig-P3", "Max-Shear", "Sig-EFF", "Sig-OCT", "Sig-P1/ux", "Sig-P1/uy", "Sig-P1/uz", "Sig-P2/ux", "Sig-P2/uy", "Sig-P2/uz", "Sig-P3/ux", "Sig-P3/uy", "Sig-P3/uz"]`
@@ -1904,9 +2042,16 @@ print(f"솔리드 응력(전역) {len(table.get('DATA', []))}행")
 | `"SOLID_LOCA_PLAST_STRAIN"` | 솔리드 변형률 (국부, 소성 Plastic Strain) |
 | `"SOLID_LOCA_TOTAL_STRAIN"` | 솔리드 변형률 (국부, 전체 Total Strain) |
 
+> ⚠️ 2026-08-26 확인: 이 테이블은 `"AVERAGE_NODAL_RESULT"`(Boolean, 기본값 `false`, Optional)와 `"NODE_FLAG"`(Object: `CENTER`/`NODES`, 둘 다 Boolean·기본값 `false`, Optional) 모두 지원합니다(공통 사항의 적용 절 표 참조). 이전 버전 문서에 누락되어 있었음.
+
 ### Response HEAD
 
-`["Index", "Elem", "Load", "Step", "Node", "Strain-xx", "Strain-yy", "Strain-zz", "Strain-xy", "Strain-yz", "Strain-xz", "Strain-P1", "Strain-P2", "Strain-P3", "Max-Shear"]`
+- `SOLID_LOCA_TOTAL_STRAIN`: `["Index", "Elem", "Load", "Step", "Node", "Strain-xx", "Strain-yy", "Strain-zz", "Strain-xy", "Strain-yz", "Strain-xz", "Strain-P1", "Strain-P2", "Strain-P3", "Max-Shear"]`
+- `SOLID_LOCA_PLAST_STRAIN`: 위 컬럼 뒤에 `Comp.Damage`/`Tens.Damage`/`Damage` 3개 컬럼이 추가됩니다.
+
+> ⚠️ 2026-08-26 확인: `SOLID_LOCA_PLAST_STRAIN` 전용 컬럼 3개(`Comp.Damage`/`Tens.Damage`/
+> `Damage`)가 이전 버전 문서에 누락되어 있었음(단일 HEAD로 표기해 소성/전체 변형률이 동일 구조인
+> 것처럼 오인될 소지).
 
 ### Request / Response JSON
 
@@ -1986,9 +2131,15 @@ print(f"솔리드 변형률(국부) {len(table.get('DATA', []))}행")
 | `"SOLID_GLOB_PLAST_STRAIN"` | 솔리드 변형률 (전역, 소성 Plastic Strain) |
 | `"SOLID_GLOB_TOTAL_STRAIN"` | 솔리드 변형률 (전역, 전체 Total Strain) |
 
+> ⚠️ 2026-08-26 확인: 이 테이블은 `"AVERAGE_NODAL_RESULT"`(Boolean, 기본값 `false`, Optional)와 `"NODE_FLAG"`(Object: `CENTER`/`NODES`, 둘 다 Boolean·기본값 `false`, Optional) 모두 지원합니다(공통 사항의 적용 절 표 참조). 이전 버전 문서에 누락되어 있었음.
+
 ### Response HEAD
 
-`["Index", "Elem", "Load", "Step", "Node", "Strain-XX", "Strain-YY", "Strain-ZZ", "Strain-XY", "Strain-YZ", "Strain-XZ", "Strain-P1", "Strain-P2", "Strain-P3", "Max-Shear"]`
+- `SOLID_GLOB_TOTAL_STRAIN`: `["Index", "Elem", "Load", "Step", "Node", "Strain-XX", "Strain-YY", "Strain-ZZ", "Strain-XY", "Strain-YZ", "Strain-XZ", "Strain-P1", "Strain-P2", "Strain-P3", "Max-Shear"]`
+- `SOLID_GLOB_PLAST_STRAIN`: 위 컬럼 뒤에 `Comp.Damage`/`Tens.Damage`/`Damage` 3개 컬럼이 추가됩니다.
+
+> ⚠️ 2026-08-26 확인: `SOLID_GLOB_PLAST_STRAIN` 전용 컬럼 3개(`Comp.Damage`/`Tens.Damage`/
+> `Damage`)가 이전 버전 문서에 누락되어 있었음(24절과 동일 패턴).
 
 ### Request / Response JSON
 
@@ -2066,15 +2217,21 @@ print(f"솔리드 변형률(전역) {len(table.get('DATA', []))}행")
 | 값 | 설명 |
 |----|------|
 | `"ELASTICLINK"` | 탄성 링크 부재력 |
-| `"ELASTICLINKVBM"` | 탄성 링크 부재력 (최댓값 기준 by-max) |
+| `"ELASTICLINKVBM"` | 탄성 링크 부재력 (최댓값 기준, View by Max Value) |
+
+> ⚠️ 2026-08-26 확인 (article id `36017416195737`): `ELASTICLINKVBM` 전용 파라미터
+> `"ITEM_TO_DISPLAY"`(Array [String], enum: `Axial`/`Shear-y`/`Shear-z`/`Torsion`/`Moment-y`/
+> `Moment-z`, 기본값 All, Optional)가 이전 버전 문서에 누락되어 있었음 — 최댓값을 계산할 대상
+> 성분을 지정하는 필드.
 
 ### Response HEAD
 
-`["Index", "No.", "Load", "Node", "Axial", "Shear-y", "Shear-z", "Torsion", "Moment-y", "Moment-z"]`
+- `ELASTICLINK`: `["Index", "No.", "Load", "Node", "Axial", "Shear-y", "Shear-z", "Torsion", "Moment-y", "Moment-z"]`
+- `ELASTICLINKVBM`: `Node` 뒤에 어느 성분이 최댓값을 낸 것인지 나타내는 `Component` 컬럼이 추가됨 — `["Index", "No.", "Load", "Node", "Component", "Axial", "Shear-y", "Shear-z", "Torsion", "Moment-y", "Moment-z"]`
 
 ### Request / Response JSON
 
-**POST Request Body**
+**POST Request Body — ELASTICLINK**
 
 ```json
 {
@@ -2089,7 +2246,7 @@ print(f"솔리드 변형률(전역) {len(table.get('DATA', []))}행")
 }
 ```
 
-**POST Response Body**
+**POST Response Body — ELASTICLINK**
 
 ```json
 {
@@ -2099,6 +2256,38 @@ print(f"솔리드 변형률(전역) {len(table.get('DATA', []))}행")
     "HEAD": ["Index", "No.", "Load", "Node", "Axial", "Shear-y", "Shear-z", "Torsion", "Moment-y", "Moment-z"],
     "DATA": [
       ["1", "1", "SWofGirders", "1", "-2.163226913452", "0.262795234546", "7.112188879013", "-0.000000245586", "1.306126533508", "0.030306393385"]
+    ]
+  }
+}
+```
+
+**POST Request Body — ELASTICLINKVBM(View by Max Value)**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "ElasticLinkViewByMaxValueItems",
+    "TABLE_TYPE": "ELASTICLINKVBM",
+    "UNIT": { "FORCE": "kN", "DIST": "m" },
+    "STYLES": { "FORMAT": "Fixed", "PLACE": 12 },
+    "NODE_ELEMS": { "KEYS": [1] },
+    "LOAD_CASE_NAMES": ["STLENV_STR(CB:max)", "STLENV_STR(CB:min)"],
+    "ITEM_TO_DISPLAY": ["Axial", "Shear-y", "Shear-z", "Torsion", "Moment-y", "Moment-z"]
+  }
+}
+```
+
+**POST Response Body — ELASTICLINKVBM(View by Max Value)**
+
+```json
+{
+  "ElasticLinkViewByMaxValueItems": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "No.", "Load", "Node", "Component", "Axial", "Shear-y", "Shear-z", "Torsion", "Moment-y", "Moment-z"],
+    "DATA": [
+      ["1", "1", "STLENV_STR(max)", "1", "Axial", "8.761203247070", "16.289886962891", "45.691238769531", "0.000035891681", "8.390747558594", "6.234448486328"],
+      ["2", "1", "STLENV_STR(max)", "1", "Shear-y", "8.761203247070", "16.289886962891", "45.691238769531", "0.000035891681", "8.390747558594", "6.234448486328"]
     ]
   }
 }
@@ -2144,16 +2333,24 @@ for row in table.get("DATA", []):
 | 값 | 설명 |
 |----|------|
 | `"GENERAL_LINK_FORCE"` | 일반 링크 부재력 |
-| `"GENERAL_LINK_FORCEVBM"` | 일반 링크 부재력 (최댓값 기준 by-max) |
+| `"GENERAL_LINK_FORCEVBM"` | 일반 링크 부재력 (최댓값 기준, View by Max Value) |
 | `"GENERAL_LINK_DEFORM"` | 일반 링크 변형 (Deform) |
+
+> ⚠️ 2026-08-26 확인 (article id `36017500761369`): `GENERAL_LINK_FORCEVBM` 전용 파라미터
+> `"ITEM_TO_DISPLAY"`(Array [String], enum: `Axial`/`Shear-y`/`Shear-z`/`Torsion`/`Moment-y`/
+> `Moment-z`, 기본값 All, Optional)가 이전 버전 문서에 누락되어 있었음(26절 Elastic Link와 동일
+> 패턴). 또한 `GENERAL_LINK_DEFORM`은 부재력과 전혀 다른 응답 구조(양단 변위/회전)를 가지는데
+> 이전 버전 문서는 부재력용 Response HEAD 하나만 표기해 DEFORM도 같은 구조로 오인할 수 있었음.
 
 ### Response HEAD
 
-`["Index", "No.", "Load", "Node", "Axial", "Shear-y", "Shear-z", "Torsion", "Moment-y", "Moment-z"]`
+- `GENERAL_LINK_FORCE`: `["Index", "No.", "Load", "Node", "Axial", "Shear-y", "Shear-z", "Torsion", "Moment-y", "Moment-z"]`
+- `GENERAL_LINK_FORCEVBM`: `Node` 뒤에 `Component` 컬럼 추가 — `["Index", "No.", "Load", "Node", "Component", "Axial", "Shear-y", "Shear-z", "Torsion", "Moment-y", "Moment-z"]`
+- `GENERAL_LINK_DEFORM`: 완전히 다른 구조 — 링크 양단의 변위(Dx/Dy/Dz)·회전(Rx/Ry/Rz)이 `Node` 블록별로 반복 — `["Index", "No.", "Load", "Node", "Dx", "Dy", "Dz", "Rx", "Ry", "Rz", "Node", "Dx", "Dy", "Dz", "Rx", "Ry", "Rz"]`
 
 ### Request / Response JSON
 
-**POST Request Body**
+**POST Request Body — GENERAL_LINK_FORCE**
 
 ```json
 {
@@ -2168,7 +2365,7 @@ for row in table.get("DATA", []):
 }
 ```
 
-**POST Response Body**
+**POST Response Body — GENERAL_LINK_FORCE**
 
 ```json
 {
@@ -2178,6 +2375,53 @@ for row in table.get("DATA", []):
     "HEAD": ["Index", "No.", "Load", "Node", "Axial", "Shear-y", "Shear-z", "Torsion", "Moment-y", "Moment-z"],
     "DATA": [
       ["1", "1", "SWofGirders", "3536", "-24.885666367763", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000"]
+    ]
+  }
+}
+```
+
+**POST Request Body — GENERAL_LINK_FORCEVBM(View by Max Value)**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "GeneralLink-Force-ViewByMaxValueItems",
+    "TABLE_TYPE": "GENERAL_LINK_FORCEVBM",
+    "UNIT": { "FORCE": "kN", "DIST": "m" },
+    "STYLES": { "FORMAT": "Fixed", "PLACE": 12 },
+    "NODE_ELEMS": { "KEYS": [2] },
+    "LOAD_CASE_NAMES": ["STLENV_STR(CB:max)", "STLENV_STR(CB:min)"],
+    "ITEM_TO_DISPLAY": ["Axial", "Shear-y", "Shear-z", "Torsion", "Moment-y", "Moment-z"]
+  }
+}
+```
+
+**POST Request Body — GENERAL_LINK_DEFORM**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "GeneralLink-Deformation",
+    "TABLE_TYPE": "GENERAL_LINK_DEFORM",
+    "UNIT": { "FORCE": "N", "DIST": "mm" },
+    "STYLES": { "FORMAT": "Scientific", "PLACE": 12 },
+    "COMPONENTS": ["No.", "Load", "Node", "Dx", "Dy", "Dz", "Rx", "Ry", "Rz"],
+    "NODE_ELEMS": { "KEYS": [1] },
+    "LOAD_CASE_NAMES": ["SWofGirders(ST)"]
+  }
+}
+```
+
+**POST Response Body — GENERAL_LINK_DEFORM**
+
+```json
+{
+  "GeneralLink-Deformation": {
+    "FORCE": "N",
+    "DIST": "mm",
+    "HEAD": ["Index", "No.", "Load", "Node", "Dx", "Dy", "Dz", "Rx", "Ry", "Rz", "Node", "Dx", "Dy", "Dz", "Rx", "Ry", "Rz"],
+    "DATA": [
+      ["1", "1", "SWofGirders", "3536", "-2.537631746597e-05", "1.256078938754e-04", "-1.455055139484e-01", "-4.829228297583e-07", "1.587459476372e-04", "-1.964780569004e-05", "1236", "-2.537631746597e-05", "1.256078938754e-04", "-1.455055139484e-01", "-4.829228297583e-07", "1.587459476372e-04", "-1.964780569004e-05"]
     ]
   }
 }
@@ -2226,9 +2470,29 @@ for row in table.get("DATA", []):
 | `"EIGENVALUEMODE"` | 고유치(Eigenvalue) 진동 모드형상 |
 | `"PARTICIPATIONVECTORMODE"` | 참여벡터(Participation Vector) 모드형상 |
 
+### 전용 파라미터
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+|-----|------|-----|-----------|--------|------|
+| 8 | 모드 번호 목록 (`"Mode" + 번호`, 예: `"Mode1"`) | `"MODES"` | Array [String] | All | Optional |
+
+> ⚠️ 2026-08-26 확인 (article id `36017669319321`): `MODES` 파라미터와 응답의 `SUB_TABLES`
+> 배열(모드해석 요약 정보) 모두 이전 버전 문서에 누락되어 있었음.
+
 ### Response HEAD
 
-`["Index", "Node", "Mode", "UX", "UY", "UZ", "RX", "RY", "RZ"]`
+메인 `HEAD`/`DATA`: `["Index", "Node", "Mode", "UX", "UY", "UZ", "RX", "RY", "RZ"]`
+
+이와 별도로, 응답 최상위에 모드해석 요약 정보를 담은 `SUB_TABLES` 배열이 추가되며, 아래 4종
+하위 테이블을 포함합니다(각 `HEAD`/`DATA`는 모드 번호별 1행):
+
+| 하위 테이블 키 | 내용 | HEAD |
+|---|---|---|
+| `EIGENVALUEANALYSIS` | 고유진동수·주기 | `["ModeNo", "Frequency(rad/sec)", "Frequency(cycle/sec)", "Period(sec)", "Tolerance"]` |
+| `MODALPARTICIPATIONMASSESPRINTOUT(1)` | 모달 참여질량(%, 누적%) | `["ModeNo", "TRAN-XMASS(%)", "TRAN-XSUM(%)", "TRAN-YMASS(%)", "TRAN-YSUM(%)", "TRAN-ZMASS(%)", "TRAN-ZSUM(%)", "ROTN-XMASS(%)", "ROTN-XSUM(%)", "ROTN-YMASS(%)", "ROTN-YSUM(%)", "ROTN-ZMASS(%)", "ROTN-ZSUM(%)"]` |
+| `MODALPARTICIPATIONMASSESPRINTOUT(2)` | 모달 참여질량(절대값, 누적값) | 위와 동일 컬럼명에서 `(%)` 제거 |
+| `MODALPARTICIPATIONFACTORPRINTOUT(kN,m)` | 모달 참여계수 | `["ModeNo", "TRAN-XValue", "TRAN-YValue", "TRAN-ZValue", "ROTN-XValue", "ROTN-YValue", "ROTN-ZValue"]` |
+| `MODALDIRECTIONFACTORPRINTOUT` | 모달 방향계수 | 위와 동일 |
 
 ### Request / Response JSON
 
@@ -2237,12 +2501,13 @@ for row in table.get("DATA", []):
 ```json
 {
   "Argument": {
-    "TABLE_NAME": "VibrationMode",
+    "TABLE_NAME": "EigenvalueMode",
     "TABLE_TYPE": "EIGENVALUEMODE",
     "UNIT": { "FORCE": "kN", "DIST": "m" },
     "STYLES": { "FORMAT": "Scientific", "PLACE": 12 },
     "COMPONENTS": ["Node", "Mode", "UX", "UY", "UZ", "RX", "RY", "RZ"],
-    "NODE_ELEMS": { "KEYS": [1] }
+    "NODE_ELEMS": { "KEYS": [1] },
+    "MODES": ["Mode1", "Mode2"]
   }
 }
 ```
@@ -2251,12 +2516,56 @@ for row in table.get("DATA", []):
 
 ```json
 {
-  "VibrationMode": {
+  "EigenvalueMode": {
     "FORCE": "kN",
     "DIST": "m",
     "HEAD": ["Index", "Node", "Mode", "UX", "UY", "UZ", "RX", "RY", "RZ"],
     "DATA": [
-      ["1", "1", "1", "3.837572718516e-02", "-2.976241858587e-07", "0.000000000000e+00", "2.380992695526e-07", "4.126895212051e-06", "-5.142371718861e-07"]
+      ["1", "1", "1", "3.837572718516e-02", "-2.976241858587e-07", "0.000000000000e+00", "2.380992695526e-07", "4.126895212051e-06", "-5.142371718861e-07"],
+      ["2", "1", "2", "4.396886676826e-05", "7.802487500606e-04", "3.449011941636e-10", "-6.241987277788e-04", "-5.791213526283e-04", "1.761254899933e-03"]
+    ],
+    "SUB_TABLES": [
+      {
+        "EIGENVALUEANALYSIS": {
+          "HEAD": ["ModeNo", "Frequency(rad/sec)", "Frequency(cycle/sec)", "Period(sec)", "Tolerance"],
+          "DATA": [
+            ["1.0000", "9.1608", "1.4580", "0.6859", "0.0000e+00"],
+            ["2.0000", "9.8717", "1.5711", "0.6365", "0.0000e+00"]
+          ]
+        }
+      },
+      {
+        "MODALPARTICIPATIONMASSESPRINTOUT(1)": {
+          "HEAD": ["ModeNo", "TRAN-XMASS(%)", "TRAN-XSUM(%)", "TRAN-YMASS(%)", "TRAN-YSUM(%)", "TRAN-ZMASS(%)", "TRAN-ZSUM(%)", "ROTN-XMASS(%)", "ROTN-XSUM(%)", "ROTN-YMASS(%)", "ROTN-YSUM(%)", "ROTN-ZMASS(%)", "ROTN-ZSUM(%)"],
+          "DATA": [
+            ["1.0000", "91.64", "91.64", "0.00", "0.00", "0.00", "0.00", "0.00", "0.00", "0.01", "0.01", "0.00", "0.00"]
+          ]
+        }
+      },
+      {
+        "MODALPARTICIPATIONMASSESPRINTOUT(2)": {
+          "HEAD": ["ModeNo", "TRAN-XMASS", "TRAN-XSUM", "TRAN-YMASS", "TRAN-YSUM", "TRAN-ZMASS", "TRAN-ZSUM", "ROTN-XMASS", "ROTN-XSUM", "ROTN-YMASS", "ROTN-YSUM", "ROTN-ZMASS", "ROTN-ZSUM"],
+          "DATA": [
+            ["1.0000", "724.1700", "724.1700", "0.00", "0.00", "0.00", "0.00", "0.00", "0.00", "148.1200", "148.1200", "0.00", "0.00"]
+          ]
+        }
+      },
+      {
+        "MODALPARTICIPATIONFACTORPRINTOUT(kN,m)": {
+          "HEAD": ["ModeNo", "TRAN-XValue", "TRAN-YValue", "TRAN-ZValue", "ROTN-XValue", "ROTN-YValue", "ROTN-ZValue"],
+          "DATA": [
+            ["1.0000", "26.91", "-0.01", "0.06", "0.00", "0.18", "0.00"]
+          ]
+        }
+      },
+      {
+        "MODALDIRECTIONFACTORPRINTOUT": {
+          "HEAD": ["ModeNo", "TRAN-XValue", "TRAN-YValue", "TRAN-ZValue", "ROTN-XValue", "ROTN-YValue", "ROTN-ZValue"],
+          "DATA": [
+            ["1.0000", "99.98", "0.00", "0.00", "0.00", "0.01", "0.00"]
+          ]
+        }
+      }
     ]
   }
 }
@@ -2304,9 +2613,22 @@ for row in table.get("DATA", []):
 |----|------|
 | `"BUCKLINGMODE"` | 좌굴(Buckling) 모드형상 |
 
+### 전용 파라미터
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+|-----|------|-----|-----------|--------|------|
+| 8 | 모드 번호 목록 (`"Mode" + 번호`, 예: `"Mode1"`) | `"MODES"` | Array [String] | All | Optional |
+
+> ⚠️ 2026-08-26 확인 (article id `36017712087065`): `MODES` 파라미터와 응답의 `SUB_TABLES`
+> (`BUCKLINGANALYSIS` — 모드별 좌굴계수(Eigenvalue)·Tolerance)가 이전 버전 문서에 누락되어
+> 있었음(28절 Vibration Mode Shape와 동일 패턴).
+
 ### Response HEAD
 
-`["Index", "Node", "Mode", "UX", "UY", "UZ", "RX", "RY", "RZ"]`
+메인 `HEAD`/`DATA`: `["Index", "Node", "Mode", "UX", "UY", "UZ", "RX", "RY", "RZ"]`
+
+이와 별도로 응답 최상위에 `SUB_TABLES` 배열이 추가되며, `BUCKLINGANALYSIS` 하위 테이블
+(`HEAD`: `["Mode", "Eigenvalue", "Tolerance"]`, 모드 번호별 1행)을 포함합니다.
 
 ### Request / Response JSON
 
@@ -2320,7 +2642,8 @@ for row in table.get("DATA", []):
     "UNIT": { "FORCE": "kN", "DIST": "m" },
     "STYLES": { "FORMAT": "Scientific", "PLACE": 12 },
     "COMPONENTS": ["Node", "Mode", "UX", "UY", "UZ", "RX", "RY", "RZ"],
-    "NODE_ELEMS": { "KEYS": [1] }
+    "NODE_ELEMS": { "KEYS": [1] },
+    "MODES": ["Mode1", "Mode2"]
   }
 }
 ```
@@ -2334,7 +2657,19 @@ for row in table.get("DATA", []):
     "DIST": "m",
     "HEAD": ["Index", "Node", "Mode", "UX", "UY", "UZ", "RX", "RY", "RZ"],
     "DATA": [
-      ["1", "1", "1", "-3.068406433733e-05", "1.071752325513e-10", "-2.756625224655e-08", "0.000000000000e+00", "2.040060468720e-08", "1.430189905494e-10"]
+      ["1", "1", "1", "-3.068406433733e-05", "1.071752325513e-10", "-2.756625224655e-08", "0.000000000000e+00", "2.040060468720e-08", "1.430189905494e-10"],
+      ["2", "1", "2", "8.776101828229e-08", "0.000000000000e+00", "-1.232408164286e-08", "0.000000000000e+00", "4.962889338148e-08", "0.000000000000e+00"]
+    ],
+    "SUB_TABLES": [
+      {
+        "BUCKLINGANALYSIS": {
+          "HEAD": ["Mode", "Eigenvalue", "Tolerance"],
+          "DATA": [
+            ["1", "2.909991059676e+03", "0.0000e+00"],
+            ["2", "3.056712238985e+03", "0.0000e+00"]
+          ]
+        }
+      }
     ]
   }
 }
@@ -2526,6 +2861,23 @@ for row in table.get("DATA", []):
 |----|------|
 | `"TNDN_ARRANGEMENT"` | 텐던 배치 |
 
+### ADDITIONAL — 텐던 그룹·시공단계 지정 (2026-08-26 공식 반영)
+
+이 테이블은 공통 사항의 `NODE_ELEMS`를 사용하지 **않으며**, 대신 아래 `ADDITIONAL` 객체로
+텐던 그룹과 시공단계를 지정합니다(둘 다 Required).
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+|-----|------|-----|-----------|--------|------|
+| 7 | 텐던 그룹·시공단계 지정 | `"ADDITIONAL"` | Object | — | **Required** |
+| 7-1 | └ 텐던 그룹·시공단계 설정 | `ADDITIONAL.SET_TENDON_PARAMS` | Object | — | **Required** |
+| 7-1-1 | 　└ 텐던 그룹 이름 | `SET_TENDON_PARAMS.TENDON_GROUP` | String | — | **Required** |
+| 7-1-2 | 　└ 시공단계 이름 | `SET_TENDON_PARAMS.STAGE` | String | — | **Required** |
+
+> ⚠️ 2026-08-26 확인 (article id `36018062664857`): 이전 버전 문서는 이 테이블도 공통
+> `NODE_ELEMS`(요소 지정)를 쓰는 것으로 오기하고 있었으나, 공식 스키마에는 `NODE_ELEMS`가 아예
+> 없고 `ADDITIONAL.SET_TENDON_PARAMS`(텐던 그룹명 + 시공단계명, 둘 다 Required)로 대상을
+> 지정합니다 — 이전 예제로는 실제 데이터를 선택할 수 없었음.
+
 ### Response HEAD
 
 `["Index", "Elem", "Part", "TendonNumber", "Yp", "Zp", "AverageSinθ", "AverageCosθ", "AverageStress", "AverageForce"]`
@@ -2537,12 +2889,17 @@ for row in table.get("DATA", []):
 ```json
 {
   "Argument": {
-    "TABLE_NAME": "TendonArrangement",
+    "TABLE_NAME": "TendonArrangement(TendonGroup)",
     "TABLE_TYPE": "TNDN_ARRANGEMENT",
     "UNIT": { "FORCE": "kN", "DIST": "m" },
     "STYLES": { "FORMAT": "Fixed", "PLACE": 12 },
     "COMPONENTS": ["Elem", "Part", "TendonNumber", "Yp", "Zp", "AverageSinθ", "AverageCosθ", "AverageStress", "AverageForce"],
-    "NODE_ELEMS": { "KEYS": [50] }
+    "ADDITIONAL": {
+      "SET_TENDON_PARAMS": {
+        "TENDON_GROUP": "Top-P2-A",
+        "STAGE": "CS2"
+      }
+    }
   }
 }
 ```
@@ -2551,12 +2908,13 @@ for row in table.get("DATA", []):
 
 ```json
 {
-  "TendonArrangement": {
+  "TendonArrangement(TendonGroup)": {
     "FORCE": "kN",
     "DIST": "m",
     "HEAD": ["Index", "Elem", "Part", "TendonNumber", "Yp", "Zp", "AverageSinθ", "AverageCosθ", "AverageStress", "AverageForce"],
     "DATA": [
-      ["1", "50", "I", "0", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000"]
+      ["1", "50", "I", "0", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000"],
+      ["2", "50", "J", "0", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000"]
     ]
   }
 }
@@ -2573,17 +2931,19 @@ HEADERS = {
     "MAPI-Key": "YOUR_MAPI_KEY"
 }
 
-# ── POST: 텐던 배치 추출 ───────────────────────────────────────────
+# ── POST: 텐던 배치 추출 (텐던그룹 + 시공단계 지정) ────────────────
 payload = {
     "Argument": {
-        "TABLE_NAME": "TendonArrangement",
+        "TABLE_NAME": "TendonArrangement(TendonGroup)",
         "TABLE_TYPE": "TNDN_ARRANGEMENT",
         "UNIT": {"FORCE": "kN", "DIST": "m"},
-        "NODE_ELEMS": {"KEYS": [50]}
+        "ADDITIONAL": {
+            "SET_TENDON_PARAMS": {"TENDON_GROUP": "Top-P2-A", "STAGE": "CS2"}
+        }
     }
 }
 resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
-table = resp.json().get("TendonArrangement", {})
+table = resp.json().get("TendonArrangement(TendonGroup)", {})
 print(f"텐던 배치 {len(table.get('DATA', []))}행")
 ```
 
@@ -2600,38 +2960,75 @@ print(f"텐던 배치 {len(table.get('DATA', []))}행")
 | `"TNDN_LOSS_FORCE"` | 텐던 손실 (부재력 Force 기준) |
 | `"TNDN_LOSS_STRESS"` | 텐던 손실 (응력 Stress 기준) |
 
+### ADDITIONAL — 텐던 그룹·시공단계 지정 (2026-08-26 공식 반영)
+
+이 테이블은 공통 사항의 `NODE_ELEMS`/`LOAD_CASE_NAMES`/`OPT_CS`/`STAGE_STEP`를 지원하지 **않고**,
+대신 32절(Tendon Arrangement)과 동일한 `ADDITIONAL.SET_TENDON_PARAMS`(텐던 그룹명 + 시공단계명,
+둘 다 Required)로 대상을 지정합니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+|-----|------|-----|-----------|--------|------|
+| 7 | 텐던 그룹·시공단계 지정 | `"ADDITIONAL"` | Object | — | **Required** |
+| 7-1 | └ 텐던 그룹·시공단계 설정 | `ADDITIONAL.SET_TENDON_PARAMS` | Object | — | **Required** |
+| 7-1-1 | 　└ 텐던 그룹 이름 | `SET_TENDON_PARAMS.TENDON_GROUP` | String | — | **Required** |
+| 7-1-2 | 　└ 시공단계 이름 | `SET_TENDON_PARAMS.STAGE` | String | — | **Required** |
+
+> ⚠️ 2026-08-26 확인 (article id `36018150905881`): 이전 버전 문서는 `NODE_ELEMS`로 대상을
+> 지정했으나 공식 스키마에는 없는 필드이며, 실제로는 `ADDITIONAL.SET_TENDON_PARAMS`가 필요함.
+
 ### Response HEAD
 
-`["Index", "Elem", "Part", "Stress(AfterImmediateLoss):A", "ElasticDeform.Loss:B", "Ratio/A", "Creep/ShrinkageLoss", "RelaxationLoss", "Stress(AfterAllLoss)/Stress(AfterImmediateLoss)", "EffectiveNum."]`
+- `TNDN_LOSS_STRESS`: `["Index", "Elem", "Part", "Stress(AfterImmediateLoss):A", "ElasticDeform.Loss:B", "Ratio/A", "Creep/ShrinkageLoss", "RelaxationLoss", "Stress(AfterAllLoss)/Stress(AfterImmediateLoss)", "EffectiveNum."]`
+- `TNDN_LOSS_FORCE`: `Stress(...)` 대신 `Force(...)` 컬럼명 사용 — `["Index", "Elem", "Part", "Force(AfterImmediateLoss):A", "ElasticDeform.Loss:B", "Ratio/A", "Creep/ShrinkageLoss", "RelaxationLoss", "Force(AfterAllLoss)/Force(AfterImmediateLoss)", "EffectiveNum."]`
 
 ### Request / Response JSON
 
-**POST Request Body**
+**POST Request Body — TNDN_LOSS_STRESS**
 
 ```json
 {
   "Argument": {
-    "TABLE_NAME": "TendonLoss",
+    "TABLE_NAME": "TendonLoss(Stress)",
     "TABLE_TYPE": "TNDN_LOSS_STRESS",
-    "UNIT": { "FORCE": "kN", "DIST": "m" },
+    "UNIT": { "FORCE": "N", "DIST": "mm" },
     "STYLES": { "FORMAT": "Fixed", "PLACE": 12 },
     "COMPONENTS": ["Elem", "Part", "Stress(AfterImmediateLoss):A", "ElasticDeform.Loss:B", "Ratio/A", "Creep/ShrinkageLoss", "RelaxationLoss", "Stress(AfterAllLoss)/Stress(AfterImmediateLoss)", "EffectiveNum."],
-    "NODE_ELEMS": { "KEYS": [33] }
+    "ADDITIONAL": {
+      "SET_TENDON_PARAMS": { "TENDON_GROUP": "Bot-Key-B", "STAGE": "CS16" }
+    }
   }
 }
 ```
 
-**POST Response Body**
+**POST Response Body — TNDN_LOSS_STRESS**
 
 ```json
 {
-  "TendonLoss": {
-    "FORCE": "kN",
-    "DIST": "m",
+  "TendonLoss(Stress)": {
+    "FORCE": "N",
+    "DIST": "mm",
     "HEAD": ["Index", "Elem", "Part", "Stress(AfterImmediateLoss):A", "ElasticDeform.Loss:B", "Ratio/A", "Creep/ShrinkageLoss", "RelaxationLoss", "Stress(AfterAllLoss)/Stress(AfterImmediateLoss)", "EffectiveNum."],
     "DATA": [
-      ["1", "33", "I", "1029.576204812610", "1.193871724644", "1.001159575871", "-68.776503747849", "-44.450510039386", "0.891185187130", "2.000000000000"]
+      ["1", "33", "I", "1029.576204812610", "1.193871724644", "1.001159575871", "-68.776503747849", "-44.450510039386", "0.891185187130", "2.000000000000"],
+      ["2", "33", "J", "1135.213914944730", "0.738061054845", "1.000650151522", "-64.974951541191", "-49.011270158760", "0.900240686663", "2.000000000000"]
     ]
+  }
+}
+```
+
+**POST Request Body — TNDN_LOSS_FORCE**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "TendonLoss(Force)",
+    "TABLE_TYPE": "TNDN_LOSS_FORCE",
+    "UNIT": { "FORCE": "kN", "DIST": "m" },
+    "STYLES": { "FORMAT": "Fixed", "PLACE": 12 },
+    "COMPONENTS": ["Elem", "Part", "Force(AfterImmediateLoss):A", "ElasticDeform.Loss:B", "Ratio/A", "Creep/ShrinkageLoss", "RelaxationLoss", "Force(AfterAllLoss)/Force(AfterImmediateLoss)", "EffectiveNum."],
+    "ADDITIONAL": {
+      "SET_TENDON_PARAMS": { "TENDON_GROUP": "Bot-Key-B", "STAGE": "CS16" }
+    }
   }
 }
 ```
@@ -2647,18 +3044,20 @@ HEADERS = {
     "MAPI-Key": "YOUR_MAPI_KEY"
 }
 
-# ── POST: 텐던 손실 추출 ───────────────────────────────────────────
+# ── POST: 텐던 손실 추출 (응력 기준) ───────────────────────────────
 #   부재력 기준: TABLE_TYPE="TNDN_LOSS_FORCE"
 payload = {
     "Argument": {
-        "TABLE_NAME": "TendonLoss",
+        "TABLE_NAME": "TendonLoss(Stress)",
         "TABLE_TYPE": "TNDN_LOSS_STRESS",
-        "UNIT": {"FORCE": "kN", "DIST": "m"},
-        "NODE_ELEMS": {"KEYS": [33]}
+        "UNIT": {"FORCE": "N", "DIST": "mm"},
+        "ADDITIONAL": {
+            "SET_TENDON_PARAMS": {"TENDON_GROUP": "Bot-Key-B", "STAGE": "CS16"}
+        }
     }
 }
 resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
-table = resp.json().get("TendonLoss", {})
+table = resp.json().get("TendonLoss(Stress)", {})
 head = table.get("HEAD", [])
 for row in table.get("DATA", []):
     d = dict(zip(head, row))
@@ -2675,23 +3074,30 @@ for row in table.get("DATA", []):
 
 | 값 | 설명 |
 |----|------|
-| `"TNDN_WEIGHT_GROUP"` | 텐던 물량 (그룹별 Group) |
 | `"TNDN_WEIGHT_PROFILE"` | 텐던 물량 (형상별 Profile) |
 | `"TNDN_WEIGHT_PROPERTY"` | 텐던 물량 (특성별 Property) |
+| `"TNDN_WEIGHT_GROUP"` | 텐던 물량 (그룹별 Group) |
+
+> ⚠️ 2026-08-26 확인 (article id `36018235852569`): 이전 버전 문서는 `TABLE_TYPE`을
+> `"TNDN_WEIGHT_GROUP"`으로 표기하면서도 예제 자체는 실제로 `"TNDN_WEIGHT_PROFILE"`(형상별)
+> 응답 데이터(`TendonName`/`TendonNum` 컬럼, `"Bot-Key-A01"` 등)를 그대로 사용하고 있었음 —
+> Group 응답은 컬럼 구성이 전혀 다름. 3종 모두 응답 구조가 달라 아래에 각각 정정·추가함.
 
 ### Response HEAD
 
-`["Index", "TendonName", "TendonNum", "Area", "Length", "Weight/Length", "Weight", "TotalWeight"]`
+- `TNDN_WEIGHT_PROFILE`: `["Index", "TendonName", "TendonNum", "Area", "Length", "Weight/Length", "Weight", "TotalWeight"]`
+- `TNDN_WEIGHT_PROPERTY`: `["Index", "TendonProperty", "Area", "TotalLength", "Weight/Length", "TotalWeight"]`
+- `TNDN_WEIGHT_GROUP`: `["Index", "TendonGroup", "TotalLength", "TotalWeight"]`
 
 ### Request / Response JSON
 
-**POST Request Body**
+**POST Request Body — TNDN_WEIGHT_PROFILE**
 
 ```json
 {
   "Argument": {
-    "TABLE_NAME": "TendonWeight",
-    "TABLE_TYPE": "TNDN_WEIGHT_GROUP",
+    "TABLE_NAME": "TendonProfile",
+    "TABLE_TYPE": "TNDN_WEIGHT_PROFILE",
     "UNIT": { "FORCE": "kN", "DIST": "m" },
     "STYLES": { "FORMAT": "Fixed", "PLACE": 12 },
     "COMPONENTS": ["TendonName", "TendonNum", "Area", "Length", "Weight/Length", "Weight", "TotalWeight"]
@@ -2699,16 +3105,77 @@ for row in table.get("DATA", []):
 }
 ```
 
-**POST Response Body**
+**POST Response Body — TNDN_WEIGHT_PROFILE**
 
 ```json
 {
-  "TendonWeight": {
+  "TendonProfile": {
     "FORCE": "kN",
     "DIST": "m",
     "HEAD": ["Index", "TendonName", "TendonNum", "Area", "Length", "Weight/Length", "Weight", "TotalWeight"],
     "DATA": [
-      ["1", "Bot-Key-A01", "1.000000000000", "0.002635300000", "21.048299083539", "0.202871198248", "4.270093656165", "4.270093656165"]
+      ["1", "Bot-Key-A01", "1.000000000000", "0.002635300000", "21.048299083539", "0.202871198248", "4.270093656165", "4.270093656165"],
+      ["2", "Bot-Key-A02", "1.000000000000", "0.002635300000", "21.035730337216", "0.202871198248", "4.267543819538", "4.267543819538"]
+    ]
+  }
+}
+```
+
+**POST Request Body — TNDN_WEIGHT_PROPERTY**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "TendonProperty",
+    "TABLE_TYPE": "TNDN_WEIGHT_PROPERTY",
+    "UNIT": { "FORCE": "kN", "DIST": "m" },
+    "STYLES": { "FORMAT": "Fixed", "PLACE": 12 },
+    "COMPONENTS": ["TendonProperty", "Area", "TotalLength", "Weight/Length", "TotalWeight"]
+  }
+}
+```
+
+**POST Response Body — TNDN_WEIGHT_PROPERTY**
+
+```json
+{
+  "TendonProperty": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "TendonProperty", "Area", "TotalLength", "Weight/Length", "TotalWeight"],
+    "DATA": [
+      ["1", "Bot", "0.002635300000", "2073.687453151790", "0.202871198248", "420.691458413265"],
+      ["2", "Top", "0.002635300000", "5553.015935350260", "0.202871198248", "1126.546996696130"],
+      ["3", "SUM", "-", "7626.703388502000", "-", "1547.238455109000"]
+    ]
+  }
+}
+```
+
+**POST Request Body — TNDN_WEIGHT_GROUP**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "TendonGroup",
+    "TABLE_TYPE": "TNDN_WEIGHT_GROUP",
+    "UNIT": { "FORCE": "kN", "DIST": "m" },
+    "STYLES": { "FORMAT": "Fixed", "PLACE": 12 },
+    "COMPONENTS": ["TendonGroup", "TotalLength", "TotalWeight"]
+  }
+}
+```
+
+**POST Response Body — TNDN_WEIGHT_GROUP**
+
+```json
+{
+  "TendonGroup": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "TendonGroup", "TotalLength", "TotalWeight"],
+    "DATA": [
+      ["1", "Bot-Key-A", "446.379820137516", "90.557608985136"]
     ]
   }
 }
@@ -2725,18 +3192,18 @@ HEADERS = {
     "MAPI-Key": "YOUR_MAPI_KEY"
 }
 
-# ── POST: 텐던 물량 추출 ───────────────────────────────────────────
-#   형상별: TABLE_TYPE="TNDN_WEIGHT_PROFILE"
+# ── POST: 텐던 물량 추출 (형상별) ──────────────────────────────────
 #   특성별: TABLE_TYPE="TNDN_WEIGHT_PROPERTY"
+#   그룹별: TABLE_TYPE="TNDN_WEIGHT_GROUP"
 payload = {
     "Argument": {
-        "TABLE_NAME": "TendonWeight",
-        "TABLE_TYPE": "TNDN_WEIGHT_GROUP",
+        "TABLE_NAME": "TendonProfile",
+        "TABLE_TYPE": "TNDN_WEIGHT_PROFILE",
         "UNIT": {"FORCE": "kN", "DIST": "m"}
     }
 }
 resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
-table = resp.json().get("TendonWeight", {})
+table = resp.json().get("TendonProfile", {})
 head = table.get("HEAD", [])
 for row in table.get("DATA", []):
     d = dict(zip(head, row))
@@ -2845,38 +3312,57 @@ for row in table.get("DATA", []):
 | `"TNDN_APPROX_LOSS_FORCE"` | 텐던 근사 손실 (부재력 Force 기준) |
 | `"TNDN_APPROX_LOSS_STRESS"` | 텐던 근사 손실 (응력 Stress 기준) |
 
+> ⚠️ 2026-08-26 확인 (article id `36018411935129`): 이 테이블은 공통 사항의 `NODE_ELEMS`를
+> 지원하지 **않습니다**(공식 스키마에 `TABLE_NAME`/`TABLE_TYPE`/`EXPORT_PATH`/`UNIT`/`STYLES`/
+> `COMPONENTS`만 존재) — 이전 버전 문서에 잘못 포함되어 있었음. 대상 제한 없이 전체 텐던 요소가
+> 반환됩니다.
+
 ### Response HEAD
 
-`["Index", "Elem", "Part", "ImmediateLoss", "CreepLoss", "ShrinkageLoss", "RelaxationLoss", "AllLoss", "Stress(ImmediateLoss)", "Stress(AllLoss)", "Stress(AllLoss)/Stress"]`
+- `TNDN_APPROX_LOSS_STRESS`: `["Index", "Elem", "Part", "ImmediateLoss", "CreepLoss", "ShrinkageLoss", "RelaxationLoss", "AllLoss", "Stress(ImmediateLoss)", "Stress(AllLoss)", "Stress(AllLoss)/Stress"]`
+- `TNDN_APPROX_LOSS_FORCE`: `Stress(...)` 대신 `Force(...)` 컬럼명 사용 — `["Index", "Elem", "Part", "ImmediateLoss", "CreepLoss", "ShrinkageLoss", "RelaxationLoss", "AllLoss", "Force(ImmediateLoss)", "Force(AllLoss)", "Force(AllLoss)/Force"]`
 
 ### Request / Response JSON
 
-**POST Request Body**
+**POST Request Body — TNDN_APPROX_LOSS_STRESS**
 
 ```json
 {
   "Argument": {
-    "TABLE_NAME": "TendonApproxLoss",
+    "TABLE_NAME": "TendonApproximateLoss(Stress)",
     "TABLE_TYPE": "TNDN_APPROX_LOSS_STRESS",
-    "UNIT": { "FORCE": "kN", "DIST": "m" },
+    "UNIT": { "FORCE": "kips", "DIST": "in" },
     "STYLES": { "FORMAT": "Fixed", "PLACE": 12 },
-    "COMPONENTS": ["Elem", "Part", "ImmediateLoss", "CreepLoss", "ShrinkageLoss", "RelaxationLoss", "AllLoss", "Stress(ImmediateLoss)", "Stress(AllLoss)", "Stress(AllLoss)/Stress"],
-    "NODE_ELEMS": { "KEYS": [1] }
+    "COMPONENTS": ["Elem", "Part", "ImmediateLoss", "CreepLoss", "ShrinkageLoss", "RelaxationLoss", "AllLoss", "Stress(ImmediateLoss)", "Stress(AllLoss)", "Stress(AllLoss)/Stress"]
   }
 }
 ```
 
-**POST Response Body**
+**POST Response Body — TNDN_APPROX_LOSS_STRESS**
 
 ```json
 {
-  "TendonApproxLoss": {
-    "FORCE": "kN",
-    "DIST": "m",
+  "TendonApproximateLoss(Stress)": {
+    "FORCE": "kips",
+    "DIST": "in",
     "HEAD": ["Index", "Elem", "Part", "ImmediateLoss", "CreepLoss", "ShrinkageLoss", "RelaxationLoss", "AllLoss", "Stress(ImmediateLoss)", "Stress(AllLoss)", "Stress(AllLoss)/Stress"],
     "DATA": [
       ["1", "1", "I", "-6.424509690435", "-8.904593184079", "-9.582009033589", "-2.465640773855", "-27.376752681958", "196.075490309565", "175.123247318042", "0.893141957934"]
     ]
+  }
+}
+```
+
+**POST Request Body — TNDN_APPROX_LOSS_FORCE**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "TendonApproximateLoss(Force)",
+    "TABLE_TYPE": "TNDN_APPROX_LOSS_FORCE",
+    "UNIT": { "FORCE": "kips", "DIST": "in" },
+    "STYLES": { "FORMAT": "Fixed", "PLACE": 12 },
+    "COMPONENTS": ["Elem", "Part", "ImmediateLoss", "CreepLoss", "ShrinkageLoss", "RelaxationLoss", "AllLoss", "Force(ImmediateLoss)", "Force(AllLoss)", "Force(AllLoss)/Force"]
   }
 }
 ```
@@ -2892,18 +3378,17 @@ HEADERS = {
     "MAPI-Key": "YOUR_MAPI_KEY"
 }
 
-# ── POST: 텐던 근사 손실 추출 ──────────────────────────────────────
+# ── POST: 텐던 근사 손실 추출 (응력 기준) ──────────────────────────
 #   부재력 기준: TABLE_TYPE="TNDN_APPROX_LOSS_FORCE"
 payload = {
     "Argument": {
-        "TABLE_NAME": "TendonApproxLoss",
+        "TABLE_NAME": "TendonApproximateLoss(Stress)",
         "TABLE_TYPE": "TNDN_APPROX_LOSS_STRESS",
-        "UNIT": {"FORCE": "kN", "DIST": "m"},
-        "NODE_ELEMS": {"KEYS": [1]}
+        "UNIT": {"FORCE": "kips", "DIST": "in"}
     }
 }
 resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
-table = resp.json().get("TendonApproxLoss", {})
+table = resp.json().get("TendonApproximateLoss(Stress)", {})
 head = table.get("HEAD", [])
 for row in table.get("DATA", []):
     d = dict(zip(head, row))
@@ -2922,6 +3407,11 @@ for row in table.get("DATA", []):
 |----|------|
 | `"COMPSECTBEAMFORCE"` | 시공단계 합성단면 부재력 (Beam Force) |
 | `"COMPSECTBEAMSTRESS"` | 시공단계 합성단면 응력 (Beam Stress) |
+
+> ⚠️ 2026-08-26 확인 (article id `36018521410457`): 이 테이블은 부재 위치 지정 파라미터
+> `"PARTS"`(Array [String], 값: `"PartI"`/`"Part1/4"`/`"Part2/4"`/`"Part3/4"`/`"PartJ"`, 기본값
+> All, Optional — 19장 8~12절의 PARTS와 동일 패턴)를 지원합니다. 이전 버전 문서에 누락되어
+> 있었음.
 
 ### Response HEAD
 
@@ -2942,7 +3432,8 @@ for row in table.get("DATA", []):
     "NODE_ELEMS": { "KEYS": [1] },
     "LOAD_CASE_NAMES": ["DL(CS)"],
     "OPT_CS": true,
-    "STAGE_STEP": ["CS1:001(first)"]
+    "STAGE_STEP": ["CS1:001(first)"],
+    "PARTS": ["PartI", "PartJ"]
   }
 }
 ```
@@ -3007,13 +3498,22 @@ for row in table.get("DATA", []):
 | `"SELF_CONST_BEAM_FORCE"` | 합성단면 자기구속 부재력 (Self-Constraint Beam Force) |
 | `"SELF_CONST_BEAM_STRESS"` | 합성단면 자기구속 응력 (Self-Constraint Beam Stress) |
 
+> ⚠️ 2026-08-26 확인 (article id `36018582743705`): 이 테이블은 부재 위치 지정 파라미터
+> `"PARTS"`(Array [String], 값: `"PartI"`/`"Part1/4"`/`"Part2/4"`/`"Part3/4"`/`"PartJ"`, 기본값
+> All, Optional)를 지원합니다(37절과 동일). 이전 버전 문서에 누락되어 있었음.
+
 ### Response HEAD
 
-`["Index", "Elem", "Load", "SectionPart", "Part", "Axial", "Moment-y", "Moment-z"]`
+- General/Post CS: `["Index", "Elem", "Load", "SectionPart", "Part", "Axial", "Moment-y", "Moment-z"]`
+- 시공단계(Construction Stage, `COMPONENTS`에 `Stage`/`Step`을 포함할 때): `Load` 뒤에 `Stage`/`Step`이 추가됨 — `["Index", "Elem", "Load", "Stage", "Step", "SectionPart", "Part", "Axial", "Moment-y", "Moment-z"]`
+
+> ⚠️ 2026-08-26 확인: 시공단계 조회 시 `Stage`/`Step` 컬럼이 추가되는 점이 이전 버전 문서에
+> 누락되어 있었음(37절의 공식 예제는 이 컬럼을 포함하지 않아 37절 자체는 정정하지 않음 — 원문
+> 아티클 간 표기 차이로 판단, 오류제보 대상).
 
 ### Request / Response JSON
 
-**POST Request Body**
+**POST Request Body — General/Post CS**
 
 ```json
 {
@@ -3025,13 +3525,12 @@ for row in table.get("DATA", []):
     "COMPONENTS": ["Elem", "Load", "SectionPart", "Part", "Axial", "Moment-y", "Moment-z"],
     "NODE_ELEMS": { "KEYS": [1] },
     "LOAD_CASE_NAMES": ["TG(+)(CS)"],
-    "OPT_CS": true,
-    "STAGE_STEP": ["CS1:001(first)"]
+    "PARTS": ["PartI", "PartJ"]
   }
 }
 ```
 
-**POST Response Body**
+**POST Response Body — General/Post CS**
 
 ```json
 {
@@ -3042,6 +3541,25 @@ for row in table.get("DATA", []):
     "DATA": [
       ["1", "1", "TG(+)", "1", "I", "326.337945299092", "-691.230653270694", "0.000000000000"]
     ]
+  }
+}
+```
+
+**POST Request Body — 시공단계(Construction Stage)**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "Self-ConstraintBeamForce",
+    "TABLE_TYPE": "SELF_CONST_BEAM_FORCE",
+    "UNIT": { "FORCE": "kN", "DIST": "m" },
+    "STYLES": { "FORMAT": "Fixed", "PLACE": 12 },
+    "COMPONENTS": ["Elem", "Load", "Stage", "Step", "SectionPart", "Part", "Axial", "Moment-y", "Moment-z"],
+    "NODE_ELEMS": { "KEYS": [1] },
+    "LOAD_CASE_NAMES": ["Summation(CS)"],
+    "PARTS": ["PartI", "PartJ"],
+    "OPT_CS": true,
+    "STAGE_STEP": ["CS4:001(first)", "CS4:002(last)"]
   }
 }
 ```
