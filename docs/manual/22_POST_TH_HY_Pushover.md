@@ -103,6 +103,13 @@
 > - **`STEP`:** 시간이력에서는 `FROM`/`TO`가 **시간(초)** 이며, 푸시오버에서는 **스텝 번호**입니다.
 > - **`PARTS`:** 보/트러스/벽 결과는 `["PartI", "PartJ"]`, 평판(Plate) 4절점 요소는 `["PartI", "PartJ", "PartK", "PartL"]`를 사용합니다. 노드 결과·일반링크 결과에는 사용하지 않습니다.
 > - **`REF_PT`/`ANR_NODE`:** 관성 응답(변위/속도/가속도)의 기준점 설정입니다. 절점 결과·변위 결과에서 사용합니다.
+>
+> ⚠️ 2026-08-26 확인 (article id `36704969941913` 등 그룹 A 전체): 공식 JSON Schema는 결과
+> 종류를 선택하는 필드명을 `"TABLE_TYPE"`으로 잘못 기재하고 있습니다(`post/TABLE` 스펙을 복사한
+> 흔적으로 보임). 그러나 모든 Request/Response 예제는 실제로 `"TEXT_TYPE"`을 사용하며 이 값을
+> 그대로 반영해야 응답을 받을 수 있습니다(예제가 표/스키마보다 우선 — CLAUDE.md 판단 원칙).
+> 이 저장소는 처음부터 `"TEXT_TYPE"`으로 정확히 기술되어 있었으므로 정정할 내용은 없으나, 다음
+> 동기화 때 스키마 쪽 `"TABLE_TYPE"` 표기를 근거로 되돌리지 않도록 주석으로 남깁니다.
 
 ### 공통 Response 구조
 
@@ -377,6 +384,12 @@ print("rows:", len(res["TH_PLATESTRESS"]["DATA"]))
 
 `["Index", "WallID", "Load", "Time/Step", "Part", "Axial", "Shear-y", "Shear-z", "Torsion", "Moment-y", "Moment-z"]`
 
+> ⚠️ 2026-08-26 확인 (article id `36705611314585`): 공식 아티클의 Request/Response 예제가
+> 서로 다른 값으로 짝지어져 있습니다(요청은 `NODE_ELEMS.KEYS: [466]`·`STEP.TO: 0.2`·`PLACE: 6`
+> 이지만, 응답 `DATA`는 `WallID "12"`·3자리 지수(예: `-4.386e+02`) 값). 이 저장소는 응답의
+> 실제 값에 맞춰 요청 예제를 내적으로 일관되게(KEYS `[12]`, STEP.TO `0.18`, PLACE `3`) 조정해
+> 두었습니다 — 공식 원문을 그대로 전재하면 요청·응답이 서로 안 맞는 예제가 되기 때문입니다.
+
 #### Request / Response JSON
 
 **POST Request Body — 벽체 부재력(TH_WALLFORCE)**
@@ -455,6 +468,10 @@ for row in res["TH_WALLFORCE"]["DATA"]:
 
 #### Request / Response JSON
 
+> ⚠️ 2026-08-26 확인 (article id `36705822943257`): 이전 버전은 `TH_GLINKDEFORM` 요청에
+> `TH_GLINKFORCE` 응답을 짝지어 놓아 요청·응답이 서로 다른 `TEXT_TYPE`이었습니다(우리 집필
+> 실수). 공식 예제 기준으로 두 `TEXT_TYPE` 각각의 요청·응답을 올바르게 짝지어 보강했습니다.
+
 **POST Request Body — 일반링크 변형(TH_GLINKDEFORM)**
 
 ```json
@@ -468,6 +485,40 @@ for row in res["TH_WALLFORCE"]["DATA"]:
     "NODE_ELEMS": { "KEYS": [1] },
     "TH_CASE_NAME": ["Elcent"],
     "STEP": { "FROM": 0.1, "TO": 0.5, "STEPS": 1 }
+  }
+}
+```
+
+**POST Response Body — 일반링크 변형(TH_GLINKDEFORM)**
+
+```json
+{
+  "TH_GLINKDEFORM": {
+    "FORCE": "N",
+    "DIST": "mm",
+    "HEAD": ["Index", "Key", "Node1", "Node2", "Load", "Time/Step", "DX", "DY", "DZ", "RX", "RY", "RZ"],
+    "DATA": [
+      ["1", "1", "18", "10", "Elcent", "0.100", "-0.366319", "0.249123", "-0.138251", "0.000003", "-0.000004", "-0.000018"],
+      ["2", "1", "18", "10", "Elcent", "0.200", "-1.862090", "1.407943", "-0.515132", "0.000043", "-0.000107", "-0.000011"]
+    ]
+  }
+}
+```
+
+**POST Request Body — 일반링크 부재력(TH_GLINKFORCE)**
+
+```json
+{
+  "Argument": {
+    "TEXT_TYPE": "TH_GLINKFORCE",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\TH_GlinkForce_Out.JSON",
+    "UNIT": { "FORCE": "kN", "DIST": "M" },
+    "STYLES": { "FORMAT": "Fixed", "PLACE": 6 },
+    "COMPONENTS": ["Key", "Node1", "Node2", "Load", "Time/Step", "Part", "FX", "FY", "FZ", "MX", "MY", "MZ"],
+    "NODE_ELEMS": { "KEYS": [1] },
+    "PARTS": ["PartI", "PartJ"],
+    "TH_CASE_NAME": ["Elcent"],
+    "STEP": { "FROM": 0.1, "TO": 0.3, "STEPS": 1 }
   }
 }
 ```
@@ -609,6 +660,11 @@ for row in res["PO_DISP"]["DATA"]:
 
 #### Request / Response JSON
 
+> ⚠️ 2026-08-26 확인 (article id `36706062373657`): 이전 버전은 `PO_BEAMFORCE` 요청에
+> `PO_TRUSSFORCE` 응답을 짝지어 놓았고, 그 응답 `DATA`도 실제 값이 아니라
+> `12.345678`/`24.691356` 같은 임의 자리수 채움 값이었습니다(우리 집필 실수). 공식 예제의
+> 실제 값으로 두 `TEXT_TYPE`을 올바르게 짝지어 교체했습니다.
+
 **POST Request Body — 보 부재력(PO_BEAMFORCE)**
 
 ```json
@@ -627,6 +683,40 @@ for row in res["PO_DISP"]["DATA"]:
 }
 ```
 
+**POST Response Body — 보 부재력(PO_BEAMFORCE)**
+
+```json
+{
+  "PO_BEAMFORCE": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "Elem", "Load", "Step", "Part", "Axial", "Shear-y", "Shear-z", "Torsion", "Moment-y", "Moment-z"],
+    "DATA": [
+      ["1", "16", "PX", "1", "I[19]", "270.506367", "0.000000", "13.449733", "0.000000", "27.545039", "0.000000"],
+      ["2", "16", "PX", "1", "J[22]", "270.506367", "0.000000", "14.095306", "0.000000", "0.000000", "0.000000"]
+    ]
+  }
+}
+```
+
+**POST Request Body — 트러스 부재력(PO_TRUSSFORCE)**
+
+```json
+{
+  "Argument": {
+    "TEXT_TYPE": "PO_TRUSSFORCE",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\PO_TrussForce_Out.JSON",
+    "UNIT": { "FORCE": "kN", "DIST": "m" },
+    "STYLES": { "FORMAT": "Fixed", "PLACE": 6 },
+    "COMPONENTS": ["Elem", "Load", "Time/Step", "Force-I", "Force-J"],
+    "NODE_ELEMS": { "KEYS": [18] },
+    "PARTS": ["PartI", "PartJ"],
+    "PO_CASE_NAME": ["PX"],
+    "STEP": { "FROM": 1, "TO": 10, "STEPS": 1 }
+  }
+}
+```
+
 **POST Response Body — 트러스 부재력(PO_TRUSSFORCE)**
 
 ```json
@@ -636,8 +726,8 @@ for row in res["PO_DISP"]["DATA"]:
     "DIST": "m",
     "HEAD": ["Index", "Elem", "Load", "Force-I", "Force-J"],
     "DATA": [
-      ["1", "40", "PX", "12.345678", "12.345678"],
-      ["2", "40", "PX", "24.691356", "24.691356"]
+      ["1", "18", "PX", "-273.752455", "-273.752455"],
+      ["2", "18", "PX", "-546.467417", "-546.467417"]
     ]
   }
 }
@@ -682,6 +772,11 @@ print("rows:", len(res["PO_BEAMFORCE"]["DATA"]))
 #### Response HEAD
 
 `["Index", "WallID", "Load", "Step", "Part", "Axial", "Shear-y", "Shear-z", "Torsion", "Moment-y", "Moment-z"]`
+
+> ⚠️ 2026-08-26 확인 (article id `36706217576217`): [A-4](#a-4-time-history-text--element-resultwall)와
+> 동일한 유형의 공식 원문 자체모순 — 요청 예제는 `NODE_ELEMS.KEYS: [466]`·`STEP.TO: 5`이지만
+> 응답 `DATA`는 `WallID "12"` 값입니다. 이 저장소는 응답 값에 맞춰 요청을 내적으로 일관되게
+> 조정해 두었습니다.
 
 #### Request / Response JSON
 
@@ -779,6 +874,10 @@ print("HEAD:", res["PO_WALLFORCE"]["HEAD"])
 
 **POST Response Body**
 
+> ⚠️ 2026-08-26 확인 (article id `36706344369049`): 이전 버전의 `DATA` 값은 실제 응답이 아니라
+> `-0.010000`/`-0.020000` 등 임의 채움 값이었습니다(우리 집필 실수, `Node1`/`Node2`도 실제
+> `20`/`22`가 아닌 `18`/`10`으로 오기). 공식 예제의 실제 값으로 교체했습니다.
+
 ```json
 {
   "PO_GLINKDEFORM": {
@@ -786,8 +885,8 @@ print("HEAD:", res["PO_WALLFORCE"]["HEAD"])
     "DIST": "mm",
     "HEAD": ["Index", "Key", "Node1", "Node2", "Load", "Step", "DX", "DY", "DZ", "RX", "RY", "RZ"],
     "DATA": [
-      ["1", "1", "18", "10", "PX", "1", "-0.010000", "0.000000", "0.000000", "0.000000", "0.000000", "0.000000"],
-      ["2", "1", "18", "10", "PX", "2", "-0.020000", "0.000000", "0.000000", "0.000000", "0.000000", "0.000000"]
+      ["1", "1", "20", "22", "PX", "1", "0.013553", "0.000000", "-0.008622", "0.000000", "-0.000407", "0.000000"],
+      ["2", "1", "20", "22", "PX", "2", "0.027107", "0.000000", "-0.017094", "0.000000", "-0.000810", "0.000000"]
     ]
   }
 }
@@ -1278,10 +1377,14 @@ print("HEAD:", res["Dx"]["HEAD"])
 
 #### Response HEAD (힌지 유형별)
 
+> ⚠️ 2026-08-26 확인 (article id `36020436094105`): 이전 버전은 아래 Truss/Spring 두 HEAD의
+> 라벨이 서로 바뀌어 있었습니다(우리 집필 실수) — 단일 `Fx` 성분만 갖는 쪽이 실제로는 Truss,
+> `GeneralLink/*` 필드를 갖는 쪽이 실제로는 Spring(일반링크 힌지)입니다.
+
 - **Lumped / Dist:** `["Index", "Elem", "HingeLocation", "InelasticHingeProp.", "Load", "Fx/Force", "Fx/Time", "Fy/Force", "Fy/Time", "Fz/Force", "Fz/Time", "Mx/Force", "Mx/Time", "My/Force", "My/Time", "Mz/Force", "Mz/Time"]`
-- **Spring:** `["Index", "Elem", "InelasticHingeProp.", "Load", "Fx/Force", "Fx/Time"]`
+- **Truss:** `["Index", "Elem", "InelasticHingeProp.", "Load", "Fx/Force", "Fx/Time"]`
 - **Wall:** `["Index", "WallID", "Story", "HingeLocation", "InelasticHingeProp.", "Load", "Fx/Force", "Fx/Time", ... , "Mz/Force", "Mz/Time"]`
-- **Truss:** `["Index", "GeneralLink/No", "GeneralLink/Prop.", "GeneralLink/Node1", "GeneralLink/Node2", "InelasticHingeProp.", "Load", "Fx/Force", "Fx/Time", ... , "Mz/Force", "Mz/Time"]`
+- **Spring:** `["Index", "GeneralLink/No", "GeneralLink/Prop.", "GeneralLink/Node1", "GeneralLink/Node2", "InelasticHingeProp.", "Load", "Fx/Force", "Fx/Time", ... , "Mz/Force", "Mz/Time"]`
 
 #### Request / Response JSON
 
@@ -1356,10 +1459,13 @@ print("rows:", len(res["Lumped"]["DATA"]))
 
 #### Response HEAD (힌지 유형별)
 
+> ⚠️ 2026-08-26 확인 (article id `36020548520601`): [B-5](#b-5-inelastic-hinge-force)와
+> 동일하게 Truss/Spring 라벨이 이전 버전에서 서로 바뀌어 있었습니다 — 정정.
+
 - **Lumped / Dist:** `["Index", "Elem", "HingeLocation", "InelasticHingeProp.", "Load", "Dx/Deform", "Dx/Time", "Dy/Deform", "Dy/Time", "Dz/Deform", "Dz/Time", "Rx/Deform", "Rx/Time", "Ry/Deform", "Ry/Time", "Rz/Deform", "Rz/Time"]`
-- **Spring:** `["Index", "Elem", "InelasticHingeProp.", "Load", "Dx/Deform", "Dx/Time"]`
+- **Truss:** `["Index", "Elem", "InelasticHingeProp.", "Load", "Dx/Deform", "Dx/Time"]`
 - **Wall:** `["Index", "WallID", "Story", "HingeLocation", "InelasticHingeProp.", "Load", "Dx/Deform", "Dx/Time", ... , "Rz/Deform", "Rz/Time"]`
-- **Truss:** `["Index", "GeneralLink/No", "GeneralLink/Prop.", "GeneralLink/Node1", "GeneralLink/Node2", "InelasticHingeProp.", "Load", "Dx/Deform", "Dx/Time", ... , "Rz/Deform", "Rz/Time"]`
+- **Spring:** `["Index", "GeneralLink/No", "GeneralLink/Prop.", "GeneralLink/Node1", "GeneralLink/Node2", "InelasticHingeProp.", "Load", "Dx/Deform", "Dx/Time", ... , "Rz/Deform", "Rz/Time"]`
 
 #### Request / Response JSON
 
@@ -1509,11 +1615,14 @@ for row in res["Beam"]["DATA"]:
 
 #### Response HEAD (힌지 유형별)
 
+> ⚠️ 2026-08-26 확인 (article id `36020795064089`): [B-5](#b-5-inelastic-hinge-force)와
+> 동일하게 Truss/Spring 라벨이 이전 버전에서 서로 바뀌어 있었습니다 — 정정.
+
 - **Lumped:** `["Index", "Elem", "HingeLocation", "InelasticHingeProp.", "Load", "Dx/max", "Dx/Time", "Dy/max", "Dy/Time", "Dz/max", "Dz/Time", "Rx/max", "Rx/Time", "Ry/max", "Ry/Time", "Rz/max", "Rz/Time"]`
 - **Dist:** `["Index", "Elem", "HingeLocation", "InelasticHingeProp.", "Load", "Dx/max(D/D1)", "Dx/Time", "Dy/max(D/D1)", "Dy/Time", "Dz/max(D/D1)", "Dz/Time", "Rx/max(D/D1)", "Rx/Time", "Ry/max(D/D1)", "Ry/Time", "Rz/max(D/D1)", "Rz/Time"]`
-- **Spring:** `["Index", "Elem", "InelasticHingeProp.", "Load", "Dx/max(D/D1)", "Dx/Time"]`
+- **Truss:** `["Index", "Elem", "InelasticHingeProp.", "Load", "Dx/max(D/D1)", "Dx/Time"]`
 - **Wall:** `["Index", "WallID", "Story", "HingeLocation", "InelasticHingeProp.", "Load", "Dx/max", "Dx/Time", ... , "Rz/max", "Rz/Time"]`
-- **Truss:** `["Index", "GeneralLink/No", "GeneralLink/Prop.", "GeneralLink/Node1", "GeneralLink/Node2", "InelasticHingeProp.", "Load", "Dx/max(D/D1)", "Dx/Time", ... , "Rz/max(D/D1)", "Rz/Time"]`
+- **Spring:** `["Index", "GeneralLink/No", "GeneralLink/Prop.", "GeneralLink/Node1", "GeneralLink/Node2", "InelasticHingeProp.", "Load", "Dx/max(D/D1)", "Dx/Time", ... , "Rz/max(D/D1)", "Rz/Time"]`
 
 #### Request / Response JSON
 
@@ -1589,10 +1698,13 @@ print("HEAD:", res["Lumped"]["HEAD"])
 
 #### Response HEAD (힌지 유형별)
 
+> ⚠️ 2026-08-26 확인 (article id `36020877017497`): [B-5](#b-5-inelastic-hinge-force)와
+> 동일하게 Truss/Spring 라벨이 이전 버전에서 서로 바뀌어 있었습니다 — 정정.
+
 - **Lumped:** `["Index", "Elem", "HingeLocation", "InelasticHingeProp.", "Load", "Dx/max(D/D2)", "Dx/Time", "Dy/max(D/D2)", "Dy/Time", "Dz/max(D/D2)", "Dz/Time", "Rx/max(D/D2)", "Rx/Time", "Ry/max(D/D2)", "Ry/Time", "Rz/max(D/D2)", "Rz/Time"]`
 - **Dist / Wall:** `["Index", ... , "Dx/max", "Dx/Time", ... , "Rz/max", "Rz/Time"]` (Dist는 `Elem`, Wall은 `WallID`·`Story` 컬럼 사용)
-- **Spring:** `["Index", "Elem", "InelasticHingeProp.", "Load", "Dx/max(D/D2)", "Dx/Time"]`
-- **Truss:** `["Index", "GeneralLink/No", "GeneralLink/Prop.", "GeneralLink/Node1", "GeneralLink/Node2", "InelasticHingeProp.", "Load", "Dx/max(D/D2)", "Dx/Time", ... , "Rz/max(D/D2)", "Rz/Time"]`
+- **Truss:** `["Index", "Elem", "InelasticHingeProp.", "Load", "Dx/max(D/D2)", "Dx/Time"]`
+- **Spring:** `["Index", "GeneralLink/No", "GeneralLink/Prop.", "GeneralLink/Node1", "GeneralLink/Node2", "InelasticHingeProp.", "Load", "Dx/max(D/D2)", "Dx/Time", ... , "Rz/max(D/D2)", "Rz/Time"]`
 
 #### Request / Response JSON
 
@@ -2185,6 +2297,13 @@ requests.delete(f"{BASE_URL}/db/THRE/1", headers=HEADERS)
 | 4 | 성분 (Force-Deformation/Force/Deformation) · Fx-Dx/Fx/Dx: `0` / Fy-Dy/Fy/Dy: `1` / Fz-Dz/Fz/Dz: `2` / Mx-Rx/Mx/Rx: `3` / My-Ry/My/Ry: `4` / Mz-Rz/Mz/Rz: `5` | `"COMP"` | Integer | `0` | Optional |
 | 5 | 일반 링크 번호 | `"GENERAL_LINK"` | Integer | — | **Required** |
 
+> ⚠️ 2026-08-26 확인 (article id `35992341376025`): 공식 Specifications 표는 `COMP` enum을
+> `Fx(NL): 0 / Fy: 1 / Fz: 2` 3개까지만 기재하고 있으나(표 자체의 누락으로 보임), 동일 구조를
+> 쓰는 [D-3 Inelastic Hinge Smart Graph](#d-3-inelastic-hinge-smart-graph--dbthri)의 공식
+> Specifications 표에는 `Mx-Rx/Mx/Rx: 3`·`My-Ry/My/Ry: 4`·`Mz-Rz/Mz/Rz: 5`까지 6개 전체가
+> 실려 있고, D-3의 Request 예제도 실제로 `COMP: 4`를 사용합니다. 형제 엔드포인트로 교차확인해
+> 6개 전체를 유지합니다.
+
 #### Request / Response JSON
 
 **POST / PUT Request Body**
@@ -2394,6 +2513,11 @@ print("정의된 힌지 그래프 개수:", len(res.get("THRI", {})))
 | 3 | 성분 | `"COMP"` | Integer | `0` | Optional |
 | 4 | 일반 링크 번호 | `"GENERAL_LINK"` | Integer | — | **Required** |
 
+> ⚠️ 2026-08-26 확인 (article id `35992460196121`): 공식 Request 예제의 3번째 레코드는
+> `"TYPE_RES": 4`를 사용하는데, 이 값은 공식 Specifications 표의 `TYPE_RES` enum(`0`/`2`/`3`/`5`/`7`)
+> 어디에도 없습니다(공식 원문 자체의 누락/모순으로 보이며, 오류제보 대상). 이 저장소는 예제의
+> 실제 값(`4`)을 그대로 유지합니다.
+
 #### Request / Response JSON
 
 **POST / PUT Request Body**
@@ -2451,7 +2575,7 @@ payload = {
     "Assign": {
         "1": {"THIS_NAME": "HIST1", "TYPE_RES": 0, "COMP": 0, "GENERAL_LINK": 1},  # 힘-변형
         "2": {"THIS_NAME": "HIST1", "TYPE_RES": 2, "COMP": 1, "GENERAL_LINK": 4},  # 힘
-        "3": {"THIS_NAME": "HIST1", "TYPE_RES": 3, "COMP": 2, "GENERAL_LINK": 4},  # 변형
+        "3": {"THIS_NAME": "HIST1", "TYPE_RES": 4, "COMP": 2, "GENERAL_LINK": 4},  # 공식 예제 원문 그대로(TYPE_RES enum 표에 없는 값, 위 ⚠️ 참고)
     }
 }
 requests.post(f"{BASE_URL}/db/THRS", json=payload, headers=HEADERS)

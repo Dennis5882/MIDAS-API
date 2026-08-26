@@ -2240,5 +2240,454 @@
       "updated_at": "2026-07-24T07:14:15Z",
       "note": "MATCH"
     }
+  },
+  "22_POST_TH_HY_Pushover.md": {
+    "A-1. Time History Text - Node Results": {
+      "article_id": "36704969941913",
+      "verified_at": "2026-08-26",
+      "updated_at": "2025-08-14T04:54:17Z",
+      "note": "MATCH. 공통 스키마의 TABLE_TYPE/TEXT_TYPE 명칭 불일치는 공식 스키마 오류(예제는 전부 TEXT_TYPE)"
+    },
+    "A-2. TH Text - Element(Truss/Beam/Plane/Solid)": {
+      "article_id": "36705161290649",
+      "verified_at": "2026-08-26",
+      "updated_at": "2025-08-14T05:00:31Z",
+      "note": "MATCH (10개 TEXT_TYPE 전체)"
+    },
+    "A-3. TH Text - Element(Plate)": {
+      "article_id": "36705400674585",
+      "verified_at": "2026-08-26",
+      "updated_at": "2025-08-14T04:55:48Z",
+      "note": "MATCH"
+    },
+    "A-4. TH Text - Element(Wall)": {
+      "article_id": "36705611314585",
+      "verified_at": "2026-08-26",
+      "updated_at": "2025-08-14T04:58:26Z",
+      "note": "공식 원문 자체의 요청/응답 예제 불일치(KEYS 466 vs WallID 12) 확인, 응답 기준으로 요청 정규화"
+    },
+    "A-5. TH Text - General Link Result": {
+      "article_id": "36705822943257",
+      "verified_at": "2026-08-26",
+      "updated_at": "2025-08-14T04:57:02Z",
+      "note": "DEFORM 요청에 FORCE 응답이 잘못 짝지어진 것을 정정, 두 TEXT_TYPE 모두 올바른 쌍으로 보강"
+    },
+    "A-6. Pushover Text - Displacement": {
+      "article_id": "36705962238873",
+      "verified_at": "2026-08-26",
+      "updated_at": "2026-08-05T07:42:36Z",
+      "note": "MATCH"
+    },
+    "A-7. Pushover Text - Element(Beam, Truss)": {
+      "article_id": "36706062373657",
+      "verified_at": "2026-08-26",
+      "updated_at": "2026-08-05T07:43:50Z",
+      "note": "BEAMFORCE 요청에 TRUSSFORCE 응답이 잘못 짝지어지고 DATA도 임의값이었던 것을 정정"
+    },
+    "A-8. Pushover Text - Element(Wall)": {
+      "article_id": "36706217576217",
+      "verified_at": "2026-08-26",
+      "updated_at": "2025-08-14T04:51:10Z",
+      "note": "A-4와 동일한 공식 원문 요청/응답 불일치 패턴 확인"
+    },
+    "A-9. Pushover Text - General Link": {
+      "article_id": "36706344369049",
+      "verified_at": "2026-08-26",
+      "updated_at": "2025-08-14T04:51:49Z",
+      "note": "DATA가 임의 채움 값(Node1/Node2 오기 포함)이었던 것을 실제 값으로 정정"
+    },
+    "A-10. Pushover Text - Elastic Link": {
+      "article_id": "36706383777817",
+      "verified_at": "2026-08-26",
+      "updated_at": "2026-08-05T07:43:10Z",
+      "note": "MATCH"
+    },
+    "B-1. Inelastic Hinge Event Time": {
+      "article_id": "36020215503257",
+      "verified_at": "2026-08-26",
+      "updated_at": "2025-04-27T06:54:40Z",
+      "note": "MATCH (5개 힌지유형 HEAD 변형 전체)"
+    },
+    "B-2. Inelastic Hinge Beam Summary": {
+      "article_id": "36020290127513",
+      "verified_at": "2026-08-26",
+      "updated_at": "2025-04-27T06:57:19Z",
+      "note": "MATCH (5개 성분)"
+    },
+    "B-3. Inelastic Hinge Truss Summary": {
+      "article_id": "36020311969305",
+      "verified_at": "2026-08-26",
+      "updated_at": "2025-04-27T06:59:26Z",
+      "note": "MATCH"
+    },
+    "B-4. Inelastic Hinge General Link Summary": {
+      "article_id": "36020391511961",
+      "verified_at": "2026-08-26",
+      "updated_at": "2025-04-27T07:01:24Z",
+      "note": "MATCH (6개 성분)"
+    },
+    "B-5. Inelastic Hinge Force": {
+      "article_id": "36020436094105",
+      "verified_at": "2026-08-26",
+      "updated_at": "2025-04-27T07:05:10Z",
+      "note": "Truss/Spring Response HEAD 라벨이 서로 바뀌어 있던 것을 정정"
+    },
+    "B-6. Inelastic Hinge Deformation": {
+      "article_id": "36020548520601",
+      "verified_at": "2026-08-26",
+      "updated_at": "2025-04-27T07:07:54Z",
+      "note": "B-5와 동일한 Truss/Spring 라벨 스왑 정정"
+    },
+    "B-7. Inelastic Hinge Element Rotation": {
+      "article_id": "36020688077209",
+      "verified_at": "2026-08-26",
+      "updated_at": "2025-04-27T07:10:42Z",
+      "note": "MATCH"
+    },
+    "B-8. Inelastic Hinge Ductility Factor(D/D1)": {
+      "article_id": "36020795064089",
+      "verified_at": "2026-08-26",
+      "updated_at": "2025-04-27T07:13:40Z",
+      "note": "B-5와 동일한 Truss/Spring 라벨 스왑 정정"
+    },
+    "B-9. Inelastic Hinge Ductility Factor(D/D2)": {
+      "article_id": "36020877017497",
+      "verified_at": "2026-08-26",
+      "updated_at": "2025-04-27T07:16:33Z",
+      "note": "B-5와 동일한 Truss/Spring 라벨 스왑 정정"
+    },
+    "C-1. Stress - Heat of Hydration": {
+      "article_id": "36006059687449",
+      "verified_at": "2026-08-26",
+      "updated_at": "2025-03-31T04:28:15Z",
+      "note": "MATCH (COMP enum 19종)"
+    },
+    "C-2. Temperature - Heat of Hydration": {
+      "article_id": "36006173505433",
+      "verified_at": "2026-08-26",
+      "updated_at": "2025-03-31T04:30:09Z",
+      "note": "MATCH"
+    },
+    "C-3. Displacements - Heat of Hydration": {
+      "article_id": "36006239859225",
+      "verified_at": "2026-08-26",
+      "updated_at": "2025-03-31T04:32:24Z",
+      "note": "MATCH (COMP enum 10종)"
+    },
+    "C-4. Allowable Tensile Stress - Heat of Hydration": {
+      "article_id": "36006326138521",
+      "verified_at": "2026-08-26",
+      "updated_at": "2025-03-31T04:34:40Z",
+      "note": "MATCH"
+    },
+    "C-5. Crack Ratio - Heat of Hydration": {
+      "article_id": "36006358418713",
+      "verified_at": "2026-08-26",
+      "updated_at": "2025-03-31T04:36:50Z",
+      "note": "MATCH (Specifications 표만 HY_CRACK RATIO 오타, 스키마/예제는 정상)"
+    },
+    "D-1. Element Force Smart Graph - db/THRE": {
+      "article_id": "39236753314073",
+      "verified_at": "2026-08-26",
+      "updated_at": "2025-11-04T00:20:00Z",
+      "note": "MATCH (표의 TYPE_ELEMENT를 THIS_ELEMENT로 적은 것은 표만의 오타)"
+    },
+    "D-2. General Link Smart Graph - db/THRG": {
+      "article_id": "35992341376025",
+      "verified_at": "2026-08-26",
+      "updated_at": "2025-03-07T08:22:40Z",
+      "note": "COMP enum 표가 3개까지만 기재(누락), D-3과 교차확인해 6개 전체 유지"
+    },
+    "D-3. Inelastic Hinge Smart Graph - db/THRI": {
+      "article_id": "35992399685017",
+      "verified_at": "2026-08-26",
+      "updated_at": "2025-11-04T00:19:08Z",
+      "note": "MATCH"
+    },
+    "D-4. Seismic Devices Smart Graph - db/THRS": {
+      "article_id": "35992460196121",
+      "verified_at": "2026-08-26",
+      "updated_at": "2025-03-07T08:25:51Z",
+      "note": "공식 예제 TYPE_RES:4가 자체 enum 표에 없음(원문 모순, 오류제보 대상). Python 예제가 TYPE_RES:3으로 잘못 적혀있던 내부 불일치도 정정"
+    }
+  },
+  "23_POST_Design.md": {
+    "1. P-M Interaction Diagram": {
+      "article_id": "36021337973017",
+      "verified_at": "2026-08-26",
+      "updated_at": "2026-08-05T07:00:50Z",
+      "note": "MATCH (빈 Argument, 원문 자체가 스텁 수준)"
+    },
+    "2. Steel Code Check": {
+      "article_id": "44662732910233",
+      "verified_at": "2026-08-26",
+      "updated_at": "2026-08-05T07:37:13Z",
+      "note": "MATCH"
+    },
+    "3. Concrete Design - Beam Design Forces": {
+      "article_id": "49514295460889",
+      "verified_at": "2026-08-26",
+      "updated_at": "2026-08-05T06:55:59Z",
+      "note": "MATCH"
+    },
+    "4. Concrete Design - Column Design Forces": {
+      "article_id": "49514320078489",
+      "verified_at": "2026-08-26",
+      "updated_at": "2026-08-05T07:00:02Z",
+      "note": "MATCH"
+    },
+    "5. Concrete Design - Brace Design Forces": {
+      "article_id": "49514395318041",
+      "verified_at": "2026-08-26",
+      "updated_at": "2026-08-05T06:57:15Z",
+      "note": "MATCH (원문이 Column과 동일 예제 수치를 재사용, 정상)"
+    },
+    "6. Concrete Design - Wall Design Forces": {
+      "article_id": "49514433321881",
+      "verified_at": "2026-08-26",
+      "updated_at": "2026-08-05T07:36:47Z",
+      "note": "MATCH (STORY_NAMES 전용 파라미터 포함)"
+    },
+    "7. Steel Design - Steel Member Design Forces": {
+      "article_id": "49514496461593",
+      "verified_at": "2026-08-26",
+      "updated_at": "2026-08-05T07:36:36Z",
+      "note": "MATCH"
+    },
+    "8. SRC Design - SRC Beam Design Forces": {
+      "article_id": "49514560567961",
+      "verified_at": "2026-08-26",
+      "updated_at": "2026-08-05T07:35:48Z",
+      "note": "MATCH (My(+)/My(-) 열 순서 RC와 다름 확인)"
+    },
+    "9. SRC Design - SRC Column Design Forces": {
+      "article_id": "49514609393049",
+      "verified_at": "2026-08-26",
+      "updated_at": "2026-08-05T07:36:05Z",
+      "note": "MATCH"
+    },
+    "10. Cold Formed Design - Cold Formed Steel Member Design Forces": {
+      "article_id": "49514621265305",
+      "verified_at": "2026-08-26",
+      "updated_at": "2026-08-05T06:58:52Z",
+      "note": "MATCH"
+    }
+  },
+  "24_DB_Design.md": {
+    "1. /db/DCON - RC 설계 코드": {
+      "article_id": "35993633394969",
+      "verified_at": "2026-08-26",
+      "updated_at": "2026-07-02T07:34:53Z",
+      "note": "MATCH"
+    },
+    "2. /db/DSTL - 강재 설계 코드": {
+      "article_id": "52149417728665",
+      "verified_at": "2026-08-26",
+      "updated_at": "2026-07-21T01:25:33Z",
+      "note": "MATCH"
+    },
+    "3. /db/RCHK - 검토용 철근 입력": {
+      "article_id": "35993850335897",
+      "verified_at": "2026-08-26",
+      "updated_at": null,
+      "note": "MATCH. 비틀림/다발/종방향 철근 7개 필드(vi~xii)가 공식 스키마엔 있으나 Specifications 표엔 누락됨을 확인, 주석 추가"
+    },
+    "4. /db/LENG - 비지지 길이": {
+      "article_id": "49513511154329",
+      "verified_at": "2026-08-26",
+      "updated_at": "2026-07-02T08:03:49Z",
+      "note": "MATCH"
+    },
+    "5. /db/MEMB - 설계 부재 배정": {
+      "article_id": "49513603328793",
+      "verified_at": "2026-08-26",
+      "updated_at": "2026-07-02T08:20:18Z",
+      "note": "MATCH"
+    },
+    "6. /db/DCTL - 프레임 정의": {
+      "article_id": "49513652948377",
+      "verified_at": "2026-08-26",
+      "updated_at": "2026-07-02T08:26:59Z",
+      "note": "MATCH"
+    },
+    "7. /db/LTSR - 세장비 제한": {
+      "article_id": "49513681377689",
+      "verified_at": "2026-08-26",
+      "updated_at": "2026-07-02T08:33:33Z",
+      "note": "MATCH (원문 예제가 Assign 대신 LTSR 키를 쓴다는 기존 주석도 재확인)"
+    },
+    "8. /db/MBTP - 부재 타입 수정": {
+      "article_id": "49513816193689",
+      "verified_at": "2026-08-26",
+      "updated_at": "2026-07-02T08:52:24Z",
+      "note": "MATCH"
+    },
+    "9. /db/WMAK - 벽체 마크 설계 수정": {
+      "article_id": "49513846785817",
+      "verified_at": "2026-08-26",
+      "updated_at": "2026-07-02T08:57:40Z",
+      "note": "MATCH. JSON Schema 블록에 누락됐던 외곽 WMAK 래퍼 키 보강"
+    },
+    "10. /db/REBB - 보 철근 데이터 수정": {
+      "article_id": "49513985245849",
+      "verified_at": "2026-08-26",
+      "updated_at": "2026-07-21T02:05:12Z",
+      "note": "전면 정정: CREATE_SUB_SECTION/ELEMS 허구 필드 삭제, MAIN_BAR LAYER1/LAYER2 구조를 실제 vMAIN_BAR_TOP/BOT 배열 구조로, SKIN_BAR 중첩객체를 SKIN_BAR_NAME/NUM 평면 필드로 정정 (Request/Response 예제 자체는 원래도 정확했음)"
+    },
+    "11. /db/REBC - 기둥 철근 데이터 수정": {
+      "article_id": "49513980544793",
+      "verified_at": "2026-08-26",
+      "updated_at": "2026-07-21T02:12:24Z",
+      "note": "전면 정정: POST 전용 오기(실제 CRUD 전체 지원, 챕터 서두 안내문도 수정) + CREATE_SUB_SECTION/ELEMS/HOOK_TYPE 허구 필드 삭제 + MAIN_BAR(단일객체)→vMAIN_BAR(배열) + DO→D0(vMAIN_BAR 내부) + HOOP_TYPE 문자열→정수(1=Tied,2=Spiral) + bSAME_SPACE_END_CEN/NUM_BAR_BC_JOINT 누락 필드 보강"
+    },
+    "12. /db/REBW - 벽체 철근 데이터 수정": {
+      "article_id": "49514033006745",
+      "verified_at": "2026-08-26",
+      "updated_at": "2026-07-21T02:20:38Z",
+      "note": "전면 정정: 필드명 전체가 실제와 다름(VERTICAL_REBAR→VER_BAR, HORIZONTAL_REBAR→HOR_BAR, END_REBAR+USE_END_REBAR→END_BAR+NUM_END_BAR, BE_HORIZONTAL_REBAR→BE_HOR_BAR, BOUNDARY_ELEMENT_LENGTH→BE_LENGTH, CONCRETE_FACE_TO_CENTER_OF_REBAR.DW/DE→최상위 DW/DE, USE_MODEL_THICKNESS/THICKNESS→bUSE_MODEL_THICK/THICK), CREATE_SUB_WALL_ID/SUB_WALL_ID/STORY 허구 구조를 실제 vSTORY_KEY 배열로 정정"
+    },
+    "13. /db/REBR - 가새 철근 데이터 수정": {
+      "article_id": "59358972353817",
+      "verified_at": "2026-08-26",
+      "updated_at": "2026-08-11T23:59:34Z",
+      "note": "MATCH — 10~12절과 달리 이 절은 원래부터 정확했음(MAIN_BAR 단일객체, DO, HOOP_TYPE 문자열 Ties/Spirals, CREATE_SUB_SECTION/ELEMS 모두 실재). 10~12절의 허구 필드 오염이 이 절 구조를 오인용한 것으로 추정"
+    }
+  },
+  "25_Design_Steel_KDS41302022.md": {
+    "1. DCO": {
+      "article_id": "57365469935257",
+      "verified_at": "2026-08-26",
+      "note": "MATCH"
+    },
+    "2. DCTL": {
+      "article_id": "57365599209497",
+      "verified_at": "2026-08-26",
+      "note": "MATCH"
+    },
+    "3. LLRF": {
+      "article_id": "57365732533145",
+      "verified_at": "2026-08-26",
+      "note": "MATCH"
+    },
+    "4. LCTB": {
+      "article_id": "57366206820249",
+      "verified_at": "2026-08-26",
+      "note": "MATCH"
+    },
+    "5. SRDF": {
+      "article_id": "57369593628057",
+      "verified_at": "2026-08-26",
+      "note": "MATCH"
+    },
+    "6. SERV": {
+      "article_id": "57369714731673",
+      "verified_at": "2026-08-26",
+      "note": "MATCH"
+    },
+    "7. EQCT": {
+      "article_id": "57369505978777",
+      "verified_at": "2026-08-26",
+      "note": "MATCH"
+    },
+    "8. ULCT": {
+      "article_id": "57424449702681",
+      "verified_at": "2026-08-26",
+      "note": "MATCH"
+    },
+    "9. SUEQ": {
+      "article_id": "57369321629081",
+      "verified_at": "2026-08-26",
+      "note": "MATCH"
+    },
+    "10. CRCM": {
+      "article_id": "57371843417497",
+      "verified_at": "2026-08-26",
+      "note": "MATCH"
+    },
+    "11. HCBM": {
+      "article_id": "57367569665177",
+      "verified_at": "2026-08-26",
+      "note": "MATCH"
+    },
+    "12. LENG": {
+      "article_id": "57368323557785",
+      "verified_at": "2026-08-26",
+      "note": "MATCH"
+    },
+    "13. KFAC": {
+      "article_id": "57368572755353",
+      "verified_at": "2026-08-26",
+      "note": "MATCH"
+    },
+    "14. LTSR": {
+      "article_id": "57368629920793",
+      "verified_at": "2026-08-26",
+      "note": "MATCH"
+    },
+    "15. CMFT": {
+      "article_id": "57368834102041",
+      "verified_at": "2026-08-26",
+      "note": "MATCH"
+    },
+    "16. FMAG": {
+      "article_id": "57369103995033",
+      "verified_at": "2026-08-26",
+      "note": "MATCH"
+    },
+    "17. CBFT": {
+      "article_id": "57370057195545",
+      "verified_at": "2026-08-26",
+      "note": "MATCH"
+    },
+    "18. MBTP": {
+      "article_id": "57369329156377",
+      "verified_at": "2026-08-26",
+      "note": "MATCH"
+    },
+    "19. SLRS": {
+      "article_id": "57371787001881",
+      "verified_at": "2026-08-26",
+      "note": "MATCH"
+    },
+    "20. MLLR": {
+      "article_id": "57400611535513",
+      "verified_at": "2026-08-26",
+      "note": "MATCH"
+    },
+    "21. MEMB": {
+      "article_id": "57670595775641",
+      "verified_at": "2026-08-26",
+      "note": "MATCH"
+    },
+    "22. SMODI": {
+      "article_id": "57389316545177",
+      "verified_at": "2026-08-26",
+      "note": "MATCH"
+    },
+    "23. CODE-ANAL": {
+      "article_id": "57389469766681",
+      "verified_at": "2026-08-26",
+      "note": "MATCH. 공식 스키마(oneOf ELEMS/SECTIONS 필수)와 공식 예제(PERFORM_TYPE=ALL만 사용, 둘 다 생략)가 서로 모순되는 원문 자체 이슈 확인, 예제 기준 유지 + 주석 추가"
+    },
+    "24. CODE-TABLE": {
+      "article_id": "57389596454553",
+      "verified_at": "2026-08-26",
+      "note": "MATCH"
+    },
+    "25. CODE-REPORT": {
+      "article_id": "57389577645209",
+      "verified_at": "2026-08-26",
+      "note": "MATCH"
+    },
+    "26. DREULT": {
+      "article_id": "57390686440345",
+      "verified_at": "2026-08-26",
+      "note": "MATCH"
+    },
+    "27. TABLE": {
+      "article_id": "57474427261465",
+      "verified_at": "2026-08-26",
+      "note": "MATCH"
+    }
   }
 }

@@ -4296,6 +4296,12 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 | 4 | 단면 번호 (ELEMS/SECTIONS 중 하나) | `"SECTIONS"` | Array[Integer] | — | 조건부 |
 
 > `Argument`는 `"ELEMS"` 또는 `"SECTIONS"` 중 **정확히 하나**만 포함해야 하며(oneOf), `ELEMS` 내부에서는 `KEYS`/`TO`/`STRUCTURE_GROUP_NAME` 중 하나만 사용합니다. `PERFORM_TYPE="ALL"`이면 대상 지정 없이 전체 수행됩니다.
+>
+> ⚠️ 2026-08-26 확인 (article id `57389469766681`): 공식 JSON Schema는 최상위 `Argument`에
+> `"ELEMS"` 또는 `"SECTIONS"` 중 하나가 항상 있어야 한다고 명시(`oneOf`)하지만, 공식
+> Request 예제는 `{"Argument": {"PERFORM_TYPE": "ALL"}}`처럼 둘 다 생략한 형태입니다(원문
+> 자체의 스키마·예제 불일치). 예제가 실제 동작을 반영한다고 보고 `PERFORM_TYPE="ALL"`일 때는
+> 둘 다 생략 가능한 것으로 기술을 유지합니다.
 
 ### Request / Response JSON
 
