@@ -1780,7 +1780,7 @@ for row in result.get("DATA", []):
   "Argument": {
     "ASSIGN_TYPE": "MANUAL",
     "SELECTION_TYPE": "SELECTION",
-    "AELEM": [640, 692],
+    "ELEM_LIST": [640, 692],
     "ALLOW_SINGLE": false
   }
 }
@@ -1817,15 +1817,12 @@ for row in result.get("DATA", []):
 |-----|------|-----|-----------|--------|------|
 | 1 | 배정 타입 · 수동: `"MANUAL"` / 자동: `"AUTO"` | `"ASSIGN_TYPE"` | String | — | **Required** |
 | 2 | 선택 타입 · 전체: `"ALL"`(`ASSIGN_TYPE="AUTO"`일 때만 가능) / 선택: `"SELECTION"` | `"SELECTION_TYPE"` | String | — | **Required** |
-| 3 | 대상 요소 목록 (`SELECTION_TYPE="ALL"`이면 무시됨) | `"AELEM"` | Array | — | 조건부 **Required** |
+| 3 | 대상 요소 목록 (`SELECTION_TYPE="ALL"`이면 무시됨) | `"ELEM_LIST"` | Array | — | 조건부 **Required** |
 | 4 | 단일요소 부재 허용 여부 | `"ALLOW_SINGLE"` | Boolean | — | **Required** |
 
-> ⚠️ 2026-08-26 확인 (article id `49514964272665`): 공식 Specifications 표는 요소 목록 필드의
-> Key를 `"ELEM_LIST"`로 적어 두었으나, 실제 Request/Response Example(및 응답 바디의
-> `"AELEM"` 키)은 모두 `"AELEM"`을 사용한다. 예제가 표보다 우선하므로 `"AELEM"`으로 정정함
-> (표의 `"ELEM_LIST"`는 공식 오타로 판단, 오류제보 대상). 아울러 표의 `"SELETION_TYPE"`(C 누락)
-> 오타는 예제가 이미 `"SELECTION_TYPE"`으로 올바르며 우리 문서도 이미 그렇게 되어 있어 별도 수정
-> 불필요.
+> 참고: Request Body의 요소 목록 Key는 `"ELEM_LIST"`이지만, Response Body(및 GET 응답)에서는
+> `"AELEM"`으로 키가 바뀐다(공식 Specifications 표·Request Example·Response Example 모두 이
+> 표기로 일치). 요청과 응답의 필드명이 다른 것은 공식 원문 그대로다.
 
 ### Python Example
 
@@ -1843,7 +1840,7 @@ payload = {
     "Argument": {
         "ASSIGN_TYPE": "MANUAL",
         "SELECTION_TYPE": "SELECTION",
-        "AELEM": [640, 692],
+        "ELEM_LIST": [640, 692],
         "ALLOW_SINGLE": False
     }
 }

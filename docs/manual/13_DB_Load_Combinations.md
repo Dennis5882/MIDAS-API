@@ -51,14 +51,6 @@
 | `2` | ABS (절댓값) | ✔ | ✔ | — | — |
 | `3` | SRSS | ✔ | ✔ | ✔ | ✔ |
 
-> ⚠️ **2026-08-26 확인:** 6개 `LCOM-*` 엔드포인트 모두에 있던 읽기 전용 `"NO"`(조합 번호) 필드를
-> 삭제했다 — 6개 공식 아티클의 JSON Schema·Specifications 표·Request/Response 예제 어디에도
-> `NO`/`CombinationNumber`에 대한 근거가 전혀 없어(원문 자체에 존재하지 않는 필드), 이전 작성
-> 시점에 잘못 추가된 것으로 판단된다. 참고로 6개 아티클의 JSON Schema는 전부 `bES`/`iSERV_TYPE`/
-> `nLCOMTYPE`/`nSEISTYPE`를 포함하는 동일한 복붙 틀을 쓰고 있는데, 이는 각 아티클 자신의
-> Specifications 표·예제와 모순되는 원문 쪽 문제(대부분의 엔드포인트에 해당 필드가 실제로는
-> 없음)라 오류제보 대상으로만 관리하고 로컬 문서에는 반영하지 않았다.
-
 ---
 
 ## 1. `/db/LCOM-GEN` — Load Combinations – General
@@ -83,6 +75,7 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
+      "NO":     { "description": "CombinationNumber", "type": "integer" },
       "NAME":   { "description": "CombinationName",   "type": "string" },
       "ACTIVE": { "description": "ActiveType",         "type": "string" },
       "bCB":    { "description": "(ReadOnly) min/max cb type", "type": "boolean" },
@@ -109,12 +102,13 @@
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 조합 이름 | `"NAME"` | String | — | **Required** |
-| 2 | 활성 타입 · `"INACTIVE"` / `"ACTIVE"` | `"ACTIVE"` | String | `"ACTIVE"` | Optional |
-| 3 | 합산 방식 · `0`=Add / `1`=Envelope / `2`=ABS / `3`=SRSS | `"iTYPE"` | Integer | `0` | Optional |
-| 4 | 설명 | `"DESC"` | String | `""` | Optional |
-| 5 | 결과 타입 (읽기 전용) · `false`=General / `true`=Min/Max/All | `"bCB"` | Boolean | — | Read Only |
-| 6 | 조합 항목 배열 | `"vCOMB"` | Array | — | **Required** |
+| 1 | 조합 번호 (읽기 전용) | `"NO"` | Integer | — | Read Only |
+| 2 | 조합 이름 | `"NAME"` | String | — | **Required** |
+| 3 | 활성 타입 · `"INACTIVE"` / `"ACTIVE"` | `"ACTIVE"` | String | `"ACTIVE"` | Optional |
+| 4 | 합산 방식 · `0`=Add / `1`=Envelope / `2`=ABS / `3`=SRSS | `"iTYPE"` | Integer | `0` | Optional |
+| 5 | 설명 | `"DESC"` | String | `""` | Optional |
+| 6 | 결과 타입 (읽기 전용) · `false`=General / `true`=Min/Max/All | `"bCB"` | Boolean | — | Read Only |
+| 7 | 조합 항목 배열 | `"vCOMB"` | Array | — | **Required** |
 | — | (vCOMB) 해석 타입 | `"ANAL"` | String | — | **Required** |
 | — | (vCOMB) 하중케이스명 | `"LCNAME"` | String | — | **Required** |
 | — | (vCOMB) 계수 | `"FACTOR"` | Number | — | **Required** |
@@ -127,6 +121,7 @@
 {
   "Assign": {
     "1": {
+      "NO": 1,
       "NAME": "LC1",
       "ACTIVE": "ACTIVE",
       "bCB": false,
@@ -139,6 +134,7 @@
       ]
     },
     "2": {
+      "NO": 2,
       "NAME": "LC2",
       "ACTIVE": "ACTIVE",
       "bCB": false,
@@ -159,6 +155,7 @@
 {
   "LCOM-GEN": {
     "1": {
+      "NO": 1,
       "NAME": "LC1",
       "ACTIVE": "ACTIVE",
       "bCB": false,
@@ -189,6 +186,7 @@ HEADERS = {
 payload = {
     "Assign": {
         "1": {
+            "NO": 1,
             "NAME": "COMB_GEN_1",
             "ACTIVE": "ACTIVE",
             "bCB": False,
@@ -241,6 +239,7 @@ print("DELETE:", resp.status_code)
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
+      "NO":     { "description": "CombinationNumber",          "type": "integer" },
       "NAME":   { "description": "CombinationName",            "type": "string" },
       "ACTIVE": { "description": "ActiveType",                  "type": "string" },
       "bES":    { "description": "E (Concrete design only)",   "type": "boolean" },
@@ -268,13 +267,14 @@ print("DELETE:", resp.status_code)
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 조합 이름 | `"NAME"` | String | — | **Required** |
-| 2 | 활성 타입 · `"INACTIVE"` / `"STRENGTH"` / `"SERVICE"` | `"ACTIVE"` | String | `"ACTIVE"` | Optional |
-| 3 | 콘크리트 설계 전용 옵션 (E) | `"bES"` | Boolean | `false` | Optional |
-| 4 | 합산 방식 · `0`=Add / `1`=Envelope / `2`=ABS / `3`=SRSS | `"iTYPE"` | Integer | `0` | Optional |
-| 5 | 설명 | `"DESC"` | String | `""` | Optional |
-| 6 | 결과 타입 (읽기 전용) · `false`=General / `true`=Min/Max/All | `"bCB"` | Boolean | — | Read Only |
-| 7 | 조합 항목 배열 | `"vCOMB"` | Array | — | **Required** |
+| 1 | 조합 번호 (읽기 전용) | `"NO"` | Integer | — | Read Only |
+| 2 | 조합 이름 | `"NAME"` | String | — | **Required** |
+| 3 | 활성 타입 · `"INACTIVE"` / `"STRENGTH"` / `"SERVICE"` | `"ACTIVE"` | String | `"ACTIVE"` | Optional |
+| 4 | 콘크리트 설계 전용 옵션 (E) | `"bES"` | Boolean | `false` | Optional |
+| 5 | 합산 방식 · `0`=Add / `1`=Envelope / `2`=ABS / `3`=SRSS | `"iTYPE"` | Integer | `0` | Optional |
+| 6 | 설명 | `"DESC"` | String | `""` | Optional |
+| 7 | 결과 타입 (읽기 전용) · `false`=General / `true`=Min/Max/All | `"bCB"` | Boolean | — | Read Only |
+| 8 | 조합 항목 배열 | `"vCOMB"` | Array | — | **Required** |
 | — | (vCOMB) 해석 타입 | `"ANAL"` | String | — | **Required** |
 | — | (vCOMB) 하중케이스명 | `"LCNAME"` | String | — | **Required** |
 | — | (vCOMB) 계수 | `"FACTOR"` | Number | — | **Required** |
@@ -287,6 +287,7 @@ print("DELETE:", resp.status_code)
 {
   "Assign": {
     "1": {
+      "NO": 1,
       "NAME": "cLCB1",
       "ACTIVE": "STRENGTH",
       "bES": false,
@@ -299,6 +300,7 @@ print("DELETE:", resp.status_code)
       ]
     },
     "6": {
+      "NO": 6,
       "NAME": "cLCB2",
       "ACTIVE": "SERVICE",
       "bES": false,
@@ -320,6 +322,7 @@ print("DELETE:", resp.status_code)
 {
   "LCOM-CONC": {
     "1": {
+      "NO": 1,
       "NAME": "cLCB1",
       "ACTIVE": "STRENGTH",
       "bES": false,
@@ -350,6 +353,7 @@ HEADERS = {
 payload = {
     "Assign": {
         "1": {
+            "NO": 1,
             "NAME": "CONC_STR_1",
             "ACTIVE": "STRENGTH",     # 강도설계
             "bES": False,
@@ -363,6 +367,7 @@ payload = {
             ]
         },
         "2": {
+            "NO": 2,
             "NAME": "CONC_SRV_1",
             "ACTIVE": "SERVICE",      # 사용성 설계
             "bES": False,
@@ -409,6 +414,7 @@ for key, val in resp.json().get("LCOM-CONC", {}).items():
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
+      "NO":     { "description": "CombinationNumber",          "type": "integer" },
       "NAME":   { "description": "CombinationName",            "type": "string" },
       "ACTIVE": { "description": "ActiveType",                  "type": "string" },
       "bCB":    { "description": "(ReadOnly) min/max cb type", "type": "boolean" },
@@ -435,12 +441,13 @@ for key, val in resp.json().get("LCOM-CONC", {}).items():
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 조합 이름 | `"NAME"` | String | — | **Required** |
-| 2 | 활성 타입 · `"INACTIVE"` / `"STRENGTH"` / `"SERVICE"` | `"ACTIVE"` | String | `"ACTIVE"` | Optional |
-| 3 | 합산 방식 · `0`=Add / `1`=Envelope / `3`=SRSS | `"iTYPE"` | Integer | `0` | Optional |
-| 4 | 설명 | `"DESC"` | String | `""` | Optional |
-| 5 | 결과 타입 (읽기 전용) · `false`=General / `true`=Min/Max/All | `"bCB"` | Boolean | — | Read Only |
-| 6 | 조합 항목 배열 | `"vCOMB"` | Array | — | **Required** |
+| 1 | 조합 번호 (읽기 전용) | `"NO"` | Integer | — | Read Only |
+| 2 | 조합 이름 | `"NAME"` | String | — | **Required** |
+| 3 | 활성 타입 · `"INACTIVE"` / `"STRENGTH"` / `"SERVICE"` | `"ACTIVE"` | String | `"ACTIVE"` | Optional |
+| 4 | 합산 방식 · `0`=Add / `1`=Envelope / `3`=SRSS | `"iTYPE"` | Integer | `0` | Optional |
+| 5 | 설명 | `"DESC"` | String | `""` | Optional |
+| 6 | 결과 타입 (읽기 전용) · `false`=General / `true`=Min/Max/All | `"bCB"` | Boolean | — | Read Only |
+| 7 | 조합 항목 배열 | `"vCOMB"` | Array | — | **Required** |
 | — | (vCOMB) 해석 타입 | `"ANAL"` | String | — | **Required** |
 | — | (vCOMB) 하중케이스명 | `"LCNAME"` | String | — | **Required** |
 | — | (vCOMB) 계수 | `"FACTOR"` | Number | — | **Required** |
@@ -453,6 +460,7 @@ for key, val in resp.json().get("LCOM-CONC", {}).items():
 {
   "Assign": {
     "1": {
+      "NO": 1,
       "NAME": "sLCB1",
       "ACTIVE": "STRENGTH",
       "bCB": true,
@@ -464,6 +472,7 @@ for key, val in resp.json().get("LCOM-CONC", {}).items():
       ]
     },
     "2": {
+      "NO": 2,
       "NAME": "sLCB2",
       "ACTIVE": "SERVICE",
       "bCB": true,
@@ -484,6 +493,7 @@ for key, val in resp.json().get("LCOM-CONC", {}).items():
 {
   "LCOM-STEEL": {
     "1": {
+      "NO": 1,
       "NAME": "sLCB1",
       "ACTIVE": "STRENGTH",
       "bCB": true,
@@ -513,6 +523,7 @@ HEADERS = {
 payload = {
     "Assign": {
         "1": {
+            "NO": 1,
             "NAME": "STEEL_STR_1",
             "ACTIVE": "STRENGTH",
             "bCB": False,
@@ -524,6 +535,7 @@ payload = {
             ]
         },
         "2": {
+            "NO": 2,
             "NAME": "STEEL_STR_2",
             "ACTIVE": "STRENGTH",
             "bCB": False,
@@ -564,6 +576,7 @@ print("POST:", resp.status_code, resp.json())
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
+      "NO":     { "description": "CombinationNumber",          "type": "integer" },
       "NAME":   { "description": "CombinationName",            "type": "string" },
       "ACTIVE": { "description": "ActiveType",                  "type": "string" },
       "bCB":    { "description": "(ReadOnly) min/max cb type", "type": "boolean" },
@@ -590,12 +603,13 @@ print("POST:", resp.status_code, resp.json())
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 조합 이름 | `"NAME"` | String | — | **Required** |
-| 2 | 활성 타입 · `"INACTIVE"` / `"STRENGTH"` / `"SERVICE"` | `"ACTIVE"` | String | `"ACTIVE"` | Optional |
-| 3 | 합산 방식 · `0`=Add / `1`=Envelope / `3`=SRSS | `"iTYPE"` | Integer | `0` | Optional |
-| 4 | 설명 | `"DESC"` | String | `""` | Optional |
-| 5 | 결과 타입 (읽기 전용) | `"bCB"` | Boolean | — | Read Only |
-| 6 | 조합 항목 배열 | `"vCOMB"` | Array | — | **Required** |
+| 1 | 조합 번호 (읽기 전용) | `"NO"` | Integer | — | Read Only |
+| 2 | 조합 이름 | `"NAME"` | String | — | **Required** |
+| 3 | 활성 타입 · `"INACTIVE"` / `"STRENGTH"` / `"SERVICE"` | `"ACTIVE"` | String | `"ACTIVE"` | Optional |
+| 4 | 합산 방식 · `0`=Add / `1`=Envelope / `3`=SRSS | `"iTYPE"` | Integer | `0` | Optional |
+| 5 | 설명 | `"DESC"` | String | `""` | Optional |
+| 6 | 결과 타입 (읽기 전용) | `"bCB"` | Boolean | — | Read Only |
+| 7 | 조합 항목 배열 | `"vCOMB"` | Array | — | **Required** |
 | — | (vCOMB) 해석 타입 | `"ANAL"` | String | — | **Required** |
 | — | (vCOMB) 하중케이스명 | `"LCNAME"` | String | — | **Required** |
 | — | (vCOMB) 계수 | `"FACTOR"` | Number | — | **Required** |
@@ -608,6 +622,7 @@ print("POST:", resp.status_code, resp.json())
 {
   "Assign": {
     "1": {
+      "NO": 1,
       "NAME": "rLCB1",
       "ACTIVE": "STRENGTH",
       "bCB": false,
@@ -618,6 +633,7 @@ print("POST:", resp.status_code, resp.json())
       ]
     },
     "2": {
+      "NO": 2,
       "NAME": "rLCB2",
       "ACTIVE": "SERVICE",
       "bCB": false,
@@ -637,6 +653,7 @@ print("POST:", resp.status_code, resp.json())
 {
   "LCOM-SRC": {
     "1": {
+      "NO": 1,
       "NAME": "rLCB1",
       "ACTIVE": "STRENGTH",
       "bCB": false,
@@ -665,6 +682,7 @@ HEADERS = {
 payload = {
     "Assign": {
         "1": {
+            "NO": 1,
             "NAME": "SRC_STR_1",
             "ACTIVE": "STRENGTH",
             "bCB": False,
@@ -684,6 +702,7 @@ print("POST:", resp.status_code, resp.json())
 update_payload = {
     "Assign": {
         "1": {
+            "NO": 1,
             "NAME": "SRC_STR_1_UPD",
             "ACTIVE": "STRENGTH",
             "bCB": False,
@@ -727,6 +746,7 @@ print("PUT:", resp.status_code, resp.json())
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
+      "NO":     { "description": "CombinationNumber",          "type": "integer" },
       "NAME":   { "description": "CombinationName",            "type": "string" },
       "ACTIVE": { "description": "ActiveType",                  "type": "string" },
       "bCB":    { "description": "(ReadOnly) min/max cb type", "type": "boolean" },
@@ -753,12 +773,13 @@ print("PUT:", resp.status_code, resp.json())
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 조합 이름 | `"NAME"` | String | — | **Required** |
-| 2 | 활성 타입 · `"INACTIVE"` / `"STRENGTH"` / `"SERVICE"` | `"ACTIVE"` | String | `"ACTIVE"` | Optional |
-| 3 | 합산 방식 · `0`=Add / `1`=Envelope / `3`=SRSS | `"iTYPE"` | Integer | `0` | Optional |
-| 4 | 설명 | `"DESC"` | String | `""` | Optional |
-| 5 | 결과 타입 (읽기 전용) | `"bCB"` | Boolean | — | Read Only |
-| 6 | 조합 항목 배열 | `"vCOMB"` | Array | — | **Required** |
+| 1 | 조합 번호 (읽기 전용) | `"NO"` | Integer | — | Read Only |
+| 2 | 조합 이름 | `"NAME"` | String | — | **Required** |
+| 3 | 활성 타입 · `"INACTIVE"` / `"STRENGTH"` / `"SERVICE"` | `"ACTIVE"` | String | `"ACTIVE"` | Optional |
+| 4 | 합산 방식 · `0`=Add / `1`=Envelope / `3`=SRSS | `"iTYPE"` | Integer | `0` | Optional |
+| 5 | 설명 | `"DESC"` | String | `""` | Optional |
+| 6 | 결과 타입 (읽기 전용) | `"bCB"` | Boolean | — | Read Only |
+| 7 | 조합 항목 배열 | `"vCOMB"` | Array | — | **Required** |
 | — | (vCOMB) 해석 타입 | `"ANAL"` | String | — | **Required** |
 | — | (vCOMB) 하중케이스명 | `"LCNAME"` | String | — | **Required** |
 | — | (vCOMB) 계수 | `"FACTOR"` | Number | — | **Required** |
@@ -771,6 +792,7 @@ print("PUT:", resp.status_code, resp.json())
 {
   "Assign": {
     "1": {
+      "NO": 1,
       "NAME": "scLCB1",
       "ACTIVE": "STRENGTH",
       "bCB": false,
@@ -782,6 +804,7 @@ print("PUT:", resp.status_code, resp.json())
       ]
     },
     "2": {
+      "NO": 2,
       "NAME": "scLCB2",
       "ACTIVE": "SERVICE",
       "bCB": false,
@@ -802,6 +825,7 @@ print("PUT:", resp.status_code, resp.json())
 {
   "LCOM-STLCOMP": {
     "1": {
+      "NO": 1,
       "NAME": "scLCB1",
       "ACTIVE": "STRENGTH",
       "bCB": false,
@@ -831,6 +855,7 @@ HEADERS = {
 payload = {
     "Assign": {
         "1": {
+            "NO": 1,
             "NAME": "COMP_STR_1",
             "ACTIVE": "STRENGTH",
             "bCB": False,
@@ -842,6 +867,7 @@ payload = {
             ]
         },
         "2": {
+            "NO": 2,
             "NAME": "COMP_SRV_1",
             "ACTIVE": "SERVICE",
             "bCB": False,
@@ -887,6 +913,7 @@ for key, val in resp.json().get("LCOM-STLCOMP", {}).items():
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
+      "NO":     { "description": "CombinationNumber",          "type": "integer" },
       "NAME":   { "description": "CombinationName",            "type": "string" },
       "ACTIVE": { "description": "ActiveType",                  "type": "string" },
       "bCB":    { "description": "(ReadOnly) min/max cb type", "type": "boolean" },
@@ -913,12 +940,13 @@ for key, val in resp.json().get("LCOM-STLCOMP", {}).items():
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 조합 이름 | `"NAME"` | String | — | **Required** |
-| 2 | 활성 타입 · `"INACTIVE"` / `"ACTIVE"` | `"ACTIVE"` | String | `"ACTIVE"` | Optional |
-| 3 | 합산 방식 · `0`=Add / `1`=Envelope / `3`=SRSS | `"iTYPE"` | Integer | `0` | Optional |
-| 4 | 설명 | `"DESC"` | String | `""` | Optional |
-| 5 | 결과 타입 (읽기 전용) | `"bCB"` | Boolean | — | Read Only |
-| 6 | 조합 항목 배열 | `"vCOMB"` | Array | — | **Required** |
+| 1 | 조합 번호 (읽기 전용) | `"NO"` | Integer | — | Read Only |
+| 2 | 조합 이름 | `"NAME"` | String | — | **Required** |
+| 3 | 활성 타입 · `"INACTIVE"` / `"ACTIVE"` | `"ACTIVE"` | String | `"ACTIVE"` | Optional |
+| 4 | 합산 방식 · `0`=Add / `1`=Envelope / `3`=SRSS | `"iTYPE"` | Integer | `0` | Optional |
+| 5 | 설명 | `"DESC"` | String | `""` | Optional |
+| 6 | 결과 타입 (읽기 전용) | `"bCB"` | Boolean | — | Read Only |
+| 7 | 조합 항목 배열 | `"vCOMB"` | Array | — | **Required** |
 | — | (vCOMB) 해석 타입 | `"ANAL"` | String | — | **Required** |
 | — | (vCOMB) 하중케이스명 | `"LCNAME"` | String | — | **Required** |
 | — | (vCOMB) 계수 | `"FACTOR"` | Number | — | **Required** |
@@ -931,6 +959,7 @@ for key, val in resp.json().get("LCOM-STLCOMP", {}).items():
 {
   "Assign": {
     "1": {
+      "NO": 1,
       "NAME": "S1",
       "ACTIVE": "ACTIVE",
       "bCB": false,
@@ -942,6 +971,7 @@ for key, val in resp.json().get("LCOM-STLCOMP", {}).items():
       ]
     },
     "2": {
+      "NO": 2,
       "NAME": "S2",
       "ACTIVE": "ACTIVE",
       "bCB": false,
@@ -962,6 +992,7 @@ for key, val in resp.json().get("LCOM-STLCOMP", {}).items():
 {
   "LCOM-SEISMIC": {
     "1": {
+      "NO": 1,
       "NAME": "S1",
       "ACTIVE": "ACTIVE",
       "bCB": false,
@@ -992,6 +1023,7 @@ HEADERS = {
 payload = {
     "Assign": {
         "1": {
+            "NO": 1,
             "NAME": "SEIS_1",
             "ACTIVE": "ACTIVE",
             "bCB": False,
@@ -1004,6 +1036,7 @@ payload = {
             ]
         },
         "2": {
+            "NO": 2,
             "NAME": "SEIS_2",
             "ACTIVE": "ACTIVE",
             "bCB": False,
@@ -1406,7 +1439,7 @@ HEADERS = {
 gen_payload = {
     "Assign": {
         "1": {
-            "NAME": "GEN_ULS_1",
+            "NO": 1, "NAME": "GEN_ULS_1",
             "ACTIVE": "ACTIVE", "bCB": False, "iTYPE": 0,
             "DESC": "ULS: 1.35D + 1.5L",
             "vCOMB": [
@@ -1415,7 +1448,7 @@ gen_payload = {
             ]
         },
         "2": {
-            "NAME": "GEN_SLS_1",
+            "NO": 2, "NAME": "GEN_SLS_1",
             "ACTIVE": "ACTIVE", "bCB": False, "iTYPE": 0,
             "DESC": "SLS: 1.0D + 1.0L",
             "vCOMB": [
@@ -1432,7 +1465,7 @@ print(f"STEP1 LCOM-GEN: {r1.status_code}")
 stlcomp_payload = {
     "Assign": {
         "1": {
-            "NAME": "COMP_STR_I",
+            "NO": 1, "NAME": "COMP_STR_I",
             "ACTIVE": "STRENGTH", "bCB": False, "iTYPE": 0,
             "DESC": "AASHTO Strength I",
             "vCOMB": [
@@ -1441,7 +1474,7 @@ stlcomp_payload = {
             ]
         },
         "2": {
-            "NAME": "COMP_SRV_I",
+            "NO": 2, "NAME": "COMP_SRV_I",
             "ACTIVE": "SERVICE", "bCB": False, "iTYPE": 0,
             "DESC": "AASHTO Service I",
             "vCOMB": [
@@ -1458,7 +1491,7 @@ print(f"STEP2 LCOM-STLCOMP: {r2.status_code}")
 seismic_payload = {
     "Assign": {
         "1": {
-            "NAME": "SEIS_EQ_X",
+            "NO": 1, "NAME": "SEIS_EQ_X",
             "ACTIVE": "ACTIVE", "bCB": False, "iTYPE": 0,
             "DESC": "1.0D + 1.0EQ_X + 0.3EQ_Y",
             "vCOMB": [
@@ -1468,7 +1501,7 @@ seismic_payload = {
             ]
         },
         "2": {
-            "NAME": "SEIS_SRSS",
+            "NO": 2, "NAME": "SEIS_SRSS",
             "ACTIVE": "ACTIVE", "bCB": False, "iTYPE": 3,  # SRSS
             "DESC": "SRSS(RX, RY, RZ)",
             "vCOMB": [

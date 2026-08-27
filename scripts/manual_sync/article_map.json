@@ -1507,38 +1507,38 @@
     "1. /db/LCOM-GEN — Load Combinations - General": {
       "article_id": "35990806887065",
       "article_title": "Load Combinations - General",
-      "verified_at": "2026-08-26",
-      "note": "읽기 전용 \"NO\"(조합 번호) 필드가 원문(스키마/표/예제 전부)에 근거 없어 삭제, 표 번호 재정렬"
+      "verified_at": "2026-08-27",
+      "note": "⚠️ 2026-08-26에 읽기 전용 \"NO\"(조합 번호) 필드를 \"원문에 근거 없다\"며 삭제했던 것을 2026-08-27 라이브 재확인으로 원복 — 실제로는 6개 아티클 전부 스키마·표·예제에 NO가 존재함(2026-08-26 당시 추출 실수)"
     },
     "2. /db/LCOM-CONC — Load Combinations - Concrete Design": {
       "article_id": "35990864052249",
       "article_title": "Load Combinations - Concrete Design",
-      "verified_at": "2026-08-26",
-      "note": "\"NO\" 필드 삭제. 적용 제품 범위 정정 — 엔드포인트 전체가 아니라 bES 필드만 Civil NX 전용(원문 아이콘이 그 필드에만 부착 확인)"
+      "verified_at": "2026-08-27",
+      "note": "\"NO\" 필드 원복(위 1번과 동일 사유). 적용 제품 범위 정정은 유효 — 엔드포인트 전체가 아니라 bES 필드만 Civil NX 전용(원문 아이콘이 그 필드에만 부착 확인)"
     },
     "3. /db/LCOM-STEEL — Load Combinations - Steel Design": {
       "article_id": "35990929861913",
       "article_title": "Load Combinations - Steel Design",
-      "verified_at": "2026-08-26",
-      "note": "\"NO\" 필드 삭제. iTYPE에 ABS 없음(0/1/3만) 재확인, 로컬 이미 정확"
+      "verified_at": "2026-08-27",
+      "note": "\"NO\" 필드 원복(위 1번과 동일 사유). iTYPE에 ABS 없음(0/1/3만) 재확인, 로컬 이미 정확"
     },
     "4. /db/LCOM-SRC — Load Combinations - SRC Design": {
       "article_id": "35991038731161",
       "article_title": "Load Combinations - SRC Design",
-      "verified_at": "2026-08-26",
-      "note": "\"NO\" 필드 삭제"
+      "verified_at": "2026-08-27",
+      "note": "\"NO\" 필드 원복(위 1번과 동일 사유)"
     },
     "5. /db/LCOM-STLCOMP — Load Combinations - Composite Steel Girder Design": {
       "article_id": "35991080923033",
       "article_title": "Load Combinations - Composite Steel Girder Design",
-      "verified_at": "2026-08-26",
-      "note": "\"NO\" 필드 삭제. \"Civil NX 전용(교량 설계)\" 표기는 이 아티클에 근거 없어(아이콘·문구 전무) 추정 표기임을 주석으로 명시"
+      "verified_at": "2026-08-27",
+      "note": "\"NO\" 필드 원복(위 1번과 동일 사유). \"Civil NX 전용(교량 설계)\" 표기는 이 아티클에 근거 없어(아이콘·문구 전무) 추정 표기임을 주석으로 명시 — 이 부분은 유효"
     },
     "6. /db/LCOM-SEISMIC — Load Combinations - Seismic Design": {
       "article_id": "35991142266265",
       "article_title": "Load Combinations - Seismic Design",
-      "verified_at": "2026-08-26",
-      "note": "\"NO\" 필드 삭제"
+      "verified_at": "2026-08-27",
+      "note": "\"NO\" 필드 원복(위 1번과 동일 사유)"
     },
     "7. /db/CUTL — Cutting Line": {
       "article_id": "35991257189017",
@@ -1667,8 +1667,8 @@
     "13. /ope/MEMB — Member Assignment": {
       "article_id": "49514964272665",
       "article_title": "Member Assignment",
-      "verified_at": "2026-08-26",
-      "note": "요청 필드 ELEM_LIST→AELEM 정정(원문 표 오타, 예제·응답 모두 AELEM). SELETION_TYPE 표 오타는 로컬이 이미 정확해 조치 불필요"
+      "verified_at": "2026-08-27",
+      "note": "⚠️ 2026-08-26에 요청 필드를 ELEM_LIST→AELEM으로 잘못 정정했던 것을 2026-08-27 라이브 재확인으로 원복 — 실제로는 Request Example/Specifications 표 모두 ELEM_LIST가 맞고, AELEM은 Response Body 전용 키(요청/응답 필드명이 다른 것 자체는 원문 그대로). SELETION_TYPE 표 오타는 로컬이 이미 정확해 조치 불필요"
     },
     "14. /ope/GUSTFACTOR — Gust Factor Calculator": {
       "article_id": "59050520760473",
