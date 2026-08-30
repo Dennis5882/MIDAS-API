@@ -24,37 +24,37 @@
 
 | No. | Endpoint | 기능 | Active Methods |
 |-----|----------|------|----------------|
-| 1 | [`DSRC`](#1-designsrcaik-src2kdsrc--src-설계-코드) | SRC 설계 코드 | `PUT` · `DELETE` |
-| 2 | [`DCO`](#2-designsrcaik-src2kdco--설계-코드-옵션) | 설계 코드 옵션 | `PUT` · `GET` · `DELETE` |
-| 3 | [`DCTL`](#3-designsrcaik-src2kdctl--프레임-정의) | 프레임 정의 | `GET` · `PUT` · `DELETE` |
-| 4 | [`LLRF`](#4-designsrcaik-src2kllrf--활하중-저감계수) | 활하중 저감계수 | `GET` · `PUT` · `DELETE` |
-| 5 | [`LCTB`](#5-designsrcaik-src2klctb--비선형-하중케이스-하중기여) | 비선형 하중케이스 하중기여 | `GET` · `DELETE` |
-| 6 | [`LENG`](#6-designsrcaik-src2kleng--비지지-길이l-lb) | 비지지 길이(L, Lb) | `POST` · `GET` · `PUT` · `DELETE` |
-| 7 | [`KFAC`](#7-designsrcaik-src2kkfac--유효좌굴길이계수k) | 유효좌굴길이계수(K) | `POST` · `GET` · `PUT` · `DELETE` |
-| 8 | [`LTSR`](#8-designsrcaik-src2kltsr--세장비-제한) | 세장비 제한 | `POST` · `GET` · `PUT` · `DELETE` |
-| 9 | [`CMFT`](#9-designsrcaik-src2kcmft--등가모멘트-보정계수cm) | 등가모멘트 보정계수(Cm) | `POST` · `GET` · `PUT` · `DELETE` |
-| 10 | [`FMAG`](#10-designsrcaik-src2kfmag--모멘트-확대계수b1δb-b2δs) | 모멘트 확대계수(B1/δb, B2/δs) | `POST` · `GET` · `PUT` · `DELETE` |
-| 11 | [`MLLR`](#11-designsrcaik-src2kmllr--활하중-저감계수-수정) | 활하중 저감계수 수정 | `POST` · `GET` · `PUT` · `DELETE` |
-| 12 | [`SUEQ`](#12-designsrcaik-src2ksueq--지진-스케일업-계수) | 지진 스케일업 계수 | `POST` · `GET` · `PUT` · `DELETE` |
-| 13 | [`MBTP`](#13-designsrcaik-src2kmbtp--부재-타입-수정) | 부재 타입 수정 | `POST` · `GET` · `PUT` · `DELETE` |
-| 14 | [`EQCT`](#14-designsrcaik-src2keqct--지진-하중조합-타입) | 지진 하중조합 타입 | `POST` · `GET` · `PUT` · `DELETE` |
-| 15 | [`BC-ANAL`](#15-designsrcaik-src2kbc-anal--src-보-검토-수행) | SRC 보 검토 수행 | `POST` |
-| 16 | [`BC-TABLE`](#16-designsrcaik-src2kbc-table--src-보-검토-테이블) | SRC 보 검토 테이블 | `POST` |
-| 17 | [`BC-REPORT`](#17-designsrcaik-src2kbc-report--src-보-검토-리포트) | SRC 보 검토 리포트 | `POST` |
-| 18 | [`CC-ANAL`](#18-designsrcaik-src2kcc-anal--src-기둥-검토-수행) | SRC 기둥 검토 수행 | `POST` |
-| 19 | [`CC-TABLE`](#19-designsrcaik-src2kcc-table--src-기둥-검토-테이블) | SRC 기둥 검토 테이블 | `POST` |
-| 20 | [`CC-REPORT`](#20-designsrcaik-src2kcc-report--src-기둥-검토-리포트) | SRC 기둥 검토 리포트 | `POST` |
-| 21 | [`OCHECK`](#21-designsrcaik-src2kocheck--src-최적-설계) | SRC 최적 설계 | `POST` |
-| 22 | [`TABLE` (보)](#22-designsrcaik-src2ktable--src-보-설계력) | SRC 보 설계력 | `POST` |
-| 23 | [`TABLE` (기둥)](#23-designsrcaik-src2ktable--src-기둥-설계력) | SRC 기둥 설계력 | `POST` |
-| 24 | [`MATD`](#24-designsrcaik-src2kmatd--src-재료-수정) | SRC 재료 수정 | `GET` · `PUT` · `DELETE` |
-| 25 | [`MCRD`](#25-designsrcaik-src2kmcrd--src-기둥-단면-데이터-수정) | SRC 기둥 단면 데이터 수정 | `POST` · `GET` · `PUT` · `DELETE` |
-| 26 | [`MEMB`](#26-designsrcaik-src2kmemb--부재-배정) | 부재 배정 | `GET` · `PUT` · `DELETE` |
-| 27 | [`MRBD`](#27-designsrcaik-src2kmrbd--src-보-단면-데이터-수정) | SRC 보 단면 데이터 수정 | `POST` · `GET` · `PUT` · `DELETE` |
+| 1 | [`DSRC`](#1-designsrcaik-src2kdsrc--src-design-code-src-설계-코드) | SRC 설계 코드 | `PUT` · `DELETE` |
+| 2 | [`DCO`](#2-designsrcaik-src2kdco--design-code-option-설계-코드-옵션) | 설계 코드 옵션 | `PUT` · `GET` · `DELETE` |
+| 3 | [`DCTL`](#3-designsrcaik-src2kdctl--definition-of-frame-프레임-정의) | 프레임 정의 | `GET` · `PUT` · `DELETE` |
+| 4 | [`LLRF`](#4-designsrcaik-src2kllrf--live-load-reduction-factor-활하중-저감계수) | 활하중 저감계수 | `GET` · `PUT` · `DELETE` |
+| 5 | [`LCTB`](#5-designsrcaik-src2klctb--load-contribution-for-nonlinear-load-case-비선형-하중케이스-하중기여) | 비선형 하중케이스 하중기여 | `GET` · `DELETE` |
+| 6 | [`LENG`](#6-designsrcaik-src2kleng--unbraced-length-l-lb-비지지-길이) | 비지지 길이(L, Lb) | `POST` · `GET` · `PUT` · `DELETE` |
+| 7 | [`KFAC`](#7-designsrcaik-src2kkfac--effective-length-factor-k-유효좌굴길이계수) | 유효좌굴길이계수(K) | `POST` · `GET` · `PUT` · `DELETE` |
+| 8 | [`LTSR`](#8-designsrcaik-src2kltsr--limiting-slenderness-ratio-세장비-제한) | 세장비 제한 | `POST` · `GET` · `PUT` · `DELETE` |
+| 9 | [`CMFT`](#9-designsrcaik-src2kcmft--equivalent-moment-correction-factorcm-등가모멘트-보정계수) | 등가모멘트 보정계수(Cm) | `POST` · `GET` · `PUT` · `DELETE` |
+| 10 | [`FMAG`](#10-designsrcaik-src2kfmag--moment-magnifierb1delta_b-b2delta_s-모멘트-확대계수) | 모멘트 확대계수(B1/δb, B2/δs) | `POST` · `GET` · `PUT` · `DELETE` |
+| 11 | [`MLLR`](#11-designsrcaik-src2kmllr--modify-live-load-reduction-factor-활하중-저감계수-수정) | 활하중 저감계수 수정 | `POST` · `GET` · `PUT` · `DELETE` |
+| 12 | [`SUEQ`](#12-designsrcaik-src2ksueq--scale-up-factor-for-earthquake-지진-스케일업-계수) | 지진 스케일업 계수 | `POST` · `GET` · `PUT` · `DELETE` |
+| 13 | [`MBTP`](#13-designsrcaik-src2kmbtp--modify-member-type-부재-타입-수정) | 부재 타입 수정 | `POST` · `GET` · `PUT` · `DELETE` |
+| 14 | [`EQCT`](#14-designsrcaik-src2keqct--seismic-load-combination-type-지진-하중조합-타입) | 지진 하중조합 타입 | `POST` · `GET` · `PUT` · `DELETE` |
+| 15 | [`BC-ANAL`](#15-designsrcaik-src2kbc-anal--src-beam-checking-perform-src-보-검토-수행) | SRC 보 검토 수행 | `POST` |
+| 16 | [`BC-TABLE`](#16-designsrcaik-src2kbc-table--src-beam-checking-table-src-보-검토-테이블) | SRC 보 검토 테이블 | `POST` |
+| 17 | [`BC-REPORT`](#17-designsrcaik-src2kbc-report--src-beam-checking-report-src-보-검토-리포트) | SRC 보 검토 리포트 | `POST` |
+| 18 | [`CC-ANAL`](#18-designsrcaik-src2kcc-anal--src-column-checking-perform-src-기둥-검토-수행) | SRC 기둥 검토 수행 | `POST` |
+| 19 | [`CC-TABLE`](#19-designsrcaik-src2kcc-table--src-column-checking-table-src-기둥-검토-테이블) | SRC 기둥 검토 테이블 | `POST` |
+| 20 | [`CC-REPORT`](#20-designsrcaik-src2kcc-report--src-column-checking-report-src-기둥-검토-리포트) | SRC 기둥 검토 리포트 | `POST` |
+| 21 | [`OCHECK`](#21-designsrcaik-src2kocheck--src-optimal-design-src-최적-설계) | SRC 최적 설계 | `POST` |
+| 22 | [`TABLE` (보)](#22-designsrcaik-src2ktable--src-beam-design-forces-src-보-설계력) | SRC 보 설계력 | `POST` |
+| 23 | [`TABLE` (기둥)](#23-designsrcaik-src2ktable--src-column-design-forces-src-기둥-설계력) | SRC 기둥 설계력 | `POST` |
+| 24 | [`MATD`](#24-designsrcaik-src2kmatd--modify-src-material-src-재료-수정) | SRC 재료 수정 | `GET` · `PUT` · `DELETE` |
+| 25 | [`MCRD`](#25-designsrcaik-src2kmcrd--modify-src-column-section-data-src-기둥-단면-데이터-수정) | SRC 기둥 단면 데이터 수정 | `POST` · `GET` · `PUT` · `DELETE` |
+| 26 | [`MEMB`](#26-designsrcaik-src2kmemb--member-assignment-부재-배정) | 부재 배정 | `GET` · `PUT` · `DELETE` |
+| 27 | [`MRBD`](#27-designsrcaik-src2kmrbd--modify-src-beam-section-data-src-보-단면-데이터-수정) | SRC 보 단면 데이터 수정 | `POST` · `GET` · `PUT` · `DELETE` |
 
 ---
 
-## 1. `DESIGN/SRC/AIK-SRC2K/DSRC` — SRC 설계 코드
+## 1. `DESIGN/SRC/AIK-SRC2K/DSRC` — SRC Design Code (SRC 설계 코드)
 
 > **기능:** SRC 설계 코드(AIK-SRC2K)를 설정합니다.
 
@@ -165,7 +165,7 @@ res.raise_for_status()
 
 ---
 
-## 2. `DESIGN/SRC/AIK-SRC2K/DCO` — 설계 코드 옵션
+## 2. `DESIGN/SRC/AIK-SRC2K/DCO` — Design Code Option (설계 코드 옵션)
 
 > **기능:** SRC 설계 코드 옵션(내진 적용 등 전역 설계 옵션)을 설정합니다.
 
@@ -294,7 +294,7 @@ print(got.json())
 
 ---
 
-## 3. `DESIGN/SRC/AIK-SRC2K/DCTL` — 프레임 정의
+## 3. `DESIGN/SRC/AIK-SRC2K/DCTL` — Definition of Frame (프레임 정의)
 
 > **기능:** 설계용 프레임(무/유측 이동, 자동 K 산정 등)을 정의합니다.
 
@@ -471,7 +471,7 @@ print(got.json())
 
 ---
 
-## 4. `DESIGN/SRC/AIK-SRC2K/LLRF` — 활하중 저감계수
+## 4. `DESIGN/SRC/AIK-SRC2K/LLRF` — Live Load Reduction Factor (활하중 저감계수)
 
 > **기능:** 활하중 저감계수(부재 지지 층수/영향면적 기반)를 설정합니다.
 
@@ -768,7 +768,7 @@ print(got.json())
 
 ---
 
-## 5. `DESIGN/SRC/AIK-SRC2K/LCTB` — 비선형 하중케이스 하중기여
+## 5. `DESIGN/SRC/AIK-SRC2K/LCTB` — Load Contribution for Nonlinear Load Case (비선형 하중케이스 하중기여)
 
 > **기능:** 비선형 하중케이스에 대한 하중 기여(Load Contribution)를 설정합니다.
 
@@ -992,7 +992,7 @@ print(got.json())
 
 ---
 
-## 6. `DESIGN/SRC/AIK-SRC2K/LENG` — 비지지 길이(L, Lb)
+## 6. `DESIGN/SRC/AIK-SRC2K/LENG` — Unbraced Length (L, Lb) (비지지 길이)
 
 > **기능:** 부재별 비지지 길이(Ly, Lz, Lb)를 설정합니다.
 
@@ -1141,7 +1141,7 @@ print(got.json())
 
 ---
 
-## 7. `DESIGN/SRC/AIK-SRC2K/KFAC` — 유효좌굴길이계수(K)
+## 7. `DESIGN/SRC/AIK-SRC2K/KFAC` — Effective Length Factor (K) (유효좌굴길이계수)
 
 > **기능:** 부재별 유효좌굴길이계수(Ky, Kz)를 설정합니다.
 
@@ -1287,7 +1287,7 @@ print(got.json())
 
 ---
 
-## 8. `DESIGN/SRC/AIK-SRC2K/LTSR` — 세장비 제한
+## 8. `DESIGN/SRC/AIK-SRC2K/LTSR` — Limiting Slenderness Ratio (세장비 제한)
 
 > **기능:** 부재별 압축/인장 세장비 제한값을 설정합니다.
 
@@ -1437,7 +1437,7 @@ print(got.json())
 
 ---
 
-## 9. `DESIGN/SRC/AIK-SRC2K/CMFT` — 등가모멘트 보정계수(Cm)
+## 9. `DESIGN/SRC/AIK-SRC2K/CMFT` — Equivalent Moment Correction Factor(Cm) (등가모멘트 보정계수)
 
 > **기능:** 부재별 등가모멘트 보정계수(Cm)를 설정합니다.
 
@@ -1580,7 +1580,7 @@ print(got.json())
 
 ---
 
-## 10. `DESIGN/SRC/AIK-SRC2K/FMAG` — 모멘트 확대계수(B1/δb, B2/δs)
+## 10. `DESIGN/SRC/AIK-SRC2K/FMAG` — Moment Magnifier(B1/Delta_b, B2/Delta_s) (모멘트 확대계수)
 
 > **기능:** 부재별 모멘트 확대계수(B1/δb, B2/δs)를 설정합니다.
 
@@ -1735,7 +1735,7 @@ print(got.json())
 
 ---
 
-## 11. `DESIGN/SRC/AIK-SRC2K/MLLR` — 활하중 저감계수 수정
+## 11. `DESIGN/SRC/AIK-SRC2K/MLLR` — Modify Live Load Reduction Factor (활하중 저감계수 수정)
 
 > **기능:** 부재별 활하중 저감계수를 수정합니다.
 
@@ -1906,7 +1906,7 @@ print(got.json())
 
 ---
 
-## 12. `DESIGN/SRC/AIK-SRC2K/SUEQ` — 지진 스케일업 계수
+## 12. `DESIGN/SRC/AIK-SRC2K/SUEQ` — Scale up Factor for Earthquake (지진 스케일업 계수)
 
 > **기능:** 지진하중에 대한 스케일업 계수를 설정합니다.
 
@@ -2079,7 +2079,7 @@ print(got.json())
 
 ---
 
-## 13. `DESIGN/SRC/AIK-SRC2K/MBTP` — 부재 타입 수정
+## 13. `DESIGN/SRC/AIK-SRC2K/MBTP` — Modify Member Type (부재 타입 수정)
 
 > **기능:** 부재의 설계 타입(보/기둥 등)을 수정합니다.
 
@@ -2213,7 +2213,7 @@ print(got.json())
 
 ---
 
-## 14. `DESIGN/SRC/AIK-SRC2K/EQCT` — 지진 하중조합 타입
+## 14. `DESIGN/SRC/AIK-SRC2K/EQCT` — Seismic Load Combination Type (지진 하중조합 타입)
 
 > **기능:** 지진 하중조합 타입을 설정합니다.
 
@@ -2343,7 +2343,7 @@ print(got.json())
 
 ---
 
-## 15. `DESIGN/SRC/AIK-SRC2K/BC-ANAL` — SRC 보 검토 수행
+## 15. `DESIGN/SRC/AIK-SRC2K/BC-ANAL` — SRC Beam Checking Perform (SRC 보 검토 수행)
 
 > **기능:** SRC 보 검토(설계 계산)를 수행합니다. POST 전용 액션입니다.
 
@@ -2502,7 +2502,7 @@ print(res.json())
 
 ---
 
-## 16. `DESIGN/SRC/AIK-SRC2K/BC-TABLE` — SRC 보 검토 테이블
+## 16. `DESIGN/SRC/AIK-SRC2K/BC-TABLE` — SRC Beam Checking Table (SRC 보 검토 테이블)
 
 > **기능:** SRC 보 검토 결과 테이블(HEAD/DATA)을 조회합니다.
 
@@ -3012,7 +3012,7 @@ print(res.json())
 
 ---
 
-## 17. `DESIGN/SRC/AIK-SRC2K/BC-REPORT` — SRC 보 검토 리포트
+## 17. `DESIGN/SRC/AIK-SRC2K/BC-REPORT` — SRC Beam Checking Report (SRC 보 검토 리포트)
 
 > **기능:** SRC 보 검토 리포트를 생성/조회합니다.
 
@@ -3231,7 +3231,7 @@ print(res.json())
 
 ---
 
-## 18. `DESIGN/SRC/AIK-SRC2K/CC-ANAL` — SRC 기둥 검토 수행
+## 18. `DESIGN/SRC/AIK-SRC2K/CC-ANAL` — SRC Column Checking Perform (SRC 기둥 검토 수행)
 
 > **기능:** SRC 기둥 검토(설계 계산)를 수행합니다. POST 전용 액션입니다.
 
@@ -3390,7 +3390,7 @@ print(res.json())
 
 ---
 
-## 19. `DESIGN/SRC/AIK-SRC2K/CC-TABLE` — SRC 기둥 검토 테이블
+## 19. `DESIGN/SRC/AIK-SRC2K/CC-TABLE` — SRC Column Checking Table (SRC 기둥 검토 테이블)
 
 > **기능:** SRC 기둥 검토 결과 테이블(HEAD/DATA)을 조회합니다.
 
@@ -3817,7 +3817,7 @@ print(res.json())
 
 ---
 
-## 20. `DESIGN/SRC/AIK-SRC2K/CC-REPORT` — SRC 기둥 검토 리포트
+## 20. `DESIGN/SRC/AIK-SRC2K/CC-REPORT` — SRC Column Checking Report (SRC 기둥 검토 리포트)
 
 > **기능:** SRC 기둥 검토 리포트를 생성/조회합니다.
 
@@ -4021,7 +4021,7 @@ print(res.json())
 
 ---
 
-## 21. `DESIGN/SRC/AIK-SRC2K/OCHECK` — SRC 최적 설계
+## 21. `DESIGN/SRC/AIK-SRC2K/OCHECK` — SRC Optimal Design (SRC 최적 설계)
 
 > **기능:** SRC 최적 설계(Optimal Design)를 수행합니다.
 
@@ -4436,7 +4436,7 @@ print(res.json())
 
 ---
 
-## 22. `DESIGN/SRC/AIK-SRC2K/TABLE` — SRC 보 설계력
+## 22. `DESIGN/SRC/AIK-SRC2K/TABLE` — SRC Beam Design Forces (SRC 보 설계력)
 
 > **기능:** SRC 보 설계력(Design Forces) 테이블을 조회합니다. URI는 `TABLE` 공용이며 `TABLE_TYPE`=`SRCBEAMDESIGNFORCES`로 구분합니다.
 
@@ -4775,7 +4775,7 @@ print(res.json())
 
 ---
 
-## 23. `DESIGN/SRC/AIK-SRC2K/TABLE` — SRC 기둥 설계력
+## 23. `DESIGN/SRC/AIK-SRC2K/TABLE` — SRC Column Design Forces (SRC 기둥 설계력)
 
 > **기능:** SRC 기둥 설계력(Design Forces) 테이블을 조회합니다. URI는 `TABLE` 공용이며 `TABLE_TYPE`=`SRCCOLUMNDESIGNFORCES`로 구분합니다.
 
@@ -5108,7 +5108,7 @@ print(res.json())
 
 ---
 
-## 24. `DESIGN/SRC/AIK-SRC2K/MATD` — SRC 재료 수정
+## 24. `DESIGN/SRC/AIK-SRC2K/MATD` — Modify SRC Material (SRC 재료 수정)
 
 > **기능:** SRC 재료(콘크리트/강재 등급)를 수정합니다.
 
@@ -5702,7 +5702,7 @@ print(got.json())
 
 ---
 
-## 25. `DESIGN/SRC/AIK-SRC2K/MCRD` — SRC 기둥 단면 데이터 수정
+## 25. `DESIGN/SRC/AIK-SRC2K/MCRD` — Modify SRC Column Section Data (SRC 기둥 단면 데이터 수정)
 
 > **기능:** SRC 기둥 단면 데이터(매입형강 배치 등)를 수정합니다.
 
@@ -5963,7 +5963,7 @@ print(got.json())
 
 ---
 
-## 26. `DESIGN/SRC/AIK-SRC2K/MEMB` — 부재 배정
+## 26. `DESIGN/SRC/AIK-SRC2K/MEMB` — Member Assignment (부재 배정)
 
 > **기능:** 설계 부재(요소→부재) 배정을 관리합니다.
 
@@ -6119,7 +6119,7 @@ print(got.json())
 
 ---
 
-## 27. `DESIGN/SRC/AIK-SRC2K/MRBD` — SRC 보 단면 데이터 수정
+## 27. `DESIGN/SRC/AIK-SRC2K/MRBD` — Modify SRC Beam Section Data (SRC 보 단면 데이터 수정)
 
 > **기능:** SRC 보 단면 데이터(매입형강/철근 배치 등)를 수정합니다.
 

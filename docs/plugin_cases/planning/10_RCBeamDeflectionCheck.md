@@ -123,8 +123,8 @@ Table` / `End Code Checking by KDS 41 20 : 2022` 로그가 그대로 출력되�
 
 | 기능 | 추정 API | 문서 위치 |
 | --- | --- | --- |
-| 보 배근 정보 조회/수정("Rebar update") | `DESIGN/RC/KDS-41-20-2022/DCRM-BEAM` | [`26_Design_RC_KDS41202022.md#29-designrckds-41-20-2022dcrm-beam--보-부재별-철근-설계기준`](../../manual/26_Design_RC_KDS41202022.md#29-designrckds-41-20-2022dcrm-beam--보-부재별-철근-설계기준) |
-| RC 보 설계 수행/결과표(모멘트·배근 조회) | `BD-ANAL` / `BD-TABLE` | [`26_Design_RC_KDS41202022.md#39-designrckds-41-20-2022bd-anal--rc-보-설계-수행`](../../manual/26_Design_RC_KDS41202022.md#39-designrckds-41-20-2022bd-anal--rc-보-설계-수행), [`26_Design_RC_KDS41202022.md#40-designrckds-41-20-2022bd-table--rc-보-설계-테이블`](../../manual/26_Design_RC_KDS41202022.md#40-designrckds-41-20-2022bd-table--rc-보-설계-테이블) |
+| 보 배근 정보 조회/수정("Rebar update") | `DESIGN/RC/KDS-41-20-2022/DCRM-BEAM` | [`26_Design_RC_KDS41202022.md#29-designrckds-41-20-2022dcrm-beam--design-criteria-for-rebars-by-beam-member-보-부재별-철근-설계기준`](../../manual/26_Design_RC_KDS41202022.md#29-designrckds-41-20-2022dcrm-beam--design-criteria-for-rebars-by-beam-member-보-부재별-철근-설계기준) |
+| RC 보 설계 수행/결과표(모멘트·배근 조회) | `BD-ANAL` / `BD-TABLE` | [`26_Design_RC_KDS41202022.md#39-designrckds-41-20-2022bd-anal--rc-beam-design-perform-rc-보-설계-수행`](../../manual/26_Design_RC_KDS41202022.md#39-designrckds-41-20-2022bd-anal--rc-beam-design-perform-rc-보-설계-수행), [`26_Design_RC_KDS41202022.md#40-designrckds-41-20-2022bd-table--rc-beam-design-table-rc-보-설계-테이블`](../../manual/26_Design_RC_KDS41202022.md#40-designrckds-41-20-2022bd-table--rc-beam-design-table-rc-보-설계-테이블) |
 | 단면/부재 정보(b, h, L) | `GET /db/SECT`, `GET /db/ELEM` | [`04_DB_Properties.md#12-dbsect`](../../manual/04_DB_Properties.md#12-dbsect), [`03_DB_Node_Element.md#2-dbelem`](../../manual/03_DB_Node_Element.md#2-dbelem) |
 | 재료 강도(fck, fy) | `GET /db/MATL` | [`04_DB_Properties.md#1-dbmatl`](../../manual/04_DB_Properties.md#1-dbmatl) |
 | 하중케이스별 해석 모멘트 | `POST /post/table`(부재력 계열 테이블) | [`20_POST_AnalysisResult_2.md`](../../manual/20_POST_AnalysisResult_2.md) (Beam Force 계열) |

@@ -34,80 +34,80 @@
 
 | No. | Endpoint | 기능 | Active Methods |
 |-----|----------|------|----------------|
-| 0 | [`DRC`](#0-designrcdrc--rc-설계-코드-선택) | RC 설계 코드 선택 (`KDS-41-20-2022` 접두사 미사용) | GET · PUT · DELETE |
-| 1 | [`DCO`](#1-designrckds-41-20-2022dco--콘크리트-설계-코드-옵션) | 콘크리트 설계 코드 옵션 | GET · PUT · DELETE |
-| 2 | [`DCTL`](#2-designrckds-41-20-2022dctl--프레임-정의) | 프레임 정의 | GET · PUT · DELETE |
-| 3 | [`LLRF`](#3-designrckds-41-20-2022llrf--활하중-저감계수) | 활하중 저감계수 | GET · PUT · DELETE |
-| 4 | [`LCTB`](#4-designrckds-41-20-2022lctb--비선형-하중케이스-하중기여) | 비선형 하중케이스 하중기여 | GET · DELETE |
-| 5 | [`SRDF`](#5-designrckds-41-20-2022srdf--강도감소계수) | 강도감소계수 | GET · PUT · DELETE |
-| 6 | [`EQCT`](#6-designrckds-41-20-2022eqct--지진-하중조합-타입) | 지진 하중조합 타입 | POST · GET · PUT · DELETE |
-| 7 | [`ULCT`](#7-designrckds-41-20-2022ulct--지하-하중조합-타입) | 지하 하중조합 타입 | POST · GET · PUT · DELETE |
-| 8 | [`SUEQ`](#8-designrckds-41-20-2022sueq--지진-스케일업-계수) | 지진 스케일업 계수 | POST · GET · PUT · DELETE |
-| 9 | [`SDGN`](#9-designrckds-41-20-2022sdgn--내진-설계-타입) | 내진 설계 타입 | POST · GET · PUT · DELETE |
-| 10 | [`SCOL`](#10-designrckds-41-20-2022scol--내진-기둥-타입) | 내진 기둥 타입 | POST · GET · PUT · DELETE |
-| 11 | [`MBTP`](#11-designrckds-41-20-2022mbtp--부재-타입-수정) | 부재 타입 수정 | POST · GET · PUT · DELETE |
-| 12 | [`MEMB`](#12-designrckds-41-20-2022memb--부재-배정) | 부재 배정 | GET · PUT · DELETE |
-| 13 | [`MATD`](#13-designrckds-41-20-2022matd--콘크리트-재료-수정) | 콘크리트 재료 수정 | GET · PUT · DELETE |
-| 14 | [`LENG`](#14-designrckds-41-20-2022leng--비지지-길이l-lb) | 비지지 길이(L, Lb) | POST · GET · PUT · DELETE |
-| 15 | [`KFAC`](#15-designrckds-41-20-2022kfac--유효좌굴길이계수k) | 유효좌굴길이계수(K) | POST · GET · PUT · DELETE |
-| 16 | [`CMFT`](#16-designrckds-41-20-2022cmft--등가모멘트-보정계수cm) | 등가모멘트 보정계수(Cm) | POST · GET · PUT · DELETE |
-| 17 | [`FMAG`](#17-designrckds-41-20-2022fmag--모멘트-확대계수b1δb-b2δs) | 모멘트 확대계수(B1/δb, B2/δs) | POST · GET · PUT · DELETE |
-| 18 | [`MLLR`](#18-designrckds-41-20-2022mllr--활하중-저감계수-수정) | 활하중 저감계수 수정 | POST · GET · PUT · DELETE |
-| 19 | [`HCBM`](#19-designrckds-41-20-2022hcbm--헌치보-배정) | 헌치보 배정 | POST · GET · PUT · DELETE |
-| 20 | [`MRFT`](#20-designrckds-41-20-2022mrft--모멘트-재분배-계수) | 모멘트 재분배 계수 | POST · GET · PUT · DELETE |
-| 21 | [`TRFT`](#21-designrckds-41-20-2022trft--비틀림-감소계수) | 비틀림 감소계수 | POST · GET · PUT · DELETE |
-| 22 | [`MCMB`](#22-designrckds-41-20-2022mcmb--보-모멘트-산정-방법) | 보 모멘트 산정 방법 | POST · GET · PUT · DELETE |
-| 23 | [`DFBA`](#23-designrckds-41-20-2022dfba--부재-배정된-보-설계력) | 부재 배정된 보 설계력 | POST · GET · PUT · DELETE |
-| 24 | [`PMDM`](#24-designrckds-41-20-2022pmdm--p-m-곡선-산정-방법) | P-M 곡선 산정 방법 | POST · GET · DELETE · PUT |
-| 25 | [`WMAK`](#25-designrckds-41-20-2022wmak--벽체-마크-데이터-수정) | 벽체 마크 데이터 수정 | POST · GET · PUT · DELETE |
-| 26 | [`BEMW`](#26-designrckds-41-20-2022bemw--벽체id별-경계요소법) | 벽체ID별 경계요소법 | POST · GET · PUT · DELETE |
-| 27 | [`REXC`](#27-designrckds-41-20-2022rexc--철근-노출-조건) | 철근 노출 조건 | POST · GET · PUT · DELETE |
-| 28 | [`LMRR`](#28-designrckds-41-20-2022lmrr--최대-철근비-제한) | 최대 철근비 제한 | GET · PUT · DELETE |
-| 29 | [`DCRM-BEAM`](#29-designrckds-41-20-2022dcrm-beam--보-부재별-철근-설계기준) | 보 부재별 철근 설계기준 | POST · GET · PUT · DELETE |
-| 30 | [`DCRM-COLUMN`](#30-designrckds-41-20-2022dcrm-column--기둥-부재별-철근-설계기준) | 기둥 부재별 철근 설계기준 | POST · GET · PUT · DELETE |
-| 31 | [`DCRM-BRACE`](#31-designrckds-41-20-2022dcrm-brace--가새-부재별-철근-설계기준) | 가새 부재별 철근 설계기준 | POST · GET · PUT · DELETE |
-| 32 | [`DCRM-WALL`](#32-designrckds-41-20-2022dcrm-wall--벽체-부재별-철근-설계기준) | 벽체 부재별 철근 설계기준 | POST · GET · PUT · DELETE |
-| 33 | [`DCRE`](#33-designrckds-41-20-2022dcre--철근-설계기준) | 철근 설계기준 | POST · GET · PUT · DELETE |
-| 34 | [`DCREM`](#34-designrckds-41-20-2022dcrem--접합부-보-철근-동일화) | 접합부 보 철근 동일화 | POST · GET · PUT · DELETE |
-| 35 | [`REBB`](#35-designrckds-41-20-2022rebb--보-철근-데이터-수정) | 보 철근 데이터 수정 | POST · GET · DELETE · PUT |
-| 36 | [`REBC`](#36-designrckds-41-20-2022rebc--기둥-철근-데이터-수정) | 기둥 철근 데이터 수정 | POST · GET · PUT · DELETE |
-| 37 | [`REBW`](#37-designrckds-41-20-2022rebw--벽체-철근-데이터-수정) | 벽체 철근 데이터 수정 | POST · PUT · DELETE · GET |
-| 38 | [`REBR`](#38-designrckds-41-20-2022rebr--가새-철근-데이터-수정) | 가새 철근 데이터 수정 | POST · GET · PUT · DELETE |
-| 39 | [`BD-ANAL`](#39-designrckds-41-20-2022bd-anal--rc-보-설계-수행) | RC 보 설계 수행 | POST |
-| 40 | [`BD-TABLE`](#40-designrckds-41-20-2022bd-table--rc-보-설계-테이블) | RC 보 설계 테이블 | POST |
-| 41 | [`BD-REPORT`](#41-designrckds-41-20-2022bd-report--rc-보-설계-리포트) | RC 보 설계 리포트 | POST |
-| 42 | [`CD-ANAL`](#42-designrckds-41-20-2022cd-anal--rc-기둥-설계-수행) | RC 기둥 설계 수행 | POST |
-| 43 | [`CD-TABLE`](#43-designrckds-41-20-2022cd-table--rc-기둥-설계-테이블) | RC 기둥 설계 테이블 | POST |
-| 44 | [`CD-REPORT`](#44-designrckds-41-20-2022cd-report--rc-기둥-설계-리포트) | RC 기둥 설계 리포트 | POST |
-| 45 | [`BRD-ANAL`](#45-designrckds-41-20-2022brd-anal--rc-가새-설계-수행) | RC 가새 설계 수행 | POST |
-| 46 | [`BRD-TABLE`](#46-designrckds-41-20-2022brd-table--rc-가새-설계-테이블) | RC 가새 설계 테이블 | POST |
-| 47 | [`BRD-REPORT`](#47-designrckds-41-20-2022brd-report--rc-가새-설계-리포트) | RC 가새 설계 리포트 | POST |
-| 48 | [`WD-ANAL`](#48-designrckds-41-20-2022wd-anal--rc-벽체-설계-수행) | RC 벽체 설계 수행 | POST |
-| 49 | [`WD-TABLE`](#49-designrckds-41-20-2022wd-table--rc-벽체-설계-테이블) | RC 벽체 설계 테이블 | POST |
-| 50 | [`WD-REPORT`](#50-designrckds-41-20-2022wd-report--rc-벽체-설계-리포트) | RC 벽체 설계 리포트 | POST |
-| 51 | [`HCD-ANAL`](#51-designrckds-41-20-2022hcd-anal--rc-헌치보-설계-수행) | RC 헌치보 설계 수행 | POST |
-| 52 | [`HCD-TABLE`](#52-designrckds-41-20-2022hcd-table--rc-헌치보-설계-테이블) | RC 헌치보 설계 테이블 | POST |
-| 53 | [`HCD-REPORT`](#53-designrckds-41-20-2022hcd-report--rc-헌치보-설계-리포트) | RC 헌치보 설계 리포트 | POST |
-| 54 | [`BC-ANAL`](#54-designrckds-41-20-2022bc-anal--rc-보-검토-수행) | RC 보 검토 수행 | POST |
-| 55 | [`BC-TABLE`](#55-designrckds-41-20-2022bc-table--rc-보-검토-테이블) | RC 보 검토 테이블 | POST |
-| 56 | [`BC-REPORT`](#56-designrckds-41-20-2022bc-report--rc-보-검토-리포트) | RC 보 검토 리포트 | POST |
-| 57 | [`CC-ANAL`](#57-designrckds-41-20-2022cc-anal--rc-기둥-검토-수행) | RC 기둥 검토 수행 | POST |
-| 58 | [`CC-TABLE`](#58-designrckds-41-20-2022cc-table--rc-기둥-검토-테이블) | RC 기둥 검토 테이블 | POST |
-| 59 | [`CC-REPORT`](#59-designrckds-41-20-2022cc-report--rc-기둥-검토-리포트) | RC 기둥 검토 리포트 | POST |
-| 60 | [`BRC-ANAL`](#60-designrckds-41-20-2022brc-anal--rc-가새-검토-수행) | RC 가새 검토 수행 | POST |
-| 61 | [`BRC-TABLE`](#61-designrckds-41-20-2022brc-table--rc-가새-검토-테이블) | RC 가새 검토 테이블 | POST |
-| 62 | [`BRC-REPORT`](#62-designrckds-41-20-2022brc-report--rc-가새-검토-리포트) | RC 가새 검토 리포트 | POST |
-| 63 | [`WC-ANAL`](#63-designrckds-41-20-2022wc-anal--rc-벽체-검토-수행) | RC 벽체 검토 수행 | POST |
-| 64 | [`WC-TABLE`](#64-designrckds-41-20-2022wc-table--rc-벽체-검토-테이블) | RC 벽체 검토 테이블 | POST |
-| 65 | [`WC-REPORT`](#65-designrckds-41-20-2022wc-report--rc-벽체-검토-리포트) | RC 벽체 검토 리포트 | POST |
-| 66 | [`CDESIGN`](#66-designrckds-41-20-2022cdesign--rc-콘크리트-종합-설계-결과) | RC 콘크리트 종합 설계 결과 | POST |
-| 67 | [`TABLE`](#67-designrckds-41-20-2022table--기둥-설계력column-design-forces) | 기둥 설계력(Column Design Forces) | POST |
-| 68 | [`TABLE`](#68-designrckds-41-20-2022table--가새-설계력brace-design-forces) | 가새 설계력(Brace Design Forces) | POST |
-| 69 | [`TABLE`](#69-designrckds-41-20-2022table--보-설계력beam-design-forces) | 보 설계력(Beam Design Forces) | POST |
+| 0 | [`DRC`](#0-designrcdrc--rc-design-code-rc-설계-코드-선택) | RC 설계 코드 선택 (`KDS-41-20-2022` 접두사 미사용) | GET · PUT · DELETE |
+| 1 | [`DCO`](#1-designrckds-41-20-2022dco--concrete-design-code-option-콘크리트-설계-코드-옵션) | 콘크리트 설계 코드 옵션 | GET · PUT · DELETE |
+| 2 | [`DCTL`](#2-designrckds-41-20-2022dctl--definition-of-frame-프레임-정의) | 프레임 정의 | GET · PUT · DELETE |
+| 3 | [`LLRF`](#3-designrckds-41-20-2022llrf--live-load-reduction-factor-활하중-저감계수) | 활하중 저감계수 | GET · PUT · DELETE |
+| 4 | [`LCTB`](#4-designrckds-41-20-2022lctb--load-contribution-for-nonlinear-load-case-비선형-하중케이스-하중기여) | 비선형 하중케이스 하중기여 | GET · DELETE |
+| 5 | [`SRDF`](#5-designrckds-41-20-2022srdf--strength-reduction-factors-강도감소계수) | 강도감소계수 | GET · PUT · DELETE |
+| 6 | [`EQCT`](#6-designrckds-41-20-2022eqct--seismic-load-combination-type-지진-하중조합-타입) | 지진 하중조합 타입 | POST · GET · PUT · DELETE |
+| 7 | [`ULCT`](#7-designrckds-41-20-2022ulct--underground-load-combination-type-지하-하중조합-타입) | 지하 하중조합 타입 | POST · GET · PUT · DELETE |
+| 8 | [`SUEQ`](#8-designrckds-41-20-2022sueq--scale-up-factor-for-earthquake-지진-스케일업-계수) | 지진 스케일업 계수 | POST · GET · PUT · DELETE |
+| 9 | [`SDGN`](#9-designrckds-41-20-2022sdgn--seismic-design-type-내진-설계-타입) | 내진 설계 타입 | POST · GET · PUT · DELETE |
+| 10 | [`SCOL`](#10-designrckds-41-20-2022scol--seismic-column-type-내진-기둥-타입) | 내진 기둥 타입 | POST · GET · PUT · DELETE |
+| 11 | [`MBTP`](#11-designrckds-41-20-2022mbtp--modify-member-type-부재-타입-수정) | 부재 타입 수정 | POST · GET · PUT · DELETE |
+| 12 | [`MEMB`](#12-designrckds-41-20-2022memb--member-assignment-부재-배정) | 부재 배정 | GET · PUT · DELETE |
+| 13 | [`MATD`](#13-designrckds-41-20-2022matd--modify-concrete-material-콘크리트-재료-수정) | 콘크리트 재료 수정 | GET · PUT · DELETE |
+| 14 | [`LENG`](#14-designrckds-41-20-2022leng--unbraced-length-l-lb-비지지-길이) | 비지지 길이(L, Lb) | POST · GET · PUT · DELETE |
+| 15 | [`KFAC`](#15-designrckds-41-20-2022kfac--effective-length-factor-k-유효좌굴길이계수) | 유효좌굴길이계수(K) | POST · GET · PUT · DELETE |
+| 16 | [`CMFT`](#16-designrckds-41-20-2022cmft--equivalent-moment-correction-factorcm-등가모멘트-보정계수) | 등가모멘트 보정계수(Cm) | POST · GET · PUT · DELETE |
+| 17 | [`FMAG`](#17-designrckds-41-20-2022fmag--moment-magnifierb1delta_b-b2delta_s-모멘트-확대계수) | 모멘트 확대계수(B1/δb, B2/δs) | POST · GET · PUT · DELETE |
+| 18 | [`MLLR`](#18-designrckds-41-20-2022mllr--modify-live-load-reduction-factor-활하중-저감계수-수정) | 활하중 저감계수 수정 | POST · GET · PUT · DELETE |
+| 19 | [`HCBM`](#19-designrckds-41-20-2022hcbm--haunched-beam-assignment-헌치보-배정) | 헌치보 배정 | POST · GET · PUT · DELETE |
+| 20 | [`MRFT`](#20-designrckds-41-20-2022mrft--moment-redistribution-factor-모멘트-재분배-계수) | 모멘트 재분배 계수 | POST · GET · PUT · DELETE |
+| 21 | [`TRFT`](#21-designrckds-41-20-2022trft--torsion-reduction-factor-비틀림-감소계수) | 비틀림 감소계수 | POST · GET · PUT · DELETE |
+| 22 | [`MCMB`](#22-designrckds-41-20-2022mcmb--moment-calculation-method-for-beam-보-모멘트-산정-방법) | 보 모멘트 산정 방법 | POST · GET · PUT · DELETE |
+| 23 | [`DFBA`](#23-designrckds-41-20-2022dfba--design-force-for-beam-assigned-as-member-부재-배정된-보-설계력) | 부재 배정된 보 설계력 | POST · GET · PUT · DELETE |
+| 24 | [`PMDM`](#24-designrckds-41-20-2022pmdm--p-m-curve-calculation-method-p-m-곡선-산정-방법) | P-M 곡선 산정 방법 | POST · GET · DELETE · PUT |
+| 25 | [`WMAK`](#25-designrckds-41-20-2022wmak--modify-wall-mark-data-벽체-마크-데이터-수정) | 벽체 마크 데이터 수정 | POST · GET · PUT · DELETE |
+| 26 | [`BEMW`](#26-designrckds-41-20-2022bemw--boundary-element-method-by-wall-id-벽체id별-경계요소법) | 벽체ID별 경계요소법 | POST · GET · PUT · DELETE |
+| 27 | [`REXC`](#27-designrckds-41-20-2022rexc--rebar-exposure-condition-철근-노출-조건) | 철근 노출 조건 | POST · GET · PUT · DELETE |
+| 28 | [`LMRR`](#28-designrckds-41-20-2022lmrr--limiting-maximum-rebar-ratio-최대-철근비-제한) | 최대 철근비 제한 | GET · PUT · DELETE |
+| 29 | [`DCRM-BEAM`](#29-designrckds-41-20-2022dcrm-beam--design-criteria-for-rebars-by-beam-member-보-부재별-철근-설계기준) | 보 부재별 철근 설계기준 | POST · GET · PUT · DELETE |
+| 30 | [`DCRM-COLUMN`](#30-designrckds-41-20-2022dcrm-column--design-criteria-for-rebars-by-column-member-기둥-부재별-철근-설계기준) | 기둥 부재별 철근 설계기준 | POST · GET · PUT · DELETE |
+| 31 | [`DCRM-BRACE`](#31-designrckds-41-20-2022dcrm-brace--design-criteria-for-rebars-by-brace-member-가새-부재별-철근-설계기준) | 가새 부재별 철근 설계기준 | POST · GET · PUT · DELETE |
+| 32 | [`DCRM-WALL`](#32-designrckds-41-20-2022dcrm-wall--design-criteria-for-rebars-by-wall-member-벽체-부재별-철근-설계기준) | 벽체 부재별 철근 설계기준 | POST · GET · PUT · DELETE |
+| 33 | [`DCRE`](#33-designrckds-41-20-2022dcre--design-criteria-for-rebar-철근-설계기준) | 철근 설계기준 | POST · GET · PUT · DELETE |
+| 34 | [`DCREM`](#34-designrckds-41-20-2022dcrem--same-beam-rebar-at-joints-접합부-보-철근-동일화) | 접합부 보 철근 동일화 | POST · GET · PUT · DELETE |
+| 35 | [`REBB`](#35-designrckds-41-20-2022rebb--modify-beam-rebar-data-보-철근-데이터-수정) | 보 철근 데이터 수정 | POST · GET · DELETE · PUT |
+| 36 | [`REBC`](#36-designrckds-41-20-2022rebc--modify-column-rebar-data-기둥-철근-데이터-수정) | 기둥 철근 데이터 수정 | POST · GET · PUT · DELETE |
+| 37 | [`REBW`](#37-designrckds-41-20-2022rebw--modify-wall-rebar-data-벽체-철근-데이터-수정) | 벽체 철근 데이터 수정 | POST · PUT · DELETE · GET |
+| 38 | [`REBR`](#38-designrckds-41-20-2022rebr--modify-brace-rebar-data-가새-철근-데이터-수정) | 가새 철근 데이터 수정 | POST · GET · PUT · DELETE |
+| 39 | [`BD-ANAL`](#39-designrckds-41-20-2022bd-anal--rc-beam-design-perform-rc-보-설계-수행) | RC 보 설계 수행 | POST |
+| 40 | [`BD-TABLE`](#40-designrckds-41-20-2022bd-table--rc-beam-design-table-rc-보-설계-테이블) | RC 보 설계 테이블 | POST |
+| 41 | [`BD-REPORT`](#41-designrckds-41-20-2022bd-report--rc-beam-design-report-rc-보-설계-리포트) | RC 보 설계 리포트 | POST |
+| 42 | [`CD-ANAL`](#42-designrckds-41-20-2022cd-anal--rc-column-design-perform-rc-기둥-설계-수행) | RC 기둥 설계 수행 | POST |
+| 43 | [`CD-TABLE`](#43-designrckds-41-20-2022cd-table--rc-column-design-table-rc-기둥-설계-테이블) | RC 기둥 설계 테이블 | POST |
+| 44 | [`CD-REPORT`](#44-designrckds-41-20-2022cd-report--rc-column-design-report-rc-기둥-설계-리포트) | RC 기둥 설계 리포트 | POST |
+| 45 | [`BRD-ANAL`](#45-designrckds-41-20-2022brd-anal--rc-brace-design-perform-rc-가새-설계-수행) | RC 가새 설계 수행 | POST |
+| 46 | [`BRD-TABLE`](#46-designrckds-41-20-2022brd-table--rc-brace-design-table-rc-가새-설계-테이블) | RC 가새 설계 테이블 | POST |
+| 47 | [`BRD-REPORT`](#47-designrckds-41-20-2022brd-report--rc-brace-design-report-rc-가새-설계-리포트) | RC 가새 설계 리포트 | POST |
+| 48 | [`WD-ANAL`](#48-designrckds-41-20-2022wd-anal--rc-wall-design-perform-rc-벽체-설계-수행) | RC 벽체 설계 수행 | POST |
+| 49 | [`WD-TABLE`](#49-designrckds-41-20-2022wd-table--rc-wall-design-table-rc-벽체-설계-테이블) | RC 벽체 설계 테이블 | POST |
+| 50 | [`WD-REPORT`](#50-designrckds-41-20-2022wd-report--rc-wall-design-report-rc-벽체-설계-리포트) | RC 벽체 설계 리포트 | POST |
+| 51 | [`HCD-ANAL`](#51-designrckds-41-20-2022hcd-anal--rc-haunched-beam-design-perform-rc-헌치보-설계-수행) | RC 헌치보 설계 수행 | POST |
+| 52 | [`HCD-TABLE`](#52-designrckds-41-20-2022hcd-table--rc-haunched-beam-design-table-rc-헌치보-설계-테이블) | RC 헌치보 설계 테이블 | POST |
+| 53 | [`HCD-REPORT`](#53-designrckds-41-20-2022hcd-report--rc-haunched-beam-design-report-rc-헌치보-설계-리포트) | RC 헌치보 설계 리포트 | POST |
+| 54 | [`BC-ANAL`](#54-designrckds-41-20-2022bc-anal--rc-beam-check-perform-rc-보-검토-수행) | RC 보 검토 수행 | POST |
+| 55 | [`BC-TABLE`](#55-designrckds-41-20-2022bc-table--rc-beam-check-table-rc-보-검토-테이블) | RC 보 검토 테이블 | POST |
+| 56 | [`BC-REPORT`](#56-designrckds-41-20-2022bc-report--rc-beam-check-report-rc-보-검토-리포트) | RC 보 검토 리포트 | POST |
+| 57 | [`CC-ANAL`](#57-designrckds-41-20-2022cc-anal--rc-column-check-perform-rc-기둥-검토-수행) | RC 기둥 검토 수행 | POST |
+| 58 | [`CC-TABLE`](#58-designrckds-41-20-2022cc-table--rc-column-check-table-rc-기둥-검토-테이블) | RC 기둥 검토 테이블 | POST |
+| 59 | [`CC-REPORT`](#59-designrckds-41-20-2022cc-report--rc-column-check-report-rc-기둥-검토-리포트) | RC 기둥 검토 리포트 | POST |
+| 60 | [`BRC-ANAL`](#60-designrckds-41-20-2022brc-anal--rc-brace-check-perform-rc-가새-검토-수행) | RC 가새 검토 수행 | POST |
+| 61 | [`BRC-TABLE`](#61-designrckds-41-20-2022brc-table--rc-brace-check-table-rc-가새-검토-테이블) | RC 가새 검토 테이블 | POST |
+| 62 | [`BRC-REPORT`](#62-designrckds-41-20-2022brc-report--rc-brace-check-report-rc-가새-검토-리포트) | RC 가새 검토 리포트 | POST |
+| 63 | [`WC-ANAL`](#63-designrckds-41-20-2022wc-anal--rc-wall-check-perform-rc-벽체-검토-수행) | RC 벽체 검토 수행 | POST |
+| 64 | [`WC-TABLE`](#64-designrckds-41-20-2022wc-table--rc-wall-check-table-rc-벽체-검토-테이블) | RC 벽체 검토 테이블 | POST |
+| 65 | [`WC-REPORT`](#65-designrckds-41-20-2022wc-report--rc-wall-check-report-rc-벽체-검토-리포트) | RC 벽체 검토 리포트 | POST |
+| 66 | [`CDESIGN`](#66-designrckds-41-20-2022cdesign--rc-concrete-design-result-rc-콘크리트-종합-설계-결과) | RC 콘크리트 종합 설계 결과 | POST |
+| 67 | [`TABLE`](#67-designrckds-41-20-2022table--column-design-forces-기둥-설계력) | 기둥 설계력(Column Design Forces) | POST |
+| 68 | [`TABLE`](#68-designrckds-41-20-2022table--brace-design-forces-가새-설계력) | 가새 설계력(Brace Design Forces) | POST |
+| 69 | [`TABLE`](#69-designrckds-41-20-2022table--beam-design-forces-보-설계력) | 보 설계력(Beam Design Forces) | POST |
 
 ---
 
-## 0. `DESIGN/RC/DRC` — RC 설계 코드 선택
+## 0. `DESIGN/RC/DRC` — RC Design Code (RC 설계 코드 선택)
 
 > **기능:** 현재 프로젝트에 적용할 **RC 설계 코드**를 선택합니다. 이 챕터의 나머지 69개
 > 엔드포인트(`KDS-41-20-2022/<CODE>`)와 달리 URI가 `KDS-41-20-2022` 접두사를 쓰지 않는
@@ -215,7 +215,7 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 
 ---
 
-## 1. `DESIGN/RC/KDS-41-20-2022/DCO` — 콘크리트 설계 코드 옵션
+## 1. `DESIGN/RC/KDS-41-20-2022/DCO` — Concrete Design Code Option (콘크리트 설계 코드 옵션)
 
 > **기능:** 콘크리트 설계 기준(KDS 41 20:2022) 및 내진 특별규정·비틀림·모멘트 재분배·노출조건·P-M 곡선 산정법 등 전역 설계 옵션을 설정합니다.
 
@@ -727,7 +727,7 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 
 ---
 
-## 2. `DESIGN/RC/KDS-41-20-2022/DCTL` — 프레임 정의
+## 2. `DESIGN/RC/KDS-41-20-2022/DCTL` — Definition of Frame (프레임 정의)
 
 > **기능:** 설계 프레임의 X/Y 방향 횡지지 여부(Sway/Non-sway), 유효좌굴길이계수 자동계산, 설계 타입(3D/평면)을 정의합니다.
 
@@ -898,7 +898,7 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 
 ---
 
-## 3. `DESIGN/RC/KDS-41-20-2022/LLRF` — 활하중 저감계수
+## 3. `DESIGN/RC/KDS-41-20-2022/LLRF` — Live Load Reduction Factor (활하중 저감계수)
 
 > **기능:** 층별·범위별 활하중 저감계수 표를 정의합니다. 적용 성분(축력/모멘트/전단), 계산 규칙, 대상 활하중 케이스를 지정합니다.
 
@@ -1134,7 +1134,7 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 
 ---
 
-## 4. `DESIGN/RC/KDS-41-20-2022/LCTB` — 비선형 하중케이스 하중기여
+## 4. `DESIGN/RC/KDS-41-20-2022/LCTB` — Load Contribution for Nonlinear Load Case (비선형 하중케이스 하중기여)
 
 > **기능:** 비선형 해석 하중케이스의 하중기여(Load Contribution) 항목을 조회·삭제합니다. 각 항목은 계수와 하중케이스명으로 구성됩니다. (읽기 전용 파생 정보 — GET/DELETE만 지원)
 
@@ -1355,7 +1355,7 @@ print("GET:", res.status_code, res.json())
 
 ---
 
-## 5. `DESIGN/RC/KDS-41-20-2022/SRDF` — 강도감소계수
+## 5. `DESIGN/RC/KDS-41-20-2022/SRDF` — Strength Reduction Factors (강도감소계수)
 
 > **기능:** 인장지배·나선철근·기타철근 부재·전단/비틀림에 대한 강도감소계수 φ 값을 설정합니다.
 
@@ -1483,7 +1483,7 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 
 ---
 
-## 6. `DESIGN/RC/KDS-41-20-2022/EQCT` — 지진 하중조합 타입
+## 6. `DESIGN/RC/KDS-41-20-2022/EQCT` — Seismic Load Combination Type (지진 하중조합 타입)
 
 > **기능:** 부재별로 특수 지진하중(Special Seismic Loads) 또는 수직 지진력(Vertical Seismic Forces) 적용 타입을 배정합니다.
 
@@ -1616,7 +1616,7 @@ print("GET :", requests.get(URI, headers=HEADERS).json())
 
 ---
 
-## 7. `DESIGN/RC/KDS-41-20-2022/ULCT` — 지하 하중조합 타입
+## 7. `DESIGN/RC/KDS-41-20-2022/ULCT` — Underground Load Combination Type (지하 하중조합 타입)
 
 > **기능:** 부재별로 지하(Underground) 하중조합 적용 여부를 배정합니다. true=지하하중용, false=비지하하중용.
 
@@ -1736,7 +1736,7 @@ print("GET :", requests.get(URI, headers=HEADERS).json())
 
 ---
 
-## 8. `DESIGN/RC/KDS-41-20-2022/SUEQ` — 지진 스케일업 계수
+## 8. `DESIGN/RC/KDS-41-20-2022/SUEQ` — Scale up Factor for Earthquake (지진 스케일업 계수)
 
 > **기능:** 부재별로 하중케이스(LC) 및 하중조합(LCOM)의 축력·모멘트·전단 각각에 대한 지진 스케일업(증폭) 계수를 지정합니다.
 
@@ -1929,7 +1929,7 @@ print("GET :", requests.get(URI, headers=HEADERS).json())
 
 ---
 
-## 9. `DESIGN/RC/KDS-41-20-2022/SDGN` — 내진 설계 타입
+## 9. `DESIGN/RC/KDS-41-20-2022/SDGN` — Seismic Design Type (내진 설계 타입)
 
 > **기능:** 부재별 내진설계 타입을 배정합니다. 내진(Seismic)/비내진(Non-Seismic)/비내진 저항시스템(Non-Seismic-Force-Resisting) 중 선택합니다.
 
@@ -2060,7 +2060,7 @@ print("GET :", requests.get(URI, headers=HEADERS).json())
 
 ---
 
-## 10. `DESIGN/RC/KDS-41-20-2022/SCOL` — 내진 기둥 타입
+## 10. `DESIGN/RC/KDS-41-20-2022/SCOL` — Seismic Column Type (내진 기둥 타입)
 
 > **기능:** 부재(기둥)별 층 타입을 배정합니다. 필로티(PILOTI) 또는 연약층(SOFT_STORY)으로 분류합니다.
 
@@ -2180,7 +2180,7 @@ print("GET :", requests.get(URI, headers=HEADERS).json())
 
 ---
 
-## 11. `DESIGN/RC/KDS-41-20-2022/MBTP` — 부재 타입 수정
+## 11. `DESIGN/RC/KDS-41-20-2022/MBTP` — Modify Member Type (부재 타입 수정)
 
 > **기능:** 요소별 설계 부재 타입을 기둥(COLUMN)/보(BEAM)/가새(BRACE)로 수정 배정합니다.
 
@@ -2317,7 +2317,7 @@ print("GET :", requests.get(URI, headers=HEADERS).json())
 
 ---
 
-## 12. `DESIGN/RC/KDS-41-20-2022/MEMB` — 부재 배정
+## 12. `DESIGN/RC/KDS-41-20-2022/MEMB` — Member Assignment (부재 배정)
 
 > **기능:** 여러 요소를 하나의 설계 부재로 묶어 배정합니다. 요소 리스트와 국부좌표 방향 반전 여부를 지정합니다.
 
@@ -2463,7 +2463,7 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 
 ---
 
-## 13. `DESIGN/RC/KDS-41-20-2022/MATD` — 콘크리트 재료 수정
+## 13. `DESIGN/RC/KDS-41-20-2022/MATD` — Modify Concrete Material (콘크리트 재료 수정)
 
 > **기능:** 재질 ID별 콘크리트·철근 재료를 수정합니다. 표준코드(Standard) 또는 사용자정의(None)로 등급/강도/경량 계수를 지정합니다.
 
@@ -2964,7 +2964,7 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 
 ---
 
-## 14. `DESIGN/RC/KDS-41-20-2022/LENG` — 비지지 길이(L, Lb)
+## 14. `DESIGN/RC/KDS-41-20-2022/LENG` — Unbraced Length (L, Lb) (비지지 길이)
 
 > **기능:** 부재별 비지지 길이 Ly·Lz, 횡좌굴 비지지 길이 Lb, 비틀림 비지지 길이 Lt를 지정합니다.
 
@@ -3109,7 +3109,7 @@ print("GET :", requests.get(URI, headers=HEADERS).json())
 
 ---
 
-## 15. `DESIGN/RC/KDS-41-20-2022/KFAC` — 유효좌굴길이계수(K)
+## 15. `DESIGN/RC/KDS-41-20-2022/KFAC` — Effective Length Factor (K) (유효좌굴길이계수)
 
 > **기능:** 부재별 유효좌굴길이계수 Ky·Kz·Kt를 지정합니다.
 
@@ -3241,7 +3241,7 @@ print("GET :", requests.get(URI, headers=HEADERS).json())
 
 ---
 
-## 16. `DESIGN/RC/KDS-41-20-2022/CMFT` — 등가모멘트 보정계수(Cm)
+## 16. `DESIGN/RC/KDS-41-20-2022/CMFT` — Equivalent Moment Correction Factor(Cm) (등가모멘트 보정계수)
 
 > **기능:** 부재별 등가모멘트 보정계수 CMy·CMz를 지정하거나 자동계산(OPT_AUTO)을 선택합니다.
 
@@ -3386,7 +3386,7 @@ print("GET :", requests.get(URI, headers=HEADERS).json())
 
 ---
 
-## 17. `DESIGN/RC/KDS-41-20-2022/FMAG` — 모멘트 확대계수(B1/δb, B2/δs)
+## 17. `DESIGN/RC/KDS-41-20-2022/FMAG` — Moment Magnifier(B1/Delta_b, B2/Delta_s) (모멘트 확대계수)
 
 > **기능:** 부재별 모멘트 확대계수를 지정합니다. B1(δb)은 1차(비횡변위) 모멘트, B2(δs)는 2차(횡변위) 모멘트에 대한 계수입니다.
 
@@ -3531,7 +3531,7 @@ print("GET :", requests.get(URI, headers=HEADERS).json())
 
 ---
 
-## 18. `DESIGN/RC/KDS-41-20-2022/MLLR` — 활하중 저감계수 수정
+## 18. `DESIGN/RC/KDS-41-20-2022/MLLR` — Modify Live Load Reduction Factor (활하중 저감계수 수정)
 
 > **기능:** 부재별 활하중 저감계수와 적용 성분(축력/모멘트/전단)을 개별 수정합니다.
 
@@ -3695,7 +3695,7 @@ print("GET :", requests.get(URI, headers=HEADERS).json())
 
 ---
 
-## 19. `DESIGN/RC/KDS-41-20-2022/HCBM` — 헌치보 배정
+## 19. `DESIGN/RC/KDS-41-20-2022/HCBM` — Haunched Beam Assignment (헌치보 배정)
 
 > **기능:** 헌치보(Haunched Beam)를 Part A/B/C 요소 구성으로 배정합니다. 각 파트는 요소 ID 목록(KEYS) 또는 ID 범위(TO)로 지정하며, 설계 위치 타입(Part 1/2 또는 User)을 선택합니다.
 
@@ -3987,7 +3987,7 @@ print("GET :", requests.get(URI, headers=HEADERS).json())
 
 ---
 
-## 20. `DESIGN/RC/KDS-41-20-2022/MRFT` — 모멘트 재분배 계수
+## 20. `DESIGN/RC/KDS-41-20-2022/MRFT` — Moment Redistribution Factor (모멘트 재분배 계수)
 
 > **기능:** 보 부재별 모멘트 재분배 계수를 지정합니다. 보(Beam) 부재 타입에만 적용됩니다.
 
@@ -4099,7 +4099,7 @@ print("GET :", requests.get(URI, headers=HEADERS).json())
 
 ---
 
-## 21. `DESIGN/RC/KDS-41-20-2022/TRFT` — 비틀림 감소계수
+## 21. `DESIGN/RC/KDS-41-20-2022/TRFT` — Torsion Reduction Factor (비틀림 감소계수)
 
 > **기능:** 보 부재별 비틀림 감소계수를 지정합니다. 보(Beam) 부재 타입에만 적용됩니다.
 
@@ -4202,7 +4202,7 @@ print("GET :", requests.get(URI, headers=HEADERS).json())
 
 ---
 
-## 22. `DESIGN/RC/KDS-41-20-2022/MCMB` — 보 모멘트 산정 방법
+## 22. `DESIGN/RC/KDS-41-20-2022/MCMB` — Moment Calculation Method for Beam (보 모멘트 산정 방법)
 
 > **기능:** 보 부재별 모멘트 산정 방법을 지정합니다. Each(각 경간별) 또는 Equivalent Frame(등가 골조) 중 선택합니다.
 
@@ -4311,7 +4311,7 @@ print("GET :", requests.get(URI, headers=HEADERS).json())
 
 ---
 
-## 23. `DESIGN/RC/KDS-41-20-2022/DFBA` — 부재 배정된 보 설계력
+## 23. `DESIGN/RC/KDS-41-20-2022/DFBA` — Design Force for Beam Assigned as Member (부재 배정된 보 설계력)
 
 > **기능:** 부재로 배정된 보의 설계력 타입을 지정합니다. Subdivided Forces(세분화 부재력) 또는 Member Forces(부재력) 중 선택합니다.
 
@@ -4431,7 +4431,7 @@ print("GET :", requests.get(URI, headers=HEADERS).json())
 
 ---
 
-## 24. `DESIGN/RC/KDS-41-20-2022/PMDM` — P-M 곡선 산정 방법
+## 24. `DESIGN/RC/KDS-41-20-2022/PMDM` — P-M Curve Calculation Method (P-M 곡선 산정 방법)
 
 > **기능:** 부재별 P-M 상관도(interaction) 설계 산정 방법을 지정합니다. P(축력 고정) 또는 M/P(모멘트/축력비 고정) 중 선택합니다.
 
@@ -4540,7 +4540,7 @@ print("GET :", requests.get(URI, headers=HEADERS).json())
 
 ---
 
-## 25. `DESIGN/RC/KDS-41-20-2022/WMAK` — 벽체 마크 데이터 수정
+## 25. `DESIGN/RC/KDS-41-20-2022/WMAK` — Modify Wall Mark Data (벽체 마크 데이터 수정)
 
 > **기능:** 벽체 마크(Wall Mark)를 정의합니다. 마크 이름과 대상 벽체 ID 목록을 지정합니다.
 
@@ -4661,7 +4661,7 @@ print("GET :", requests.get(URI, headers=HEADERS).json())
 
 ---
 
-## 26. `DESIGN/RC/KDS-41-20-2022/BEMW` — 벽체ID별 경계요소법
+## 26. `DESIGN/RC/KDS-41-20-2022/BEMW` — Boundary Element Method by Wall ID (벽체ID별 경계요소법)
 
 > **기능:** 벽체별 경계요소법(Boundary Element Method) 사용 여부와 방식(변위/응력 기반), 최하층 지정 여부 및 층 이름을 설정합니다.
 
@@ -4798,7 +4798,7 @@ print("GET :", requests.get(URI, headers=HEADERS).json())
 
 ---
 
-## 27. `DESIGN/RC/KDS-41-20-2022/REXC` — 철근 노출 조건
+## 27. `DESIGN/RC/KDS-41-20-2022/REXC` — Rebar Exposure Condition (철근 노출 조건)
 
 > **기능:** 부재별 철근 노출 조건(Rebar Exposure Condition)을 지정합니다. Dry(건조) 또는 Etc(기타) 중 선택합니다.
 
@@ -4919,7 +4919,7 @@ print("GET :", requests.get(URI, headers=HEADERS).json())
 
 ---
 
-## 28. `DESIGN/RC/KDS-41-20-2022/LMRR` — 최대 철근비 제한
+## 28. `DESIGN/RC/KDS-41-20-2022/LMRR` — Limiting Maximum Rebar Ratio (최대 철근비 제한)
 
 > **기능:** 설계별 최대 철근비 상한을 설정합니다. 전단벽(Rhow)·기둥(Rhoc)·가새(Rhor) 각각의 최대 철근비를 지정합니다.
 
@@ -5037,7 +5037,7 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 
 ---
 
-## 29. `DESIGN/RC/KDS-41-20-2022/DCRM-BEAM` — 보 부재별 철근 설계기준
+## 29. `DESIGN/RC/KDS-41-20-2022/DCRM-BEAM` — Design Criteria for Rebars by Beam Member (보 부재별 철근 설계기준)
 
 > **기능:** 보(Beam) **부재 ID별**로 철근 설계기준(주철근·스터럽·다리 수·측면철근·피복·복철근·간격제한·이음)을 개별 지정합니다. 전역 기준(`DCRE`)을 특정 부재에 덮어쓸 때 사용합니다.
 
@@ -5187,7 +5187,7 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 
 ---
 
-## 30. `DESIGN/RC/KDS-41-20-2022/DCRM-COLUMN` — 기둥 부재별 철근 설계기준
+## 30. `DESIGN/RC/KDS-41-20-2022/DCRM-COLUMN` — Design Criteria for Rebars by Column Member (기둥 부재별 철근 설계기준)
 
 > **기능:** 기둥(Column) **부재 ID별**로 철근 설계기준(주철근·띠철근/나선철근·Y/Z 방향 다리 수·피복·간격제한·이음)을 개별 지정합니다.
 
@@ -5320,7 +5320,7 @@ print("GET:", requests.get(URI, headers=HEADERS).json())   # 최상위 키 "DCRM
 
 ---
 
-## 31. `DESIGN/RC/KDS-41-20-2022/DCRM-BRACE` — 가새 부재별 철근 설계기준
+## 31. `DESIGN/RC/KDS-41-20-2022/DCRM-BRACE` — Design Criteria for Rebars by Brace Member (가새 부재별 철근 설계기준)
 
 > **기능:** 가새(Brace) **부재 ID별**로 철근 설계기준을 지정합니다. 필드 구성은 기둥(`DCRM-COLUMN`)과 동일합니다(주철근·띠철근·Y/Z 다리 수·피복·간격제한·이음).
 
@@ -5453,7 +5453,7 @@ print("GET:", requests.get(URI, headers=HEADERS).json())   # 최상위 키 "DCRM
 
 ---
 
-## 32. `DESIGN/RC/KDS-41-20-2022/DCRM-WALL` — 벽체 부재별 철근 설계기준
+## 32. `DESIGN/RC/KDS-41-20-2022/DCRM-WALL` — Design Criteria for Rebars by Wall Member (벽체 부재별 철근 설계기준)
 
 > **기능:** 벽체(Wall) **ID별**로, 그리고 각 ID 내에서 **층(Story)별**로 철근 설계기준(수직·수평·단부 철근, 경계요소 수평철근, 경계요소 수평/수직 간격, 피복 de/dw)을 개별 지정합니다. 각 벽체 ID는 층별 항목 배열 `"ITEMS"` 를 가지며, 배열의 각 항목이 층 이름(`"STORY"`)과 해당 층의 철근 규격 필드를 함께 포함합니다.
 >
@@ -5714,7 +5714,7 @@ print("GET:", requests.get(URI, headers=HEADERS).json())   # 최상위 키 "DCRM
 
 ---
 
-## 33. `DESIGN/RC/KDS-41-20-2022/DCRE` — 철근 설계기준
+## 33. `DESIGN/RC/KDS-41-20-2022/DCRE` — Design Criteria for Rebar (철근 설계기준)
 
 > **기능:** 모델 **전역**의 RC 철근 설계기준을 부재 종류별(`BEAM`·`COLUMN`·`BRACE`·`WALL`)로 한 번에 설정합니다. 보/기둥/가새는 `DCRM-*` 와 유사한 필드를 가지되 주철근을 **배열(다중 규격, 최대 5종)** 로 입력하며, 벽체는 직경별 재질 매핑·면외 휨·간격 리스트 등 **추가 설정**을 포함합니다.
 
@@ -6090,7 +6090,7 @@ print("GET:", requests.get(URI, headers=HEADERS).json())   # 최상위 키 "DCRE
 
 ---
 
-## 34. `DESIGN/RC/KDS-41-20-2022/DCREM` — 접합부 보 철근 동일화
+## 34. `DESIGN/RC/KDS-41-20-2022/DCREM` — Same Beam Rebar at Joints (접합부 보 철근 동일화)
 
 > **기능:** 접합부(절점)에서 만나는 보들의 철근을 **동일하게** 처리하기 위한 설정입니다. 전체 부재에 적용하거나(`SELECT_ALL`), 특정 절점(node)별로 그 절점을 사이에 두는 **정확히 2개의 요소 번호**를 지정합니다.
 
@@ -6233,7 +6233,7 @@ print("GET:", requests.get(URI, headers=HEADERS).json())   # 최상위 키 "DCRE
 
 ---
 
-## 35. `DESIGN/RC/KDS-41-20-2022/REBB` — 보 철근 데이터 수정
+## 35. `DESIGN/RC/KDS-41-20-2022/REBB` — Modify Beam Rebar Data (보 철근 데이터 수정)
 
 > **기능:** 단면(section) 번호별로 콘크리트 보의 철근 데이터를 수정합니다. 각 `ITEMS` 항목은 I·M·J 세 구간(`BAR_SECTOR_I/M/J`)의 상·하단 주철근(레이어별), 스터럽(전단철근), 표피철근(skin bar)과 상·하단 피복(`DT`/`DB`)을 포함하며, `CREATE_SUB_SECTION` 으로 서브 단면을 생성할 수 있습니다.
 
@@ -6538,7 +6538,7 @@ print("GET:", requests.get(URI, headers=HEADERS).json())   # 최상위 키 "REBB
 
 ---
 
-## 36. `DESIGN/RC/KDS-41-20-2022/REBC` — 기둥 철근 데이터 수정
+## 36. `DESIGN/RC/KDS-41-20-2022/REBC` — Modify Column Rebar Data (기둥 철근 데이터 수정)
 
 > **기능:** 단면 번호별로 콘크리트 기둥의 철근 데이터를 수정합니다. 주철근(`MAIN_BAR`), 단부/중앙부 전단철근(`SHEAR_BAR_END`/`SHEAR_BAR_CEN`), 피복 거리(`DO`), 후프 타입(`HOOP_TYPE`), 후크 타입(`HOOK_TYPE`)을 포함합니다.
 
@@ -6763,7 +6763,7 @@ print("GET:", requests.get(URI, headers=HEADERS).json())   # 최상위 키 "REBC
 
 ---
 
-## 37. `DESIGN/RC/KDS-41-20-2022/REBW` — 벽체 철근 데이터 수정
+## 37. `DESIGN/RC/KDS-41-20-2022/REBW` — Modify Wall Rebar Data (벽체 철근 데이터 수정)
 
 > **기능:** 벽체 ID별로 철근 데이터를 수정합니다. 수직/수평 철근, 단부 철근(End Rebar), 경계요소(Boundary Element) 수평 철근, 피복 거리(dw, de), 두께 및 서브 벽체 ID/층(Story) 정보를 포함합니다.
 
@@ -7008,7 +7008,7 @@ print("GET:", requests.get(URI, headers=HEADERS).json())   # 최상위 키 "REBW
 
 ---
 
-## 38. `DESIGN/RC/KDS-41-20-2022/REBR` — 가새 철근 데이터 수정
+## 38. `DESIGN/RC/KDS-41-20-2022/REBR` — Modify Brace Rebar Data (가새 철근 데이터 수정)
 
 > **기능:** 단면 번호별로 콘크리트 가새(Brace)의 철근 데이터를 수정합니다. 구조는 기둥(`REBC`)과 유사하나 `MAIN_BAR` 에 `USE_CORNER` 가 없고 후크 타입(`HOOK_TYPE`)도 없으며, 주철근(`MAIN_BAR`), 단부/중앙부 전단철근(`SHEAR_BAR_END`/`SHEAR_BAR_CEN`), 피복(`DO`), 후프 타입(`HOOP_TYPE`)으로 구성됩니다.
 
@@ -7230,7 +7230,7 @@ print("GET:", requests.get(URI, headers=HEADERS).json())   # 최상위 키 "REBR
 
 ---
 
-## 39. `DESIGN/RC/KDS-41-20-2022/BD-ANAL` — RC 보 설계 수행
+## 39. `DESIGN/RC/KDS-41-20-2022/BD-ANAL` — RC Beam Design Perform (RC 보 설계 수행)
 
 > **기능:** 지정한 요소 · 단면(또는 전체)에 대해 RC 보 설계 계산을 수행합니다. 결과는 모델에 저장되며 이후 `BD-TABLE` / `BD-REPORT` 로 조회합니다.
 
@@ -7339,7 +7339,7 @@ print(res.json())   # {"message": "success"}
 
 ---
 
-## 40. `DESIGN/RC/KDS-41-20-2022/BD-TABLE` — RC 보 설계 테이블
+## 40. `DESIGN/RC/KDS-41-20-2022/BD-TABLE` — RC Beam Design Table (RC 보 설계 테이블)
 
 > **기능:** 수행된 RC 보 설계 결과를 표(HEAD/DATA) 형태로 반환합니다. 부재별(MEMB) 또는 단면 속성별(PROP)로 조회할 수 있습니다.
 
@@ -7529,7 +7529,7 @@ for row in table["DATA"]:
 
 ---
 
-## 41. `DESIGN/RC/KDS-41-20-2022/BD-REPORT` — RC 보 설계 리포트
+## 41. `DESIGN/RC/KDS-41-20-2022/BD-REPORT` — RC Beam Design Report (RC 보 설계 리포트)
 
 > **기능:** RC 보 설계 결과를 Graphic(JPG) · Detail(DOC) · Summary(TXT) 형식의 파일로 출력합니다.
 
@@ -7655,7 +7655,7 @@ print(res.json())   # {"SUCCESS": true, "FILE_PATH": "...", "MESSAGE": ""}
 
 ---
 
-## 42. `DESIGN/RC/KDS-41-20-2022/CD-ANAL` — RC 기둥 설계 수행
+## 42. `DESIGN/RC/KDS-41-20-2022/CD-ANAL` — RC Column Design Perform (RC 기둥 설계 수행)
 
 > **기능:** 지정한 요소 · 단면(또는 전체)에 대해 RC 기둥 설계 계산을 수행합니다. 결과는 이후 `CD-TABLE` / `CD-REPORT` 로 조회합니다.
 
@@ -7757,7 +7757,7 @@ print("POST:", res.status_code, res.json())   # {"message": "success"}
 
 ---
 
-## 43. `DESIGN/RC/KDS-41-20-2022/CD-TABLE` — RC 기둥 설계 테이블
+## 43. `DESIGN/RC/KDS-41-20-2022/CD-TABLE` — RC Column Design Table (RC 기둥 설계 테이블)
 
 > **기능:** 수행된 RC 기둥 설계 결과를 표(HEAD/DATA) 형태로 반환합니다. P-M 상관 및 전단 검토 결과를 포함합니다.
 
@@ -7916,7 +7916,7 @@ for row in table["DATA"]:
 
 ---
 
-## 44. `DESIGN/RC/KDS-41-20-2022/CD-REPORT` — RC 기둥 설계 리포트
+## 44. `DESIGN/RC/KDS-41-20-2022/CD-REPORT` — RC Column Design Report (RC 기둥 설계 리포트)
 
 > **기능:** RC 기둥 설계 결과를 Graphic(JPG) · Detail(DOC) · Summary(TXT) · PM Curve(JPG) 형식의 파일로 출력합니다.
 
@@ -8036,7 +8036,7 @@ print(res.json())
 
 ---
 
-## 45. `DESIGN/RC/KDS-41-20-2022/BRD-ANAL` — RC 가새 설계 수행
+## 45. `DESIGN/RC/KDS-41-20-2022/BRD-ANAL` — RC Brace Design Perform (RC 가새 설계 수행)
 
 > **기능:** 지정한 요소 · 단면(또는 전체)에 대해 RC 가새(Brace) 설계 계산을 수행합니다. 결과는 이후 `BRD-TABLE` / `BRD-REPORT` 로 조회합니다.
 
@@ -8136,7 +8136,7 @@ print("POST:", res.status_code, res.json())   # {"message": "success"}
 
 ---
 
-## 46. `DESIGN/RC/KDS-41-20-2022/BRD-TABLE` — RC 가새 설계 테이블
+## 46. `DESIGN/RC/KDS-41-20-2022/BRD-TABLE` — RC Brace Design Table (RC 가새 설계 테이블)
 
 > **기능:** 수행된 RC 가새 설계 결과를 표(HEAD/DATA) 형태로 반환합니다. 축력-휨(P-M) 및 전단 검토 결과를 포함합니다.
 
@@ -8306,7 +8306,7 @@ for row in table["DATA"]:
 
 ---
 
-## 47. `DESIGN/RC/KDS-41-20-2022/BRD-REPORT` — RC 가새 설계 리포트
+## 47. `DESIGN/RC/KDS-41-20-2022/BRD-REPORT` — RC Brace Design Report (RC 가새 설계 리포트)
 
 > **기능:** RC 가새 설계 결과를 Graphic(JPG) · Detail(DOC) · Summary(TXT) · PM Curve(JPG) 형식의 파일로 출력합니다.
 
@@ -8426,7 +8426,7 @@ print(res.json())
 
 ---
 
-## 48. `DESIGN/RC/KDS-41-20-2022/WD-ANAL` — RC 벽체 설계 수행
+## 48. `DESIGN/RC/KDS-41-20-2022/WD-ANAL` — RC Wall Design Perform (RC 벽체 설계 수행)
 
 > **기능:** 지정한 벽체 ID · 층(Story) 조합에 대해 RC 벽체(Wall) 설계 계산을 수행합니다. 벽체는 요소가 아니라 `WALL_IDS` + `STORY` 조합으로 지정합니다.
 
@@ -8537,7 +8537,7 @@ print("POST:", res.status_code, res.json())   # {"message": "success"}
 
 ---
 
-## 49. `DESIGN/RC/KDS-41-20-2022/WD-TABLE` — RC 벽체 설계 테이블
+## 49. `DESIGN/RC/KDS-41-20-2022/WD-TABLE` — RC Wall Design Table (RC 벽체 설계 테이블)
 
 > **기능:** 수행된 RC 벽체 설계 결과를 표 형태로 반환합니다. 응답은 `data` 객체 안에 `COMPONENTS`(열 정의)와 `ROWS`(행 객체 배열)를 담는 구조입니다.
 
@@ -8761,7 +8761,7 @@ for row in data["ROWS"]:
 
 ---
 
-## 50. `DESIGN/RC/KDS-41-20-2022/WD-REPORT` — RC 벽체 설계 리포트
+## 50. `DESIGN/RC/KDS-41-20-2022/WD-REPORT` — RC Wall Design Report (RC 벽체 설계 리포트)
 
 > **기능:** RC 벽체 설계 결과를 Graphic(JPG) · Detail(DOC) · Summary(TXT) · PM Curve(JPG) 형식의 파일로 출력합니다. 벽체는 `SELECTIONS`(벽체 ID + 층)으로 지정합니다.
 
@@ -8898,7 +8898,7 @@ print(res.json())
 
 ---
 
-## 51. `DESIGN/RC/KDS-41-20-2022/HCD-ANAL` — RC 헌치보 설계 수행
+## 51. `DESIGN/RC/KDS-41-20-2022/HCD-ANAL` — RC Haunched Beam Design Perform (RC 헌치보 설계 수행)
 
 > **기능:** 지정한 헌치보(Haunched Beam) 요소에 대해 RC 설계 계산을 수행합니다. 결과는 이후 `HCD-TABLE` / `HCD-REPORT` 로 조회합니다.
 
@@ -8990,7 +8990,7 @@ print("POST:", res.status_code, res.json())   # {"message": "success"}
 
 ---
 
-## 52. `DESIGN/RC/KDS-41-20-2022/HCD-TABLE` — RC 헌치보 설계 테이블
+## 52. `DESIGN/RC/KDS-41-20-2022/HCD-TABLE` — RC Haunched Beam Design Table (RC 헌치보 설계 테이블)
 
 > **기능:** 수행된 RC 헌치보 설계 결과를 표(HEAD/DATA) 형태로 반환합니다. 헌치 구간(T/N 구간)별 위치(`POS`)에 따라 휨·전단 검토 결과를 제공합니다.
 
@@ -9208,7 +9208,7 @@ for row in table["DATA"]:
 
 ---
 
-## 53. `DESIGN/RC/KDS-41-20-2022/HCD-REPORT` — RC 헌치보 설계 리포트
+## 53. `DESIGN/RC/KDS-41-20-2022/HCD-REPORT` — RC Haunched Beam Design Report (RC 헌치보 설계 리포트)
 
 > **기능:** RC 헌치보 설계 결과를 Graphic(JPG) 형식의 파일로 출력합니다.
 
@@ -9314,7 +9314,7 @@ print(res.json())   # {"SUCCESS": true, "FILE_PATH": "...", "MESSAGE": ""}
 
 ---
 
-## 54. `DESIGN/RC/KDS-41-20-2022/BC-ANAL` — RC 보 검토 수행
+## 54. `DESIGN/RC/KDS-41-20-2022/BC-ANAL` — RC Beam Check Perform (RC 보 검토 수행)
 
 > **기능:** 기존 배근(rebar)이 배정된 RC 보 부재에 대해 **코드 검토(Checking)** 계산을 수행합니다. 전체(`ALL`)·요소별(`ELEMS`)·단면별(`SECTIONS`) 대상 선택을 지원하며, 결과는 이후 `BC-TABLE`/`BC-REPORT`로 조회합니다.
 
@@ -9461,7 +9461,7 @@ print(res.json())   # {"message": "success"}
 
 ---
 
-## 55. `DESIGN/RC/KDS-41-20-2022/BC-TABLE` — RC 보 검토 테이블
+## 55. `DESIGN/RC/KDS-41-20-2022/BC-TABLE` — RC Beam Check Table (RC 보 검토 테이블)
 
 > **기능:** RC 보 검토 결과를 표(HEAD/DATA) 형식으로 반환합니다. 강도 검토(휨 정/부모멘트·전단)와 배근 상세(주근·스터럽 최소/최대 조건)가 함께 출력됩니다.
 
@@ -9824,7 +9824,7 @@ for row in table["DATA"]:
 
 ---
 
-## 56. `DESIGN/RC/KDS-41-20-2022/BC-REPORT` — RC 보 검토 리포트
+## 56. `DESIGN/RC/KDS-41-20-2022/BC-REPORT` — RC Beam Check Report (RC 보 검토 리포트)
 
 > **기능:** RC 보 검토 결과를 파일(그래픽 JPG / Detail DOC / Summary TXT)로 내보냅니다. 여러 요소를 지정하면 인덱스·요소번호가 접두된 파일명으로 각각 저장됩니다.
 
@@ -10034,7 +10034,7 @@ print(res.json())   # {"SUCCESS": true, "FILE_PATH": "...detail.txt", "MESSAGE":
 ```
 
 ---
-## 57. `DESIGN/RC/KDS-41-20-2022/CC-ANAL` — RC 기둥 검토 수행
+## 57. `DESIGN/RC/KDS-41-20-2022/CC-ANAL` — RC Column Check Perform (RC 기둥 검토 수행)
 
 > **기능:** 배근이 배정된 RC 기둥 부재에 대해 **P-M 상관·전단 코드 검토**를 수행합니다. 전체/요소별/단면별 대상 선택을 지원합니다.
 
@@ -10185,7 +10185,7 @@ print(res.json())   # {"message": "success"}
 
 ---
 
-## 58. `DESIGN/RC/KDS-41-20-2022/CC-TABLE` — RC 기둥 검토 테이블
+## 58. `DESIGN/RC/KDS-41-20-2022/CC-TABLE` — RC Column Check Table (RC 기둥 검토 테이블)
 
 > **기능:** RC 기둥 검토 결과를 표로 반환합니다. P-M 상관(축력/모멘트 강도비), 단·중앙부 전단, 주근·후프(Hoop) 배근 상세를 포함합니다.
 
@@ -10643,7 +10643,7 @@ for row in table["DATA"]:
 
 ---
 
-## 59. `DESIGN/RC/KDS-41-20-2022/CC-REPORT` — RC 기둥 검토 리포트
+## 59. `DESIGN/RC/KDS-41-20-2022/CC-REPORT` — RC Column Check Report (RC 기둥 검토 리포트)
 
 > **기능:** RC 기둥 검토 결과를 파일(Graphic/Detail/Summary)로 내보냅니다.
 
@@ -10846,7 +10846,7 @@ print(res.json())   # {"SUCCESS": true, "FILE_PATH": "...", "MESSAGE": ""}
 
 ---
 
-## 60. `DESIGN/RC/KDS-41-20-2022/BRC-ANAL` — RC 가새 검토 수행
+## 60. `DESIGN/RC/KDS-41-20-2022/BRC-ANAL` — RC Brace Check Perform (RC 가새 검토 수행)
 
 > **기능:** 배근이 배정된 RC 가새(Brace) 부재에 대해 P-M 상관·전단 코드 검토를 수행합니다.
 
@@ -10998,7 +10998,7 @@ print(res.json())   # {"message": "success"}
 
 ---
 
-## 61. `DESIGN/RC/KDS-41-20-2022/BRC-TABLE` — RC 가새 검토 테이블
+## 61. `DESIGN/RC/KDS-41-20-2022/BRC-TABLE` — RC Brace Check Table (RC 가새 검토 테이블)
 
 > **기능:** RC 가새 검토 결과를 표로 반환합니다. 구성은 기둥 검토와 유사하나 단부 구분이 없는 단일 위치 값(축력/모멘트 강도비, 전단, 후프 배근)을 제공합니다. 응답 최상위 키는 `TABLE_NAME`(미지정 시 예제에서는 `"Result Table"`)입니다.
 
@@ -11411,7 +11411,7 @@ for row in table["DATA"]:
 
 ---
 
-## 62. `DESIGN/RC/KDS-41-20-2022/BRC-REPORT` — RC 가새 검토 리포트
+## 62. `DESIGN/RC/KDS-41-20-2022/BRC-REPORT` — RC Brace Check Report (RC 가새 검토 리포트)
 
 > **기능:** RC 가새 검토 결과를 파일(Graphic/Detail/Summary)로 내보냅니다.
 
@@ -11616,7 +11616,7 @@ print(res.json())   # {"SUCCESS": true, "FILE_PATH": "...Graphic.jpg", "MESSAGE"
 
 ---
 
-## 63. `DESIGN/RC/KDS-41-20-2022/WC-ANAL` — RC 벽체 검토 수행
+## 63. `DESIGN/RC/KDS-41-20-2022/WC-ANAL` — RC Wall Check Perform (RC 벽체 검토 수행)
 
 > **기능:** RC 벽체(Shear Wall) 부재에 대해 코드 검토를 수행합니다. 벽체는 요소번호가 아니라 **벽 ID(WALL_IDS)와 층(STORY)** 조합(`SELECTIONS`)으로 대상을 지정하며, 생략 시 전체 벽·전체 층을 검토합니다.
 
@@ -11784,7 +11784,7 @@ print(res.json())   # {"message": "success"}
 
 ---
 
-## 64. `DESIGN/RC/KDS-41-20-2022/WC-TABLE` — RC 벽체 검토 테이블
+## 64. `DESIGN/RC/KDS-41-20-2022/WC-TABLE` — RC Wall Check Table (RC 벽체 검토 테이블)
 
 > **기능:** RC 벽체 검토 결과를 표로 반환합니다. 벽체는 `TABLE_TYPE`으로 출력 단위를 선택하며(`"WID+STORY"`=벽ID+층, `"WID"`=벽ID), 대상은 `SELECTIONS`(WALL_IDS + STORY)로 지정합니다. 응답은 `HEAD`/`DATA`가 아니라 **`COMPONENTS` + `DATA`(각 행이 컬럼명 키를 가진 객체)** 형식입니다.
 
@@ -12232,7 +12232,7 @@ for rec in body["DATA"]:      # DATA는 객체(dict)의 배열
 
 ---
 
-## 65. `DESIGN/RC/KDS-41-20-2022/WC-REPORT` — RC 벽체 검토 리포트
+## 65. `DESIGN/RC/KDS-41-20-2022/WC-REPORT` — RC Wall Check Report (RC 벽체 검토 리포트)
 
 > **기능:** RC 벽체 검토 결과를 파일로 내보냅니다. 벽체는 `REPORT_TYPE`으로 출력 단위(`"WID+STORY"`/`"WID"`)를 정하고 각각 `CURRENT_MODE_WID_STORY`/`CURRENT_MODE_WID`로 모드(Graphic·Detail·Summary·PMCurve)를 지정합니다. 대상은 `SELECTIONS`로 지정합니다.
 
@@ -12462,7 +12462,7 @@ print(res.json())   # {"SUCCESS": true, "FILE_PATH": "...", "MESSAGE": ""}
 ```
 
 ---
-## 66. `DESIGN/RC/KDS-41-20-2022/CDESIGN` — RC 콘크리트 종합 설계 결과
+## 66. `DESIGN/RC/KDS-41-20-2022/CDESIGN` — RC Concrete Design Result (RC 콘크리트 종합 설계 결과)
 
 > **기능:** RC 콘크리트 설계(보·기둥·가새·벽체 통합) 결과를 화면에 표시하고 **이미지 파일로 캡처**합니다. 표시 하중조합, 강도비 성분(축력/전단/휨/조합), 배근 표시, 부재 종류 필터, 값/범례 등 그래픽 옵션을 세밀하게 설정합니다.
 
@@ -12868,7 +12868,7 @@ print(res.json())   # 성공 시 지정 경로에 이미지 파일 생성
 
 ---
 
-## 67. `DESIGN/RC/KDS-41-20-2022/TABLE` — 기둥 설계력(Column Design Forces)
+## 67. `DESIGN/RC/KDS-41-20-2022/TABLE` — Column Design Forces (기둥 설계력)
 
 > **기능:** RC 설계용 **기둥(Column) 부재 설계력**(3축 힘·모멘트)을 하중조합별로 추출합니다.
 
@@ -13189,7 +13189,7 @@ for row in table["DATA"][:5]:
 
 ---
 
-## 68. `DESIGN/RC/KDS-41-20-2022/TABLE` — 가새 설계력(Brace Design Forces)
+## 68. `DESIGN/RC/KDS-41-20-2022/TABLE` — Brace Design Forces (가새 설계력)
 
 > **기능:** RC 설계용 **가새(Brace) 부재 설계력**(3축 힘·모멘트)을 추출합니다. 응답 컬럼 구조는 기둥과 동일합니다.
 
@@ -13519,7 +13519,7 @@ for row in table["DATA"][:5]:
 
 ---
 
-## 69. `DESIGN/RC/KDS-41-20-2022/TABLE` — 보 설계력(Beam Design Forces)
+## 69. `DESIGN/RC/KDS-41-20-2022/TABLE` — Beam Design Forces (보 설계력)
 
 > **기능:** RC 설계용 **보(Beam) 부재 설계력**을 추출합니다. 휨설계 기준의 전단력·비틀림·정/부 모멘트를 제공합니다.
 

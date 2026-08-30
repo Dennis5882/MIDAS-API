@@ -127,7 +127,7 @@ GEN NX의 벽체설계 로직(Wall ID별 설계)을 만족하도록 Wall ID를 �
 | Story Data 등록 | `POST /db/STOR` | [`02_DB_Project_Structure.md#14-dbstor--story-data`](../../manual/02_DB_Project_Structure.md#14-dbstor--story-data) |
 | 벽체/보 Node·Element 생성 | `POST /db/NODE`, `POST /db/ELEM` | [`03_DB_Node_Element.md#1-dbnode`](../../manual/03_DB_Node_Element.md#1-dbnode), [`#2-dbelem`](../../manual/03_DB_Node_Element.md#2-dbelem) |
 | Material/Section/Thickness 생성 | `POST /db/MATL`, `POST /db/SECT`, `POST /db/THIK` | [`04_DB_Properties.md#1-dbmatl`](../../manual/04_DB_Properties.md#1-dbmatl), [`#12-dbsect`](../../manual/04_DB_Properties.md#12-dbsect) |
-| Wall Mark(Mark ↔ Wall ID 매핑) | `POST /db/WMAK` | [`24_DB_Design.md#9-dbwmak--벽체-마크-설계-수정`](../../manual/24_DB_Design.md#9-dbwmak--벽체-마크-설계-수정) |
+| Wall Mark(Mark ↔ Wall ID 매핑) | `POST /db/WMAK` | [`24_DB_Design.md#9-dbwmak--modify-wall-mark-design-벽체-마크-설계-수정`](../../manual/24_DB_Design.md#9-dbwmak--modify-wall-mark-design-벽체-마크-설계-수정) |
 
 - GEN NX 네이티브 `Structure > Building > Auto Wall ID Generation`(트리 메뉴 "Modify Wall Mark
   Data") 화면에 Plug-in이 만든 Wall Mark/Wall ID 데이터가 그대로 나타나는 것을 확인했으므로,

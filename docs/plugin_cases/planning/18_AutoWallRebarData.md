@@ -115,7 +115,7 @@
 | 기능 | 대응 GEN NX 메뉴 | `docs/manual` 커버리지 |
 | --- | --- | --- |
 | 벽체 배근(수직·수평·단부보강근·경계요소) 조회/입력 | `Design > Rebar Input > Modify Wall Rebar Data` | ⚠️ 전용 엔드포인트 미문서화(아래 참고) |
-| Wall Mark 목록 조회 | `Design > Design Input Data > Modify Wall Mark Data` | [`24_DB_Design.md#9-dbwmak--벽체-마크-설계-수정`](../../manual/24_DB_Design.md#9-dbwmak--벽체-마크-설계-수정) (`/db/WMAK`) |
+| Wall Mark 목록 조회 | `Design > Design Input Data > Modify Wall Mark Data` | [`24_DB_Design.md#9-dbwmak--modify-wall-mark-design-벽체-마크-설계-수정`](../../manual/24_DB_Design.md#9-dbwmak--modify-wall-mark-design-벽체-마크-설계-수정) (`/db/WMAK`) |
 | Wall Mark별 부재별 철근 설계기준 | (참고) `DESIGN/RC/KDS-41-20-2022/DCRM-WALL` | [`26_Design_RC_KDS41202022.md`](../../manual/26_Design_RC_KDS41202022.md) (§32 `DCRM-WALL`) |
 
 - ⚠️ **중요 발견**: 이 Plug-in이 조작하는 "벽체 배근(Modify Wall Rebar Data)" — 수직/수평

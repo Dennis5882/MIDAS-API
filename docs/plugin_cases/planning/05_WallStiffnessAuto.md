@@ -94,8 +94,8 @@
 | 화면 표시 | 용도(화면 표시) | 문서 위치 |
 | --- | --- | --- |
 | `POST doc/ANAL` | 구조해석 실행 | [`01_DOC.md#11-docanal--perform-analysis`](../../manual/01_DOC.md#11-docanal--perform-analysis) |
-| `POST WD/WC-ANAL` | 벽체 설계·배근 검토 | [`26_Design_RC_KDS41202022.md#63-designrckds-41-20-2022wc-anal--rc-벽체-검토-수행`](../../manual/26_Design_RC_KDS41202022.md#63-designrckds-41-20-2022wc-anal--rc-벽체-검토-수행) |
-| `POST WD/WC-TABLE` | NG 부재·응력비 조회 | [`26_Design_RC_KDS41202022.md#64-designrckds-41-20-2022wc-table--rc-벽체-검토-테이블`](../../manual/26_Design_RC_KDS41202022.md#64-designrckds-41-20-2022wc-table--rc-벽체-검토-테이블) |
+| `POST WD/WC-ANAL` | 벽체 설계·배근 검토 | [`26_Design_RC_KDS41202022.md#63-designrckds-41-20-2022wc-anal--rc-wall-check-perform-rc-벽체-검토-수행`](../../manual/26_Design_RC_KDS41202022.md#63-designrckds-41-20-2022wc-anal--rc-wall-check-perform-rc-벽체-검토-수행) |
+| `POST WD/WC-TABLE` | NG 부재·응력비 조회 | [`26_Design_RC_KDS41202022.md#64-designrckds-41-20-2022wc-table--rc-wall-check-table-rc-벽체-검토-테이블`](../../manual/26_Design_RC_KDS41202022.md#64-designrckds-41-20-2022wc-table--rc-wall-check-table-rc-벽체-검토-테이블) |
 | `GET db/ELEM · NODE · STOR` | 요소·층 매핑 | [`03_DB_Node_Element.md#1-dbnode`](../../manual/03_DB_Node_Element.md#1-dbnode), [`#2-dbelem`](../../manual/03_DB_Node_Element.md#2-dbelem), [`02_DB_Project_Structure.md#14-dbstor--story-data`](../../manual/02_DB_Project_Structure.md#14-dbstor--story-data) |
 | `GET / PUT db/WSSF` | 강성 증감계수 조회·적용 | ⚠️ 이 저장소의 `docs/manual`에는 `/db/WSSF` 전용 엔드포인트 문서가 없다(아래 참고) |
 | `GET view/SELECT` | 선택 부재 읽기 | [`16_VIEW.md#1-viewselect--select`](../../manual/16_VIEW.md#1-viewselect--select) |

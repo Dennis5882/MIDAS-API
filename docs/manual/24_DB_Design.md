@@ -23,25 +23,25 @@
 
 | No. | Endpoint | 기능 | Active Methods |
 |-----|----------|------|----------------|
-| 1 | [`/db/DCON`](#1-dbdcon--rc-설계-코드) | RC 설계 코드 | POST, GET, PUT, DELETE |
-| 2 | [`/db/DSTL`](#2-dbdstl--강재-설계-코드) | 강재(Steel) 설계 코드 | POST, GET, PUT, DELETE |
-| 3 | [`/db/RCHK`](#3-dbrchk--검토용-철근-입력-beamcolumn) | 검토용 철근 입력 (Beam/Column) | POST, GET, PUT, DELETE |
-| 4 | [`/db/LENG`](#4-dbleng--비지지-길이) | 비지지 길이 (Unbraced Length) | POST, GET, PUT, DELETE |
-| 5 | [`/db/MEMB`](#5-dbmemb--설계-부재-배정) | 설계 부재 배정 (Member Assignment) | POST, GET, PUT, DELETE |
-| 6 | [`/db/DCTL`](#6-dbdctl--프레임-정의) | 프레임 정의 (Definition of Frame) | POST, GET, PUT, DELETE |
-| 7 | [`/db/LTSR`](#7-dbltsr--세장비-제한) | 세장비 제한 (Limiting Slenderness Ratio) | POST, GET, PUT, DELETE |
-| 8 | [`/db/MBTP`](#8-dbmbtp--부재-타입-수정) | 부재 타입 수정 (Modify Member Type) | POST, GET, PUT, DELETE |
-| 9 | [`/db/WMAK`](#9-dbwmak--벽체-마크-설계-수정) | 벽체 마크 설계 수정 (Modify Wall Mark) | POST, GET, PUT, DELETE |
-| 10 | [`/db/REBB`](#10-dbrebb--보-철근-데이터-수정) | 보 철근 데이터 수정 (Modify Beam Rebar) | POST, GET, PUT, DELETE |
-| 11 | [`/db/REBC`](#11-dbrebc--기둥-철근-데이터-수정) | 기둥 철근 데이터 수정 (Modify Column Rebar) | **POST** |
-| 12 | [`/db/REBW`](#12-dbrebw--벽체-철근-데이터-수정) | 벽체 철근 데이터 수정 (Modify Wall Rebar) | POST, GET, PUT, DELETE |
-| 13 | [`/db/REBR`](#13-dbrebr--가새-철근-데이터-수정) | 가새 철근 데이터 수정 (Modify Brace Rebar) | POST, GET, PUT, DELETE |
+| 1 | [`/db/DCON`](#1-dbdcon--rc-design-code-rc-설계-코드) | RC 설계 코드 | POST, GET, PUT, DELETE |
+| 2 | [`/db/DSTL`](#2-dbdstl--design-steel-code-강재-설계-코드) | 강재(Steel) 설계 코드 | POST, GET, PUT, DELETE |
+| 3 | [`/db/RCHK`](#3-dbrchk--rebar-input-for-checking---beamcolumn-검토용-철근-입력) | 검토용 철근 입력 (Beam/Column) | POST, GET, PUT, DELETE |
+| 4 | [`/db/LENG`](#4-dbleng--unbraced-length-비지지-길이) | 비지지 길이 (Unbraced Length) | POST, GET, PUT, DELETE |
+| 5 | [`/db/MEMB`](#5-dbmemb--member-assignment-설계-부재-배정) | 설계 부재 배정 (Member Assignment) | POST, GET, PUT, DELETE |
+| 6 | [`/db/DCTL`](#6-dbdctl--definition-of-frame-프레임-정의) | 프레임 정의 (Definition of Frame) | POST, GET, PUT, DELETE |
+| 7 | [`/db/LTSR`](#7-dbltsr--limiting-slenderness-ratio-세장비-제한) | 세장비 제한 (Limiting Slenderness Ratio) | POST, GET, PUT, DELETE |
+| 8 | [`/db/MBTP`](#8-dbmbtp--modify-member-type-부재-타입-수정) | 부재 타입 수정 (Modify Member Type) | POST, GET, PUT, DELETE |
+| 9 | [`/db/WMAK`](#9-dbwmak--modify-wall-mark-design-벽체-마크-설계-수정) | 벽체 마크 설계 수정 (Modify Wall Mark) | POST, GET, PUT, DELETE |
+| 10 | [`/db/REBB`](#10-dbrebb--modify-beam-rebar-data-보-철근-데이터-수정) | 보 철근 데이터 수정 (Modify Beam Rebar) | POST, GET, PUT, DELETE |
+| 11 | [`/db/REBC`](#11-dbrebc--modify-column-rebar-data-기둥-철근-데이터-수정) | 기둥 철근 데이터 수정 (Modify Column Rebar) | **POST** |
+| 12 | [`/db/REBW`](#12-dbrebw--modify-wall-rebar-data-벽체-철근-데이터-수정) | 벽체 철근 데이터 수정 (Modify Wall Rebar) | POST, GET, PUT, DELETE |
+| 13 | [`/db/REBR`](#13-dbrebr--modify-brace-rebar-data-가새-철근-데이터-수정) | 가새 철근 데이터 수정 (Modify Brace Rebar) | POST, GET, PUT, DELETE |
 
 > ⚠️ **`/db/REBC`(11번)는 POST(생성/설정)만 지원**합니다. 나머지 12개 엔드포인트는 POST · GET · PUT · DELETE 전체(CRUD)를 지원합니다.
 
 ---
 
-## 1. `/db/DCON` — RC 설계 코드
+## 1. `/db/DCON` — RC Design Code (RC 설계 코드)
 
 > **기능:** RC(철근콘크리트) 부재 설계에 사용할 설계 기준(Design Code)을 지정합니다. KDS·KCI·ACI·Eurocode·AASHTO 등 다양한 국가/버전 코드를 문자열로 설정합니다.
 
@@ -151,7 +151,7 @@ print("현재 설계 코드:", res.json())
 
 ---
 
-## 2. `/db/DSTL` — 강재 설계 코드
+## 2. `/db/DSTL` — Design Steel Code (강재 설계 코드)
 
 > **기능:** 강재(Steel) 부재 설계에 사용할 설계 기준을 지정합니다. KDS·KSSC·AISC·Eurocode3·AASHTO 등을 문자열로 설정합니다.
 
@@ -250,7 +250,7 @@ print("현재 강재 코드:", requests.get(f"{BASE_URL}/db/DSTL", headers=HEADE
 
 ---
 
-## 3. `/db/RCHK` — 검토용 철근 입력 (Beam/Column)
+## 3. `/db/RCHK` — Rebar Input for Checking - Beam/Column (검토용 철근 입력)
 
 > **기능:** 설계 검토(Checking) 시 사용할 실제 배근 정보를 부재(요소)별로 입력합니다. `MEMBTYPE`에 따라 **BEAM(보)** 또는 **COLUMN(기둥)** 트리 중 하나를 채우며, 주철근 레이어·부철근(전단/비틀림/다발 철근) 정보를 상세히 담습니다.
 
@@ -611,7 +611,7 @@ print(requests.get(f"{BASE_URL}/db/RCHK", headers=HEADERS).json())
 
 ---
 
-## 4. `/db/LENG` — 비지지 길이
+## 4. `/db/LENG` — Unbraced Length (비지지 길이)
 
 > **기능:** 부재의 좌굴 검토에 사용할 비지지 길이(Unbraced Length)를 요소별로 입력합니다. 강축/약축(Ly, Lz), 횡비틀림 좌굴 길이(Lb, Lt)를 지정하거나 코드에 의한 자동 계산을 설정할 수 있습니다.
 
@@ -716,7 +716,7 @@ print(requests.get(f"{BASE_URL}/db/LENG", headers=HEADERS).json())
 
 ---
 
-## 5. `/db/MEMB` — 설계 부재 배정
+## 5. `/db/MEMB` — Member Assignment (설계 부재 배정)
 
 > **기능:** 여러 요소를 하나의 설계 부재(Design Member)로 묶어 배정합니다. `AELEM`에 요소 번호 배열을 넣고, 필요 시 국부좌표 방향을 반전(`bREVERSE`)합니다.
 >
@@ -820,7 +820,7 @@ print(requests.get(f"{BASE_URL}/db/MEMB", headers=HEADERS).json())
 
 ---
 
-## 6. `/db/DCTL` — 프레임 정의
+## 6. `/db/DCTL` — Definition of Frame (프레임 정의)
 
 > **기능:** 설계 시 프레임의 좌굴 거동(횡구속/비횡구속) 및 유효좌굴길이계수(K) 자동 계산 여부, 설계 평면(Design Type)을 정의합니다.
 
@@ -917,7 +917,7 @@ print(requests.get(f"{BASE_URL}/db/DCTL", headers=HEADERS).json())
 
 ---
 
-## 7. `/db/LTSR` — 세장비 제한
+## 7. `/db/LTSR` — Limiting Slenderness Ratio (세장비 제한)
 
 > **기능:** 부재의 압축/인장 한계 세장비(Limiting Slenderness Ratio)를 요소별로 지정하거나 검토를 생략(`bNOTCHECK`)합니다.
 
@@ -1004,7 +1004,7 @@ print(requests.get(f"{BASE_URL}/db/LTSR", headers=HEADERS).json())
 
 ---
 
-## 8. `/db/MBTP` — 부재 타입 수정
+## 8. `/db/MBTP` — Modify Member Type (부재 타입 수정)
 
 > **기능:** 요소의 설계 부재 타입(Column / Beam / Brace)을 지정·변경합니다.
 
@@ -1091,7 +1091,7 @@ print(requests.get(f"{BASE_URL}/db/MBTP", headers=HEADERS).json())
 
 ---
 
-## 9. `/db/WMAK` — 벽체 마크 설계 수정
+## 9. `/db/WMAK` — Modify Wall Mark Design (벽체 마크 설계 수정)
 
 > **기능:** 설계용 벽체 마크(Wall Mark)를 정의합니다. 마크 이름과 해당 마크에 속하는 벽체 ID 목록을 지정합니다.
 
@@ -1177,7 +1177,7 @@ print(requests.get(f"{BASE_URL}/db/WMAK", headers=HEADERS).json())
 
 ---
 
-## 10. `/db/REBB` — 보 철근 데이터 수정
+## 10. `/db/REBB` — Modify Beam Rebar Data (보 철근 데이터 수정)
 
 > **기능:** 단면(section) 번호별로 콘크리트 보의 철근 데이터를 수정합니다. 각 `ITEMS` 항목은 I·M·J 세 구간(`BAR_SECTOR_I/M/J`)의 상·하단 주철근, 스터럽(전단철근), 표피철근(skin bar) 정보와 피복 거리(`MAIN_BAR_DC_*`)를 포함합니다.
 
@@ -1437,7 +1437,7 @@ print(requests.get(f"{BASE_URL}/db/REBB", headers=HEADERS).json())
 
 ---
 
-## 11. `/db/REBC` — 기둥 철근 데이터 수정
+## 11. `/db/REBC` — Modify Column Rebar Data (기둥 철근 데이터 수정)
 
 > **기능:** 단면 번호별로 콘크리트 기둥의 철근 데이터를 수정합니다. 주철근(`MAIN_BAR`), 단부/중앙부 전단철근(`SHEAR_BAR_END`/`SHEAR_BAR_CEN`), 피복 거리(`DO`), 후프 타입(`HOOP_TYPE`), 후크 타입(`HOOK_TYPE`)을 포함합니다.
 >
@@ -1651,7 +1651,7 @@ print("POST:", res.status_code, res.json())
 
 ---
 
-## 12. `/db/REBW` — 벽체 철근 데이터 수정
+## 12. `/db/REBW` — Modify Wall Rebar Data (벽체 철근 데이터 수정)
 
 > **기능:** 벽체 ID별로 철근 데이터를 수정합니다. 수직/수평 철근, 단부 철근(End Rebar), 경계요소(Boundary Element) 수평 철근, 피복 거리(dw, de), 두께 및 서브 벽체 ID/층(Story) 정보를 포함합니다.
 
@@ -1884,7 +1884,7 @@ print(requests.get(f"{BASE_URL}/db/REBW", headers=HEADERS).json())
 
 ---
 
-## 13. `/db/REBR` — 가새 철근 데이터 수정
+## 13. `/db/REBR` — Modify Brace Rebar Data (가새 철근 데이터 수정)
 
 > **기능:** 단면 번호별로 콘크리트 가새(Brace)의 철근 데이터를 수정합니다. 구조는 기둥(REBC)과 유사하나 `USE_CORNER`/`HOOK_TYPE` 없이 주철근(`MAIN_BAR`), 단부/중앙부 전단철근, 피복(`DO`), 후프 타입(`HOOP_TYPE`)으로 구성됩니다.
 
