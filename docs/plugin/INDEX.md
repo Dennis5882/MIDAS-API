@@ -34,16 +34,22 @@ Manual과 같지만, 문서 성격은 다르다:
 이 INDEX.md는 카탈로그이자 작업 트래커다. "상태" 컬럼이 ⬜(미작성)인 항목은 아직 개별 문서가
 없다 — 원문 링크만 확인된 상태다. 필요할 때(사용자 요청 시) 해당 원문을 다시 스크래핑해
 `tools/*.md` 템플릿에 맞춰 채우고, 이 표의 상태를 ✅로 갱신한다. 규모가 크면 CLAUDE.md의
-리서치/편집 분리 서브에이전트 패턴을 그대로 재사용한다.
+리서치/편집 분리 서브에이전트 패턴을 그대로 재사용한다. **⚠️ 폐기됨**은 한때 랜딩 페이지에
+있었고 개별 문서도 작성했으나, 이후 공식 사이트에서 아티클 자체가 삭제(404)된 항목 — 문서는
+과거 기록용으로 남겨두되 더 이상 동기화 점검 대상이 아니다(`common.py`의
+`PLUGIN_ARTICLE_IDS`에서도 제외).
 
 - Guide: 4/4 작성 완료
-- Plug-in Item: 63/63 작성 완료 (원문 53건 중 "Image Capture Generator"는 "Easy Capture
-  Generator"와 동일 URL의 별칭이라 1건으로 병합 + 2026-08-06 랜딩 페이지 재확인 시 신규 발견
-  4건 추가 + 2026-08-15 랜딩 페이지 재확인 시 신규 발견 2건 추가 + 2026-08-24 랜딩 페이지
-  재확인 시 신규 발견 5건 추가. "Response Spectrum Generator"도 랜딩 페이지에 지역 코드별
-  별칭("[Peru E.030:2026]", "[SNZ TS 1170.5:2025]")으로 두 번 더 나열되나 동일 아티클이라
-  건수에 포함하지 않음 — 해당 코드들은 [Response_Spectrum_Generator.md](tools/Response_Spectrum_Generator.md)의
-  "적용 기준"에 이미 반영돼 있음)
+- Plug-in Item: 65건 등재(작성 완료 61 + 폐기됨 2 + 미작성 2). 연혁: 원문 53건 중 "Image
+  Capture Generator"는 "Easy Capture Generator"와 동일 URL의 별칭이라 1건으로 병합 +
+  2026-08-06 신규 발견 4건 + 2026-08-15 신규 발견 2건 + 2026-08-24 신규 발견 5건 +
+  2026-08-30 정기 점검 시 신규 발견 2건("Point to Patch Convertor"·"Model Report Builder")과,
+  같은 날 기존 2건("Floor Load Table Generator"·"Easy Result Table")이 공식 사이트에서
+  삭제된 것을 확인해 폐기됨으로 전환한 것. "Response Spectrum Generator"도 랜딩 페이지에 지역
+  코드별 별칭("[Peru E.030:2026]", "[SNZ TS 1170.5:2025]")으로 두 번 더 나열되나 동일
+  아티클이라 건수에 포함하지 않음 — 해당 코드들은
+  [Response_Spectrum_Generator.md](tools/Response_Spectrum_Generator.md)의 "적용 기준"에
+  이미 반영돼 있음)
 
 ---
 
@@ -58,7 +64,7 @@ Manual과 같지만, 문서 성격은 다르다:
 
 ---
 
-## Plug-in Item — 개별 툴 (64건, 고유 63건)
+## Plug-in Item — 개별 툴 (65건, 그중 폐기됨 2건)
 
 원문 페이지는 하위 카테고리 없이 알파벳순 flat 목록이라, 이 표도 원문 순서를 그대로 따른다.
 파일명은 번호를 매기지 않고 툴 이름을 슬러그화한 것 — 신규 Plug-in이 추가돼도 기존 파일 재번호가
@@ -118,8 +124,8 @@ Manual과 같지만, 문서 성격은 다르다:
 | 50 | Thailand DPT Code Auto Searching | [tools/Thailand_DPT_Code_Auto_Searching.md](tools/Thailand_DPT_Code_Auto_Searching.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/52715682940313-Thailand-DPT-Code-Auto-Searching) |
 | 51 | Tunnel Lining Generator | [tools/Tunnel_Lining_Generator.md](tools/Tunnel_Lining_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/35655721814937-Tunnel-Lining-Model) |
 | 52 | Wind Load Calculator for Bridges (HK) | [tools/Wind_Load_Calculator_for_Bridges_HK.md](tools/Wind_Load_Calculator_for_Bridges_HK.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/40645303004697-Wind-Load-Calculator-for-bridges-HK) |
-| 53 | Floor Load Table Generator | [tools/Floor_Load_Table_Generator.md](tools/Floor_Load_Table_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/ko/articles/49475987573657-Floor-Load-Table-Generator) |
-| 54 | Easy Result Table | [tools/Easy_Result_Table.md](tools/Easy_Result_Table.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/ko/articles/49504449511705-Easy-Result-Table) |
+| 53 | Floor Load Table Generator | [tools/Floor_Load_Table_Generator.md](tools/Floor_Load_Table_Generator.md) | ⚠️ 폐기됨 (2026-08-30 확인, 원문 404) | ~~[원문](https://support.midasuser.com/hc/ko/articles/49475987573657-Floor-Load-Table-Generator)~~ |
+| 54 | Easy Result Table | [tools/Easy_Result_Table.md](tools/Easy_Result_Table.md) | ⚠️ 폐기됨 (2026-08-30 확인, 원문 404) | ~~[원문](https://support.midasuser.com/hc/ko/articles/49504449511705-Easy-Result-Table)~~ |
 | 55 | Bulk Tabular Result Exporter | [tools/Bulk_Tabular_Result_Exporter.md](tools/Bulk_Tabular_Result_Exporter.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/ko/articles/60848073556633-Bulk-Tabular-Result-Exporter) |
 | 56 | Skew Grillage Geometry Generator | [tools/Skew_Grillage_Geometry_Generator.md](tools/Skew_Grillage_Geometry_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/ko/articles/60848423734169-Skew-Grillage-Geometry-Generator) |
 | 57 | CS454 Load Assessment Combinations | [tools/CS454_Load_Assessment_Combinations.md](tools/CS454_Load_Assessment_Combinations.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/ko/articles/60997850893209-CS454-Load-Assessment-Combinations) |
@@ -129,6 +135,8 @@ Manual과 같지만, 문서 성격은 다르다:
 | 61 | Eurocode Load Combinations Plugin | [tools/Eurocode_Load_Combinations_Plugin.md](tools/Eurocode_Load_Combinations_Plugin.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/ko/articles/61259382041369-Eurocode-Load-Combinations) |
 | 62 | Eurocode Moving Load Case Generator | [tools/Eurocode_Moving_Load_Case_Generator.md](tools/Eurocode_Moving_Load_Case_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/ko/articles/61259043302041-Eurocode-Moving-Load-Case-Generator) |
 | 63 | Load Combination Contribution Analyzer | [tools/Load_Combination_Contribution_Analyzer.md](tools/Load_Combination_Contribution_Analyzer.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/ko/articles/61258768334233-Load-Combination-Contribution-Analyzer) |
+| 64 | Point to Patch Convertor | — | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/61486703401753-Point-to-Patch-Convertor) |
+| 65 | Model Report Builder | — | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/61655350763289-Model-Report-Builder) |
 
 [^1]: 원문 페이지에는 "Image Capture Generator"라는 이름으로도 한 번 더 나열되어 있으나 같은
     URL(`35639906272025-Easy-Capture-Generator`)을 가리키는 동일 아티클이다.
@@ -151,6 +159,15 @@ Manual과 같지만, 문서 성격은 다르다:
 > 본문은 영어로만 작성돼 있다(한국어 번역 미제공). "Eurocode Load Combinations Plugin"
 > 아티클은 다른 문서와 달리 GUI 사용법이 아닌 버전 릴리스 노트 형식으로 작성돼 있어, 해당
 > 문서의 "사용 방법" 절은 비워 두었다.
+>
+> **2026-08-30 정기 점검(변경):** 랜딩 페이지 `updated_at` 갱신(2026-08-18 → 2026-08-28)을
+> 계기로 재확인한 결과, 신규 아티클 2건("Point to Patch Convertor" 원문 생성 2026-08-24,
+> "Model Report Builder" 원문 생성 2026-08-28, 둘 다 No. 64~65로 미작성 상태 추가)과 함께
+> 기존 No. 53("Floor Load Table Generator")·54("Easy Result Table")가 랜딩 페이지 링크
+> 목록에서 빠진 것을 발견했다. 두 아티클을 직접 조회한 결과 모두 404 — 공식 사이트에서
+> 삭제된 것으로 확인, 상태를 ⚠️ 폐기됨으로 전환하고(문서 파일은 보존) `common.py`의
+> `PLUGIN_ARTICLE_IDS`에서 두 id를 제거했다(더 이상 조회 불가능한 아티클을 매 점검마다
+> 404로 재확인할 이유가 없음).
 
 ---
 

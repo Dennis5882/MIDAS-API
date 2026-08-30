@@ -1109,11 +1109,23 @@ print(f"프리스트레스 부재력 {len(table.get('DATA', []))}행")
 > ⚠️ 2026-08-26 확인: 위 3개 파라미터(`PARTS`/`SECTION_POSITION`/`ITEM_TO_DISPLAY`) 모두 이전
 > 버전 문서에 누락되어 있었음.
 
+### 시공단계(Construction Stage) 전용 파라미터
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+|-----|------|-----|-----------|--------|------|
+| 1 | 시공단계 스텝 활성화 | `"OPT_CS"` | Boolean | `false` | Optional |
+| 2 | 시공단계 스텝 이름 목록 | `"STAGE_STEP"` | Array [String] | All | Optional |
+
+> ⚠️ 2026-08-30 정기 점검 확인 (article id `36011455813273`, 원문 갱신 2026-08-27): `BEAMSTRESS`·
+> `BEAMSTRESS7DOF` 시공단계(CS) 조회 예제가 원문에 추가/보강되어 있었으나 이전 버전 문서에는
+> 반영되지 않았음 — `OPT_CS`/`STAGE_STEP`(공통 파라미터)로 시공단계 스텝별 결과를 조회하며,
+> `BEAMSTRESSVBM`은 원문에 CS 전용 예제가 없음(비-CS 예제만 존재).
+
 ### Response HEAD
 
-- `BEAMSTRESS`: `["Index", "Elem", "Load", "Part", "Axial", "Shear-y", "Shear-z", "Bend(+y)", "Bend(-y)", "Bend(+z)", "Bend(-z)", "Cb(min/max)", "Cb1(-y+z)", "Cb2(+y+z)", "Cb3(+y-z)", "Cb4(-y-z)"]`
+- `BEAMSTRESS`: `["Index", "Elem", "Load", "Part", "Axial", "Shear-y", "Shear-z", "Bend(+y)", "Bend(-y)", "Bend(+z)", "Bend(-z)", "Cb(min/max)", "Cb1(-y+z)", "Cb2(+y+z)", "Cb3(+y-z)", "Cb4(-y-z)"]`(시공단계 조회 시 `Load` 뒤에 `Stage`/`Step` 추가)
 - `BEAMSTRESSVBM`: `Part` 뒤에 `Component` 컬럼이 추가된 것 외에는 `BEAMSTRESS`와 동일 — `["Index", "Elem", "Load", "Part", "Component", "Axial", "Shear-y", "Shear-z", "Bend(+y)", "Bend(-y)", "Bend(+z)", "Bend(-z)", "Cb(min/max)", "Cb1(-y+z)", "Cb2(+y+z)", "Cb3(+y-z)", "Cb4(-y-z)"]`
-- `BEAMSTRESS7DOF`: 완전히 다른 구조 — `["Index", "Elem", "Load", "Part", "SectionPosition", "Sax(Warping)", "Ssy(Mt)", "Ssy(Mw)", "Ssz(Mt)", "Ssz(Mw)", "Cb(Ssy)", "Cb(Ssz)"]`
+- `BEAMSTRESS7DOF`: 완전히 다른 구조 — `["Index", "Elem", "Load", "Part", "SectionPosition", "Sax(Warping)", "Ssy(Mt)", "Ssy(Mw)", "Ssz(Mt)", "Ssz(Mw)", "Cb(Ssy)", "Cb(Ssz)"]`(시공단계 조회 시 `Load` 뒤에 `Stage`/`Step` 추가)
 
 > ⚠️ 2026-08-26 확인: 이전 버전 문서는 `BEAMSTRESS7DOF`도 `BEAMSTRESS`와 같은 HEAD를 쓰는 것으로
 > 오해할 수 있게 단일 HEAD만 표기했으나, 실제로는 7th DOF 전용 컬럼(`SectionPosition`,
@@ -1121,7 +1133,7 @@ print(f"프리스트레스 부재력 {len(table.get('DATA', []))}행")
 
 ### Request / Response JSON
 
-**POST Request Body — BEAMSTRESS**
+**POST Request Body — BEAMSTRESS(General)**
 
 ```json
 {
@@ -1137,7 +1149,7 @@ print(f"프리스트레스 부재력 {len(table.get('DATA', []))}행")
 }
 ```
 
-**POST Response Body — BEAMSTRESS**
+**POST Response Body — BEAMSTRESS(General)**
 
 ```json
 {
@@ -1152,7 +1164,43 @@ print(f"프리스트레스 부재력 {len(table.get('DATA', []))}행")
 }
 ```
 
-**POST Request Body — BEAMSTRESS7DOF**
+**POST Request Body — BEAMSTRESS(시공단계)**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "BeamStress",
+    "TABLE_TYPE": "BEAMSTRESS",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": { "FORCE": "N", "DIST": "mm" },
+    "STYLES": { "FORMAT": "Fixed", "PLACE": 12 },
+    "COMPONENTS": ["Elem", "Load", "Stage", "Step", "Part", "Axial", "Shear-y", "Shear-z", "Bend(+y)", "Bend(-y)", "Bend(+z)", "Bend(-z)", "Cb(min/max)", "Cb1(-y+z)", "Cb2(+y+z)", "Cb3(+y-z)", "Cb4(-y-z)"],
+    "NODE_ELEMS": { "KEYS": [1] },
+    "LOAD_CASE_NAMES": ["Summation(CS)"],
+    "PARTS": ["PartI", "PartJ"],
+    "OPT_CS": true,
+    "STAGE_STEP": ["CS3:001(first)", "CS3:002(last)"]
+  }
+}
+```
+
+**POST Response Body — BEAMSTRESS(시공단계)**
+
+```json
+{
+  "BeamStress": {
+    "FORCE": "N",
+    "DIST": "mm",
+    "HEAD": ["Index", "Elem", "Load", "Stage", "Step", "Part", "Axial", "Shear-y", "Shear-z", "Bend(+y)", "Bend(-y)", "Bend(+z)", "Bend(-z)", "Cb(min/max)", "Cb1(-y+z)", "Cb2(+y+z)", "Cb3(+y-z)", "Cb4(-y-z)"],
+    "DATA": [
+      ["1", "1", "Summation", "CS3", "001(first)", "I[1]", "-0.774105629705", "0.000000000000", "-0.633378895214", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "-0.774105629705", "-0.774105629705", "-0.774105629705", "-0.774105629705", "-0.774105629705"],
+      ["2", "1", "Summation", "CS3", "001(first)", "J[2]", "-0.787581597130", "0.000000000000", "-0.510199230117", "0.000000000000", "0.000000000000", "-1.517545803005", "1.519418342486", "-2.328225752254", "-2.282028873379", "-2.328225752254", "0.754933827124", "0.708739639195"]
+    ]
+  }
+}
+```
+
+**POST Request Body — BEAMSTRESS7DOF(General)**
 
 ```json
 {
@@ -1170,7 +1218,7 @@ print(f"프리스트레스 부재력 {len(table.get('DATA', []))}행")
 }
 ```
 
-**POST Response Body — BEAMSTRESS7DOF**
+**POST Response Body — BEAMSTRESS7DOF(General)**
 
 ```json
 {
@@ -1181,6 +1229,43 @@ print(f"프리스트레스 부재력 {len(table.get('DATA', []))}행")
     "DATA": [
       ["1", "1", "EccentricLoads", "I[1]", "Pos-1", "0.000000000000", "-0.000769832639", "0.014441854460", "-0.000722966974", "0.009767207099", "0.013672021820", "0.009044240125"],
       ["2", "1", "EccentricLoads", "I[1]", "Max", "0.000000000000", "-0.000769832639", "0.014441854460", "-0.000722966974", "0.009767207099", "0.013672021820", "0.009044240125"]
+    ]
+  }
+}
+```
+
+**POST Request Body — BEAMSTRESS7DOF(시공단계)**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "BeamStress(7thDOF)",
+    "TABLE_TYPE": "BEAMSTRESS7DOF",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": { "FORCE": "kN", "DIST": "m" },
+    "STYLES": { "FORMAT": "Fixed", "PLACE": 12 },
+    "COMPONENTS": ["Elem", "Load", "Stage", "Step", "Part", "SectionPosition", "Sax(Warping)", "Ssy(Mt)", "Ssy(Mw)", "Ssz(Mt)", "Ssz(Mw)", "Cb(Ssy)", "Cb(Ssz)"],
+    "NODE_ELEMS": { "KEYS": [1] },
+    "LOAD_CASE_NAMES": ["Summation(CS)"],
+    "PARTS": ["PartI", "PartJ"],
+    "SECTION_POSITION": ["Pos-1", "Max"],
+    "OPT_CS": true,
+    "STAGE_STEP": ["CS3:001(first)", "CS3:002(last)"]
+  }
+}
+```
+
+**POST Response Body — BEAMSTRESS7DOF(시공단계)**
+
+```json
+{
+  "BeamStress(7thDOF)": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "Elem", "Load", "Stage", "Step", "Part", "SectionPosition", "Sax(Warping)", "Ssy(Mt)", "Ssy(Mw)", "Ssz(Mt)", "Ssz(Mw)", "Cb(Ssy)", "Cb(Ssz)"],
+    "DATA": [
+      ["1", "1", "Summation", "CS3", "001(first)", "I[1]", "Pos-1", "0.000000000000", "-0.202862111996", "69.145522875219", "-0.190512326587", "46.763983379006", "68.942660763224", "46.573471052419"],
+      ["2", "1", "Summation", "CS3", "001(first)", "I[1]", "Max", "0.000000000000", "-0.202862111996", "69.145522875219", "-0.190512326587", "46.763983379006", "68.942660763224", "46.573471052419"]
     ]
   }
 }
