@@ -127,7 +127,9 @@ set_main_control()
 
 Hyper-S(MEC) 솔버용 메인 제어 데이터입니다. 인장/압축 트러스 요소(Tension/Compression Truss)에 대한 고급 비선형 파라미터(`TCELEM`)를 중첩 객체로 포함합니다.
 
-> **Active Methods**: `GET, PUT, DELETE` (POST 미지원 — 기본 레코드가 자동 생성됨)
+> **Active Methods**: `GET, PUT, DELETE`(POST 미지원). 원문에 POST가 없는 이유는 설명돼 있지 않다
+> — ⚠️ 2026-08-30 확인: 이전에 "기본 레코드가 자동 생성됨"이라는 근거를 달아 뒀으나, 원문 어디에도
+> 그런 설명이 없어 근거 없는 추정이었음이 확인돼 삭제한다.
 
 ### HTTP Methods
 

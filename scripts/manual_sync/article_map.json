@@ -106,7 +106,7 @@
       "article_title": "Structure Type",
       "updated_at": "2026-05-15T08:31:57Z",
       "verified_at": "2026-08-30",
-      "note": "INDEX.md엔 등재돼 있었으나 본문 섹션이 누락돼 있던 것을 신규 작성. 클래식 STYP와 별개 아티클(ko 로케일 전용). 원문 JSON Schema의 STYPE enum이 '_3D'(언더스코어)인데 Request Examples·Specifications 표는 '3D'로 일관 표기하는 모순 확인, 예제/표 기준으로 '3D' 채택"
+      "note": "INDEX.md엔 등재돼 있었으나 본문 섹션이 누락돼 있던 것을 신규 작성. 클래식 STYP와 별개 아티클(ko 로케일 전용). 원문 JSON Schema의 STYPE enum이 '_3D'(언더스코어)인데 Request Examples·Specifications 표는 '3D'로 일관 표기하는 모순 확인, 예제/표 기준으로 '3D' 채택. 최초 작성 시 POST 미지원 사유로 ACTL-M1의 '기본 레코드가 자동 생성됨' 문구를 그대로 가져다 썼으나, 원문에 그런 설명이 없는 근거 없는 추정이었음을 재확인 후 삭제(2026-08-30)"
     },
     "5. /db/GRUP — Structure Group": {
       "article_id": "35802441712921",
@@ -1392,8 +1392,8 @@
     "2. /db/ACTL-M1 — Main Control Data (Hyper-S)": {
       "article_id": "56397306107545",
       "article_title": "Main Control Data",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치 (Input URI로 M1 확정). 원문 CONVERGENCE 표가 LOAD/WORK 행에도 \"Displacement\" 설명을 복붙한 원문 오류 확인, 로컬 영향 없음"
+      "verified_at": "2026-08-30",
+      "note": "완전 일치 (Input URI로 M1 확정). 원문 CONVERGENCE 표가 LOAD/WORK 행에도 \"Displacement\" 설명을 복붙한 원문 오류 확인, 로컬 영향 없음. 2026-08-30: \"POST 미지원 — 기본 레코드가 자동 생성됨\" 근거 문구가 원문에 없는 추정이었음을 확인, 삭제"
     },
     "3. /db/PDEL — P-Delta Analysis Control": {
       "article_id": "35989163268249",

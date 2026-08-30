@@ -431,7 +431,10 @@ print(result)
 ## 4. `/db/STYP-M1` — Structure Type (Hyper-S)
 
 > ⚠️ **Hyper-S(MEC) 솔버 전용.** 클래식 `/db/STYP`와는 별개의 아티클·스키마를 가진 엔드포인트입니다.
-> **Active Methods:** `GET`, `PUT`, `DELETE` (POST 미지원 — 기본 레코드가 자동 생성됨).
+> **Active Methods:** `GET`, `PUT`, `DELETE`(POST 미지원). 원문에 POST가 없는 이유나 DELETE의 실제
+> 동작(예: 기본값으로 리셋되는지, 완전히 빈 상태가 되는지)에 대한 설명은 없어 확인되지 않았다 —
+> 클래식 `/db/UNIT`·`/db/STYP`처럼 신규 파일에 필수로 존재하는 데이터라는 점을 고려하면 의아한
+> 조합이니, 실제 사용 전 GET으로 응답을 먼저 확인할 것을 권장한다.
 
 ### 기본 정보
 
