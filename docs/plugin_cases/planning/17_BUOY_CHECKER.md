@@ -115,7 +115,7 @@ GEN NX에서 자동으로 불러와, 단계별 안전율 검토부터 관리수�
 
 | 화면 표시(번호) | 화면 표시 텍스트 | 문서 위치 |
 | --- | --- | --- |
-| 01 Story 목록 | `GET db/STOR` | [`02_DB_Project_Structure.md#14-dbstor--story-data`](../../manual/02_DB_Project_Structure.md#14-dbstor--story-data) |
+| 01 Story 목록 | `GET db/STOR` | [`02_DB_Project_Structure.md#15-dbstor--story-data`](../../manual/02_DB_Project_Structure.md#15-dbstor--story-data) |
 | 02 정적하중 케이스 | `GET db/STLD` | [`06_DB_Static_Loads.md#1-dbstld--static-load-cases`](../../manual/06_DB_Static_Loads.md#1-dbstld--static-load-cases) |
 | 03 DL·Story 축력 | `POST TABLE · STORY_AXIAL_FORCE_SUM` | [`21_POST_StoryTables.md#9-story-axial-force-sum`](../../manual/21_POST_StoryTables.md#9-story-axial-force-sum) |
 | 04 DL·지점반력 | `POST TABLE · REACTIO...`(화면에서 텍스트 일부 잘림) | [`19_POST_AnalysisResult_1.md#1-reaction`](../../manual/19_POST_AnalysisResult_1.md#1-reaction) (`TABLE_TYPE: REACTIONG` 등) |

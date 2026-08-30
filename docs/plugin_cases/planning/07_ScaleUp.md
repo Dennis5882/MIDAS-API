@@ -119,7 +119,7 @@
 
 | 화면 표시(항목 번호) | 화면 표시 텍스트 | 문서 위치 |
 | --- | --- | --- |
-| 01 층높이 | `GET db/STOR` | [`02_DB_Project_Structure.md#14-dbstor--story-data`](../../manual/02_DB_Project_Structure.md#14-dbstor--story-data) |
+| 01 층높이 | `GET db/STOR` | [`02_DB_Project_Structure.md#15-dbstor--story-data`](../../manual/02_DB_Project_Structure.md#15-dbstor--story-data) |
 | 02 RS 케이스 | `GET db/SPLC` (RS 하중케이스 · GET db/SPLC 드롭다운으로 재확인) | [`09_DB_Dynamic_Loads.md#2-dbsplc--response-spectrum-load-cases`](../../manual/09_DB_Dynamic_Loads.md#2-dbsplc--response-spectrum-load-cases) |
 | 03 고유치결과 | `POST TABLE · EIGENVALUEMODE` | [`20_POST_AnalysisResult_2.md#28-vibration-mode-shape`](../../manual/20_POST_AnalysisResult_2.md#28-vibration-mode-shape) |
 | 04 유효지진중량 | `NODE · MASS · SUMMARY XY` (드롭다운에 `Mass Summary X · POST post/TABLE · MASS_SUMMARY_X`, `Mass Summary Y · ...MASS_SUMMARY_Y` 노출) | [`18_POST_PreProcess.md#3-mass-summary-table`](../../manual/18_POST_PreProcess.md#3-mass-summary-table) |

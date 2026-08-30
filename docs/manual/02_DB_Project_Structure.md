@@ -20,17 +20,18 @@
 | 1 | [`/db/PJCF`](#1-dbpjcf--project-information) | Project Information | POST, GET, PUT, DELETE |
 | 2 | [`/db/UNIT`](#2-dbunit--unit-system) | Unit System | **GET, PUT** |
 | 3 | [`/db/STYP`](#3-dbstyp--structure-type) | Structure Type | **GET, PUT** |
-| 4 | [`/db/GRUP`](#4-dbgrup--structure-group) | Structure Group | POST, GET, PUT |
-| 5 | [`/db/BNGR`](#5-dbbngr--boundary-group) | Boundary Group | POST, GET, PUT |
-| 6 | [`/db/LDGR`](#6-dbldgr--load-group) | Load Group | POST, GET, PUT, DELETE |
-| 7 | [`/db/TDGR`](#7-dbtdgr--tendon-group) | Tendon Group | POST, GET, PUT, DELETE |
-| 8 | [`/db/NPLN`](#8-dbnpln--named-plane) | Named Plane | POST, GET, PUT, DELETE |
-| 9 | [`/db/CO_M`](#9-dbco_m--material-color) | Material Color | **GET, PUT** |
-| 10 | [`/db/CO_S`](#10-dbco_s--section-color) | Section Color | **GET, PUT** |
-| 11 | [`/db/CO_T`](#11-dbco_t--thickness-color) | Thickness Color | **GET, PUT** |
-| 12 | [`/db/CO_F`](#12-dbco_f--floor-load-color) | Floor Load Color | **GET, PUT** |
-| 13 | [`/db/SPAN`](#13-dbspan--span-information) | Span Information | POST, GET, PUT, DELETE |
-| 14 | [`/db/STOR`](#14-dbstor--story-data) | Story Data | POST, GET, PUT, DELETE |
+| 4 | [`/db/STYP-M1`](#4-dbstyp-m1--structure-type-hyper-s) | Structure Type (Hyper-S) | **GET, PUT, DELETE** |
+| 5 | [`/db/GRUP`](#5-dbgrup--structure-group) | Structure Group | POST, GET, PUT |
+| 6 | [`/db/BNGR`](#6-dbbngr--boundary-group) | Boundary Group | POST, GET, PUT |
+| 7 | [`/db/LDGR`](#7-dbldgr--load-group) | Load Group | POST, GET, PUT, DELETE |
+| 8 | [`/db/TDGR`](#8-dbtdgr--tendon-group) | Tendon Group | POST, GET, PUT, DELETE |
+| 9 | [`/db/NPLN`](#9-dbnpln--named-plane) | Named Plane | POST, GET, PUT, DELETE |
+| 10 | [`/db/CO_M`](#10-dbco_m--material-color) | Material Color | **GET, PUT** |
+| 11 | [`/db/CO_S`](#11-dbco_s--section-color) | Section Color | **GET, PUT** |
+| 12 | [`/db/CO_T`](#12-dbco_t--thickness-color) | Thickness Color | **GET, PUT** |
+| 13 | [`/db/CO_F`](#13-dbco_f--floor-load-color) | Floor Load Color | **GET, PUT** |
+| 14 | [`/db/SPAN`](#14-dbspan--span-information) | Span Information | POST, GET, PUT, DELETE |
+| 15 | [`/db/STOR`](#15-dbstor--story-data) | Story Data | POST, GET, PUT, DELETE |
 
 ---
 
@@ -427,7 +428,142 @@ print(result)
 
 ---
 
-## 4. `/db/GRUP` — Structure Group
+## 4. `/db/STYP-M1` — Structure Type (Hyper-S)
+
+> ⚠️ **Hyper-S(MEC) 솔버 전용.** 클래식 `/db/STYP`와는 별개의 아티클·스키마를 가진 엔드포인트입니다.
+> **Active Methods:** `GET`, `PUT`, `DELETE` (POST 미지원 — 기본 레코드가 자동 생성됨).
+
+### 기본 정보
+
+| 항목 | 값 |
+|------|----|
+| **Input URI** | `{base url}/db/STYP-M1` |
+| **Methods** | `GET`, `PUT`, `DELETE` |
+| **공식 문서** | [Structure Type (Hyper-S) ↗](https://support.midasuser.com/hc/ko/articles/56375311138201) |
+
+### JSON Schema
+
+```json
+{
+  "STYP-M1": {
+    "Assign": {
+      "<ID>": {
+        "STYPE": { "description": "Structure Type", "type": "string (enum)" },
+        "MASS_CONTROL": {
+          "description": "Mass Control Parameter (Required)",
+          "type": "object",
+          "properties": {
+            "MASS_TYPE":  { "description": "Lumped Mass(LUMPED) / Consistent Mass(CONSISTENT)", "type": "string (enum)" },
+            "MASS_POS":   { "description": "MASS_TYPE=LUMPED일 때 필수 — Centroid(CENTROID) / Offset(OFFSET). MASS_TYPE=CONSISTENT면 불가", "type": "string (enum)" },
+            "SELFWEIGHT": { "description": "자중을 질량으로 변환할지 여부", "type": "boolean" },
+            "MASS_AXIS":  { "description": "SELFWEIGHT=true일 때 필수 — XYZ / XY / Z (SELFWEIGHT=false면 불가. MASS_TYPE=CONSISTENT & SELFWEIGHT=true면 XYZ만 허용)", "type": "string (enum)" }
+          }
+        },
+        "GRAV":      { "description": "Gravity Acceleration", "type": "number" },
+        "TEMP":      { "description": "Initial Temperature", "type": "number" },
+        "ALIGNBEAM": { "description": "Align Top of Beam Section with Center Line (X-Y Plane) for Display", "type": "boolean" },
+        "ALIGNSLAB": { "description": "Align Top of Slab(Plate) Section with Center Line (X-Y Plane) for Display", "type": "boolean" }
+      }
+    }
+  }
+}
+```
+
+> ⚠️ 원문 JSON Schema의 `STYPE` enum은 `["_3D", "XZ", "YZ", "XY", "RZ"]`(선두 언더스코어 포함)로
+> 정의돼 있으나, 같은 아티클의 Request Examples와 Specifications 표는 모두 `"3D"`(언더스코어 없음)로
+> 일관되게 표기한다. 본 저장소 원칙(예제가 표보다 우선)에 따라 아래 예제·표에서는 `"3D"`를 사용한다.
+
+### Request Examples
+
+**Lumped Mass**
+
+```json
+{
+  "Assign": {
+    "1": {
+      "STYPE": "3D",
+      "MASS_CONTROL": {
+        "MASS_TYPE": "LUMPED",
+        "MASS_POS": "CENTROID",
+        "SELFWEIGHT": true,
+        "MASS_AXIS": "XYZ"
+      },
+      "GRAV": 9.806,
+      "TEMP": 0,
+      "ALIGNBEAM": false,
+      "ALIGNSLAB": false
+    }
+  }
+}
+```
+
+**Consistent Mass**
+
+```json
+{
+  "Assign": {
+    "1": {
+      "STYPE": "3D",
+      "MASS_CONTROL": {
+        "MASS_TYPE": "CONSISTENT",
+        "SELFWEIGHT": true,
+        "MASS_AXIS": "XYZ"
+      },
+      "GRAV": 9.806,
+      "TEMP": 0,
+      "ALIGNBEAM": false,
+      "ALIGNSLAB": false
+    }
+  }
+}
+```
+
+### Specifications
+
+| No. | Description | Key | Value Type | Default | Required |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Structure Type · 3-D: `3D` / X-Z Plane: `XZ` / Y-Z Plane: `YZ` / X-Y Plane: `XY` / Constraint RZ: `RZ` | `"STYPE"` | String (enum) | `"3D"` | Optional |
+| 2 | Mass Control Parameter | `"MASS_CONTROL"` | Object | – | Required |
+| 2-(1) | └ Mass Type · Lumped Mass: `LUMPED` / Consistent Mass: `CONSISTENT` | `"MASS_TYPE"` | String (enum) | – | Required |
+| 2-(2) | └ Mass Position (`MASS_TYPE="LUMPED"`일 때) · Centroid: `CENTROID` / Offset: `OFFSET` | `"MASS_POS"` | String (enum) | – | 조건부 Required |
+| 2-(3) | └ Convert Self-weight into Masses | `"SELFWEIGHT"` | Boolean | – | Required |
+| 2-(4) | └ Mass Axis (`SELFWEIGHT=true`일 때) · X,Y,Z: `XYZ` / X,Y: `XY` / Z: `Z` (`MASS_TYPE="CONSISTENT"`면 `XYZ`만 허용) | `"MASS_AXIS"` | String (enum) | – | 조건부 Required |
+| 3 | Gravity Acceleration | `"GRAV"` | Number | System | Optional |
+| 4 | Initial Temperature | `"TEMP"` | Number | `0` | Optional |
+| 5 | Align Top of Beam Section with Center Line (X-Y Plane) for Display | `"ALIGNBEAM"` | Boolean | `false` | Optional |
+| 6 | Align Top of Slab(Plate) Section with Center Line (X-Y Plane) for Display | `"ALIGNSLAB"` | Boolean | `false` | Optional |
+
+### Python 예제
+
+```python
+# 구조 타입 설정 (Hyper-S, 3-D, Lumped Mass, 자중 변환 있음)
+payload = {
+    "Assign": {
+        "1": {
+            "STYPE": "3D",
+            "MASS_CONTROL": {
+                "MASS_TYPE": "LUMPED",
+                "MASS_POS": "CENTROID",
+                "SELFWEIGHT": True,
+                "MASS_AXIS": "XYZ"
+            },
+            "GRAV": 9.806,
+            "TEMP": 0,
+            "ALIGNBEAM": False,
+            "ALIGNSLAB": False
+        }
+    }
+}
+result = midas_api("PUT", "/db/STYP-M1", payload)
+
+# 현재 구조 타입(Hyper-S) 조회
+result = midas_api("GET", "/db/STYP-M1")
+print(result)
+```
+
+---
+
+## 5. `/db/GRUP` — Structure Group
 
 ### 기본 정보
 
@@ -514,7 +650,7 @@ print(result)
 
 ---
 
-## 5. `/db/BNGR` — Boundary Group
+## 6. `/db/BNGR` — Boundary Group
 
 ### 기본 정보
 
@@ -575,7 +711,7 @@ print(result)
 
 ---
 
-## 6. `/db/LDGR` — Load Group
+## 7. `/db/LDGR` — Load Group
 
 ### 기본 정보
 
@@ -637,7 +773,7 @@ print(result)
 
 ---
 
-## 7. `/db/TDGR` — Tendon Group
+## 8. `/db/TDGR` — Tendon Group
 
 ### 기본 정보
 
@@ -693,7 +829,7 @@ print(result)
 
 ---
 
-## 8. `/db/NPLN` — Named Plane
+## 9. `/db/NPLN` — Named Plane
 
 ### 기본 정보
 
@@ -807,7 +943,7 @@ print(result)
 
 ---
 
-## 9. `/db/CO_M` — Material Color
+## 10. `/db/CO_M` — Material Color
 
 ### 기본 정보
 
@@ -893,7 +1029,7 @@ print(result)
 
 ---
 
-## 10. `/db/CO_S` — Section Color
+## 11. `/db/CO_S` — Section Color
 
 ### 기본 정보
 
@@ -973,7 +1109,7 @@ print(result)
 
 ---
 
-## 11. `/db/CO_T` — Thickness Color
+## 12. `/db/CO_T` — Thickness Color
 
 ### 기본 정보
 
@@ -1052,7 +1188,7 @@ print(result)
 
 ---
 
-## 12. `/db/CO_F` — Floor Load Color
+## 13. `/db/CO_F` — Floor Load Color
 
 ### 기본 정보
 
@@ -1142,7 +1278,7 @@ print(result)
 
 ---
 
-## 13. `/db/SPAN` — Span Information
+## 14. `/db/SPAN` — Span Information
 
 ### 기본 정보
 
@@ -1243,7 +1379,7 @@ print(result)
 
 ---
 
-## 14. `/db/STOR` — Story Data
+## 15. `/db/STOR` — Story Data
 
 ### 기본 정보
 

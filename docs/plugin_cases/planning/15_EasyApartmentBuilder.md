@@ -124,7 +124,7 @@ GEN NX의 벽체설계 로직(Wall ID별 설계)을 만족하도록 Wall ID를 �
 
 | 기능 | 추정 API | 문서 위치 |
 | --- | --- | --- |
-| Story Data 등록 | `POST /db/STOR` | [`02_DB_Project_Structure.md#14-dbstor--story-data`](../../manual/02_DB_Project_Structure.md#14-dbstor--story-data) |
+| Story Data 등록 | `POST /db/STOR` | [`02_DB_Project_Structure.md#15-dbstor--story-data`](../../manual/02_DB_Project_Structure.md#15-dbstor--story-data) |
 | 벽체/보 Node·Element 생성 | `POST /db/NODE`, `POST /db/ELEM` | [`03_DB_Node_Element.md#1-dbnode`](../../manual/03_DB_Node_Element.md#1-dbnode), [`#2-dbelem`](../../manual/03_DB_Node_Element.md#2-dbelem) |
 | Material/Section/Thickness 생성 | `POST /db/MATL`, `POST /db/SECT`, `POST /db/THIK` | [`04_DB_Properties.md#1-dbmatl`](../../manual/04_DB_Properties.md#1-dbmatl), [`#12-dbsect`](../../manual/04_DB_Properties.md#12-dbsect) |
 | Wall Mark(Mark ↔ Wall ID 매핑) | `POST /db/WMAK` | [`24_DB_Design.md#9-dbwmak--modify-wall-mark-design-벽체-마크-설계-수정`](../../manual/24_DB_Design.md#9-dbwmak--modify-wall-mark-design-벽체-마크-설계-수정) |

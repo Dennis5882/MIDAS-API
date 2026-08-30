@@ -145,7 +145,7 @@
 
 | 챕터 | 항목 | 추정 API | 문서 위치 |
 | --- | --- | --- | --- |
-| 01/02 | Story Data | `GET /db/STOR` | [`02_DB_Project_Structure.md#14-dbstor--story-data`](../../manual/02_DB_Project_Structure.md#14-dbstor--story-data) |
+| 01/02 | Story Data | `GET /db/STOR` | [`02_DB_Project_Structure.md#15-dbstor--story-data`](../../manual/02_DB_Project_Structure.md#15-dbstor--story-data) |
 | 01/02 | Node/Element 수, 좌표 | `GET /db/NODE`, `GET /db/ELEM` | [`03_DB_Node_Element.md#1-dbnode`](../../manual/03_DB_Node_Element.md#1-dbnode), [`#2-dbelem`](../../manual/03_DB_Node_Element.md#2-dbelem) |
 | 01 | 고유치해석 결과 | `POST /post/table`(`EIGENVALUEMODE`/`PARTICIPATIONVECTORMODE`) | [`20_POST_AnalysisResult_2.md#28-vibration-mode-shape`](../../manual/20_POST_AnalysisResult_2.md#28-vibration-mode-shape) |
 | 03 | Material Properties | `GET /db/MATL` | [`04_DB_Properties.md#1-dbmatl`](../../manual/04_DB_Properties.md#1-dbmatl) |

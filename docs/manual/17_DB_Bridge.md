@@ -8,7 +8,7 @@
 > **인증 헤더:** `MAPI-Key: <발급된 키>`  
 > **출처:** [MIDAS API Online Manual](https://support.midasuser.com/hc/en-us/articles/33016922742937)
 
-이 파트는 교량 특화 결과 설정을 다룹니다. 거더 다이어그램(Girder Diagram) 정의·이미지 Export, 캠버 제어(General / FCM Camber), 케이블 미지하중계수 제약(Unknown Load Factor Constraints)을 포함합니다.
+이 파트는 교량 특화 결과 설정을 다룹니다. 거더 다이어그램(Girder Diagram) 정의·이미지 Generation, 캠버 제어(General / FCM Camber), 케이블 미지하중계수 제약(Unknown Load Factor Constraints)을 포함합니다.
 
 ---
 
@@ -20,7 +20,7 @@
 | 2 | [`/db/GCMB`](#2-dbgcmb--general-camber-control) | 일반 캠버 제어 | POST, GET, PUT, DELETE |
 | 3 | [`/db/CAMB`](#3-dbcamb--fcm-camber-control) | FCM 캠버 제어 | POST, GET, PUT, DELETE |
 | 4 | [`/db/ULFC`](#4-dbulfc--cable-control--unknown-load-factor-constraints) | 케이블 제어 – 미지하중계수 제약 | POST, GET, PUT, DELETE |
-| 5 | [`/ope/GSBG`](#5-opegsbg--bridge-girder-diagram-image-export) | 교량 거더 다이어그램 이미지 Export | POST |
+| 5 | [`/ope/GSBG`](#5-opegsbg--bridge-girder-diagram-image-generation) | 교량 거더 다이어그램 이미지 Generation | POST |
 
 ---
 
@@ -582,12 +582,14 @@ for key, val in resp.json().get("ULFC", {}).items():
 
 ---
 
-## 5. `/ope/GSBG` — Bridge Girder Diagram Image Export
+## 5. `/ope/GSBG` — Bridge Girder Diagram Image Generation
 
 > **기능:** [`/db/GSBG`](#1-dbgsbg--bridge-girder-diagrams)로 정의한 거더 다이어그램(응력 또는
-> 부재력)을 지정 시공단계 구간에 대해 이미지 파일(bmp/jpg/emf)로 저장(export)합니다. `db/GSBG`가
-> 다이어그램 그룹을 **정의**하는 엔드포인트라면, 이 엔드포인트는 그 결과를 **이미지로 뽑아내는**
-> 별도의 OPE(Operation) 엔드포인트입니다.
+> 부재력)을 지정 시공단계 구간에 대해 이미지 파일(bmp/jpg/emf)로 생성(generation)합니다. `db/GSBG`가
+> 다이어그램 그룹을 **정의**하는 엔드포인트라면, 이 엔드포인트는 그 결과를 **이미지로 생성하는**
+> 별도의 OPE(Operation) 엔드포인트입니다. `15_OPE.md` §19와 동일 엔드포인트를 문서화하며(공식
+> JSON Schema 설명: "GSBG OPE request argument for Bridge Girder Diagram image generation"),
+> 교량 특화 챕터 독자를 위해 이 챕터에도 중복 수록했습니다.
 
 ### Input URI
 

@@ -101,77 +101,84 @@
       "verified_at": "2026-08-25",
       "note": "기본값 6개 정정(bMASSOFFSET/bSELFWEIGHT/bALIGNBEAM/bALIGNSLAB/bROTRIGID=false, SMASS=1)"
     },
-    "4. /db/GRUP — Structure Group": {
+    "4. /db/STYP-M1 — Structure Type (Hyper-S)": {
+      "article_id": "56375311138201",
+      "article_title": "Structure Type",
+      "updated_at": "2026-05-15T08:31:57Z",
+      "verified_at": "2026-08-30",
+      "note": "INDEX.md엔 등재돼 있었으나 본문 섹션이 누락돼 있던 것을 신규 작성. 클래식 STYP와 별개 아티클(ko 로케일 전용). 원문 JSON Schema의 STYPE enum이 '_3D'(언더스코어)인데 Request Examples·Specifications 표는 '3D'로 일관 표기하는 모순 확인, 예제/표 기준으로 '3D' 채택"
+    },
+    "5. /db/GRUP — Structure Group": {
       "article_id": "35802441712921",
       "article_title": "Structure Group",
       "updated_at": "2025-11-04T00:18:15Z",
       "verified_at": "2026-08-25",
       "note": "완전 일치"
     },
-    "5. /db/BNGR — Boundary Group": {
+    "6. /db/BNGR — Boundary Group": {
       "article_id": "35804937452313",
       "article_title": "Boundary Group",
       "updated_at": "2025-02-06T06:54:56Z",
       "verified_at": "2026-08-25",
       "note": "완전 일치"
     },
-    "6. /db/LDGR — Load Group": {
+    "7. /db/LDGR — Load Group": {
       "article_id": "35804975346841",
       "article_title": "Load Group",
       "updated_at": "2025-02-06T06:55:17Z",
       "verified_at": "2026-08-25",
       "note": "완전 일치"
     },
-    "7. /db/TDGR — Tendon Group": {
+    "8. /db/TDGR — Tendon Group": {
       "article_id": "35805198736793",
       "article_title": "Tendon Group",
       "updated_at": "2025-02-06T06:55:40Z",
       "verified_at": "2026-08-25",
       "note": "완전 일치"
     },
-    "8. /db/NPLN — Named Plane": {
+    "9. /db/NPLN — Named Plane": {
       "article_id": "35805287066649",
       "article_title": "Named Plane",
       "updated_at": "2025-02-06T06:56:00Z",
       "verified_at": "2026-08-25",
       "note": "TOL 기본값 0, COORD Optional/기본값 0으로 정정"
     },
-    "9. /db/CO_M — Material Color": {
+    "10. /db/CO_M — Material Color": {
       "article_id": "35805703171353",
       "article_title": "Material Color",
       "updated_at": "2025-02-06T06:57:46Z",
       "verified_at": "2026-08-25",
       "note": "완전 일치"
     },
-    "10. /db/CO_S — Section Color": {
+    "11. /db/CO_S — Section Color": {
       "article_id": "35805763514393",
       "article_title": "Section Color",
       "updated_at": "2025-02-06T06:58:08Z",
       "verified_at": "2026-08-25",
       "note": "완전 일치 (CO_M과 동일 구조)"
     },
-    "11. /db/CO_T — Thickness Color": {
+    "12. /db/CO_T — Thickness Color": {
       "article_id": "35805833925785",
       "article_title": "Thickness Color",
       "updated_at": "2025-02-06T06:58:28Z",
       "verified_at": "2026-08-25",
       "note": "완전 일치 (CO_M과 동일 구조)"
     },
-    "12. /db/CO_F — Floor Load Color": {
+    "13. /db/CO_F — Floor Load Color": {
       "article_id": "35805846236441",
       "article_title": "Floor Load Color",
       "updated_at": "2025-09-17T06:22:27Z",
       "verified_at": "2026-08-25",
       "note": "완전 일치"
     },
-    "13. /db/SPAN — Span Information": {
+    "14. /db/SPAN — Span Information": {
       "article_id": "35805957502233",
       "article_title": "Span Information",
       "updated_at": "2025-02-06T06:59:14Z",
       "verified_at": "2026-08-25",
       "note": "완전 일치"
     },
-    "14. /db/STOR — Story Data": {
+    "15. /db/STOR — Story Data": {
       "article_id": "49513466793113",
       "article_title": "Story Data",
       "updated_at": "2026-07-01T01:38:53Z",
@@ -1788,12 +1795,12 @@
       "verified_at": "2026-08-26",
       "note": "완전 일치 (TYPE/POINT/COMP enum 전체 확인)"
     },
-    "5. /ope/GSBG — Bridge Girder Diagram Image Export": {
+    "5. /ope/GSBG — Bridge Girder Diagram Image Generation": {
       "article_id": "59870138081177",
       "article_title": "Bridge Girder Diagrams",
       "updated_at": "2026-08-07T02:10:58Z",
-      "verified_at": "2026-08-25",
-      "note": "동명 아티클 2건 중 신규(2026-08-07) 쪽이 /ope/GSBG(이미지 export)에 해당함을 본문 대조로 확정. 구버전 id 35991591178265(2025-03-07)는 1번 절 /db/GSBG로 확정(2026-08-26 재검증). Sbz 부호 오타(‘Sbz\" 4’) 확인 근거."
+      "verified_at": "2026-08-30",
+      "note": "동명 아티클 2건 중 신규(2026-08-07) 쪽이 /ope/GSBG에 해당함을 본문 대조로 확정. 구버전 id 35991591178265(2025-03-07)는 1번 절 /db/GSBG로 확정(2026-08-26 재검증). Sbz 부호 오타(‘Sbz\" 4’) 확인 근거. 2026-08-30: 15_OPE.md §19와 동일 엔드포인트를 중복 문서화하는데 영문 제목이 'Image Export'/'Image Generation'로 서로 달랐던 것을, 원문 JSON Schema 설명(\"...for Bridge Girder Diagram image generation\") 근거로 15_OPE.md와 통일(Generation)"
     }
   },
   "18_POST_PreProcess.md": {

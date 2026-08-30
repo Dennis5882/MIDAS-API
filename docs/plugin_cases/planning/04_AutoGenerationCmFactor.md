@@ -97,7 +97,7 @@ Mode Shape 결과 테이블, Story Shear Force Coefficient 결과 테이블)이 
 
 | 취득 항목 | 추정 API | 문서 위치 |
 | --- | --- | --- |
-| 건축물 높이(hn), Story 목록 | `GET /db/STOR` | [`02_DB_Project_Structure.md#14-dbstor--story-data`](../../manual/02_DB_Project_Structure.md#14-dbstor--story-data) |
+| 건축물 높이(hn), Story 목록 | `GET /db/STOR` | [`02_DB_Project_Structure.md#15-dbstor--story-data`](../../manual/02_DB_Project_Structure.md#15-dbstor--story-data) |
 | 유효 중량(W), Weight Sum X/Y | `POST /post/table` (`TABLE_TYPE: STORY_SHEAR_FORCE_COEFFICIENT`) | [`21_POST_StoryTables.md#4-story-shear-force-coefficient-rs-analysis`](../../manual/21_POST_StoryTables.md#4-story-shear-force-coefficient-rs-analysis) |
 | 고유치해석 주기(Td,x, Td,y) | `POST /post/table` (`TABLE_TYPE: EIGENVALUEMODE` 또는 `PARTICIPATIONVECTORMODE`) | [`20_POST_AnalysisResult_2.md#28-vibration-mode-shape`](../../manual/20_POST_AnalysisResult_2.md#28-vibration-mode-shape) |
 | 정적/동적 밑면전단력(Vs, Vd) | `POST /post/table` (`TABLE_TYPE: STORY_SHEAR_FOR_RS` 등, 정적 지진하중 결과와의 비교) | [`21_POST_StoryTables.md#3-story-shear-force-rs-analysis`](../../manual/21_POST_StoryTables.md#3-story-shear-force-rs-analysis) |

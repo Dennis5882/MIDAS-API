@@ -11,7 +11,7 @@
 | 파일 | 섹션 | 설명 |
 |------|------|------|
 | [01_DOC.md](./01_DOC.md) | DOC | 문서 생성·열기·저장·닫기·해석 실행 (11개) |
-| [02_DB_Project_Structure.md](./02_DB_Project_Structure.md) | DB – Project / Structure | 프로젝트 정보·단위·구조타입·그룹·층 데이터 (14개) |
+| [02_DB_Project_Structure.md](./02_DB_Project_Structure.md) | DB – Project / Structure | 프로젝트 정보·단위·구조타입·그룹·층 데이터 (15개) |
 | [03_DB_Node_Element.md](./03_DB_Node_Element.md) | DB – Node / Element | 노드·요소·로컬축·도메인 (6개) |
 | [04_DB_Properties.md](./04_DB_Properties.md) | DB – Properties | 재료·단면·두께·힌지·섬유단면 (32개) |
 | [05_DB_Boundary.md](./05_DB_Boundary.md) | DB – Boundary | 지지·스프링·링크·해제·내진장치 (24개) |
@@ -362,7 +362,7 @@ MIDAS NX 파일에 저장되는 데이터. MCT/MGT 기능과 동일한 역할.
 | 17 | `/db/STCT` | Construction Stage Analysis Control Data |
 | 18 | `/db/STCT-M1` | Construction Stage Analysis Control Data (Hyper-S) |
 | 19 | `/db/BCCT` | Boundary Change Assignment |
-| 20 | `/db/BCGD-M1` | Assign Boundary Combination (Hyper-S) |
+| 20 | `/db/BCGD-M1` | Define Boundary Combination (Hyper-S) |
 | 21 | `/db/BCGA-M1` | Assign Boundary Combination (Hyper-S) |
 
 ### Analysis Results / Load Combinations
@@ -403,8 +403,8 @@ MIDAS NX 파일에 저장되는 데이터. MCT/MGT 기능과 동일한 역할.
 | No. | Endpoint | 기능 |
 |-----|----------|------|
 | 1 | `/db/DCON` | RC Design Code |
-| 2 | `/db/DSTL` | Steel Design Code |
-| 3 | `/db/RCHK` | Rebar Input for Checking (Beam/Column) |
+| 2 | `/db/DSTL` | Design Steel Code |
+| 3 | `/db/RCHK` | Rebar Input for Checking - Beam/Column |
 | 4 | `/db/LENG` | Unbraced Length |
 | 5 | `/db/MEMB` | Member Assignment |
 | 6 | `/db/DCTL` | Definition of Frame |
@@ -435,7 +435,7 @@ GUI 또는 사전처리 계산값 제어 함수. DB에 저장되지 않는 데�
 | 9 | `/ope/STOR` | Story Calculation |
 | 10 | `/ope/STORY_PARAM` | Story Check Parameter |
 | 11 | `/ope/STORY_IRR_PARAM` | Story Irregularity Check Parameter |
-| 12 | `/ope/STORPROP` | Story Properties |
+| 12 | `/ope/STORYPROP` | Story Properties |
 | 13 | `/ope/MEMB` | Member Assignment |
 | 14 | `/ope/GUSTFACTOR` | Gust Factor Calculator |
 | 15 | `/ope/LCOM-GEN` | Load Combination (General) – KDS:2022 / AIK-SRC2K |
@@ -495,7 +495,7 @@ GUI 또는 사전처리 계산값 제어 함수. DB에 저장되지 않는 데�
 |-----|----------|------|
 | 1 | `/post/PM` | P-M Interaction Diagram |
 | 2 | `/post/STEELCODECHECK` | Steel Code Check |
-| 3 | `/post/BEAMDESIGNFORCES` | Concrete – Beam Design Force |
+| 3 | `/post/BEAMDESIGNFORCES` | Concrete – Beam Design Forces |
 | 4 | `/post/COLUMNDESIGNFORCES` | Concrete – Column Design Forces |
 | 5 | `/post/BRACEDESIGNFORCES` | Concrete – Brace Design Forces |
 | 6 | `/post/WALLDESIGNFORCES` | Concrete – Wall Design Forces |

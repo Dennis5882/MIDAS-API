@@ -142,7 +142,7 @@ NX 해석모델에 이미 부여되어 있는 Wall ID의 벽체 중심 좌표와
 
 | 시점 | 로그 문구 | 추정 API | 문서 위치 |
 | --- | --- | --- | --- |
-| 연결 직후 | "STOR 28개를 불러왔습니다" | `GET /db/STOR` | [`02_DB_Project_Structure.md#14-dbstor--story-data`](../../manual/02_DB_Project_Structure.md#14-dbstor--story-data) |
+| 연결 직후 | "STOR 28개를 불러왔습니다" | `GET /db/STOR` | [`02_DB_Project_Structure.md#15-dbstor--story-data`](../../manual/02_DB_Project_Structure.md#15-dbstor--story-data) |
 | GEN NX 불러오기 | "NODE 7461개, ELEM 7377개... 불러왔습니다" | `GET /db/NODE`, `GET /db/ELEM` | [`03_DB_Node_Element.md#1-dbnode`](../../manual/03_DB_Node_Element.md#1-dbnode), [`03_DB_Node_Element.md#2-dbelem`](../../manual/03_DB_Node_Element.md#2-dbelem) |
 | 수정 모드 진입 | "GET db/WMAK 조회 검증이 진행되었습니다" | `GET /db/WMAK` | [`24_DB_Design.md#9-dbwmak--modify-wall-mark-design-벽체-마크-설계-수정`](../../manual/24_DB_Design.md#9-dbwmak--modify-wall-mark-design-벽체-마크-설계-수정) |
 | Wall Mark 적용 | "Wall Mark 수정내역 저장" | `POST /db/WMAK` (신규/변경분), 필요 시 `PUT`/`DELETE` | 위와 동일 |
