@@ -67,26 +67,32 @@
   MIDAS Gen NX의 MAPI는 해석(<code>POST /doc/anal</code>)을 실행하기 전에
   반드시 파일을 먼저 저장(<code>POST /doc/saveas</code>)해야 합니다.
   저장 없이 해석하면 Gen NX가 저장 다이얼로그를 띄워 자동화가 중단됩니다.<br><br>
-  이 예제는 <code>GET /mapikey/verify</code>로 현재 로그인된 사용자의 이메일을 가져와
-  저장 경로를 동적으로 만들고, <code>POST /doc/saveas → POST /doc/anal</code> 순서로
-  실행하는 전체 흐름을 보여줍니다.
+  이 예제는 <code>GET /mapikey/verify</code>로 연결 상태를 먼저 확인한 뒤, 호출자가 지정한
+  저장 폴더(또는 <code>C:/Temp</code> 폴백)로 파일명을 조립하고,
+  <code>POST /doc/saveas → POST /doc/anal</code> 순서로 실행하는 전체 흐름을 보여줍니다.<br><br>
+  ⚠️ 로그인 이메일 계정과 PC의 실제 Windows 계정명이 다를 수 있어, 이메일에서 사용자 폴더를
+  추정하는 방식(<code>C:/Users/{이메일 앞부분}/...</code>)은 신뢰할 수 없습니다 — 저장 폴더는
+  호출자가 실제 존재하는 경로를 직접 지정하세요.
 </div>
 <div class="section-note">
   <strong style="color:var(--ok)">EN</strong>&nbsp;
   MIDAS Gen NX MAPI requires saving the file (<code>POST /doc/saveas</code>) before
   running analysis (<code>POST /doc/anal</code>).
   Without saving first, Gen NX shows a save dialog that interrupts automation.<br><br>
-  This example retrieves the logged-in user's email via <code>GET /mapikey/verify</code>,
-  builds a dynamic save path from it, then runs
-  <code>POST /doc/saveas → POST /doc/anal</code> in the correct order.
+  This example first checks the connection via <code>GET /mapikey/verify</code>, then builds
+  the file name inside a caller-provided save folder (or a <code>C:/Temp</code> fallback), then
+  runs <code>POST /doc/saveas → POST /doc/anal</code> in the correct order.<br><br>
+  ⚠️ The login email account and the PC's actual Windows account name can differ, so guessing
+  the user folder from the email (<code>C:/Users/{email local-part}/...</code>) is unreliable —
+  always pass a real, existing folder as the save directory yourself.
 </div>
 
 <!-- ── FLOW ──────────────────────────────────────────────── -->
 <h2>Flow / 동작 흐름</h2>
 <div class="flow">
-  <div class="flow-step"><span>1</span>GET  /mapikey/verify → <code>j.user</code> (e.g. <code>"john@midasit.com"</code>)</div>
+  <div class="flow-step"><span>1</span>GET  /mapikey/verify → confirm connection (<code>j.user</code> is for display only, not for the path)</div>
   <div class="flow-arrow">↓</div>
-  <div class="flow-step"><span>2</span>extract username → <code>"john"</code> &nbsp;·&nbsp; build path <code>C:/Users/john/Documents/gen_rc_temp_1234567.mgbx</code></div>
+  <div class="flow-step"><span>2</span>build path from caller-provided <code>saveDir</code> (fallback <code>C:/Temp</code>) → <code>{saveDir}/gen_rc_temp_1234567.mgbx</code></div>
   <div class="flow-arrow">↓</div>
   <div class="flow-step"><span>3</span>POST /doc/saveas &nbsp;{ Argument: "&lt;path&gt;" }</div>
   <div class="flow-arrow">↓</div>
@@ -104,6 +110,28 @@
   Calling <code>/doc/anal</code> before <code>/doc/saveas</code> causes Gen NX to show
   a "Do you want to save?" dialog and wait for user input.
   The MAPI call may hang indefinitely without a timeout or error.
+</div>
+
+<!-- ── SAVE FOLDER MUST EXIST ───────────────────────────────── -->
+<h2>Save Folder Must Already Exist / 저장 폴더는 미리 존재해야 함</h2>
+<div class="warn-note">
+  <strong>⚠️ KO</strong>&nbsp;
+  <code>/doc/SAVEAS</code>의 공식 문서(<a href="https://support.midasuser.com/hc/en-us/articles/35994277012377" style="color:#9cdcfe">Save As ↗</a>)엔
+  존재하지 않는 폴더로 저장을 시도했을 때의 동작이 명시돼 있지 않지만, **실제 MAPI 호출로
+  확인했습니다**(2026-08-31): 폴더가 없으면 Gen NX가 "◯◯에 잘못된 경로가 있습니다"
+  에러 다이얼로그를 띄우고, MAPI 호출은 그 다이얼로그가 응답을 기다리는 동안 타임아웃됩니다
+  (자동 생성되지 않음). 폴더를 미리 만들어두면 <code>200 OK</code>로 정상 저장됩니다.
+  <code>C:/Temp</code>도 Windows 기본 폴더가 아니므로, 저장 전에 해당 폴더가 실제로 있는지
+  직접 확인/생성하세요.<br><br>
+  <strong>⚠️ EN</strong>&nbsp;
+  The official <a href="https://support.midasuser.com/hc/en-us/articles/35994277012377" style="color:#9cdcfe">Save As doc</a>
+  for <code>/doc/SAVEAS</code> does not state what happens if the target folder doesn't
+  exist, but this was **verified with a live MAPI call** (2026-08-31): if the folder is
+  missing, Gen NX shows a "there is an invalid path in ◯◯" error dialog, and the MAPI call
+  times out while that dialog waits for a response (the folder is NOT auto-created).
+  Creating the folder beforehand results in a normal <code>200 OK</code> save.
+  <code>C:/Temp</code> is not a default Windows folder either, so verify/create it yourself
+  before saving.
 </div>
 
 <!-- ── UNIT SETTING ──────────────────────────────────────── -->
@@ -148,38 +176,47 @@
 }
 
 <span class="cmt">/**
- * KO: 저장 경로 자동 결정
- *     성공: C:/Users/{username}/Documents/gen_rc_temp_{timestamp}.mgbx
- *     폴백: C:/Temp/gen_rc_temp_{timestamp}.mgbx  (verifyConn 실패 시)
+ * KO: 저장 경로 결정
+ *     1순위: saveDir 인자로 명시된 폴더 (권장 — 항상 정확함)
+ *     2순위: C:/Temp  (saveDir 미지정 시 고정 폴백 — 이 폴더도 미리 존재해야 함, 자동 생성 안 됨)
  *
+ *     ※ 폴더가 없으면 Gen NX가 에러 다이얼로그를 띄우고 MAPI 호출이 타임아웃됩니다 —
+ *       실제 호출로 확인함(2026-08-31, 아래 "Save Folder Must Already Exist" 참고).
  *     ※ %USERPROFILE% 같은 환경변수는 MAPI 서버(Gen NX 프로세스)가 인식하지 못합니다.
- *       /mapikey/verify 의 j.user 이메일로 사용자 폴더를 직접 구성해야 합니다.
+ *     ※ /mapikey/verify 의 j.user(로그인 이메일) 앞부분을 Windows 사용자명으로 가정해
+ *       C:/Users/{username}/... 을 자동 구성하는 방식은 사용하지 않습니다 — 로그인 이메일
+ *       계정과 실제 PC의 Windows 계정명은 서로 다를 수 있기 때문입니다(예: 회사 이메일
+ *       "kim@midasit.com" 이지만 Windows 계정은 "user01"). j.user는 연결 확인 용도로만
+ *       쓰고, 저장 경로는 호출자가 실제 존재하는 폴더를 saveDir로 직접 넘겨주세요.
  *
- * EN: Determine save path automatically.
- *     Primary : C:/Users/{username}/Documents/gen_rc_temp_{timestamp}.mgbx
- *     Fallback: C:/Temp/gen_rc_temp_{timestamp}.mgbx  (if verifyConn fails)
+ * EN: Determine save path.
+ *     1st : the folder passed explicitly as saveDir (recommended — always correct)
+ *     2nd : C:/Temp  (fixed fallback when saveDir is not given — this folder must also
+ *           already exist; it is NOT auto-created)
  *
+ *     ※ If the folder is missing, Gen NX shows an error dialog and the MAPI call times
+ *       out — verified with a live call (2026-08-31, see "Save Folder Must Already Exist" below).
  *     ※ Environment variables like %USERPROFILE% are NOT resolved by the MAPI server.
- *       Build the path from j.user returned by /mapikey/verify instead.
+ *     ※ We deliberately do NOT guess C:/Users/{username}/... from the local part of
+ *       j.user (the login email) returned by /mapikey/verify — the login email account
+ *       and the actual Windows account on the PC can differ (e.g. email "kim@midasit.com"
+ *       but Windows account "user01"). Use j.user only to confirm the connection; pass a
+ *       real, existing folder as saveDir instead.
  */</span>
-<span class="kw">async function</span> <span class="fn">autoSavePath</span>(base, key) {
-  <span class="kw">try</span> {
-    <span class="kw">const</span> { ok, j } = <span class="kw">await</span> <span class="fn">verifyConn</span>(base, key);
-    <span class="kw">if</span> (ok &amp;&amp; j?.user) {
-      <span class="kw">const</span> username = j.user.split(<span class="str">'@'</span>)[<span class="num">0</span>];           <span class="cmt">// "john@midasit.com" → "john"</span>
-      <span class="kw">return</span> `C:/Users/${username}/Documents/gen_rc_temp_${Date.now()}.mgbx`;
-    }
-  } <span class="kw">catch</span> (e) {}
-  <span class="kw">return</span> `C:/Temp/gen_rc_temp_${Date.now()}.mgbx`;     <span class="cmt">// fallback</span>
+<span class="kw">async function</span> <span class="fn">autoSavePath</span>(base, key, saveDir) {
+  <span class="kw">const</span> dir = (saveDir &amp;&amp; saveDir.trim()) ? saveDir.trim().replace(<span class="str">/[\\/]+$/</span>, <span class="str">''</span>) : <span class="str">'C:/Temp'</span>;
+  <span class="kw">return</span> `${dir}/gen_rc_temp_${Date.now()}.mgbx`;
 }
 
 <span class="cmt">/**
  * KO: 단위 설정 → 모델 생성 → 저장 → 해석 전체 흐름
  *     setUnit 은 모델 생성(노드 추가) 전에 반드시 호출해야 합니다.
+ *     saveDir: 실제 존재하는 저장 폴더를 호출자가 넘겨줍니다(권장). 생략 시 C:/Temp 사용.
  * EN: Set unit → build model → save → analyze — full flow.
  *     setUnit MUST be called before creating any model entities (nodes/elements).
+ *     saveDir: caller-provided folder that actually exists (recommended). Falls back to C:/Temp if omitted.
  */</span>
-<span class="kw">async function</span> <span class="fn">runAnalysis</span>(base, key) {
+<span class="kw">async function</span> <span class="fn">runAnalysis</span>(base, key, saveDir) {
   <span class="kw">const</span> headers = { <span class="str">'MAPI-Key'</span>: key, <span class="str">'Content-Type'</span>: <span class="str">'application/json'</span> };
   <span class="kw">const</span> api = (method, path, body) =>
     fetch(`${base}${path}`, { method, headers, body: body ? JSON.stringify(body) : undefined });
@@ -190,7 +227,7 @@
   <span class="cmt">// ② ... 모델 생성 (nodes, elements, loads ...) ...</span>
 
   <span class="cmt">// ③ 저장 — 반드시 /doc/anal 보다 먼저 (EN: must precede /doc/anal)</span>
-  <span class="kw">const</span> savePath = <span class="kw">await</span> <span class="fn">autoSavePath</span>(base, key);
+  <span class="kw">const</span> savePath = <span class="kw">await</span> <span class="fn">autoSavePath</span>(base, key, saveDir);
   <span class="kw">await</span> <span class="fn">api</span>(<span class="str">'POST'</span>, <span class="str">'/doc/saveas'</span>, { Argument: savePath });
 
   <span class="cmt">// ④ 해석 (EN: run analysis)</span>
@@ -212,6 +249,9 @@
 
 <label>MAPI Key</label>
 <input id="mapiKey" type="password" placeholder="your-mapi-key">
+
+<label>Save Directory &nbsp;<span style="color:#555; font-size:0.9em">(선택, 비우면 C:/Temp — 미리 존재해야 함 / optional, defaults to C:/Temp — must already exist)</span></label>
+<input id="saveDir" placeholder="C:/Temp">
 
 <button onclick="runDemo()">Check Connection &amp; Preview Path</button>
 <div id="log">— 결과가 여기에 표시됩니다 / Results will appear here —</div>
@@ -236,21 +276,18 @@ async function verifyConn(base, key) {
   return { ok: res.ok, j };
 }
 
-async function autoSavePath(base, key) {
-  try {
-    const { ok, j } = await verifyConn(base, key);
-    if (ok && j?.user) {
-      const username = j.user.split('@')[0];
-      return { path: `C:/Users/${username}/Documents/gen_rc_temp_${Date.now()}.mgbx`, user: j.user, program: j.program };
-    }
-  } catch (e) {}
-  return { path: `C:/Temp/gen_rc_temp_${Date.now()}.mgbx`, user: null, program: null };
+// j.user (login email) is used only to confirm the connection — never to guess a
+// Windows folder, since the email account and the PC's Windows account can differ.
+function buildSavePath(saveDir) {
+  const dir = (saveDir && saveDir.trim()) ? saveDir.trim().replace(/[\\/]+$/, '') : 'C:/Temp';
+  return `${dir}/gen_rc_temp_${Date.now()}.mgbx`;
 }
 
 async function runDemo() {
-  const base = document.getElementById('baseUrl').value.trim().replace(/\/$/, '');
-  const key  = document.getElementById('mapiKey').value.trim();
-  const log  = document.getElementById('log');
+  const base    = document.getElementById('baseUrl').value.trim().replace(/\/$/, '');
+  const key     = document.getElementById('mapiKey').value.trim();
+  const saveDir = document.getElementById('saveDir').value.trim();
+  const log     = document.getElementById('log');
 
   if (!base || !key) {
     log.innerHTML = '<span class="err">Base URL 과 MAPI Key 를 입력하세요 / Enter Base URL and MAPI Key.</span>';
@@ -259,17 +296,19 @@ async function runDemo() {
 
   log.innerHTML = '<span class="info">연결 확인 중... / Checking connection...</span>';
   try {
-    const { path, user, program } = await autoSavePath(base, key);
-    if (!user) {
+    const { ok, j } = await verifyConn(base, key);
+    if (!ok || !j?.user) {
       log.innerHTML = '<span class="err">연결 실패 — MAPI Key 또는 Base URL을 확인하세요.\nConnection failed — check your MAPI Key and Base URL.</span>';
       return;
     }
+    const path = buildSavePath(saveDir);
     log.innerHTML =
       `<span class="ok">✔ 연결 성공 / Connected</span>\n` +
-      `  user    : ${user}\n` +
-      `  program : ${program ?? '—'}\n\n` +
-      `<span class="ok">✔ 자동 저장 경로 / Auto-save path</span>\n  ${path}\n\n` +
-      `<span class="cmt">  (이 경로로 POST /doc/saveas 가 호출됩니다 /\n   POST /doc/saveas will be called with this path)</span>`;
+      `  user    : ${j.user}\n` +
+      `  program : ${j.program ?? '—'}\n\n` +
+      `<span class="ok">✔ 저장 경로 / Save path</span>\n  ${path}\n\n` +
+      `<span class="cmt">  (이 경로로 POST /doc/saveas 가 호출됩니다 — 폴더가 미리 존재해야 합니다 /\n` +
+      `   POST /doc/saveas will be called with this path — the folder must already exist)</span>`;
   } catch (e) {
     log.innerHTML = `<span class="err">오류 / Error: ${e.message}</span>`;
   }
