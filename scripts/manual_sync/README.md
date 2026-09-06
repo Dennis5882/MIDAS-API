@@ -19,7 +19,7 @@
 |---|---|---|
 | `common.py` | Zendesk API 호출, 섹션 레지스트리, 매니페스트 로드/저장, diff 계산 공통 로직 | ✗ |
 | `fetch_manifest.py` | 현재 홈페이지 상태를 섹션별 `.sync_manifest.json`에 스냅샷으로 저장 (`--section` 생략 시 전체) | ✗ |
-| `check_diff.py` | 매니페스트와 현재 홈페이지 상태를 섹션별로 비교해 added/removed/changed article만 추출 (`--section` 생략 시 전체) | ✗ |
+| `check_diff.py` | 매니페스트와 현재 홈페이지 상태를 섹션별로 비교해 added/removed/changed article만 추출 (`--section` 생략 시 전체). changed 항목마다 **어느 로케일이 바뀌었는지** 판정해 `locale_note`로 표시 (`--no-locales`로 생략 가능) | ✗ |
 | `validate_manual.py` | `docs/manual/*.md` + `docs/plugin/**/*.md`의 JSON 코드블록 유효성 + TOC 앵커 정합성 검증 | ✗ |
 | `prompt_sample.md` | 최초 매뉴얼 문서(01~27)를 사람이 손으로 생성할 때 썼던 프롬프트 예시 (참고용, 실행 스크립트 아님) | — |
 
@@ -57,6 +57,39 @@ python3 check_diff.py
 # 문서 패치 후 항상 실행 — JSON/TOC 무결성 검증 (docs/manual + docs/plugin 모두 스캔)
 python3 validate_manual.py
 ```
+
+## 로케일 판정 — `changed`가 떴는데 본문은 그대로일 때
+
+Zendesk의 아티클 레벨 `updated_at`은 **그 아티클의 모든 번역본 `updated_at` 중 최댓값**입니다.
+그런데 `common.py`의 `BASE`(`SYNC_LOCALE = "en-us"`)는 **영문 본문만** 받아옵니다. 그래서
+ko나 ja만 편집된 경우 → `check_diff.py`는 changed로 잡는데 → 받아온 영문 본문은 한 글자도 안
+바뀐 상태가 됩니다. 이걸 "타임스탬프만 갱신된 화장빨"로 판정하고 넘기면 **실제 변경을 통째로
+놓칩니다.**
+
+`check_diff.py`는 changed 항목마다 `articles/{id}/translations.json`을 한 번 호출해
+(직전 스냅샷의 `updated_at`보다 새로운 로케일만 골라) 다음 셋 중 하나로 판정합니다:
+
+| `locale_note` | 뜻 | 대응 |
+| --- | --- | --- |
+| `en-us changed — normal review` | 평소대로 영문 본문이 바뀜 | 기존 절차대로 대조 |
+| `ko/ja changed but en-us did NOT ...` | **우리가 받는 본문에는 안 보이는 변경** | 해당 로케일 페이지를 직접 열어 대조 |
+| `metadata only — no translation body is newer` | 어떤 번역본도 새로워지지 않음 | 진짜 화장빨, 넘어가도 됨 |
+
+실측 근거(2026-09-06, 719건 전수 스캔):
+
+- 719건 중 492건이 `ko+en-us+ja`, 174건이 `ko+en-us`. **ja 번역이 존재한다는 사실 자체가
+  이 스캔 전까지 파악되지 않았습니다.**
+- `/ope/MEMB`(`49514964272665`)의 `2026-07-30` 갱신은 ko도 en-us도 아닌 **ja 번역**이 만든
+  것이었습니다. 정작 ko와 en-us 본문은 요청 Key가 서로 다른 채로 2025년부터 방치돼 있었고,
+  그 분기를 못 본 탓에 공식 측에 **방향이 반대인 오류 제보**를 올렸다가 철회했습니다
+  (Jira `MAPI-2484` A-7).
+- SSEIS(`58908676674585`)의 ko 본문 오염도 en-us는 멀쩡한 채 ko만 바뀐 경우라, 이 판정이
+  없으면 화장빨로 걸러졌을 사안이었습니다.
+
+**로케일 간 본문이 얼마나 벌어져 있는지 전수 점검하려면** `translations.json`의
+`updated_at`·본문 길이를 아티클별로 비교하면 됩니다(`common.py`의 `fetch_translations()`).
+2026-09-06 스캔에서는 본문 길이 비율이 크게 어긋난 9건과, **ko 본문이 서로 바이트 단위로
+동일한 아티클 쌍 2쌍**(SSEIS, Static Wind Load)이 나왔습니다.
 
 ## GitHub Actions (체크 전용, API 키 불필요)
 

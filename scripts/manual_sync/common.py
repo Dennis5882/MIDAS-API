@@ -1,11 +1,13 @@
 """Shared helpers for MIDAS API manual sync scripts. No AI calls here — pure HTTP + diff logic."""
 import json
 import os
+import time
 import urllib.request
 
 _DOCS_DIR = os.path.join(os.path.dirname(__file__), "..", "..", "docs")
 
-BASE = "https://support.midasuser.com/api/v2/help_center/en-us"
+SYNC_LOCALE = "en-us"  # the locale whose bodies this repo mirrors
+BASE = f"https://support.midasuser.com/api/v2/help_center/{SYNC_LOCALE}"
 USER_AGENT = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
     "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
@@ -76,6 +78,52 @@ def _get_json(url):
     req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
     with urllib.request.urlopen(req, timeout=30) as resp:
         return json.loads(resp.read().decode("utf-8"))
+
+
+def fetch_translations(article_id, retries=4):
+    """Fetch {locale: {"updated_at": ..., "len": ...}} for one article.
+
+    The article-level ``updated_at`` returned by the section listing is the MAX over all
+    locale translations, so a bump can come from a locale we never read. ``BASE`` above is
+    the en-us Help Center, meaning a ko-only or ja-only edit shows up in check_diff.py as a
+    "changed" article whose en-us body is byte-identical — which reads as a cosmetic bump
+    and gets waved through. This endpoint is what tells the two apart.
+
+    Verified 2026-09-06: 719 tracked articles carry ko/en-us/ja in various combinations;
+    /ope/MEMB's 2026-07-30 bump was the *Japanese* translation, while its ko and en-us
+    bodies disagree on the request key and have not been touched since 2025.
+    """
+    url = f"https://support.midasuser.com/api/v2/help_center/articles/{article_id}/translations.json"
+    for attempt in range(retries):
+        try:
+            data = _get_json(url)
+        except Exception:
+            if attempt == retries - 1:
+                raise
+            time.sleep(2 * (attempt + 1))  # Zendesk returns 429 under light concurrency
+            continue
+        return {
+            t["locale"]: {
+                "updated_at": t["updated_at"],
+                "len": len(t.get("body") or ""),
+            }
+            for t in data.get("translations", [])
+        }
+    return {}
+
+
+def locales_changed_since(article_id, old_updated_at):
+    """Which locales' bodies moved after ``old_updated_at``.
+
+    Returns (changed_locales, all_locales). An empty ``changed_locales`` means no
+    translation body is newer than the previous snapshot — i.e. a genuine metadata-only
+    bump. ``SYNC_LOCALE`` not being in the list means our fetched body will look unchanged.
+    """
+    locales = fetch_translations(article_id)
+    changed = sorted(
+        loc for loc, meta in locales.items() if meta["updated_at"] > old_updated_at
+    )
+    return changed, locales
 
 
 def fetch_all_articles(section_id=SECTION_ID):
