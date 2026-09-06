@@ -1675,8 +1675,9 @@
     "13. /ope/MEMB — Member Assignment": {
       "article_id": "49514964272665",
       "article_title": "Member Assignment",
-      "verified_at": "2026-08-27",
-      "note": "⚠️ 2026-08-26에 요청 필드를 ELEM_LIST→AELEM으로 잘못 정정했던 것을 2026-08-27 라이브 재확인으로 원복 — 실제로는 Request Example/Specifications 표 모두 ELEM_LIST가 맞고, AELEM은 Response Body 전용 키(요청/응답 필드명이 다른 것 자체는 원문 그대로). SELETION_TYPE 표 오타는 로컬이 이미 정확해 조치 불필요"
+      "verified_at": "2026-09-06",
+      "note": "⚠️ 2026-09-06 재정정: 2026-08-27에 요청 키를 AELEM→ELEM_LIST로 되돌리며 \"요청 예제도 ELEM_LIST\"라고 기록했으나 오독이었음. 원문 전체에서 ELEM_LIST는 Specifications 표 3행 1회뿐이고 요청 예제·응답 예제 모두 AELEM(이 아티클엔 JSON Schema 절 자체가 없음). 예제 우선 원칙에 따라 로컬을 AELEM으로 재정정. 형제 /db/MEMB(49513603328793)도 스키마·예제 전부 AELEM, ELEM_LIST 0회. 원문 표 오기는 MAPI-2484 A-7로 접수됐으나 2026-09-06 기준 미반영(아티클 updated_at 2026-07-30 그대로). 표 SELETION_TYPE 오타(A-7 후반부)도 미반영 상태이며 로컬은 SELECTION_TYPE으로 정확. 실제 API가 ELEM_LIST도 받는지는 미검증",
+      "updated_at": "2026-07-30T05:16:25Z"
     },
     "14. /ope/GUSTFACTOR — Gust Factor Calculator": {
       "article_id": "59050520760473",

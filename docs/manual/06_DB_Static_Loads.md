@@ -2048,17 +2048,29 @@ midas_api("DELETE", "/db/SSEIS", {"Assign": {"2": {}}})
 | (3) | Additional Seismic Load Y | `"ALONG_Y"` | number | - | Required |
 | (4) | Additional Torsional Seismic Load RZ | `"TORSIONAL_RZ"` | number | - | Required |
 
-> ⚠️ **원문 상태 변경(2026-09-06 확인).** 이전(2026-08-25 확인)에는 원문 Request Example이
+> ⚠️ **원문 ko 로케일 오염(2026-09-06 확인).** 이전(2026-08-25 확인)에는 원문 Request Example이
 > `"INHERENT_TORSION"`을 `"NHERENT_TORSION"`(앞 글자 I 누락)으로 오타 표기하고 있어 아래 예제에서
-> 정정해 두었다. 그러나 2026-09-01 갱신 이후 **User Type 아티클(id `58908928576153`)의 본문이
-> KDS 아티클(id `58908676674585`)의 본문으로 통째로 덮어써져**(두 본문이 56,247자 완전 동일) User
-> Type 전용 Request Example과 Specifications 표가 원문에서 사라졌다 — 즉 그 오타 예제 자체가 현재
-> 원문에 존재하지 않는다.
+> 정정해 두었으나, 2026-09-01 갱신으로 그 예제 자체가 원문에서 사라졌다.
 >
-> 아래 표와 예제는 **두 아티클에 공통으로 남아 있는 USER TYPE JSON Schema**(`SEIS_CODE`
-> `const: "USER TYPE"`, `SEISMIC_FORCE` 배열, `INHERENT_TORSION` boolean 기본값 `false`)로
-> 계속 뒷받침되므로 그대로 유지한다. 원문 본문 덮어쓰기는 명백한 공식 측 사고로 보이며 오류 제보
-> 대상이다(복구되면 재대조 필요).
+> 현재 상태(로케일별로 다름에 주의):
+>
+> | 아티클 | 로케일 | 마지막 편집 | 스키마 `SEIS_CODE` |
+> | --- | --- | --- | --- |
+> | KDS (`58908676674585`) | **en-us** | 2026-06-18 | `const: "KDS(41-17-00:2019)"` (정상) |
+> | KDS (`58908676674585`) | **ko** | 2026-09-01 | `const: "USER TYPE"` (오염) |
+> | User Type (`58908928576153`) | ko / en-us | 2026-09-01 | `const: "USER TYPE"` |
+>
+> 즉 **ko 로케일에서 두 아티클의 본문이 56,247자로 완전히 같아졌고**, 그 본문은 USER TYPE 스키마와
+> KDS 예제·Specifications 표가 뒤섞인 상태다(표는 `PARAMETERS`를 Required로 요구하는데 스키마에는
+> 그 속성이 아예 없고, 반대로 스키마가 required로 지정한 `SEISMIC_FORCE`·`INHERENT_TORSION`은 표에
+> 행이 없다). 같은 아티클의 손대지 않은 en-us 번역본이 올바른 KDS 스키마를 그대로 보존하고 있어,
+> 의도적 통합이 아니라 편집 사고로 판단한다(스키마에 `oneOf`/`if` 분기도 없고 목차에는 두 항목이
+> 그대로 별개로 남아 있다).
+>
+> 아래 표와 예제는 **USER TYPE JSON Schema**(`SEISMIC_FORCE` 배열, `INHERENT_TORSION` boolean
+> 기본값 `false`)로 계속 뒷받침되므로 그대로 유지한다. 오류 제보 대상이며, 원문이 복구되면 재대조가
+> 필요하다. `scripts/manual_sync`는 `articles/{id}.json`(= 원본 로케일 ko)을 읽으므로 이 오염이
+> 정기 점검에 잡혔지만, en-us 페이지를 보는 사용자에게는 KDS 쪽이 아직 정상으로 보인다는 점에 유의.
 
 ```json
 {
