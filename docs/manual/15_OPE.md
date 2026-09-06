@@ -1780,7 +1780,7 @@ for row in result.get("DATA", []):
   "Argument": {
     "ASSIGN_TYPE": "MANUAL",
     "SELECTION_TYPE": "SELECTION",
-    "AELEM": [640, 692],
+    "ELEM_LIST": [640, 692],
     "ALLOW_SINGLE": false
   }
 }
@@ -1817,23 +1817,33 @@ for row in result.get("DATA", []):
 |-----|------|-----|-----------|--------|------|
 | 1 | 배정 타입 · 수동: `"MANUAL"` / 자동: `"AUTO"` | `"ASSIGN_TYPE"` | String | — | **Required** |
 | 2 | 선택 타입 · 전체: `"ALL"`(`ASSIGN_TYPE="AUTO"`일 때만 가능) / 선택: `"SELECTION"` | `"SELECTION_TYPE"` | String | — | **Required** |
-| 3 | 대상 요소 목록 (`SELECTION_TYPE="ALL"`이면 무시됨) | `"AELEM"` | Array | — | 조건부 **Required** |
+| 3 | 대상 요소 목록 (`SELECTION_TYPE="ALL"`이면 무시됨) | `"ELEM_LIST"` | Array | — | 조건부 **Required** |
 | 4 | 단일요소 부재 허용 여부 | `"ALLOW_SINGLE"` | Boolean | — | **Required** |
 
-> ⚠️ **표 vs 예제 불일치 — 예제 기준으로 `"AELEM"` 채택 (2026-09-06 재확인).**
-> 원문(아티클 id `49514964272665`)에서 `ELEM_LIST`는 **Specifications 표 3행에 단 1회**만 나오고,
-> 요청 예제(`{"Argument": {..., "AELEM": [1, 2], ...}}`)와 응답 예제(`{"MEMB": {"1": {"AELEM": ...}}}`)는
-> 둘 다 `"AELEM"`을 쓴다. 이 아티클에는 JSON Schema 절 자체가 없어 근거는 예제뿐이며, 저장소 원칙
-> (예제가 표보다 우선)에 따라 위 표·예제에는 `"AELEM"`을 적었다. 형제 엔드포인트
-> [`/db/MEMB`](./24_DB_Design.md#5-dbmemb--member-assignment-설계-부재-배정)도 스키마·예제 모두
-> `AELEM`이고 `ELEM_LIST`는 0회다.
+> ⚠️ **한글/영문 페이지 불일치 — 영문 페이지 기준으로 `"ELEM_LIST"` 채택 (2026-09-06 확정).**
+> 원문 아티클(id `49514964272665`)은 **로케일별 본문이 다르다.** 영문 페이지는 요청 예제와
+> Specifications 표가 모두 `ELEM_LIST`이고 응답 예제만 `AELEM`이라 내적으로 일관된 반면, 한글
+> 페이지는 표만 `ELEM_LIST`이고 요청 예제는 `AELEM`이라 같은 페이지 안에서 서로 어긋난다.
+> (본문 문자열 카운트 — 영문: `ELEM_LIST` 2회 / `AELEM` 1회, 한글: `ELEM_LIST` 1회 / `AELEM` 5회.
+> 이 아티클에는 JSON Schema 절 자체가 없다.)
 >
-> 원문 표의 `ELEM_LIST` 표기는 2026-08-27 오류 제보(Jira `MAPI-2484` A-7)로 이미 접수돼 있으며
-> 2026-09-06 기준 미반영 상태다. **실제 API가 `ELEM_LIST`도 받는지는 검증하지 않았다** — 만약
-> 받는다면 표가 맞고 예제가 틀린 경우일 수 있으므로 정본 판단은 공식 측 회신을 따른다.
+> | 페이지 | 요청 예제 | Specifications 표 3행 | 응답 예제 |
+> | --- | --- | --- | --- |
+> | [영문](https://support.midasuser.com/hc/en-us/articles/49514964272665) | `"ELEM_LIST": [640, 692]` | `"ELEM_LIST"` | `"AELEM"` |
+> | [한글](https://support.midasuser.com/hc/ko/articles/49514964272665) | `"AELEM": [1, 2]` | `"ELEM_LIST"` | `"AELEM"` |
 >
-> (이력: 2026-08-27에 이 항목을 `ELEM_LIST`로 되돌리며 "요청 예제도 ELEM_LIST"라고 적었으나,
-> 원문에 그런 예제는 존재하지 않는 오독이었다. 되돌리지 말 것.)
+> 즉 **요청 키는 `ELEM_LIST`, 응답·저장 레코드 키는 `AELEM`** 으로 서로 다른 것이 정상이다.
+> 형제 엔드포인트 [`/db/MEMB`](./24_DB_Design.md#5-dbmemb--member-assignment-설계-부재-배정)가
+> 전부 `AELEM`인 것은 그쪽이 저장 레코드를 직접 다루는 CRUD이기 때문이며, 이 엔드포인트의 **요청**
+> 키 근거가 되지 않는다.
+>
+> 한글 페이지 요청 예제를 영문에 맞춰 달라는 요청은 Jira `MAPI-2484` 후속 코멘트(2026-09-06)로
+> 접수해 두었다. 원문 표 2행의 `"SELETION_TYPE"` 오타(한/영 모두 잔존)도 같은 티켓 A-7 항목이며,
+> 위 표는 `SELECTION_TYPE`으로 정정해 적었다.
+>
+> (이력: 2026-09-06에 **한글 페이지만 보고** "예제가 표보다 우선" 원칙을 적용해 `AELEM`으로 바꿨다가
+> 같은 날 영문 페이지를 확인하고 되돌렸다. **로케일 간 본문이 갈리는지 먼저 확인하기 전에는 예제
+> 우선 원칙을 적용하지 말 것.** 되돌리지 말 것.)
 
 ### Python Example
 
@@ -1851,7 +1861,7 @@ payload = {
     "Argument": {
         "ASSIGN_TYPE": "MANUAL",
         "SELECTION_TYPE": "SELECTION",
-        "AELEM": [640, 692],
+        "ELEM_LIST": [640, 692],
         "ALLOW_SINGLE": False
     }
 }
