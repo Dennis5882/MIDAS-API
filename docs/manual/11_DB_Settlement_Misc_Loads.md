@@ -942,6 +942,13 @@ set_initial_force_control()
 | `"E-LINK"` | 12 | Axial-i, Vy-i, Vz-i, Torsion-i, My-i, Mz-i, Axial-j, Vy-j, Vz-j, Torsion-j, My-j, Mz-j |
 | `"G-LINK"` | 12 | Axial-i, Vy-i, Vz-i, Torsion-i, My-i, Mz-i, Axial-j, Vy-j, Vz-j, Torsion-j, My-j, Mz-j |
 
+> ⚠️ **타입 표기 근거(2026-09-06 확인).** 원문 Specifications 표 3번은 `"ELEMENT_FORCES"`를
+> `Array [Number, 12]`(길이 12 고정)로 적고 있으나, 같은 원문의 두 번째 예제가
+> `"ELEM_TYPE": "TRUSS"`에 `"ELEMENT_FORCES": [1, 2]`(2개)를 보내고 있어 서로 모순된다.
+> 예제가 표보다 우선한다는 원칙에 따라 위 표에는 길이 제약 없는 `Array [Number]`로 적고, 실제
+> 크기는 요소 타입별로 이 표에 정리했다 — 되돌리지 말 것.
+> (TRUSS의 `Axial-i, Axial-j` 순서는 원문이 12성분 순서만 설명하고 있어 우리 추정이다.)
+
 ### Request Body (POST)
 
 ```json

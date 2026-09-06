@@ -4,7 +4,7 @@
   "33016922742937": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/33016922742937-MIDAS-API-Online-Manual",
    "title": "MIDAS API Online Manual",
-   "updated_at": "2026-08-07T02:17:57Z"
+   "updated_at": "2026-09-04T05:52:21Z"
   },
   "35409287717657": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35409287717657-Main-Control-Data",
@@ -39,7 +39,7 @@
   "35801869341337": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35801869341337-Project-Information",
    "title": "Project Information",
-   "updated_at": "2025-02-06T06:52:50Z"
+   "updated_at": "2026-09-01T01:00:22Z"
   },
   "35802155483801": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35802155483801-Unit-System",
@@ -499,7 +499,7 @@
   "35953557411993": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35953557411993-Assign-Plane-Loads",
    "title": "Assign Plane Loads",
-   "updated_at": "2025-03-06T02:39:26Z"
+   "updated_at": "2026-09-01T04:24:47Z"
   },
   "35953604106137": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35953604106137-Define-Floor-Load-Type",
@@ -549,7 +549,7 @@
   "35954555962137": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35954555962137-Tendon-Profile",
    "title": "Tendon Profile",
-   "updated_at": "2025-03-06T05:20:54Z"
+   "updated_at": "2026-09-01T04:33:16Z"
   },
   "35954649371545": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35954649371545-Tendon-Location-for-Composite-Section",
@@ -794,7 +794,7 @@
   "35963719599641": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35963719599641-Response-Spectrum-Load-Cases",
    "title": "Response Spectrum Load Cases",
-   "updated_at": "2025-11-04T00:19:06Z"
+   "updated_at": "2026-09-01T01:10:25Z"
   },
   "35963819140505": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35963819140505-Time-History-Global-Control",
@@ -919,7 +919,7 @@
   "35988663234329": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35988663234329-Load-Sequence-for-Nonlinear",
    "title": "Load Sequence for Nonlinear",
-   "updated_at": "2025-03-07T05:33:20Z"
+   "updated_at": "2026-09-01T04:37:13Z"
   },
   "35988728179097": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35988728179097-Wave-Loads",
@@ -944,7 +944,7 @@
   "35988975670937": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35988975670937-Small-Displacement-Initial-Element-Force",
    "title": "Small Displacement - Initial Element Force",
-   "updated_at": "2025-03-07T05:40:56Z"
+   "updated_at": "2026-09-01T04:39:37Z"
   },
   "35989163268249": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35989163268249-P-Delta-Analysis-Control",
@@ -989,7 +989,7 @@
   "35989924517401": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35989924517401-Moving-Load-Analysis-Control-Transverse",
    "title": "Moving Load Analysis Control - Transverse",
-   "updated_at": "2025-08-13T02:49:56Z"
+   "updated_at": "2026-09-01T04:48:54Z"
   },
   "35990184995481": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35990184995481-Settlement-Analysis-Control-Data",
@@ -1049,7 +1049,7 @@
   "35991591178265": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35991591178265-Bridge-Girder-Diagrams",
    "title": "Bridge Girder Diagrams",
-   "updated_at": "2025-03-07T08:14:19Z"
+   "updated_at": "2026-09-01T01:14:26Z"
   },
   "35991765204121": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35991765204121-General-Camber-Control",
@@ -1114,7 +1114,7 @@
   "35993732216985": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35993732216985-Modify-Concrete-Materials",
    "title": "Modify Concrete Materials",
-   "updated_at": "2026-07-10T03:56:05Z"
+   "updated_at": "2026-09-01T01:04:26Z"
   },
   "35993850335897": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35993850335897-Rebar-Input-for-Checking-Beam-Column",
@@ -1429,12 +1429,12 @@
   "36011262919705": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/36011262919705-Beam-Force-Analysis-Result-Table",
    "title": "Beam Force - Analysis Result Table",
-   "updated_at": "2025-03-31T06:39:07Z"
+   "updated_at": "2026-09-01T02:55:30Z"
   },
   "36011373070745": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/36011373070745-Beam-Force-Static-Prestress-Analysis-Result-Table",
    "title": "Beam Force (Static Prestress) - Analysis Result Table",
-   "updated_at": "2025-03-31T06:42:46Z"
+   "updated_at": "2026-09-01T04:07:27Z"
   },
   "36011455813273": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/36011455813273-Beam-Stress-Analysis-Result-Table",
@@ -2874,7 +2874,7 @@
   "57568269363737": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/57568269363737-Design-Code",
    "title": "Design Code",
-   "updated_at": "2026-05-08T04:15:20Z"
+   "updated_at": "2026-09-04T06:13:53Z"
   },
   "57656773423385": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/57656773423385-Assign-Inelastic-Hinges-Beam",
@@ -3104,7 +3104,7 @@
   "58908676674585": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/58908676674585-Static-Seismic-Load-KDS-41-17-00-2019",
    "title": "Static Seismic Load - KDS(41-17-00:2019)",
-   "updated_at": "2026-08-07T01:38:19Z"
+   "updated_at": "2026-09-01T04:15:48Z"
   },
   "58908922148249": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/58908922148249-Static-Wind-Load-User-Type",
@@ -3114,7 +3114,7 @@
   "58908928576153": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/58908928576153-Static-Seismic-Load-User-Type",
    "title": "Static Seismic Load - User Type",
-   "updated_at": "2026-08-07T01:41:05Z"
+   "updated_at": "2026-09-01T04:15:13Z"
   },
   "59050520760473": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/59050520760473-Gust-Factor-Calculator",
@@ -3254,7 +3254,7 @@
   "59870138081177": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/59870138081177-Bridge-Girder-Diagrams",
    "title": "Bridge Girder Diagrams",
-   "updated_at": "2026-08-07T02:10:58Z"
+   "updated_at": "2026-09-01T01:28:35Z"
   }
  },
  "section_id": "30087500371097"

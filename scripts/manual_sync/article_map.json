@@ -83,9 +83,9 @@
     "1. /db/PJCF — Project Information": {
       "article_id": "35801869341337",
       "article_title": "Project Information",
-      "updated_at": "2025-02-06T06:52:50Z",
-      "verified_at": "2026-08-25",
-      "note": "필드 일치. 원문 표 18번 Key 오타 'APROVE'(우리 문서는 APPROVE로 정확) 확인, 오류제보 대상"
+      "updated_at": "2026-09-01T01:00:22Z",
+      "verified_at": "2026-09-06",
+      "note": "✅ 해결 확인(2026-09-06 정기 점검): 원문 표 18번 Key 'APROVE' 오타가 2026-09-01 갱신으로 'APPROVE'로 정정됨(재확인 APPROVE 3회/APROVE 0회). 2026-08-27 오류 제보(MAPI-2484) 반영 결과로 보임. 로컬은 처음부터 정상 표기라 표 수정 없음, ⚠️ 주석만 해결 기록으로 교체"
     },
     "2. /db/UNIT — Unit System": {
       "article_id": "35802155483801",
@@ -501,9 +501,9 @@
     "32. /db/MATD": {
       "article_id": "35993732216985",
       "article_title": "Modify Concrete Materials",
-      "updated_at": "2026-07-10T03:56:05Z",
-      "verified_at": "2026-08-25",
-      "note": "원문 오타(RABAR_CODENAME) 확인, DESIGN 미문서화 4필드 발견·참고 표기"
+      "updated_at": "2026-09-01T01:04:26Z",
+      "verified_at": "2026-09-06",
+      "note": "✅ 해결 확인(2026-09-06): 원문 표 4번 Key 'RABAR_CODENAME' 오타가 'REBAR_CODENAME'로 정정됨(MAPI-2484 반영 추정). ⚠️ 신규: 2026-09-01 갱신으로 최상위에 bSERVCHECK/dSHORTTERM/dLONGTERM 3개 필드가 JSON Schema에만 추가됨(표·예제엔 없음) — 로컬 표에 9~11번으로 추정 표기 추가. ⚠️ 원문 스키마가 유효한 JSON이 아님(SUBREBAR_B_FY 닫는 중괄호 뒤 쉼표 누락) — 오류 제보 대상"
     }
   },
   "05_DB_Boundary.md": {
@@ -758,9 +758,9 @@
     "12. /db/PNLA": {
       "article_id": "35953557411993",
       "article_title": "Assign Plane Loads",
-      "updated_at": "2025-03-06T02:39:26Z",
-      "verified_at": "2026-08-25",
-      "note": "조건 라벨 오류 정정(SELECT_TYPE=SOLID→ELEM_TYPE=SOLID, 원문 자체 오기)"
+      "updated_at": "2026-09-01T04:24:47Z",
+      "verified_at": "2026-09-06",
+      "note": "✅ 부분 해결(2026-09-06): 조건행 Key가 'SELECT_TYPE'→'ELEM_TYPE'으로 정정됨(MAPI-2484 반영 추정). ⚠️ 잔여: 같은 행 설명 문구는 아직 'When Element Select Type'으로 남아 있음(첫 조건행은 'When Element Type'으로 정상) — 잔여 오류 제보 대상"
     },
     "13. /db/FBLD": {
       "article_id": "35953604106137",
@@ -828,16 +828,16 @@
     "21. /db/SSEIS (KDS)": {
       "article_id": "58908676674585",
       "article_title": "Static Seismic Load - KDS(41-17-00:2019)",
-      "updated_at": "2026-08-07T01:38:19Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치(필드 단위 100%)"
+      "updated_at": "2026-09-01T04:15:48Z",
+      "verified_at": "2026-09-06",
+      "note": "⚠️ 원문 사고 의심(2026-09-06): 이 아티클과 User Type 아티클(58908928576153)의 본문이 56,247자 완전 동일해짐. 본문 구성이 뒤섞여 JSON Schema는 USER TYPE 스키마인데 예제·Specifications 표는 KDS 것. KDS 표 9개 행·PERIOD_METHOD 양 분기·ADDITIONAL_LOAD 4개 하위행은 로컬과 전부 일치해 표 수정 없음. 오류 제보 대상"
     },
     "21. /db/SSEIS (User Type)": {
       "article_id": "58908928576153",
       "article_title": "Static Seismic Load - User Type",
-      "updated_at": "2026-08-07T01:41:05Z",
-      "verified_at": "2026-08-25",
-      "note": "INHERENT_TORSION 오타(원문 Request 예제 NHERENT_TORSION) 확인 근거 — 오류제보 대상"
+      "updated_at": "2026-09-01T04:15:13Z",
+      "verified_at": "2026-09-06",
+      "note": "⚠️ 원문 사고 의심(2026-09-06): 본문이 KDS 아티클(58908676674585)로 통째로 덮어써져 User Type 전용 Request Example·Specifications 표가 원문에서 사라짐(두 본문 56,247자 완전 동일). 로컬 ADDITIONAL 표는 두 아티클에 공통으로 남아있는 USER TYPE JSON Schema로 계속 뒷받침되므로 유지. 기존 NHERENT_TORSION 오타 주석은 '원문에서 해당 예제가 사라짐'으로 갱신. 가장 심각한 오류 제보 대상 — 복구되면 재대조 필요"
     }
   },
   "07_DB_Temperature_Prestress.md": {
@@ -886,9 +886,9 @@
     "7. /db/TDNA — Tendon Profile": {
       "article_id": "35954555962137",
       "article_title": "Tendon Profile",
-      "updated_at": "2025-03-06T05:20:54Z",
-      "verified_at": "2026-08-25",
-      "note": "Round 타입 프로파일 좌표 구조(RADIUS/OPT/ANGLE/HEIGHT/RADIUS2, 2D+3D) 전체 누락 발견·보강. 원문 표의 RADIUS Value Type 'Boolean' 표기는 예제와 모순되는 원문 오타로 판단해 Number로 기재"
+      "updated_at": "2026-09-01T04:33:16Z",
+      "verified_at": "2026-09-06",
+      "note": "보강(2026-09-06): SHAPE='CURVE' 블록에만 누락돼 있던 bPJ(Projection) 행 추가 — 원문 JSON Schema·CURVE 예제 4종·Specifications 표 모두에 존재함을 직접 확인(bPJ 16회). 원문의 20번 중복 번호도 그대로 반영. ⚠️ 미해결 잔존: 2D Round RADIUS가 여전히 Boolean 표기(B-2 제보 미반영, PROFZ 쪽만 Number로 되어 있음). ⚠️ 미확인 편차: PROFY/PROFZ OPT 타입(원문 Number/0 vs 로컬 String/'NONE'), 3D Round RADIUS(원문 Array vs 로컬 Number, 예제는 스칼라) — 09-01 변경인지 이전부터인지 판별 불가로 변경하지 않음"
     },
     "8. /db/TDCS — Tendon Location for Composite Section": {
       "article_id": "35954649371545",
@@ -1142,9 +1142,9 @@
     "2. /db/SPLC — Response Spectrum Load Cases": {
       "article_id": "35963719599641",
       "article_title": "Response Spectrum Load Cases",
-      "updated_at": "2025-11-04T00:19:06Z",
-      "verified_at": "2026-08-25",
-      "note": "원문 표 오류 2건(ACCECC_PERTCENT/bACCECC_CONSIDER_GL 중복) 스키마 근거로 정정 — 예제에 없는 필드라 표 대신 스키마 신뢰"
+      "updated_at": "2026-09-01T01:10:25Z",
+      "verified_at": "2026-09-06",
+      "note": "✅ 해결 확인(2026-09-06): 원문 표 오류 2건(ACCECC_PERTCENT 오타, 28번 Key가 27번과 중복)이 2026-09-01 갱신으로 모두 정정됨(ACCECC_PERCENT 2회/PERTCENT 0회, bACCECC_MINIMUM_TORSION 2회). 로컬은 처음부터 스키마 기준 정상 표기라 표 수정 없음. ⚠️ 잔여: 29-(3) Key가 표 'Along' vs 스키마 'ALONG', 표의 'fasle'·'Eccentricitiy' 오타, iCOEF 기본값 1과 설명(2) 모순 — 잔여 오류 제보 대상"
     },
     "3. /db/THGC — Time History Global Control": {
       "article_id": "35963819140505",
@@ -1342,9 +1342,9 @@
     "4. /db/LDSQ — Load Sequence for Nonlinear": {
       "article_id": "35988663234329",
       "article_title": "Load Sequence for Nonlinear",
-      "updated_at": "2025-03-07T05:33:20Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치. 원문 표의 Value Type \"String\"(스키마/예제는 Array[String]) 오기 확인 — 로컬은 이미 정상, 오류제보 대상"
+      "updated_at": "2026-09-01T04:37:13Z",
+      "verified_at": "2026-09-06",
+      "note": "✅ 해결 확인(2026-09-06): 원문 표 Value Type이 'String'→'Array [String]'으로 정정됨(MAPI-2485 B-3 반영). 로컬은 처음부터 정상이라 수정 없음"
     },
     "5. /db/WVLD — Wave Loads": {
       "article_id": "35988728179097",
@@ -1377,9 +1377,9 @@
     "9. /db/INMF — Small Displacement - Initial Element Force": {
       "article_id": "35988975670937",
       "article_title": "Small Displacement - Initial Element Force",
-      "updated_at": "2025-03-07T05:40:56Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치. 원문 표의 Key \"ELEM_FORCES\"(스키마/예제는 ELEMENT_FORCES) 오기 확인 — 로컬은 이미 정상, 오류제보 대상"
+      "updated_at": "2026-09-01T04:39:37Z",
+      "verified_at": "2026-09-06",
+      "note": "✅ 해결 확인(2026-09-06): 원문 표 3번 Key가 'ELEM_FORCES'→'ELEMENT_FORCES'로 정정됨(MAPI-2485 B-4 반영). ⚠️ 원문 표는 여전히 Array [Number, 12] 고정 길이로 적지만 원문 예제 2번이 TRUSS에 [1,2](2개)를 보내 모순 — 로컬은 예제 우선 원칙으로 Array [Number] 유지, 이번에 그 근거를 ⚠️ 주석으로 명시"
     }
   },
   "12_DB_Analysis_Control.md": {
@@ -1458,8 +1458,9 @@
     "13. /db/MVCTtr — Moving Load Analysis Control - Transverse": {
       "article_id": "35989924517401",
       "article_title": "Moving Load Analysis Control - Transverse",
-      "verified_at": "2026-08-26",
-      "note": "파라미터 완전 일치. 원문 Input URI가 대문자 db/MVCTTR로 표기돼 있어 실제 라우트 대소문자 재확인 필요 — 로컬 db/MVCTtr 유지, 확인 보류"
+      "verified_at": "2026-09-06",
+      "note": "✅ 보류 질문 종결(2026-09-06): 원문 Input URI가 대문자 'db/MVCTTR'이던 것이 2026-09-01 갱신으로 'db/MVCTtr'로 정정됨(MAPI-2485 B-5 반영). 로컬 표기가 맞았음이 확인돼 이전 '확인 보류' 상태 종료. JSON Schema 루트 키는 형제 엔드포인트와 마찬가지로 대문자 MVCTTR 유지(정상)",
+      "updated_at": "2026-09-01T04:48:54Z"
     },
     "14. /db/SMCT — Settlement Analysis Control Data": {
       "article_id": "35990184995481",
@@ -1722,8 +1723,9 @@
     "19. /ope/GSBG — Bridge Girder Diagram Image Generation": {
       "article_id": "59870138081177",
       "article_title": "Bridge Girder Diagram Image Generation",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치. 기존 2026-07-14 ℹ️ 주석(LC_TYPE 삭제, BATCH_LIST 배열 타입 변경) 현재도 유효함 재확인"
+      "verified_at": "2026-09-06",
+      "note": "✅ 부분 해결(2026-09-06): 원문 표 응력 성분 4번이 부호 없는 'Sbz\" 4'에서 '-Sbz\" 4'로 정정됨(MAPI-2484 A-4 반영). ⚠️ 콜론 자리에 큰따옴표가 남은 오타는 미해결. 로컬 표·예제·스키마 전부 원문과 일치, 수정 없음",
+      "updated_at": "2026-09-01T01:28:35Z"
     }
   },
   "16_VIEW.md": {
@@ -1774,8 +1776,9 @@
     "1. /db/GSBG — Bridge Girder Diagrams": {
       "article_id": "35991591178265",
       "article_title": "Bridge Girder Diagrams",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치. 원문 스키마의 BSTRSCOMP/BSTRSCOMP_SUB/MOMENT_COMP/_7TH_DOF_TYPE/DGRM_TYPE description이 여전히 \"TODO: ...\" 미완성 상태로 남아있음(로컬도 동일하게 반영, 정상). 동명의 신규 아티클(59870138081177)은 5절 /ope/GSBG와 별개이니 혼동 주의"
+      "verified_at": "2026-09-06",
+      "note": "무변경 확인(2026-09-06): updated_at만 갱신된 화장빨 변경(cosmetic bump). Input URI·Active Methods·스키마 10개 속성(미완성 'TODO: BSTRSCOMP' 설명 포함)·예제 2종·Specifications 10개 행 모두 로컬과 일치",
+      "updated_at": "2026-09-01T01:14:26Z"
     },
     "2. /db/GCMB — General Camber Control": {
       "article_id": "35991765204121",
@@ -1798,9 +1801,9 @@
     "5. /ope/GSBG — Bridge Girder Diagram Image Generation": {
       "article_id": "59870138081177",
       "article_title": "Bridge Girder Diagrams",
-      "updated_at": "2026-08-07T02:10:58Z",
-      "verified_at": "2026-08-30",
-      "note": "동명 아티클 2건 중 신규(2026-08-07) 쪽이 /ope/GSBG에 해당함을 본문 대조로 확정. 구버전 id 35991591178265(2025-03-07)는 1번 절 /db/GSBG로 확정(2026-08-26 재검증). Sbz 부호 오타(‘Sbz\" 4’) 확인 근거. 2026-08-30: 15_OPE.md §19와 동일 엔드포인트를 중복 문서화하는데 영문 제목이 'Image Export'/'Image Generation'로 서로 달랐던 것을, 원문 JSON Schema 설명(\"...for Bridge Girder Diagram image generation\") 근거로 15_OPE.md와 통일(Generation)"
+      "updated_at": "2026-09-01T01:28:35Z",
+      "verified_at": "2026-09-06",
+      "note": "✅ 부분 해결(2026-09-06): 원문 표 응력 성분 4번 부호가 '-Sbz\" 4'로 정정됨(MAPI-2484 A-4 반영) — 기존 ⚠️ 주석이 '원문에 부호가 없다'고 서술해 사실과 달라져 해결 기록으로 교체. ⚠️ 콜론이 큰따옴표로 남은 오타는 미해결(잔여 제보 대상). 표 자체는 수정 없음"
     }
   },
   "18_POST_PreProcess.md": {
@@ -1913,14 +1916,16 @@
     "8. Beam Force": {
       "article_id": "36011262919705",
       "article_title": "Beam Force - Analysis Result Table",
-      "verified_at": "2026-08-26",
-      "note": "TABLE_TYPE BEAMFORCEBYMAX→BEAMFORCEVBM 정정(스키마 오타, 예제·표 기준), PARTS 파라미터(8~12절 공통) 및 BEAMFORCEVBM 전용 ITEM_TO_DISPLAY·HEAD·예제 전체 신규 보강"
+      "verified_at": "2026-09-06",
+      "note": "✅ 해결 확인(2026-09-06): JSON Schema enum의 'BEAMFORCEBYMAX' 오타가 정정돼 현재 ['BEAMFORCE','BEAMFORCEVBM'](BEAMFORCEBYMAX 0회). MAPI-2484 A-5 반영. 로컬은 처음부터 예제·표 기준이라 값 수정 없음, ⚠️ 주석만 해결 기록으로 교체. PARTS 3자 모순(스키마 Part1 / 표 'Part I' / 예제 'PartI')은 그대로라 기존 주석 유지",
+      "updated_at": "2026-09-01T02:55:30Z"
     },
     "9. Beam Force (Static Prestress)": {
       "article_id": "36011373070745",
       "article_title": "Beam Force (Static Prestress) - Analysis Result Table",
-      "verified_at": "2026-08-26",
-      "note": "TABLE_TYPE BEAMFORCESIP→BEAMFORCESTP 정정(스키마 오타, 예제·표 기준), PARTS 파라미터 누락 보강"
+      "verified_at": "2026-09-06",
+      "note": "✅ 해결 확인(2026-09-06): JSON Schema enum의 'BEAMFORCESIP' 오타가 'BEAMFORCESTP'로 정정됨(BEAMFORCESIP 0회, BEAMFORCESTP 3회). MAPI-2484 A-6 반영. 로컬 값 수정 없음, ⚠️ 주석만 해결 기록으로 교체",
+      "updated_at": "2026-09-01T04:07:27Z"
     },
     "10. Beam Stress": {
       "article_id": "36011455813273",
@@ -2561,6 +2566,13 @@
     }
   },
   "25_Design_Steel_KDS41302022.md": {
+    "0. DSTL": {
+      "article_id": "57568269363737",
+      "article_title": "Design Code",
+      "updated_at": "2026-09-04T06:13:53Z",
+      "verified_at": "2026-09-06",
+      "note": "신규 작성(2026-09-06 정기 점검): DESIGN/STEEL/DSTL(강재 설계 코드 선택). 원문 생성일 2026-05-04로 이전부터 있었으나 매뉴얼에 누락돼 있던 것을, 이 아티클과 랜딩 페이지가 함께 2026-09-04 갱신된 것을 계기로 발견. KDS-41-30-2022 접두사를 쓰지 않는 별도 URI라 ## 0.으로 추가. 26장 DESIGN/RC/DRC의 강재 대응 엔드포인트. GET 응답 최상위 키는 엔드포인트명과 같은 'DSTL'(RC 쪽은 'DCON'이라 규칙이 다름). ⚠️ 원문 스키마에 maxProperties가 'maxroperties'로 오타 — 오류 제보 대상"
+    },
     "1. DCO": {
       "article_id": "57365469935257",
       "verified_at": "2026-08-26",

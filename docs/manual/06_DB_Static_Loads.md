@@ -1094,10 +1094,14 @@ midas_api("DELETE", "/db/PNLD", {"Assign": {"2": {}}})
 | **ELEM_TYPE = "SOLID"** | | | | | |
 | 14 | Solid Face No. (1~6) | `"FACE_NO"` | Integer | - | Optional |
 
-> ⚠️ 원문은 이 조건을 "SELECT_TYPE이 SOLID일 때"로 적고 있으나, `SELECT_TYPE`의 실제 enum은
-> `"ON_PLANE"`/`"IN_GROUP"`뿐이라 `"SOLID"` 값을 가질 수 없다(4번 `ELEM_TYPE`의 enum이
-> `"PLATE"`/`"SOLID"`). `FACE_NO`는 Solid 요소 전용 필드이므로 실제로는 `ELEM_TYPE`
-> 조건으로 정정했다(원문 자체의 오기로 판단, 오류제보 대상).
+> ✅ **2026-09-06 부분 해결 확인:** 원문이 이 조건의 Key를 `"SELECT_TYPE"`으로 적었던 오기가
+> 2026-09-01 갱신으로 `"ELEM_TYPE"`으로 정정돼, 위 표기와 일치하게 됐다(2026-08-27 오류 제보
+> Jira `MAPI-2484` 반영 결과로 보임).
+>
+> ⚠️ 다만 같은 행의 **설명 문구는 아직 `Element Select Type`으로 남아 있다**(원문 그대로:
+> `When Element Select Type, "ELEM_TYPE" is "SOLID"`). 같은 표의 첫 조건행은
+> `When Element Type, "ELEM_TYPE" is "PLATE"`로 올바르게 적혀 있어 문구만 정정이 덜 된 상태다 —
+> 잔여 오류 제보 대상.
 
 ### Python 예제
 
@@ -2044,10 +2048,17 @@ midas_api("DELETE", "/db/SSEIS", {"Assign": {"2": {}}})
 | (3) | Additional Seismic Load Y | `"ALONG_Y"` | number | - | Required |
 | (4) | Additional Torsional Seismic Load RZ | `"TORSIONAL_RZ"` | number | - | Required |
 
-> ⚠️ 원문 Request Example에는 `"INHERENT_TORSION"`이 `"NHERENT_TORSION"`(앞 글자 I 누락)으로
-> 오타 표기되어 있다. JSON Schema와 Specifications 표는 둘 다 `"INHERENT_TORSION"`으로 일관되게
-> 표기하므로, 예제가 표보다 우선한다는 원칙에도 불구하고 이 경우는 예제 쪽의 명백한 오타로 판단해
-> 아래 예제에서 정정했다.
+> ⚠️ **원문 상태 변경(2026-09-06 확인).** 이전(2026-08-25 확인)에는 원문 Request Example이
+> `"INHERENT_TORSION"`을 `"NHERENT_TORSION"`(앞 글자 I 누락)으로 오타 표기하고 있어 아래 예제에서
+> 정정해 두었다. 그러나 2026-09-01 갱신 이후 **User Type 아티클(id `58908928576153`)의 본문이
+> KDS 아티클(id `58908676674585`)의 본문으로 통째로 덮어써져**(두 본문이 56,247자 완전 동일) User
+> Type 전용 Request Example과 Specifications 표가 원문에서 사라졌다 — 즉 그 오타 예제 자체가 현재
+> 원문에 존재하지 않는다.
+>
+> 아래 표와 예제는 **두 아티클에 공통으로 남아 있는 USER TYPE JSON Schema**(`SEIS_CODE`
+> `const: "USER TYPE"`, `SEISMIC_FORCE` 배열, `INHERENT_TORSION` boolean 기본값 `false`)로
+> 계속 뒷받침되므로 그대로 유지한다. 원문 본문 덮어쓰기는 명백한 공식 측 사고로 보이며 오류 제보
+> 대상이다(복구되면 재대조 필요).
 
 ```json
 {

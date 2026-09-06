@@ -9,13 +9,19 @@
 > **인증 헤더:** `MAPI-Key: <발급된 키>`
 > **출처:** [MIDAS API Online Manual](https://support.midasuser.com/hc/en-us/articles/33016922742937)
 
-이 장은 **강재(Steel) 설계 기준 KDS 41 30:2022** 의 설계 입력·수행·결과 관련 **27개 엔드포인트**를 다룹니다. 모든 엔드포인트는 다음 공통 URI 접두어를 공유합니다.
+이 장은 **강재(Steel) 설계 기준 KDS 41 30:2022** 의 설계 입력·수행·결과 관련 **28개 엔드포인트**(공통 접두사 `KDS-41-30-2022/<CODE>` 엔드포인트 27개 + 강재 설계 코드 선택 엔드포인트 `DSTL` 1개)를 다룹니다. `DSTL`을 제외한 27개는 다음 공통 URI 접두어를 공유합니다.
 
 ```
 {base url}/DESIGN/STEEL/KDS-41-30-2022/<CODE>
 ```
 
 여기서 `<CODE>`는 각 엔드포인트 코드(`DCO`, `LENG`, `MEMB`, `CODE-ANAL` 등)입니다.
+
+> ⚠️ **2026-09-06 신규 반영:** `DESIGN/STEEL/DSTL`(활성 강재 설계 코드 선택)은 원문 생성일이
+> 2026-05-04로 이전부터 있었으나, 정기 점검(2026-09-06)에서 해당 아티클과 매뉴얼 랜딩 페이지가
+> 함께 갱신(2026-09-04)된 것을 확인하고 발견했다. `KDS-41-30-2022` 접두사를 쓰지 않는 별도
+> URI라 번호 체계에 영향 없이 `## 0.`으로 추가한다. RC 쪽 대응 엔드포인트는
+> [26장 `DESIGN/RC/DRC`](./26_Design_RC_KDS41202022.md#0-designrcdrc--rc-design-code-rc-설계-코드-선택)이다.
 
 > **공통 규약 — 요청 래퍼:**
 > - **설정(config)·부재(member) 엔드포인트**는 최상위에 `"Assign"` 객체를 두고, 그 안에서 대상 ID(요소·부재·재질 ID 등)를 **문자열 키**로 사용하여 각 레코드를 담습니다. GET 응답은 최상위 키가 해당 엔드포인트 코드(예: `DCO`, `LENG`)로 바뀌어 동일 구조로 반환됩니다.
@@ -36,6 +42,7 @@
 
 | No. | Endpoint | 기능 | Active Methods |
 |-----|----------|------|----------------|
+| 0 | [`DESIGN/STEEL/DSTL`](#0-designsteeldstl--design-code-강재-설계-코드-선택) | Design Code (강재 설계 코드 선택, `KDS-41-30-2022` 접두사 미사용) | GET · PUT · DELETE |
 | 1 | [`.../DCO`](#1-designsteelkds-41-30-2022dco--design-code-option-설계-코드-옵션) | Design Code Option (설계 코드 옵션) | GET · PUT · DELETE |
 | 2 | [`.../DCTL`](#2-designsteelkds-41-30-2022dctl--definition-of-frame-프레임-정의) | Definition of Frame (프레임 정의) | GET · PUT · DELETE |
 | 3 | [`.../LLRF`](#3-designsteelkds-41-30-2022llrf--live-load-reduction-factor-활하중-저감계수) | Live Load Reduction Factor (활하중 저감계수) | GET · PUT · DELETE |
@@ -78,6 +85,121 @@
 | 25 | [`.../CODE-REPORT`](#25-designsteelkds-41-30-2022code-report--steel-code-check-report-강재-코드-검토-보고서) | Steel Code Check Report (강재 코드 검토 보고서) | POST |
 | 26 | [`.../DREULT`](#26-designsteelkds-41-30-2022dreult--steel-design-result-강재-설계-결과-이미지) | Steel Design Result (강재 설계 결과 이미지) | POST |
 | 27 | [`.../TABLE`](#27-designsteelkds-41-30-2022table--steel-member-design-forces-강재-부재-설계-부재력) | Steel Member Design Forces (강재 부재 설계 부재력) | POST |
+
+---
+
+## 0. `DESIGN/STEEL/DSTL` — Design Code (강재 설계 코드 선택)
+
+> **기능:** 현재 프로젝트에 적용할 **강재 설계 코드**를 선택합니다. 이 챕터의 나머지 27개
+> 엔드포인트(`KDS-41-30-2022/<CODE>`)와 달리 URI가 `KDS-41-30-2022` 접두사를 쓰지 않는
+> 별도의 상위 선택 엔드포인트입니다.
+
+### Input URI
+
+```
+{base url}/DESIGN/STEEL/DSTL
+```
+
+### Active Methods
+
+`GET` · `PUT` · `DELETE`
+
+### JSON Schema
+
+```json
+{
+  "type": "object",
+  "required": [
+    "Assign"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "Assign": {
+      "type": "object",
+      "description": "Keyed object (dictionary). Each property name is an ID string (e.g., \"1\").",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "maxProperties": 1,
+      "patternProperties": {
+        "^[0-9]+$": {
+          "type": "object",
+          "required": [
+            "DGNCODE"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "DGNCODE": {
+              "type": "string",
+              "description": "Design Code",
+              "enum": [
+                "KDS 41 30 : 2022"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+> ⚠️ **원문 스키마 오타:** 원문에는 `"maxProperties"`가 **`"maxroperties"`** 로 잘못 적혀 있다
+> (2026-09-06 확인, 원문 `maxProperties` 0회 / `maxroperties` 1회). 동일 구조인 26장
+> `DESIGN/RC/DRC`는 `"maxProperties"`로 올바르게 표기돼 있어, 위 스키마에는 정상 표기를 적었다.
+> 오류 제보 대상.
+
+### 파라미터
+
+| No. | 설명 | Key | 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Assign 래퍼 (ID 문자열 키, 1개) | `"Assign"` | Object | — | **필수** |
+| 2 | 강재 설계 코드 · 현재 `"KDS 41 30 : 2022"` 1개 값만 지원 | `"DGNCODE"` | String (enum) | — | **필수** |
+
+### Request / Response JSON
+
+**PUT Request Body**
+
+```json
+{
+  "Assign": {
+    "1": {
+      "DGNCODE": "KDS 41 30 : 2022"
+    }
+  }
+}
+```
+
+**GET Response Body**
+
+```json
+{
+  "DSTL": {
+    "1": {
+      "DGNCODE": "KDS 41 30 : 2022"
+    }
+  }
+}
+```
+
+> **참고:** GET 응답의 최상위 키는 엔드포인트명과 같은 `"DSTL"`이다. 동일 역할의 26장
+> `DESIGN/RC/DRC`는 응답 키가 엔드포인트명과 다른 `"DCON"`이라 서로 규칙이 다르니 주의.
+> 또한 24장 [`/db/DSTL`](./24_DB_Design.md#2-dbdstl--design-steel-code-강재-설계-코드)은 이름이
+> 같지만 URI·스키마가 다른 별개의 구(舊) 네임스페이스 엔드포인트다.
+
+### Python 예제
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/gen"
+HEADERS = {"MAPI-Key": "<발급된 키>", "Content-Type": "application/json"}
+URI = f"{BASE_URL}/DESIGN/STEEL/DSTL"
+
+# 강재 설계 코드 선택 (PUT): KDS 41 30:2022
+payload = {"Assign": {"1": {"DGNCODE": "KDS 41 30 : 2022"}}}
+print("PUT:", requests.put(URI, headers=HEADERS, json=payload).json())
+print("GET:", requests.get(URI, headers=HEADERS).json())
+```
 
 ---
 

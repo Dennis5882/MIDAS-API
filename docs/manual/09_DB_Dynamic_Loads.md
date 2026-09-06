@@ -682,11 +682,15 @@ print("SPFC DELETE/1:", resp.status_code)
 | (2) | Cross 방향 위치 | `CROSS` | Number | - | Required |
 | (3) | Along 방향 위치 | `ALONG` | Number | - | Required |
 
-> ⚠️ 2026-08-25 확인: 원문 Specifications 표는 `ACCECC_PERTCENT`(오타, 스키마는 `ACCECC_PERCENT`)와
-> 28번 Key를 27번과 동일한 `bACCECC_CONSIDER_GL`로 중복 오기(스키마는 `bACCECC_MINIMUM_TORSION`)
-> 하고 있음. 이 4개 필드는 원문 Request 예제에 등장하지 않아 표와 대조할 예제가 없으므로,
-> CLAUDE.md 원칙에 따라 JSON Schema를 근거로 정정(원문
+> ✅ **2026-09-06 해결 확인:** 이전(2026-08-25)에는 원문 Specifications 표가 `ACCECC_PERTCENT`
+> (오타)와 28번 Key를 27번과 동일한 `bACCECC_CONSIDER_GL`로 중복 오기하고 있어, 예제가 없는
+> 필드라 JSON Schema를 근거로 정정해 두었다. 2026-09-01 원문 갱신으로 **두 건 모두 정정**됐다
+> (재확인: `ACCECC_PERCENT` 2회·`PERTCENT` 0회, `bACCECC_MINIMUM_TORSION` 2회). 위 표는 원래부터
+> 정상 표기였으므로 수정 없음(원문
 > [Response Spectrum Load Cases](https://support.midasuser.com/hc/en-us/articles/35963719599641)).
+>
+> ⚠️ 잔여 불일치: 29-(3) 편심 목록의 Key를 원문 표는 `"Along"`으로, JSON Schema는 `"ALONG"`으로
+> 적고 있다(예제 없음). 위 표는 스키마 기준 `ALONG`을 따랐다 — 잔여 오류 제보 대상.
 
 **비소산 요소 설계 파라미터** *(GEN NX only)*
 

@@ -156,10 +156,10 @@ def midas_api(method: str, endpoint: str, body=None):
 | 19 | Approver Date | `"ADATE"` | String | - | Optional |
 | 20 | Comments | `"COMMENT"` | String | - | Optional |
 
-> ⚠️ 원문 Specifications 표 18번 항목은 Key가 `"APROVE"`(P 1개)로 오타 표기돼 있다. JSON Schema와
-> Request Example은 둘 다 `"APPROVE"`(P 2개)로 일관되게 쓰고 있어(예제가 표보다 우선), 위 표는
-> 정상 표기를 실었다. 다음 동기화 때 "원문과 다르다"고 되돌리지 말 것(아티클 id `35801869341337`,
-> 2026-08-25 확인 — 오류제보 대상).
+> ✅ **2026-09-06 해결 확인:** 원문 Specifications 표 18번 Key가 `"APROVE"`(P 1개) 오타였던 것이
+> 2026-09-01 원문 갱신으로 `"APPROVE"`(P 2개)로 정정됐다(아티클 id `35801869341337`, 재확인 시
+> `APPROVE` 3회·`APROVE` 0회). 우리 문서는 처음부터 정상 표기였으므로 표 수정은 없었다.
+> 2026-08-27 오류 제보(Jira `MAPI-2484`) 반영 결과로 보인다.
 
 ### Python 예제
 

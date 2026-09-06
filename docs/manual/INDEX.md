@@ -34,7 +34,7 @@
 | [22_POST_TH_HY_Pushover.md](./22_POST_TH_HY_Pushover.md) | POST – TH / HY / Pushover Result Tables | 시간이력·수화열·푸시오버 결과 (28개) |
 | [23_POST_Design.md](./23_POST_Design.md) | POST – Design Tables | P-M·Steel·RC·SRC·냉간성형 설계 결과 (~10개) |
 | [24_DB_Design.md](./24_DB_Design.md) | DB – Design | RC·Steel 설계 코드·부재·비지지 길이 (13개) |
-| [25_Design_Steel_KDS41302022.md](./25_Design_Steel_KDS41302022.md) | Design Code – STEEL KDS 41 30:2022 | 강재 설계 코드 설정·부재·비지지길이·좌굴·설계검토 (27개) |
+| [25_Design_Steel_KDS41302022.md](./25_Design_Steel_KDS41302022.md) | Design Code – STEEL KDS 41 30:2022 | 강재 설계 코드 설정·부재·비지지길이·좌굴·설계검토 (28개) |
 | [26_Design_RC_KDS41202022.md](./26_Design_RC_KDS41202022.md) | Design Code – RC KDS 41 20:2022 | RC 설계 코드 설정·보·기둥·벽체·슬래브 설계 (70개) |
 | [27_Design_SRC_AIKSRC2K.md](./27_Design_SRC_AIKSRC2K.md) | Design Code – SRC AIK-SRC2K | SRC 합성부재 설계 코드 설정·보·기둥 설계 (27개) |
 

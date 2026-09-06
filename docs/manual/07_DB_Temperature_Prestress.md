@@ -872,9 +872,16 @@ midas_api("DELETE", "/db/TDNT", {"Assign": {"1": {}}})
 | 18 | Radius Center (X, Y) | `"RC"` | Array \[Number, 2\] | 0 | Optional |
 | 19 | Offset | `"OFFSET"` | Number | 0 | Optional |
 | 20 | Direction · CW: `"CW"` · CCW: `"CCW"` | `"DIR"` | String | `"CW"` | Optional |
-| 21 | x Axis Rotation Angle | `"XAR_ANGLE"` | Number | 0 | Optional |
+| 20 | x Axis Rotation Angle | `"XAR_ANGLE"` | Number | 0 | Optional |
+| 21 | Projection | `"bPJ"` | Boolean | `false` | Optional |
 | 22 | Grad. Rot. Angle Type · `"X"` · `"Y"` | `"GR_AXIS"` | String | `"Y"` | Optional |
 | 23 | Grad. Rot. Angle | `"GR_ANGLE"` | Number | 0 | Optional |
+
+> ⚠️ **2026-09-06 정기 점검 보강:** `bPJ`(Projection) 행이 이 CURVE 블록에서만 누락돼 있어
+> 추가했다 — 원문 JSON Schema(`"bPJ": {"description": "IsProjection?", "type": "boolean"}`),
+> CURVE 예제 4종 전부(`"bPJ": true`), 그리고 원문 Specifications 표 모두에 존재한다(같은 필드가
+> ELEMENT·STRAIGHT 블록에는 이미 있었다). 20번이 `DIR`·`XAR_ANGLE` 두 행에 중복 부여된 것은
+> 원문 번호 오류를 그대로 옮긴 것이다(원문 표기 유지 — 되돌리지 말 것).
 
 **프로파일 좌표 (INPUT=2D, CURVE="SPLINE"):**
 

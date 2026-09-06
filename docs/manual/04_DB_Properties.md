@@ -2471,13 +2471,21 @@ midas_api("POST", "/db/ESSF", essf_data)
 
 ### Specifications
 
-> ⚠️ **2026-08-25 재확인.** 원문 Specifications 표 4번 항목은 Key가 `"RABAR_CODENAME"`(오타,
-> E 누락)으로 적혀 있으나 JSON Schema·Request Example은 모두 `"REBAR_CODENAME"`으로 일관
-> 표기한다(예제가 표보다 우선) — 아래는 정상 표기, 되돌리지 말 것(아티클 id `35993732216985`).
-> 또한 `DATA1.DESIGN` 하위에 `bLAMBDA`/`dLAMBDA`/`bTRANSFER`/`dTRANSFERFCI` 4개 필드가 JSON
-> Schema에는 있으나 원문 Specifications 표·Request Example 어디에도 설명이나 예시가 없다 —
-> 경량콘크리트 λ계수·프리스트레스 전달강도 관련으로 추정되나 필수 여부·기본값을 확인할 근거가
-> 없어 참고용으로만 표기한다.
+> ✅ **2026-09-06 해결 확인:** 원문 Specifications 표 4번 Key가 `"RABAR_CODENAME"`(E 누락 오타)
+> 이던 것이 2026-09-01 원문 갱신으로 `"REBAR_CODENAME"`으로 정정됐다(재확인 시
+> `REBAR_CODENAME` 3회·`RABAR_CODENAME` 0회). 우리 문서는 처음부터 정상 표기였다.
+> 2026-08-27 오류 제보(Jira `MAPI-2484`) 반영 결과로 보인다.
+>
+> ⚠️ **스키마에만 존재하는 필드(설명 근거 없음).** `DATA1.DESIGN` 하위
+> `bLAMBDA`/`dLAMBDA`/`bTRANSFER`/`dTRANSFERFCI` 4개 필드는 JSON Schema에만 있고 원문
+> Specifications 표·Request Example 어디에도 설명·예시가 없다 — 경량콘크리트 λ계수·프리스트레스
+> 전달강도 관련으로 추정되나 필수 여부·기본값 근거가 없어 참고용으로만 표기한다. 여기에 더해
+> **2026-09-01 갱신으로 최상위에 3개 필드가 새로 추가**됐는데(아래 표 참고), 이들 역시 스키마에만
+> 있고 표·예제에는 없다.
+>
+> ⚠️ **원문 JSON Schema 구문 오류(2026-09-06 확인):** 새로 추가된 `"bSERVCHECK"` 바로 앞,
+> `SUBREBAR_B_FY` 블록을 닫는 `}` 뒤에 **쉼표가 빠져 있어** 스키마 블록 전체가 유효한 JSON이
+> 아니다(원문 그대로: `..."type": "number" } "bSERVCHECK": {...`). 오류 제보 대상.
 
 | No. | Description | Key | Value Type | Default | Required |
 | --- | --- | --- | --- | --- | --- |
@@ -2498,8 +2506,16 @@ midas_api("POST", "/db/ESSF", essf_data)
 | 6 | Sub Rebar Name | `"SUBREBAR_REBARNAME"` | String | Blank | Optional |
 | 7 | Main Rebar (fy) | `"MAINREBAR_B_FY"` | Number | 0 | GET only |
 | 8 | Sub Rebar (fy) | `"SUBREBAR_B_FY"` | Number | 0 | GET only |
+| 9 | (추정) 사용성 검토 여부 ⚠️표·예제에 근거 없음 (스키마 설명 `ServiceabilityCheck`) | `"bSERVCHECK"` | Boolean | - | 불명 |
+| 10 | (추정) 단기 계수 ⚠️표·예제에 근거 없음 (스키마 설명 `ShortTerm`) | `"dSHORTTERM"` | Number | - | 불명 |
+| 11 | (추정) 장기 계수 ⚠️표·예제에 근거 없음 (스키마 설명 `LongTerm`) | `"dLONGTERM"` | Number | - | 불명 |
 
 > `C_FC`·`C_FCI`·`MAINREBAR_B_FY`·`SUBREBAR_B_FY`는 `CODENAME`/`CODEMATLNAME`/`REBAR_CODENAME`에 종속되는 계산값으로, GET 응답에서만 채워지며 PUT 요청 시에는 무시됩니다.
+>
+> 9~11번(`bSERVCHECK`/`dSHORTTERM`/`dLONGTERM`)은 2026-09-01 원문 갱신으로 JSON Schema
+> 최상위에 추가된 필드다(2026-09-06 정기 점검에서 발견). 원문 Specifications 표·Request Example에
+> 아직 반영되지 않아 타입 외에는 근거가 없으므로 위 설명은 스키마 `description` 문자열에 기반한
+> 추정이다.
 
 ### Request Body
 

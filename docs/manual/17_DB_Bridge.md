@@ -625,8 +625,11 @@ for key, val in resp.json().get("ULFC", {}).items():
 | 12 | 생성 이미지 저장 경로 | `"EXPORT_PATH"` | String | — | **Required** |
 | 13 | 저장 이미지 확장자 · `"bmp"` / `"jpg"` / `"emf"` | `"EXTENSION"` | String (enum) | — | **Required** |
 
-> ⚠️ 원문 Specifications 표에는 응력 성분 `−Sbz`(4번)가 `"Sbz" 4`로 오타 표기되어 있다. JSON
-> Schema의 설명("3: +Sbz, 4: -Sbz")을 근거로 위 표에서는 `−Sbz`로 정정했다.
+> ✅ **2026-09-06 부분 해결 확인:** 원문 Specifications 표의 응력 성분 4번이 `"Sbz" 4`로 부호
+> 없이 오타 표기돼 있던 것이 2026-09-01 갱신으로 **부호가 추가**돼 현재는 `-Sbz" 4`이다
+> (2026-08-27 오류 제보 Jira `MAPI-2484` 반영 결과로 보임). 위 표의 `−Sbz` 표기는 그대로 유효하다.
+> ⚠️ 다만 콜론이 들어가야 할 자리에 여전히 `"`가 남아 있어(`-Sbz" 4`) 문장부호 오타는 미해결
+> 상태다 — 잔여 오류 제보 대상.
 > `BATCH=true`일 때는 `BRDG_GROUP`·`COMPONENTS`·`COMBINED_COMP`·`7TH_DOF_TYPE`을 최상위에 함께
 > 보내면 안 되고, `BATCH=false`일 때는 반대로 `BATCH_LIST`를 보내면 안 된다(원문 JSON Schema
 > `allOf`/`if-then` 제약).
