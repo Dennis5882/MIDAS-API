@@ -48,11 +48,15 @@ _PLUGIN_TOOL_IDS = [
     "61259382041369", "61486703401753", "61655350763289",
     # 2026-09-15 정기 점검에서 랜딩 페이지 재스크래핑으로 발견 (신규 2건, 삭제 0건)
     "61971621469849", "62123537156889",
+    # 2026-09-21 원문 생성, 2026-09-24 정기 점검에서 발견 (ko/en-us 양쪽 존재)
+    "62470497136665", "62470891196825", "62471186426649",
+    # 2026-08-30에 "삭제됨"으로 오판해 제외했던 2건 — 실제로는 ko 전용 아티클로 살아 있다.
+    # 당시 /en-us/ 경로로 404를 확인하고 삭제로 단정했는데, 이 두 아티클은 ko 랜딩에만 링크되고
+    # en-us 번역본이 없을 뿐이었다. 아래 fetch_articles_by_ids()가 로케일 무관 엔드포인트를 쓰는
+    # 이유가 정확히 이것. 2026-09-24 재확인(ko 200 / en-us 404, 본문 updated_at 2026-07-27).
+    "49475987573657", "49504449511705",
 ]
-# 2026-08-30 폐기됨(공식 사이트에서 삭제, 404 확인) — 더 이상 조회 대상 아님. docs/plugin/INDEX.md
-# No.53/54("Floor Load Table Generator"/"Easy Result Table")에 ⚠️ 폐기됨으로 표시, 문서는 보존.
-#   "49475987573657", "49504449511705",
-PLUGIN_ARTICLE_IDS = [_PLUGIN_LANDING_ID] + _PLUGIN_GUIDE_IDS + _PLUGIN_TOOL_IDS  # 70 ids
+PLUGIN_ARTICLE_IDS = [_PLUGIN_LANDING_ID] + _PLUGIN_GUIDE_IDS + _PLUGIN_TOOL_IDS  # 75 ids
 
 # Zendesk resources tracked by this repo. "manual" = JSON Manual section (REST endpoint
 # schema reference, docs/manual/*), "plugin" = Plug-in article-id allowlist (GUI-embedded

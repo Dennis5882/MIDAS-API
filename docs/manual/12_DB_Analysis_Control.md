@@ -67,6 +67,29 @@
 | 8 | Number of Iterations / Load Case | `"ITER"` | Number | - | Required |
 | 9 | Convergence Tolerance | `"TOL"` | Number | - | Required |
 
+> ⚠️ **ja 로케일에만 있는 10번째 필드 `ACWC` — 아직 반영하지 않음 (2026-09-24 확인).**
+> 원문 아티클(id `35409287717657`)의 **일본어 번역본이 2026-09-24에 갱신되면서**
+> `| 5 | Auto Constraint for Wall Elements Connectivity | "ACWC" | Boolean | false | Optional |`
+> 행이 추가됐다(ja 10행 / en-us·ko 9행). ja에서는 이 행이 5번에 삽입돼 기존 5~9번이 6~10번으로
+> 밀린다.
+>
+> | 로케일 | 마지막 편집 | 표 행 수 | `ACWC` |
+> | --- | --- | --- | --- |
+> | ja | 2026-09-24 | 10 | 있음 (5행) |
+> | en-us | 2025-11-04 | 9 | 없음 |
+> | ko | 2025-09-17 | 9 | 없음 |
+>
+> 이 저장소는 en-us를 기준으로 하므로 **위 표는 9행 그대로 둔다.**
+>
+> **⚠️ 이것을 en-us/ko의 "표 누락"으로 단정하지 말 것.** ja 로케일은 일본 시장용 빌드(iGen 계열)를
+> 다루므로, `ACWC`가 **일본 전용 기능이라 애초에 en-us/ko에 없는 것**일 수 있다. 같은 구조의
+> 선례가 있다 — `AIJ-ASD02`는 API가 존재하는데도 일본 전용 빌드 대상이라 `docs/manual` 누락이
+> 아닌 것으로 정리했다. 따라서 현재로선 **제보 후보가 아니다.**
+>
+> 판별하려면 일반 빌드(Gen NX / Civil NX)에서 `/db/ACTL`에 `ACWC`를 보내 수용되는지 확인하면
+> 된다 — 수용되면 en-us/ko 표 누락, 거부되면 일본 전용으로 확정된다. 그 전까지는 이 주석으로만
+> 남겨 둔다.
+
 ### Request Body (POST)
 
 ```json

@@ -22,7 +22,7 @@ Manual과 같지만, 문서 성격은 다르다:
 | 대상 독자 | REST API를 직접 호출하는 개발자 | GUI에서 완성된 도구를 쓰는 엔지니어(+직접 Plug-in을 만들려는 개발자) |
 | 원문 성격 | 엔드포인트별 Key/Value 스키마 표 | 스크린샷 기반 GUI 사용법 워크스루 |
 | 문서 단위 | 챕터(엔드포인트 그룹) | 개별 Plug-in 툴 1개 = 파일 1개 |
-| Zendesk 섹션 | JSON Manual (651개 아티클) | Plug-in (Introduction 4건 + Plug-in Item 65건, 폐기 2건 별도) |
+| Zendesk 섹션 | JSON Manual (651개 아티클) | Plug-in (Introduction 4건 + Plug-in Item 70건) |
 
 **따라서 `docs/manual`의 "TABLE_TYPE 표 → Response HEAD → Request/Response JSON → Python 예제"
 관례를 그대로 적용하지 않는다.** 대신 [아래 템플릿](#toolsmd-개별-문서-템플릿)을 따른다.
@@ -34,18 +34,20 @@ Manual과 같지만, 문서 성격은 다르다:
 이 INDEX.md는 카탈로그이자 작업 트래커다. "상태" 컬럼이 ⬜(미작성)인 항목은 아직 개별 문서가
 없다 — 원문 링크만 확인된 상태다. 필요할 때(사용자 요청 시) 해당 원문을 다시 스크래핑해
 `tools/*.md` 템플릿에 맞춰 채우고, 이 표의 상태를 ✅로 갱신한다. 규모가 크면 CLAUDE.md의
-리서치/편집 분리 서브에이전트 패턴을 그대로 재사용한다. **⚠️ 폐기됨**은 한때 랜딩 페이지에
-있었고 개별 문서도 작성했으나, 이후 공식 사이트에서 아티클 자체가 삭제(404)된 항목 — 문서는
-과거 기록용으로 남겨두되 더 이상 동기화 점검 대상이 아니다(`common.py`의
-`PLUGIN_ARTICLE_IDS`에서도 제외).
+리서치/편집 분리 서브에이전트 패턴을 그대로 재사용한다. **(ko 전용)** 표시는 한국어
+로케일에만 존재하고 `/en-us/` 경로로는 404가 나는 아티클이다 — 삭제된 것이 아니므로 정상
+점검 대상이며, `common.py`의 `fetch_articles_by_ids()`가 로케일 접두사 없는 엔드포인트를
+쓰기 때문에 그대로 추적된다. 현재 폐기된 항목은 없다.
 
 - Guide: 4/4 작성 완료
-- Plug-in Item: 65건 등재(작성 완료 61 + 폐기됨 2 + 미작성 2). 연혁: 원문 53건 중 "Image
+- Plug-in Item: 70건 등재(작성 완료 63 + 미작성 7, **폐기됨 0**). 연혁: 원문 53건 중 "Image
   Capture Generator"는 "Easy Capture Generator"와 동일 URL의 별칭이라 1건으로 병합 +
   2026-08-06 신규 발견 4건 + 2026-08-15 신규 발견 2건 + 2026-08-24 신규 발견 5건 +
-  2026-08-30 정기 점검 시 신규 발견 2건("Point to Patch Convertor"·"Model Report Builder")과,
-  같은 날 기존 2건("Floor Load Table Generator"·"Easy Result Table")이 공식 사이트에서
-  삭제된 것을 확인해 폐기됨으로 전환한 것. "Response Spectrum Generator"도 랜딩 페이지에 지역
+  2026-08-30 신규 발견 2건("Point to Patch Convertor"·"Model Report Builder") +
+  2026-09-15 신규 발견 2건 + 2026-09-24 신규 발견 3건("Beam to Plate"·"Construction Stage
+  Wizard"·"Construction Stage Reporter"). 2026-08-30에 폐기로 전환했던 2건("Floor Load Table
+  Generator"·"Easy Result Table")은 **2026-09-24에 오판으로 확인돼 ko 전용으로 복원**했다
+  (아래 정정 주석 참고). "Response Spectrum Generator"도 랜딩 페이지에 지역
   코드별 별칭("[Peru E.030:2026]", "[SNZ TS 1170.5:2025]")으로 두 번 더 나열되나 동일
   아티클이라 건수에 포함하지 않음 — 해당 코드들은
   [Response_Spectrum_Generator.md](tools/Response_Spectrum_Generator.md)의 "적용 기준"에
@@ -64,7 +66,7 @@ Manual과 같지만, 문서 성격은 다르다:
 
 ---
 
-## Plug-in Item — 개별 툴 (67건, 그중 폐기됨 2건)
+## Plug-in Item — 개별 툴 (70건)
 
 원문 페이지는 하위 카테고리 없이 알파벳순 flat 목록이라, 이 표도 원문 순서를 그대로 따른다.
 파일명은 번호를 매기지 않고 툴 이름을 슬러그화한 것 — 신규 Plug-in이 추가돼도 기존 파일 재번호가
@@ -124,8 +126,8 @@ Manual과 같지만, 문서 성격은 다르다:
 | 50 | Thailand DPT Code Auto Searching | [tools/Thailand_DPT_Code_Auto_Searching.md](tools/Thailand_DPT_Code_Auto_Searching.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/52715682940313-Thailand-DPT-Code-Auto-Searching) |
 | 51 | Tunnel Lining Generator | [tools/Tunnel_Lining_Generator.md](tools/Tunnel_Lining_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/35655721814937-Tunnel-Lining-Model) |
 | 52 | Wind Load Calculator for Bridges (HK) | [tools/Wind_Load_Calculator_for_Bridges_HK.md](tools/Wind_Load_Calculator_for_Bridges_HK.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/en-us/articles/40645303004697-Wind-Load-Calculator-for-bridges-HK) |
-| 53 | Floor Load Table Generator | [tools/Floor_Load_Table_Generator.md](tools/Floor_Load_Table_Generator.md) | ⚠️ 폐기됨 (2026-08-30 확인, 원문 404) | ~~[원문](https://support.midasuser.com/hc/ko/articles/49475987573657-Floor-Load-Table-Generator)~~ |
-| 54 | Easy Result Table | [tools/Easy_Result_Table.md](tools/Easy_Result_Table.md) | ⚠️ 폐기됨 (2026-08-30 확인, 원문 404) | ~~[원문](https://support.midasuser.com/hc/ko/articles/49504449511705-Easy-Result-Table)~~ |
+| 53 | Floor Load Table Generator | [tools/Floor_Load_Table_Generator.md](tools/Floor_Load_Table_Generator.md) | ✅ 작성 완료 (ko 전용) | [원문](https://support.midasuser.com/hc/ko/articles/49475987573657-Floor-Load-Table-Generator) |
+| 54 | Easy Result Table | [tools/Easy_Result_Table.md](tools/Easy_Result_Table.md) | ✅ 작성 완료 (ko 전용) | [원문](https://support.midasuser.com/hc/ko/articles/49504449511705-Easy-Result-Table) |
 | 55 | Bulk Tabular Result Exporter | [tools/Bulk_Tabular_Result_Exporter.md](tools/Bulk_Tabular_Result_Exporter.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/ko/articles/60848073556633-Bulk-Tabular-Result-Exporter) |
 | 56 | Skew Grillage Geometry Generator | [tools/Skew_Grillage_Geometry_Generator.md](tools/Skew_Grillage_Geometry_Generator.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/ko/articles/60848423734169-Skew-Grillage-Geometry-Generator) |
 | 57 | CS454 Load Assessment Combinations | [tools/CS454_Load_Assessment_Combinations.md](tools/CS454_Load_Assessment_Combinations.md) | ✅ 작성 완료 | [원문](https://support.midasuser.com/hc/ko/articles/60997850893209-CS454-Load-Assessment-Combinations) |
@@ -139,6 +141,9 @@ Manual과 같지만, 문서 성격은 다르다:
 | 65 | Model Report Builder | — | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/61655350763289-Model-Report-Builder) |
 | 66 | RC Slab and Shell Assessment | — | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/61971621469849-RC-Slab-and-Shell-Assessment) |
 | 67 | Concurrent Force Reporter | — | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/62123537156889-Concurrent-Force-Reporter) |
+| 68 | Beam to Plate | — | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/62470497136665-Beam-to-Plate) |
+| 69 | Construction Stage Wizard | — | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/62470891196825-Construction-stage-wizard) |
+| 70 | Construction Stage Reporter | — | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/62471186426649-Construction-stage-reporter) |
 
 [^1]: 원문 페이지에는 "Image Capture Generator"라는 이름으로도 한 번 더 나열되어 있으나 같은
     URL(`35639906272025-Easy-Capture-Generator`)을 가리키는 동일 아티클이다.
@@ -170,6 +175,23 @@ Manual과 같지만, 문서 성격은 다르다:
 > 삭제된 것으로 확인, 상태를 ⚠️ 폐기됨으로 전환하고(문서 파일은 보존) `common.py`의
 > `PLUGIN_ARTICLE_IDS`에서 두 id를 제거했다(더 이상 조회 불가능한 아티클을 매 점검마다
 > 404로 재확인할 이유가 없음).
+>
+> **❌ 2026-09-24 정정 — 위 2026-08-30 폐기 판정은 틀렸다.** No.53("Floor Load Table
+> Generator")·54("Easy Result Table")는 삭제된 적이 없고 **ko 전용 아티클로 계속 살아 있다**
+> (ko 200 / en-us 404, 본문 `updated_at` 2026-07-27). 당시 `/en-us/` 경로로만 404를 확인하고
+> 삭제로 단정한 것이 원인이다. 랜딩 페이지도 ko판에만 이 2건이 링크돼 있다(ko 74개 / en-us 72개).
+> 상태를 ✅(ko 전용)로 되돌리고 `PLUGIN_ARTICLE_IDS`에 두 id를 복원했다.
+>
+> **교훈: 플러그인 아티클의 생사 판정은 로케일 접두사가 없는 `articles/{id}.json`으로 할 것.**
+> `common.py`의 `fetch_articles_by_ids()`가 이미 로케일 무관 엔드포인트를 쓰는 이유가 바로
+> 이것인데, 폐기 판정만 손으로 `/en-us/`를 찍어보고 내렸다. 랜딩 페이지 재스크래핑도 ko·en-us
+> 양쪽을 합집합으로 봐야 한다.
+>
+> **2026-09-24 정기 점검(변경):** 랜딩 페이지 `updated_at` 갱신(2026-09-11 → 2026-09-21)을
+> 계기로 재확인해 신규 3건을 발견했다 — No.68 "Beam to Plate", No.69 "Construction Stage
+> Wizard", No.70 "Construction Stage Reporter". 세 아티클 모두 2026-09-21 당일 생성됐고
+> ko·en-us 양쪽에 존재하며 본문 길이가 동일하다. 위 폐기 오판 정정과 합쳐
+> `PLUGIN_ARTICLE_IDS`는 70개 → 75개가 됐다.
 
 ---
 
