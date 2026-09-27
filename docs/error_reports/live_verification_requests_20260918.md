@@ -124,7 +124,13 @@
 
 - `/db/PNLA` 조건 라벨 `When Element Select Type` ↔ `When Element Type` (설명 문구)
 - `/ope/GSBG` Component 목록의 `• -Sbz" 4` (콜론 자리에 큰따옴표 — 문장부호)
-- `/db/SPLC` `fasle` · `Eccentricitiy`, `/db/DSTL` `maxroperties` (설명문 오탈자)
+- `/db/SPLC` `fasle` · `Eccentricitiy` (설명문 오탈자)
+- ~~`/db/DSTL` `maxroperties` (설명문 오탈자)~~ → **정정(2026-09-28):** 엔드포인트 경로가
+  `/db/DSTL`이 아니라 `DESIGN/STEEL/DSTL`(아티클 `57568269363737`)이었고, `maxroperties`는
+  설명문이 아니라 **JSON Schema 키워드**(`maxProperties`) 오타였다. 스키마 키워드는 검증
+  로직에 쓰이므로 "서버 동작과 무관"이라는 이 섹션의 전제가 애초에 성립하지 않았을 수 있다 —
+  A/B 섹션으로 재분류해 라이브 검증했어야 할 항목이었으나, 이 요청서는 이미 회신을 받아
+  종결되어 재제출은 하지 않는다.
 - `/db/SSEIS` 한글 본문 오염 (두 아티클의 한글 본문이 동일해진 편집 사고)
 
 ---
