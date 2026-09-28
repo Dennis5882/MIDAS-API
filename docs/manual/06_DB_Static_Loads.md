@@ -1094,14 +1094,21 @@ midas_api("DELETE", "/db/PNLD", {"Assign": {"2": {}}})
 | **ELEM_TYPE = "SOLID"** | | | | | |
 | 14 | Solid Face No. (1~6) | `"FACE_NO"` | Integer | - | Optional |
 
-> ✅ **2026-09-06 부분 해결 확인:** 원문이 이 조건의 Key를 `"SELECT_TYPE"`으로 적었던 오기가
-> 2026-09-01 갱신으로 `"ELEM_TYPE"`으로 정정돼, 위 표기와 일치하게 됐다(2026-08-27 오류 제보
-> Jira `MAPI-2484` 반영 결과로 보임).
+> ⚠️ **2026-09-28 재확인 — 기존 오류 미해결 + 신규 오류 발견.** 2026-09-01 갱신으로 `ELEM_TYPE =
+> "SOLID"` 조건 행의 Key 오기(`"SELECT_TYPE"` → `"ELEM_TYPE"`)는 정정됐었으나, 같은 행의 **설명
+> 문구는 여전히 `Element Select Type`으로 남아 있다**(원문 그대로: `When Element Select Type,
+> "ELEM_TYPE" is "SOLID"`). 같은 표의 첫 조건행은 `When Element Type, "ELEM_TYPE" is "PLATE"`로
+> 올바르므로 이 행만 문구 정정이 덜 된 상태다.
 >
-> ⚠️ 다만 같은 행의 **설명 문구는 아직 `Element Select Type`으로 남아 있다**(원문 그대로:
-> `When Element Select Type, "ELEM_TYPE" is "SOLID"`). 같은 표의 첫 조건행은
-> `When Element Type, "ELEM_TYPE" is "PLATE"`로 올바르게 적혀 있어 문구만 정정이 덜 된 상태다 —
-> 잔여 오류 제보 대상.
+> **신규 회귀 — `SELECT_TYPE = "IN_GROUP"` 조건 행의 Key가 오염됐다.** 2026-09-06 시점에는
+> `When Element Select Type, "SELECT_TYPE" is "IN_GROUP"`으로 Key가 올바르게 `SELECT_TYPE`이었으나,
+> 2026-09-28 재확인 결과 **Key가 `"ELEM_TYPE"`으로 바뀌어 있다**(`When Element Select Type,
+> "ELEM_TYPE" is "IN_GROUP"` — `IN_GROUP`은 `SELECT_TYPE`의 값이지 `ELEM_TYPE`의 값이 아니므로
+> 의미상 성립하지 않는다). 한글·영문 페이지 모두 동일하게 오염되어 있다. 위 표는 실제 스키마와
+> Specifications 표 9번 설명(`SELECT_TYPE` = Element Selection Type)에 근거해 `SELECT_TYPE`으로
+> 정정해 적었다. Jira `MAPI-2485` B-1 코멘트(2026-09-27)에서 이 행은 "표기가 맞으니 그대로 두면
+> 된다"고 확인해준 바로 그 행이 이번 편집으로 새로 깨진 것 — 잔여 오류 제보 대상(2026-09-28 재제보
+> 예정).
 
 ### Python 예제
 
@@ -2048,53 +2055,41 @@ midas_api("DELETE", "/db/SSEIS", {"Assign": {"2": {}}})
 | (3) | Additional Seismic Load Y | `"ALONG_Y"` | number | - | Required |
 | (4) | Additional Torsional Seismic Load RZ | `"TORSIONAL_RZ"` | number | - | Required |
 
-> ⚠️ **원문 ko 로케일 오염(2026-09-06 확인).** 이전(2026-08-25 확인)에는 원문 Request Example이
-> `"INHERENT_TORSION"`을 `"NHERENT_TORSION"`(앞 글자 I 누락)으로 오타 표기하고 있어 아래 예제에서
-> 정정해 두었으나, 2026-09-01 갱신으로 그 예제 자체가 원문에서 사라졌다.
+> ⚠️ **원문 ko 로케일 오염 — 2026-09-28 재확인 결과 미해결(형태만 변경).** 2026-09-06에 처음
+> 발견한 오염은 "KDS·User Type 두 아티클의 ko 본문이 완전히 동일(56,247자)"한 형태였다. 2026-09-28
+> 공식 담당자가 수정게시했다고 알려와 재확인했으나, **KDS 아티클(`58908676674585`)의 ko 페이지는
+> 여전히 내부적으로 어긋나 있다** — 증상만 바뀌었다:
 >
-> 이 정정은 실효가 있다 — 2026-09-18 라이브 검증에서 오타 키 `IINHERENT_TORSION`·`NHERENT_TORSION`은
-> **HTTP 201을 받지만 조용히 무시되고**, 응답에서 키가 사라지며 GET에는 정상 필드
-> `INHERENT_TORSION`이 기본값 `false`로 남았다. 오타 키를 그대로 복사해 보낸 사용자는 옵션이
+> | 아티클 | 로케일 | 마지막 편집 | JSON Schema 절 | Examples·표 |
+> | --- | --- | --- | --- | --- |
+> | KDS (`58908676674585`) | en-us | 2026-06-18(무변경) | KDS 스키마(`const: "KDS(41-17-00:2019)"`, `PARAMETERS` required) — 정상 | KDS 예제·표 — 정상 |
+> | KDS (`58908676674585`) | **ko** | **2026-09-28** | **User Type 스키마 그대로**(`const: "USER TYPE"`, `SEISMIC_FORCE`/`INHERENT_TORSION` required, `PARAMETERS` 속성 없음) — **오염 지속** | KDS 예제·표로 정정됨(`SEIS_CODE: "KDS(41-17-00: 2019)"`, `PARAMETERS` 행 존재) |
+> | User Type (`58908928576153`) | ko / en-us | 2026-09-28 | User Type 스키마 — 정상 | 정상 |
+>
+> 즉 이전에는 "페이지 전체가 통째로 User Type 본문으로 뒤바뀜"이었다면, 지금은 "Examples·표는 KDS로
+> 고쳐졌지만 JSON Schema 절만 User Type 스키마로 남음"이라는 **다른 형태의 같은 불일치**다. KDS ko
+> 페이지만 보고는 여전히 올바른 요청을 만들 수 없다 — Schema 절이 요구하는 필드(`SEISMIC_FORCE`,
+> `INHERENT_TORSION`)와 Examples·표가 실제 쓰는 필드(`PARAMETERS`)가 서로 다르기 때문이다.
+>
+> 추가로 **`IINHERENT_TORSION`(I 두 번) · `NHERENT_TORSION`(I 누락) 오타도 User Type 아티클
+> (`58908928576153`, ko·en-us 공통)에 그대로 남아 있다** — JSON Schema 설명 문구에
+> `IINHERENT_TORSION` 1회, 두 예제 중 하나에 `NHERENT_TORSION` 1회. 2026-09-18 라이브 검증(Gen NX
+> 2026, Build 09/24/2026)에서 이 오타 키들은 **HTTP 201을 받지만 조용히 무시되고** GET에는 정상 필드
+> `INHERENT_TORSION`이 기본값 `false`로 남는 것을 확인했다 — 오타 키를 그대로 복사한 사용자는 옵션이
 > 켜졌다고 오해하게 된다. 정상 키로 보내면 `true`가 그대로 저장된다.
 >
-> 현재 상태(로케일별로 다름에 주의):
->
-> | 아티클 | 로케일 | 마지막 편집 | 스키마 `SEIS_CODE` |
-> | --- | --- | --- | --- |
-> | KDS (`58908676674585`) | **en-us** | 2026-06-18 | `const: "KDS(41-17-00:2019)"` (정상) |
-> | KDS (`58908676674585`) | **ko** | 2026-09-01 | `const: "USER TYPE"` (오염) |
-> | User Type (`58908928576153`) | ko / en-us | 2026-09-01 | `const: "USER TYPE"` |
->
-> 추가로 **ko 본문의 복사용 예제는 `"SEIS_CODE": "KDS(41-17-00: 2019)"`로 콜론 뒤에 공백이
-> 들어가 있다**(en-us는 공백 없음). 같은 ko 페이지의 Specifications 표는 공백 없는 표기라
-> 페이지 안에서도 어긋난다. 다만 **실사용에는 지장이 없다** — 2026-09-18 라이브 검증(Gen NX 2026
-> v2.1, Build 09/15/2026)에서 공백이 있는 값도 수용되고 POST 응답·GET 저장값 모두 공백 없는
-> `"KDS(41-17-00:2019)"`로 **정규화**되는 것이 확인됐다. 따라서 표기 통일 요청 수준의 사안이다.
-> 이 저장소는 en-us 기준이므로 위 예제들은 공백 없는 표기를 쓴다.
->
-> ⚠️ 2026-09-18에 이 자리에 "`const`라서 ko 예제를 그대로 복사해 전송하면 스키마 검증에 실패한다"고
-> 적었으나 **틀렸다.** 스키마의 `const`만 보고 서버도 그대로 거를 것이라 단정한 추론이었고, 라이브
-> 검증으로 뒤집혔다. **문서상 `const`/`enum` 표기가 곧 서버의 거부를 뜻하지는 않는다** — 실제
-> 동작을 근거로 쓰려면 라이브 검증 결과를 받아올 것.
->
-> ⚠️ 이 공백을 en-us 스키마에서도 본 것 같다면 **구문 강조 허상이다.** 강조기가 문자열 안의 숫자를
-> `"KDS(41-17-00: <span class="manual-json-n">2019</span>)"`로 잘못 토큰화해서 태그를 제거하면
-> 공백이 생긴다. 판정은 반드시 복사용 `<textarea id="copyRawJson_…">` 원본으로 할 것
-> (2026-09-18에 이걸로 한 번 오판했다).
->
-> 즉 **ko 로케일에서 두 아티클의 본문이 56,247자로 완전히 같아졌고**, 그 본문은 USER TYPE 스키마와
-> KDS 예제·Specifications 표가 뒤섞인 상태다(표는 `PARAMETERS`를 Required로 요구하는데 스키마에는
-> 그 속성이 아예 없고, 반대로 스키마가 required로 지정한 `SEISMIC_FORCE`·`INHERENT_TORSION`은 표에
-> 행이 없다). 같은 아티클의 손대지 않은 en-us 번역본이 올바른 KDS 스키마를 그대로 보존하고 있어,
-> 의도적 통합이 아니라 편집 사고로 판단한다(스키마에 `oneOf`/`if` 분기도 없고 목차에는 두 항목이
-> 그대로 별개로 남아 있다).
+> ⚠️ 2026-09-18에 "`const`라서 ko 예제를 그대로 복사해 전송하면 스키마 검증에 실패한다"고 적었으나
+> **틀렸다.** 스키마의 `const`만 보고 서버도 그대로 거를 것이라 단정한 추론이었고, 라이브 검증으로
+> 뒤집혔다. **문서상 `const`/`enum` 표기가 곧 서버의 거부를 뜻하지는 않는다** — 실제 동작을 근거로
+> 쓰려면 라이브 검증 결과를 받아올 것.
 >
 > 아래 표와 예제는 **USER TYPE JSON Schema**(`SEISMIC_FORCE` 배열, `INHERENT_TORSION` boolean
-> 기본값 `false`)로 계속 뒷받침되므로 그대로 유지한다. 오류 제보 대상이며, 원문이 복구되면 재대조가
-> 필요하다. `scripts/manual_sync`는 `SYNC_LOCALE`(= **en-us**) 본문만 받아오므로 이 오염은
-> 받아온 본문에는 나타나지 않는다 — 아티클 레벨 `updated_at`이 로케일별 타임스탬프의 최댓값이라
-> ko 편집만으로도 changed 플래그가 떠서 발견된 경우다. `check_diff.py`의 `locale_note`가
-> `en-us did NOT` 판정을 내주므로, 그런 건은 반드시 ko 페이지를 직접 열어 대조할 것.
+> 기본값 `false`)로 계속 뒷받침되므로 그대로 유지한다. Jira `MAPI-2484` A-8로 계속 추적 중이며
+> (2026-09-28 재오픈), 원문이 완전히 복구되면 재대조가 필요하다. `scripts/manual_sync`는
+> `SYNC_LOCALE`(= **en-us**) 본문만 받아오므로 KDS ko 오염은 받아온 본문에는 나타나지 않는다 —
+> 아티클 레벨 `updated_at`이 로케일별 타임스탬프의 최댓값이라 ko 편집만으로도 changed 플래그가 떠서
+> 발견된 경우다. `check_diff.py`의 `locale_note`가 `en-us did NOT` 판정을 내주므로, 그런 건은
+> 반드시 ko 페이지를 직접 열어 대조할 것.
 
 ```json
 {

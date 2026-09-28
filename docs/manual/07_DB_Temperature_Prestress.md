@@ -909,7 +909,11 @@ midas_api("DELETE", "/db/TDNT", {"Assign": {"1": {}}})
 > (Build 09/15/2026) 양쪽에서 `PROFY[].RADIUS = false`가 `Wrong Field`로 거부되고 후속 GET은
 > `Not Found Key`를 반환했다. 숫자값(`0`, `20`)은 두 제품 모두 생성·보존됐다. 원문 표의
 > "Boolean" 표기는 오류이며 실제 wire type은 `Number`다. 원문 JSON Schema도 `PROFY`·`PROFZ`·`PROF`
-> 세 분기 모두 `"RADIUS": {"type": "number"}`로 일치한다. Jira `MAPI-2485` B-2로 제보 중.
+> 세 분기 모두 `"RADIUS": {"type": "number"}`로 일치한다.
+>
+> ✅ **2026-09-28 공식 반영 확인.** Jira `MAPI-2485` B-2 제보가 반영되어 원문 Specifications 표의
+> `PROFY`·`PROFZ`·`PROF` 세 `RADIUS` 행이 모두 `Number`(기본값 `0`)로 정정됐다 — 위 표는 이
+> 상태를 그대로 반영한다.
 >
 > ⚠️ **이 API는 오류 본문을 HTTP 201로 돌려준다.** 상태 코드만 보면 성공으로 오판하므로,
 > 반드시 응답 본문과 후속 GET을 함께 확인할 것.
@@ -950,14 +954,14 @@ midas_api("DELETE", "/db/TDNT", {"Assign": {"1": {}}})
 | (2) | Fix Option | `"bFIX"` | Boolean | `false` | Optional |
 | (3) | Radius (length) | `"RADIUS"` | Number | 0 | Optional |
 
-> ⚠️ **원문 표는 이 행의 Value Type을 "Array"로 적었으나 `Number`로 기재한다.** 원문은 같은
-> `"RADIUS"` 항목을 구간별로 세 가지 타입(2D x-y `Boolean` / 2D x-z `Number` / 3D `Array`)으로
-> 표기하는데, JSON Schema는 세 분기 모두 `"type": "number"`이고 예제도 전부 스칼라(`0`, `20`)다.
+> ✅ **2026-09-28 공식 반영 확인.** 원문 표가 이 행을 "Array"로 오표기했던 것이 Jira `MAPI-2485`
+> B-2 제보로 `Number`(기본값 `0`)로 정정됐다 — 위 표는 이 상태를 그대로 반영한다. JSON Schema는
+> 애초부터 세 분기(2D x-y `PROFY` / 2D x-z `PROFZ` / 3D `PROF`) 모두 `"type": "number"`로
+> 일관됐었다.
 >
-> ✅ **2026-09-18 라이브 검증으로 확정.** `PROF[].RADIUS = [0, 20]`은 Gen·Civil 양쪽에서
+> **2026-09-18 라이브 검증(표기 정정 전 기록):** `PROF[].RADIUS = [0, 20]`은 Gen·Civil 양쪽에서
 > `Wrong Field`로 거부되고 후속 GET은 `Not Found Key`를 반환했다(검증 환경과 HTTP 201 주의사항은
-> 위 2D Round 절의 주석 참고). 숫자값은 정상 생성·보존된다. 되돌리지 말 것 — Jira `MAPI-2485`
-> B-2로 제보 중이며, 원문이 정정되면 이 주석을 함께 정리한다.
+> 위 2D Round 절의 주석 참고). 숫자값은 정상 생성·보존된다.
 
 ### Python 예제
 
