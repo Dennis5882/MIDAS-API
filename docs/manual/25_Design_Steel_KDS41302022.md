@@ -119,7 +119,6 @@
       "description": "Keyed object (dictionary). Each property name is an ID string (e.g., \"1\").",
       "additionalProperties": false,
       "minProperties": 1,
-      "maxProperties": 1,
       "patternProperties": {
         "^[0-9]+$": {
           "type": "object",
@@ -143,10 +142,11 @@
 }
 ```
 
-> ⚠️ **원문 스키마 오타:** 원문에는 `"maxProperties"`가 **`"maxroperties"`** 로 잘못 적혀 있다
-> (2026-09-06 확인, 원문 `maxProperties` 0회 / `maxroperties` 1회). 동일 구조인 26장
-> `DESIGN/RC/DRC`는 `"maxProperties"`로 올바르게 표기돼 있어, 위 스키마에는 정상 표기를 적었다.
-> 오류 제보 대상.
+> ⚠️ **2026-09-28 공식 개정 반영 — 키워드 삭제.** 2026-09-06에는 원문 `"maxProperties"`가
+> `"maxroperties"`로 오타 표기되어 있었으나, 2026-09-28 개정으로 원문 스키마(영문·한글 모두)에서
+> `maxProperties` 키워드 자체가 사라졌다. 공식 기준을 따라 위 스키마에서도 해당 줄을 제거했다.
+> 다만 이것이 의도된 삭제인지 정정 누락인지는 공식 측 확인이 필요하다 — 확인 전까지 추가 제보는 보류.
+> 동일 구조인 26장 `DESIGN/RC/DRC`는 여전히 `"maxProperties"`를 쓴다.
 
 ### 파라미터
 

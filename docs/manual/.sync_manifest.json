@@ -4,12 +4,12 @@
   "33016922742937": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/33016922742937-MIDAS-API-Online-Manual",
    "title": "MIDAS API Online Manual",
-   "updated_at": "2026-09-08T13:59:36Z"
+   "updated_at": "2026-09-29T09:06:05Z"
   },
   "35409287717657": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35409287717657-Main-Control-Data",
    "title": "Main Control Data",
-   "updated_at": "2026-09-24T05:38:26Z"
+   "updated_at": "2026-09-29T08:59:46Z"
   },
   "35523395368985": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35523395368985-Active",
@@ -499,7 +499,7 @@
   "35953557411993": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35953557411993-Assign-Plane-Loads",
    "title": "Assign Plane Loads",
-   "updated_at": "2026-09-01T04:24:47Z"
+   "updated_at": "2026-09-28T01:52:51Z"
   },
   "35953604106137": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35953604106137-Define-Floor-Load-Type",
@@ -549,7 +549,7 @@
   "35954555962137": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35954555962137-Tendon-Profile",
    "title": "Tendon Profile",
-   "updated_at": "2026-09-01T04:33:16Z"
+   "updated_at": "2026-09-28T02:12:44Z"
   },
   "35954649371545": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35954649371545-Tendon-Location-for-Composite-Section",
@@ -794,7 +794,7 @@
   "35963719599641": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35963719599641-Response-Spectrum-Load-Cases",
    "title": "Response Spectrum Load Cases",
-   "updated_at": "2026-09-01T01:10:25Z"
+   "updated_at": "2026-09-28T07:42:59Z"
   },
   "35963819140505": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35963819140505-Time-History-Global-Control",
@@ -1114,7 +1114,7 @@
   "35993732216985": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35993732216985-Modify-Concrete-Materials",
    "title": "Modify Concrete Materials",
-   "updated_at": "2026-09-01T01:04:26Z"
+   "updated_at": "2026-09-28T07:29:49Z"
   },
   "35993850335897": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35993850335897-Rebar-Input-for-Checking-Beam-Column",
@@ -2114,17 +2114,17 @@
   "49513980544793": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49513980544793-Modify-Column-Rebar-Data",
    "title": "Modify Column Rebar Data",
-   "updated_at": "2026-07-21T02:12:24Z"
+   "updated_at": "2026-09-28T05:54:07Z"
   },
   "49513985245849": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49513985245849-Modify-Beam-Rebar-Data",
    "title": "Modify Beam Rebar Data",
-   "updated_at": "2026-07-21T02:05:12Z"
+   "updated_at": "2026-09-28T05:52:34Z"
   },
   "49514033006745": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49514033006745-Modify-Wall-Rebar-Data",
    "title": "Modify Wall Rebar Data",
-   "updated_at": "2026-07-21T02:20:38Z"
+   "updated_at": "2026-09-28T05:55:00Z"
   },
   "49514136996889": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49514136996889-Story-Mass-Summary",
@@ -2204,7 +2204,7 @@
   "49514964272665": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49514964272665-Member-Assignment",
    "title": "Member Assignment",
-   "updated_at": "2026-07-30T05:16:25Z"
+   "updated_at": "2026-09-28T02:59:53Z"
   },
   "50694881913241": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/50694881913241-Resultant-Force-Diagram-Result-Display",
@@ -2874,7 +2874,7 @@
   "57568269363737": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/57568269363737-Design-Code",
    "title": "Design Code",
-   "updated_at": "2026-09-07T08:40:39Z"
+   "updated_at": "2026-09-29T09:07:44Z"
   },
   "57656773423385": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/57656773423385-Assign-Inelastic-Hinges-Beam",
@@ -3109,12 +3109,12 @@
   "58908922148249": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/58908922148249-Static-Wind-Load-User-Type",
    "title": "Static Wind Load - User Type",
-   "updated_at": "2026-08-07T01:36:37Z"
+   "updated_at": "2026-09-28T05:50:13Z"
   },
   "58908928576153": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/58908928576153-Static-Seismic-Load-User-Type",
    "title": "Static Seismic Load - User Type",
-   "updated_at": "2026-09-01T04:15:13Z"
+   "updated_at": "2026-09-28T05:30:23Z"
   },
   "59050520760473": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/59050520760473-Gust-Factor-Calculator",
@@ -3254,7 +3254,7 @@
   "59870138081177": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/59870138081177-Bridge-Girder-Diagrams",
    "title": "Bridge Girder Diagrams",
-   "updated_at": "2026-09-01T01:28:35Z"
+   "updated_at": "2026-09-28T02:29:48Z"
   }
  },
  "section_id": "30087500371097"

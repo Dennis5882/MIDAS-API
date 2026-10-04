@@ -2483,9 +2483,8 @@ midas_api("POST", "/db/ESSF", essf_data)
 > **2026-09-01 갱신으로 최상위에 3개 필드가 새로 추가**됐는데(아래 표 참고), 이들 역시 스키마에만
 > 있고 표·예제에는 없다.
 >
-> ⚠️ **원문 JSON Schema 구문 오류(2026-09-06 확인):** 새로 추가된 `"bSERVCHECK"` 바로 앞,
-> `SUBREBAR_B_FY` 블록을 닫는 `}` 뒤에 **쉼표가 빠져 있어** 스키마 블록 전체가 유효한 JSON이
-> 아니다(원문 그대로: `..."type": "number" } "bSERVCHECK": {...`). 오류 제보 대상.
+> ✅ **원문 JSON Schema 구문 오류 — 2026-10-04 해결 확인.** 2026-09-06에 발견한 `"bSERVCHECK"` 앞
+> 쉼표 누락(`..."type": "number" } "bSERVCHECK": {...`)은 원문 갱신(2026-09-28)으로 정정되었다.
 
 | No. | Description | Key | Value Type | Default | Required |
 | --- | --- | --- | --- | --- | --- |
@@ -2506,23 +2505,20 @@ midas_api("POST", "/db/ESSF", essf_data)
 | 6 | Sub Rebar Name | `"SUBREBAR_REBARNAME"` | String | Blank | Optional |
 | 7 | Main Rebar (fy) | `"MAINREBAR_B_FY"` | Number | 0 | GET only |
 | 8 | Sub Rebar (fy) | `"SUBREBAR_B_FY"` | Number | 0 | GET only |
-| 9 | (추정) 사용성 검토 여부 ⚠️표·예제에 근거 없음 (스키마 설명 `ServiceabilityCheck`) | `"bSERVCHECK"` | Boolean | - | 불명 |
-| 10 | (추정) 단기 계수 ⚠️표·예제에 근거 없음 (스키마 설명 `ShortTerm`) | `"dSHORTTERM"` | Number | - | 불명 |
-| 11 | (추정) 장기 계수 ⚠️표·예제에 근거 없음 (스키마 설명 `LongTerm`) | `"dLONGTERM"` | Number | - | 불명 |
+| 9 | Modulus of Elasticity Ratio Input Option | `"bSERVCHECK"` | Boolean | `true` | Optional |
+| 10 | Short-Term Ratio of Modulus of Elasticity | `"dSHORTTERM"` | Number | - | Optional |
+| 11 | Long-Term Ratio of Modulus of Elasticity | `"dLONGTERM"` | Number | - | Optional |
 
 > `C_FC`·`C_FCI`·`MAINREBAR_B_FY`·`SUBREBAR_B_FY`는 `CODENAME`/`CODEMATLNAME`/`REBAR_CODENAME`에 종속되는 계산값으로, GET 응답에서만 채워지며 PUT 요청 시에는 무시됩니다.
 >
-> 9~11번(`bSERVCHECK`/`dSHORTTERM`/`dLONGTERM`)은 2026-09-01 원문 갱신으로 JSON Schema
-> 최상위에 추가된 필드다(2026-09-06 정기 점검에서 발견). 원문 Specifications 표·Request Example에
-> 아직 반영되지 않아 타입 외에는 근거가 없으므로 위 설명은 스키마 `description` 문자열에 기반한
-> 추정이다.
->
-> ⚠️ **원문 Specifications 표 누락 — 제보 대상.** 스키마에만 있고 표에 행이 없어, 표만 보는
-> 사용자는 이 세 필드의 존재를 알 수 없다. 2026-09-18 라이브 검증에서 세 필드 모두 실제로 전송·
-> 저장되는 것이 확인되어(`bSERVCHECK=true`, `dSHORTTERM=1.25`, `dLONGTERM=1.5`), 죽은 스키마가
-> 아니라 **표가 빠진 것**임이 분명해졌다. 다만 각 필드의 의미는 여전히 스키마 설명 문자열 기반
-> 추정이므로 위 "(추정)" 표기는 유지한다. 검증 상세는
+> 9~11번(`bSERVCHECK`/`dSHORTTERM`/`dLONGTERM`)은 2026-09-01 원문 갱신으로 JSON Schema 최상위에
+> 추가된 뒤, **2026-09-28 원문 갱신으로 Specifications 표에도 행이 추가되었다**(위 표가 원문 표기 그대로).
+> 2026-09-18 라이브 검증에서 세 필드 모두 실제로 전송·저장되는 것이 확인됐다(`bSERVCHECK=true`,
+> `dSHORTTERM=1.25`, `dLONGTERM=1.5`). 검증 상세는
 > [live_verification_feedback_20260918.md](../error_reports/live_verification_feedback_20260918.md) 참고.
+>
+> ✅ **2026-10-04 재확인:** 원문 JSON Schema의 `SUBREBAR_B_FY` 블록 뒤 쉼표 누락(위 2026-09-06 구문 오류)도
+> 현재는 정상 쉼표로 고쳐져 있어 이 블록은 유효한 JSON이다.
 
 ### Request Body
 

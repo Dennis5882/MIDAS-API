@@ -33,11 +33,11 @@
 | 8 | [`/db/MBTP`](#8-dbmbtp--modify-member-type-부재-타입-수정) | 부재 타입 수정 (Modify Member Type) | POST, GET, PUT, DELETE |
 | 9 | [`/db/WMAK`](#9-dbwmak--modify-wall-mark-design-벽체-마크-설계-수정) | 벽체 마크 설계 수정 (Modify Wall Mark) | POST, GET, PUT, DELETE |
 | 10 | [`/db/REBB`](#10-dbrebb--modify-beam-rebar-data-보-철근-데이터-수정) | 보 철근 데이터 수정 (Modify Beam Rebar) | POST, GET, PUT, DELETE |
-| 11 | [`/db/REBC`](#11-dbrebc--modify-column-rebar-data-기둥-철근-데이터-수정) | 기둥 철근 데이터 수정 (Modify Column Rebar) | **POST** |
+| 11 | [`/db/REBC`](#11-dbrebc--modify-column-rebar-data-기둥-철근-데이터-수정) | 기둥 철근 데이터 수정 (Modify Column Rebar) | POST, GET, PUT, DELETE |
 | 12 | [`/db/REBW`](#12-dbrebw--modify-wall-rebar-data-벽체-철근-데이터-수정) | 벽체 철근 데이터 수정 (Modify Wall Rebar) | POST, GET, PUT, DELETE |
 | 13 | [`/db/REBR`](#13-dbrebr--modify-brace-rebar-data-가새-철근-데이터-수정) | 가새 철근 데이터 수정 (Modify Brace Rebar) | POST, GET, PUT, DELETE |
 
-> ⚠️ **`/db/REBC`(11번)는 POST(생성/설정)만 지원**합니다. 나머지 12개 엔드포인트는 POST · GET · PUT · DELETE 전체(CRUD)를 지원합니다.
+> ✅ **11번 `/db/REBC`의 "POST 전용" 표기는 2026-09-28 공식 개정으로 근거가 없어져 삭제했습니다.** 공식 Active Methods가 POST · GET · PUT · DELETE로 명시되어 있습니다.
 
 ---
 
@@ -1179,7 +1179,9 @@ print(requests.get(f"{BASE_URL}/db/WMAK", headers=HEADERS).json())
 
 ## 10. `/db/REBB` — Modify Beam Rebar Data (보 철근 데이터 수정)
 
-> **기능:** 단면(section) 번호별로 콘크리트 보의 철근 데이터를 수정합니다. 각 `ITEMS` 항목은 I·M·J 세 구간(`BAR_SECTOR_I/M/J`)의 상·하단 주철근, 스터럽(전단철근), 표피철근(skin bar) 정보와 피복 거리(`MAIN_BAR_DC_*`)를 포함합니다.
+> **기능:** 섹션(`KEY`) 번호별로 콘크리트 보의 철근 데이터를 수정합니다. 각 `ITEMS` 항목은 I·M·J 세 구간(`BAR_SECTOR_I/M/J`)의 상·하단 주철근(`vMAIN_BAR_TOP`/`vMAIN_BAR_BOT`), 전단철근(`SHEAR_BAR`), 표피철근(`SKIN_BAR_NAME`/`SKIN_BAR_NUM`)과 피복 거리(`MAIN_BAR_DC_TOP`/`MAIN_BAR_DC_BOT`)를 포함합니다.
+>
+> ✅ **2026-09-28 공식 개정 반영.** 공식 영문 아티클(`49513985245849`)이 이번 개정으로 본문을 갱신했고, 한글 페이지도 같은 키 집합이 되었습니다. 이 절은 개정된 공식 본문 기준이며, 이전 세대(`CREATE_SUB_SECTION`·`ELEMS`·`LAYER1`/`LAYER2`·`DT`/`DB` 계열)는 더 이상 공식 문서에 없습니다.
 
 ### Input URI
 
@@ -1193,7 +1195,7 @@ print(requests.get(f"{BASE_URL}/db/WMAK", headers=HEADERS).json())
 
 ### JSON Schema
 
-> 실제 스키마는 각 철근 규격 `NAME`에 대해 `D4`~`D57` enum 목록이 반복되어 매우 큽니다. 아래는 의미 있는 구조를 요약한 스키마입니다(규격 enum은 `D4`~`D57`로 축약).
+> 규격 enum(`D4`~`D57`)은 공식 원문대로 `NAME` 문자열로 받습니다. 공식 JSON Schema 최상위는 `Argument` 래퍼이지만, 공식 예제와 실제 요청은 `Assign` 래퍼를 쓰므로 아래는 예제 기준으로 표기합니다.
 
 ```json
 {
@@ -1202,7 +1204,7 @@ print(requests.get(f"{BASE_URL}/db/WMAK", headers=HEADERS).json())
   "properties": {
     "Assign": {
       "type": "object",
-      "description": "키는 단면 번호 문자열 (예: \"211\")",
+      "description": "키는 섹션 번호 문자열 (예: \"211\")",
       "patternProperties": {
         "^[0-9]+$": {
           "type": "object",
@@ -1210,29 +1212,18 @@ print(requests.get(f"{BASE_URL}/db/WMAK", headers=HEADERS).json())
           "properties": {
             "ITEMS": {
               "type": "array",
-              "minItems": 1,
               "items": {
                 "type": "object",
                 "properties": {
-                  "CREATE_SUB_SECTION": { "type": "boolean", "default": false },
-                  "ID": { "type": "integer", "description": "Sub Section ID (read only)" },
-                  "BAR_SECTOR_I": { "type": "object", "description": "I단 구간 철근" },
-                  "BAR_SECTOR_M": { "type": "object", "description": "중앙(M) 구간 철근" },
-                  "BAR_SECTOR_J": { "type": "object", "description": "J단 구간 철근" },
-                  "MAIN_BAR_DC_TOP": { "type": "number", "description": "상단 피복 dT" },
-                  "MAIN_BAR_DC_BOT": { "type": "number", "description": "하단 피복 dB" },
+                  "ID": { "type": "integer" },
+                  "BAR_SECTOR_I": { "$ref": "#/definitions/BarSector" },
+                  "BAR_SECTOR_M": { "$ref": "#/definitions/BarSector" },
+                  "BAR_SECTOR_J": { "$ref": "#/definitions/BarSector" },
+                  "MAIN_BAR_DC_TOP": { "type": "number" },
+                  "MAIN_BAR_DC_BOT": { "type": "number" },
                   "bSAME_SIZE_TOP_BOT": { "type": "boolean" },
                   "bSAME_SIZE_IMJ": { "type": "boolean" },
-                  "bSAME_SIZE_LAYER": { "type": "boolean" },
-                  "ELEMS": {
-                    "type": "object",
-                    "description": "CREATE_SUB_SECTION=true 일 때. KEYS / TO / STRUCTURE_GROUP_NAME 중 택1",
-                    "properties": {
-                      "KEYS": { "type": "array", "items": { "type": "integer" } },
-                      "TO": { "type": "string" },
-                      "STRUCTURE_GROUP_NAME": { "type": "string" }
-                    }
-                  }
+                  "bSAME_SIZE_LAYER": { "type": "boolean" }
                 }
               }
             }
@@ -1240,75 +1231,74 @@ print(requests.get(f"{BASE_URL}/db/WMAK", headers=HEADERS).json())
         }
       }
     }
+  },
+  "definitions": {
+    "BarSector": {
+      "type": "object",
+      "properties": {
+        "vMAIN_BAR_TOP": { "type": "array", "items": { "$ref": "#/definitions/MainBar" } },
+        "vMAIN_BAR_BOT": { "type": "array", "items": { "$ref": "#/definitions/MainBar" } },
+        "SHEAR_BAR": { "type": "object", "properties": { "NAME": { "type": "string" }, "LEG": { "type": "integer" }, "DIST": { "type": "number" } } },
+        "SKIN_BAR_NAME": { "type": "string" },
+        "SKIN_BAR_NUM": { "type": "integer" }
+      }
+    },
+    "MainBar": {
+      "type": "object",
+      "properties": { "NAME": { "type": "string" }, "NUM": { "type": "integer" } }
+    }
   }
-}
-```
-
-각 `BAR_SECTOR_*` 객체(구간별 철근) 구조:
-
-```json
-{
-  "MAIN_BAR_TOP": {
-    "LAYER1": { "NAME": "D19", "NUM": 4 },
-    "LAYER2": { "NAME": "D16", "NUM": 2 }
-  },
-  "MAIN_BAR_BOT": {
-    "LAYER1": { "NAME": "D19", "NUM": 4 },
-    "LAYER2": { "NAME": "D16", "NUM": 2 }
-  },
-  "SHEAR_BAR": { "NAME": "D10", "LEG": 2, "DIST": 0.1 },
-  "SKIN_BAR": { "NAME": "D10", "NUM": 2 }
 }
 ```
 
 ### 파라미터
 
-**Root / Item 공통**
+**Root / Item**
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 단면 번호 문자열을 키로 갖는 맵 | `"Assign"` | Object | — | **Required** |
-| 1 | 콘크리트 보 철근 항목 (min 1) | `"ITEMS"` | Array[Object] | — | **Required** |
-| (1) | 서브 단면 생성 여부 | `"CREATE_SUB_SECTION"` | Boolean | `false` | Optional |
-| (2) | I단 구간 철근 | `"BAR_SECTOR_I"` | Object | — | **Required** |
-| (3) | 중앙(M) 구간 철근 | `"BAR_SECTOR_M"` | Object | — | **Required** |
-| (4) | J단 구간 철근 | `"BAR_SECTOR_J"` | Object | — | **Required** |
-| (5) | 상단 피복 거리 dT | `"DT"` (예제에서는 `"MAIN_BAR_DC_TOP"`) | Number | — | **Required** |
-| (6) | 하단 피복 거리 dB | `"DB"` (예제에서는 `"MAIN_BAR_DC_BOT"`) | Number | — | **Required** |
+| 1 | 섹션 번호 문자열을 키로 갖는 맵 | `"Assign"` | Object | — | **Required** |
+| 2 | 보 철근 항목 목록 | `"ITEMS"` | Array[Object] | — | **Required** |
+| 3 | 서브 구간 ID (읽기 전용) | `"ID"` | Integer | — | Required |
+| 4 | I단 구간 철근 | `"BAR_SECTOR_I"` | Object | — | **Required** |
+| 5 | 중앙(M) 구간 철근 | `"BAR_SECTOR_M"` | Object | — | **Required** |
+| 6 | J단 구간 철근 | `"BAR_SECTOR_J"` | Object | — | **Required** |
+| 7 | 상단 피복 거리 (콘크리트면~주철근 중심) | `"MAIN_BAR_DC_TOP"` | Number | — | **Required** |
+| 8 | 하단 피복 거리 (콘크리트면~주철근 중심) | `"MAIN_BAR_DC_BOT"` | Number | — | **Required** |
+| 9 | 상·하단 주철근 규격 동일 | `"bSAME_SIZE_TOP_BOT"` | Boolean | — | **Required** |
+| 10 | I·M·J 주철근 규격 동일 | `"bSAME_SIZE_IMJ"` | Boolean | — | **Required** |
+| 11 | 층(레이어)별 주철근 규격 동일 | `"bSAME_SIZE_LAYER"` | Boolean | — | **Required** |
 
-**`BAR_SECTOR_I/M/J` 구간 객체 (a~d)**
-
-| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
-|-----|------|-----|-----------|--------|------|
-| a | 상단 철근 | `"MAIN_BAR_TOP"` | Object | — | **Required** |
-| a→(a) | 레이어1 | `"LAYER1"` | Object | — | **Required** |
-| a→(d) | 레이어2 | `"LAYER2"` | Object | — | Optional |
-| — | 레이어 내 철근 규격 · `D4`~`D57` | `"NAME"` | String | — | **Required** |
-| — | 레이어 내 철근 개수 | `"NUM"` | Integer | — | **Required** |
-| b | 하단 철근 | `"MAIN_BAR_BOT"` | Object (LAYER1/LAYER2) | — | **Required** |
-| c | 스터럽(전단철근) | `"SHEAR_BAR"` | Object | — | **Required** |
-| c→ | 스터럽 규격 · `D4`~`D57` | `"NAME"` | String | — | **Required** |
-| c→ | 다리(leg) 개수 | `"LEG"` | Integer | — | **Required** |
-| c→ | 스터럽 간격 @ | `"DIST"` | Number | — | **Required** |
-| d | 표피철근(skin bar) | `"SKIN_BAR"` | Object | — | Optional |
-| d→ | 표피철근 규격 · `D4`~`D57` | `"NAME"` | String | — | **Required** |
-| d→ | 표피철근 개수 | `"NUM"` | Integer | — | **Required** |
-
-**`CREATE_SUB_SECTION == true` 일 때**
+**`BAR_SECTOR_I/M/J` 구간 객체**
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| (1) | 서브 단면 ID (읽기 전용) | `"ID"` | Integer | — | Optional |
-| (2) | 요소 목록 (KEYS / TO / STRUCTURE_GROUP_NAME 중 택1) | `"ELEMS"` | Object | — | **Required** |
-| a | 요소 ID 배열 | `"KEYS"` | Array[Integer] | — | Optional |
-| b | ID 범위 (예: `"1to160"`) | `"TO"` | String | — | Optional |
-| c | 구조 그룹 이름 | `"STRUCTURE_GROUP_NAME"` | String | — | Optional |
+| a | 상단 주철근 목록 (1~2줄) | `"vMAIN_BAR_TOP"` | Array[Object] | — | **Required** |
+| b | 하단 주철근 목록 (1~2줄) | `"vMAIN_BAR_BOT"` | Array[Object] | — | **Required** |
+| c | 전단철근 | `"SHEAR_BAR"` | Object | — | **Required** |
+| d | 표피철근 규격 | `"SKIN_BAR_NAME"` | String | — | **Required** |
+| e | 표피철근 개수 | `"SKIN_BAR_NUM"` | Integer | — | **Required** |
 
-> 참고: Request/Response 예제에서는 구간별 상·하단 주철근을 `"vMAIN_BAR_TOP"` / `"vMAIN_BAR_BOT"` **배열**로 표기하고, 피복 거리를 `"MAIN_BAR_DC_TOP"` / `"MAIN_BAR_DC_BOT"`로 표기합니다. 실제 전송 시에는 아래 예제 형식을 그대로 따르는 것이 안전합니다.
+**주철근 목록 원소 (`vMAIN_BAR_TOP` / `vMAIN_BAR_BOT`)**
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+|-----|------|-----|-----------|--------|------|
+| i | 철근 규격 · `D4`~`D57` | `"NAME"` | String | — | **Required** |
+| ii | 철근 개수 | `"NUM"` | Integer | — | **Required** |
+
+**`SHEAR_BAR` 객체**
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+|-----|------|-----|-----------|--------|------|
+| i | 철근 규격 · `D4`~`D57` | `"NAME"` | String | — | **Required** |
+| ii | 다리(leg) 개수 | `"LEG"` | Integer | — | **Required** |
+| iii | 철근 간격 @ | `"DIST"` | Number | — | **Required** |
+
+> ⚠️ **공식 표기 불일치 (2026-10-04 확인).** 공식 Specifications 표는 `DIST`를 Integer로, 표피철근 개수 키를 `"SKIN_BAR"NUM"`(따옴표 오기)으로 적었으나, 공식 JSON Schema와 예제는 `DIST`를 number(예: `0.15`), 키를 `SKIN_BAR_NUM`으로 쓴다. 위 표는 스키마·예제를 따랐다.
 
 ### Request / Response JSON
 
-**POST / PUT Request Body**
+**POST / PUT Request Body** (공식 예제)
 
 ```json
 {
@@ -1318,70 +1308,28 @@ print(requests.get(f"{BASE_URL}/db/WMAK", headers=HEADERS).json())
         {
           "ID": 0,
           "BAR_SECTOR_I": {
-            "vMAIN_BAR_TOP": [],
-            "vMAIN_BAR_BOT": [],
-            "SHEAR_BAR": { "NAME": "D10", "LEG": 2, "DIST": 0.1 },
+            "vMAIN_BAR_TOP": [{ "NAME": "D25", "NUM": 3 }, { "NAME": "D25", "NUM": 3 }],
+            "vMAIN_BAR_BOT": [{ "NAME": "D25", "NUM": 3 }],
+            "SHEAR_BAR": { "NAME": "D13", "LEG": 3, "DIST": 0.15 },
             "SKIN_BAR_NAME": "",
-            "SKIN_BAR_NUM": 2
+            "SKIN_BAR_NUM": 0
           },
           "BAR_SECTOR_M": {
-            "vMAIN_BAR_TOP": [],
-            "vMAIN_BAR_BOT": [],
-            "SHEAR_BAR": { "NAME": "D10", "LEG": 2, "DIST": 0.1 },
+            "vMAIN_BAR_TOP": [{ "NAME": "D25", "NUM": 3 }],
+            "vMAIN_BAR_BOT": [{ "NAME": "D25", "NUM": 4 }],
+            "SHEAR_BAR": { "NAME": "D13", "LEG": 3, "DIST": 0.15 },
             "SKIN_BAR_NAME": "",
-            "SKIN_BAR_NUM": 2
+            "SKIN_BAR_NUM": 0
           },
           "BAR_SECTOR_J": {
-            "vMAIN_BAR_TOP": [],
-            "vMAIN_BAR_BOT": [],
-            "SHEAR_BAR": { "NAME": "D10", "LEG": 2, "DIST": 0.1 },
+            "vMAIN_BAR_TOP": [{ "NAME": "D25", "NUM": 3 }, { "NAME": "D25", "NUM": 3 }],
+            "vMAIN_BAR_BOT": [{ "NAME": "D25", "NUM": 3 }],
+            "SHEAR_BAR": { "NAME": "D13", "LEG": 3, "DIST": 0.15 },
             "SKIN_BAR_NAME": "",
-            "SKIN_BAR_NUM": 2
+            "SKIN_BAR_NUM": 0
           },
-          "MAIN_BAR_DC_TOP": 0.06999999999999999,
-          "MAIN_BAR_DC_BOT": 0.06999999999999999,
-          "bSAME_SIZE_TOP_BOT": true,
-          "bSAME_SIZE_IMJ": true,
-          "bSAME_SIZE_LAYER": true
-        }
-      ]
-    }
-  }
-}
-```
-
-**GET Response Body**
-
-```json
-{
-  "REBB": {
-    "211": {
-      "ITEMS": [
-        {
-          "ID": 0,
-          "BAR_SECTOR_I": {
-            "vMAIN_BAR_TOP": [],
-            "vMAIN_BAR_BOT": [],
-            "SHEAR_BAR": { "NAME": "D10", "LEG": 2, "DIST": 0.1 },
-            "SKIN_BAR_NAME": "",
-            "SKIN_BAR_NUM": 2
-          },
-          "BAR_SECTOR_M": {
-            "vMAIN_BAR_TOP": [],
-            "vMAIN_BAR_BOT": [],
-            "SHEAR_BAR": { "NAME": "D10", "LEG": 2, "DIST": 0.1 },
-            "SKIN_BAR_NAME": "",
-            "SKIN_BAR_NUM": 2
-          },
-          "BAR_SECTOR_J": {
-            "vMAIN_BAR_TOP": [],
-            "vMAIN_BAR_BOT": [],
-            "SHEAR_BAR": { "NAME": "D10", "LEG": 2, "DIST": 0.1 },
-            "SKIN_BAR_NAME": "",
-            "SKIN_BAR_NUM": 2
-          },
-          "MAIN_BAR_DC_TOP": 0.06999999999999999,
-          "MAIN_BAR_DC_BOT": 0.06999999999999999,
+          "MAIN_BAR_DC_TOP": 0.07,
+          "MAIN_BAR_DC_BOT": 0.07,
           "bSAME_SIZE_TOP_BOT": true,
           "bSAME_SIZE_IMJ": true,
           "bSAME_SIZE_LAYER": true
@@ -1400,13 +1348,12 @@ import requests
 BASE_URL = "https://moa-engineers.midasit.com:443/gen"
 HEADERS = {"MAPI-Key": "<발급된 키>", "Content-Type": "application/json"}
 
-# 단면 211의 보 철근 데이터 수정
-sector = {
-    "vMAIN_BAR_TOP": [],
-    "vMAIN_BAR_BOT": [],
-    "SHEAR_BAR": {"NAME": "D10", "LEG": 2, "DIST": 0.1},
+sector_i = {
+    "vMAIN_BAR_TOP": [{"NAME": "D25", "NUM": 3}, {"NAME": "D25", "NUM": 3}],
+    "vMAIN_BAR_BOT": [{"NAME": "D25", "NUM": 3}],
+    "SHEAR_BAR": {"NAME": "D13", "LEG": 3, "DIST": 0.15},
     "SKIN_BAR_NAME": "",
-    "SKIN_BAR_NUM": 2,
+    "SKIN_BAR_NUM": 0,
 }
 payload = {
     "Assign": {
@@ -1414,9 +1361,9 @@ payload = {
             "ITEMS": [
                 {
                     "ID": 0,
-                    "BAR_SECTOR_I": sector,
-                    "BAR_SECTOR_M": sector,
-                    "BAR_SECTOR_J": sector,
+                    "BAR_SECTOR_I": sector_i,
+                    "BAR_SECTOR_M": sector_i,
+                    "BAR_SECTOR_J": sector_i,
                     "MAIN_BAR_DC_TOP": 0.07,
                     "MAIN_BAR_DC_BOT": 0.07,
                     "bSAME_SIZE_TOP_BOT": True,
@@ -1429,8 +1376,6 @@ payload = {
 }
 res = requests.post(f"{BASE_URL}/db/REBB", headers=HEADERS, json=payload)
 print("POST:", res.status_code)
-
-# 조회 (PUT/DELETE도 동일 URI 지원)
 print(requests.get(f"{BASE_URL}/db/REBB", headers=HEADERS).json())
 # requests.delete(f"{BASE_URL}/db/REBB", headers=HEADERS)
 ```
@@ -1439,9 +1384,11 @@ print(requests.get(f"{BASE_URL}/db/REBB", headers=HEADERS).json())
 
 ## 11. `/db/REBC` — Modify Column Rebar Data (기둥 철근 데이터 수정)
 
-> **기능:** 단면 번호별로 콘크리트 기둥의 철근 데이터를 수정합니다. 주철근(`MAIN_BAR`), 단부/중앙부 전단철근(`SHEAR_BAR_END`/`SHEAR_BAR_CEN`), 피복 거리(`DO`), 후프 타입(`HOOP_TYPE`), 후크 타입(`HOOK_TYPE`)을 포함합니다.
+> **기능:** 섹션(`KEY`) 번호별로 콘크리트 기둥의 철근 데이터를 수정합니다. 주철근(`vMAIN_BAR`), 단부/중앙부 전단철근(`SHEAR_BAR_END`/`SHEAR_BAR_CEN`), 띠철근 형식(`HOOP_TYPE`), 보-기둥 접합부 철근 수(`NUM_BAR_BC_JOINT`)를 포함합니다.
 >
-> ⚠️ **이 엔드포인트는 `POST` 만 지원합니다.** (GET/PUT/DELETE 미지원)
+> ✅ **2026-09-28 공식 개정 반영.** 공식 영문 아티클(`49513980544793`)이 개정되어 `GET`/`PUT`/`DELETE`도 지원하는 것으로 명시되었습니다. 이전 판의 "POST 전용" 표기는 이 개정으로 공식 근거가 없어져 삭제했습니다.
+>
+> ⚠️ **Gen NX 전용.** 2026-09-27 라이브 검증에서 Civil NX에는 이 경로가 없어 404였습니다.
 
 ### Input URI
 
@@ -1451,11 +1398,11 @@ print(requests.get(f"{BASE_URL}/db/REBB", headers=HEADERS).json())
 
 ### Active Methods
 
-`POST`
+`POST` · `GET` · `PUT` · `DELETE`
 
 ### JSON Schema
 
-> 규격 enum(`D4`~`D57`)은 축약. 실제 스키마에는 각 `NAME`마다 전체 규격 목록이 나열됩니다.
+> 규격 enum(`D4`~`D57`)은 `NAME` 문자열로 받습니다.
 
 ```json
 {
@@ -1464,8 +1411,7 @@ print(requests.get(f"{BASE_URL}/db/REBB", headers=HEADERS).json())
   "properties": {
     "Assign": {
       "type": "object",
-      "description": "키는 단면 번호 문자열 (예: \"1\")",
-      "minProperties": 1,
+      "description": "키는 섹션 번호 문자열 (예: \"101\")",
       "patternProperties": {
         "^[0-9]+$": {
           "type": "object",
@@ -1473,76 +1419,45 @@ print(requests.get(f"{BASE_URL}/db/REBB", headers=HEADERS).json())
           "properties": {
             "ITEMS": {
               "type": "array",
-              "description": "Concrete column rebar items.",
-              "minItems": 1,
               "items": {
                 "type": "object",
-                "required": ["MAIN_BAR", "SHEAR_BAR_END", "SHEAR_BAR_CEN", "DO"],
                 "properties": {
-                  "CREATE_SUB_SECTION": { "type": "boolean", "default": false },
-                  "ID": { "type": "integer", "description": "Sub Section ID (read only)" },
-                  "ELEMS": {
-                    "type": "object",
-                    "description": "CREATE_SUB_SECTION=true 일 때. KEYS / TO / STRUCTURE_GROUP_NAME 중 택1",
-                    "properties": {
-                      "KEYS": { "type": "array", "items": { "type": "integer" } },
-                      "TO": { "type": "string" },
-                      "STRUCTURE_GROUP_NAME": { "type": "string" }
+                  "ID": { "type": "integer" },
+                  "vMAIN_BAR": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "NAME": { "type": "string" },
+                        "NUM": { "type": "integer" },
+                        "ROW": { "type": "integer" },
+                        "D0": { "type": "number" },
+                        "bUSE_CORNER": { "type": "boolean" },
+                        "NAME_CORNER": { "type": "string" }
+                      }
                     }
                   },
-                  "MAIN_BAR": {
-                    "type": "object",
-                    "required": ["NAME", "NUM", "ROW", "USE_CORNER"],
-                    "properties": {
-                      "NAME": { "type": "string", "description": "Main rebar size (D4~D57)" },
-                      "NUM": { "type": "integer", "description": "Total number of rebars" },
-                      "ROW": { "type": "integer", "description": "Number of column row for rebar" },
-                      "USE_CORNER": { "type": "boolean" },
-                      "NAME_CORNER": { "type": "string", "description": "Corner rebar size (USE_CORNER=true 일 때)" }
-                    }
-                  },
-                  "SHEAR_BAR_END": {
-                    "type": "object",
-                    "required": ["NAME", "LEG_Y", "LEG_Z", "DIST"],
-                    "properties": {
-                      "NAME": { "type": "string", "description": "Hoop rebar size (D4~D57)" },
-                      "LEG_Y": { "type": "integer", "description": "Number of leg (local Y dir.)" },
-                      "LEG_Z": { "type": "integer", "description": "Number of leg (local Z dir.)" },
-                      "DIST": { "type": "number", "description": "Distance between rebars" }
-                    }
-                  },
-                  "SHEAR_BAR_CEN": {
-                    "type": "object",
-                    "required": ["NAME", "LEG_Y", "LEG_Z", "DIST"],
-                    "properties": {
-                      "NAME": { "type": "string", "description": "Hoop rebar size (D4~D57)" },
-                      "LEG_Y": { "type": "integer" },
-                      "LEG_Z": { "type": "integer" },
-                      "DIST": { "type": "number" }
-                    }
-                  },
-                  "DO": { "type": "number", "description": "Distance from concrete face to center of rebar" },
-                  "HOOP_TYPE": {
-                    "type": "string",
-                    "default": "Ties",
-                    "oneOf": [
-                      { "title": "Ties", "const": "Ties" },
-                      { "title": "Spirals", "const": "Spirals" }
-                    ]
-                  },
-                  "HOOK_TYPE": {
-                    "type": "integer",
-                    "default": 0,
-                    "oneOf": [
-                      { "title": "90+(135 or 180)", "const": 0 },
-                      { "title": "Both(135 or 180)", "const": 1 }
-                    ]
-                  }
+                  "SHEAR_BAR_END": { "$ref": "#/definitions/Shear" },
+                  "SHEAR_BAR_CEN": { "$ref": "#/definitions/Shear" },
+                  "HOOP_TYPE": { "type": "integer", "description": "1=Tied, 2=Spiral" },
+                  "bSAME_SPACE_END_CEN": { "type": "boolean" },
+                  "NUM_BAR_BC_JOINT": { "type": "integer" }
                 }
               }
             }
           }
         }
+      }
+    }
+  },
+  "definitions": {
+    "Shear": {
+      "type": "object",
+      "properties": {
+        "NAME": { "type": "string" },
+        "LEG_Y": { "type": "integer" },
+        "LEG_Z": { "type": "integer" },
+        "DIST": { "type": "number" }
       }
     }
   }
@@ -1555,61 +1470,57 @@ print(requests.get(f"{BASE_URL}/db/REBB", headers=HEADERS).json())
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 단면 번호 문자열을 키로 갖는 맵 | `"Assign"` | Object | — | **Required** |
-| 1 | 콘크리트 기둥 철근 항목 (min 1) | `"ITEMS"` | Array[Object] | — | **Required** |
-| (1) | 서브 단면 생성 여부 | `"CREATE_SUB_SECTION"` | Boolean | `false` | Optional |
-| (2) | 서브 단면 ID (읽기 전용) | `"ID"` | Integer | — | Optional |
-| (3) | 주철근 | `"MAIN_BAR"` | Object | — | **Required** |
-| (4) | 단부 전단철근 | `"SHEAR_BAR_END"` | Object | — | **Required** |
-| (5) | 중앙부 전단철근 | `"SHEAR_BAR_CEN"` | Object | — | **Required** |
-| (6) | 콘크리트면~철근중심 거리 (do) | `"DO"` | Number | — | **Required** |
-| (7) | 후프 철근 타입 · `"Ties"` / `"Spirals"` | `"HOOP_TYPE"` | String | `"Ties"` | Optional |
-| (8) | 후크 타입 · `0`: 90+(135 or 180) / `1`: Both(135 or 180) | `"HOOK_TYPE"` | Enum(Integer) | `0` | Optional |
+| 1 | 섹션 번호 문자열을 키로 갖는 맵 | `"Assign"` | Object | — | **Required** |
+| 2 | 기둥 철근 항목 목록 | `"ITEMS"` | Array[Object] | — | **Required** |
+| 3 | 서브 구간 ID (읽기 전용) | `"ID"` | Integer | — | Optional |
+| 4 | 주철근 목록 | `"vMAIN_BAR"` | Array[Object] | — | **Required** |
+| 5 | 단부 전단철근 | `"SHEAR_BAR_END"` | Object | — | **Required** |
+| 6 | 중앙부 전단철근 | `"SHEAR_BAR_CEN"` | Object | — | **Required** |
+| 7 | 띠철근 형식 · `1`: Tied / `2`: Spiral | `"HOOP_TYPE"` | Integer (enum) | — | **Required** |
+| 8 | 단부·중앙부 철근 간격 동일 | `"bSAME_SPACE_END_CEN"` | Boolean | — | **Required** |
+| 9 | 보-기둥 접합부 철근 수 (특정 설계기준 + 특수 내진 규정) | `"NUM_BAR_BC_JOINT"` | Integer | — | **Required** |
 
-**`MAIN_BAR` 객체**
+**`vMAIN_BAR` 원소**
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
 | a | 주철근 규격 · `D4`~`D57` | `"NAME"` | String | — | **Required** |
 | b | 철근 총 개수 | `"NUM"` | Integer | — | **Required** |
-| c | 열(row) 수 | `"ROW"` | Integer | — | **Required** |
-| d | 코너 철근 사용 | `"USE_CORNER"` | Boolean | — | **Required** |
-| a' | 코너 철근 규격 (USE_CORNER=true 일 때) | `"NAME_CORNER"` | String | — | **Required** |
+| c | 기둥 열(row) 수 | `"ROW"` | Integer | — | **Required** |
+| d | 콘크리트면~철근 중심 거리 | `"D0"` | Number | — | **Required** |
+| e | 코너 철근 사용 | `"bUSE_CORNER"` | Boolean | — | **Required** |
+| f | 코너 철근 규격 | `"NAME_CORNER"` | String | — | **Required** |
 
-**`SHEAR_BAR_END` / `SHEAR_BAR_CEN` 객체 (단부·중앙부 공통 구조)**
+**`SHEAR_BAR_END` / `SHEAR_BAR_CEN` 객체 (공통 구조)**
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
 | a | 후프 철근 규격 · `D4`~`D57` | `"NAME"` | String | — | **Required** |
-| b | 다리 개수 (local Y) | `"LEG_Y"` | Integer | — | **Required** |
-| c | 다리 개수 (local Z) | `"LEG_Z"` | Integer | — | **Required** |
+| b | 다리 개수 (local Y 방향) | `"LEG_Y"` | Integer | — | **Required** |
+| c | 다리 개수 (local Z 방향) | `"LEG_Z"` | Integer | — | **Required** |
 | d | 철근 간격 @ | `"DIST"` | Number | — | **Required** |
 
-**`CREATE_SUB_SECTION == true` 일 때 — `ELEMS` (KEYS / TO / STRUCTURE_GROUP_NAME 중 택1)**
+> ⚠️ **공식 표기 불일치 (2026-10-04 확인).** 공식 표는 콘크리트면 거리 키를 `"DO"`(영문 O), 띠철근 형식 키를 `"HOOP TYPE"`(공백)으로 적었으나, 공식 JSON Schema와 예제는 `"D0"`(숫자 0, `vMAIN_BAR` 원소 안)와 `"HOOP_TYPE"`을 쓴다. 위 표는 스키마·예제를 따랐다.
 
-| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
-|-----|------|-----|-----------|--------|------|
-| a | 요소 ID 배열 | `"KEYS"` | Array[Integer] | — | Optional |
-| b | ID 범위 (예: `"1to160"`) | `"TO"` | String | — | Optional |
-| c | 구조 그룹 이름 | `"STRUCTURE_GROUP_NAME"` | String | — | Optional |
+### Request / Response JSON
 
-### Request JSON
-
-**POST Request Body**
+**POST Request Body** (공식 예제)
 
 ```json
 {
   "Assign": {
-    "1": {
+    "101": {
       "ITEMS": [
         {
-          "CREATE_SUB_SECTION": false,
-          "MAIN_BAR": { "NAME": "D19", "NUM": 8, "ROW": 3, "USE_CORNER": false },
-          "SHEAR_BAR_END": { "NAME": "D10", "LEG_Y": 2, "LEG_Z": 2, "DIST": 100 },
-          "SHEAR_BAR_CEN": { "NAME": "D10", "LEG_Y": 2, "LEG_Z": 2, "DIST": 200 },
-          "DO": 40,
-          "HOOP_TYPE": "Ties",
-          "HOOK_TYPE": 0
+          "ID": 0,
+          "vMAIN_BAR": [
+            { "NAME": "D22", "NUM": 14, "ROW": 5, "D0": 0.0762, "bUSE_CORNER": false, "NAME_CORNER": "D22" }
+          ],
+          "SHEAR_BAR_END": { "NAME": "D10", "LEG_Y": 3, "LEG_Z": 3, "DIST": 0.15 },
+          "SHEAR_BAR_CEN": { "NAME": "D10", "LEG_Y": 3, "LEG_Z": 3, "DIST": 0.15 },
+          "HOOP_TYPE": 1,
+          "bSAME_SPACE_END_CEN": true,
+          "NUM_BAR_BC_JOINT": 0
         }
       ]
     }
@@ -1625,35 +1536,40 @@ import requests
 BASE_URL = "https://moa-engineers.midasit.com:443/gen"
 HEADERS = {"MAPI-Key": "<발급된 키>", "Content-Type": "application/json"}
 
-# 단면 1의 기둥 철근 데이터 수정 (REBC는 POST만 지원)
 payload = {
     "Assign": {
-        "1": {
+        "101": {
             "ITEMS": [
                 {
-                    "CREATE_SUB_SECTION": False,
-                    "MAIN_BAR": {"NAME": "D19", "NUM": 8, "ROW": 3, "USE_CORNER": False},
-                    "SHEAR_BAR_END": {"NAME": "D10", "LEG_Y": 2, "LEG_Z": 2, "DIST": 100},
-                    "SHEAR_BAR_CEN": {"NAME": "D10", "LEG_Y": 2, "LEG_Z": 2, "DIST": 200},
-                    "DO": 40,
-                    "HOOP_TYPE": "Ties",
-                    "HOOK_TYPE": 0,
+                    "ID": 0,
+                    "vMAIN_BAR": [
+                        {"NAME": "D22", "NUM": 14, "ROW": 5, "D0": 0.0762, "bUSE_CORNER": False, "NAME_CORNER": "D22"}
+                    ],
+                    "SHEAR_BAR_END": {"NAME": "D10", "LEG_Y": 3, "LEG_Z": 3, "DIST": 0.15},
+                    "SHEAR_BAR_CEN": {"NAME": "D10", "LEG_Y": 3, "LEG_Z": 3, "DIST": 0.15},
+                    "HOOP_TYPE": 1,
+                    "bSAME_SPACE_END_CEN": True,
+                    "NUM_BAR_BC_JOINT": 0,
                 }
             ]
         }
     }
 }
 res = requests.post(f"{BASE_URL}/db/REBC", headers=HEADERS, json=payload)
-print("POST:", res.status_code, res.json())
-
-# ※ REBC는 POST 전용이므로 GET/PUT/DELETE는 지원하지 않습니다.
+print("POST:", res.status_code)
+print(requests.get(f"{BASE_URL}/db/REBC", headers=HEADERS).json())
+# requests.delete(f"{BASE_URL}/db/REBC", headers=HEADERS)
 ```
 
 ---
 
 ## 12. `/db/REBW` — Modify Wall Rebar Data (벽체 철근 데이터 수정)
 
-> **기능:** 벽체 ID별로 철근 데이터를 수정합니다. 수직/수평 철근, 단부 철근(End Rebar), 경계요소(Boundary Element) 수평 철근, 피복 거리(dw, de), 두께 및 서브 벽체 ID/층(Story) 정보를 포함합니다.
+> **기능:** 벽체 번호별로 철근 데이터를 수정합니다. 수직/수평 철근(`VER_BAR`/`HOR_BAR`), 단부 철근(`END_BAR`/`NUM_END_BAR`), 경계요소 수평 철근(`BE_HOR_BAR`)과 길이(`BE_LENGTH`), 피복 거리(`DW`/`DE`), 두께, 적용 층 목록(`vSTORY_KEY`)을 포함합니다.
+>
+> ✅ **2026-09-28 공식 개정 반영.** 공식 영문 아티클(`49514033006745`)이 이번 개정으로 본문을 갱신했고, 한글 페이지도 같은 키 집합이 되었습니다. 이전 판의 `CREATE_SUB_WALL_ID`·`STORY`·`VERTICAL_REBAR`·`HORIZONTAL_REBAR`·`END_REBAR` 계열은 공식 문서에 없어 삭제했습니다.
+>
+> ⚠️ **Gen NX 전용.** 2026-09-27 라이브 검증에서 Civil NX에는 이 경로가 없어 404였습니다.
 
 ### Input URI
 
@@ -1667,7 +1583,7 @@ print("POST:", res.status_code, res.json())
 
 ### JSON Schema
 
-> 규격 enum(`D4`~`D57`)은 축약.
+> 규격 enum(`D4`~`D57`)은 `NAME` 문자열로 받습니다.
 
 ```json
 {
@@ -1676,7 +1592,7 @@ print("POST:", res.status_code, res.json())
   "properties": {
     "Assign": {
       "type": "object",
-      "description": "키는 벽체 ID 문자열 (예: \"1\")",
+      "description": "키는 벽체 번호 문자열 (예: \"1\")",
       "patternProperties": {
         "^[0-9]+$": {
           "type": "object",
@@ -1684,64 +1600,35 @@ print("POST:", res.status_code, res.json())
           "properties": {
             "ITEMS": {
               "type": "array",
-              "minItems": 1,
               "items": {
                 "type": "object",
                 "properties": {
-                  "CREATE_SUB_WALL_ID": { "type": "boolean", "default": false },
-                  "SUB_WALL_ID": { "type": "integer", "description": "read only" },
-                  "STORY": {
-                    "type": "object",
-                    "properties": {
-                      "FROM": { "type": "string" },
-                      "TO": { "type": "string" }
-                    }
-                  },
-                  "VERTICAL_REBAR": {
-                    "type": "object",
-                    "properties": {
-                      "NAME": { "type": "string", "description": "D4~D57" },
-                      "DIST": { "type": "number" }
-                    }
-                  },
-                  "HORIZONTAL_REBAR": {
-                    "type": "object",
-                    "properties": {
-                      "NAME": { "type": "string", "description": "D4~D57" },
-                      "DIST": { "type": "number" }
-                    }
-                  },
-                  "USE_END_REBAR": { "type": "boolean", "default": false },
-                  "END_REBAR": {
-                    "type": "object",
-                    "properties": {
-                      "NAME": { "type": "string", "description": "D4~D57" },
-                      "NUM": { "type": "integer" },
-                      "DIST": { "type": "number" }
-                    }
-                  },
-                  "BE_HORIZONTAL_REBAR": {
-                    "type": "object",
-                    "properties": {
-                      "NAME": { "type": "string", "description": "D4~D57" },
-                      "DIST": { "type": "number" }
-                    }
-                  },
-                  "BOUNDARY_ELEMENT_LENGTH": { "type": "number", "default": 0 },
-                  "CONCRETE_FACE_TO_CENTER_OF_REBAR": {
-                    "type": "object",
-                    "properties": {
-                      "DW": { "type": "number" },
-                      "DE": { "type": "number" }
-                    }
-                  },
-                  "USE_MODEL_THICKNESS": { "type": "boolean", "default": true },
-                  "THICKNESS": { "type": "number", "description": "USE_MODEL_THICKNESS=false 일 때" }
+                  "ID": { "type": "integer" },
+                  "bUSE_MODEL_THICK": { "type": "boolean" },
+                  "THICK": { "type": "number" },
+                  "DW": { "type": "number" },
+                  "DE": { "type": "number" },
+                  "VER_BAR": { "$ref": "#/definitions/Bar" },
+                  "HOR_BAR": { "$ref": "#/definitions/Bar" },
+                  "END_BAR": { "$ref": "#/definitions/Bar" },
+                  "NUM_END_BAR": { "type": "integer" },
+                  "BE_HOR_BAR": { "$ref": "#/definitions/Bar" },
+                  "BE_LENGTH": { "type": "number" },
+                  "vSTORY_KEY": { "type": "array", "items": { "type": "integer" } }
                 }
               }
             }
           }
         }
+      }
+    }
+  },
+  "definitions": {
+    "Bar": {
+      "type": "object",
+      "properties": {
+        "NAME": { "type": "string" },
+        "DIST": { "type": "number" }
       }
     }
   }
@@ -1752,47 +1639,26 @@ print("POST:", res.status_code, res.json())
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 벽체 ID 문자열을 키로 갖는 맵 | `"Assign"` | Object | — | **Required** |
-| 1 | 벽체 철근 항목 (min 1) | `"ITEMS"` | Array[Object] | — | **Required** |
-| (1) | 서브 벽체 ID 생성 여부 | `"CREATE_SUB_WALL_ID"` | Boolean | `false` | Optional |
-| (2) | 수직 철근 | `"VERTICAL_REBAR"` | Object | — | **Required** |
-| (2)a | 규격 · `D4`~`D57` | `"NAME"` | String | — | **Required** |
-| (2)b | 수직 철근 간격 @ | `"DIST"` | Number | — | **Required** |
-| (3) | 수평 철근 | `"HORIZONTAL_REBAR"` | Object (NAME/DIST) | — | **Required** |
-| (4) | 단부 철근 사용 여부 | `"USE_END_REBAR"` | Boolean | `false` | Optional |
-| (5) | 경계요소 수평 철근 | `"BE_HORIZONTAL_REBAR"` | Object (NAME/DIST) | — | Optional |
-| (6) | 경계요소 길이 | `"BOUNDARY_ELEMENT_LENGTH"` | Number | `0` | Optional |
-| (7) | 콘크리트면~철근중심 거리 (dw, de) | `"CONCRETE_FACE_TO_CENTER_OF_REBAR"` | Object | — | **Required** |
-| (7)a | dw | `"DW"` | Number | — | **Required** |
-| (7)b | de | `"DE"` | Number | — | **Required** |
-| (8) | 모델 두께 사용 | `"USE_MODEL_THICKNESS"` | Boolean | `true` | Optional |
+| 1 | 벽체 번호 문자열을 키로 갖는 맵 | `"Assign"` | Object | — | **Required** |
+| 2 | 벽체 철근 항목 목록 | `"ITEMS"` | Array[Object] | — | **Required** |
+| 3 | 서브 구간 ID | `"ID"` | Integer | — | Required |
+| 4 | 모델 두께 사용 여부 | `"bUSE_MODEL_THICK"` | Boolean | — | **Required** |
+| 5 | 두께 (`bUSE_MODEL_THICK=false` 일 때 입력) | `"THICK"` | Number | — | **Required** |
+| 6 | 콘크리트면~철근 중심 거리 (면외, dw) | `"DW"` | Number | — | **Required** |
+| 7 | 콘크리트면~철근 중심 거리 (면내, de) | `"DE"` | Number | — | **Required** |
+| 8 | 수직 철근 · 규격 `NAME`, 간격 `DIST` | `"VER_BAR"` | Object | — | **Required** |
+| 9 | 수평 철근 · 규격 `NAME`, 간격 `DIST` | `"HOR_BAR"` | Object | — | **Required** |
+| 10 | 단부 철근 · 규격 `NAME`, 간격 `DIST` | `"END_BAR"` | Object | — | **Required** |
+| 11 | 단부 철근 개수 | `"NUM_END_BAR"` | Integer | — | **Required** |
+| 12 | 경계요소 수평 철근 · 규격 `NAME`, 간격 `DIST` | `"BE_HOR_BAR"` | Object | — | **Required** |
+| 13 | 경계요소 길이 | `"BE_LENGTH"` | Number | — | **Required** |
+| 14 | 적용 층 목록 (층 키) | `"vSTORY_KEY"` | Array[Integer] | — | **Required** |
 
-**`CREATE_SUB_WALL_ID == true` 일 때**
-
-| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
-|-----|------|-----|-----------|--------|------|
-| (1) | 서브 벽체 ID (읽기 전용) | `"SUB_WALL_ID"` | Integer | — | **Required** |
-| (2) | 층 범위 | `"STORY"` | Object | — | **Required** |
-| (2)a | 시작 층 | `"FROM"` | String | — | **Required** |
-| (2)b | 끝 층 | `"TO"` | String | — | **Required** |
-
-**`USE_END_REBAR == true` 일 때 — `END_REBAR`**
-
-| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
-|-----|------|-----|-----------|--------|------|
-| a | 규격 · `D4`~`D57` | `"NAME"` | String | — | **Required** |
-| b | 개수 | `"NUM"` | Integer | — | **Required** |
-| c | 간격 @ | `"DIST"` | Number | — | **Required** |
-
-**`USE_MODEL_THICKNESS == false` 일 때**
-
-| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
-|-----|------|-----|-----------|--------|------|
-| (1) | 두께 | `"THICKNESS"` | Number | — | **Required** |
+> ⚠️ **공식 표기 불일치 (2026-10-04 확인).** 공식 표는 수직·수평·단부·경계요소 철근의 규격 키를 `"NUM"`(String)으로 적었으나, 공식 JSON Schema와 예제는 `"NAME"`을 쓴다. 위 표는 스키마·예제를 따랐다.
 
 ### Request / Response JSON
 
-**POST / PUT Request Body**
+**POST Request Body** (공식 예제)
 
 ```json
 {
@@ -1800,45 +1666,17 @@ print("POST:", res.status_code, res.json())
     "1": {
       "ITEMS": [
         {
-          "CREATE_SUB_WALL_ID": true,
-          "VERTICAL_REBAR": { "NAME": "D19", "DIST": 222 },
-          "HORIZONTAL_REBAR": { "NAME": "D16", "DIST": 200 },
-          "USE_END_REBAR": true,
-          "BE_HORIZONTAL_REBAR": { "NAME": "D19", "DIST": 222 },
-          "BOUNDARY_ELEMENT_LENGTH": 222,
-          "CONCRETE_FACE_TO_CENTER_OF_REBAR": { "DW": 50, "DE": 50 },
-          "USE_MODEL_THICKNESS": false,
-          "END_REBAR": { "NAME": "D25", "NUM": 2, "DIST": 150 },
-          "THICKNESS": 1000,
-          "SUB_WALL_ID": 1,
-          "STORY": { "FROM": "2F", "TO": "Roof" }
-        }
-      ]
-    }
-  }
-}
-```
-
-**GET Response Body**
-
-```json
-{
-  "REBW": {
-    "1": {
-      "ITEMS": [
-        {
-          "CREATE_SUB_WALL_ID": true,
-          "SUB_WALL_ID": 1,
-          "STORY": { "FROM": "2F", "TO": "Roof" },
-          "VERTICAL_REBAR": { "NAME": "D19", "DIST": 222 },
-          "HORIZONTAL_REBAR": { "NAME": "D16", "DIST": 200 },
-          "USE_END_REBAR": true,
-          "END_REBAR": { "NAME": "D25", "NUM": 2, "DIST": 150 },
-          "BE_HORIZONTAL_REBAR": { "NAME": "D19", "DIST": 222 },
-          "BOUNDARY_ELEMENT_LENGTH": 222,
-          "CONCRETE_FACE_TO_CENTER_OF_REBAR": { "DW": 50, "DE": 50 },
-          "USE_MODEL_THICKNESS": false,
-          "THICKNESS": 1000
+          "ID": 0,
+          "bUSE_MODEL_THICK": true,
+          "THICK": 0,
+          "DW": 0.05,
+          "DE": 0.05,
+          "VER_BAR": { "NAME": "D13", "DIST": 0.35 },
+          "HOR_BAR": { "NAME": "D10", "DIST": 0.28 },
+          "END_BAR": { "NAME": "D13", "DIST": 0.1 },
+          "NUM_END_BAR": 24,
+          "BE_HOR_BAR": { "NAME": "", "DIST": 0.2 },
+          "BE_LENGTH": 0
         }
       ]
     }
@@ -1859,18 +1697,17 @@ payload = {
         "1": {
             "ITEMS": [
                 {
-                    "CREATE_SUB_WALL_ID": True,
-                    "VERTICAL_REBAR": {"NAME": "D19", "DIST": 222},
-                    "HORIZONTAL_REBAR": {"NAME": "D16", "DIST": 200},
-                    "USE_END_REBAR": True,
-                    "END_REBAR": {"NAME": "D25", "NUM": 2, "DIST": 150},
-                    "BE_HORIZONTAL_REBAR": {"NAME": "D19", "DIST": 222},
-                    "BOUNDARY_ELEMENT_LENGTH": 222,
-                    "CONCRETE_FACE_TO_CENTER_OF_REBAR": {"DW": 50, "DE": 50},
-                    "USE_MODEL_THICKNESS": False,
-                    "THICKNESS": 1000,
-                    "SUB_WALL_ID": 1,
-                    "STORY": {"FROM": "2F", "TO": "Roof"},
+                    "ID": 0,
+                    "bUSE_MODEL_THICK": True,
+                    "THICK": 0,
+                    "DW": 0.05,
+                    "DE": 0.05,
+                    "VER_BAR": {"NAME": "D13", "DIST": 0.35},
+                    "HOR_BAR": {"NAME": "D10", "DIST": 0.28},
+                    "END_BAR": {"NAME": "D13", "DIST": 0.1},
+                    "NUM_END_BAR": 24,
+                    "BE_HOR_BAR": {"NAME": "", "DIST": 0.2},
+                    "BE_LENGTH": 0,
                 }
             ]
         }
