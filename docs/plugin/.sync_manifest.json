@@ -1,10 +1,10 @@
 {
- "article_count": 75,
+ "article_count": 76,
  "articles": {
   "35639730101529": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/35639730101529-Plug-in-Online-Manual",
    "title": "Plug-in Online Manual",
-   "updated_at": "2026-09-21T10:09:21Z"
+   "updated_at": "2026-10-07T00:25:53Z"
   },
   "35639906272025": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/35639906272025-Easy-Capture-Generator",
@@ -84,7 +84,7 @@
   "35693347852569": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/35693347852569-Introduction-to-MIDAS-Plug-in",
    "title": "Introduction to MIDAS Plug-in",
-   "updated_at": "2026-09-08T06:36:55Z"
+   "updated_at": "2026-10-09T02:26:52Z"
   },
   "35694950947353": {
    "html_url": "https://support.midasuser.com/hc/ko/articles/35694950947353-How-to-use-MIDAS-Plug-ins",
@@ -375,6 +375,11 @@
    "html_url": "https://support.midasuser.com/hc/ko/articles/62471186426649-Construction-stage-reporter",
    "title": "Construction stage reporter",
    "updated_at": "2026-09-21T08:37:31Z"
+  },
+  "62950495480217": {
+   "html_url": "https://support.midasuser.com/hc/ko/articles/62950495480217-Stress-Profile-Generator",
+   "title": "Stress Profile Generator",
+   "updated_at": "2026-10-06T07:11:08Z"
   }
  },
  "section_id": "plugin"

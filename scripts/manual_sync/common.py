@@ -55,8 +55,10 @@ _PLUGIN_TOOL_IDS = [
     # en-us 번역본이 없을 뿐이었다. 아래 fetch_articles_by_ids()가 로케일 무관 엔드포인트를 쓰는
     # 이유가 정확히 이것. 2026-09-24 재확인(ko 200 / en-us 404, 본문 updated_at 2026-07-27).
     "49475987573657", "49504449511705",
+    # 2026-10-06 원문 생성, 2026-10-11 정기 점검에서 발견 (ko/en-us 양쪽 존재)
+    "62950495480217",
 ]
-PLUGIN_ARTICLE_IDS = [_PLUGIN_LANDING_ID] + _PLUGIN_GUIDE_IDS + _PLUGIN_TOOL_IDS  # 75 ids
+PLUGIN_ARTICLE_IDS = [_PLUGIN_LANDING_ID] + _PLUGIN_GUIDE_IDS + _PLUGIN_TOOL_IDS  # 76 ids
 
 # Zendesk resources tracked by this repo. "manual" = JSON Manual section (REST endpoint
 # schema reference, docs/manual/*), "plugin" = Plug-in article-id allowlist (GUI-embedded

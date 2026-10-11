@@ -22,7 +22,7 @@ Manual과 같지만, 문서 성격은 다르다:
 | 대상 독자 | REST API를 직접 호출하는 개발자 | GUI에서 완성된 도구를 쓰는 엔지니어(+직접 Plug-in을 만들려는 개발자) |
 | 원문 성격 | 엔드포인트별 Key/Value 스키마 표 | 스크린샷 기반 GUI 사용법 워크스루 |
 | 문서 단위 | 챕터(엔드포인트 그룹) | 개별 Plug-in 툴 1개 = 파일 1개 |
-| Zendesk 섹션 | JSON Manual (651개 아티클) | Plug-in (Introduction 4건 + Plug-in Item 70건) |
+| Zendesk 섹션 | JSON Manual (651개 아티클) | Plug-in (Introduction 4건 + Plug-in Item 71건) |
 
 **따라서 `docs/manual`의 "TABLE_TYPE 표 → Response HEAD → Request/Response JSON → Python 예제"
 관례를 그대로 적용하지 않는다.** 대신 [아래 템플릿](#toolsmd-개별-문서-템플릿)을 따른다.
@@ -40,7 +40,7 @@ Manual과 같지만, 문서 성격은 다르다:
 쓰기 때문에 그대로 추적된다. 현재 폐기된 항목은 없다.
 
 - Guide: 4/4 작성 완료
-- Plug-in Item: 70건 등재(작성 완료 63 + 미작성 7, **폐기됨 0**). 연혁: 원문 53건 중 "Image
+- Plug-in Item: 71건 등재(작성 완료 63 + 미작성 8, **폐기됨 0**). 연혁: 원문 53건 중 "Image
   Capture Generator"는 "Easy Capture Generator"와 동일 URL의 별칭이라 1건으로 병합 +
   2026-08-06 신규 발견 4건 + 2026-08-15 신규 발견 2건 + 2026-08-24 신규 발견 5건 +
   2026-08-30 신규 발견 2건("Point to Patch Convertor"·"Model Report Builder") +
@@ -51,7 +51,7 @@ Manual과 같지만, 문서 성격은 다르다:
   코드별 별칭("[Peru E.030:2026]", "[SNZ TS 1170.5:2025]")으로 두 번 더 나열되나 동일
   아티클이라 건수에 포함하지 않음 — 해당 코드들은
   [Response_Spectrum_Generator.md](tools/Response_Spectrum_Generator.md)의 "적용 기준"에
-  이미 반영돼 있음)
+  이미 반영돼 있음) + 2026-10-11 신규 발견 1건("Stress Profile Generator")
 
 ---
 
@@ -66,7 +66,7 @@ Manual과 같지만, 문서 성격은 다르다:
 
 ---
 
-## Plug-in Item — 개별 툴 (70건)
+## Plug-in Item — 개별 툴 (71건)
 
 원문 페이지는 하위 카테고리 없이 알파벳순 flat 목록이라, 이 표도 원문 순서를 그대로 따른다.
 파일명은 번호를 매기지 않고 툴 이름을 슬러그화한 것 — 신규 Plug-in이 추가돼도 기존 파일 재번호가
@@ -144,6 +144,7 @@ Manual과 같지만, 문서 성격은 다르다:
 | 68 | Beam to Plate | — | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/62470497136665-Beam-to-Plate) |
 | 69 | Construction Stage Wizard | — | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/62470891196825-Construction-stage-wizard) |
 | 70 | Construction Stage Reporter | — | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/62471186426649-Construction-stage-reporter) |
+| 71 | Stress Profile Generator | — | ⬜ 미작성 | [원문](https://support.midasuser.com/hc/en-us/articles/62950495480217-Stress-Profile-Generator) |
 
 [^1]: 원문 페이지에는 "Image Capture Generator"라는 이름으로도 한 번 더 나열되어 있으나 같은
     URL(`35639906272025-Easy-Capture-Generator`)을 가리키는 동일 아티클이다.
@@ -192,6 +193,10 @@ Manual과 같지만, 문서 성격은 다르다:
 > Wizard", No.70 "Construction Stage Reporter". 세 아티클 모두 2026-09-21 당일 생성됐고
 > ko·en-us 양쪽에 존재하며 본문 길이가 동일하다. 위 폐기 오판 정정과 합쳐
 > `PLUGIN_ARTICLE_IDS`는 70개 → 75개가 됐다.
+>
+> **2026-10-11 정기 점검(변경):** 랜딩 페이지 `updated_at` 갱신(2026-09-29 → 2026-10-07)을
+> 계기로 재확인해 신규 1건을 발견했다 — No.71 "Stress Profile Generator"(원문 생성
+> 2026-10-06, ko·en-us 양쪽 존재, 본문 길이 동일). `PLUGIN_ARTICLE_IDS`는 75개 → 76개가 됐다.
 
 ---
 
