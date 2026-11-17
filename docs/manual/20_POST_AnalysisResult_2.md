@@ -3320,14 +3320,26 @@ for row in table.get("DATA", []):
 | `"TNDN_APPROX_LOSS_STRESS"` | 텐던 근사 손실 (응력 Stress 기준) |
 
 > ⚠️ 2026-08-26 확인 (article id `36018411935129`): 이 테이블은 공통 사항의 `NODE_ELEMS`를
-> 지원하지 **않습니다**(공식 스키마에 `TABLE_NAME`/`TABLE_TYPE`/`EXPORT_PATH`/`UNIT`/`STYLES`/
-> `COMPONENTS`만 존재) — 이전 버전 문서에 잘못 포함되어 있었음. 대상 제한 없이 전체 텐던 요소가
-> 반환됩니다.
+> 지원하지 **않습니다**(공식 스키마가 `additionalProperties: false`이고 `NODE_ELEMS`가 없음) —
+> 이전 버전 문서에 잘못 포함되어 있었음.
+>
+> ✅ **2026-11-13 공식 개정 반영.** 대상 제한 방식이 `NODE_ELEMS` 대신 이 테이블 전용 파라미터 두 개로
+> 바뀌었다(둘 다 `Array [String]`, Optional, 생략 시 전체):
+>
+> | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+> | --- | --- | --- | --- | --- | --- |
+> | 1 | 텐던 이름 | `"TENDON_NAME"` | Array [String] | All | Optional |
+> | 2 | 텐던 프리스트레스가 정의된 정적 하중케이스 이름 | `"LCNAME"` | Array [String] | All | Optional |
+>
+> 이에 따라 응답에 `LoadCase` 열이 추가됐고(`TNDN_APPROX_LOSS_FORCE`는 `Tendon` 열도 추가),
+> `COMPONENTS` enum에 `Tendon`·`LoadCase`가 들어갔으며 마지막 비율 열 이름이
+> `Stress(AllLoss)/Stress(ImmediateLoss)`·`Force(AllLoss)/Force(ImmediateLoss)`로 풀려 표기된다
+> (이전 문서의 `.../Stress`·`.../Force` 축약 표기는 원문 개정 전 표기).
 
 ### Response HEAD
 
-- `TNDN_APPROX_LOSS_STRESS`: `["Index", "Elem", "Part", "ImmediateLoss", "CreepLoss", "ShrinkageLoss", "RelaxationLoss", "AllLoss", "Stress(ImmediateLoss)", "Stress(AllLoss)", "Stress(AllLoss)/Stress"]`
-- `TNDN_APPROX_LOSS_FORCE`: `Stress(...)` 대신 `Force(...)` 컬럼명 사용 — `["Index", "Elem", "Part", "ImmediateLoss", "CreepLoss", "ShrinkageLoss", "RelaxationLoss", "AllLoss", "Force(ImmediateLoss)", "Force(AllLoss)", "Force(AllLoss)/Force"]`
+- `TNDN_APPROX_LOSS_STRESS`: `["Index", "LoadCase", "Elem", "Part", "ImmediateLoss", "CreepLoss", "ShrinkageLoss", "RelaxationLoss", "AllLoss", "Stress(ImmediateLoss)", "Stress(AllLoss)", "Stress(AllLoss)/Stress(ImmediateLoss)"]`
+- `TNDN_APPROX_LOSS_FORCE`: `Stress(...)` 대신 `Force(...)` 컬럼명 사용, `Tendon` 열 추가 — `["Index", "Tendon", "LoadCase", "Elem", "Part", "ImmediateLoss", "CreepLoss", "ShrinkageLoss", "RelaxationLoss", "AllLoss", "Force(ImmediateLoss)", "Force(AllLoss)", "Force(AllLoss)/Force(ImmediateLoss)"]`
 
 ### Request / Response JSON
 
@@ -3338,9 +3350,11 @@ for row in table.get("DATA", []):
   "Argument": {
     "TABLE_NAME": "TendonApproximateLoss(Stress)",
     "TABLE_TYPE": "TNDN_APPROX_LOSS_STRESS",
+    "TENDON_NAME": ["tendon_strand"],
+    "LCNAME": ["PS"],
     "UNIT": { "FORCE": "kips", "DIST": "in" },
     "STYLES": { "FORMAT": "Fixed", "PLACE": 12 },
-    "COMPONENTS": ["Elem", "Part", "ImmediateLoss", "CreepLoss", "ShrinkageLoss", "RelaxationLoss", "AllLoss", "Stress(ImmediateLoss)", "Stress(AllLoss)", "Stress(AllLoss)/Stress"]
+    "COMPONENTS": ["LoadCase", "Elem", "Part", "ImmediateLoss", "CreepLoss", "ShrinkageLoss", "RelaxationLoss", "AllLoss", "Stress(ImmediateLoss)", "Stress(AllLoss)", "Stress(AllLoss)/Stress(ImmediateLoss)"]
   }
 }
 ```
@@ -3352,9 +3366,9 @@ for row in table.get("DATA", []):
   "TendonApproximateLoss(Stress)": {
     "FORCE": "kips",
     "DIST": "in",
-    "HEAD": ["Index", "Elem", "Part", "ImmediateLoss", "CreepLoss", "ShrinkageLoss", "RelaxationLoss", "AllLoss", "Stress(ImmediateLoss)", "Stress(AllLoss)", "Stress(AllLoss)/Stress"],
+    "HEAD": ["Index", "LoadCase", "Elem", "Part", "ImmediateLoss", "CreepLoss", "ShrinkageLoss", "RelaxationLoss", "AllLoss", "Stress(ImmediateLoss)", "Stress(AllLoss)", "Stress(AllLoss)/Stress(ImmediateLoss)"],
     "DATA": [
-      ["1", "1", "I", "-6.424509690435", "-8.904593184079", "-9.582009033589", "-2.465640773855", "-27.376752681958", "196.075490309565", "175.123247318042", "0.893141957934"]
+      ["1", "PS", "1", "I", "-6.424509690435", "-8.904593184079", "-9.582009033589", "-2.465640773855", "-27.376752681958", "196.075490309565", "175.123247318042", "0.893141957934"]
     ]
   }
 }
@@ -3367,9 +3381,11 @@ for row in table.get("DATA", []):
   "Argument": {
     "TABLE_NAME": "TendonApproximateLoss(Force)",
     "TABLE_TYPE": "TNDN_APPROX_LOSS_FORCE",
+    "TENDON_NAME": ["tendon_strand"],
+    "LCNAME": ["PS"],
     "UNIT": { "FORCE": "kips", "DIST": "in" },
     "STYLES": { "FORMAT": "Fixed", "PLACE": 12 },
-    "COMPONENTS": ["Elem", "Part", "ImmediateLoss", "CreepLoss", "ShrinkageLoss", "RelaxationLoss", "AllLoss", "Force(ImmediateLoss)", "Force(AllLoss)", "Force(AllLoss)/Force"]
+    "COMPONENTS": ["Tendon", "LoadCase", "Elem", "Part", "ImmediateLoss", "CreepLoss", "ShrinkageLoss", "RelaxationLoss", "AllLoss", "Force(ImmediateLoss)", "Force(AllLoss)", "Force(AllLoss)/Force(ImmediateLoss)"]
   }
 }
 ```
@@ -3391,6 +3407,8 @@ payload = {
     "Argument": {
         "TABLE_NAME": "TendonApproximateLoss(Stress)",
         "TABLE_TYPE": "TNDN_APPROX_LOSS_STRESS",
+        "TENDON_NAME": ["tendon_strand"],
+        "LCNAME": ["PS"],
         "UNIT": {"FORCE": "kips", "DIST": "in"}
     }
 }

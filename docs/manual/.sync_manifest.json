@@ -1,5 +1,5 @@
 {
- "article_count": 651,
+ "article_count": 650,
  "articles": {
   "33016922742937": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/33016922742937-MIDAS-API-Online-Manual",
@@ -1644,7 +1644,7 @@
   "36018411935129": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/36018411935129-Tendon-Approximate-Loss-Analysis-Result-Table",
    "title": "Tendon Approximate Loss - Analysis Result Table",
-   "updated_at": "2025-04-25T10:59:12Z"
+   "updated_at": "2026-11-13T02:39:45Z"
   },
   "36018521410457": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/36018521410457-Composite-Section-for-C-S-Force-and-Stress-Analysis-Result-Table",
@@ -1924,7 +1924,7 @@
   "39508838720153": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/39508838720153-Response-Spectrum-Functions-Other-Countries",
    "title": "Response Spectrum Functions - Other Countries",
-   "updated_at": "2025-11-04T00:20:03Z"
+   "updated_at": "2026-11-11T00:08:08Z"
   },
   "39772183634329": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/39772183634329-Surface-Spring",
@@ -2215,11 +2215,6 @@
    "html_url": "https://support.midasuser.com/hc/en-us/articles/50707525717401-Save-Current-Stage-As",
    "title": "Save Current Stage As",
    "updated_at": "2026-06-30T08:51:02Z"
-  },
-  "50760778765593": {
-   "html_url": "https://support.midasuser.com/hc/en-us/articles/50760778765593",
-   "title": "MIDAS API Online Manual(사내 검증용)",
-   "updated_at": "2025-11-04T00:19:09Z"
   },
   "51740138178969": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/51740138178969-Diaphragm-Disconnect",

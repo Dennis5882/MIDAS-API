@@ -8,7 +8,7 @@
 
 | 이름 | mode | 대상 문서 | 매니페스트 |
 | --- | --- | --- | --- |
-| `manual` | `section` — `sections/{id}/articles.json`로 651개 아티클을 한 번에 나열 (JSON Manual, `section_id=30087500371097`) | `docs/manual/*.md` — REST 엔드포인트 스키마 표 | `docs/manual/.sync_manifest.json` |
+| `manual` | `section` — `sections/{id}/articles.json`로 650개 아티클을 한 번에 나열 (JSON Manual, `section_id=30087500371097`) | `docs/manual/*.md` — REST 엔드포인트 스키마 표 | `docs/manual/.sync_manifest.json` |
 | `plugin` | `id_list` — `common.PLUGIN_ARTICLE_IDS`(57개, 명시적 목록)를 `articles/{id}.json`로 1건씩 조회 | `docs/plugin/**/*.md` — GUI 내장 Plug-in 툴 사용법 | `docs/plugin/.sync_manifest.json` |
 
 `plugin`이 `id_list`인 이유: Plug-in Zendesk 섹션(`section_id=35681419399961`)은 `sections/{id}/articles.json`을 호출해도 "Plug-in Online Manual" 랜딩 페이지 **1건만** 돌아옵니다. 나머지 56개(가이드 4 + 개별 툴 52)는 그 랜딩 페이지 본문 HTML 안에 있는 `<a href>` 링크일 뿐이고, 각각 API로는 찾을 수 없는 별도 `section_id`에 흩어져 있습니다. 그래서 `docs/plugin/INDEX.md`를 만들 때 추출한 57개 article id를 `common.py`에 고정 목록으로 박아두고 개별 조회합니다. **신규 Plug-in이 추가되면 랜딩 페이지 자체의 `updated_at`이 바뀌므로 `changed` 목록에 랜딩 article(`35639730101529`)이 잡히고**, 이를 신호로 랜딩 페이지를 재스크래핑해 `PLUGIN_ARTICLE_IDS`와 `INDEX.md`를 갱신해야 합니다(코드 수정이 필요하므로 자동 반영되지 않음).

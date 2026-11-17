@@ -57,8 +57,10 @@ _PLUGIN_TOOL_IDS = [
     "49475987573657", "49504449511705",
     # 2026-10-06 원문 생성, 2026-10-11 정기 점검에서 발견 (ko/en-us 양쪽 존재)
     "62950495480217",
+    # 2026-10-23 원문 생성, 2026-11-16 정기 점검에서 ko 랜딩 재스크래핑으로 발견 (ko 전용, en-us 번역 없음)
+    "63531591309465", "63531619915801",
 ]
-PLUGIN_ARTICLE_IDS = [_PLUGIN_LANDING_ID] + _PLUGIN_GUIDE_IDS + _PLUGIN_TOOL_IDS  # 76 ids
+PLUGIN_ARTICLE_IDS = [_PLUGIN_LANDING_ID] + _PLUGIN_GUIDE_IDS + _PLUGIN_TOOL_IDS  # 78 ids
 
 # Zendesk resources tracked by this repo. "manual" = JSON Manual section (REST endpoint
 # schema reference, docs/manual/*), "plugin" = Plug-in article-id allowlist (GUI-embedded

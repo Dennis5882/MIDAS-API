@@ -31,7 +31,7 @@ SDK는 별도 프로젝트입니다. SDK 관련 작업 요청이 아니라면 �
 
 | 섹션 이름(`--section`) | Zendesk 대상 | 추적 방식 | 로컬 문서 |
 | --- | --- | --- | --- |
-| `manual` | JSON Manual 섹션(651개 아티클, `section_id=30087500371097`) | 섹션 목록 API 그대로 사용 | `docs/manual/*.md` |
+| `manual` | JSON Manual 섹션(650개 아티클, `section_id=30087500371097`) | 섹션 목록 API 그대로 사용 | `docs/manual/*.md` |
 | `plugin` | Plug-in 섹션(`section_id=35681419399961`) | ⚠️ 섹션 목록 API가 랜딩 페이지 1건만 반환하므로, `common.py`의 `PLUGIN_ARTICLE_IDS`(70개 고정 목록)를 1건씩 개별 조회 | `docs/plugin/**/*.md` |
 
 ```bash
