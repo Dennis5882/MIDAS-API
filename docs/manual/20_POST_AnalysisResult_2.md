@@ -3649,7 +3649,7 @@ for row in table.get("DATA", []):
 | --- | --- | --- | --- | --- | --- |
 | 1 | 층 이름 지정 | `"STORY_NAMES"` | Array [String] | All | Optional |
 
-> ℹ️ **2026-07-30 공식 확인:** 이전 버전 문서는 JSON Schema에만 등장하던 `SECT_POSITION`·`PARTS`를 추정 설명과 함께 실었으나, 공식 담당자 확인 결과 이 Table Type(`WALL_FORCE_MOMENT`)은 두 항목을 지원하지 않으며 공식 아티클에서도 제거되었습니다(Jira MAPI-2012). 이에 맞춰 위 표에서도 제거했습니다.
+> ℹ️ **2026-07-30 공식 확인:** 이전 버전 문서는 JSON Schema에만 등장하던 `SECT_POSITION`·`PARTS`를 추정 설명과 함께 실었으나, 공식 담당자 확인 결과 이 Table Type(`WALL_FORCE_MOMENT`)은 두 항목을 지원하지 않으며 공식 아티클에서도 제거되었습니다. 이에 맞춰 위 표에서도 제거했습니다.
 
 ### Request / Response JSON
 

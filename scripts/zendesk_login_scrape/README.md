@@ -75,4 +75,5 @@ python download_assets.py
 
 - 2026-08-07: `support.midasuser.com/hc/ko/categories/60103640613785`
   ("API 적용 사례" — Plugin 20종, 로그인 필수) → 문서 20개 + 영상 20개(mp4, 총 1.8GB) 전량
-  수집 성공. 결과물: `docs/plugin_cases/`.
+  수집 성공. 결과물은 로컬에만 보관하며 이 저장소에는 포함하지 않는다(로그인 필수 카테고리라
+  공개 저장소에 올리지 않음).

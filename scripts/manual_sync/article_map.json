@@ -85,7 +85,7 @@
       "article_title": "Project Information",
       "updated_at": "2026-09-01T01:00:22Z",
       "verified_at": "2026-09-06",
-      "note": "✅ 해결 확인(2026-09-06 정기 점검): 원문 표 18번 Key 'APROVE' 오타가 2026-09-01 갱신으로 'APPROVE'로 정정됨(재확인 APPROVE 3회/APROVE 0회). 2026-08-27 오류 제보(MAPI-2484) 반영 결과로 보임. 로컬은 처음부터 정상 표기라 표 수정 없음, ⚠️ 주석만 해결 기록으로 교체"
+      "note": "✅ 해결 확인(2026-09-06 정기 점검): 원문 표 18번 Key 'APROVE' 오타가 2026-09-01 갱신으로 'APPROVE'로 정정됨(재확인 APPROVE 3회/APROVE 0회). 2026-08-27 오류 제보 반영 결과로 보임. 로컬은 처음부터 정상 표기라 표 수정 없음, ⚠️ 주석만 해결 기록으로 교체"
     },
     "2. /db/UNIT — Unit System": {
       "article_id": "35802155483801",
@@ -503,7 +503,7 @@
       "article_title": "Modify Concrete Materials",
       "updated_at": "2026-09-01T01:04:26Z",
       "verified_at": "2026-09-06",
-      "note": "✅ 해결 확인(2026-09-06): 원문 표 4번 Key 'RABAR_CODENAME' 오타가 'REBAR_CODENAME'로 정정됨(MAPI-2484 반영 추정). ⚠️ 신규: 2026-09-01 갱신으로 최상위에 bSERVCHECK/dSHORTTERM/dLONGTERM 3개 필드가 JSON Schema에만 추가됨(표·예제엔 없음) — 로컬 표에 9~11번으로 추정 표기 추가. ⚠️ 원문 스키마가 유효한 JSON이 아님(SUBREBAR_B_FY 닫는 중괄호 뒤 쉼표 누락) — 오류 제보 대상"
+      "note": "✅ 해결 확인(2026-09-06): 원문 표 4번 Key 'RABAR_CODENAME' 오타가 'REBAR_CODENAME'로 정정됨(오류 제보 반영 추정). ⚠️ 신규: 2026-09-01 갱신으로 최상위에 bSERVCHECK/dSHORTTERM/dLONGTERM 3개 필드가 JSON Schema에만 추가됨(표·예제엔 없음) — 로컬 표에 9~11번으로 추정 표기 추가. ⚠️ 원문 스키마가 유효한 JSON이 아님(SUBREBAR_B_FY 닫는 중괄호 뒤 쉼표 누락) — 오류 제보 대상"
     }
   },
   "05_DB_Boundary.md": {
@@ -760,7 +760,7 @@
       "article_title": "Assign Plane Loads",
       "updated_at": "2026-09-01T04:24:47Z",
       "verified_at": "2026-09-06",
-      "note": "✅ 부분 해결(2026-09-06): 조건행 Key가 'SELECT_TYPE'→'ELEM_TYPE'으로 정정됨(MAPI-2484 반영 추정). ⚠️ 잔여: 같은 행 설명 문구는 아직 'When Element Select Type'으로 남아 있음(첫 조건행은 'When Element Type'으로 정상) — 잔여 오류 제보 대상"
+      "note": "✅ 부분 해결(2026-09-06): 조건행 Key가 'SELECT_TYPE'→'ELEM_TYPE'으로 정정됨(오류 제보 반영 추정). ⚠️ 잔여: 같은 행 설명 문구는 아직 'When Element Select Type'으로 남아 있음(첫 조건행은 'When Element Type'으로 정상) — 잔여 오류 제보 대상"
     },
     "13. /db/FBLD": {
       "article_id": "35953604106137",
@@ -1344,7 +1344,7 @@
       "article_title": "Load Sequence for Nonlinear",
       "updated_at": "2026-09-01T04:37:13Z",
       "verified_at": "2026-09-06",
-      "note": "✅ 해결 확인(2026-09-06): 원문 표 Value Type이 'String'→'Array [String]'으로 정정됨(MAPI-2485 B-3 반영). 로컬은 처음부터 정상이라 수정 없음"
+      "note": "✅ 해결 확인(2026-09-06): 원문 표 Value Type이 'String'→'Array [String]'으로 정정됨(오류 제보 반영). 로컬은 처음부터 정상이라 수정 없음"
     },
     "5. /db/WVLD — Wave Loads": {
       "article_id": "35988728179097",
@@ -1379,7 +1379,7 @@
       "article_title": "Small Displacement - Initial Element Force",
       "updated_at": "2026-09-01T04:39:37Z",
       "verified_at": "2026-09-06",
-      "note": "✅ 해결 확인(2026-09-06): 원문 표 3번 Key가 'ELEM_FORCES'→'ELEMENT_FORCES'로 정정됨(MAPI-2485 B-4 반영). ⚠️ 원문 표는 여전히 Array [Number, 12] 고정 길이로 적지만 원문 예제 2번이 TRUSS에 [1,2](2개)를 보내 모순 — 로컬은 예제 우선 원칙으로 Array [Number] 유지, 이번에 그 근거를 ⚠️ 주석으로 명시"
+      "note": "✅ 해결 확인(2026-09-06): 원문 표 3번 Key가 'ELEM_FORCES'→'ELEMENT_FORCES'로 정정됨(오류 제보 반영). ⚠️ 원문 표는 여전히 Array [Number, 12] 고정 길이로 적지만 원문 예제 2번이 TRUSS에 [1,2](2개)를 보내 모순 — 로컬은 예제 우선 원칙으로 Array [Number] 유지, 이번에 그 근거를 ⚠️ 주석으로 명시"
     }
   },
   "12_DB_Analysis_Control.md": {
@@ -1459,7 +1459,7 @@
       "article_id": "35989924517401",
       "article_title": "Moving Load Analysis Control - Transverse",
       "verified_at": "2026-09-06",
-      "note": "✅ 보류 질문 종결(2026-09-06): 원문 Input URI가 대문자 'db/MVCTTR'이던 것이 2026-09-01 갱신으로 'db/MVCTtr'로 정정됨(MAPI-2485 B-5 반영). 로컬 표기가 맞았음이 확인돼 이전 '확인 보류' 상태 종료. JSON Schema 루트 키는 형제 엔드포인트와 마찬가지로 대문자 MVCTTR 유지(정상)",
+      "note": "✅ 보류 질문 종결(2026-09-06): 원문 Input URI가 대문자 'db/MVCTTR'이던 것이 2026-09-01 갱신으로 'db/MVCTtr'로 정정됨(오류 제보 반영). 로컬 표기가 맞았음이 확인돼 이전 '확인 보류' 상태 종료. JSON Schema 루트 키는 형제 엔드포인트와 마찬가지로 대문자 MVCTTR 유지(정상)",
       "updated_at": "2026-09-01T04:48:54Z"
     },
     "14. /db/SMCT — Settlement Analysis Control Data": {
@@ -1676,7 +1676,7 @@
       "article_id": "49514964272665",
       "article_title": "Member Assignment",
       "verified_at": "2026-09-06",
-      "note": "⚠️ 2026-09-06 최종 확정: 원문 아티클 49514964272665는 로케일별 본문이 다름. 영문 페이지는 요청 예제·Specifications 표 모두 ELEM_LIST(ELEM_LIST 2회/AELEM 1회, 응답 예제만 AELEM)로 일관, 한글 페이지는 표만 ELEM_LIST이고 요청 예제는 AELEM(ELEM_LIST 1회/AELEM 5회)으로 자기모순. 이 아티클엔 JSON Schema 절 자체가 없음. 요청 키=ELEM_LIST / 응답·저장 레코드 키=AELEM으로 다른 것이 정상이며, 형제 /db/MEMB(49513603328793)가 전부 AELEM인 것은 저장 레코드 CRUD이기 때문이라 요청 키 근거가 아님. 이력: 2026-08-26 AELEM → 2026-08-27 ELEM_LIST(오독 기록) → 2026-09-06 한글 페이지만 보고 다시 AELEM → 같은 날 영문 확인 후 ELEM_LIST로 최종 복귀. 로케일 분기를 확인하기 전에 '예제 우선' 원칙을 적용하지 말 것. 한글 요청 예제 정정 요청은 MAPI-2484 후속 코멘트(359525)로 접수, 기존 코멘트 359523의 A-7 앞항목은 철회 표기함. 표 2행 SELETION_TYPE 오타는 한/영 모두 잔존(A-7 뒷항목, 유효)하며 로컬은 SELECTION_TYPE으로 정확.",
+      "note": "⚠️ 2026-09-06 최종 확정: 원문 아티클 49514964272665는 로케일별 본문이 다름. 영문 페이지는 요청 예제·Specifications 표 모두 ELEM_LIST(ELEM_LIST 2회/AELEM 1회, 응답 예제만 AELEM)로 일관, 한글 페이지는 표만 ELEM_LIST이고 요청 예제는 AELEM(ELEM_LIST 1회/AELEM 5회)으로 자기모순. 이 아티클엔 JSON Schema 절 자체가 없음. 요청 키=ELEM_LIST / 응답·저장 레코드 키=AELEM으로 다른 것이 정상이며, 형제 /db/MEMB(49513603328793)가 전부 AELEM인 것은 저장 레코드 CRUD이기 때문이라 요청 키 근거가 아님. 이력: 2026-08-26 AELEM → 2026-08-27 ELEM_LIST(오독 기록) → 2026-09-06 한글 페이지만 보고 다시 AELEM → 같은 날 영문 확인 후 ELEM_LIST로 최종 복귀. 로케일 분기를 확인하기 전에 '예제 우선' 원칙을 적용하지 말 것. 한글 요청 예제 정정 요청은 오류 제보 후속으로 접수, 기존 제보의 앞항목은 철회 표기함. 표 2행 SELETION_TYPE 오타는 한/영 모두 잔존(A-7 뒷항목, 유효)하며 로컬은 SELECTION_TYPE으로 정확.",
       "updated_at": "2026-07-30T05:16:25Z"
     },
     "14. /ope/GUSTFACTOR — Gust Factor Calculator": {
@@ -1725,7 +1725,7 @@
       "article_id": "59870138081177",
       "article_title": "Bridge Girder Diagram Image Generation",
       "verified_at": "2026-09-06",
-      "note": "✅ 부분 해결(2026-09-06): 원문 표 응력 성분 4번이 부호 없는 'Sbz\" 4'에서 '-Sbz\" 4'로 정정됨(MAPI-2484 A-4 반영). ⚠️ 콜론 자리에 큰따옴표가 남은 오타는 미해결. 로컬 표·예제·스키마 전부 원문과 일치, 수정 없음",
+      "note": "✅ 부분 해결(2026-09-06): 원문 표 응력 성분 4번이 부호 없는 'Sbz\" 4'에서 '-Sbz\" 4'로 정정됨(오류 제보 반영). ⚠️ 콜론 자리에 큰따옴표가 남은 오타는 미해결. 로컬 표·예제·스키마 전부 원문과 일치, 수정 없음",
       "updated_at": "2026-09-01T01:28:35Z"
     }
   },
@@ -1804,7 +1804,7 @@
       "article_title": "Bridge Girder Diagrams",
       "updated_at": "2026-09-01T01:28:35Z",
       "verified_at": "2026-09-06",
-      "note": "✅ 부분 해결(2026-09-06): 원문 표 응력 성분 4번 부호가 '-Sbz\" 4'로 정정됨(MAPI-2484 A-4 반영) — 기존 ⚠️ 주석이 '원문에 부호가 없다'고 서술해 사실과 달라져 해결 기록으로 교체. ⚠️ 콜론이 큰따옴표로 남은 오타는 미해결(잔여 제보 대상). 표 자체는 수정 없음"
+      "note": "✅ 부분 해결(2026-09-06): 원문 표 응력 성분 4번 부호가 '-Sbz\" 4'로 정정됨(오류 제보 반영) — 기존 ⚠️ 주석이 '원문에 부호가 없다'고 서술해 사실과 달라져 해결 기록으로 교체. ⚠️ 콜론이 큰따옴표로 남은 오타는 미해결(잔여 제보 대상). 표 자체는 수정 없음"
     }
   },
   "18_POST_PreProcess.md": {
@@ -1918,14 +1918,14 @@
       "article_id": "36011262919705",
       "article_title": "Beam Force - Analysis Result Table",
       "verified_at": "2026-09-06",
-      "note": "✅ 해결 확인(2026-09-06): JSON Schema enum의 'BEAMFORCEBYMAX' 오타가 정정돼 현재 ['BEAMFORCE','BEAMFORCEVBM'](BEAMFORCEBYMAX 0회). MAPI-2484 A-5 반영. 로컬은 처음부터 예제·표 기준이라 값 수정 없음, ⚠️ 주석만 해결 기록으로 교체. PARTS 3자 모순(스키마 Part1 / 표 'Part I' / 예제 'PartI')은 그대로라 기존 주석 유지",
+      "note": "✅ 해결 확인(2026-09-06): JSON Schema enum의 'BEAMFORCEBYMAX' 오타가 정정돼 현재 ['BEAMFORCE','BEAMFORCEVBM'](BEAMFORCEBYMAX 0회). 오류 제보 반영. 로컬은 처음부터 예제·표 기준이라 값 수정 없음, ⚠️ 주석만 해결 기록으로 교체. PARTS 3자 모순(스키마 Part1 / 표 'Part I' / 예제 'PartI')은 그대로라 기존 주석 유지",
       "updated_at": "2026-09-01T02:55:30Z"
     },
     "9. Beam Force (Static Prestress)": {
       "article_id": "36011373070745",
       "article_title": "Beam Force (Static Prestress) - Analysis Result Table",
       "verified_at": "2026-09-06",
-      "note": "✅ 해결 확인(2026-09-06): JSON Schema enum의 'BEAMFORCESIP' 오타가 'BEAMFORCESTP'로 정정됨(BEAMFORCESIP 0회, BEAMFORCESTP 3회). MAPI-2484 A-6 반영. 로컬 값 수정 없음, ⚠️ 주석만 해결 기록으로 교체",
+      "note": "✅ 해결 확인(2026-09-06): JSON Schema enum의 'BEAMFORCESIP' 오타가 'BEAMFORCESTP'로 정정됨(BEAMFORCESIP 0회, BEAMFORCESTP 3회). 오류 제보 반영. 로컬 값 수정 없음, ⚠️ 주석만 해결 기록으로 교체",
       "updated_at": "2026-09-01T04:07:27Z"
     },
     "10. Beam Stress": {
@@ -2147,7 +2147,7 @@
     "39. Wall Force": {
       "article_id": "49513398732953",
       "verified_at": "2026-08-26",
-      "note": "완전 일치 (기존 SECT_POSITION/PARTS 삭제 관련 MAPI-2012 주석 정확함 재확인)"
+      "note": "완전 일치 (기존 SECT_POSITION/PARTS 삭제 관련 주석 정확함 재확인)"
     }
   },
   "21_POST_StoryTables.md": {

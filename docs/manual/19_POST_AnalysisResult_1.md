@@ -900,7 +900,7 @@ for row in table.get("DATA", []):
 > `"BEAMFORCEBYMAX"`로 잘못 적혀 있던 것(Request Example·Specifications 표는 원래부터
 > `"BEAMFORCEVBM"`)이 2026-09-01 원문 갱신으로 정정됐다 — 재확인 시 원문에 `BEAMFORCEBYMAX`
 > 0회, enum은 `["BEAMFORCE", "BEAMFORCEVBM"]`. 위 표는 처음부터 예제·표 기준이었으므로 수정
-> 없음. 2026-08-27 오류 제보(Jira `MAPI-2484`) 반영 결과로 보인다.
+> 없음. 2026-08-27 오류 제보 반영 결과로 보인다.
 
 ### 부재 위치(Parts) 지정 — 8~12절 공통
 
@@ -1038,7 +1038,7 @@ for row in table.get("DATA", []):
 > ✅ **2026-09-06 해결 확인** (article id `36011373070745`): 공식 JSON Schema enum에만
 > `"BEAMFORCESIP"`로 잘못 적혀 있던 것(Request Example·Specifications 표는 원래부터
 > `"BEAMFORCESTP"`)이 2026-09-01 원문 갱신으로 정정됐다 — 재확인 시 원문에 `BEAMFORCESIP` 0회,
-> `BEAMFORCESTP` 3회. 위 표는 수정 없음. 2026-08-27 오류 제보(Jira `MAPI-2484`) 반영 결과로 보인다.
+> `BEAMFORCESTP` 3회. 위 표는 수정 없음. 2026-08-27 오류 제보 반영 결과로 보인다.
 > `PARTS`(8절 공통 파라미터 참조, 값 예: `"PartI"`/`"PartJ"`)도 이 테이블에 적용되나 이전
 > 버전에는 누락되어 있었음.
 

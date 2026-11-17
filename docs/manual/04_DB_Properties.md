@@ -2474,7 +2474,7 @@ midas_api("POST", "/db/ESSF", essf_data)
 > ✅ **2026-09-06 해결 확인:** 원문 Specifications 표 4번 Key가 `"RABAR_CODENAME"`(E 누락 오타)
 > 이던 것이 2026-09-01 원문 갱신으로 `"REBAR_CODENAME"`으로 정정됐다(재확인 시
 > `REBAR_CODENAME` 3회·`RABAR_CODENAME` 0회). 우리 문서는 처음부터 정상 표기였다.
-> 2026-08-27 오류 제보(Jira `MAPI-2484`) 반영 결과로 보인다.
+> 2026-08-27 오류 제보 반영 결과로 보인다.
 >
 > ⚠️ **스키마에만 존재하는 필드(설명 근거 없음).** `DATA1.DESIGN` 하위
 > `bLAMBDA`/`dLAMBDA`/`bTRANSFER`/`dTRANSFERFCI` 4개 필드는 JSON Schema에만 있고 원문

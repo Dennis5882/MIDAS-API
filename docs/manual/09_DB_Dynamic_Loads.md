@@ -690,7 +690,7 @@ print("SPFC DELETE/1:", resp.status_code)
 > [Response Spectrum Load Cases](https://support.midasuser.com/hc/en-us/articles/35963719599641)).
 >
 > ✅ **2026-09-28 공식 반영 확인:** 원문 Specifications 표의 편심 목록 Key가 `"Along"`에서 `"ALONG"`으로
-> 정정되어 표와 스키마가 일치한다(Jira `MAPI-2600` SPLC 항목 반영). 위 표는 그대로 유효하다.
+> 정정되어 표와 스키마가 일치한다(오류 제보 반영). 위 표는 그대로 유효하다.
 >
 > ✅ **2026-09-18 라이브 검증으로 스키마 표기가 맞음이 확인됐다.** `aACCECC_ECCEN_LIST[0].ALONG`
 > (대문자)로 보낸 값이 그대로 저장·조회됐다. 원문 표의 `"Along"` 표기가 오류이며, 위 표는

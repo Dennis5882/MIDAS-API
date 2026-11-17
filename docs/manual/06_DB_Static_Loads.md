@@ -1106,9 +1106,8 @@ midas_api("DELETE", "/db/PNLD", {"Assign": {"2": {}}})
 > "ELEM_TYPE" is "IN_GROUP"` — `IN_GROUP`은 `SELECT_TYPE`의 값이지 `ELEM_TYPE`의 값이 아니므로
 > 의미상 성립하지 않는다). 한글·영문 페이지 모두 동일하게 오염되어 있다. 위 표는 실제 스키마와
 > Specifications 표 9번 설명(`SELECT_TYPE` = Element Selection Type)에 근거해 `SELECT_TYPE`으로
-> 정정해 적었다. Jira `MAPI-2485` B-1 코멘트(2026-09-27)에서 이 행은 "표기가 맞으니 그대로 두면
-> 된다"고 확인해준 바로 그 행이 이번 편집으로 새로 깨진 것 — 잔여 오류 제보 대상(2026-09-28 재제보
-> 예정).
+> 정정해 적었다. 2026-09-27 오류 제보 시 이 행은 "표기가 맞으니 그대로 두면
+> 된다"고 확인했던 바로 그 행인데 이번 편집으로 새로 깨진 것 — 잔여 오류 제보 대상.
 
 ### Python 예제
 
@@ -2074,7 +2073,7 @@ midas_api("DELETE", "/db/SSEIS", {"Assign": {"2": {}}})
 > 추가로 **`IINHERENT_TORSION`(I 두 번) · `NHERENT_TORSION`(I 누락) 오타도 User Type 아티클
 > (`58908928576153`, ko·en-us 공통)에 그대로 남아 있다** — JSON Schema 설명 문구에
 > `IINHERENT_TORSION` 1회, 두 예제 중 하나에 `NHERENT_TORSION` 1회. 2026-09-18 라이브 검증(Gen NX
-> 2026, Build 09/24/2026)에서 이 오타 키들은 **HTTP 201을 받지만 조용히 무시되고** GET에는 정상 필드
+> 2026)에서 이 오타 키들은 **HTTP 201을 받지만 조용히 무시되고** GET에는 정상 필드
 > `INHERENT_TORSION`이 기본값 `false`로 남는 것을 확인했다 — 오타 키를 그대로 복사한 사용자는 옵션이
 > 켜졌다고 오해하게 된다. 정상 키로 보내면 `true`가 그대로 저장된다.
 >
@@ -2084,8 +2083,8 @@ midas_api("DELETE", "/db/SSEIS", {"Assign": {"2": {}}})
 > 쓰려면 라이브 검증 결과를 받아올 것.
 >
 > 아래 표와 예제는 **USER TYPE JSON Schema**(`SEISMIC_FORCE` 배열, `INHERENT_TORSION` boolean
-> 기본값 `false`)로 계속 뒷받침되므로 그대로 유지한다. Jira `MAPI-2484` A-8로 계속 추적 중이며
-> (2026-09-28 재오픈), 원문이 완전히 복구되면 재대조가 필요하다. `scripts/manual_sync`는
+> 기본값 `false`)로 계속 뒷받침되므로 그대로 유지한다. 오류 제보 건으로 계속 추적 중이며,
+> 원문이 완전히 복구되면 재대조가 필요하다. `scripts/manual_sync`는
 > `SYNC_LOCALE`(= **en-us**) 본문만 받아오므로 KDS ko 오염은 받아온 본문에는 나타나지 않는다 —
 > 아티클 레벨 `updated_at`이 로케일별 타임스탬프의 최댓값이라 ko 편집만으로도 changed 플래그가 떠서
 > 발견된 경우다. `check_diff.py`의 `locale_note`가 `en-us did NOT` 판정을 내주므로, 그런 건은
