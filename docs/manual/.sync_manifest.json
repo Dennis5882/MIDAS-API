@@ -1,10 +1,10 @@
 {
- "article_count": 650,
+ "article_count": 651,
  "articles": {
   "33016922742937": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/33016922742937-MIDAS-API-Online-Manual",
    "title": "MIDAS API Online Manual",
-   "updated_at": "2026-10-13T02:39:31Z"
+   "updated_at": "2026-11-23T04:25:41Z"
   },
   "35409287717657": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/35409287717657-Main-Control-Data",
@@ -1329,7 +1329,7 @@
   "36004497508505": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/36004497508505-Plate-Forces-Moments-Moving-Tracer-Display",
    "title": "Plate Forces/Moments - Moving Tracer Display",
-   "updated_at": "2025-03-13T01:55:22Z"
+   "updated_at": "2026-11-23T04:23:18Z"
   },
   "36005757391385": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/36005757391385-Beam-Stresses-Moving-Tracer-Display",
@@ -2194,7 +2194,7 @@
   "49514751862425": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49514751862425-Story-Irregularity-Check-Parameter",
    "title": "Story Irregularity Check Parameter",
-   "updated_at": "2026-07-30T06:12:50Z"
+   "updated_at": "2026-11-23T04:23:17Z"
   },
   "49514773501721": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/49514773501721-Story-Properties",
@@ -2904,7 +2904,7 @@
   "57711427405209": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/57711427405209-KDS-41-20-2022",
    "title": "KDS 41 20 : 2022",
-   "updated_at": "2026-08-06T08:13:02Z"
+   "updated_at": "2026-11-17T00:40:16Z"
   },
   "57711471216537": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/57711471216537-AIK-SRC2K",
@@ -2994,7 +2994,7 @@
   "58078226966169": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/58078226966169-DESIGN-PSC-AASHTO-LRFD24-DIDP-VBEAM-Design-Position-for-Virtual-Beam",
    "title": "DESIGN/PSC/AASHTO-LRFD24/DIDP-VBEAM : Design Position for Virtual Beam",
-   "updated_at": "2026-05-19T08:50:49Z"
+   "updated_at": "2026-11-16T23:46:20Z"
   },
   "58078690517017": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/58078690517017-DESIGN-PSC-AASHTO-LRFD24-DIOP-Output-Position",
@@ -3064,7 +3064,7 @@
   "58337271509017": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/58337271509017-DESIGN-PSC-AASHTO-LRFD24-TABLE-Check-tensile-stress-for-Prestressing-tendons",
    "title": "DESIGN/PSC/AASHTO-LRFD24/TABLE : Check tensile stress for Prestressing tendons",
-   "updated_at": "2026-05-27T07:07:36Z"
+   "updated_at": "2026-11-17T01:42:58Z"
   },
   "58381619465241": {
    "html_url": "https://support.midasuser.com/hc/en-us/articles/58381619465241-RATING-PSC-AASHTO-LRFR19-RPSC-ANAL-Perform-Rating",
@@ -3250,6 +3250,11 @@
    "html_url": "https://support.midasuser.com/hc/en-us/articles/59870138081177-Bridge-Girder-Diagrams",
    "title": "Bridge Girder Diagrams",
    "updated_at": "2026-09-28T02:29:48Z"
+  },
+  "64608751935897": {
+   "html_url": "https://support.midasuser.com/hc/en-us/articles/64608751935897-Section-Properties-Virtual-Section-for-Design",
+   "title": "Section Properties - Virtual Section for Design",
+   "updated_at": "2026-11-23T01:58:50Z"
   }
  },
  "section_id": "30087500371097"

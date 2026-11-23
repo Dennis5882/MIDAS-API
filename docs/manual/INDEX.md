@@ -13,7 +13,7 @@
 | [01_DOC.md](./01_DOC.md) | DOC | 문서 생성·열기·저장·닫기·해석 실행 (11개) |
 | [02_DB_Project_Structure.md](./02_DB_Project_Structure.md) | DB – Project / Structure | 프로젝트 정보·단위·구조타입·그룹·층 데이터 (15개) |
 | [03_DB_Node_Element.md](./03_DB_Node_Element.md) | DB – Node / Element | 노드·요소·로컬축·도메인 (6개) |
-| [04_DB_Properties.md](./04_DB_Properties.md) | DB – Properties | 재료·단면·두께·힌지·섬유단면 (32개) |
+| [04_DB_Properties.md](./04_DB_Properties.md) | DB – Properties | 재료·단면·두께·힌지·섬유단면 (33개) |
 | [05_DB_Boundary.md](./05_DB_Boundary.md) | DB – Boundary | 지지·스프링·링크·해제·내진장치 (24개) |
 | [06_DB_Static_Loads.md](./06_DB_Static_Loads.md) | DB – Static Loads | 정적하중케이스·자중·보하중·바닥하중·풍하중·지진하중 (21개) |
 | [07_DB_Temperature_Prestress.md](./07_DB_Temperature_Prestress.md) | DB – Temperature / Prestress | 온도·텐던·PS 하중 (12개) |
@@ -168,6 +168,7 @@ MIDAS NX 파일에 저장되는 데이터. MCT/MGT 기능과 동일한 역할.
 | 30 | `/db/GRDP` | Group Damping |
 | 31 | `/db/ESSF` | Element Stiffness Scale Factor |
 | 32 | `/db/MATD` | Modify Concrete Materials |
+| 33 | `/db/SECV` | Virtual Section for Design |
 
 ### Boundary
 

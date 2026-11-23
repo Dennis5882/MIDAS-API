@@ -2,7 +2,7 @@
 
 > **Source**: [MIDAS API Online Manual](https://support.midasuser.com/hc/ko/articles/33016922742937-MIDAS-API-Online-Manual)  
 > **Sync date**: 2026-07-12  
-> **Endpoints covered**: `/db/MATL`, `/db/MATL-M1`, `/db/IMFM`, `/db/IMFM-M1`, `/db/TDMF`, `/db/TDMT`, `/db/TDME`, `/db/EDMP`, `/db/TMAT`, `/db/EPMT`, `/db/EPMT-M1`, `/db/SECT`, `/db/THIK`, `/db/TSGR`, `/db/SECF`, `/db/RPSC`, `/db/STRPSSM`, `/db/PSSF`, `/db/VBEM`, `/db/VSEC`, `/db/EWSF`, `/db/IEHC`, `/db/IEHG`, `/db/IEHG-BEAM-M1`, `/db/IEHG-TRUSS-M1`, `/db/IEHG-GL-M1`, `/db/IEHG-PSS-M1`, `/db/FIMP`, `/db/FIBR`, `/db/GRDP`, `/db/ESSF`, `/db/MATD`
+> **Endpoints covered**: `/db/MATL`, `/db/MATL-M1`, `/db/IMFM`, `/db/IMFM-M1`, `/db/TDMF`, `/db/TDMT`, `/db/TDME`, `/db/EDMP`, `/db/TMAT`, `/db/EPMT`, `/db/EPMT-M1`, `/db/SECT`, `/db/THIK`, `/db/TSGR`, `/db/SECF`, `/db/RPSC`, `/db/STRPSSM`, `/db/PSSF`, `/db/VBEM`, `/db/VSEC`, `/db/EWSF`, `/db/IEHC`, `/db/IEHG`, `/db/IEHG-BEAM-M1`, `/db/IEHG-TRUSS-M1`, `/db/IEHG-GL-M1`, `/db/IEHG-PSS-M1`, `/db/FIMP`, `/db/FIBR`, `/db/GRDP`, `/db/ESSF`, `/db/MATD`, `/db/SECV`
 
 ---
 
@@ -42,6 +42,7 @@
 | 30 | [`/db/GRDP`](#30-dbgrdp) | Group Damping | POST, GET, PUT, DELETE |
 | 31 | [`/db/ESSF`](#31-dbessf) | Element Stiffness Scale Factor | POST, GET, PUT, DELETE |
 | 32 | [`/db/MATD`](#32-dbmatd) | Modify Concrete Materials | GET, PUT |
+| 33 | [`/db/SECV`](#33-dbsecv) | Virtual Section for Design | POST, GET, PUT, DELETE |
 
 ---
 
@@ -2563,6 +2564,137 @@ matd_data = {
     }
 }
 midas_api("PUT", "/db/MATD/1", matd_data)
+```
+
+---
+
+## 33. `/db/SECV`
+
+> **Virtual Section for Design** — 설계용 가상 보(Virtual Beam)에 지정하는 합성 단면을 정의합니다. 키는 기존 가상 보 번호(`/db/VBEM`)와 일치해야 합니다.
+
+- **URL**: `{base url}/db/SECV`
+- **Methods**: `POST`, `GET`, `PUT`, `DELETE`
+- **Source**: [Section Properties - Virtual Section for Design ↗](https://support.midasuser.com/hc/en-us/articles/64608751935897-Section-Properties-Virtual-Section-for-Design)
+
+> ⚠️ 공식 아티클은 `SECTTYPE`을 `"COMPOSITE"` 한 가지로만 허용하며, `SHAPE`는 `GI`/`CI`/`CT` 3종입니다. `SECT_AFTER.SLAB`은 공식 Specifications 표에 `Array [any]`로 표기되나 JSON Schema는 `[Bc, tc, Hh[, Sg]]` 3~4개 number로 정의하여 스키마 기준으로 적었습니다. `/db/SECT`의 `COMPOSITE`와 필드 구성이 유사하지만 별도 엔드포인트입니다. 이 엔드포인트의 실제 API 동작은 검증하지 않았습니다.
+
+### Specifications
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Section Data Type — `"COMPOSITE"` 고정 | `"SECTTYPE"` | String | - | **Required** |
+| 2 | Section Name (최소 1자) | `"SECT_NAME"` | String | - | **Required** |
+| 3 | Section Data - Before (합성 전: 거더) | `"SECT_BEFORE"` | Object | - | Optional |
+| 3.1 | └ Cardinal Point | `"OFFSET_PT"` | String | - | Optional |
+| 3.2 | └ Offset Center (0: Centroid, 1: Center of Section) | `"OFFSET_CENTER"` | Integer | - | Optional |
+| 3.3 | └ User Offset Reference (0: Centroid, 1: Extreme Fiber(s)) | `"USER_OFFSET_REF"` | Integer | - | Optional |
+| 3.4 | └ Horizontal Offset Option (0: Extreme Fiber, 1: User-defined) | `"HORZ_OFFSET_OPT"` | Integer | - | Optional |
+| 3.5 | └ User Offset Y at I | `"USERDEF_OFFSET_YI"` | Number | - | Optional |
+| 3.6 | └ User Offset Y at J | `"USERDEF_OFFSET_YJ"` | Number | - | Optional |
+| 3.7 | └ Vertical Offset Option (0: Extreme Fiber, 1: User-defined) | `"VERT_OFFSET_OPT"` | Integer | - | Optional |
+| 3.8 | └ User Offset Z at I | `"USERDEF_OFFSET_ZI"` | Number | - | Optional |
+| 3.9 | └ User Offset Z at J | `"USERDEF_OFFSET_ZJ"` | Number | - | Optional |
+| 3.10 | └ Consider Shear Deformation | `"USE_SHEAR_DEFORM"` | Boolean | false | Optional |
+| 3.11 | └ Consider Warping Effect | `"USE_WARPING_EFFECT"` | Boolean | false | Optional |
+| 3.12 | └ Hambly Equivalent Section | `"USE_HAMBLY_EQ"` | Boolean | false | Optional |
+| 3.13 | └ Girder Shape — `"GI"`: Steel Composite I, `"CI"`: PSC Composite I, `"CT"`: PSC Composite T | `"SHAPE"` | String | - | **Required** (`SECT_BEFORE` 지정 시) |
+| 3.14 | └ Section Data Type | `"DATATYPE"` | Integer | - | Optional |
+| 3.15 | └ Section Type | `"TYPE"` | Integer | - | Optional |
+| 3.16 | └ I-End Girder Section | `"SECT_I"` | Object | - | Optional |
+| 3.16.1 | 　　└ I-End Section Dimensions (GI: `[B1, B2, B3, B4, H, t1, t2, tw]`) | `"vSIZE"` | Array[Number] | - | Optional |
+| 3.16.2 | 　　└ PSC Dimensions A | `"vSIZE_PSC_A"` | Array[Number] | - | Optional |
+| 3.16.3 | 　　└ PSC Dimensions B | `"vSIZE_PSC_B"` | Array[Number] | - | Optional |
+| 3.16.4 | 　　└ PSC Dimensions C | `"vSIZE_PSC_C"` | Array[Number] | - | Optional |
+| 3.16.5 | 　　└ PSC Dimensions D | `"vSIZE_PSC_D"` | Array[Number] | - | Optional |
+| 3.16.6 | 　　└ Use Symmetric Calculation | `"USE_SYM_CALC"` | Boolean | - | Optional |
+| 3.16.7 | 　　└ Section Stiffness | `"SODSTIFF"` | Object | - | Optional |
+| 3.16.7.1 | 　　　　└ Torsional Stiffness Number | `"TOSTIFNOS"` | Integer | - | Optional |
+| 3.16.7.2 | 　　　　└ Deck Stiffness Number | `"DECKSTIFFNO"` | Integer | - | Optional |
+| 3.17 | └ J-End Girder Section | `"SECT_J"` | Object | - | Optional |
+| 3.17.1 | 　　└ J-End Section Dimensions | `"vSIZE"` | Array[Number] | - | Optional |
+| 3.18 | └ Y Variation | `"Y_VAR"` | Integer | - | Optional |
+| 3.19 | └ Z Variation | `"Z_VAR"` | Integer | - | Optional |
+| 3.20 | └ Source Section Type | `"SRC_TYPE"` | Integer | - | Optional |
+| 3.21 | └ Modulus Ratio, Steel to Concrete | `"MATL_ELAST"` | Number | - | Optional |
+| 3.22 | └ Density Ratio, Steel to Concrete | `"MATL_DENS"` | Number | - | Optional |
+| 3.23 | └ Poisson's Ratio of Steel | `"MATL_POIS_S"` | Number | - | Optional |
+| 3.24 | └ Poisson's Ratio of Concrete | `"MATL_POIS_C"` | Number | - | Optional |
+| 3.25 | └ Material Stiffness Factor | `"MATL_STIF_FACTOR"` | Number | - | Optional |
+| 3.26 | └ Thermal Expansion Ratio | `"MATL_THERMAL"` | Number | - | Optional |
+| 3.27 | └ Stiffness Calculation Option | `"CALC_STIFF_OPT"` | Integer | - | Optional |
+| 3.28 | └ Multiple Modulus Options | `"USE_MULTI_ELAST"` | Boolean | false | Optional |
+| 3.29 | └ PSC Shape Option 1 | `"PSC_OPT1"` | String | - | Optional |
+| 3.30 | └ PSC Shape Option 2 | `"PSC_OPT2"` | String | - | Optional |
+| 3.31 | └ Joint Options | `"JOINT"` | Array[Boolean] | - | Optional |
+| 3.32 | └ Long-Term Es/Ec (`USE_MULTI_ELAST`가 true일 때) | `"LONGTERM_ESEC"` | Number | - | Optional |
+| 3.33 | └ Shrinkage Es/Ec (`USE_MULTI_ELAST`가 true일 때) | `"SHRINK_ESEC"` | Number | - | Optional |
+| 4 | Section Data - After (합성 후: 슬래브) — `SHAPE`가 `CI`/`CT`이면 필수 | `"SECT_AFTER"` | Object | - | Optional |
+| 4.1 | └ After-Composite Section | `"SECT_I"` | Object | - | Optional |
+| 4.1.1 | 　　└ After-Composite I-End Dimensions (GI: `[Sg, Top, Bot]`) | `"vSIZE"` | Array[Number] | - | Optional |
+| 4.2 | └ Slab Dimensions `[Bc, tc, Hh[, Sg]]` (3~4개) | `"SLAB"` | Array[Number] | - | **Required** (`CI`/`CT`) |
+| 5 | Composite J-End (Tapered) | `"COMPOSITE_J"` | Object | - | Optional |
+| 5.1 | └ Base Section Name | `"DB_NAME"` | String | - | Optional |
+| 5.2 | └ J-End Section Name | `"SECT_NAME"` | String | - | Optional |
+| 5.3 | └ J-End Composite Dimensions | `"vSIZE"` | Array[Number] | - | Optional |
+
+### Request / Response JSON
+
+```json
+{
+  "Assign": {
+    "1": {
+      "SECTTYPE": "COMPOSITE",
+      "SECT_NAME": "VB_D1",
+      "SECT_BEFORE": {
+        "OFFSET_PT": "CC",
+        "OFFSET_CENTER": 0, "USER_OFFSET_REF": 0,
+        "HORZ_OFFSET_OPT": 0, "USERDEF_OFFSET_YI": 0,
+        "VERT_OFFSET_OPT": 0, "USERDEF_OFFSET_ZI": 0,
+        "USE_SHEAR_DEFORM": true, "USE_WARPING_EFFECT": false, "USE_HAMBLY_EQ": false,
+        "SHAPE": "CI",
+        "SECT_I": {
+          "vSIZE_PSC_A": [0, 0.1016, 0.127, 0.0508, 0, 1.1684, 0.2286, 0, 0, 0.2032],
+          "vSIZE_PSC_B": [0.1016, 0.6096, 0.4318, 0, 0.3302, 0, 0],
+          "vSIZE_PSC_C": [0.1016, 0.127, 0.0508, 0, 1.1684, 0.2286, 0, 0, 0.2032],
+          "vSIZE_PSC_D": [0.1016, 0.6096, 0.4318, 0, 0.3302, 0, 0]
+        },
+        "MATL_ELAST": 1.173905142649464, "MATL_DENS": 1,
+        "MATL_POIS_S": 0.167, "MATL_POIS_C": 0.167, "MATL_THERMAL": 1,
+        "USE_MULTI_ELAST": false, "PSC_OPT1": "", "PSC_OPT2": "",
+        "JOINT": [false, true, false, false, false, true, false, false, false]
+      },
+      "SECT_AFTER": { "SLAB": [2.5, 0.22, 0.0500003333333333, 0] }
+    }
+  }
+}
+```
+
+> GET 응답은 최상위 키가 `"SECV"`이고 그 아래는 `Assign`과 동일한 구조입니다.
+
+### Python 예제
+
+```python
+# 가상 보 1번에 PSC Composite I 설계용 단면 지정 (사전에 /db/VBEM 으로 가상 보 정의 필요)
+secv_data = {
+    "Assign": {
+        "1": {
+            "SECTTYPE": "COMPOSITE", "SECT_NAME": "VB_D1",
+            "SECT_BEFORE": {
+                "OFFSET_PT": "CC", "SHAPE": "CI",
+                "SECT_I": {
+                    "vSIZE_PSC_A": [0, 0.1016, 0.127, 0.0508, 0, 1.1684, 0.2286, 0, 0, 0.2032],
+                    "vSIZE_PSC_B": [0.1016, 0.6096, 0.4318, 0, 0.3302, 0, 0],
+                    "vSIZE_PSC_C": [0.1016, 0.127, 0.0508, 0, 1.1684, 0.2286, 0, 0, 0.2032],
+                    "vSIZE_PSC_D": [0.1016, 0.6096, 0.4318, 0, 0.3302, 0, 0]
+                },
+                "MATL_ELAST": 1.1739, "MATL_DENS": 1,
+                "MATL_POIS_S": 0.167, "MATL_POIS_C": 0.167, "MATL_THERMAL": 1
+            },
+            "SECT_AFTER": {"SLAB": [2.5, 0.22, 0.05, 0]}
+        }
+    }
+}
+midas_api("POST", "/db/SECV", secv_data)
 ```
 
 ---
