@@ -9,7 +9,7 @@
 > **인증 헤더:** `MAPI-Key: <발급된 키>`  
 > **출처:** [MIDAS API Online Manual](https://support.midasuser.com/hc/en-us/articles/33016922742937)
 
-이 파트는 **시간이력(Time History) · 수화열(Heat of Hydration) · 푸시오버(Pushover)** 해석 결과를 다루며, 총 **28개 엔드포인트**로 구성됩니다. 앞선 19~21장과 달리 이 파트의 엔드포인트는 **서로 다른 4개의 URI 그룹**에 속하므로, 그룹별로 요청 구조가 다릅니다.
+이 파트는 **시간이력(Time History) · 수화열(Heat of Hydration) · 푸시오버(Pushover)** 해석 결과를 다루며, 총 **43개 엔드포인트**로 구성됩니다. 앞선 19~21장과 달리 이 파트의 엔드포인트는 **8개 그룹**에 속하므로, 그룹별로 요청 구조가 다릅니다.
 
 | 그룹 | 내용 | 공통 URI | 메서드 | 엔드포인트 수 |
 |------|------|----------|--------|:---:|
@@ -17,8 +17,12 @@
 | **B** | 비탄성 힌지(Inelastic Hinge) 시간이력 결과 테이블 | `POST {base url}/post/TABLE` | `POST` | 9 |
 | **C** | 수화열 해석 결과 그래픽 표시 | `POST {base url}/view/RESULTGRAPHIC` | `POST` | 5 |
 | **D** | 시간이력 스마트 그래프 정의 DB | `{base url}/db/THR*` | `POST · GET · PUT · DELETE` | 4 |
+| **E** | 수화열 해석 결과 그래프 정의 DB | `{base url}/db/HHND` | `POST · GET · PUT · DELETE` | 1 |
+| **F** | 시간이력 결과 테이블 | `POST {base url}/post/TABLE` | `POST` | 4 |
+| **G** | Fiber Section 시간이력 결과 테이블 | `POST {base url}/post/TABLE` | `POST` | 5 |
+| **H** | 수화열 결과 테이블 | `POST {base url}/post/TABLE` | `POST` | 5 |
 
-### 전체 엔드포인트 요약 (28개)
+### 전체 엔드포인트 요약 (43개)
 
 | # | 절 | 엔드포인트(제목) | 그룹 | URI | 메서드 |
 |---|-----|------------------|:---:|-----|--------|
@@ -50,6 +54,23 @@
 | 26 | [D-2](#d-2-general-link-smart-graph--dbthrg) | General Link Smart Graph | D | `db/THRG` | POST·GET·PUT·DELETE |
 | 27 | [D-3](#d-3-inelastic-hinge-smart-graph--dbthri) | Inelastic Hinge Smart Graph | D | `db/THRI` | POST·GET·PUT·DELETE |
 | 28 | [D-4](#d-4-seismic-devices-smart-graph--dbthrs) | Seismic Devices Smart Graph | D | `db/THRS` | POST·GET·PUT·DELETE |
+| 29 | [E-1](#e-1-heat-of-hydration-result-graph--dbhhnd) | Heat of Hydration Result Graph | E | `db/HHND` | POST·GET·PUT·DELETE |
+| 30 | [F-1](#f-1-displacement--velocity--acceleration) | Displacement / Velocity / Acceleration | F | `post/TABLE` | POST |
+| 31 | [F-2](#f-2-beam-force-time-history) | Beam Force (Time History) | F | `post/TABLE` | POST |
+| 32 | [F-3](#f-3-truss-force-time-history) | Truss Force (Time History) | F | `post/TABLE` | POST |
+| 33 | [F-4](#f-4-general-link-time-history) | General Link (Time History) | F | `post/TABLE` | POST |
+| 34 | [G-1](#g-1-fiber-section-estimate-yield-strength) | Fiber Section Estimate Yield Strength | G | `post/TABLE` | POST |
+| 35 | [G-2](#g-2-fiber-section-elastic-modulus-retention-rate) | Fiber Section Elastic Modulus Retention Rate ᴶ⁾ | G | `post/TABLE` | POST |
+| 36 | [G-3](#g-3-fiber-section-maximum-strain-of-the-cell) | Fiber Section Maximum Strain of The Cell ᴶ⁾ | G | `post/TABLE` | POST |
+| 37 | [G-4](#g-4-fiber-section-event-step) | Fiber Section Event Step ᴶ⁾ | G | `post/TABLE` | POST |
+| 38 | [G-5](#g-5-fiber-section-average-compression-strain) | Fiber Section Average Compression Strain ᴶ⁾ | G | `post/TABLE` | POST |
+| 39 | [H-1](#h-1-stress-heat-of-hydration-table) | Stress (Heat of Hydration Table) | H | `post/TABLE` | POST |
+| 40 | [H-2](#h-2-temperature-heat-of-hydration-table) | Temperature (Heat of Hydration Table) | H | `post/TABLE` | POST |
+| 41 | [H-3](#h-3-displacement-heat-of-hydration-table) | Displacement (Heat of Hydration Table) | H | `post/TABLE` | POST |
+| 42 | [H-4](#h-4-tensile-stress-heat-of-hydration-table) | Tensile Stress (Heat of Hydration Table) | H | `post/TABLE` | POST |
+| 43 | [H-5](#h-5-pipe-cooling-nodal-temperature) | Pipe Cooling Nodal Temperature | H | `post/TABLE` | POST |
+
+> ᴶ⁾ = MIDAS Civil NX JP 버전 전용 ([jp_only.json](./jp_only.json))
 
 ---
 
@@ -2515,7 +2536,7 @@ print("정의된 힌지 그래프 개수:", len(res.get("THRI", {})))
 
 > ⚠️ 2026-08-26 확인 (article id `35992460196121`): 공식 Request 예제의 3번째 레코드는
 > `"TYPE_RES": 4`를 사용하는데, 이 값은 공식 Specifications 표의 `TYPE_RES` enum(`0`/`2`/`3`/`5`/`7`)
-> 어디에도 없습니다(공식 원문 자체의 누락/모순으로 보이며, 오류제보 대상). 이 저장소는 예제의
+> 어디에도 없습니다(공식 원문 자체의 누락/모순으로 보입니다). 이 저장소는 예제의
 > 실제 값(`4`)을 그대로 유지합니다.
 
 #### Request / Response JSON
@@ -2584,6 +2605,1668 @@ requests.post(f"{BASE_URL}/db/THRS", json=payload, headers=HEADERS)
 res = requests.get(f"{BASE_URL}/db/THRS", headers=HEADERS).json()
 print("정의된 장치 그래프:", list(res.get("THRS", {}).keys()))
 requests.delete(f"{BASE_URL}/db/THRS/3", headers=HEADERS)
+```
+
+---
+
+## 그룹 E. 수화열 해석 결과 그래프 DB (`db/HHND`)
+
+### E-1. Heat of Hydration Result Graph – `db/HHND`
+
+> **기능:** 수화열 해석 결과 그래프로 추출할 대상(절점 또는 요소)과 응력 성분을 정의합니다.
+>
+> ⚠️ 2026-11-26 확인 (article id `35992577650841`, en-us·ko 본문 동일):
+> 공식 아티클 제목과 예제 이름은 "Heat of **Hydaration** Result Graph"로 되어 있으며(Hydration의
+> 오탈자), 이 문서는 정규화해 적었습니다. 그 밖의 원문 불일치는 아래와 같고 값은 원문 그대로입니다.
+>
+> - 예제 1번 레코드의 `"COMP": 100`은 표의 `COMP` enum(`0`~`6`)에 없는 값입니다.
+> - `NODE_KEY`와 `ELEM_KEY`가 모두 Required이며, `TYPE = 0`(절점) 예제는 `"ELEM_KEY": 0`을 보냅니다.
+> - JSON Schema의 `COMP` 설명은 `"TODO:Comp"`로 남아 있습니다.
+
+#### Input URI
+
+```
+{base url}/db/HHND
+```
+
+#### Active Methods
+
+`POST` · `GET` · `PUT` · `DELETE`
+
+#### Specifications
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Name | `"NAME"` | String | - | **Required** |
+| 2 | Type · Select Node: 0 · Select Element: 1 | `"TYPE"` | Integer | `0` | Optional |
+| 3 | Node Number | `"NODE_KEY"` | Integer | - | **Required** |
+| 4 | Element Number | `"ELEM_KEY"` | Integer | - | **Required** |
+| 5 | Stress Component · Sig-xx: 0 · Sig-yy: 1 · Sig-zz: 2 · Max(P1,P2,P3): 3 · Sig-P1: 4 · Sig-P2: 5 · Sig-P3: 6 | `"COMP"` | Integer | `0` | Optional |
+
+#### Request / Response JSON
+
+**POST / PUT Request Body**
+
+```json
+{
+  "Assign": {
+    "1": {"NAME": "N1476-X", "NODE_KEY": 1476, "COMP": 100, "TYPE": 0, "ELEM_KEY": 0},
+    "2": {"NAME": "N1988-X", "NODE_KEY": 1988, "COMP": 0, "TYPE": 0, "ELEM_KEY": 0},
+    "3": {"NAME": "N2308-X", "NODE_KEY": 2308, "COMP": 0, "TYPE": 0, "ELEM_KEY": 0},
+    "4": {"NAME": "N2818-X", "NODE_KEY": 2818, "COMP": 0, "TYPE": 0, "ELEM_KEY": 0}
+  }
+}
+```
+
+> GET 응답의 최상위 키는 공식 JSON Schema 기준 `"HHND"`입니다.
+
+#### Python Example
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/gen"
+HEADERS = {"Content-Type": "application/json", "MAPI-Key": "YOUR_MAPI_KEY"}
+
+payload = {
+    "Assign": {
+        "1": {"NAME": "N1988-X", "NODE_KEY": 1988, "COMP": 0, "TYPE": 0, "ELEM_KEY": 0}
+    }
+}
+requests.post(f"{BASE_URL}/db/HHND", json=payload, headers=HEADERS)
+print(requests.get(f"{BASE_URL}/db/HHND", headers=HEADERS).json())
+```
+
+---
+
+## 그룹 F. 시간이력 결과 테이블 (`post/TABLE`)
+
+### 그룹 F 공통 파라미터
+
+`POST {base url}/post/TABLE` · Active Methods: `POST`
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Table Name · Response Table Title | `"TABLE_NAME"` | String | Empty | Optional |
+| 2 | Result Table Type | `"TABLE_TYPE"` | String | - | **Required** |
+| 3 | Result Table Save Path | `"EXPORT_PATH"` | String | - | Optional |
+| 4 | Response Unit Setting | `"UNIT"` | Object | System | Optional |
+| (1) | └ Force | `"FORCE"` | String | - | Optional |
+| (2) | └ Length | `"DIST"` | String | - | Optional |
+| (3) | └ Heat | `"HEAT"` | String | - | Optional |
+| (4) | └ Temperature | `"TEMP"` | String | - | Optional |
+| 5 | Response Number Format | `"STYLES"` | Object | System | Optional |
+| (1) | └ Number Format · "Default" · "Fixed" · "Scientific" · "General" | `"FORMAT"` | String | - | Optional |
+| (2) | └ Digit Place · 0 to 15 | `"PLACE"` | Integer | - | Optional |
+| 6 | Components of Result Table | `"COMPONENTS"` | Array[String] | All | Optional |
+
+---
+
+### F-1. Displacement / Velocity / Acceleration
+
+> **기능:** 시간이력 해석의 절점 변위·속도·절대가속도·상대가속도를 추출합니다.
+>
+> **Source**: [Displacement/Velocity/Acceleration - TH Result Table ↗](https://support.midasuser.com/hc/en-us/articles/36019076720921) (2026-11-26 문서화)
+>
+> ⚠️ Displacement 응답 예제의 최상위 키는 `"Example"`입니다. 다른 세 예제는 요청의 `TABLE_NAME`과 같은 키를 씁니다. 원문 그대로 두었습니다.
+>
+> ⚠️ JSON Schema의 최상위 Key가 `"RESULTGRAPHIC"`으로 되어 있으나 이 API는 `post/TABLE`이며 요청 예제는 `"Argument"`로 시작합니다.
+
+#### `TABLE_TYPE`
+
+| 값 | 설명 |
+| --- | --- |
+| `"THISDISPLACEMENT"` | Displacement |
+| `"THISVELOCITY"` | Velocity |
+| `"THISABSOLUTEACCEL"` | Absolute Acceleration |
+| `"THISRELATIVEACCEL"` | Relative Acceleration |
+
+#### Response HEAD
+
+`["Index", "Node", "Load", "DX/DX", "DX/Time/Step", "DY/DY", "DY/Time/Step", "DZ/DZ", "DZ/Time/Step", "RX/RX", "RX/Time/Step", "RY/RY", "RY/Time/Step", "RZ/RZ", "RZ/Time/Step"]`
+
+#### 전용 파라미터
+
+공통 파라미터(1~6번) 외에 아래 항목을 지원합니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 7 | Node / Element No. Input · Use Only One of the Three Methods | `"NODE_ELEMS"` | Object | All | Optional |
+| (1) | └ [Method 1: Specify Each ID] "KEYS": [101, 102, 103] | `"KEYS"` | Array[Integer] | - | Optional |
+| (1) | └ [Method 2: Specify ID Range] "TO": "101 to 105" | `"TO"` | String | - | Optional |
+| (1) | └ [Method 3: Specify Structure Group Name] "STRUCTURE_GROUP_NAME": "SG1" | `"STRUCTURE_GROUP_NAME"` | String | - | Optional |
+| 8 | Load Name & Type · Static Load Cases / NAME + "(ST)" · Load Combinations / NAME + "(CB)" / NAME + "(CB:all)" / NAME + "(CB:max)" / NAME + "(CB:min)" · Construction Stage / NAME + "(CS)" · Response Spectrum / NAME + "(RS)" · Moving Load / NAME + "(MV:all)" / NAME + "(MV:max)" / NAME + "(MV:min)" · Settlement Load / NAME + "(SM:all)" / NAME + "(SM:max)" / NAME + "(SM:min)" | `"LOAD_CASE_NAMES"` | Array[String] | All | Optional |
+
+#### Request / Response JSON
+
+**POST Request Body — Displacement**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "Displacement",
+    "TABLE_TYPE": "THISDISPLACEMENT",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "N", "DIST": "mm"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["Node", "Load", "DX/DX", "DX/Time/Step", "DY/DY", "DY/Time/Step", "DZ/DZ", "DZ/Time/Step", "RX/RX", "RX/Time/Step", "RY/RY", "RY/Time/Step", "RZ/RZ", "RZ/Time/Step"],
+    "NODE_ELEMS": {"KEYS": [10]},
+    "LOAD_CASE_NAMES": ["Elcent(TH:max)", "Elcent(TH:min)"]
+  }
+}
+```
+
+**POST Request Body — Velocity**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "Velocity",
+    "TABLE_TYPE": "THISVELOCITY",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "kN", "DIST": "m"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["Node", "Load", "DX/DX", "DX/Time/Step", "DY/DY", "DY/Time/Step", "DZ/DZ", "DZ/Time/Step", "RX/RX", "RX/Time/Step", "RY/RY", "RY/Time/Step", "RZ/RZ", "RZ/Time/Step"],
+    "NODE_ELEMS": {"KEYS": [10]},
+    "LOAD_CASE_NAMES": ["Elcent(TH:max)", "Elcent(TH:min)"]
+  }
+}
+```
+
+**POST Request Body — Absolute Acceleration**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "AbsoluteAcceleration",
+    "TABLE_TYPE": "THISABSOLUTEACCEL",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "kN", "DIST": "m"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["Node", "Load", "DX/DX", "DX/Time/Step", "DY/DY", "DY/Time/Step", "DZ/DZ", "DZ/Time/Step", "RX/RX", "RX/Time/Step", "RY/RY", "RY/Time/Step", "RZ/RZ", "RZ/Time/Step"],
+    "NODE_ELEMS": {"KEYS": [10]},
+    "LOAD_CASE_NAMES": ["Elcent(TH:max)", "Elcent(TH:min)"]
+  }
+}
+```
+
+**POST Request Body — Relative Acceleration**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "RelativeAcceleration",
+    "TABLE_TYPE": "THISRELATIVEACCEL",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "kN", "DIST": "m"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["Node", "Load", "DX/DX", "DX/Time/Step", "DY/DY", "DY/Time/Step", "DZ/DZ", "DZ/Time/Step", "RX/RX", "RX/Time/Step", "RY/RY", "RY/Time/Step", "RZ/RZ", "RZ/Time/Step"],
+    "NODE_ELEMS": {"KEYS": [10]},
+    "LOAD_CASE_NAMES": ["Elcent(TH:max)", "Elcent(TH:min)"]
+  }
+}
+```
+
+**POST Response Body — Displacement**
+
+```json
+{
+  "Example": {
+    "FORCE": "N",
+    "DIST": "mm",
+    "HEAD": ["Index", "Node", "Load", "DX/DX", "DX/Time/Step", "DY/DY", "DY/Time/Step", "DZ/DZ", "DZ/Time/Step", "RX/RX", "RX/Time/Step", "RY/RY", "RY/Time/Step", "RZ/RZ", "RZ/Time/Step"],
+    "DATA": [
+      ["1", "10", "Elcent(max)", "596.416378612533", "2.600000000000", "653.432783248434", "2.600000000000", "500.789364547815", "2.400000000000", "0.246347948089", "2.100000000000", "0.203149986317", "2.400000000000", "0.081485738031", "4.600000000000"],
+      ["2", "10", "Elcent(min)", "-793.410551124026", "2.100000000000", "-763.692215616999", "2.100000000000", "-669.752215933897", "2.000000000000", "-0.203251540673", "2.400000000000", "-0.244702299160", "2.100000000000", "-0.085078675200", "5.000000000000"]
+    ]
+  }
+}
+```
+
+**POST Response Body — Velocity**
+
+```json
+{
+  "Velocity": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "Node", "Load", "DX/DX", "DX/Time/Step", "DY/DY", "DY/Time/Step", "DZ/DZ", "DZ/Time/Step", "RX/RX", "RX/Time/Step", "RY/RY", "RY/Time/Step", "RZ/RZ", "RZ/Time/Step"],
+    "DATA": [
+      ["1", "10", "Elcent(max)", "4.195017337799", "2.400000000000", "4.122277736664", "2.400000000000", "6.590407848358", "2.200000000000", "2.059892416000", "2.500000000000", "2.164476156235", "2.200000000000", "0.510402321815", "4.400000000000"],
+      ["2", "10", "Elcent(min)", "-4.455899715424", "1.900000000000", "-4.244371891022", "1.900000000000", "-4.951992511749", "1.900000000000", "-2.163064241409", "2.200000000000", "-2.091286659241", "2.500000000000", "-0.613315522671", "4.900000000000"]
+    ]
+  }
+}
+```
+
+**POST Response Body — Absolute Acceleration**
+
+```json
+{
+  "AbsoluteAcceleration": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "Node", "Load", "DX/DX", "DX/Time/Step", "DY/DY", "DY/Time/Step", "DZ/DZ", "DZ/Time/Step", "RX/RX", "RX/Time/Step", "RY/RY", "RY/Time/Step", "RZ/RZ", "RZ/Time/Step"],
+    "DATA": [
+      ["1", "10", "Elcent(max)", "16.357984730419", "5.000000000000", "12.261610814314", "3.100000000000", "51.913863260315", "2.700000000000", "27.889919281006", "2.400000000000", "24.016025543213", "2.100000000000", "3.462173938751", "4.200000000000"],
+      ["2", "10", "Elcent(min)", "-15.169878465651", "2.600000000000", "-17.553484422682", "2.600000000000", "-48.886538532521", "2.300000000000", "-24.006631851196", "2.100000000000", "-28.005668640137", "2.400000000000", "-3.807588338852", "4.700000000000"]
+    ]
+  }
+}
+```
+
+**POST Response Body — Relative Acceleration**
+
+```json
+{
+  "RelativeAcceleration": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "Node", "Load", "DX/DX", "DX/Time/Step", "DY/DY", "DY/Time/Step", "DZ/DZ", "DZ/Time/Step", "RX/RX", "RX/Time/Step", "RY/RY", "RY/Time/Step", "RZ/RZ", "RZ/Time/Step"],
+    "DATA": [
+      ["1", "10", "Elcent(max)", "40.562923431396", "2.100000000000", "41.699108123779", "2.100000000000", "66.987838745117", "2.100000000000", "27.889919281006", "2.400000000000", "24.016025543213", "2.100000000000", "3.462173938751", "4.200000000000"],
+      ["2", "10", "Elcent(min)", "-33.107425689697", "4.500000000000", "-34.653484344482", "2.600000000000", "-55.846538543701", "2.300000000000", "-24.006631851196", "2.100000000000", "-28.005668640137", "2.400000000000", "-3.807588338852", "4.700000000000"]
+    ]
+  }
+}
+```
+
+#### Python Example
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/gen"
+HEADERS = {"Content-Type": "application/json", "MAPI-Key": "YOUR_MAPI_KEY"}
+
+payload = {
+    'Argument': {
+        'TABLE_NAME': 'Displacement',
+        'TABLE_TYPE': 'THISDISPLACEMENT',
+        'UNIT': {'FORCE': 'N', 'DIST': 'mm'},
+        'STYLES': {'FORMAT': 'Fixed', 'PLACE': 12},
+        'NODE_ELEMS': {'KEYS': [10]},
+        'LOAD_CASE_NAMES': ['Elcent(TH:max)', 'Elcent(TH:min)']
+    }
+}
+
+resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
+table = next(iter(resp.json().values()), {})  # 응답 최상위 키가 예제마다 다를 수 있음
+print(table.get("HEAD"))
+print(len(table.get("DATA", [])), "rows")
+```
+
+---
+
+### F-2. Beam Force (Time History)
+
+> **기능:** 시간이력 해석의 보 부재력을 추출합니다.
+>
+> **Source**: [Beam Force - TH Result Table ↗](https://support.midasuser.com/hc/en-us/articles/36020023438361) (2026-11-26 문서화)
+>
+> ⚠️ `PARTS` 값은 Specifications 표가 `"Part I"`처럼 공백을 넣어 적었고 요청 예제는 `"PartI"`/`"PartJ"`입니다. 19장과 같이 예제 표기를 씁니다.
+>
+> ⚠️ JSON Schema의 최상위 Key가 `"RESULTGRAPHIC"`으로 되어 있으나 이 API는 `post/TABLE`이며 요청 예제는 `"Argument"`로 시작합니다.
+
+#### `TABLE_TYPE`
+
+| 값 | 설명 |
+| --- | --- |
+| `"THISBEAMFORCE"` | Beam Force |
+
+#### Response HEAD
+
+`["Index", "Elem", "Load", "Part", "Axial/Force", "Axial/Time/Step", "Shear-y/Force", "Shear-y/Time/Step", "Shear-z/Force", "Shear-z/Time/Step", "Torsion/Force", "Torsion/Time/Step", "Moment-y/Force", "Moment-y/Time/Step", "Moment-z/Force", "Moment-z/Time/Step"]`
+
+#### 전용 파라미터
+
+공통 파라미터(1~6번) 외에 아래 항목을 지원합니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 7 | Node / Element No. Input · Use Only One of the Three Methods | `"NODE_ELEMS"` | Object | All | Optional |
+| (1) | └ [Method 1: Specify Each ID] "KEYS": [101, 102, 103] | `"KEYS"` | Array[Integer] | - | Optional |
+| (1) | └ [Method 2: Specify ID Range] "TO": "101 to 105" | `"TO"` | String | - | Optional |
+| (1) | └ [Method 3: Specify Structure Group Name] "STRUCTURE_GROUP_NAME": "SG1" | `"STRUCTURE_GROUP_NAME"` | String | - | Optional |
+| 8 | Load Name & Type · Static Load Cases / NAME + "(ST)" · Load Combinations / NAME + "(CB)" / NAME + "(CB:all)" / NAME + "(CB:max)" / NAME + "(CB:min)" · Construction Stage / NAME + "(CS)" · Response Spectrum / NAME + "(RS)" · Moving Load / NAME + "(MV:all)" / NAME + "(MV:max)" / NAME + "(MV:min)" · Settlement Load / NAME + "(SM:all)" / NAME + "(SM:max)" / NAME + "(SM:min)" | `"LOAD_CASE_NAMES"` | Array[String] | All | Optional |
+| 9 | Element Part Number · "Part I" · "Part 1/4" · "Part 2/4" · "Part 3/4" · "Part J" | `"PARTS"` | Array[String] | All | Optional |
+
+#### Request / Response JSON
+
+**POST Request Body — Beam Force**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "BeamForce",
+    "TABLE_TYPE": "THISBEAMFORCE",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "kN", "DIST": "m"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["Elem", "Load", "Part", "Axial/Force", "Axial/Time/Step", "Shear-y/Force", "Shear-y/Time/Step", "Shear-z/Force", "Shear-z/Time/Step", "Torsion/Force", "Torsion/Time/Step", "Moment-y/Force", "Moment-y/Time/Step", "Moment-z/Force", "Moment-z/Time/Step"],
+    "NODE_ELEMS": {"KEYS": [2]},
+    "LOAD_CASE_NAMES": ["Elcent(TH:max)", "Elcent(TH:min)"],
+    "PARTS": ["PartI", "PartJ"]
+  }
+}
+```
+
+**POST Response Body — Beam Force**
+
+```json
+{
+  "BeamForce": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "Elem", "Load", "Part", "Axial/Force", "Axial/Time/Step", "Shear-y/Force", "Shear-y/Time/Step", "Shear-z/Force", "Shear-z/Time/Step", "Torsion/Force", "Torsion/Time/Step", "Moment-y/Force", "Moment-y/Time/Step", "Moment-z/Force", "Moment-z/Time/Step"],
+    "DATA": [
+      ["1", "2", "Elcent(max)", "I", "3173.563394791860", "3.100000000000", "577.907231453647", "3.200000000000", "699.454595387362", "2.700000000000", "480.302606335478", "4.600000000000", "1568.113590604420", "2.600000000000", "1914.476246927190", "3.200000000000"],
+      ["2", "2", "Elcent(max)", "J", "3173.563394791860", "3.100000000000", "577.907231453647", "3.200000000000", "699.454595387362", "2.700000000000", "480.302606335478", "4.600000000000", "908.701560443666", "2.600000000000", "1346.071767485260", "2.100000000000"],
+      ["3", "2", "Elcent(min)", "I", "-3128.073061845680", "2.800000000000", "-718.715116909429", "2.700000000000", "-533.203881847885", "2.300000000000", "-495.045917555815", "5.000000000000", "-1710.453319273460", "5.000000000000", "-1743.503716441520", "2.600000000000"],
+      ["4", "2", "Elcent(min)", "J", "-3128.073061845680", "2.800000000000", "-718.715116909429", "2.700000000000", "-533.203881847885", "2.300000000000", "-495.045917555815", "5.000000000000", "-1330.633282797570", "2.100000000000", "-1030.259814079540", "2.600000000000"]
+    ]
+  }
+}
+```
+
+#### Python Example
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/gen"
+HEADERS = {"Content-Type": "application/json", "MAPI-Key": "YOUR_MAPI_KEY"}
+
+payload = {
+    'Argument': {
+        'TABLE_NAME': 'BeamForce',
+        'TABLE_TYPE': 'THISBEAMFORCE',
+        'UNIT': {'FORCE': 'kN', 'DIST': 'm'},
+        'STYLES': {'FORMAT': 'Fixed', 'PLACE': 12},
+        'NODE_ELEMS': {'KEYS': [2]},
+        'LOAD_CASE_NAMES': ['Elcent(TH:max)', 'Elcent(TH:min)'],
+        'PARTS': ['PartI', 'PartJ']
+    }
+}
+
+resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
+table = resp.json().get('BeamForce', {})
+print(table.get("HEAD"))
+print(len(table.get("DATA", [])), "rows")
+```
+
+---
+
+### F-3. Truss Force (Time History)
+
+> **기능:** 시간이력 해석의 트러스 부재력을 추출합니다.
+>
+> **Source**: [Truss Force - TH Result Table ↗](https://support.midasuser.com/hc/en-us/articles/36020089749913) (2026-11-26 문서화)
+>
+> ⚠️ JSON Schema의 최상위 Key가 `"RESULTGRAPHIC"`으로 되어 있으나 이 API는 `post/TABLE`이며 요청 예제는 `"Argument"`로 시작합니다.
+
+#### `TABLE_TYPE`
+
+| 값 | 설명 |
+| --- | --- |
+| `"THISTRUSSFORCE"` | Truss Force |
+
+#### Response HEAD
+
+`["Index", "Elem", "Load", "Force-I/Force", "Force-I/Time/Step", "Force-J/Force", "Force-J/Time/Step"]`
+
+#### 전용 파라미터
+
+공통 파라미터(1~6번) 외에 아래 항목을 지원합니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 7 | Node / Element No. Input · Use Only One of the Three Methods | `"NODE_ELEMS"` | Object | All | Optional |
+| (1) | └ [Method 1: Specify Each ID] "KEYS": [101, 102, 103] | `"KEYS"` | Array[Integer] | - | Optional |
+| (1) | └ [Method 2: Specify ID Range] "TO": "101 to 105" | `"TO"` | String | - | Optional |
+| (1) | └ [Method 3: Specify Structure Group Name] "STRUCTURE_GROUP_NAME": "SG1" | `"STRUCTURE_GROUP_NAME"` | String | - | Optional |
+| 8 | Load Name & Type · Static Load Cases / NAME + "(ST)" · Load Combinations / NAME + "(CB)" / NAME + "(CB:all)" / NAME + "(CB:max)" / NAME + "(CB:min)" · Construction Stage / NAME + "(CS)" · Response Spectrum / NAME + "(RS)" · Moving Load / NAME + "(MV:all)" / NAME + "(MV:max)" / NAME + "(MV:min)" · Settlement Load / NAME + "(SM:all)" / NAME + "(SM:max)" / NAME + "(SM:min)" | `"LOAD_CASE_NAMES"` | Array[String] | All | Optional |
+
+#### Request / Response JSON
+
+**POST Request Body — Truss Force**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "TrussForce",
+    "TABLE_TYPE": "THISTRUSSFORCE",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "kN", "DIST": "m"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["Elem", "Load", "Force-I/Force", "Force-I/Time/Step", "Force-J/Force", "Force-J/Time/Step"],
+    "NODE_ELEMS": {"KEYS": [49]},
+    "LOAD_CASE_NAMES": ["Elcent(TH:max)", "Elcent(TH:min)"]
+  }
+}
+```
+
+**POST Response Body — Truss Force**
+
+```json
+{
+  "TrussForce": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "Elem", "Load", "Force-I/Force", "Force-I/Time/Step", "Force-J/Force", "Force-J/Time/Step"],
+    "DATA": [
+      ["1", "49", "Elcent(max)", "832.172999263829", "2.100000000000", "832.172999263829", "2.100000000000"],
+      ["2", "49", "Elcent(min)", "-841.719193446358", "5.000000000000", "-841.719193446358", "5.000000000000"]
+    ]
+  }
+}
+```
+
+#### Python Example
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/gen"
+HEADERS = {"Content-Type": "application/json", "MAPI-Key": "YOUR_MAPI_KEY"}
+
+payload = {
+    'Argument': {
+        'TABLE_NAME': 'TrussForce',
+        'TABLE_TYPE': 'THISTRUSSFORCE',
+        'UNIT': {'FORCE': 'kN', 'DIST': 'm'},
+        'STYLES': {'FORMAT': 'Fixed', 'PLACE': 12},
+        'NODE_ELEMS': {'KEYS': [49]},
+        'LOAD_CASE_NAMES': ['Elcent(TH:max)', 'Elcent(TH:min)']
+    }
+}
+
+resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
+table = resp.json().get('TrussForce', {})
+print(table.get("HEAD"))
+print(len(table.get("DATA", [])), "rows")
+```
+
+---
+
+### F-4. General Link (Time History)
+
+> **기능:** 시간이력 해석의 일반 링크 부재력·변형을 추출합니다.
+>
+> **Source**: [General Link - TH Result Table ↗](https://support.midasuser.com/hc/en-us/articles/36020136483353) (2026-11-26 문서화)
+>
+> ⚠️ JSON Schema에는 `OPT_CS`·`STAGE_STEP`이 있으나 Specifications 표에는 없습니다. 표를 따라 파라미터 표에 넣지 않았습니다.
+>
+> ⚠️ JSON Schema의 최상위 Key가 `"RESULTGRAPHIC"`으로 되어 있으나 이 API는 `post/TABLE`이며 요청 예제는 `"Argument"`로 시작합니다.
+
+#### `TABLE_TYPE`
+
+| 값 | 설명 |
+| --- | --- |
+| `"THISGLINKFORCE"` | General Link - Force |
+| `"THISGLINKDEFORMATION"` | General Link - Deformation |
+
+#### Response HEAD
+
+**General Link-Force**: `["Index", "No.", "Load", "Node", "Axial/Force", "Axial/Time/Step", "Shear-y/Force", "Shear-y/Time/Step", "Shear-z/Force", "Shear-z/Time/Step", "Torsion/Force", "Torsion/Time/Step", "Moment-y/Force", "Moment-y/Time/Step", "Moment-z/Force", "Moment-z/Time/Step"]`
+
+**General Link-Deformation**: `["Index", "No.", "Load", "Node1", "Node2", "Dx/Deformation", "Dx/Time/Step", "Dy/Deformation", "Dy/Time/Step", "Dz/Deformation", "Dz/Time/Step", "Rx/Deformation", "Rx/Time/Step", "Ry/Deformation", "Ry/Time/Step", "Rz/Deformation", "Rz/Time/Step"]`
+
+#### 전용 파라미터
+
+공통 파라미터(1~6번) 외에 아래 항목을 지원합니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 7 | Node / Element No. Input · Use Only One of the Three Methods | `"NODE_ELEMS"` | Object | All | Optional |
+| (1) | └ [Method 1: Specify Each ID] "KEYS": [101, 102, 103] | `"KEYS"` | Array[Integer] | - | Optional |
+| (1) | └ [Method 2: Specify ID Range] "TO": "101 to 105" | `"TO"` | String | - | Optional |
+| (1) | └ [Method 3: Specify Structure Group Name] "STRUCTURE_GROUP_NAME": "SG1" | `"STRUCTURE_GROUP_NAME"` | String | - | Optional |
+| 8 | Load Name & Type · Static Load Cases / NAME + "(ST)" · Load Combinations / NAME + "(CB)" / NAME + "(CB:all)" / NAME + "(CB:max)" / NAME + "(CB:min)" · Construction Stage / NAME + "(CS)" · Response Spectrum / NAME + "(RS)" · Moving Load / NAME + "(MV:all)" / NAME + "(MV:max)" / NAME + "(MV:min)" · Settlement Load / NAME + "(SM:all)" / NAME + "(SM:max)" / NAME + "(SM:min)" | `"LOAD_CASE_NAMES"` | Array[String] | All | Optional |
+
+#### Request / Response JSON
+
+**POST Request Body — General Link-Force**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "GeneralLink-Force",
+    "TABLE_TYPE": "THISGLINKFORCE",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "kN", "DIST": "m"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["No.", "Load", "Node", "Axial/Force", "Axial/Time/Step", "Shear-y/Force", "Shear-y/Time/Step", "Shear-z/Force", "Shear-z/Time/Step", "Torsion/Force", "Torsion/Time/Step", "Moment-y/Force", "Moment-y/Time/Step", "Moment-z/Force", "Moment-z/Time/Step"],
+    "NODE_ELEMS": {"KEYS": [1]},
+    "LOAD_CASE_NAMES": ["Elcent(TH:max)", "Elcent(TH:min)"]
+  }
+}
+```
+
+**POST Request Body — General Link-Deformation**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "GeneralLink-Deformation",
+    "TABLE_TYPE": "THISGLINKDEFORMATION",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "kN", "DIST": "m"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["No.", "Load", "Node1", "Node2", "Dx/Deformation", "Dx/Time/Step", "Dy/Deformation", "Dy/Time/Step", "Dz/Deformation", "Dz/Time/Step", "Rx/Deformation", "Rx/Time/Step", "Ry/Deformation", "Ry/Time/Step", "Rz/Deformation", "Rz/Time/Step"],
+    "NODE_ELEMS": {"KEYS": [1]},
+    "LOAD_CASE_NAMES": ["Elcent(TH:max)", "Elcent(TH:min)"]
+  }
+}
+```
+
+**POST Response Body — General Link-Force**
+
+```json
+{
+  "GeneralLink-Force": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "No.", "Load", "Node", "Axial/Force", "Axial/Time/Step", "Shear-y/Force", "Shear-y/Time/Step", "Shear-z/Force", "Shear-z/Time/Step", "Torsion/Force", "Torsion/Time/Step", "Moment-y/Force", "Moment-y/Time/Step", "Moment-z/Force", "Moment-z/Time/Step"],
+    "DATA": [
+      ["1", "1", "Elcent(max)", "18", "499.476687500000", "2.400000000000", "450.036250000000", "3.200000000000", "515.898968750000", "2.600000000000", "475.261125000000", "4.600000000000", "1451.482750000000", "2.400000000000", "1180.272500000000", "2.100000000000"],
+      ["2", "1", "Elcent(min)", "18", "-669.949250000000", "2.000000000000", "-555.443812500000", "2.600000000000", "-517.579125000000", "5.000000000000", "-487.232062500000", "5.000000000000", "-1146.132750000000", "2.100000000000", "-1339.953625000000", "2.400000000000"]
+    ]
+  }
+}
+```
+
+**POST Response Body — General Link-Deformation**
+
+```json
+{
+  "GeneralLink-Deformation": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "No.", "Load", "Node1", "Node2", "Dx/Deformation", "Dx/Time/Step", "Dy/Deformation", "Dy/Time/Step", "Dz/Deformation", "Dz/Time/Step", "Rx/Deformation", "Rx/Time/Step", "Ry/Deformation", "Ry/Time/Step", "Rz/Deformation", "Rz/Time/Step"],
+    "DATA": [
+      ["1", "1", "Elcent(max)", "18", "10", "0.500344097614", "2.400000000000", "0.450891047716", "3.200000000000", "0.515045344830", "2.600000000000", "0.047441307455", "4.600000000000", "0.145236372948", "2.400000000000", "0.117942161858", "2.100000000000"],
+      ["2", "1", "Elcent(min)", "18", "10", "-0.669098973274", "2.000000000000", "-0.554590106010", "2.600000000000", "-0.516815662384", "5.000000000000", "-0.048638608307", "5.000000000000", "-0.114528223872", "2.100000000000", "-0.134083509445", "2.400000000000"]
+    ]
+  }
+}
+```
+
+#### Python Example
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/gen"
+HEADERS = {"Content-Type": "application/json", "MAPI-Key": "YOUR_MAPI_KEY"}
+
+payload = {
+    'Argument': {
+        'TABLE_NAME': 'GeneralLink-Force',
+        'TABLE_TYPE': 'THISGLINKFORCE',
+        'UNIT': {'FORCE': 'kN', 'DIST': 'm'},
+        'STYLES': {'FORMAT': 'Fixed', 'PLACE': 12},
+        'NODE_ELEMS': {'KEYS': [1]},
+        'LOAD_CASE_NAMES': ['Elcent(TH:max)', 'Elcent(TH:min)']
+    }
+}
+
+resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
+table = resp.json().get('GeneralLink-Force', {})
+print(table.get("HEAD"))
+print(len(table.get("DATA", [])), "rows")
+```
+
+---
+
+## 그룹 G. Fiber Section 시간이력 결과 테이블 (`post/TABLE`)
+
+### 그룹 G 공통 파라미터
+
+`POST {base url}/post/TABLE` · Active Methods: `POST`
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Table Name · Response Table Title | `"TABLE_NAME"` | String | Empty | Optional |
+| 2 | Result Table Type | `"TABLE_TYPE"` | String | - | **Required** |
+| 3 | Result Table Save Path | `"EXPORT_PATH"` | String | - | Optional |
+| 4 | Response Unit Setting | `"UNIT"` | Object | System | Optional |
+| (1) | └ Force | `"FORCE"` | String | - | Optional |
+| (2) | └ Length | `"DIST"` | String | - | Optional |
+| (3) | └ Heat | `"HEAT"` | String | - | Optional |
+| (4) | └ Temperature | `"TEMP"` | String | - | Optional |
+| 5 | Response Number Format | `"STYLES"` | Object | System | Optional |
+| (1) | └ Number Format · "Default" · "Fixed" · "Scientific" · "General" | `"FORMAT"` | String | - | Optional |
+| (2) | └ Digit Place · 0 to 15 | `"PLACE"` | Integer | - | Optional |
+| 6 | Components of Result Table | `"COMPONENTS"` | Array[String] | All | Optional |
+
+---
+
+### G-1. Fiber Section Estimate Yield Strength
+
+> **기능:** 화이버 단면의 항복강도 추정 결과를 추출합니다.
+>
+> **Source**: [Fiber Section Estimate Yield Strength - TH Result Table ↗](https://support.midasuser.com/hc/en-us/articles/39237582598937) (2026-11-26 문서화)
+>
+> ⚠️ 하중케이스 Key는 Specifications 표·JSON Schema가 `LOAD_CASE_NAMES`, 요청 예제가 `TH_LOAD_CASE_NAMES`로 서로 다릅니다. 예제 우선 원칙에 따라 `TH_LOAD_CASE_NAMES`를 씁니다(22장 B그룹의 시간이력 테이블과 같은 Key).
+>
+> ⚠️ Specifications 표는 `TABLE_TYPE` 설명이 "Beam Force"이고, JSON Schema의 enum은 `"THISBEAMFORCE"`입니다. Beam Force 글에서 복사된 것으로 보여 예제의 값을 씁니다.
+>
+> ⚠️ `TABLE_TYPE` 값의 `YILED`(Yield의 오탈자)는 표와 예제가 일치하므로 그대로 씁니다.
+>
+> ⚠️ JSON Schema의 최상위 Key가 `"RESULTGRAPHIC"`으로 되어 있으나 이 API는 `post/TABLE`이며 요청 예제는 `"Argument"`로 시작합니다.
+
+#### `TABLE_TYPE`
+
+| 값 | 설명 |
+| --- | --- |
+| `"FIBR_YILEDSTRENGTH"` | Estimate Yield Strength |
+
+#### Response HEAD
+
+`["Index", "Type", "Definition", "Elem", "Hinge Location", "Inelastic Hinge Prop.", "Load Case", "Crack/Rc'", "Crack/Mc'", "Crack/Step", "Yield/Ry'", "Yield/My'", "Yield/Step", "Ultimate/Ru", "Ultimate/Mu", "Ultimate/Step", "Estimate Yield/Ry", "Estimate Yield/My", "Estimate Yield/Step", "Mmax", "Ieff", "Ieff/I"]`
+
+#### 전용 파라미터
+
+공통 파라미터(1~6번) 외에 아래 항목을 지원합니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 7 | Node / Element No. Input · Use Only One of the Three Methods | `"NODE_ELEMS"` | Object | All | Optional |
+| (1) | └ [Method 1: Specify Each ID] "KEYS": [101, 102, 103] | `"KEYS"` | Array[Integer] | - | Optional |
+| (1) | └ [Method 2: Specify ID Range] "TO": "101 to 105" | `"TO"` | String | - | Optional |
+| (1) | └ [Method 3: Specify Structure Group Name] "STRUCTURE_GROUP_NAME": "SG1" | `"STRUCTURE_GROUP_NAME"` | String | - | Optional |
+| 8 | Time History Load Name | `"TH_LOAD_CASE_NAMES"` | Array[String] | All | Optional |
+
+#### Request / Response JSON
+
+**POST Request Body — Yield Strength**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "YieldStrength",
+    "TABLE_TYPE": "FIBR_YILEDSTRENGTH",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "kN", "DIST": "m"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["Type", "Definition", "Elem", "Hinge Location", "Inelastic Hinge Prop.", "Load Case", "Crack/Rc'", "Crack/Mc'", "Crack/Step", "Yield/Ry'", "Yield/My'", "Yield/Step", "Ultimate/Ru", "Ultimate/Mu", "Ultimate/Step", "Estimate Yield/Ry", "Estimate Yield/My", "Estimate Yield/Step", "Mmax", "Ieff", "Ieff/I"],
+    "NODE_ELEMS": {"KEYS": [1240]},
+    "TH_LOAD_CASE_NAMES": ["kh"]
+  }
+}
+```
+
+**POST Response Body — Yield Strength**
+
+```json
+{
+  "YieldStrength": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "Type", "Definition", "Elem", "Hinge Location", "Inelastic Hinge Prop.", "Load Case", "Crack/Rc'", "Crack/Mc'", "Crack/Step", "Yield/Ry'", "Yield/My'", "Yield/Step", "Ultimate/Ru", "Ultimate/Mu", "Ultimate/Step", "Estimate Yield/Ry", "Estimate Yield/My", "Estimate Yield/Step", "Mmax", "Ieff", "Ieff/I"],
+    "DATA": [
+      ["1", "Distributed", "Fiber", "1240", "1-Pos", "P2(2) (CONC)", "kh(all)", "0.000000000000", "0.000000000000", "-1", "0.002047820000", "0.000000000000", "75", "0.002142960000", "49560.500000000000", "78", "0.002088760000", "48668.300000000003", "78", "48947.599999999999", "0.116501000000", "1.135970000000"],
+      ["2", "Distributed", "Fiber", "1240", "2-Pos", "P2(2) (CONC)", "kh(all)", "0.000000000000", "0.000000000000", "-1", "0.002071200000", "0.000000000000", "79", "0.002132520000", "49410.199999999997", "81", "0.002076460000", "48357.500000000000", "81", "48824.900000000001", "0.116442000000", "1.135400000000"],
+      ["3", "Distributed", "Fiber", "1240", "3-Pos", "P2(2) (CONC)", "kh(all)", "0.000000000000", "0.000000000000", "-1", "0.002058940000", "0.000000000000", "82", "0.002148490000", "49642.699999999997", "85", "0.002096510000", "48837.599999999999", "85", "49087.199999999997", "0.116474000000", "1.135710000000"]
+    ]
+  }
+}
+```
+
+#### Python Example
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/gen"
+HEADERS = {"Content-Type": "application/json", "MAPI-Key": "YOUR_MAPI_KEY"}
+
+payload = {
+    'Argument': {
+        'TABLE_NAME': 'YieldStrength',
+        'TABLE_TYPE': 'FIBR_YILEDSTRENGTH',
+        'UNIT': {'FORCE': 'kN', 'DIST': 'm'},
+        'STYLES': {'FORMAT': 'Fixed', 'PLACE': 12},
+        'NODE_ELEMS': {'KEYS': [1240]},
+        'TH_LOAD_CASE_NAMES': ['kh']
+    }
+}
+
+resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
+table = resp.json().get('YieldStrength', {})
+print(table.get("HEAD"))
+print(len(table.get("DATA", [])), "rows")
+```
+
+---
+
+### G-2. Fiber Section Elastic Modulus Retention Rate
+
+> **기능:** 화이버 단면의 탄성계수 유지율 결과를 추출합니다.
+>
+> **Source**: [Fiber Section Elastic Modulus Retention Rate - TH Result Table ↗](https://support.midasuser.com/hc/en-us/articles/39237678441497) (2026-11-26 문서화)
+>
+> **MIDAS Civil NX JP 버전 전용** (공식 목차의 `ᴶ⁾` 표시). 예제의 `COMPONENTS`와 응답 값은 일본어입니다.
+>
+> ⚠️ 하중케이스 Key는 Specifications 표·JSON Schema가 `LOAD_CASE_NAMES`, 요청 예제가 `TH_LOAD_CASE_NAMES`로 서로 다릅니다. 예제 우선 원칙에 따라 `TH_LOAD_CASE_NAMES`를 씁니다(22장 B그룹의 시간이력 테이블과 같은 Key).
+>
+> ⚠️ Specifications 표는 `TABLE_TYPE` 설명이 "Beam Force"이고, JSON Schema의 enum은 `"THISBEAMFORCE"`입니다. Beam Force 글에서 복사된 것으로 보여 예제의 값을 씁니다.
+>
+> ⚠️ JSON Schema의 최상위 Key가 `"RESULTGRAPHIC"`으로 되어 있으나 이 API는 `post/TABLE`이며 요청 예제는 `"Argument"`로 시작합니다.
+
+#### `TABLE_TYPE`
+
+| 값 | 설명 |
+| --- | --- |
+| `"FIBR_ELASTREMAIN"` | Elastic Modulus Retention Rate |
+
+#### Response HEAD
+
+`["Index", "番号/要素", "番号/断面", "番号/セルNo.", "番号/荷重", "セル位置/y", "セル位置/z", "弾性剛性残存率/K", "セル面積/△A"]`
+
+#### 전용 파라미터
+
+공통 파라미터(1~6번) 외에 아래 항목을 지원합니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 7 | Time History Load Name | `"TH_LOAD_CASE_NAMES"` | Array[String] | All | Optional |
+
+#### Request / Response JSON
+
+**POST Request Body — Elastic Modulus Retention Rate**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "ElasticModulus",
+    "TABLE_TYPE": "FIBR_ELASTREMAIN",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "kN", "DIST": "m"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["番号/要素", "番号/断面", "番号/セルNo.", "番号/荷重", "セル位置/y", "セル位置/z", "弾性剛性残存率/K", "セル面積/△A"],
+    "TH_LOAD_CASE_NAMES": ["kh"]
+  }
+}
+```
+
+**POST Response Body — Elastic Modulus Retention Rate**
+
+```json
+{
+  "ElasticModulus": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "番号/要素", "番号/断面", "番号/セルNo.", "番号/荷重", "セル位置/y", "セル位置/z", "弾性剛性残存率/K", "セル面積/△A"],
+    "DATA": [
+      ["1", "1203", "1-pos", "22", "kh", "-0.617750000000", "0.867600000000", "0.994194030762", "0.034029200000"],
+      ["2", "1203", "1-pos", "23", "kh", "-0.441250000000", "0.867600000000", "0.996670603752", "0.034029200000"],
+      ["1008", "1240", "3-pos", "183", "kh", "0.624750000000", "-0.874800000000", "0.797961592674", "0.034700400000"]
+    ]
+  }
+}
+```
+
+#### Python Example
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/civil"
+HEADERS = {"Content-Type": "application/json", "MAPI-Key": "YOUR_MAPI_KEY"}
+
+payload = {
+    'Argument': {
+        'TABLE_NAME': 'ElasticModulus',
+        'TABLE_TYPE': 'FIBR_ELASTREMAIN',
+        'UNIT': {'FORCE': 'kN', 'DIST': 'm'},
+        'STYLES': {'FORMAT': 'Fixed', 'PLACE': 12},
+        'TH_LOAD_CASE_NAMES': ['kh']
+    }
+}
+
+resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
+table = resp.json().get('ElasticModulus', {})
+print(table.get("HEAD"))
+print(len(table.get("DATA", [])), "rows")
+```
+
+---
+
+### G-3. Fiber Section Maximum Strain of The Cell
+
+> **기능:** 화이버 셀의 최대·최소 변형률 결과를 추출합니다.
+>
+> **Source**: [Fiber Section Maximum Strain of The Cell - TH Result Table ↗](https://support.midasuser.com/hc/en-us/articles/39237774129433) (2026-11-26 문서화)
+>
+> **MIDAS Civil NX JP 버전 전용** (공식 목차의 `ᴶ⁾` 표시). 예제의 `COMPONENTS`와 응답 값은 일본어입니다.
+>
+> ⚠️ 하중케이스 Key는 Specifications 표·JSON Schema가 `LOAD_CASE_NAMES`, 요청 예제가 `TH_LOAD_CASE_NAMES`로 서로 다릅니다. 예제 우선 원칙에 따라 `TH_LOAD_CASE_NAMES`를 씁니다(22장 B그룹의 시간이력 테이블과 같은 Key).
+>
+> ⚠️ Specifications 표는 `TABLE_TYPE` 설명이 "Beam Force"이고, JSON Schema의 enum은 `"THISBEAMFORCE"`입니다. Beam Force 글에서 복사된 것으로 보여 예제의 값을 씁니다.
+>
+> ⚠️ JSON Schema의 최상위 Key가 `"RESULTGRAPHIC"`으로 되어 있으나 이 API는 `post/TABLE`이며 요청 예제는 `"Argument"`로 시작합니다.
+
+#### `TABLE_TYPE`
+
+| 값 | 설명 |
+| --- | --- |
+| `"FIBR_MAXCONTRACT"` | Maximum Strain of The Cell |
+
+#### Response HEAD
+
+`["Index", "要素", "断面位置", "材料", "荷重", "セルNo.", "最小/ε", "最小/時間/ステップ", "最大/ε", "最大/時間/ステップ"]`
+
+#### 전용 파라미터
+
+공통 파라미터(1~6번) 외에 아래 항목을 지원합니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 7 | Node / Element No. Input · Use Only One of the Two Methods | `"NODE_ELEMS"` | Object | All | Optional |
+| (1) | └ [Method 1: Specify Each ID] "KEYS": [101, 102, 103] | `"KEYS"` | Array[Integer] | - | Optional |
+| (1) | └ [Method 2: Specify ID Range] "TO": "101 to 105" | `"TO"` | String | - | Optional |
+| 8 | Time History Load Name | `"TH_LOAD_CASE_NAMES"` | Array[String] | All | Optional |
+| 9 | Section Positions | `"SECT_POSITION"` | String | All | Optional |
+| 10 | All Fiber Cell Min/Max Strain Table | `"FIBER_CELL_MINMAX"` | Boolean | false | Optional |
+
+#### Request / Response JSON
+
+**POST Request Body — Maximum Strain**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "MaximumStrain",
+    "TABLE_TYPE": "FIBR_MAXCONTRACT",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "kN", "DIST": "m"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["要素", "断面位置", "材料", "荷重", "セルNo.", "最小/ε", "最小/時間/ステップ", "最大/ε", "最大/時間/ステップ"],
+    "NODE_ELEMS": {"KEYS": [1240]},
+    "TH_LOAD_CASE_NAMES": ["kh"],
+    "SECT_POSITION": "1to2",
+    "FIBER_CELL_MINMAX": true
+  }
+}
+```
+
+**POST Response Body — Maximum Strain**
+
+```json
+{
+  "MaximumStrain": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "要素", "断面位置", "材料", "荷重", "セルNo.", "最小/ε", "最小/時間/ステップ", "最大/ε", "最大/時間/ステップ"],
+    "DATA": [
+      ["1", "1240", "1-pos", "Concrete", "kh", "22", "-0.072529099882", "94.000000000000", "0.410933822393", "97.000000000000"],
+      ["2", "1240", "1-pos", "Concrete", "kh", "24", "-0.086023047566", "93.000000000000", "0.337079584599", "97.000000000000"],
+      ["408", "1240", "2-pos", "Steel", "kh", "204", "-0.417252540588", "94.000000000000", "0.165957629681", "100.000000000000"]
+    ]
+  }
+}
+```
+
+#### Python Example
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/civil"
+HEADERS = {"Content-Type": "application/json", "MAPI-Key": "YOUR_MAPI_KEY"}
+
+payload = {
+    'Argument': {
+        'TABLE_NAME': 'MaximumStrain',
+        'TABLE_TYPE': 'FIBR_MAXCONTRACT',
+        'UNIT': {'FORCE': 'kN', 'DIST': 'm'},
+        'STYLES': {'FORMAT': 'Fixed', 'PLACE': 12},
+        'NODE_ELEMS': {'KEYS': [1240]},
+        'TH_LOAD_CASE_NAMES': ['kh'],
+        'SECT_POSITION': '1to2',
+        'FIBER_CELL_MINMAX': True
+    }
+}
+
+resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
+table = resp.json().get('MaximumStrain', {})
+print(table.get("HEAD"))
+print(len(table.get("DATA", [])), "rows")
+```
+
+---
+
+### G-4. Fiber Section Event Step
+
+> **기능:** 화이버 단면의 이벤트 발생 스텝 결과를 추출합니다.
+>
+> **Source**: [Fiber Section Event Step - TH Result Table ↗](https://support.midasuser.com/hc/en-us/articles/39237785220505) (2026-11-26 문서화)
+>
+> **MIDAS Civil NX JP 버전 전용** (공식 목차의 `ᴶ⁾` 표시). 예제의 `COMPONENTS`와 응답 값은 일본어입니다.
+>
+> ⚠️ 하중케이스 Key는 Specifications 표·JSON Schema가 `LOAD_CASE_NAMES`, 요청 예제가 `TH_LOAD_CASE_NAMES`로 서로 다릅니다. 예제 우선 원칙에 따라 `TH_LOAD_CASE_NAMES`를 씁니다(22장 B그룹의 시간이력 테이블과 같은 Key).
+>
+> ⚠️ Specifications 표는 `TABLE_TYPE` 설명이 "Beam Force"이고, JSON Schema의 enum은 `"THISBEAMFORCE"`입니다. Beam Force 글에서 복사된 것으로 보여 예제의 값을 씁니다.
+>
+> ⚠️ JSON Schema의 최상위 Key가 `"RESULTGRAPHIC"`으로 되어 있으나 이 API는 `post/TABLE`이며 요청 예제는 `"Argument"`로 시작합니다.
+
+#### `TABLE_TYPE`
+
+| 값 | 설명 |
+| --- | --- |
+| `"FIBR_EVENTSTEP"` | Event Step |
+
+#### Response HEAD
+
+`["Index", "要素", "断面位置", "荷重", "鉄骨/引張降伏/セルNo.", "鉄骨/引張降伏/ε", "鉄骨/引張降伏/時間/ステップ", "鉄骨/圧縮降伏/セルNo.", "鉄骨/圧縮降伏/ε", "鉄骨/圧縮降伏/時間/ステップ"]`
+
+#### 전용 파라미터
+
+공통 파라미터(1~6번) 외에 아래 항목을 지원합니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 7 | Node / Element No. Input · Use Only One of the Two Methods | `"NODE_ELEMS"` | Object | All | Optional |
+| (1) | └ [Method 1: Specify Each ID] "KEYS": [101, 102, 103] | `"KEYS"` | Array[Integer] | - | Optional |
+| (1) | └ [Method 2: Specify ID Range] "TO": "101 to 105" | `"TO"` | String | - | Optional |
+| 8 | Time History Load Name | `"TH_LOAD_CASE_NAMES"` | Array[String] | All | Optional |
+| 9 | Section Positions | `"SECT_POSITION"` | String | All | Optional |
+
+#### Request / Response JSON
+
+**POST Request Body — Event Step**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "EventStep",
+    "TABLE_TYPE": "FIBR_EVENTSTEP",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "kN", "DIST": "m"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["要素", "断面位置", "荷重", "鉄骨/引張降伏/セルNo.", "鉄骨/引張降伏/ε", "鉄骨/引張降伏/時間/ステップ", "鉄骨/圧縮降伏/セルNo.", "鉄骨/圧縮降伏/ε", "鉄骨/圧縮降伏/時間/ステップ"],
+    "NODE_ELEMS": {"KEYS": [1240]},
+    "TH_LOAD_CASE_NAMES": ["kh"],
+    "SECT_POSITION": "1to2"
+  }
+}
+```
+
+**POST Response Body — Event Step**
+
+```json
+{
+  "EventStep": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "要素", "断面位置", "荷重", "鉄骨/引張降伏/セルNo.", "鉄骨/引張降伏/ε", "鉄骨/引張降伏/時間/ステップ", "鉄骨/圧縮降伏/セルNo.", "鉄骨/圧縮降伏/ε", "鉄骨/圧縮降伏/時間/ステップ"],
+    "DATA": [
+      ["1", "1240", "1-pos", "kh", "29", "0.001794418902", "78", "1", "-0.070452451706", "90"],
+      ["2", "1240", "2-pos", "kh", "29", "0.001787770307", "81", "7", "-0.068571634591", "90"]
+    ]
+  }
+}
+```
+
+#### Python Example
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/civil"
+HEADERS = {"Content-Type": "application/json", "MAPI-Key": "YOUR_MAPI_KEY"}
+
+payload = {
+    'Argument': {
+        'TABLE_NAME': 'EventStep',
+        'TABLE_TYPE': 'FIBR_EVENTSTEP',
+        'UNIT': {'FORCE': 'kN', 'DIST': 'm'},
+        'STYLES': {'FORMAT': 'Fixed', 'PLACE': 12},
+        'NODE_ELEMS': {'KEYS': [1240]},
+        'TH_LOAD_CASE_NAMES': ['kh'],
+        'SECT_POSITION': '1to2'
+    }
+}
+
+resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
+table = resp.json().get('EventStep', {})
+print(table.get("HEAD"))
+print(len(table.get("DATA", [])), "rows")
+```
+
+---
+
+### G-5. Fiber Section Average Compression Strain
+
+> **기능:** 화이버 단면의 평균 압축 변형률 결과를 추출합니다.
+>
+> **Source**: [Fiber Section Average Compression Strain - TH Result Table ↗](https://support.midasuser.com/hc/en-us/articles/39237854424601) (2026-11-26 문서화)
+>
+> **MIDAS Civil NX JP 버전 전용** (공식 목차의 `ᴶ⁾` 표시). 예제의 `COMPONENTS`와 응답 값은 일본어입니다.
+>
+> ⚠️ 하중케이스 Key는 Specifications 표·JSON Schema가 `LOAD_CASE_NAMES`, 요청 예제가 `TH_LOAD_CASE_NAMES`로 서로 다릅니다. 예제 우선 원칙에 따라 `TH_LOAD_CASE_NAMES`를 씁니다(22장 B그룹의 시간이력 테이블과 같은 Key).
+>
+> ⚠️ Specifications 표는 `TABLE_TYPE` 설명이 "Beam Force"이고, JSON Schema의 enum은 `"THISBEAMFORCE"`입니다. Beam Force 글에서 복사된 것으로 보여 예제의 값을 씁니다.
+>
+> ⚠️ JSON Schema의 최상위 Key가 `"RESULTGRAPHIC"`으로 되어 있으나 이 API는 `post/TABLE`이며 요청 예제는 `"Argument"`로 시작합니다.
+
+#### `TABLE_TYPE`
+
+| 값 | 설명 |
+| --- | --- |
+| `"FIBR_MEANCOMPCONTRACT"` | Average Compression Strain |
+
+#### Response HEAD
+
+`["Index", "各ステップにおける外側セルの平均圧縮ひずみ/ステップ", "各ステップにおける外側セルの平均圧縮ひずみ/要素", "各ステップにおける外側セルの平均圧縮ひずみ/断面 位置", "各ステップにおける外側セルの平均圧縮ひずみ/材料", "各ステップにおける外側セルの平均圧縮ひずみ/荷重", "各ステップにおける外側セルの平均圧縮ひずみ/Ea"]`
+
+#### 전용 파라미터
+
+공통 파라미터(1~6번) 외에 아래 항목을 지원합니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 7 | Node / Element No. Input · Use Only One of the Two Methods | `"NODE_ELEMS"` | Object | All | Optional |
+| (1) | └ [Method 1: Specify Each ID] "KEYS": [101, 102, 103] | `"KEYS"` | Array[Integer] | - | Optional |
+| (1) | └ [Method 2: Specify ID Range] "TO": "101 to 105" | `"TO"` | String | - | Optional |
+| 8 | Time History Load Name | `"TH_LOAD_CASE_NAMES"` | Array[String] | All | Optional |
+| 9 | Section Positions | `"SECT_POSITION"` | String | All | Optional |
+| 10 | Output Step | `"OUTPUT_STEP"` | String | All | Optional |
+
+#### Request / Response JSON
+
+**POST Request Body — Average compression strain**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "AverageCompStrain",
+    "TABLE_TYPE": "FIBR_MEANCOMPCONTRACT",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "kN", "DIST": "m"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["各ステップにおける外側セルの平均圧縮ひずみ/ステップ", "各ステップにおける外側セルの平均圧縮ひずみ/要素", "各ステップにおける外側セルの平均圧縮ひずみ/断面 位置", "各ステップにおける外側セルの平均圧縮ひずみ/材料", "各ステップにおける外側セルの平均圧縮ひずみ/荷重", "各ステップにおける外側セルの平均圧縮ひずみ/Ea"],
+    "NODE_ELEMS": {"KEYS": [1240]},
+    "TH_LOAD_CASE_NAMES": ["kh"],
+    "SECT_POSITION": "1to2",
+    "OUTPUT_STEP": "1,3"
+  }
+}
+```
+
+**POST Response Body — Average compression strain**
+
+> 원문 `DATA`는 12행이며 앞 4행만 발췌했습니다.
+
+```json
+{
+  "AverageCompStrain": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "各ステップにおける外側セルの平均圧縮ひずみ/ステップ", "各ステップにおける外側セルの平均圧縮ひずみ/要素", "各ステップにおける外側セルの平均圧縮ひずみ/断面 位置", "各ステップにおける外側セルの平均圧縮ひずみ/材料", "各ステップにおける外側セルの平均圧縮ひずみ/荷重", "各ステップにおける外側セルの平均圧縮ひずみ/Ea"],
+    "DATA": [
+      ["1", "1", "1240", "1-pos", "Steel (Top_Bottom)", "kh", "-0.000050183599"],
+      ["2", "1", "1240", "1-pos", "Steel (Left_Right)", "kh", "-0.000110298402"],
+      ["3", "1", "1240", "1-pos", "Concrete", "kh", "-0.000074351559"],
+      ["4", "1", "1240", "2-pos", "Steel (Left_Right)", "kh", "-0.000105987026"]
+    ]
+  }
+}
+```
+
+#### Python Example
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/civil"
+HEADERS = {"Content-Type": "application/json", "MAPI-Key": "YOUR_MAPI_KEY"}
+
+payload = {
+    'Argument': {
+        'TABLE_NAME': 'AverageCompStrain',
+        'TABLE_TYPE': 'FIBR_MEANCOMPCONTRACT',
+        'UNIT': {'FORCE': 'kN', 'DIST': 'm'},
+        'STYLES': {'FORMAT': 'Fixed', 'PLACE': 12},
+        'NODE_ELEMS': {'KEYS': [1240]},
+        'TH_LOAD_CASE_NAMES': ['kh'],
+        'SECT_POSITION': '1to2',
+        'OUTPUT_STEP': '1,3'
+    }
+}
+
+resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
+table = resp.json().get('AverageCompStrain', {})
+print(table.get("HEAD"))
+print(len(table.get("DATA", [])), "rows")
+```
+
+---
+
+## 그룹 H. 수화열 결과 테이블 (`post/TABLE`)
+
+### 그룹 H 공통 파라미터
+
+`POST {base url}/post/TABLE` · Active Methods: `POST`
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Table Name · Response Table Title | `"TABLE_NAME"` | String | Empty | Optional |
+| 2 | Result Table Type | `"TABLE_TYPE"` | String | - | **Required** |
+| 3 | Result Table Save Path | `"EXPORT_PATH"` | String | - | Optional |
+| 4 | Response Unit Setting | `"UNIT"` | Object | System | Optional |
+| (1) | └ Force | `"FORCE"` | String | - | Optional |
+| (2) | └ Length | `"DIST"` | String | - | Optional |
+| (3) | └ Heat | `"HEAT"` | String | - | Optional |
+| (4) | └ Temperature | `"TEMP"` | String | - | Optional |
+| 5 | Response Number Format | `"STYLES"` | Object | System | Optional |
+| (1) | └ Number Format · "Default" · "Fixed" · "Scientific" · "General" | `"FORMAT"` | String | - | Optional |
+| (2) | └ Digit Place · 0 to 15 | `"PLACE"` | Integer | - | Optional |
+| 6 | Components of Result Table | `"COMPONENTS"` | Array[String] | All | Optional |
+
+---
+
+### H-1. Stress (Heat of Hydration Table)
+
+> **기능:** 수화열 해석의 응력(국부/전체 좌표계) 테이블을 추출합니다.
+>
+> **Source**: [Stress - HY Result Table ↗](https://support.midasuser.com/hc/en-us/articles/36020924196249) (2026-11-26 문서화)
+>
+> ⚠️ Specifications 표는 `"HEAT_HYDR_STRESS_G"`도 "Hydration Stress - **Local**"로 적었습니다. 예제 이름("Hydration Stress - Global")에 따라 Global로 정정했습니다.
+>
+> ⚠️ JSON Schema의 최상위 Key가 `"RESULTGRAPHIC"`으로 되어 있으나 이 API는 `post/TABLE`이며 요청 예제는 `"Argument"`로 시작합니다.
+
+#### `TABLE_TYPE`
+
+| 값 | 설명 |
+| --- | --- |
+| `"HEAT_HYDR_STRESS_L"` | Hydration Stress - Local |
+| `"HEAT_HYDR_STRESS_G"` | Hydration Stress - Global |
+
+#### Response HEAD
+
+**Hydration Stress - Local**: `["Index", "Elem", "Stage", "Step", "Time", "Node", "Sig-xx", "Sig-yy", "Sig-zz", "Sig-xy", "Sig-yz", "Sig-xz", "Sig-P1", "Sig-P2", "Sig-P3", "Max-Shear", "Sig-EFF", "Sig-OCT"]`
+
+**Hydration Stress - Global**: `["Index", "Elem", "Stage", "Step", "Time", "Node", "Sig-XX", "Sig-YY", "Sig-ZZ", "Sig-XY", "Sig-YZ", "Sig-XZ", "Sig-P1", "Sig-P2", "Sig-P3", "Max-Shear", "Sig-EFF", "Sig-OCT"]`
+
+#### 전용 파라미터
+
+공통 파라미터(1~6번) 외에 아래 항목을 지원합니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 7 | Node / Element No. Input · Use Only One of the Three Methods | `"NODE_ELEMS"` | Object | All | Optional |
+| (1) | └ [Method 1: Specify Each ID] "KEYS": [101, 102, 103] | `"KEYS"` | Array[Integer] | - | Optional |
+| (1) | └ [Method 2: Specify ID Range] "TO": "101 to 105" | `"TO"` | String | - | Optional |
+| (1) | └ [Method 3: Specify Structure Group Name] "STRUCTURE_GROUP_NAME": "SG1" | `"STRUCTURE_GROUP_NAME"` | String | - | Optional |
+| 8 | Node Flag | `"NODE_FLAG"` | Object | - | Optional |
+| (1) | └ Center | `"CENTER"` | Boolean | false | Optional |
+| (2) | └ Nodes | `"NODES"` | Boolean | false | Optional |
+| 9 | Stage Step Name | `"STAGE_STEP"` | Array[String] | All | Optional |
+
+#### Request / Response JSON
+
+**POST Request Body — Hydration Stress - Local**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "HydrationStress(Local)",
+    "TABLE_TYPE": "HEAT_HYDR_STRESS_L",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "N", "DIST": "mm"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["Elem", "Stage", "Step", "Time", "Node", "Sig-xx", "Sig-yy", "Sig-zz", "Sig-xy", "Sig-yz", "Sig-xz", "Sig-P1", "Sig-P2", "Sig-P3", "Max-Shear", "Sig-EFF", "Sig-OCT"],
+    "NODE_ELEMS": {"KEYS": [2202]},
+    "NODE_FLAG": {"CENTER": true, "NODES": true},
+    "STAGE_STEP": ["CS2:013"]
+  }
+}
+```
+
+**POST Request Body — Hydration Stress - Global**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "HydrationStress(Global)",
+    "TABLE_TYPE": "HEAT_HYDR_STRESS_G",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "N", "DIST": "mm"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["Elem", "Stage", "Step", "Time", "Node", "Sig-XX", "Sig-YY", "Sig-ZZ", "Sig-XY", "Sig-YZ", "Sig-XZ", "Sig-P1", "Sig-P2", "Sig-P3", "Max-Shear", "Sig-EFF", "Sig-OCT"],
+    "NODE_ELEMS": {"KEYS": [2202]},
+    "NODE_FLAG": {"CENTER": true, "NODES": true},
+    "STAGE_STEP": ["CS2:013"]
+  }
+}
+```
+
+**POST Response Body — Hydration Stress - Local**
+
+> 원문 `DATA`는 9행이며 앞 4행만 발췌했습니다.
+
+```json
+{
+  "HydrationStress(Local)": {
+    "FORCE": "N",
+    "DIST": "mm",
+    "HEAD": ["Index", "Elem", "Stage", "Step", "Time", "Node", "Sig-xx", "Sig-yy", "Sig-zz", "Sig-xy", "Sig-yz", "Sig-xz", "Sig-P1", "Sig-P2", "Sig-P3", "Max-Shear", "Sig-EFF", "Sig-OCT"],
+    "DATA": [
+      ["1", "2202", "CS2", "013", "1100.000000000000", "Cent", "-0.496144128489", "-0.336760523832", "-0.019634210949", "0.186785826965", "-0.104255753806", "0.047534625575", "0.011726461498", "-0.229188262169", "-0.635077062600", "0.323401762049", "0.566189200348", "0.266904148667"],
+      ["2", "2202", "CS2", "013", "1100.000000000000", "2543", "-0.055279503463", "0.065549401996", "0.456937191151", "0.168065944442", "-0.124931084692", "0.026165696447", "0.494405082664", "0.160204132991", "-0.187402125972", "0.340903604318", "0.590500404648", "0.278364560280"],
+      ["3", "2202", "CS2", "013", "1100.000000000000", "2544", "-0.127527874786", "0.042629777689", "0.412455488654", "0.161996756951", "-0.135540360794", "0.072082150258", "0.457445958293", "0.122309304550", "-0.252197871286", "0.354821914789", "0.614884772252", "0.289859461405"],
+      ["4", "2202", "CS2", "013", "1100.000000000000", "2560", "-0.010982230089", "0.171523810856", "0.503667834810", "0.186766078116", "-0.077078739625", "0.061582373261", "0.521605552354", "0.283683909671", "-0.141080046447", "0.331342799400", "0.581456502815", "0.274101224070"]
+    ]
+  }
+}
+```
+
+**POST Response Body — Hydration Stress - Global**
+
+> 원문 `DATA`는 9행이며 앞 4행만 발췌했습니다.
+
+```json
+{
+  "HydrationStress(Global)": {
+    "FORCE": "N",
+    "DIST": "mm",
+    "HEAD": ["Index", "Elem", "Stage", "Step", "Time", "Node", "Sig-XX", "Sig-YY", "Sig-ZZ", "Sig-XY", "Sig-YZ", "Sig-XZ", "Sig-P1", "Sig-P2", "Sig-P3", "Max-Shear", "Sig-EFF", "Sig-OCT"],
+    "DATA": [
+      ["1", "2202", "CS2", "013", "1100.000000000000", "Cent", "-0.496144128489", "-0.336760523832", "-0.019634210949", "0.186785826965", "-0.104255753806", "0.047534625575", "0.011726461498", "-0.229188262169", "-0.635077062600", "0.323401762049", "0.566189200348", "0.266904148667"],
+      ["2", "2202", "CS2", "013", "1100.000000000000", "2543", "-0.055279503463", "0.065549401996", "0.456937191151", "0.168065944442", "-0.124931084692", "0.026165696447", "0.494405082664", "0.160204132991", "-0.187402125972", "0.340903604318", "0.590500404648", "0.278364560280"],
+      ["3", "2202", "CS2", "013", "1100.000000000000", "2544", "-0.127527874786", "0.042629777689", "0.412455488654", "0.161996756951", "-0.135540360794", "0.072082150258", "0.457445958293", "0.122309304550", "-0.252197871286", "0.354821914789", "0.614884772252", "0.289859461405"],
+      ["4", "2202", "CS2", "013", "1100.000000000000", "2560", "-0.010982230089", "0.171523810856", "0.503667834810", "0.186766078116", "-0.077078739625", "0.061582373261", "0.521605552354", "0.283683909671", "-0.141080046447", "0.331342799400", "0.581456502815", "0.274101224070"]
+    ]
+  }
+}
+```
+
+#### Python Example
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/gen"
+HEADERS = {"Content-Type": "application/json", "MAPI-Key": "YOUR_MAPI_KEY"}
+
+payload = {
+    'Argument': {
+        'TABLE_NAME': 'HydrationStress(Local)',
+        'TABLE_TYPE': 'HEAT_HYDR_STRESS_L',
+        'UNIT': {'FORCE': 'N', 'DIST': 'mm'},
+        'STYLES': {'FORMAT': 'Fixed', 'PLACE': 12},
+        'NODE_ELEMS': {'KEYS': [2202]},
+        'NODE_FLAG': {'CENTER': True, 'NODES': True},
+        'STAGE_STEP': ['CS2:013']
+    }
+}
+
+resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
+table = resp.json().get('HydrationStress(Local)', {})
+print(table.get("HEAD"))
+print(len(table.get("DATA", [])), "rows")
+```
+
+---
+
+### H-2. Temperature (Heat of Hydration Table)
+
+> **기능:** 수화열 해석의 절점 온도 테이블을 추출합니다.
+>
+> **Source**: [Temperature - HY Result Table ↗](https://support.midasuser.com/hc/en-us/articles/36020983264793) (2026-11-26 문서화)
+>
+> ⚠️ JSON Schema의 최상위 Key가 `"RESULTGRAPHIC"`으로 되어 있으나 이 API는 `post/TABLE`이며 요청 예제는 `"Argument"`로 시작합니다.
+
+#### `TABLE_TYPE`
+
+| 값 | 설명 |
+| --- | --- |
+| `"HEAT_HYDR_TEMPERATURE"` | Hydration Temperature |
+
+#### Response HEAD
+
+`["Index", "Node", "Stage", "Step", "Time", "Temperature"]`
+
+#### 전용 파라미터
+
+공통 파라미터(1~6번) 외에 아래 항목을 지원합니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 7 | Node / Element No. Input · Use Only One of the Three Methods | `"NODE_ELEMS"` | Object | All | Optional |
+| (1) | └ [Method 1: Specify Each ID] "KEYS": [101, 102, 103] | `"KEYS"` | Array[Integer] | - | Optional |
+| (1) | └ [Method 2: Specify ID Range] "TO": "101 to 105" | `"TO"` | String | - | Optional |
+| (1) | └ [Method 3: Specify Structure Group Name] "STRUCTURE_GROUP_NAME": "SG1" | `"STRUCTURE_GROUP_NAME"` | String | - | Optional |
+| 8 | Stage Step Name | `"STAGE_STEP"` | Array[String] | All | Optional |
+
+#### Request / Response JSON
+
+**POST Request Body — Hydration Temperature**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "HydrationTemperature",
+    "TABLE_TYPE": "HEAT_HYDR_TEMPERATURE",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "N", "DIST": "mm"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["Node", "Stage", "Step", "Time", "Temperature"],
+    "NODE_ELEMS": {"KEYS": [1252]},
+    "STAGE_STEP": ["CS2:013"]
+  }
+}
+```
+
+**POST Response Body — Hydration Temperature**
+
+```json
+{
+  "HydrationTemperature": {
+    "FORCE": "N",
+    "DIST": "mm",
+    "HEAD": ["Index", "Node", "Stage", "Step", "Time", "Temperature"],
+    "DATA": [["1", "1252", "CS2", "013", "1100.000000000000", "20.000000200000"]]
+  }
+}
+```
+
+#### Python Example
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/gen"
+HEADERS = {"Content-Type": "application/json", "MAPI-Key": "YOUR_MAPI_KEY"}
+
+payload = {
+    'Argument': {
+        'TABLE_NAME': 'HydrationTemperature',
+        'TABLE_TYPE': 'HEAT_HYDR_TEMPERATURE',
+        'UNIT': {'FORCE': 'N', 'DIST': 'mm'},
+        'STYLES': {'FORMAT': 'Fixed', 'PLACE': 12},
+        'NODE_ELEMS': {'KEYS': [1252]},
+        'STAGE_STEP': ['CS2:013']
+    }
+}
+
+resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
+table = resp.json().get('HydrationTemperature', {})
+print(table.get("HEAD"))
+print(len(table.get("DATA", [])), "rows")
+```
+
+---
+
+### H-3. Displacement (Heat of Hydration Table)
+
+> **기능:** 수화열 해석의 절점 변위 테이블을 추출합니다.
+>
+> **Source**: [Displacement - HY Result Table ↗](https://support.midasuser.com/hc/en-us/articles/36021071108377) (2026-11-26 문서화)
+>
+> ⚠️ JSON Schema의 최상위 Key가 `"RESULTGRAPHIC"`으로 되어 있으나 이 API는 `post/TABLE`이며 요청 예제는 `"Argument"`로 시작합니다.
+
+#### `TABLE_TYPE`
+
+| 값 | 설명 |
+| --- | --- |
+| `"HEAT_HYDR_DISPLACEMENT"` | Hydration Displacement |
+
+#### Response HEAD
+
+`["Index", "Node", "Stage", "Step", "Time", "DX", "DY", "DZ", "RX", "RY", "RZ"]`
+
+#### 전용 파라미터
+
+공통 파라미터(1~6번) 외에 아래 항목을 지원합니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 7 | Node/Element No. Input · Use Only One of the Three Methods | `"NODE_ELEMS"` | Object | All | Optional |
+| (1) | └ [Method 1: Specify Each ID] "KEYS": [ 101, 102, 103 ] | `"KEYS"` | Array[Integer] | - | Optional |
+| (1) | └ [Method 2: Specify ID Range] "TO": "101 to 105" | `"TO"` | String | - | Optional |
+| (1) | └ [Method 3: Specify Structure Group Name] "STRUCTURE_GROUP_NAME": "SG1" | `"STRUCTURE_GROUP_NAME"` | String | - | Optional |
+| 8 | Stage Step Name | `"STAGE_STEP"` | Array[String] | All | Optional |
+
+#### Request / Response JSON
+
+**POST Request Body — Hydration Displacement**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "HydrationDisplacement",
+    "TABLE_TYPE": "HEAT_HYDR_DISPLACEMENT",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "N", "DIST": "mm"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["Node", "Stage", "Step", "Time", "DX", "DY", "DZ", "RX", "RY", "RZ"],
+    "NODE_ELEMS": {"KEYS": [2809]},
+    "STAGE_STEP": ["CS2:013"]
+  }
+}
+```
+
+**POST Response Body — Hydration Displacement**
+
+```json
+{
+  "HydrationDisplacement": {
+    "FORCE": "N",
+    "DIST": "mm",
+    "HEAD": ["Index", "Node", "Stage", "Step", "Time", "DX", "DY", "DZ", "RX", "RY", "RZ"],
+    "DATA": [
+      ["1", "2809", "CS2", "013", "1100.000000000000", "-0.403454540476", "0.294750103956", "-1.156321396074", "0.000000000000", "0.000000000000", "0.000000000000"]
+    ]
+  }
+}
+```
+
+#### Python Example
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/gen"
+HEADERS = {"Content-Type": "application/json", "MAPI-Key": "YOUR_MAPI_KEY"}
+
+payload = {
+    'Argument': {
+        'TABLE_NAME': 'HydrationDisplacement',
+        'TABLE_TYPE': 'HEAT_HYDR_DISPLACEMENT',
+        'UNIT': {'FORCE': 'N', 'DIST': 'mm'},
+        'STYLES': {'FORMAT': 'Fixed', 'PLACE': 12},
+        'NODE_ELEMS': {'KEYS': [2809]},
+        'STAGE_STEP': ['CS2:013']
+    }
+}
+
+resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
+table = resp.json().get('HydrationDisplacement', {})
+print(table.get("HEAD"))
+print(len(table.get("DATA", [])), "rows")
+```
+
+---
+
+### H-4. Tensile Stress (Heat of Hydration Table)
+
+> **기능:** 수화열 해석의 인장응력 테이블을 추출합니다.
+>
+> **Source**: [Tensile Stress - HY Result Table ↗](https://support.midasuser.com/hc/en-us/articles/36021119165081) (2026-11-26 문서화)
+>
+> ⚠️ JSON Schema의 최상위 Key가 `"RESULTGRAPHIC"`으로 되어 있으나 이 API는 `post/TABLE`이며 요청 예제는 `"Argument"`로 시작합니다.
+
+#### `TABLE_TYPE`
+
+| 값 | 설명 |
+| --- | --- |
+| `"HEAT_HYDR_TENS_STRESS"` | Hydration Tensile Stress |
+
+#### Response HEAD
+
+`["Index", "Node", "Stage", "Step", "Time", "Stress"]`
+
+#### 전용 파라미터
+
+공통 파라미터(1~6번) 외에 아래 항목을 지원합니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 7 | Node / Element No. Input · Use Only One of the Three Methods | `"NODE_ELEMS"` | Object | All | Optional |
+| (1) | └ [Method 1: Specify Each ID] "KEYS": [101, 102, 103] | `"KEYS"` | Array[Integer] | - | Optional |
+| (1) | └ [Method 2: Specify ID Range] "TO": "101 to 105" | `"TO"` | String | - | Optional |
+| (1) | └ [Method 3: Specify Structure Group Name] "STRUCTURE_GROUP_NAME": "SG1" | `"STRUCTURE_GROUP_NAME"` | String | - | Optional |
+| 8 | Stage Step Name | `"STAGE_STEP"` | Array[String] | All | Optional |
+
+#### Request / Response JSON
+
+**POST Request Body — Hydration Tensile Stress**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "HydrationTensileStress",
+    "TABLE_TYPE": "HEAT_HYDR_TENS_STRESS",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "N", "DIST": "mm"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["Node", "Stage", "Step", "Time", "Stress"],
+    "NODE_ELEMS": {"KEYS": [2809]},
+    "STAGE_STEP": ["CS2:013"]
+  }
+}
+```
+
+**POST Response Body — Hydration Tensile Stress**
+
+```json
+{
+  "HydrationTensileStress": {
+    "FORCE": "N",
+    "DIST": "mm",
+    "HEAD": ["Index", "Node", "Stage", "Step", "Time", "Stress"],
+    "DATA": [["1", "2809", "CS2", "013", "1100.000000000000", "2.425816923260"]]
+  }
+}
+```
+
+#### Python Example
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/gen"
+HEADERS = {"Content-Type": "application/json", "MAPI-Key": "YOUR_MAPI_KEY"}
+
+payload = {
+    'Argument': {
+        'TABLE_NAME': 'HydrationTensileStress',
+        'TABLE_TYPE': 'HEAT_HYDR_TENS_STRESS',
+        'UNIT': {'FORCE': 'N', 'DIST': 'mm'},
+        'STYLES': {'FORMAT': 'Fixed', 'PLACE': 12},
+        'NODE_ELEMS': {'KEYS': [2809]},
+        'STAGE_STEP': ['CS2:013']
+    }
+}
+
+resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
+table = resp.json().get('HydrationTensileStress', {})
+print(table.get("HEAD"))
+print(len(table.get("DATA", [])), "rows")
+```
+
+---
+
+### H-5. Pipe Cooling Nodal Temperature
+
+> **기능:** 파이프 쿨링 절점 온도 테이블을 추출합니다.
+>
+> **Source**: [Pipe Cooling Nodal Temperature - HY Result Table ↗](https://support.midasuser.com/hc/en-us/articles/36021224509977) (2026-11-26 문서화)
+>
+> ⚠️ JSON Schema의 최상위 Key가 `"RESULTGRAPHIC"`으로 되어 있으나 이 API는 `post/TABLE`이며 요청 예제는 `"Argument"`로 시작합니다.
+
+#### `TABLE_TYPE`
+
+| 값 | 설명 |
+| --- | --- |
+| `"HEAT_HYDR_PIPE_NODE_TEMP"` | Pipe Cooling Nodal Temperature |
+
+#### Response HEAD
+
+`["Index", "PipeCooling", "Stage", "Step", "Time", "Node", "Temperature"]`
+
+#### 전용 파라미터
+
+공통 파라미터(1~6번) 외에 아래 항목을 지원합니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 7 | Stage Step Name | `"STAGE_STEP"` | Array[String] | All | Optional |
+
+#### Request / Response JSON
+
+**POST Request Body — Pipe Cooling Nodal Temperature**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "PipeCoolingNodalTemperature",
+    "TABLE_TYPE": "HEAT_HYDR_PIPE_NODE_TEMP",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "N", "DIST": "mm"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["PipeCooling", "Stage", "Step", "Time", "Node", "Temperature"],
+    "STAGE_STEP": ["CS1:001"]
+  }
+}
+```
+
+**POST Response Body — Pipe Cooling Nodal Temperature**
+
+> 원문 `DATA`는 5행이며 앞 4행만 발췌했습니다.
+
+```json
+{
+  "PipeCoolingNodalTemperature": {
+    "FORCE": "N",
+    "DIST": "mm",
+    "HEAD": ["Index", "PipeCooling", "Stage", "Step", "Time", "Node", "Temperature"],
+    "DATA": [
+      ["1", "PipeCooling", "CS1", "001", "10.000000000000", "296", "13.000000000000"],
+      ["2", "PipeCooling", "CS1", "001", "10.000000000000", "283", "13.000000000000"],
+      ["3", "PipeCooling", "CS1", "001", "10.000000000000", "270", "13.000000000000"],
+      ["4", "PipeCooling", "CS1", "001", "10.000000000000", "257", "13.000000000000"]
+    ]
+  }
+}
+```
+
+#### Python Example
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/gen"
+HEADERS = {"Content-Type": "application/json", "MAPI-Key": "YOUR_MAPI_KEY"}
+
+payload = {
+    'Argument': {
+        'TABLE_NAME': 'PipeCoolingNodalTemperature',
+        'TABLE_TYPE': 'HEAT_HYDR_PIPE_NODE_TEMP',
+        'UNIT': {'FORCE': 'N', 'DIST': 'mm'},
+        'STYLES': {'FORMAT': 'Fixed', 'PLACE': 12},
+        'STAGE_STEP': ['CS1:001']
+    }
+}
+
+resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
+table = resp.json().get('PipeCoolingNodalTemperature', {})
+print(table.get("HEAD"))
+print(len(table.get("DATA", [])), "rows")
 ```
 
 ---

@@ -81,7 +81,6 @@
 >
 > 다만 같은 표의 Default 열은 여전히 `false`로 적혀 있어 설명과 어긋난다. 생략 시 동작이 별도로
 > 기술된 이상 Default를 `false`로 보긴 어려우므로 위 표의 기본값 칸에 `(표기상)`을 덧붙였다.
-> **실제 API 동작은 검증하지 않았다** — 오류 제보 대상.
 >
 > 이 설명은 2026-09-15 기준 **Reaction 아티클에만** 있다. 같은 `post/TABLE` 엔드포인트의 형제
 > 아티클(Displacements `36009638400281`, Beam Stress `36011455813273` 등)은 아직
@@ -138,7 +137,7 @@
 > ⚠️ 2026-08-26 확인 (article id `36009349748249`): 공식 Specifications 표·JSON Schema enum은
 > 모두 `"REACTIONSURFACESPRING"`으로 일치하나, "Reaction(Local-Surface Spring)" Request Example
 > 하나만 `"REACTIONLSURFACESPRING"`(L 추가)을 사용한다. 표·스키마 2곳이 일치하는 쪽을 채택하고
-> 예제 쪽의 단발성 오타로 판단했으나, 실제 API 동작은 검증하지 않았으므로 오류제보 대상으로 남김.
+> 예제 쪽의 단발성 오타로 판단함.
 
 ### Response HEAD
 
@@ -710,7 +709,7 @@ for row in table.get("DATA", []):
 > 놓아 실제로는 짝이 맞지 않는 요청/응답 조합이었음(5절 Cable Force와 동일한 문제). 아래에 두
 > 시나리오를 정확한 요청/응답 쌍으로 분리해 정정. 시공단계 응답이 `SkewAngle` 2개 컬럼을 아예
 > 빠뜨리는 것은 원문 자체의 특이사항으로, 원문의 시공단계 Request Example이 `COMPONENTS`에
-> `"IEnd"`/`"JEnd"`를 명시적으로 요청함에도 실제 응답엔 반영되지 않는 자기모순 — 오류제보 대상.
+> `"IEnd"`/`"JEnd"`를 명시적으로 요청함에도 응답 예제엔 반영되지 않는 자기모순.
 
 ### Request / Response JSON
 
@@ -900,7 +899,7 @@ for row in table.get("DATA", []):
 > `"BEAMFORCEBYMAX"`로 잘못 적혀 있던 것(Request Example·Specifications 표는 원래부터
 > `"BEAMFORCEVBM"`)이 2026-09-01 원문 갱신으로 정정됐다 — 재확인 시 원문에 `BEAMFORCEBYMAX`
 > 0회, enum은 `["BEAMFORCE", "BEAMFORCEVBM"]`. 위 표는 처음부터 예제·표 기준이었으므로 수정
-> 없음. 2026-08-27 오류 제보 반영 결과로 보인다.
+> 없음.
 
 ### 부재 위치(Parts) 지정 — 8~12절 공통
 
@@ -1038,7 +1037,7 @@ for row in table.get("DATA", []):
 > ✅ **2026-09-06 해결 확인** (article id `36011373070745`): 공식 JSON Schema enum에만
 > `"BEAMFORCESIP"`로 잘못 적혀 있던 것(Request Example·Specifications 표는 원래부터
 > `"BEAMFORCESTP"`)이 2026-09-01 원문 갱신으로 정정됐다 — 재확인 시 원문에 `BEAMFORCESIP` 0회,
-> `BEAMFORCESTP` 3회. 위 표는 수정 없음. 2026-08-27 오류 제보 반영 결과로 보인다.
+> `BEAMFORCESTP` 3회. 위 표는 수정 없음.
 > `PARTS`(8절 공통 파라미터 참조, 값 예: `"PartI"`/`"PartJ"`)도 이 테이블에 적용되나 이전
 > 버전에는 누락되어 있었음.
 
@@ -1479,7 +1478,7 @@ for row in table.get("DATA", []):
 > ⚠️ 2026-08-26 확인: `BEAMSTRESS7DOFPSC`는 10절 `BEAMSTRESS7DOF`와 개념은 유사하나(같은
 > Sax/Ssy/Ssz 구조) 마지막 두 컬럼명이 `Cb(Ssy)`/`Cb(Ssz)`가 아니라 `Combined(Ssy)`/
 > `Combined(Ssz)`로 다르게 표기되어 있음 — 원문에서 별개로 작성된 두 아티클 간 명명 불일치로
-> 판단(오류라기보다 정보성 기록, 오류제보 대상).
+> 판단(오류라기보다 정보성 기록).
 
 ### Request / Response JSON
 
@@ -1689,8 +1688,7 @@ for row in table.get("DATA", []):
 > 짝을 이루는데도 응답 최상위 키가 요청한 `TABLE_NAME`이 아니라 리터럴 `"empty"`로 되어 있습니다
 > (`{"empty": {...}}`). 이 챕터의 다른 모든 테이블 및 공통 Response 구조(`{"<TABLE_NAME>": {...}}`)
 > 관례와 어긋나는데, 원문 저작 시 실제 값으로 치환하지 않은 복사·붙여넣기 실수인지, 이 엔드포인트만의
-> 실제 동작인지 판단할 근거가 없어 실제 API 동작은 검증하지 않았음을 전제로 오류제보 대상으로만
-> 남기고, 위 예제는 관례를 따라 `"Concurrent Joint Forces"` 키를 그대로 유지했습니다.
+> 이 엔드포인트의 의도인지 판단할 근거가 없어, 위 예제는 관례를 따라 `"Concurrent Joint Forces"` 키를 그대로 유지했습니다.
 
 ### Python Example
 

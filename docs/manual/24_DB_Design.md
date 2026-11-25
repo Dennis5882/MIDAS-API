@@ -9,7 +9,7 @@
 > **인증 헤더:** `MAPI-Key: <발급된 키>`  
 > **출처:** [MIDAS API Online Manual](https://support.midasuser.com/hc/en-us/articles/33016922742937)
 
-이 장은 설계 실행에 앞서 모델에 입력해야 하는 **설계 입력 DB**를 다룹니다. RC/강재 설계 코드, 검토용 철근 입력, 비지지 길이, 설계 부재 배정, 프레임 정의, 세장비 제한, 부재 타입 및 마크 수정, 그리고 보/기둥/벽체/가새의 철근 데이터 수정까지 총 **13개 엔드포인트**를 포함합니다.
+이 장은 설계 실행에 앞서 모델에 입력해야 하는 **설계 입력 DB**를 다룹니다. RC/강재 설계 코드, 검토용 철근 입력, 비지지 길이, 설계 부재 배정, 프레임 정의, 세장비 제한, 부재 타입 및 마크 수정, 그리고 보/기둥/벽체/가새의 철근 데이터 수정까지 총 **14개 엔드포인트**를 포함합니다.
 
 > **참고 1 — Load Combination(설계용 하중조합):** Concrete / Steel / SRC / Composite / Seismic Design 하중조합 관련 엔드포인트는 이 장이 아니라 **13장(Load Combinations)** 에서 다룹니다. 이 장은 설계 계산에 필요한 "입력 레코드(input DB)" 를 정의하는 CRUD 엔드포인트만 설명합니다.
 >
@@ -36,6 +36,7 @@
 | 11 | [`/db/REBC`](#11-dbrebc--modify-column-rebar-data-기둥-철근-데이터-수정) | 기둥 철근 데이터 수정 (Modify Column Rebar) | POST, GET, PUT, DELETE |
 | 12 | [`/db/REBW`](#12-dbrebw--modify-wall-rebar-data-벽체-철근-데이터-수정) | 벽체 철근 데이터 수정 (Modify Wall Rebar) | POST, GET, PUT, DELETE |
 | 13 | [`/db/REBR`](#13-dbrebr--modify-brace-rebar-data-가새-철근-데이터-수정) | 가새 철근 데이터 수정 (Modify Brace Rebar) | POST, GET, PUT, DELETE |
+| 14 | [`/db/ULCT`](#14-dbulct--underground-load-combination-type-지하-하중조합-타입) | 지하 하중조합 타입 (Underground Load Combination Type) | POST, GET, PUT, DELETE |
 
 > ✅ **11번 `/db/REBC`의 "POST 전용" 표기는 2026-09-28 공식 개정으로 근거가 없어져 삭제했습니다.** 공식 Active Methods가 POST · GET · PUT · DELETE로 명시되어 있습니다.
 
@@ -1387,8 +1388,6 @@ print(requests.get(f"{BASE_URL}/db/REBB", headers=HEADERS).json())
 > **기능:** 섹션(`KEY`) 번호별로 콘크리트 기둥의 철근 데이터를 수정합니다. 주철근(`vMAIN_BAR`), 단부/중앙부 전단철근(`SHEAR_BAR_END`/`SHEAR_BAR_CEN`), 띠철근 형식(`HOOP_TYPE`), 보-기둥 접합부 철근 수(`NUM_BAR_BC_JOINT`)를 포함합니다.
 >
 > ✅ **2026-09-28 공식 개정 반영.** 공식 영문 아티클(`49513980544793`)이 개정되어 `GET`/`PUT`/`DELETE`도 지원하는 것으로 명시되었습니다. 이전 판의 "POST 전용" 표기는 이 개정으로 공식 근거가 없어져 삭제했습니다.
->
-> ⚠️ **Gen NX 전용.** 2026-09-27 라이브 검증에서 Civil NX에는 이 경로가 없어 404였습니다.
 
 ### Input URI
 
@@ -1568,8 +1567,6 @@ print(requests.get(f"{BASE_URL}/db/REBC", headers=HEADERS).json())
 > **기능:** 벽체 번호별로 철근 데이터를 수정합니다. 수직/수평 철근(`VER_BAR`/`HOR_BAR`), 단부 철근(`END_BAR`/`NUM_END_BAR`), 경계요소 수평 철근(`BE_HOR_BAR`)과 길이(`BE_LENGTH`), 피복 거리(`DW`/`DE`), 두께, 적용 층 목록(`vSTORY_KEY`)을 포함합니다.
 >
 > ✅ **2026-09-28 공식 개정 반영.** 공식 영문 아티클(`49514033006745`)이 이번 개정으로 본문을 갱신했고, 한글 페이지도 같은 키 집합이 되었습니다. 이전 판의 `CREATE_SUB_WALL_ID`·`STORY`·`VERTICAL_REBAR`·`HORIZONTAL_REBAR`·`END_REBAR` 계열은 공식 문서에 없어 삭제했습니다.
->
-> ⚠️ **Gen NX 전용.** 2026-09-27 라이브 검증에서 Civil NX에는 이 경로가 없어 404였습니다.
 
 ### Input URI
 
@@ -1921,6 +1918,60 @@ res = requests.post(f"{BASE_URL}/db/REBR", headers=HEADERS, json=payload)
 print("POST:", res.status_code)
 print(requests.get(f"{BASE_URL}/db/REBR", headers=HEADERS).json())
 # requests.delete(f"{BASE_URL}/db/REBR", headers=HEADERS)
+```
+
+---
+
+## 14. `/db/ULCT` — Underground Load Combination Type (지하 하중조합 타입)
+
+> **기능:** 부재별로 지하 하중조합(Underground Loads) 적용 여부를 지정합니다.
+>
+> ⚠️ **Input URI는 공식 원문과 다르게 `/db/ULCT`로 적었습니다** (2026-11-26 확인, article id
+> `49513792356505`). 원문 본문의 Input URI는 en-us·ko·ja 모두 `db/LTSR`이지만, 아래 근거로
+> 복사 오류라고 판단했습니다.
+>
+> - 공식 목차(Design 8행)는 이 글을 `/db/ULCT`로 링크합니다.
+> - `db/LTSR`은 바로 위 행 [Limiting Slenderness Ratio ↗](https://support.midasuser.com/hc/en-us/articles/49513681377689) 글의 주소이며,
+>   그 글의 필드(`bNOTCHECK`/`COMP`/`TENS`)는 이 글의 필드(`bUNDERLOADTYPE`)와 다릅니다.
+> - 설계코드 네임스페이스의 같은 기능도 `.../ULCT`입니다
+>   (`DESIGN/STEEL/KDS-41-30-2022/ULCT`, `DESIGN/RC/KDS-41-20-2022/ULCT`). 이 둘은 별개 아티클입니다.
+
+### Input URI
+
+```
+{base url}/db/ULCT
+```
+
+### Active Methods
+
+`POST` · `GET` · `PUT` · `DELETE`
+
+### 파라미터
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Assign Member · For Underground Loads : true · For None-underground Loads : false | `"bUNDERLOADTYPE"` | Boolean | `false` | Optional |
+
+### Request / Response JSON
+
+**POST / PUT Request Body** (키는 부재 번호)
+
+```json
+{"Assign": {"2": {"bUNDERLOADTYPE": true}, "397": {"bUNDERLOADTYPE": false}}}
+```
+
+### Python 예제
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/gen"
+HEADERS = {"MAPI-Key": "<발급된 키>", "Content-Type": "application/json"}
+
+payload = {"Assign": {"2": {"bUNDERLOADTYPE": True}, "397": {"bUNDERLOADTYPE": False}}}
+res = requests.post(f"{BASE_URL}/db/ULCT", headers=HEADERS, json=payload)
+print("POST:", res.status_code)
+print(requests.get(f"{BASE_URL}/db/ULCT", headers=HEADERS).json())
 ```
 
 ---

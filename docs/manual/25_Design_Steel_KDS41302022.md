@@ -30,9 +30,9 @@
 > **메서드 패턴 3종:**
 > 1. **Config-singleton** (예: `DCO`, `DCTL`, `LLRF`, `SRDF`, `SMODI`, `MEMB`) — 모델당 하나의 전역/집합 설정으로, **POST가 없습니다**. 레코드는 최초 조회 시 암묵적으로 생성되거나 **PUT** 으로 설정/수정합니다. (`LCTB`는 `GET`·`DELETE`만 지원하는 파생 정보입니다.)
 > 2. **Member-CRUD** (예: `HCBM`, `LENG`, `KFAC`, `LTSR`, `SLRS`, `SERV`, `EQCT`, `ULCT`, `SUEQ`, `CRCM`, `CMFT`, `FMAG`, `CBFT`, `MBTP`, `MLLR`) — 부재/ID 키 기반 **전체 CRUD**(POST·GET·PUT·DELETE)를 지원합니다.
-> 3. **POST-action** (`CODE-ANAL`, `CODE-TABLE`, `CODE-REPORT`, `DREULT`, `TABLE`) — 검토 수행·결과표·보고서·이미지 출력 등의 **작업으로 POST만** 지원합니다.
+> 3. **POST-action** (`CODE-ANAL`, `CODE-TABLE`, `CODE-REPORT`, `DREULT`, `TABLE`, `OCHECK`) — 검토 수행·결과표·보고서·이미지 출력 등의 **작업으로 POST만** 지원합니다.
 
-> ⚠️ **엔드포인트마다 Active Methods가 다릅니다.** 아래 각 절의 **Active Methods**를 정확히 따르세요. (예: `DCO`/`DCTL`/`LLRF`/`SMODI`/`MEMB` = GET·PUT·DELETE, `LCTB` = GET·DELETE, `SRDF` = GET·DELETE·PUT, 5개 action 엔드포인트 = POST.)
+> ⚠️ **엔드포인트마다 Active Methods가 다릅니다.** 아래 각 절의 **Active Methods**를 정확히 따르세요. (예: `DCO`/`DCTL`/`LLRF`/`SMODI`/`MEMB` = GET·PUT·DELETE, `LCTB` = GET·DELETE, `SRDF` = GET·DELETE·PUT, 6개 action 엔드포인트 = POST.)
 
 ---
 
@@ -85,6 +85,7 @@
 | 25 | [`.../CODE-REPORT`](#25-designsteelkds-41-30-2022code-report--steel-code-check-report-강재-코드-검토-보고서) | Steel Code Check Report (강재 코드 검토 보고서) | POST |
 | 26 | [`.../DREULT`](#26-designsteelkds-41-30-2022dreult--steel-design-result-강재-설계-결과-이미지) | Steel Design Result (강재 설계 결과 이미지) | POST |
 | 27 | [`.../TABLE`](#27-designsteelkds-41-30-2022table--steel-member-design-forces-강재-부재-설계-부재력) | Steel Member Design Forces (강재 부재 설계 부재력) | POST |
+| 28 | [`.../OCHECK`](#28-designsteelkds-41-30-2022ocheck--steel-optimal-design-강재-최적-설계) | Steel Optimal Design (강재 최적 설계) | POST |
 
 ---
 
@@ -145,7 +146,7 @@
 > ⚠️ **2026-09-28 공식 개정 반영 — 키워드 삭제.** 2026-09-06에는 원문 `"maxProperties"`가
 > `"maxroperties"`로 오타 표기되어 있었으나, 2026-09-28 개정으로 원문 스키마(영문·한글 모두)에서
 > `maxProperties` 키워드 자체가 사라졌다. 공식 기준을 따라 위 스키마에서도 해당 줄을 제거했다.
-> 다만 이것이 의도된 삭제인지 정정 누락인지는 공식 측 확인이 필요하다 — 확인 전까지 추가 제보는 보류.
+> 다만 이것이 의도된 삭제인지 정정 누락인지는 공식 문서만으로 알 수 없다.
 > 동일 구조인 26장 `DESIGN/RC/DRC`는 여전히 `"maxProperties"`를 쓴다.
 
 ### 파라미터
@@ -1457,6 +1458,18 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 ## 8. `DESIGN/STEEL/KDS-41-30-2022/ULCT` — Underground Load Combination Type (지하 하중조합 타입)
 
 > **기능:** 부재별로 지하 하중조합(Underground Loads) 적용 여부를 배정합니다.
+>
+> ⚠️ **ULCT는 공식 문서에 주소가 세 가지로 보입니다** (2026-11-26 확인).
+>
+> | 위치 | 적힌 주소 |
+> | --- | --- |
+> | 공식 목차 Design 8행 | `/db/ULCT` |
+> | 그 행이 링크한 [글 `49513792356505` ↗](https://support.midasuser.com/hc/en-us/articles/49513792356505) 본문의 Input URI (en-us·ko·ja) | `db/LTSR` |
+> | 이 절의 원문 글 `57424449702681` | `DESIGN/STEEL/KDS-41-30-2022/ULCT` |
+>
+> 이 절은 자기 원문 글이 명시한 `DESIGN/STEEL/KDS-41-30-2022/ULCT`를 그대로 씁니다. 위 두 행은
+> 별개의 `/db/` 글에 대한 것으로, 판단 근거는
+> [24장 14절 `/db/ULCT`](./24_DB_Design.md#14-dbulct--underground-load-combination-type-지하-하중조합-타입)에 있습니다.
 
 ### Input URI
 
@@ -6247,6 +6260,105 @@ payload = {
 res = requests.post(URI, headers=HEADERS, json=payload)
 print("POST:", res.status_code)
 print(res.json())
+```
+
+---
+
+## 28. `DESIGN/STEEL/KDS-41-30-2022/OCHECK` — Steel Optimal Design (강재 최적 설계)
+
+> **기능:** 지정한 단면 번호에 대해 후보 단면 DB에서 조합 응력비 목표를 만족하는 최적 단면을 선정합니다.
+>
+> **Source**: [Steel Optimal Design ↗](https://support.midasuser.com/hc/en-us/articles/57389695353241) (2026-11-26 문서화)
+>
+> ⚠️ 공식 아티클에는 **요청·응답 예제가 없고 JSON Schema와 Specifications 표만** 있습니다. 아래 요청
+> 예제는 스키마를 근거로 구성한 것입니다.
+> `OUTPUT.MODEL_UPDATE`를 `true`로 보내면 모델이 변경됩니다.
+
+### Input URI
+
+```
+{base url}/DESIGN/STEEL/KDS-41-30-2022/OCHECK
+```
+
+### Active Methods
+
+`POST`
+
+### 파라미터 (`"Argument"` 객체)
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Section List & Design Criteria (POST input only) | `"SECT_LIST"` | Array[Object] | - | **Required** |
+| 1.1 | └ Section No. (input required, not name) | `"SECT_NO"` | Integer | - | **Required** |
+| 1.2 | └ Desired limits for combined stress ratio | `"ALLOW"` | Number | `1` | Optional |
+| 1.3 | └ SectDB · BUILT (Welded sections): "BUILT" · KS21 (Korean Standard rolled sections): "KS21" · USER (User-defined sections): "USER" | `"SECT_DB"` | String | - | **Required** |
+| 1.4 | └ Shape · L-Angle: "L" · C-Channel: "C" · H-Shape: "H" · T-Shape: "T" · Box Tube: "B" · Pipe: "P" · Round Bar: "SR" · Square Bar: "SB" · Built-up L: "2L" · Built-up C: "2C" | `"SHAPE"` | String | - | Optional |
+| 1.5 | └ D1, The default value is based on the default size defined in the DB section. | `"D1"` | Number | - | Optional |
+| 1.6 | └ D2, The default value is based on the default size defined in the DB section. | `"D2"` | Number | - | Optional |
+| 1.7 | └ D3, The default value is based on the default size defined in the DB section. | `"D3"` | Number | - | Optional |
+| 1.8 | └ D4, The default value is based on the default size defined in the DB section. | `"D4"` | Number | - | Optional |
+| 1.9 | └ D5, The default value is based on the default size defined in the DB section. | `"D5"` | Number | - | Optional |
+| 1.10 | └ D6, The default value is based on the default size defined in the DB section. | `"D6"` | Number | - | Optional |
+| 2 | Analysis Option | `"ANALYSIS_OPT"` | Object | - | Optional |
+| 2.1 | └ Analysis Time (0=selection only, max 10) Constraints: · Value Range: >= 0, <= 10 | `"ANAL_TIME"` | Integer | `1` | Optional |
+| 3 | Column Design | `"COLUMN_DESIGN"` | Object | - | Optional |
+| 3.1 | └ Applied Forces and Moments · Axial Forces and Moments: "0" · Axial Forces Only: "1" | `"APPLIED_FORCES"` | Integer | `0` | Optional |
+| 3.2 | └ Joint Method of Built-Up Column Splices · Internal Const (Fixed inside, expand outward): "0" · External Const (Fixed outside, adjust inward): "1" | `"JOINT_METHOD"` | Integer | `1` | Optional |
+| 4 | Output Options | `"OUTPUT"` | Object | - | Optional |
+| 4.1 | └ Optimal Design (Max. Ratio) | `"GRAPH_MAX_RATIO"` | Boolean | `false` | Optional |
+| 4.2 | └ Optimal Design (Average Ratio) | `"GRAPH_AVG_RATIO"` | Boolean | `false` | Optional |
+| 4.3 | └ Optimal Design (Weight) | `"GRAPH_WEIGHT"` | Boolean | `false` | Optional |
+| 4.4 | └ Optimal Design (Weight Sum) | `"GRAPH_WEIGHT_SUM"` | Boolean | `false` | Optional |
+| 4.5 | └ Optimal Design (Weight Ratio) | `"GRAPH_WEIGHT_RATIO"` | Boolean | `false` | Optional |
+| 4.6 | └ Text Report | `"TEXT_REPORT"` | Boolean | `false` | Optional |
+| 4.7 | └ Model Update | `"MODEL_UPDATE"` | Boolean | `false` | Optional |
+| 4.8 | └ Export Path (folder or prefix) e.g. C:\MIDAS\Report\optimal_design | `"EXPORT_PATH"` | String | - | Optional |
+| 5 | Plate Thickness Data (only when SectDB=BUILT) | `"PLATE_THICKNESS"` | Array[Number] | - | Optional |
+| 6 | User-Defined Section DB (only when SectDB=USER) | `"USER_DEFINED_SECT"` | Array[Object] | - | **Required** (`USER`) |
+| 6.1 | └ No | `"NO"` | Integer | - | **Required** |
+| 6.2 | └ Shape | `"SHAPE"` | String | - | **Required** |
+| 6.3 | └ D1 | `"D1"` | Number | `0` | Optional |
+| 6.4 | └ D2 | `"D2"` | Number | `0` | Optional |
+| 6.5 | └ D3 | `"D3"` | Number | `0` | Optional |
+| 6.6 | └ D4 | `"D4"` | Number | `0` | Optional |
+| 6.7 | └ D5 | `"D5"` | Number | `0` | Optional |
+| 6.8 | └ D6 | `"D6"` | Number | `0` | Optional |
+
+### Request / Response JSON
+
+**POST Request Body** (스키마 기준 구성)
+
+```json
+{
+  "Argument": {
+    "SECT_LIST": [
+      {"SECT_NO": 1, "ALLOW": 0.9, "SECT_DB": "KS21", "SHAPE": "H"}
+    ],
+    "ANALYSIS_OPT": {"ANAL_TIME": 0},
+    "OUTPUT": {"TEXT_REPORT": true, "MODEL_UPDATE": false}
+  }
+}
+```
+
+> 응답 구조는 공식 아티클에 기재되어 있지 않습니다.
+
+### Python 예제
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/gen"
+HEADERS = {"MAPI-Key": "<발급된 키>", "Content-Type": "application/json"}
+
+payload = {
+    "Argument": {
+        "SECT_LIST": [{"SECT_NO": 1, "SECT_DB": "KS21", "SHAPE": "H"}],
+        "ANALYSIS_OPT": {"ANAL_TIME": 0},
+        "OUTPUT": {"TEXT_REPORT": True, "MODEL_UPDATE": False},
+    }
+}
+res = requests.post(f"{BASE_URL}/DESIGN/STEEL/KDS-41-30-2022/OCHECK", headers=HEADERS, json=payload)
+print(res.status_code, res.text)
 ```
 
 ---

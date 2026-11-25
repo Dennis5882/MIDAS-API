@@ -5,78 +5,67 @@
       "article_id": "35994078198681",
       "article_title": "New Project",
       "updated_at": "2025-11-04T00:18:17Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "2. /doc/OPEN — Open Project": {
       "article_id": "35994112560793",
       "article_title": "Open Project",
       "updated_at": "2025-11-04T00:19:06Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "3. /doc/CLOSE — Close Project": {
       "article_id": "35994162529305",
       "article_title": "Close Project",
       "updated_at": "2025-11-04T00:18:18Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "4. /doc/SAVE — Save": {
       "article_id": "35994210207513",
       "article_title": "Save",
       "updated_at": "2025-09-17T06:22:29Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "5. /doc/SAVEAS — Save As": {
       "article_id": "35994277012377",
       "article_title": "Save As",
       "updated_at": "2025-09-17T06:22:28Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "6. /doc/STAGAS — Save Current Stage As": {
       "article_id": "50707525717401",
       "article_title": "Save Current Stage As",
       "updated_at": "2026-06-30T08:51:02Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "7. /doc/IMPORT — Import to JSON": {
       "article_id": "35994338816793",
       "article_title": "Import to Json",
       "updated_at": "2025-09-17T06:22:29Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "8. /doc/IMPORTMXT — Import to mct/mgt": {
       "article_id": "35994365225113",
       "article_title": "Import to mct/mgt",
       "updated_at": "2025-11-04T00:20:02Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "9. /doc/EXPORT — Export to JSON": {
       "article_id": "35994422273305",
       "article_title": "Export to Json",
       "updated_at": "2025-02-06T06:30:12Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "10. /doc/EXPORTMXT — Export to mct/mgt": {
       "article_id": "35994462805017",
       "article_title": "Export to mct/mgt",
       "updated_at": "2025-11-04T00:15:02Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "11. /doc/ANAL — Perform Analysis": {
       "article_id": "35685160815897",
       "article_title": "Perform Analysis",
       "updated_at": "2025-02-06T06:52:23Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     }
   },
   "02_DB_Project_Structure.md": {
@@ -84,106 +73,91 @@
       "article_id": "35801869341337",
       "article_title": "Project Information",
       "updated_at": "2026-09-01T01:00:22Z",
-      "verified_at": "2026-09-06",
-      "note": "✅ 해결 확인(2026-09-06 정기 점검): 원문 표 18번 Key 'APROVE' 오타가 2026-09-01 갱신으로 'APPROVE'로 정정됨(재확인 APPROVE 3회/APROVE 0회). 2026-08-27 오류 제보 반영 결과로 보임. 로컬은 처음부터 정상 표기라 표 수정 없음, ⚠️ 주석만 해결 기록으로 교체"
+      "verified_at": "2026-09-06"
     },
     "2. /db/UNIT — Unit System": {
       "article_id": "35802155483801",
       "article_title": "Unit System",
       "updated_at": "2025-02-06T06:53:10Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "3. /db/STYP — Structure Type": {
       "article_id": "35802404495257",
       "article_title": "Structure Type",
       "updated_at": "2025-02-06T06:53:33Z",
-      "verified_at": "2026-08-25",
-      "note": "기본값 6개 정정(bMASSOFFSET/bSELFWEIGHT/bALIGNBEAM/bALIGNSLAB/bROTRIGID=false, SMASS=1)"
+      "verified_at": "2026-08-25"
     },
     "4. /db/STYP-M1 — Structure Type (Hyper-S)": {
       "article_id": "56375311138201",
       "article_title": "Structure Type",
       "updated_at": "2026-05-15T08:31:57Z",
-      "verified_at": "2026-08-30",
-      "note": "INDEX.md엔 등재돼 있었으나 본문 섹션이 누락돼 있던 것을 신규 작성. 클래식 STYP와 별개 아티클(ko 로케일 전용). 원문 JSON Schema의 STYPE enum이 '_3D'(언더스코어)인데 Request Examples·Specifications 표는 '3D'로 일관 표기하는 모순 확인, 예제/표 기준으로 '3D' 채택. 최초 작성 시 POST 미지원 사유로 ACTL-M1의 '기본 레코드가 자동 생성됨' 문구를 그대로 가져다 썼으나, 원문에 그런 설명이 없는 근거 없는 추정이었음을 재확인 후 삭제(2026-08-30)"
+      "verified_at": "2026-08-30"
     },
     "5. /db/GRUP — Structure Group": {
       "article_id": "35802441712921",
       "article_title": "Structure Group",
       "updated_at": "2025-11-04T00:18:15Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "6. /db/BNGR — Boundary Group": {
       "article_id": "35804937452313",
       "article_title": "Boundary Group",
       "updated_at": "2025-02-06T06:54:56Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "7. /db/LDGR — Load Group": {
       "article_id": "35804975346841",
       "article_title": "Load Group",
       "updated_at": "2025-02-06T06:55:17Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "8. /db/TDGR — Tendon Group": {
       "article_id": "35805198736793",
       "article_title": "Tendon Group",
       "updated_at": "2025-02-06T06:55:40Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "9. /db/NPLN — Named Plane": {
       "article_id": "35805287066649",
       "article_title": "Named Plane",
       "updated_at": "2025-02-06T06:56:00Z",
-      "verified_at": "2026-08-25",
-      "note": "TOL 기본값 0, COORD Optional/기본값 0으로 정정"
+      "verified_at": "2026-08-25"
     },
     "10. /db/CO_M — Material Color": {
       "article_id": "35805703171353",
       "article_title": "Material Color",
       "updated_at": "2025-02-06T06:57:46Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "11. /db/CO_S — Section Color": {
       "article_id": "35805763514393",
       "article_title": "Section Color",
       "updated_at": "2025-02-06T06:58:08Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치 (CO_M과 동일 구조)"
+      "verified_at": "2026-08-25"
     },
     "12. /db/CO_T — Thickness Color": {
       "article_id": "35805833925785",
       "article_title": "Thickness Color",
       "updated_at": "2025-02-06T06:58:28Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치 (CO_M과 동일 구조)"
+      "verified_at": "2026-08-25"
     },
     "13. /db/CO_F — Floor Load Color": {
       "article_id": "35805846236441",
       "article_title": "Floor Load Color",
       "updated_at": "2025-09-17T06:22:27Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "14. /db/SPAN — Span Information": {
       "article_id": "35805957502233",
       "article_title": "Span Information",
       "updated_at": "2025-02-06T06:59:14Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "15. /db/STOR — Story Data": {
       "article_id": "49513466793113",
       "article_title": "Story Data",
       "updated_at": "2026-07-01T01:38:53Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치 (15개 필드 모두 확인)"
+      "verified_at": "2026-08-25"
     }
   },
   "03_DB_Node_Element.md": {
@@ -191,43 +165,37 @@
       "article_id": "35806845654169",
       "article_title": "Node",
       "updated_at": "2025-02-06T06:59:36Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "2. /db/ELEM": {
       "article_id": "35806934300825",
       "article_title": "Element",
       "updated_at": "2025-11-04T00:18:17Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치 (10개 요소 타입 서브테이블 전부 확인)"
+      "verified_at": "2026-08-25"
     },
     "3. /db/SKEW": {
       "article_id": "35807178748569",
       "article_title": "Node Local Axis",
       "updated_at": "2025-02-06T07:00:29Z",
-      "verified_at": "2026-08-25",
-      "note": "iMETHOD 기본값 1(Angle) 정보 추가"
+      "verified_at": "2026-08-25"
     },
     "4. /db/MADO": {
       "article_id": "35807228332825",
       "article_title": "Define Domain",
       "updated_at": "2025-02-06T07:00:51Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "5. /db/SBDO": {
       "article_id": "35807304820761",
       "article_title": "Define Sub-Domain",
       "updated_at": "2025-11-04T00:15:03Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "6. /db/DOEL": {
       "article_id": "35807341514393",
       "article_title": "Domain-Element",
       "updated_at": "2025-02-06T07:01:37Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     }
   },
   "04_DB_Properties.md": {
@@ -236,274 +204,235 @@
       "article_id": "35807411331993",
       "article_title": "Material Properties",
       "updated_at": "2025-11-04T00:15:06Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "2. /db/MATL-M1": {
       "article_id": "56396523438873",
       "article_title": "Material Properties",
       "updated_at": "2026-05-07T01:20:12Z",
-      "verified_at": "2026-08-25",
-      "note": "우리 문서는 의도적 스텁(기존 패턴) — 확장 안 함"
+      "verified_at": "2026-08-25"
     },
     "3. /db/IMFM": {
       "article_id": "35807475893401",
       "article_title": "Inelastic Material Properties for Fiber Model",
       "updated_at": "2025-02-06T07:02:23Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "4. /db/IMFM-M1": {
       "article_id": "56375076523929",
       "article_title": "Inelastic Material Link for Auto Generation",
       "updated_at": "2026-05-07T01:20:14Z",
-      "verified_at": "2026-08-25",
-      "note": "원문은 CONCRETE/STEEL 풀 구조 있음, 우리 문서는 의도적 스텁(기존 패턴) — 확장 안 함"
+      "verified_at": "2026-08-25"
     },
     "5. /db/TDMF": {
       "article_id": "35807665049369",
       "article_title": "Time Dependent Material Properties - User Defined",
       "updated_at": "2025-02-06T07:02:49Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "6. /db/TDMT": {
       "article_id": "35808006330009",
       "article_title": "Time Dependent Material Properties - Creep/Shrinkage",
       "updated_at": "2025-09-17T06:20:17Z",
-      "verified_at": "2026-08-25",
-      "note": "CODE 코드표 5개 항목 누락 보강(공통+CEB-FIP+ACI 필드만 발췌 기재, 나머지 코드군 세부 필드는 의도적 생략)"
+      "verified_at": "2026-08-25"
     },
     "7. /db/TDME": {
       "article_id": "35808102389401",
       "article_title": "Time Dependent Material Properties - Compressive Strength",
       "updated_at": "2025-08-12T01:02:49Z",
-      "verified_at": "2026-08-25",
-      "note": "전면 정정 — KDS-2016 그룹 오류(A/B→iCTYPE+DENSITY)"
+      "verified_at": "2026-08-25"
     },
     "8. /db/EDMP": {
       "article_id": "35808245801881",
       "article_title": "Change Property",
       "updated_at": "2025-02-06T07:04:01Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "9. /db/TMAT": {
       "article_id": "35808280891033",
       "article_title": "Time Dependent Material Link",
       "updated_at": "2025-02-06T07:04:22Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "10. /db/EPMT": {
       "article_id": "35808376517913",
       "article_title": "Plastic Material",
       "updated_at": "2025-02-06T07:04:51Z",
-      "verified_at": "2026-08-25",
-      "note": "전면 보강 — Drucker/Masonry/ConcreteDamage 3개 모델 객체 구조 추가, HARDENING_COEF Required 정정"
+      "verified_at": "2026-08-25"
     },
     "11. /db/EPMT-M1": {
       "article_id": "56511025581337",
       "article_title": "Plastic Material",
       "updated_at": "2026-05-15T08:31:57Z",
-      "verified_at": "2026-08-25",
-      "note": "우리 문서는 의도적 스텁(기존 패턴) — 확장 안 함"
+      "verified_at": "2026-08-25"
     },
     "12. /db/SECT (common)": {
       "article_id": "35808653964185",
       "article_title": "Section Properties - Common",
       "updated_at": "2025-11-04T00:18:17Z",
-      "verified_at": "2026-08-25",
-      "note": "공통부 완전 일치"
+      "verified_at": "2026-08-25"
     },
     "12-A. /db/SECT DB/User": {
       "article_id": "35809067039513",
       "article_title": "Section Properties - DB/User",
       "updated_at": "2025-11-04T00:15:04Z",
-      "verified_at": "2026-08-25",
-      "note": "대표 예시 수준 유지"
+      "verified_at": "2026-08-25"
     },
     "12-B. /db/SECT Value": {
       "article_id": "35839753881497",
       "article_title": "Section Properties - Value",
       "updated_at": "2026-06-19T04:05:53Z",
-      "verified_at": "2026-08-25",
-      "note": "CALC_OPT Create Only 확인, 대표 예시 수준 유지"
+      "verified_at": "2026-08-25"
     },
     "12-C. /db/SECT SRC": {
       "article_id": "35845378225689",
       "article_title": "Section Properties - SRC",
       "updated_at": "2025-02-06T07:18:09Z",
-      "verified_at": "2026-08-25",
-      "note": "대표 예시 수준 유지"
+      "verified_at": "2026-08-25"
     },
     "12-D. /db/SECT PSC": {
       "article_id": "35851688190105",
       "article_title": "Section Properties - PSC",
       "updated_at": "2025-02-06T07:43:14Z",
-      "verified_at": "2026-08-25",
-      "note": "9700줄+, 대표 예시 수준 유지(전수 미대조)"
+      "verified_at": "2026-08-25"
     },
     "12-E. /db/SECT Tapered": {
       "article_id": "35852806893593",
       "article_title": "Section Properties - Tapered - DB/User",
       "updated_at": "2025-11-04T00:17:28Z",
-      "verified_at": "2026-08-25",
-      "note": "대표 예시 수준 유지"
+      "verified_at": "2026-08-25"
     },
     "12-F. /db/SECT Composite-Steel": {
       "article_id": "35939122737689",
       "article_title": "Section Properties - Composite - Steel",
       "updated_at": "2025-11-04T00:17:27Z",
-      "verified_at": "2026-08-25",
-      "note": "대표 예시 수준 유지"
+      "verified_at": "2026-08-25"
     },
     "12-F. /db/SECT SteelGirder": {
       "article_id": "35939506348697",
       "article_title": "Section Properties - Steel Girder",
       "updated_at": "2025-08-20T07:59:18Z",
-      "verified_at": "2026-08-25",
-      "note": "대표 예시 수준 유지"
+      "verified_at": "2026-08-25"
     },
     "13. /db/THIK": {
       "article_id": "35942236652697",
       "article_title": "Thickness - Value",
       "updated_at": "2025-03-05T10:37:24Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "14. /db/TSGR": {
       "article_id": "35942955627673",
       "article_title": "Tapered Group",
       "updated_at": "2025-03-05T10:57:17Z",
-      "verified_at": "2026-08-25",
-      "note": "Y축 3필드 누락 보강"
+      "verified_at": "2026-08-25"
     },
     "15. /db/SECF": {
       "article_id": "35943174833177",
       "article_title": "Section Manager - Stiffness",
       "updated_at": "2025-03-05T11:00:34Z",
-      "verified_at": "2026-08-25",
-      "note": "J단 11필드 누락 보강"
+      "verified_at": "2026-08-25"
     },
     "16. /db/RPSC": {
       "article_id": "35943227821465",
       "article_title": "Section Manager - Reinforcements",
-      "updated_at": "2026-01-12T06:03:33Z",
-      "verified_at": "2026-08-25",
-      "note": "SBW/TR/SR/MBAR 전체 누락 보강"
+      "updated_at": "2026-11-25T04:16:04Z",
+      "verified_at": "2026-11-26"
     },
     "17. /db/STRPSSM": {
       "article_id": "35943448721177",
       "article_title": "Section Manager - Stress Points",
-      "updated_at": "2025-03-05T11:06:15Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "updated_at": "2026-11-25T04:46:03Z",
+      "verified_at": "2026-11-26"
     },
     "18. /db/PSSF": {
       "article_id": "35943557337753",
       "article_title": "Section Manager - Plate Stiffness Scale Factor",
       "updated_at": "2025-03-05T11:08:16Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "19. /db/VBEM": {
       "article_id": "35943802727065",
       "article_title": "Section Manager - Virtual Beam",
       "updated_at": "2025-03-05T11:10:15Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "20. /db/VSEC": {
       "article_id": "35943859944729",
       "article_title": "Section Manager - Virtual Section",
       "updated_at": "2025-03-05T11:12:20Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "21. /db/EWSF": {
       "article_id": "35943954272281",
       "article_title": "Effective Width Scale Factor",
       "updated_at": "2025-03-05T11:14:53Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "22. /db/IEHC": {
       "article_id": "35944093809689",
       "article_title": "Inelastic Hinge Control Data",
       "updated_at": "2025-11-04T00:15:04Z",
-      "verified_at": "2026-08-25",
-      "note": "Wall계열 11필드 누락 보강, 기존 예제 필드명 오류 정정"
+      "verified_at": "2026-08-25"
     },
     "23. /db/IEHG": {
       "article_id": "35944228031001",
       "article_title": "Assign Inelastic Hinge Properties",
       "updated_at": "2025-03-05T11:18:44Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "24. /db/IEHG-BEAM-M1": {
       "article_id": "57668691043865",
       "article_title": "Assign Inelastic Hinges - Beam",
       "updated_at": "2026-05-07T01:20:06Z",
-      "verified_at": "2026-08-25",
-      "note": "의도적 스텁(기존 패턴) — 확장 안 함"
+      "verified_at": "2026-08-25"
     },
     "25. /db/IEHG-TRUSS-M1": {
       "article_id": "57668724267545",
       "article_title": "Assign Inelastic Hinges - Truss",
       "updated_at": "2026-05-07T01:20:04Z",
-      "verified_at": "2026-08-25",
-      "note": "의도적 스텁(기존 패턴) — 확장 안 함"
+      "verified_at": "2026-08-25"
     },
     "26. /db/IEHG-GL-M1": {
       "article_id": "57668691115801",
       "article_title": "Assign Inelastic Hinges - General Link",
       "updated_at": "2026-05-07T01:20:05Z",
-      "verified_at": "2026-08-25",
-      "note": "의도적 스텁(기존 패턴) — 확장 안 함"
+      "verified_at": "2026-08-25"
     },
     "27. /db/IEHG-PSS-M1": {
       "article_id": "57668755432473",
       "article_title": "Assign Inelastic Hinges - Point Spring Support",
       "updated_at": "2026-05-07T01:20:05Z",
-      "verified_at": "2026-08-25",
-      "note": "의도적 스텁(기존 패턴) — 확장 안 함"
+      "verified_at": "2026-08-25"
     },
     "28. /db/FIMP": {
       "article_id": "35944335180569",
       "article_title": "Inelastic Material Properties",
       "updated_at": "2025-03-05T11:40:37Z",
-      "verified_at": "2026-08-25",
-      "note": "Kent&Park 4필드 누락 보강, 나머지 모델은 대표 예시 원칙상 미기재"
+      "verified_at": "2026-08-25"
     },
     "29. /db/FIBR": {
       "article_id": "35944476555801",
       "article_title": "Fiber Division of Section",
       "updated_at": "2025-03-05T11:43:15Z",
-      "verified_at": "2026-08-25",
-      "note": "FIBR_BASE 8필드+모니터링 2필드 누락 보강, FIBR_BASE_KEY 타입 정정"
+      "verified_at": "2026-08-25"
     },
     "30. /db/GRDP": {
       "article_id": "35944577940633",
       "article_title": "Group Damping",
       "updated_at": "2025-03-05T11:47:57Z",
-      "verified_at": "2026-08-25",
-      "note": "Rayleigh감쇠 18필드+우선순위 4필드 누락 보강(챕터 내 최대 누락)"
+      "verified_at": "2026-08-25"
     },
     "31. /db/ESSF": {
       "article_id": "44613910309401",
       "article_title": "Element Stiffness Scale Factor",
       "updated_at": "2026-07-02T00:07:22Z",
-      "verified_at": "2026-08-25",
-      "note": "iPart 필드 누락 보강"
+      "verified_at": "2026-08-25"
     },
     "32. /db/MATD": {
       "article_id": "35993732216985",
       "article_title": "Modify Concrete Materials",
       "updated_at": "2026-09-01T01:04:26Z",
-      "verified_at": "2026-09-06",
-      "note": "✅ 해결 확인(2026-09-06): 원문 표 4번 Key 'RABAR_CODENAME' 오타가 'REBAR_CODENAME'로 정정됨(오류 제보 반영 추정). ⚠️ 신규: 2026-09-01 갱신으로 최상위에 bSERVCHECK/dSHORTTERM/dLONGTERM 3개 필드가 JSON Schema에만 추가됨(표·예제엔 없음) — 로컬 표에 9~11번으로 추정 표기 추가. ⚠️ 원문 스키마가 유효한 JSON이 아님(SUBREBAR_B_FY 닫는 중괄호 뒤 쉼표 누락) — 오류 제보 대상"
+      "verified_at": "2026-09-06"
     }
   },
   "05_DB_Boundary.md": {
@@ -511,169 +440,145 @@
       "article_id": "35944759597337",
       "article_title": "Constraint Support",
       "updated_at": "2025-11-04T00:15:03Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "2. /db/NSPR": {
       "article_id": "35945908301081",
       "article_title": "Point Spring",
       "updated_at": "2025-03-06T00:11:23Z",
-      "verified_at": "2026-08-25",
-      "note": "전면 정정 — COMP/TENS/MULTI 구조 오류(가짜 SK 필드 삭제)"
+      "verified_at": "2026-08-25"
     },
     "3. /db/GSTP": {
       "article_id": "35946004118169",
       "article_title": "Define General Spring Type",
       "updated_at": "2025-03-06T00:03:56Z",
-      "verified_at": "2026-08-25",
-      "note": "21항 배열 인덱스 매핑 정정"
+      "verified_at": "2026-08-25"
     },
     "4. /db/GSPR": {
       "article_id": "35946151002393",
       "article_title": "Assign General Spring Supports",
       "updated_at": "2025-03-06T00:05:45Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "5. /db/SSPS": {
       "article_id": "35946218805785",
       "article_title": "Surface Spring",
       "updated_at": "2025-03-31T04:24:17Z",
-      "verified_at": "2026-08-25",
-      "note": "WIDTH 필드 누락 보강"
+      "verified_at": "2026-08-25"
     },
     "6. /db/ELNK": {
       "article_id": "35946439146649",
       "article_title": "Elastic Link",
       "updated_at": "2025-11-04T00:17:25Z",
-      "verified_at": "2026-08-25",
-      "note": "원문 표 오타 확인(MULTI LINEAR/RAIL INTERACT), RAILINTERACT DIR enum 명시"
+      "verified_at": "2026-08-25"
     },
     "7. /db/RIGD": {
       "article_id": "35946584247193",
       "article_title": "Rigid Link",
       "updated_at": "2025-03-06T00:17:53Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "8. /db/NLLP": {
       "article_id": "35946764618905",
       "article_title": "General Link Properties",
       "updated_at": "2026-02-23T05:33:13Z",
-      "verified_at": "2026-08-25",
-      "note": "공통필드 3개 누락 보강, 장치별 상세는 대표 수준 유지(6000줄+)"
+      "verified_at": "2026-08-25"
     },
     "9. /db/NLNK": {
       "article_id": "35946942651289",
       "article_title": "General Link",
       "updated_at": "2025-03-06T00:31:28Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치 (VECTOR_VALUES 등 기존 표기 정확 확인)"
+      "verified_at": "2026-08-25"
     },
     "10. /db/NLNK-M1": {
       "article_id": "56511465190937",
       "article_title": "General Link",
       "updated_at": "2026-05-07T01:20:07Z",
-      "verified_at": "2026-08-25",
-      "note": "전면 보강 — 스텁이었으나 실제 928줄 온전한 스펙 발견, NLNK와 거의 동일 구조로 확장"
+      "verified_at": "2026-08-25"
     },
     "11. /db/CGLP": {
       "article_id": "35947087784217",
       "article_title": "Change General Link Property",
       "updated_at": "2025-03-06T00:32:52Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "12. /db/FRLS": {
       "article_id": "35947184258585",
       "article_title": "Beam End Release",
       "updated_at": "2025-11-04T00:15:03Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "13. /db/OFFS": {
       "article_id": "35947465569049",
       "article_title": "Beam End Offsets",
       "updated_at": "2025-03-06T00:37:37Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "14. /db/PRLS": {
       "article_id": "35947668757017",
       "article_title": "Plate End Release",
       "updated_at": "2025-03-06T00:39:52Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "15. /db/MLFC": {
       "article_id": "35947795463705",
       "article_title": "Force-Deformation Function",
       "updated_at": "2025-03-06T00:42:36Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "16. /db/SDVI": {
       "article_id": "35947995586713",
       "article_title": "Seismic Device - Viscous Damper/Oil Damper",
       "updated_at": "2025-03-06T00:46:03Z",
-      "verified_at": "2026-08-25",
-      "note": "Exponential Function 필드 누락 보강"
+      "verified_at": "2026-08-25"
     },
     "17. /db/SDVE": {
       "article_id": "35948062417049",
       "article_title": "Seismic Device - Viscoelastic Damper",
       "updated_at": "2025-03-06T00:48:42Z",
-      "verified_at": "2026-08-25",
-      "note": "14필드 누락 보강(3→17개)"
+      "verified_at": "2026-08-25"
     },
     "18. /db/SDST": {
       "article_id": "35948150053529",
       "article_title": "Seismic Device - Steel Damper",
       "updated_at": "2025-03-06T00:51:29Z",
-      "verified_at": "2026-08-25",
-      "note": "원문 표가 SDVE 내용과 혼선, 실제 필드로 전면 정정"
+      "verified_at": "2026-08-25"
     },
     "19. /db/SDHY": {
       "article_id": "35948292269977",
       "article_title": "Seismic Device - Hysteretic Isolator(MSS)",
       "updated_at": "2025-03-06T00:53:48Z",
-      "verified_at": "2026-08-25",
-      "note": "7필드 누락 보강, 원문 MULTIPL은 스키마·예제 미확인이라 제외"
+      "verified_at": "2026-08-25"
     },
     "20. /db/SDIS": {
       "article_id": "35948330042649",
       "article_title": "Seismic Device - Isolator(MSS)",
       "updated_at": "2025-03-06T00:57:16Z",
-      "verified_at": "2026-08-25",
-      "note": "전면 정정 — SDIS_DEV_TYPE 3번째 값(SB→SLD), LRB DX 중첩구조, NRB/SB 필드 누락"
+      "verified_at": "2026-08-25"
     },
     "21. /db/MCON": {
       "article_id": "35948507217689",
       "article_title": "Linear Constraints",
       "updated_at": "2025-03-06T00:59:49Z",
-      "verified_at": "2026-08-25",
-      "note": "EX/WD 타입별 SLAVES 필드 오류 정정(COEFF+DOF vs WEIGHT)"
+      "verified_at": "2026-08-25"
     },
     "22. /db/PZEF": {
       "article_id": "35950231812505",
       "article_title": "Panel Zone Effects",
       "updated_at": "2025-03-06T01:01:17Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "23. /db/CLDR": {
       "article_id": "35952465579417",
       "article_title": "Define Constraints Label Direction",
       "updated_at": "2025-03-06T01:02:46Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "24. /db/DRLS": {
       "article_id": "51740138178969",
       "article_title": "Diaphragm Disconnect",
       "updated_at": "2026-07-02T01:05:11Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     }
   },
   "06_DB_Static_Loads.md": {
@@ -682,162 +587,139 @@
       "article_id": "35952651947801",
       "article_title": "Static Load Cases",
       "updated_at": "2025-11-04T00:15:01Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치(67종 Load Type 전수 확인)"
+      "verified_at": "2026-08-25"
     },
     "2. /db/BODF": {
       "article_id": "35952708909337",
       "article_title": "Self-Weight",
       "updated_at": "2025-03-06T01:53:49Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "3. /db/CNLD": {
       "article_id": "35952812160281",
       "article_title": "Nodal Loads",
       "updated_at": "2025-03-06T01:55:33Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "4. /db/BMLD": {
       "article_id": "35952826746521",
       "article_title": "Beam Loads",
       "updated_at": "2025-03-06T02:01:25Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "5. /db/SDSP": {
       "article_id": "35952933108761",
       "article_title": "Specified Displacements of Support",
       "updated_at": "2025-03-06T02:03:32Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "6. /db/NMAS": {
       "article_id": "35952994344985",
       "article_title": "Nodal Masses",
       "updated_at": "2025-03-06T02:05:02Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "7. /db/LTOM": {
       "article_id": "35953062761881",
       "article_title": "Loads to Masses",
       "updated_at": "2025-03-06T02:06:51Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "8. /db/NBOF": {
       "article_id": "35953117115545",
       "article_title": "Nodal Body Force",
       "updated_at": "2025-03-06T02:11:42Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "9. /db/PSLT": {
       "article_id": "35953165879833",
       "article_title": "Define Pressure Load Type",
       "updated_at": "2025-11-04T00:17:27Z",
-      "verified_at": "2026-08-25",
-      "note": "Key 오류 정정(CMD→LOADCASENAME)"
+      "verified_at": "2026-08-25"
     },
     "10. /db/PRES": {
       "article_id": "35953322434457",
       "article_title": "Assign Pressure Loads",
       "updated_at": "2025-11-04T00:15:02Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "11. /db/PNLD": {
       "article_id": "35953492119321",
       "article_title": "Define Plane Load Type",
       "updated_at": "2025-03-06T02:30:00Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "12. /db/PNLA": {
       "article_id": "35953557411993",
       "article_title": "Assign Plane Loads",
       "updated_at": "2026-09-01T04:24:47Z",
-      "verified_at": "2026-09-06",
-      "note": "✅ 부분 해결(2026-09-06): 조건행 Key가 'SELECT_TYPE'→'ELEM_TYPE'으로 정정됨(오류 제보 반영 추정). ⚠️ 잔여: 같은 행 설명 문구는 아직 'When Element Select Type'으로 남아 있음(첫 조건행은 'When Element Type'으로 정상) — 잔여 오류 제보 대상"
+      "verified_at": "2026-09-06"
     },
     "13. /db/FBLD": {
       "article_id": "35953604106137",
       "article_title": "Define Floor Load Type",
       "updated_at": "2025-03-06T02:41:15Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "14. /db/FBLA": {
       "article_id": "35953653792665",
       "article_title": "Assign Floor Loads",
       "updated_at": "2025-03-06T02:44:30Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "15. /db/FMLD": {
       "article_id": "35953690148121",
       "article_title": "Finishing Material Loads",
       "updated_at": "2025-03-06T02:46:41Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "16. /db/POSP": {
       "article_id": "49510865840537",
       "article_title": "Parameter of Soil Properties",
       "updated_at": "2026-07-02T01:56:19Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "17. /db/EPST": {
       "article_id": "49511059178521",
       "article_title": "Static Earth Pressure",
       "updated_at": "2026-07-02T02:15:35Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "18. /db/EPSE": {
       "article_id": "49511153905177",
       "article_title": "Seismic Earth Pressure",
       "updated_at": "2026-07-02T02:32:38Z",
-      "verified_at": "2026-08-25",
-      "note": "예제 오타 정정(SEL_TYPE ELEM→ELEMENT)"
+      "verified_at": "2026-08-25"
     },
     "19. /db/POSL": {
       "article_id": "49511410691609",
       "article_title": "Parameter of Seismic Loads",
       "updated_at": "2026-07-02T05:32:28Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "20. /db/SWIND (KDS)": {
       "article_id": "58908673370521",
       "article_title": "Static Wind Load - KDS(41-12:2022)",
       "updated_at": "2026-08-07T01:32:24Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치(필드 단위 100%)"
+      "verified_at": "2026-08-25"
     },
     "20. /db/SWIND (User Type)": {
       "article_id": "58908922148249",
       "article_title": "Static Wind Load - User Type",
       "updated_at": "2026-08-07T01:36:37Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "21. /db/SSEIS (KDS)": {
       "article_id": "58908676674585",
       "article_title": "Static Seismic Load - KDS(41-17-00:2019)",
       "updated_at": "2026-09-01T04:15:48Z",
-      "verified_at": "2026-09-06",
-      "note": "⚠️ 원문 사고 의심(2026-09-06): 이 아티클과 User Type 아티클(58908928576153)의 본문이 56,247자 완전 동일해짐. 본문 구성이 뒤섞여 JSON Schema는 USER TYPE 스키마인데 예제·Specifications 표는 KDS 것. KDS 표 9개 행·PERIOD_METHOD 양 분기·ADDITIONAL_LOAD 4개 하위행은 로컬과 전부 일치해 표 수정 없음. 오류 제보 대상"
+      "verified_at": "2026-09-06"
     },
     "21. /db/SSEIS (User Type)": {
       "article_id": "58908928576153",
       "article_title": "Static Seismic Load - User Type",
       "updated_at": "2026-09-01T04:15:13Z",
-      "verified_at": "2026-09-06",
-      "note": "⚠️ 원문 사고 의심(2026-09-06): 본문이 KDS 아티클(58908676674585)로 통째로 덮어써져 User Type 전용 Request Example·Specifications 표가 원문에서 사라짐(두 본문 56,247자 완전 동일). 로컬 ADDITIONAL 표는 두 아티클에 공통으로 남아있는 USER TYPE JSON Schema로 계속 뒷받침되므로 유지. 기존 NHERENT_TORSION 오타 주석은 '원문에서 해당 예제가 사라짐'으로 갱신. 가장 심각한 오류 제보 대상 — 복구되면 재대조 필요"
+      "verified_at": "2026-09-06"
     }
   },
   "07_DB_Temperature_Prestress.md": {
@@ -845,85 +727,73 @@
       "article_id": "35954097233561",
       "article_title": "Element Temperature",
       "updated_at": "2025-03-06T04:11:32Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "2. /db/GTMP — Temperature Gradient": {
       "article_id": "35954163821593",
       "article_title": "Temperature Gradient",
       "updated_at": "2025-03-06T04:13:50Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "3. /db/BTMP — Beam Section Temperature": {
       "article_id": "35954186047897",
       "article_title": "Beam Section Temperature",
       "updated_at": "2025-11-04T00:17:26Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "4. /db/STMP — System Temperature": {
       "article_id": "35954219102233",
       "article_title": "System Temperature",
       "updated_at": "2025-03-06T04:19:03Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "5. /db/NTMP — Nodal Temperature": {
       "article_id": "35954302641177",
       "article_title": "Nodal Temperature",
       "updated_at": "2025-03-06T04:20:33Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "6. /db/TDNT — Tendon Property": {
       "article_id": "35954451663513",
       "article_title": "Tendon Property",
       "updated_at": "2025-11-04T00:15:04Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치 — 14개 코드표준 RM/RV/FT/TDMFK 매핑표 전체 확인. 원문 표의 TYPE enum 설명 오타('INTERAL')는 우리 문서에 영향 없음(우리는 이미 INTERNAL로 정확)"
+      "verified_at": "2026-08-25"
     },
     "7. /db/TDNA — Tendon Profile": {
       "article_id": "35954555962137",
       "article_title": "Tendon Profile",
       "updated_at": "2026-09-01T04:33:16Z",
-      "verified_at": "2026-09-06",
-      "note": "보강(2026-09-06): SHAPE='CURVE' 블록에만 누락돼 있던 bPJ(Projection) 행 추가 — 원문 JSON Schema·CURVE 예제 4종·Specifications 표 모두에 존재함을 직접 확인(bPJ 16회). 원문의 20번 중복 번호도 그대로 반영. ⚠️ 미해결 잔존: 2D Round RADIUS가 여전히 Boolean 표기(B-2 제보 미반영, PROFZ 쪽만 Number로 되어 있음). ⚠️ 미확인 편차: PROFY/PROFZ OPT 타입(원문 Number/0 vs 로컬 String/'NONE'), 3D Round RADIUS(원문 Array vs 로컬 Number, 예제는 스칼라) — 09-01 변경인지 이전부터인지 판별 불가로 변경하지 않음"
+      "verified_at": "2026-09-06"
     },
     "8. /db/TDCS — Tendon Location for Composite Section": {
       "article_id": "35954649371545",
       "article_title": "Tendon Location for Composite Section",
       "updated_at": "2025-03-06T05:24:06Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "9. /db/TDPL — Tendon Prestress": {
       "article_id": "35954702397209",
       "article_title": "Tendon Prestress",
       "updated_at": "2025-03-06T05:25:59Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "10. /db/PRST — Prestress Beam Loads": {
       "article_id": "35954744402713",
       "article_title": "Prestress Beam Loads",
       "updated_at": "2025-03-06T05:27:55Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "11. /db/PTNS — Pretension Loads": {
       "article_id": "35954793469593",
       "article_title": "Pretension Loads",
       "updated_at": "2025-03-06T05:29:21Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "12. /db/EXLD — External Type Load Case for Pretension": {
       "article_id": "35954841849753",
       "article_title": "External Type Load Case for Pretension",
       "updated_at": "2025-03-06T05:30:50Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     }
   },
   "08_DB_Moving_Loads.md": {
@@ -931,197 +801,169 @@
       "article_id": "35955076795929",
       "article_title": "Moving Load Code",
       "updated_at": "2025-11-04T00:17:25Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "2. /db/LLAN — Traffic Line Lanes": {
       "article_id": "35955170613273",
       "article_title": "Traffic Line Lanes",
       "updated_at": "2025-03-06T05:38:32Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "3. /db/LLANch — Traffic Line Lanes - China": {
       "article_id": "35955208713241",
       "article_title": "Traffic Line Lanes - China",
       "updated_at": "2025-03-06T05:43:03Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "4. /db/LLANid — Traffic Line Lanes - India": {
       "article_id": "35955251576089",
       "article_title": "Traffic Line Lanes - India",
       "updated_at": "2025-03-06T05:45:01Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "5. /db/LLANtr — Traffic Line Lanes - Transverse": {
       "article_id": "35955355080217",
       "article_title": "Traffic Line Lanes - Transverse",
       "updated_at": "2025-03-06T05:46:42Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "6. /db/LLANop — Traffic Line Lanes - Moving Load Optimization": {
       "article_id": "35955410961689",
       "article_title": "Traffic Line Lanes - Moving Load Optimizaion",
       "updated_at": "2025-03-06T05:49:56Z",
-      "verified_at": "2026-08-25",
-      "note": "원문 제목 자체 오타(Optimizaion). 본문 완전 일치"
+      "verified_at": "2026-08-25"
     },
     "7. /db/SLAN — Traffic Surface Lanes": {
       "article_id": "35956862556313",
       "article_title": "Traffic Surface Lanes",
       "updated_at": "2025-03-06T05:53:03Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "8. /db/SLANch — Traffic Surface Lanes - China": {
       "article_id": "35956917206425",
       "article_title": "Traffic Surface Lanes - China",
       "updated_at": "2025-03-06T05:54:53Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "9. /db/SLANop — Traffic Surface Lanes - Moving Load Optimization": {
       "article_id": "35956982840473",
       "article_title": "Traffic Surface Lanes - Moving Load Optimization",
       "updated_at": "2025-12-22T08:32:14Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "10. /db/MVHL — Vehicles": {
       "article_id": "35957125531545+14개국",
       "article_title": "Vehicles - <국가별 15개 아티클>",
       "updated_at": "various",
-      "verified_at": "2026-08-25",
-      "note": "대형 재작업 — VEH_DEFAULT가 15개 코드 중 5개(AASHTO Std/LRFD, PENNDOT, Korea, Taiwan)에만 적용되고 나머지 10개(KSCE-LSD15 기존 확인 + Canada/Australia/SouthAfrica/China/Poland/BS/Eurocode/Russia/India)는 각자 전용 VEH_XX 객체를 쓰는 것을 발견. Canada(VEH_CA)/Australia(VEH_AU)/SouthAfrica(VEH_ZA)/China(VEH_CN)/Poland(VEH_PL) 5개는 전체 하위모드 문서화, BS(VEH_BS)/Eurocode(VEH_EUROCODE)/Russia(VEH_RU)/India(VEH_IN) 4개는 원문이 매우 방대해(다중 표준·10+ 하위모드) 대표 모드만 문서화(SECT/TDMT 원칙). 국가별 개별 article_id는 08장 파이썬 예제/원문 링크 참고"
+      "verified_at": "2026-08-25"
     },
     "11. /db/MVHLtr — Vehicles - Transverse": {
       "article_id": "35958910039321",
       "article_title": "Vehicles - Transverse",
       "updated_at": "2025-03-07T02:04:37Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "12. /db/MVLD — Moving Load Cases": {
       "article_id": "35959068573209",
       "article_title": "Moving Load Cases",
       "updated_at": "2025-11-04T00:20:00Z",
-      "verified_at": "2026-08-25",
-      "note": "Korea 추가필드 Required 컬럼 보강, Australia 전용 필드(LOAD_MODEL/LOAD_COMB_TYPE/FATIGUE/ASL) 및 Russia 전용 필드(LOAD_COMB_TYPE) 완전 누락 발견·보강. 코드별 지원 Load Type 매트릭스 추가"
+      "verified_at": "2026-08-25"
     },
     "13. /db/MVLDch — Moving Load Cases - China": {
       "article_id": "35960417354649",
       "article_title": "Moving Load Cases - China",
       "updated_at": "2025-08-29T06:51:13Z",
-      "verified_at": "2026-08-25",
-      "note": "Moving Load Optimization 모드(OPT_AUTO_OPTIMIZE=true) 전용 필드 5개(MIN_VEHICLE_DIST~AUTO_OPTIMIZE_ITEMS) 완전 누락 발견·보강"
+      "verified_at": "2026-08-25"
     },
     "14. /db/MVLDid — Moving Load Cases - India": {
       "article_id": "35961164029593",
       "article_title": "Moving Load Cases - India",
       "updated_at": "2025-08-29T06:51:14Z",
-      "verified_at": "2026-08-25",
-      "note": "SUB_LOAD_ITEMS 하위 필드가 General Load·Auto Live Load Combinations 두 모드 모두 표에 전혀 없었음(예제로만 암시) — 전체 보강"
+      "verified_at": "2026-08-25"
     },
     "15. /db/MVLDbs — Moving Load Cases - BS": {
       "article_id": "35961459443737",
       "article_title": "Moving Load Cases - BS",
       "updated_at": "2025-08-29T06:50:59Z",
-      "verified_at": "2026-08-25",
-      "note": "LOADMODEL enum 4번째 값 ALL_MODE_2 누락, LCDATA_STANDARD/SPECIAL/ALLMODE 하위 필드 전체 및 Optimization 전용 3개 객체(_OPTI) 완전 누락 — LCDATA_STANDARD만 전체 필드 문서화하고 나머지 5개는 요약표로 보강(원문이 4×2=8개 조합의 대형 아티클)"
+      "verified_at": "2026-08-25"
     },
     "16. /db/MVLDeu — Moving Load Cases - Eurocode": {
       "article_id": "35961579883929",
       "article_title": "Moving Load Cases - Eurocode",
       "updated_at": "2026-07-06T06:46:52Z",
-      "verified_at": "2026-08-25",
-      "note": "기존 문서가 이미 매우 상세·정확 — SRA_LIST 적용 범위 주석 오류(LM1/3 → LM1/3/4) 1건만 정정"
+      "verified_at": "2026-08-25"
     },
     "17. /db/MVLDpl — Moving Load Cases - Poland": {
       "article_id": "35961922701209",
       "article_title": "Moving Load Cases - Poland",
       "updated_at": "2025-08-29T06:51:18Z",
-      "verified_at": "2026-08-25",
-      "note": "General Load(DEFAULT) 하위 필드 미문서화 + Moving Load Optimization(AUTO_OPTIMIZE)·Permit Vehicle(PERMIT_LOAD) 객체 완전 누락 — 전체 보강"
+      "verified_at": "2026-08-25"
     },
     "18. /db/MVLDtr — Moving Load Cases - Transverse": {
       "article_id": "35961950207129",
       "article_title": "Moving Load Cases - Transverse",
       "updated_at": "2025-08-29T06:52:10Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "19. /db/CRGR — Concurrent Reaction Group": {
       "article_id": "35962261902745",
       "article_title": "Concurrent Reaction Group",
       "updated_at": "2025-03-07T04:18:00Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "20. /db/CJFG — Concurrent Joint Force Group": {
       "article_id": "35962376351769",
       "article_title": "Concurrent Joint Force Group",
       "updated_at": "2025-03-07T04:19:27Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "21. /db/MVHC — Vehicle Classes": {
       "article_id": "35962463156761",
       "article_title": "Vehicle Classes",
       "updated_at": "2025-03-07T04:21:02Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "22. /db/SINF — Plate Element for Influence Surface": {
       "article_id": "35962659347481",
       "article_title": "Plate Element for Influence Surface",
       "updated_at": "2025-03-07T04:22:18Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "23. /db/MLSP — Lane Support - Negative Moments at Interior Piers": {
       "article_id": "35962967211545",
       "article_title": "Lane Support - Negative Moments at Interior Piers",
       "updated_at": "2025-03-07T04:28:00Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치 (TYPE enum 'AutoInput'/'UserInput'은 이미 예제 기준으로 정확히 기재돼 있었음, 원문 표의 공백 포함 표기는 오타)"
+      "verified_at": "2026-08-25"
     },
     "24. /db/MLSR — Lane Support - Reactions at Interior Piers": {
       "article_id": "35963167875225",
       "article_title": "Lane Support - Reactions at Interior Piers",
       "updated_at": "2025-03-07T04:29:35Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "25. /db/DYLA — Dynamic Load Allowance": {
       "article_id": "35963288573849",
       "article_title": "Dynamic Load Allowance",
       "updated_at": "2025-03-07T04:30:50Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "26. /db/IMPF — Additional Impact Factor": {
       "article_id": "35963359844889",
       "article_title": "Additional Impact Factor",
       "updated_at": "2025-03-07T04:35:05Z",
-      "verified_at": "2026-08-25",
-      "note": "PARTS 필드가 Truss 타입 예제에는 없음(Beam/Plate 전용)을 주석으로 명시"
+      "verified_at": "2026-08-25"
     },
     "27. /db/DYFG — Railway Dynamic Factor": {
       "article_id": "35963474883097",
       "article_title": "Railway Dynamic Factor",
       "updated_at": "2025-03-07T04:37:17Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "28. /db/DYNF — Railway Dynamic Factor by Element": {
       "article_id": "35963520535577",
       "article_title": "Railway Dynamic Factor by Element",
       "updated_at": "2025-03-07T04:39:07Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     }
   },
   "09_DB_Dynamic_Loads.md": {
@@ -1129,92 +971,79 @@
       "article_id": "35963686253593,39235144118297,39235469691033,39235490544281",
       "article_title": "Response Spectrum Functions - User Type/Korea/US/Eurocode",
       "updated_at": "various",
-      "verified_at": "2026-08-25",
-      "note": "기존 문서화분 완전 일치, 재검증만 수행"
+      "verified_at": "2026-08-25"
     },
     "1. /db/SPFC — Response Spectrum Functions (China/Japan/Taiwan/India/Other Countries)": {
       "article_id": "39473334759065,39473375938969,39473471043737,39508760179097,39508838720153",
       "article_title": "Response Spectrum Functions - China/Japan/Taiwan/India/Other Countries",
       "updated_at": "various",
-      "verified_at": "2026-08-25",
-      "note": "5개 국가 계열 전체 누락 발견·보강(MVHL과 동일 패턴). Japan(4코드)·India(3코드) 전체 상세화, China(9코드 중 GB50011-2010만)·Taiwan(7코드 중 2022만)·Other Countries(8코드 중 Canada NBC95만) 대표 코드만 상세화 — 원문 자체가 대형(각 27K~42K자)"
+      "verified_at": "2026-08-25"
     },
     "2. /db/SPLC — Response Spectrum Load Cases": {
       "article_id": "35963719599641",
       "article_title": "Response Spectrum Load Cases",
       "updated_at": "2026-09-01T01:10:25Z",
-      "verified_at": "2026-09-06",
-      "note": "✅ 해결 확인(2026-09-06): 원문 표 오류 2건(ACCECC_PERTCENT 오타, 28번 Key가 27번과 중복)이 2026-09-01 갱신으로 모두 정정됨(ACCECC_PERCENT 2회/PERTCENT 0회, bACCECC_MINIMUM_TORSION 2회). 로컬은 처음부터 스키마 기준 정상 표기라 표 수정 없음. ⚠️ 잔여: 29-(3) Key가 표 'Along' vs 스키마 'ALONG', 표의 'fasle'·'Eccentricitiy' 오타, iCOEF 기본값 1과 설명(2) 모순 — 잔여 오류 제보 대상"
+      "verified_at": "2026-09-06"
     },
     "3. /db/THGC — Time History Global Control": {
       "article_id": "35963819140505",
       "article_title": "Time History Global Control",
       "updated_at": "2025-11-04T00:19:07Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "4. /db/THGC-M1 — Time History Global Control (Hyper-S)": {
       "article_id": "56510942223513",
       "article_title": "Time History Global Control",
       "updated_at": "2026-05-07T01:20:09Z",
-      "verified_at": "2026-08-25",
-      "note": "HINGE_OPT(PSPRING_SUP/EL) 설명·기본값 오류 정정. 동명 아티클 2건 중 Input URI로 M1 버전 확정"
+      "verified_at": "2026-08-25"
     },
     "5. /db/THOO-M1 — Time History Output Option (Hyper-S)": {
       "article_id": "56371398681241",
       "article_title": "Time History Output Option",
       "updated_at": "2026-05-15T08:31:56Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "6. /db/THIS — Time History Load Cases": {
       "article_id": "35963903917593",
       "article_title": "Time History Load Cases",
       "updated_at": "2025-08-20T03:31:48Z",
-      "verified_at": "2026-08-25",
-      "note": "Key 오타(aMDAMPING→aDAMP, 실사용 시 버그) + Mass&Stiffness 감쇠·Static 증분제어·Nonlinear 공통 반복제어 블록 전체 누락 보강. 동명 아티클 2건 중 Input URI로 non-M1 버전 확정"
+      "verified_at": "2026-08-25"
     },
     "7. /db/THIS-M1 — Time History Load Cases (Hyper-S)": {
       "article_id": "56538335819673",
       "article_title": "Time History Load Cases",
       "updated_at": "2026-05-15T08:31:56Z",
-      "verified_at": "2026-08-25",
-      "note": "원문 234K자(최대 규모). ANAL_METHOD 3번째 값(Static) 누락, GEOM_NL_TYPE 스왑 주의사항·M&S감쇠·Static증분제어·Direct적분법·BOUNDARY_NL_ANAL 블록 보강. 세부 예제는 대표 수준만(원문이 매우 방대)"
+      "verified_at": "2026-08-25"
     },
     "8. /db/THFC — Time History Functions": {
       "article_id": "35964507702937",
       "article_title": "Time History Functions",
       "updated_at": "2025-03-06T07:49:49Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "9. /db/THGA — Ground Acceleration": {
       "article_id": "35964590740633",
       "article_title": "Ground Acceleration",
       "updated_at": "2025-03-06T07:52:06Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "10. /db/THNL — Dynamic Nodal Loads": {
       "article_id": "35964586306841",
       "article_title": "Dynamic Nodal Loads",
       "updated_at": "2025-03-06T07:53:47Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "11. /db/THSL — Time Varying Static Loads": {
       "article_id": "35964656837785",
       "article_title": "Time Varying Static Loads",
       "updated_at": "2025-03-06T07:55:11Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "12. /db/THMS — Multiple Support Excitation": {
       "article_id": "35964708397081",
       "article_title": "Multiple Support Excitation",
       "updated_at": "2025-03-06T07:57:05Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치 (Y/Z방향 Optional 처리 포함)"
+      "verified_at": "2026-08-25"
     }
   },
   "10_DB_Construction_Stage.md": {
@@ -1222,99 +1051,85 @@
       "article_id": "35987578396697",
       "article_title": "Define Construction Stage",
       "updated_at": "2025-03-06T06:02:45Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "2. /db/CSCS — Composite Section for Construction Stage": {
       "article_id": "35987625234201",
       "article_title": "Composite Section for Construction Stage",
       "updated_at": "2025-03-06T06:05:47Z",
-      "verified_at": "2026-08-25",
-      "note": "WAREA(원문 표 자체 누락, 예제 우선 반영)·OPT_UPDATE_ALL_H(스키마 전용) 추가. vPARTINFO의 CY/CZ/CYI/CZI/CYJ/CZJ·STIFF_USER 3종도 스키마 전용이라 용도 추정 주석과 함께 보강. 예제의 TYPE:\"NORMAL\"은 원문 자체 모순(표/스키마는 GENERAL/USER만) — 오류제보 대상, 로컬은 수정 없음"
+      "verified_at": "2026-08-25"
     },
     "3. /db/TMLD — Time Loads for Construction Stage": {
       "article_id": "35987743311385",
       "article_title": "Time Loads for Construction Stage",
       "updated_at": "2025-03-06T06:09:20Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "4. /db/STBK — Set-Back Loads for Nonlinear Construction Stage": {
       "article_id": "35987833076505",
       "article_title": "Set-Back Loads for Nonlinear Construction Stage",
       "updated_at": "2025-03-06T06:12:26Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "5. /db/CMCS — Camber for Construction Stage": {
       "article_id": "35987807611161",
       "article_title": "Camber for Construction Stage",
       "updated_at": "2025-03-06T06:28:51Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치 (DEFORM/USER 모두 Required)"
+      "verified_at": "2026-08-25"
     },
     "6. /db/CRPC — Creep Coefficient for Construction Stage": {
       "article_id": "35987878971545",
       "article_title": "Creep Coefficient for Construction Stage",
       "updated_at": "2025-03-06T06:30:18Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "7. /db/ETFC — Ambient Temperature Functions": {
       "article_id": "35988049086489",
       "article_title": "Ambient Temperature Functions",
       "updated_at": "2025-03-07T04:46:27Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "8. /db/CCFC — Convection Coefficient Functions": {
       "article_id": "35988168533785",
       "article_title": "Convection Coefficient Functions",
       "updated_at": "2025-03-07T04:48:17Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "9. /db/HECB — Element Convection Boundary": {
       "article_id": "35988210740761",
       "article_title": "Element Convection Boundary",
       "updated_at": "2025-03-07T04:49:52Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "10. /db/HSPT — Prescribed Temperature": {
       "article_id": "35988262538521",
       "article_title": "Prescribed Temperature",
       "updated_at": "2025-03-07T04:51:20Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "11. /db/HSFC — Heat Source Functions": {
       "article_id": "35988291377305",
       "article_title": "Heat Source Functions",
       "updated_at": "2025-03-07T04:53:30Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치 (Constant/Code/User 3타입 모두)"
+      "verified_at": "2026-08-25"
     },
     "12. /db/HAHS — Assign Heat Source": {
       "article_id": "35988378892441",
       "article_title": "Assign Heat Source",
       "updated_at": "2025-03-07T04:55:01Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "13. /db/HPCE — Pipe Cooling": {
       "article_id": "35988420776345",
       "article_title": "Pipe Cooling",
       "updated_at": "2025-03-07T04:56:43Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "14. /db/HSTG — Define Construction Stage for Hydration": {
       "article_id": "35988442589465",
       "article_title": "Define Construction Stage for Hydration",
       "updated_at": "2025-03-07T04:59:04Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     }
   },
   "11_DB_Settlement_Misc_Loads.md": {
@@ -1322,410 +1137,345 @@
       "article_id": "35988516836633",
       "article_title": "Settlement Group",
       "updated_at": "2025-03-07T05:00:26Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "2. /db/SMLC — Settlement Load Cases": {
       "article_id": "35988560566425",
       "article_title": "Settlement Load Cases",
       "updated_at": "2025-03-07T05:15:46Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "3. /db/PLCB — Pre-composite Section": {
       "article_id": "35988644139673",
       "article_title": "Pre-composite Section",
       "updated_at": "2025-03-07T05:32:01Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "4. /db/LDSQ — Load Sequence for Nonlinear": {
       "article_id": "35988663234329",
       "article_title": "Load Sequence for Nonlinear",
       "updated_at": "2026-09-01T04:37:13Z",
-      "verified_at": "2026-09-06",
-      "note": "✅ 해결 확인(2026-09-06): 원문 표 Value Type이 'String'→'Array [String]'으로 정정됨(오류 제보 반영). 로컬은 처음부터 정상이라 수정 없음"
+      "verified_at": "2026-09-06"
     },
     "5. /db/WVLD — Wave Loads": {
       "article_id": "35988728179097",
       "article_title": "Wave Loads",
       "updated_at": "2025-03-07T05:34:49Z",
-      "verified_at": "2026-08-25",
-      "note": "다수 정정: VERT_COORD GLOBAL_X 미확인 표기, COEF.TYPE \"GROUP\" 삭제(원문 미공개), GRID_Z 설명 Grid Y Size로 정정(원문 표+스키마 일치), CREST/UNIT 예제값을 원문 확인값(MXM/PHASE)으로 정정, DESC 기본값 Blank로 정정. COEF 필드 Value Type \"Array\" 오기·GROWTH.T 설명 \"Velocity\" 오기는 원문 자체 모순, 로컬은 이미 정상이라 수정 없음"
+      "verified_at": "2026-08-25"
     },
     "6. /db/IELC — Ignore Elements for Load Cases": {
       "article_id": "35988790960921",
       "article_title": "Ignore Elements for Load Cases",
       "updated_at": "2025-03-07T05:36:13Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "7. /db/IFGS — Large Displacement - Initial Forces for Geometric Stiffness": {
       "article_id": "35988857497113",
       "article_title": "Large Displacement - Initial Forces for Geometric Stiffness",
       "updated_at": "2025-03-07T05:37:44Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "8. /db/EFCT — Small Displacement - Initial Force Control Data": {
       "article_id": "35988927684633",
       "article_title": "Small Displacement - Initial Force Control Data",
       "updated_at": "2025-03-07T05:39:28Z",
-      "verified_at": "2026-08-25",
-      "note": "완전 일치"
+      "verified_at": "2026-08-25"
     },
     "9. /db/INMF — Small Displacement - Initial Element Force": {
       "article_id": "35988975670937",
       "article_title": "Small Displacement - Initial Element Force",
       "updated_at": "2026-09-01T04:39:37Z",
-      "verified_at": "2026-09-06",
-      "note": "✅ 해결 확인(2026-09-06): 원문 표 3번 Key가 'ELEM_FORCES'→'ELEMENT_FORCES'로 정정됨(오류 제보 반영). ⚠️ 원문 표는 여전히 Array [Number, 12] 고정 길이로 적지만 원문 예제 2번이 TRUSS에 [1,2](2개)를 보내 모순 — 로컬은 예제 우선 원칙으로 Array [Number] 유지, 이번에 그 근거를 ⚠️ 주석으로 명시"
+      "verified_at": "2026-09-06"
     }
   },
   "12_DB_Analysis_Control.md": {
     "1. /db/ACTL — Main Control Data": {
       "article_id": "35409287717657",
       "article_title": "Main Control Data",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치"
+      "verified_at": "2026-08-26"
     },
     "2. /db/ACTL-M1 — Main Control Data (Hyper-S)": {
       "article_id": "56397306107545",
       "article_title": "Main Control Data",
-      "verified_at": "2026-08-30",
-      "note": "완전 일치 (Input URI로 M1 확정). 원문 CONVERGENCE 표가 LOAD/WORK 행에도 \"Displacement\" 설명을 복붙한 원문 오류 확인, 로컬 영향 없음. 2026-08-30: \"POST 미지원 — 기본 레코드가 자동 생성됨\" 근거 문구가 원문에 없는 추정이었음을 확인, 삭제"
+      "verified_at": "2026-08-30"
     },
     "3. /db/PDEL — P-Delta Analysis Control": {
       "article_id": "35989163268249",
       "article_title": "P-Delta Analysis Control",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치"
+      "verified_at": "2026-08-26"
     },
     "4. /db/BUCK — Buckling Analysis Control": {
       "article_id": "35989190592537",
       "article_title": "Buckling Analysis Control",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치"
+      "verified_at": "2026-08-26"
     },
     "5. /db/EIGV — Eigenvalue Analysis Control": {
       "article_id": "35989224565273",
       "article_title": "Eigenvalue Analysis Control",
-      "verified_at": "2026-08-26",
-      "note": "Ritz vRITZ(2) 원문 표가 CASE/GROUND를 CASE 하나로 뭉뚱그린 오류(스키마+예제는 분리) 정정, Lanczos 예제의 EIGEN 전용 필드(iITER/iDIM/TOL) 혼입 제거"
+      "verified_at": "2026-08-26"
     },
     "6. /db/EIGV-M1 — Eigenvalue Analysis Control (Hyper-S)": {
       "article_id": "56375983487385",
       "article_title": "Eigenvalue Analysis Control",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치 (Input URI로 M1 확정, 스키마 allOf 조건부 로직까지 확인)"
+      "verified_at": "2026-08-26"
     },
     "7. /db/HHCT — Heat of Hydration Analysis Control": {
       "article_id": "35989317531417",
       "article_title": "Heat of Hydration Analysis Control",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치. 스키마 전용 고아 필드 ITEM.OPT_USE_CREEP_SHRINKAGE(표·예제 모두 없음)는 반영 안 함"
+      "verified_at": "2026-08-26"
     },
     "8. /db/HHCT-M1 — Heat of Hydration Analysis Control (Hyper-S)": {
       "article_id": "56399833703193",
       "article_title": "Heat of Hydration Analysis Control",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치 (Input URI로 M1 확정, TYPE enum \"SHRINKAGE\"가 HHCT의 \"SHRINK\"와 다름을 재확인)"
+      "verified_at": "2026-08-26"
     },
     "9. /db/MVCT — Moving Load Analysis Control": {
       "article_id": "35989483364633",
       "article_title": "Moving Load Analysis Control",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치 (Russia 전용 8개 필드 요약도 정확). 원문의 국가별 METHOD/POINT 지원 매트릭스 각주는 보강 없이 유지"
+      "verified_at": "2026-08-26"
     },
     "10. /db/MVCTch — Moving Load Analysis Control - China": {
       "article_id": "35989644995609",
       "article_title": "Moving Load Analysis Control - China",
-      "verified_at": "2026-08-26",
-      "note": "이번 챕터 최대 발견 — iCODETYPE/iNFM/iSLCM/iBC enum·Required 보강, BRIDGE2(TB 10002-2017/Q·CR 9300-2018) 객체 전체 신규, BRIDGE1 Train(Subway) 분기 및 MBRG 전체 필드 보강"
+      "verified_at": "2026-08-26"
     },
     "11. /db/MVCTid — Moving Load Analysis Control - India": {
       "article_id": "35989643553305",
       "article_title": "Moving Load Analysis Control - India",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치. 원문 표가 bRG/RGN/bDG/DGN(P 없음)로 오기, 스키마+예제는 bRGP/RGP/bDGP/DGP — 로컬은 이미 P접미사로 정확, 오류제보 대상"
+      "verified_at": "2026-08-26"
     },
     "12. /db/MVCTbs — Moving Load Analysis Control - BS": {
       "article_id": "35989838706969",
       "article_title": "Moving Load Analysis Control - BS",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치. 원문 표 bDP(오기)/스키마+예제 bDGP — 로컬 이미 정확, 오류제보 대상"
+      "verified_at": "2026-08-26"
     },
     "13. /db/MVCTtr — Moving Load Analysis Control - Transverse": {
       "article_id": "35989924517401",
       "article_title": "Moving Load Analysis Control - Transverse",
       "verified_at": "2026-09-06",
-      "note": "✅ 보류 질문 종결(2026-09-06): 원문 Input URI가 대문자 'db/MVCTTR'이던 것이 2026-09-01 갱신으로 'db/MVCTtr'로 정정됨(오류 제보 반영). 로컬 표기가 맞았음이 확인돼 이전 '확인 보류' 상태 종료. JSON Schema 루트 키는 형제 엔드포인트와 마찬가지로 대문자 MVCTTR 유지(정상)",
       "updated_at": "2026-09-01T04:48:54Z"
     },
     "14. /db/SMCT — Settlement Analysis Control Data": {
       "article_id": "35990184995481",
       "article_title": "Settlement Analysis Control Data",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치"
+      "verified_at": "2026-08-26"
     },
     "15. /db/NLCT — Nonlinear Analysis Control Data": {
       "article_id": "35990229420441",
       "article_title": "Nonlinear Analysis Control Data",
-      "verified_at": "2026-08-26",
-      "note": "MAXIMUM_DISPLACEMENT(상단+ARCLEN_ITEMS) 기본값 0/Optional로 정정(이전엔 Required)"
+      "verified_at": "2026-08-26"
     },
     "16. /db/NLCT-M1 — Nonlinear Analysis Control (Hyper-S)": {
       "article_id": "56506850582425",
       "article_title": "Nonlinear Analysis Control",
-      "verified_at": "2026-08-26",
-      "note": "LOAD_CASE(조건부 필수)·ADVANCED 객체 전체 누락 보강, LOAD_STEPS 하위 DISP모드 필드(MASTER_NODE/MAX_DISP/DIRECTION/REF_NODE) 보강, Displacement Control 예제 신규 추가"
+      "verified_at": "2026-08-26"
     },
     "17. /db/STCT — Construction Stage Analysis Control Data": {
       "article_id": "35990281053465",
       "article_title": "Construction Stage Analysis Control Data",
-      "verified_at": "2026-08-26",
-      "note": "iBSC 라벨 오류 정정(Bi-Section Control→Beam Section Property Option), GROUP/LFFGR 조건부 Required 정정, ITD 기본값 ALL 추가, bSDLE/vSDLE(JP 전용) 신규, EREC enum 각주 신규, TOL_CR 기본값/iITS Required 정정"
+      "verified_at": "2026-08-26"
     },
     "18. /db/STCT-M1 — Construction Stage Analysis Control Data (Hyper-S)": {
       "article_id": "57053813627673",
       "article_title": "Construction Stage Analysis Control Data",
-      "verified_at": "2026-08-26",
-      "note": "iBSC(기본값 1, STCT의 0과 다름)/FRAME_OUTPUT/bSAVE_OCS/NONL_CONTROL(ADVANCED+DISP/LOAD/WORK 포함) 전체 누락 보강, iINC_NLA 4번째 값(3) 추가, CREEP_SHRINKAGE.TYPE \"SHRINK\"→\"SHRINKAGE\" 정정, bIEMF 추가"
+      "verified_at": "2026-08-26"
     },
     "19. /db/BCCT — Boundary Change Assignment": {
       "article_id": "35736960800281",
       "article_title": "Boundary Change Assignment",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치. 원문 표 vBG Value Type \"String\"(스키마는 array) 오기 — 로컬 이미 정확"
+      "verified_at": "2026-08-26"
     },
     "20. /db/BCGD-M1 — Define Boundary Combination (Hyper-S)": {
       "article_id": "56374180830745",
       "article_title": "Define Boundary Combination",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치"
+      "verified_at": "2026-08-26"
     },
     "21. /db/BCGA-M1 — Assign Boundary Combination (Hyper-S)": {
       "article_id": "56375029084697",
       "article_title": "Assign Boundary Combination",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치 (BC_SELECT 17종 enum 순서까지 확인). 원문이 \"SM\"을 이 아티클에서만 \"Static Modal\"로 표기(BCCT·SMCT는 \"Settlement\")하는 모순 확인, 로컬은 Settlement 유지, 오류제보 대상"
+      "verified_at": "2026-08-26"
     }
   },
   "13_DB_Load_Combinations.md": {
     "1. /db/LCOM-GEN — Load Combinations - General": {
       "article_id": "35990806887065",
       "article_title": "Load Combinations - General",
-      "verified_at": "2026-08-27",
-      "note": "⚠️ 2026-08-26에 읽기 전용 \"NO\"(조합 번호) 필드를 \"원문에 근거 없다\"며 삭제했던 것을 2026-08-27 라이브 재확인으로 원복 — 실제로는 6개 아티클 전부 스키마·표·예제에 NO가 존재함(2026-08-26 당시 추출 실수)"
+      "verified_at": "2026-08-27"
     },
     "2. /db/LCOM-CONC — Load Combinations - Concrete Design": {
       "article_id": "35990864052249",
       "article_title": "Load Combinations - Concrete Design",
-      "verified_at": "2026-08-27",
-      "note": "\"NO\" 필드 원복(위 1번과 동일 사유). 적용 제품 범위 정정은 유효 — 엔드포인트 전체가 아니라 bES 필드만 Civil NX 전용(원문 아이콘이 그 필드에만 부착 확인)"
+      "verified_at": "2026-08-27"
     },
     "3. /db/LCOM-STEEL — Load Combinations - Steel Design": {
       "article_id": "35990929861913",
       "article_title": "Load Combinations - Steel Design",
-      "verified_at": "2026-08-27",
-      "note": "\"NO\" 필드 원복(위 1번과 동일 사유). iTYPE에 ABS 없음(0/1/3만) 재확인, 로컬 이미 정확"
+      "verified_at": "2026-08-27"
     },
     "4. /db/LCOM-SRC — Load Combinations - SRC Design": {
       "article_id": "35991038731161",
       "article_title": "Load Combinations - SRC Design",
-      "verified_at": "2026-08-27",
-      "note": "\"NO\" 필드 원복(위 1번과 동일 사유)"
+      "verified_at": "2026-08-27"
     },
     "5. /db/LCOM-STLCOMP — Load Combinations - Composite Steel Girder Design": {
       "article_id": "35991080923033",
       "article_title": "Load Combinations - Composite Steel Girder Design",
-      "verified_at": "2026-08-27",
-      "note": "\"NO\" 필드 원복(위 1번과 동일 사유). \"Civil NX 전용(교량 설계)\" 표기는 이 아티클에 근거 없어(아이콘·문구 전무) 추정 표기임을 주석으로 명시 — 이 부분은 유효"
+      "verified_at": "2026-08-27"
     },
     "6. /db/LCOM-SEISMIC — Load Combinations - Seismic Design": {
       "article_id": "35991142266265",
       "article_title": "Load Combinations - Seismic Design",
-      "verified_at": "2026-08-27",
-      "note": "\"NO\" 필드 원복(위 1번과 동일 사유)"
+      "verified_at": "2026-08-27"
     },
     "7. /db/CUTL — Cutting Line": {
       "article_id": "35991257189017",
       "article_title": "Cutting Line",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치 (DIR은 NORMAL/DIR 2종만, 로컬과 일치)"
+      "verified_at": "2026-08-26"
     },
     "8. /db/CLWP — Plate Cutting Line Diagram": {
       "article_id": "35991500289561",
       "article_title": "Plate Cutting Line Diagram",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치. 원문 표가 DIR=\"PLANE\"을 누락(자체 예제와 모순) — 로컬은 예제 기준으로 이미 PLANE 포함해 정확, 오류제보 대상"
+      "verified_at": "2026-08-26"
     }
   },
   "14_DB_Pushover.md": {
     "1. /db/POGD — Pushover Analysis Control Data": {
       "article_id": "35992664632601",
       "article_title": "Pushover Analysis Control Data",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치. (서브에이전트가 제안한 PHOP_OPT Required 정정은 원문 재확인 결과 Optional이 맞아 반려·원복). SHEAR_R(원문 표 Integer, 실제 Number)·SF_SMOOTH_BAR(원문 표 String, 실제 Number)는 원문 표 자체 오타, 로컬 이미 정확, 오류제보 대상"
+      "verified_at": "2026-08-26"
     },
     "2. /db/POGD-M1 — Pushover Global Control (Hyper-S)": {
       "article_id": "56511008007705",
       "article_title": "Pushover Global Control",
-      "verified_at": "2026-08-26",
-      "note": "GEO_NONL_TYPE enum 순서 오류 정정(None:0/Large Disp:1/P-Delta:2 — 원문 스키마 설명 문구 순서와 표의 명시적 번호가 모순, 표 우선 + 09장 THGC-M1과 교차확인). 그 외 대량의 중첩 조건부 로직(ANALYSIS_STOP/ITER_CTRL/PO_HINGE_OPT/MISC)은 전부 정확함을 재확인"
+      "verified_at": "2026-08-26"
     },
     "3. /db/IEPI — Ignore Elements for Pushover Initial Load": {
       "article_id": "35992797619097",
       "article_title": "Ignore Elements for Pushover Intial Load",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치. 원문 제목 자체의 오타(Intial→Initial)는 로컬 제목이 이미 올바르게 표기, 오류제보 대상 아님(사소)"
+      "verified_at": "2026-08-26"
     },
     "4. /db/PHGE — Assign Pushover Hinge Properties": {
       "article_id": "35992838417049",
       "article_title": "Assign Pushover Hinge Properties",
-      "verified_at": "2026-08-26",
-      "note": "TYPE enum에서 G-LINK 누락 보강 + WALL의 Gen NX 전용 아이콘 표기 추가"
+      "verified_at": "2026-08-26"
     },
     "5. /db/POLC — Pushover Load Cases": {
       "article_id": "35993449470489",
       "article_title": "Pushover Load Cases",
-      "verified_at": "2026-08-26",
-      "note": "STIFF_RATIO에 INCRE_METHOD=\"LOAD\" 조건 명시 보강. 원문 표의 스트레이 FIBER_KEY 행(PHGE 아티클에서 복붙된 것으로 추정, 스키마·예제 어디에도 없음)은 로컬에 없음이 정확 — 오류제보 대상"
+      "verified_at": "2026-08-26"
     },
     "6. /db/POLC-M1 — Pushover Load Case (Hyper-S)": {
       "article_id": "56506753403673",
       "article_title": "Pushover Load Case",
-      "verified_at": "2026-08-26",
-      "note": "Active Methods 원문 표기(POST 포함)가 챕터 전체의 Hyper-S POST 미지원 관례와 모순돼 실기 확인 전까지 로컬 유지 주석 추가. LOADPATTERN.DIR/MODE 원문 스키마 설명 오류(둘 다 \"Load Case\"로 복붙)를 로컬이 이미 정확히 우회 중임을 근거 주석으로 명시"
+      "verified_at": "2026-08-26"
     }
   },
   "15_OPE.md": {
     "1. /ope/PROJECTSTATUS — Project Status": {
       "article_id": "35994678976281",
       "article_title": "Project Status",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치"
+      "verified_at": "2026-08-26"
     },
     "2. /ope/DIVIDEELEM — Divide Elements": {
       "article_id": "35994694310937",
       "article_title": "Divide Elements",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치"
+      "verified_at": "2026-08-26"
     },
     "3. /ope/SECTPROP — Section Properties Calculation Results": {
       "article_id": "35994769341081",
       "article_title": "Section Properties Calculation Results",
-      "verified_at": "2026-08-26",
-      "note": "Response 예제에 누락된 정점 좌표(y1~z4) 8개 행 보강"
+      "verified_at": "2026-08-26"
     },
     "4. /ope/USLC — Using Load Combinations": {
       "article_id": "35994827741465",
       "article_title": "Using Load Combinations",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치"
+      "verified_at": "2026-08-26"
     },
     "5. /ope/LINEBMLD — Line Beam Load": {
       "article_id": "35994879160857",
       "article_title": "Line Beam Load",
-      "verified_at": "2026-08-26",
-      "note": "LOAD.TYPE(7-3) 설명에서 잘못된 CURVED 제외 조건 삭제 — 모든 TYPE 공통 필드로 정정"
+      "verified_at": "2026-08-26"
     },
     "6. /ope/AUTOMESH — Auto-Mesh Planar Area": {
       "article_id": "35736427971225",
       "article_title": "Auto-Mesh Planar Area",
-      "verified_at": "2026-08-26",
-      "note": "MESHER.METHOD/MESHER.TYPE/PROPERTY.ELEMENT_TYPE enum 리터럴에서 표기상 공백 제거(원문 표는 공백 포함 오기, 예제는 공백 없는 리터럴)"
+      "verified_at": "2026-08-26"
     },
     "7. /ope/SSPS — Surface Spring": {
       "article_id": "39772183634329",
       "article_title": "Surface Spring",
-      "verified_at": "2026-08-26",
-      "note": "BOUNDARY.STIFF/bDAMP/DAMP가 CONVERT_TO=POINT_SPRING 전용임을 명시(ELASTIC_LINK는 LINEAR라도 해당 필드 없음). 동명의 다른 아티클(35946218805785, /db/SSPS)과 혼동 주의 — updated_at 최신순이 아니라 Input URI로 확정"
+      "verified_at": "2026-08-26"
     },
     "8. /ope/EDMP — Change Property": {
       "article_id": "39772649347865",
       "article_title": "Change Property",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치. 동명 아티클 35808245801881(/db/EDMP, 별개 엔드포인트)과 Input URI로 구분"
+      "verified_at": "2026-08-26"
     },
     "9. /ope/STOR — Story Calculation": {
       "article_id": "49514653408793",
       "article_title": "Story Calculation",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치"
+      "verified_at": "2026-08-26"
     },
     "10. /ope/STORY_PARAM — Story Check Parameter": {
       "article_id": "49514705474457",
       "article_title": "Story Check Parameter",
-      "verified_at": "2026-08-26",
-      "note": "COUNTRY_CODE enum \"NTCS2020\"→\"NTC2020\" 정정(표 기준, 예제 없어 확증은 보류)"
+      "verified_at": "2026-08-26"
     },
     "11. /ope/STORY_IRR_PARAM — Story Irregularity Check Parameter": {
       "article_id": "49514751862425",
       "article_title": "Story Irregularity Check Parameter",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치. STORY_DRIFT_METHOD 등 예제의 공백없는 리터럴이 이미 정확(표의 공백 포함 표기는 설명용)"
+      "verified_at": "2026-08-26"
     },
     "12. /ope/STORYPROP — Story Properties": {
       "article_id": "49514773501721",
       "article_title": "Story Properties",
-      "verified_at": "2026-08-26",
-      "note": "엔드포인트 표기 STORPROP→STORYPROP 정정(응답 키는 이미 정확했음), FORMAT 예제값 Default→Fixed 정정, HEAD 배열 \"Loaded H/Bx/By\" 공백 보강. PLACE Value Type \"String\"(예제는 정수) 원문 자기모순은 판단 보류"
+      "verified_at": "2026-08-26"
     },
     "13. /ope/MEMB — Member Assignment": {
       "article_id": "49514964272665",
       "article_title": "Member Assignment",
       "verified_at": "2026-09-06",
-      "note": "⚠️ 2026-09-06 최종 확정: 원문 아티클 49514964272665는 로케일별 본문이 다름. 영문 페이지는 요청 예제·Specifications 표 모두 ELEM_LIST(ELEM_LIST 2회/AELEM 1회, 응답 예제만 AELEM)로 일관, 한글 페이지는 표만 ELEM_LIST이고 요청 예제는 AELEM(ELEM_LIST 1회/AELEM 5회)으로 자기모순. 이 아티클엔 JSON Schema 절 자체가 없음. 요청 키=ELEM_LIST / 응답·저장 레코드 키=AELEM으로 다른 것이 정상이며, 형제 /db/MEMB(49513603328793)가 전부 AELEM인 것은 저장 레코드 CRUD이기 때문이라 요청 키 근거가 아님. 이력: 2026-08-26 AELEM → 2026-08-27 ELEM_LIST(오독 기록) → 2026-09-06 한글 페이지만 보고 다시 AELEM → 같은 날 영문 확인 후 ELEM_LIST로 최종 복귀. 로케일 분기를 확인하기 전에 '예제 우선' 원칙을 적용하지 말 것. 한글 요청 예제 정정 요청은 오류 제보 후속으로 접수, 기존 제보의 앞항목은 철회 표기함. 표 2행 SELETION_TYPE 오타는 한/영 모두 잔존(A-7 뒷항목, 유효)하며 로컬은 SELECTION_TYPE으로 정확.",
       "updated_at": "2026-07-30T05:16:25Z"
     },
     "14. /ope/GUSTFACTOR — Gust Factor Calculator": {
       "article_id": "59050520760473",
       "article_title": "Gust Factor Calculator",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치 (JSON Schema 전체 검증)"
+      "verified_at": "2026-08-26"
     },
     "15. /ope/LCOM-GEN — Load Combination (General) KDS:2022": {
       "article_id": "59057595762329",
       "article_title": "Load Combination (General)",
-      "verified_at": "2026-08-26",
-      "note": "ADD_ENVELOPE가 CONCRETE/STEEL 바디에만 존재한다는 설명이 오류(SRC 분기 스키마에도 동일하게 존재) — 세 바디 공통으로 정정. 원문 표 자체의 WIND_LOAD_COMB/UNDERGROUND_LOAD Required 오기재(스키마와 모순)·DGNCODE 기본값 복붙 오타는 로컬이 이미 스키마 기준으로 정확, 오류제보 대상"
+      "verified_at": "2026-08-26"
     },
     "15-aik. /ope/LCOM-GEN — AIK-SRC2K 변형": {
       "article_id": "59057584761369",
       "article_title": "Load Combination (General) - AIK 2K",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치. 공통 스키마 블록의 required가 LCOM-SRC 기준(RS_SCALE_FACTOR 미포함)이라 LCOM-GEN(실제로는 RS_SCALE_FACTOR 포함) 검증용으로 오인되지 않도록 주석 추가"
+      "verified_at": "2026-08-26"
     },
     "16. /ope/LCOM-CONC — Load Combination (Concrete)": {
       "article_id": "59054699524889",
       "article_title": "Load Combination (Concrete)",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치"
+      "verified_at": "2026-08-26"
     },
     "17. /ope/LCOM-STEEL — Load Combination (Steel)": {
       "article_id": "59054671269145",
       "article_title": "Load Combination (Steel)",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치"
+      "verified_at": "2026-08-26"
     },
     "18. /ope/LCOM-SRC — Load Combination (SRC) KDS:2022": {
       "article_id": "59057831082265",
       "article_title": "Load Combination (SRC)",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치"
+      "verified_at": "2026-08-26"
     },
     "18-aik. /ope/LCOM-SRC — AIK-SRC2K 변형": {
       "article_id": "59056886354201",
       "article_title": "Load Combination (SRC) - AIK 2K",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치 (RS_SCALE_FACTOR Optional 확인)"
+      "verified_at": "2026-08-26"
     },
     "19. /ope/GSBG — Bridge Girder Diagram Image Generation": {
       "article_id": "59870138081177",
       "article_title": "Bridge Girder Diagram Image Generation",
       "verified_at": "2026-09-06",
-      "note": "✅ 부분 해결(2026-09-06): 원문 표 응력 성분 4번이 부호 없는 'Sbz\" 4'에서 '-Sbz\" 4'로 정정됨(오류 제보 반영). ⚠️ 콜론 자리에 큰따옴표가 남은 오타는 미해결. 로컬 표·예제·스키마 전부 원문과 일치, 수정 없음",
       "updated_at": "2026-09-01T01:28:35Z"
     }
   },
@@ -1733,44 +1483,37 @@
     "1. /view/SELECT — Select": {
       "article_id": "35995942911257",
       "article_title": "Select",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치"
+      "verified_at": "2026-08-26"
     },
     "2. /view/CAPTURE — Capture": {
       "article_id": "35996023805337",
       "article_title": "Capture",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치. 원문 스키마 description의 \"Veiw/*\" 오타(View)는 로컬이 이미 정상 표기, 오류제보 대상"
+      "verified_at": "2026-08-26"
     },
     "3. /view/PRECAPTURE — Dialog Capture": {
       "article_id": "39236964850329",
       "article_title": "Dialog Capture",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치. 원문 표 OPTION 설명이 EXPORT_PATH 설명을 복붙한 오류 — 로컬은 이미 스키마 description 기준으로 정확, 오류제보 대상"
+      "verified_at": "2026-08-26"
     },
     "4. /view/ANGLE — Viewpoint": {
       "article_id": "35736247981209",
       "article_title": "Viewpoint",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치"
+      "verified_at": "2026-08-26"
     },
     "5. /view/ACTIVE — Active": {
       "article_id": "35523395368985",
       "article_title": "Active",
-      "verified_at": "2026-08-26",
-      "note": "신규 IDENTITY_TYPE=\"STORY\"(층별 활성화) 모드 보강 — 원문 스키마엔 미반영이나 표·예제엔 존재(원문 자체 모순, 예제 기준 STORY_ACTIVE 필드 포함 추가). 원문 예제 자체의 JSON 문법 오류(콤마 누락)는 로컬에 정상 반영"
+      "verified_at": "2026-08-26"
     },
     "6. /view/DISPLAY — Display": {
       "article_id": "35996157533977",
       "article_title": "Display",
-      "verified_at": "2026-08-26",
-      "note": "90여개 필드·각주 전체 완전 일치. 원문 예제 7종(Node/Element/Property/Boundary/Load/MISC/View) 중 Property·MISC 2종 누락 보강. Boundary/Load 예제는 원문이 상호배타 각주와 모순되게 전체 필드 true로 나열 — 로컬은 기존처럼 대표 발췌 유지, 오류제보 대상"
+      "verified_at": "2026-08-26"
     },
     "7. /view/RESULTGRAPHIC — Result Graphic": {
       "article_id": "35996812786841",
       "article_title": "Type of Display",
-      "verified_at": "2026-08-26",
-      "note": "TYPE_OF_DISPLAY 공통 스키마(CONTOUR/VALUES/LEGEND/DEFORM/DISP_OPT/MIRRORED/CUTTING_DIAGRAM/CUTTING_PLANE/APPLIED_LOADS/ISO_SURFACE)·예제 5종 전체 완전 일치. CURRENT_MODE는 원문이 ~25개 개별 아티클로 분산돼 있어 기존 방침대로 대표 예시만 유지(SECT/TDMT 원칙), 이미 문서에 그 취지의 주석 있음. 개별 모드별 COMPONENTS 세부 구조는 미전개 상태 유지"
+      "verified_at": "2026-08-26"
     }
   },
   "17_DB_Bridge.md": {
@@ -1778,792 +1521,657 @@
       "article_id": "35991591178265",
       "article_title": "Bridge Girder Diagrams",
       "verified_at": "2026-09-06",
-      "note": "무변경 확인(2026-09-06): updated_at만 갱신된 화장빨 변경(cosmetic bump). Input URI·Active Methods·스키마 10개 속성(미완성 'TODO: BSTRSCOMP' 설명 포함)·예제 2종·Specifications 10개 행 모두 로컬과 일치",
       "updated_at": "2026-09-01T01:14:26Z"
     },
     "2. /db/GCMB — General Camber Control": {
       "article_id": "35991765204121",
       "article_title": "General Camber Control",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치"
+      "verified_at": "2026-08-26"
     },
     "3. /db/CAMB — FCM Camber Control": {
       "article_id": "35991862460697",
       "article_title": "FCM Camber Control",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치"
+      "verified_at": "2026-08-26"
     },
     "4. /db/ULFC — Cable Control – Unknown Load Factor Constraints": {
       "article_id": "35991960319897",
       "article_title": "Cable Control - Unknown Load Factor Constraints",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치 (TYPE/POINT/COMP enum 전체 확인)"
+      "verified_at": "2026-08-26"
     },
     "5. /ope/GSBG — Bridge Girder Diagram Image Generation": {
       "article_id": "59870138081177",
       "article_title": "Bridge Girder Diagrams",
       "updated_at": "2026-09-01T01:28:35Z",
-      "verified_at": "2026-09-06",
-      "note": "✅ 부분 해결(2026-09-06): 원문 표 응력 성분 4번 부호가 '-Sbz\" 4'로 정정됨(오류 제보 반영) — 기존 ⚠️ 주석이 '원문에 부호가 없다'고 서술해 사실과 달라져 해결 기록으로 교체. ⚠️ 콜론이 큰따옴표로 남은 오타는 미해결(잔여 제보 대상). 표 자체는 수정 없음"
+      "verified_at": "2026-09-06"
     }
   },
   "18_POST_PreProcess.md": {
     "1. Element Weight Table": {
       "article_id": "36007474964249",
       "article_title": "Element Weight Table",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치 (NODE_ELEMS anyOf 구조 포함)"
+      "verified_at": "2026-08-26"
     },
     "2. Nodal Body Force Table": {
       "article_id": "36007518091289",
       "article_title": "Nodal Body Force Table",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치. 동명이나 별개인 아티클 35953117115545(POST/TABLE 아님)와 혼동 주의"
+      "verified_at": "2026-08-26"
     },
     "3. Mass Summary Table": {
       "article_id": "36007577052441",
       "article_title": "Mass Summary Table",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치 (TABLE_TYPE MASS_SUMMARY_X/Y/Z 확인)"
+      "verified_at": "2026-08-26"
     },
     "4. Load Summary Table": {
       "article_id": "36007640088857",
       "article_title": "Load Summary Table",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치 (TABLE_TYPE LOAD_SUMMARY_X/Y/Z 확인, 지수표기 값 포함)"
+      "verified_at": "2026-08-26"
     },
     "5. Material Table": {
       "article_id": "43835303404825",
       "article_title": "Material Table",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치 (33개 컬럼 HEAD 전체 확인)"
+      "verified_at": "2026-08-26"
     },
     "6. Section Table": {
       "article_id": "43835398107801",
       "article_title": "Section Table",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치 (TABLE_TYPE 10종 SECTIONALL/COMBINED/COMPOSITE/CONSTRUCTION/DB-USER/PSC/SRC/STEELGIRDER/TAPERED/VALUE 전체 확인)"
+      "verified_at": "2026-08-26"
     },
     "7. Restraint Supports Table": {
       "article_id": "43835481307161",
       "article_title": "Restraint Supports Table",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치"
+      "verified_at": "2026-08-26"
     },
     "10. Story Weight Table": {
       "article_id": "49514231584921",
       "article_title": "Story Weight",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치. UNIT/STYLES/COMPONENTS 관련 기존 2026-08-05 ⚠️ 주석 정확함 재확인"
+      "verified_at": "2026-08-26"
     },
     "8. Story Mass Summary Table": {
       "article_id": "49514136996889",
       "article_title": "Story Mass Summary",
       "updated_at": "2026-08-05T07:41:22Z",
-      "verified_at": "2026-08-25",
-      "note": "UNIT/STYLES/COMPONENTS 및 TABLE_TYPE enum(STORY_MASS/_X/_Y/_Z) 실존 확인 — 9번 절과의 오염 여부 대조용."
+      "verified_at": "2026-08-25"
     },
     "9. Story Load Summary Table": {
       "article_id": "49514148775705",
       "article_title": "Story Load Summary",
       "updated_at": "2026-08-05T07:40:56Z",
-      "verified_at": "2026-08-25",
-      "note": "이전 로컬 문서(2026-08-07 작성)가 8번 절 구조를 잘못 가져와 UNIT/STYLES/COMPONENTS/LOAD_CASE_NAMES를 허구로 기재하고 TABLE_TYPE도 STORY_LOAD_X/Y/Z로 오기했던 것을 이번에 발견·정정함. 실제 파라미터는 TABLE_NAME/TABLE_TYPE(enum: STORY_LOAD_SUMMARY_X/Y/Z)/EXPORT_PATH 3개뿐."
+      "verified_at": "2026-08-25"
     }
   },
   "19_POST_AnalysisResult_1.md": {
     "1. Reaction": {
       "article_id": "36009349748249",
       "article_title": "Reaction - Analysis Result Table",
-      "verified_at": "2026-09-15",
-      "note": "2026-09-15 정기 점검(원문 갱신 2026-09-11, ko/en-us/ja 3개 로케일 동시): 본문·HEAD 7종·SUB_TABLES(SUMMATIONOFREACTIONFORCESPRINTOUT)·TABLE_TYPE enum 모두 기존 문서와 일치하며, 새로 추가된 것은 Specifications 표 9행 OPT_CS의 값별 동작 설명 1건뿐. true=CS(첫 단계) 전환, false=PostCS(최종 단계) 전환, 필드 생략=현재 뷰 모드 유지로 3상태이며 생략과 false가 다르다. 같은 표 Default 열은 여전히 false여서 설명과 불일치(오류 제보 대상). 이 설명은 2026-09-15 기준 Reaction 아티클에만 있고 형제 아티클(36009638400281 등)은 'Activation - Construction Stage Step' 한 줄뿐이라, 19/20/21장 공통 파라미터 표에 반영하되 근거가 Reaction 한 곳임을 주석에 명시함. REACTIONLSURFACESPRING(예제 1건만의 L 추가 표기)은 이번 갱신에도 그대로 남아 있어 판단 보류 유지."
+      "verified_at": "2026-09-15"
     },
     "2. Displacements": {
       "article_id": "36009638400281",
       "article_title": "Displacements - Analysis Result Table",
-      "verified_at": "2026-08-26",
-      "note": "DISP_OPT(시공단계 전용, Accumulative/Current/Real) 파라미터 누락 보강 + 시공단계 예제 신규 추가"
+      "verified_at": "2026-08-26"
     },
     "3. Truss Force": {
       "article_id": "36009739012249",
       "article_title": "Truss Force - Analysis Result Table",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치"
+      "verified_at": "2026-08-26"
     },
     "4. Truss Stress": {
       "article_id": "36010188199833",
       "article_title": "Truss Stress - Analysis Result Table",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치"
+      "verified_at": "2026-08-26"
     },
     "5. Cable Force": {
       "article_id": "36010315199001",
       "article_title": "Cable Force - Analysis Result Table",
-      "verified_at": "2026-08-26",
-      "note": "General/Post CS 예제에 시공단계 요청(OPT_CS/STAGE_STEP/CS 하중케이스)이 잘못 붙어있던 것을 General과 시공단계(Stage 컬럼 추가된 HEAD) 두 쌍으로 분리 정정"
+      "verified_at": "2026-08-26"
     },
     "6. Cable Configuration": {
       "article_id": "36011013418905",
       "article_title": "Cable Configuration - Analysis Result Table",
-      "verified_at": "2026-08-26",
-      "note": "5절과 동일한 예제 혼선 정정. 시공단계 응답은 SkewAngle 2개 컬럼이 아예 빠지는 원문 자체 특이사항(요청 COMPONENTS는 IEnd/JEnd를 명시하는데 응답엔 반영 안 됨) 확인, 오류제보 대상"
+      "verified_at": "2026-08-26"
     },
     "7. Cable Efficiency": {
       "article_id": "36011176175385",
       "article_title": "Cable Efficiency - Analysis Result Table",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치. TABLE_TYPE \"CABLEEFFIENCY\"(오타)는 예제·표 기준으로 이미 정확, 스키마만 CABLEEFFICIENCY로 다름(오류제보 대상)"
+      "verified_at": "2026-08-26"
     },
     "8. Beam Force": {
       "article_id": "36011262919705",
       "article_title": "Beam Force - Analysis Result Table",
       "verified_at": "2026-09-06",
-      "note": "✅ 해결 확인(2026-09-06): JSON Schema enum의 'BEAMFORCEBYMAX' 오타가 정정돼 현재 ['BEAMFORCE','BEAMFORCEVBM'](BEAMFORCEBYMAX 0회). 오류 제보 반영. 로컬은 처음부터 예제·표 기준이라 값 수정 없음, ⚠️ 주석만 해결 기록으로 교체. PARTS 3자 모순(스키마 Part1 / 표 'Part I' / 예제 'PartI')은 그대로라 기존 주석 유지",
       "updated_at": "2026-09-01T02:55:30Z"
     },
     "9. Beam Force (Static Prestress)": {
       "article_id": "36011373070745",
       "article_title": "Beam Force (Static Prestress) - Analysis Result Table",
       "verified_at": "2026-09-06",
-      "note": "✅ 해결 확인(2026-09-06): JSON Schema enum의 'BEAMFORCESIP' 오타가 'BEAMFORCESTP'로 정정됨(BEAMFORCESIP 0회, BEAMFORCESTP 3회). 오류 제보 반영. 로컬 값 수정 없음, ⚠️ 주석만 해결 기록으로 교체",
       "updated_at": "2026-09-01T04:07:27Z"
     },
     "10. Beam Stress": {
       "article_id": "36011455813273",
       "article_title": "Beam Stress - Analysis Result Table",
-      "verified_at": "2026-08-26",
-      "note": "BEAMSTRESSVBM(스키마 누락, 표+예제로 실존 확인) 신규 보강, BEAMSTRESS7DOF가 BEAMSTRESS와 다른 HEAD를 쓴다는 점 명시(이전엔 단일 HEAD로 오인 소지), PARTS/SECTION_POSITION/ITEM_TO_DISPLAY 신규"
+      "verified_at": "2026-08-26"
     },
     "11. Beam Stress (Equivalent)": {
       "article_id": "36011572000153",
       "article_title": "Beam Stress (Equivalent) - Analysis Result Table",
-      "verified_at": "2026-08-26",
-      "note": "TABLE_TYPE·HEAD는 완전 일치. PARTS/SECTION_POSITION(1~28+Maximum, 10절과 다른 체계) 파라미터 누락 보강"
+      "verified_at": "2026-08-26"
     },
     "12. Beam Stress (PSC)": {
       "article_id": "36011704177561",
       "article_title": "Beam Stress (PSC) - Analysis Result Table",
-      "verified_at": "2026-08-26",
-      "note": "BEAMSTRESS7DOFPSC가 BEAMSTRESSPSC와 다른 HEAD(Combined(Ssy)/Combined(Ssz))를 쓴다는 점 명시 + 예제 신규, PARTS/SECTION_POSITION(Pos-1~16+Max/Min/All) 신규"
+      "verified_at": "2026-08-26"
     },
     "13. Concurrent Joint Force": {
       "article_id": "59520540732185",
       "article_title": "Concurrent Joint Force Table",
-      "verified_at": "2026-08-26",
-      "note": "공통 파라미터 표 미적용(자체 스키마, additionalProperties:false로 NODE_ELEMS/OPT_CS/STAGE_STEP 사용 불가) 명시, LOAD_CASE_NAMES가 이 테이블만 Required임을 정정, DATA/HEAD 행·블록 구조 설명이 반대로 되어 있던 것을 정정(요소별 1행, 성분별 블록 반복). 응답 최상위 키가 요청 TABLE_NAME이 아니라 리터럴 \"empty\"인 원문 특이사항은 오류제보 대상으로만 기록, 로컬 예제는 관례대로 TABLE_NAME 키 유지"
+      "verified_at": "2026-08-26"
     }
   },
   "20_POST_AnalysisResult_2.md": {
     "1. Plate Force (Local)": {
       "article_id": "36012451576985",
-      "verified_at": "2026-08-26",
-      "note": "AVERAGE_NODAL_RESULT 파라미터 누락 보강"
+      "verified_at": "2026-08-26"
     },
     "2. Plate Force (Global)": {
       "article_id": "36012742430873",
-      "verified_at": "2026-08-26",
-      "note": "AVERAGE_NODAL_RESULT 파라미터 누락 보강"
+      "verified_at": "2026-08-26"
     },
     "3. Plate Force (Unit Length)": {
       "article_id": "36012822385817",
-      "verified_at": "2026-08-26",
-      "note": "TABLE_TYPE 5종(UL/UG/ULVBM/UGVBM/WA) 중 VBM·WA 2종의 응답 구조·전용 파라미터(ITEM_TO_DISPLAY 등)가 통째로 누락돼 있었음 — 전면 보강(대표 예제 각각 추가)"
+      "verified_at": "2026-08-26"
     },
     "4. Plate Stress (Local)": {
       "article_id": "36013026785433",
-      "verified_at": "2026-08-26",
-      "note": "AVERAGE_NODAL_RESULT/NODE_FLAG 파라미터 누락 보강"
+      "verified_at": "2026-08-26"
     },
     "5. Plate Stress (Global)": {
       "article_id": "36013101276697",
-      "verified_at": "2026-08-26",
-      "note": "AVERAGE_NODAL_RESULT/NODE_FLAG 파라미터 누락 보강"
+      "verified_at": "2026-08-26"
     },
     "6. Plate Strain (Local)": {
       "article_id": "36013201499417",
-      "verified_at": "2026-08-26",
-      "note": "NODE_FLAG 파라미터 누락 보강 (AVERAGE_NODAL_RESULT는 원문에 없음, 정확)"
+      "verified_at": "2026-08-26"
     },
     "7. Plate Strain (Global)": {
       "article_id": "36013319302809",
-      "verified_at": "2026-08-26",
-      "note": "NODE_FLAG 파라미터 누락 보강"
+      "verified_at": "2026-08-26"
     },
     "8. Plane Stress Force (Local)": {
       "article_id": "36013533471769",
-      "verified_at": "2026-08-26",
-      "note": "AVERAGE_NODAL_RESULT 파라미터 누락 보강. 공식 아티클 제목은 \"Plane Force (Local)\"(로컬 절 제목과 다름, 확인만)"
+      "verified_at": "2026-08-26"
     },
     "9. Plane Stress Force (Global)": {
       "article_id": null,
-      "verified_at": "2026-08-26",
-      "note": "AVERAGE_NODAL_RESULT 파라미터 누락 보강. 아티클 id 미기록(다음 동기화 시 재검색 필요)"
+      "verified_at": "2026-08-26"
     },
     "10. Plane Stress (Local)": {
       "article_id": null,
-      "verified_at": "2026-08-26",
-      "note": "AVERAGE_NODAL_RESULT/NODE_FLAG 누락 보강, COMPONENTS에 Angle 누락 추가, UNIT 표기 오류(kN/m→N/mm) 정정. 아티클 id 미기록"
+      "verified_at": "2026-08-26"
     },
     "11. Plane Stress (Global)": {
       "article_id": null,
-      "verified_at": "2026-08-26",
-      "note": "10절과 동일 패턴(AVERAGE_NODAL_RESULT/NODE_FLAG/Angle/UNIT) 정정. 아티클 id 미기록"
+      "verified_at": "2026-08-26"
     },
     "12. Plane Strain Force (Local)": {
       "article_id": null,
-      "verified_at": "2026-08-26",
-      "note": "AVERAGE_NODAL_RESULT 파라미터 누락 보강. 아티클 id 미기록"
+      "verified_at": "2026-08-26"
     },
     "13. Plane Strain Force (Global)": {
       "article_id": null,
-      "verified_at": "2026-08-26",
-      "note": "AVERAGE_NODAL_RESULT 파라미터 누락 보강. 아티클 id 미기록"
+      "verified_at": "2026-08-26"
     },
     "14. Plane Strain Stress (Local)": {
       "article_id": null,
-      "verified_at": "2026-08-26",
-      "note": "AVERAGE_NODAL_RESULT/NODE_FLAG 누락 보강, UNIT 표기 오류(kN/m→N/mm) 정정. 아티클 id 미기록"
+      "verified_at": "2026-08-26"
     },
     "15. Plane Strain Stress (Global)": {
       "article_id": null,
-      "verified_at": "2026-08-26",
-      "note": "14절과 동일 패턴 정정. 아티클 id 미기록"
+      "verified_at": "2026-08-26"
     },
     "16. Axisymmetric Force (Local)": {
       "article_id": null,
-      "verified_at": "2026-08-26",
-      "note": "AVERAGE_NODAL_RESULT 파라미터 누락 보강. 아티클 id 미기록"
+      "verified_at": "2026-08-26"
     },
     "17. Axisymmetric Force (Global)": {
       "article_id": "36014441528985",
-      "verified_at": "2026-08-26",
-      "note": "AVERAGE_NODAL_RESULT 파라미터 누락 보강"
+      "verified_at": "2026-08-26"
     },
     "18. Axisymmetric Stress (Local)": {
       "article_id": "36014896433945",
-      "verified_at": "2026-08-26",
-      "note": "AVERAGE_NODAL_RESULT/NODE_FLAG 파라미터 누락 보강"
+      "verified_at": "2026-08-26"
     },
     "19. Axisymmetric Stress (Global)": {
       "article_id": "36014957537433",
-      "verified_at": "2026-08-26",
-      "note": "AVERAGE_NODAL_RESULT/NODE_FLAG 파라미터 누락 보강"
+      "verified_at": "2026-08-26"
     },
     "20. Solid Force (Local)": {
       "article_id": "36015113863449",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치 (AVERAGE_NODAL_RESULT/NODE_FLAG 둘 다 원문에 없음 확인)"
+      "verified_at": "2026-08-26"
     },
     "21. Solid Force (Global)": {
       "article_id": "36015175530137",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치"
+      "verified_at": "2026-08-26"
     },
     "22. Solid Stress (Local)": {
       "article_id": "36015236608281",
-      "verified_at": "2026-08-26",
-      "note": "NODE_FLAG 파라미터 누락 보강(AVERAGE_NODAL_RESULT는 원문에 없음, 응답의 \"Cent\" 값 근거가 이제 명확해짐)"
+      "verified_at": "2026-08-26"
     },
     "23. Solid Stress (Global)": {
       "article_id": "36015348343833",
-      "verified_at": "2026-08-26",
-      "note": "AVERAGE_NODAL_RESULT/NODE_FLAG 파라미터 누락 보강"
+      "verified_at": "2026-08-26"
     },
     "24. Solid Strain (Local)": {
       "article_id": "36017264069017",
-      "verified_at": "2026-08-26",
-      "note": "AVERAGE_NODAL_RESULT/NODE_FLAG 누락 보강 + SOLID_LOCA_PLAST_STRAIN 전용 컬럼 3개(Comp.Damage/Tens.Damage/Damage) 신규"
+      "verified_at": "2026-08-26"
     },
     "25. Solid Strain (Global)": {
       "article_id": "36017308083481",
-      "verified_at": "2026-08-26",
-      "note": "24절과 동일 패턴 정정"
+      "verified_at": "2026-08-26"
     },
     "26. Elastic Link": {
       "article_id": "36017416195737",
-      "verified_at": "2026-08-26",
-      "note": "ELASTICLINKVBM 전용 ITEM_TO_DISPLAY·HEAD·예제 신규 보강"
+      "verified_at": "2026-08-26"
     },
     "27. General Link": {
       "article_id": "36017500761369",
-      "verified_at": "2026-08-26",
-      "note": "GENERAL_LINK_FORCEVBM 전용 ITEM_TO_DISPLAY 및 GENERAL_LINK_DEFORM 전용 응답 구조(양단 변위/회전)·예제 신규 보강"
+      "verified_at": "2026-08-26"
     },
     "28. Vibration Mode Shape": {
       "article_id": "36017669319321",
-      "verified_at": "2026-08-26",
-      "note": "MODES 파라미터 및 응답 SUB_TABLES(EIGENVALUEANALYSIS 등 4종 요약 테이블) 누락 보강"
+      "verified_at": "2026-08-26"
     },
     "29. Buckling Mode Shape": {
       "article_id": "36017712087065",
-      "verified_at": "2026-08-26",
-      "note": "MODES 파라미터 및 SUB_TABLES(BUCKLINGANALYSIS) 누락 보강"
+      "verified_at": "2026-08-26"
     },
     "30. Tendon Coordinates": {
       "article_id": "36017935058713",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치"
+      "verified_at": "2026-08-26"
     },
     "31. Tendon Elongation": {
       "article_id": "36018016568345",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치"
+      "verified_at": "2026-08-26"
     },
     "32. Tendon Arrangement": {
       "article_id": "36018062664857",
-      "verified_at": "2026-08-26",
-      "note": "NODE_ELEMS로 대상을 지정한다는 이전 표기가 오류 — 실제로는 ADDITIONAL.SET_TENDON_PARAMS(TENDON_GROUP+STAGE, 둘 다 Required)로 지정. 전면 정정"
+      "verified_at": "2026-08-26"
     },
     "33. Tendon Loss": {
       "article_id": "36018150905881",
-      "verified_at": "2026-08-26",
-      "note": "32절과 동일하게 NODE_ELEMS→ADDITIONAL.SET_TENDON_PARAMS 정정, Force/Stress HEAD 컬럼명 차이 명시, UNIT 표기 오류(kN/m→N/mm) 정정"
+      "verified_at": "2026-08-26"
     },
     "34. Tendon Weight": {
       "article_id": "36018235852569",
-      "verified_at": "2026-08-26",
-      "note": "TABLE_TYPE=GROUP로 표기된 예제가 실제로는 PROFILE 데이터였던 것을 발견·정정, PROPERTY/GROUP 응답 구조 신규 보강"
+      "verified_at": "2026-08-26"
     },
     "35. Tendon Stress Limit Check": {
       "article_id": "36018322624281",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치"
+      "verified_at": "2026-08-26"
     },
     "36. Tendon Approximate Loss": {
       "article_id": "36018411935129",
-      "verified_at": "2026-08-26",
-      "note": "NODE_ELEMS가 이 테이블 스키마에 없어 삭제, Force/Stress HEAD 컬럼명 차이 명시, UNIT 표기 오류(kN/m→kips/in) 정정"
+      "verified_at": "2026-08-26"
     },
     "37. Composite Section for C.S. (Force and Stress)": {
       "article_id": "36018521410457",
-      "verified_at": "2026-08-26",
-      "note": "PARTS 파라미터 누락 보강"
+      "verified_at": "2026-08-26"
     },
     "38. Composite Section for C.S. (Self-Constraint Force and Stress)": {
       "article_id": "36018582743705",
-      "verified_at": "2026-08-26",
-      "note": "PARTS 파라미터 누락 보강 + 시공단계 조회 시 Stage/Step 컬럼 추가되는 점 신규 명시"
+      "verified_at": "2026-08-26"
     },
     "39. Wall Force": {
       "article_id": "49513398732953",
-      "verified_at": "2026-08-26",
-      "note": "완전 일치 (기존 SECT_POSITION/PARTS 삭제 관련 주석 정확함 재확인)"
+      "verified_at": "2026-08-26"
     }
   },
   "21_POST_StoryTables.md": {
     "1. Story Drift": {
       "article_id": "49511531295257",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-07-28T02:08:46Z",
-      "note": "STORY_DRIFT_COMB Response HEAD 37열 정정 (이전 버전 30열, Shear-Weighted 블록 누락) + 2번째 예제 DATA 정정"
+      "updated_at": "2026-07-28T02:08:46Z"
     },
     "2. Story Displacement": {
       "article_id": "49511597474713",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-07-24T02:09:38Z",
-      "note": "Comb Response 예제 누락 보강"
+      "updated_at": "2026-07-24T02:09:38Z"
     },
     "3. Story Shear Force (R.S. Analysis)": {
       "article_id": "49511717907097",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-07-24T06:38:49Z",
-      "note": "MATCH"
+      "updated_at": "2026-07-24T06:38:49Z"
     },
     "4. Story Shear Force Coefficient (R.S. Analysis)": {
       "article_id": "49511816211737",
       "verified_at": "2026-08-26",
-      "updated_at": "2025-11-06T01:51:27Z",
-      "note": "MATCH"
+      "updated_at": "2025-11-06T01:51:27Z"
     },
     "5. Story Mode Shape": {
       "article_id": "49511927443481",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-07-24T06:08:28Z",
-      "note": "MATCH"
+      "updated_at": "2026-07-24T06:08:28Z"
     },
     "6. Story Shear Force Ratio": {
       "article_id": "49512411760665",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-07-24T06:33:00Z",
-      "note": "2번째 DATA 행이 SUB_TABLES 합계값을 잘못 재사용한 오류 정정"
+      "updated_at": "2026-07-24T06:33:00Z"
     },
     "7. Story Eccentricity": {
       "article_id": "49511990423833",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-07-24T06:01:05Z",
-      "note": "MATCH"
+      "updated_at": "2026-07-24T06:01:05Z"
     },
     "8. Overturning Moment": {
       "article_id": "49512035391641",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-07-29T07:21:10Z",
-      "note": "MATCH"
+      "updated_at": "2026-07-29T07:21:10Z"
     },
     "9. Story Axial Force Sum": {
       "article_id": "49512116327065",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-07-24T02:13:40Z",
-      "note": "UNIT.FORCE kN → lbf 정정 (원문 예제는 LBF 단위값)"
+      "updated_at": "2026-07-24T02:13:40Z"
     },
     "10. Story Stability Coefficient": {
       "article_id": "49512818237849",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-08-20T02:02:10Z",
-      "note": "MATCH (Drift at the Center of Mass 표기 기존 정정 유지 확인)"
+      "updated_at": "2026-08-20T02:02:10Z"
     },
     "11. Torsional Irregularity Check": {
       "article_id": "49512900149017",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-07-29T07:48:27Z",
-      "note": "MATCH"
+      "updated_at": "2026-07-29T07:48:27Z"
     },
     "12. Torsional Amplification Factor": {
       "article_id": "49513005384089",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-07-29T08:19:34Z",
-      "note": "MATCH"
+      "updated_at": "2026-07-29T08:19:34Z"
     },
     "13. Stiffness Irregularity Check (Soft Story)": {
       "article_id": "49513107644057",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-07-29T08:27:21Z",
-      "note": "\"Drfit\" 오타가 공식 측에서 이미 정정됨(더 이상 오타 아님) — 관련 주석 갱신, STORY_DRIFT_METHOD/STORY_STIFFNESS_METHOD 기본값 System으로 정정"
+      "updated_at": "2026-07-29T08:27:21Z"
     },
     "14. Capacity Irregularity Check (Weak Story)": {
       "article_id": "49513198751385",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-07-29T08:21:11Z",
-      "note": "MATCH"
+      "updated_at": "2026-07-29T08:21:11Z"
     },
     "15. Criteria for Regularity in Plan": {
       "article_id": "49513284077721",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-07-30T07:06:04Z",
-      "note": "MATCH"
+      "updated_at": "2026-07-30T07:06:04Z"
     },
     "16. Ultimate Story Shear For Check": {
       "article_id": "49513305580569",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-07-30T07:12:23Z",
-      "note": "MATCH"
+      "updated_at": "2026-07-30T07:12:23Z"
     },
     "17. Weight Irregularity Check": {
       "article_id": "58746274895769",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-07-24T07:14:15Z",
-      "note": "MATCH"
+      "updated_at": "2026-07-24T07:14:15Z"
     }
   },
   "22_POST_TH_HY_Pushover.md": {
     "A-1. Time History Text - Node Results": {
       "article_id": "36704969941913",
       "verified_at": "2026-08-26",
-      "updated_at": "2025-08-14T04:54:17Z",
-      "note": "MATCH. 공통 스키마의 TABLE_TYPE/TEXT_TYPE 명칭 불일치는 공식 스키마 오류(예제는 전부 TEXT_TYPE)"
+      "updated_at": "2025-08-14T04:54:17Z"
     },
     "A-2. TH Text - Element(Truss/Beam/Plane/Solid)": {
       "article_id": "36705161290649",
       "verified_at": "2026-08-26",
-      "updated_at": "2025-08-14T05:00:31Z",
-      "note": "MATCH (10개 TEXT_TYPE 전체)"
+      "updated_at": "2025-08-14T05:00:31Z"
     },
     "A-3. TH Text - Element(Plate)": {
       "article_id": "36705400674585",
       "verified_at": "2026-08-26",
-      "updated_at": "2025-08-14T04:55:48Z",
-      "note": "MATCH"
+      "updated_at": "2025-08-14T04:55:48Z"
     },
     "A-4. TH Text - Element(Wall)": {
       "article_id": "36705611314585",
       "verified_at": "2026-08-26",
-      "updated_at": "2025-08-14T04:58:26Z",
-      "note": "공식 원문 자체의 요청/응답 예제 불일치(KEYS 466 vs WallID 12) 확인, 응답 기준으로 요청 정규화"
+      "updated_at": "2025-08-14T04:58:26Z"
     },
     "A-5. TH Text - General Link Result": {
       "article_id": "36705822943257",
       "verified_at": "2026-08-26",
-      "updated_at": "2025-08-14T04:57:02Z",
-      "note": "DEFORM 요청에 FORCE 응답이 잘못 짝지어진 것을 정정, 두 TEXT_TYPE 모두 올바른 쌍으로 보강"
+      "updated_at": "2025-08-14T04:57:02Z"
     },
     "A-6. Pushover Text - Displacement": {
       "article_id": "36705962238873",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-08-05T07:42:36Z",
-      "note": "MATCH"
+      "updated_at": "2026-08-05T07:42:36Z"
     },
     "A-7. Pushover Text - Element(Beam, Truss)": {
       "article_id": "36706062373657",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-08-05T07:43:50Z",
-      "note": "BEAMFORCE 요청에 TRUSSFORCE 응답이 잘못 짝지어지고 DATA도 임의값이었던 것을 정정"
+      "updated_at": "2026-08-05T07:43:50Z"
     },
     "A-8. Pushover Text - Element(Wall)": {
       "article_id": "36706217576217",
       "verified_at": "2026-08-26",
-      "updated_at": "2025-08-14T04:51:10Z",
-      "note": "A-4와 동일한 공식 원문 요청/응답 불일치 패턴 확인"
+      "updated_at": "2025-08-14T04:51:10Z"
     },
     "A-9. Pushover Text - General Link": {
       "article_id": "36706344369049",
       "verified_at": "2026-08-26",
-      "updated_at": "2025-08-14T04:51:49Z",
-      "note": "DATA가 임의 채움 값(Node1/Node2 오기 포함)이었던 것을 실제 값으로 정정"
+      "updated_at": "2025-08-14T04:51:49Z"
     },
     "A-10. Pushover Text - Elastic Link": {
       "article_id": "36706383777817",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-08-05T07:43:10Z",
-      "note": "MATCH"
+      "updated_at": "2026-08-05T07:43:10Z"
     },
     "B-1. Inelastic Hinge Event Time": {
       "article_id": "36020215503257",
       "verified_at": "2026-08-26",
-      "updated_at": "2025-04-27T06:54:40Z",
-      "note": "MATCH (5개 힌지유형 HEAD 변형 전체)"
+      "updated_at": "2025-04-27T06:54:40Z"
     },
     "B-2. Inelastic Hinge Beam Summary": {
       "article_id": "36020290127513",
       "verified_at": "2026-08-26",
-      "updated_at": "2025-04-27T06:57:19Z",
-      "note": "MATCH (5개 성분)"
+      "updated_at": "2025-04-27T06:57:19Z"
     },
     "B-3. Inelastic Hinge Truss Summary": {
       "article_id": "36020311969305",
       "verified_at": "2026-08-26",
-      "updated_at": "2025-04-27T06:59:26Z",
-      "note": "MATCH"
+      "updated_at": "2025-04-27T06:59:26Z"
     },
     "B-4. Inelastic Hinge General Link Summary": {
       "article_id": "36020391511961",
       "verified_at": "2026-08-26",
-      "updated_at": "2025-04-27T07:01:24Z",
-      "note": "MATCH (6개 성분)"
+      "updated_at": "2025-04-27T07:01:24Z"
     },
     "B-5. Inelastic Hinge Force": {
       "article_id": "36020436094105",
       "verified_at": "2026-08-26",
-      "updated_at": "2025-04-27T07:05:10Z",
-      "note": "Truss/Spring Response HEAD 라벨이 서로 바뀌어 있던 것을 정정"
+      "updated_at": "2025-04-27T07:05:10Z"
     },
     "B-6. Inelastic Hinge Deformation": {
       "article_id": "36020548520601",
       "verified_at": "2026-08-26",
-      "updated_at": "2025-04-27T07:07:54Z",
-      "note": "B-5와 동일한 Truss/Spring 라벨 스왑 정정"
+      "updated_at": "2025-04-27T07:07:54Z"
     },
     "B-7. Inelastic Hinge Element Rotation": {
       "article_id": "36020688077209",
       "verified_at": "2026-08-26",
-      "updated_at": "2025-04-27T07:10:42Z",
-      "note": "MATCH"
+      "updated_at": "2025-04-27T07:10:42Z"
     },
     "B-8. Inelastic Hinge Ductility Factor(D/D1)": {
       "article_id": "36020795064089",
       "verified_at": "2026-08-26",
-      "updated_at": "2025-04-27T07:13:40Z",
-      "note": "B-5와 동일한 Truss/Spring 라벨 스왑 정정"
+      "updated_at": "2025-04-27T07:13:40Z"
     },
     "B-9. Inelastic Hinge Ductility Factor(D/D2)": {
       "article_id": "36020877017497",
       "verified_at": "2026-08-26",
-      "updated_at": "2025-04-27T07:16:33Z",
-      "note": "B-5와 동일한 Truss/Spring 라벨 스왑 정정"
+      "updated_at": "2025-04-27T07:16:33Z"
     },
     "C-1. Stress - Heat of Hydration": {
       "article_id": "36006059687449",
       "verified_at": "2026-08-26",
-      "updated_at": "2025-03-31T04:28:15Z",
-      "note": "MATCH (COMP enum 19종)"
+      "updated_at": "2025-03-31T04:28:15Z"
     },
     "C-2. Temperature - Heat of Hydration": {
       "article_id": "36006173505433",
       "verified_at": "2026-08-26",
-      "updated_at": "2025-03-31T04:30:09Z",
-      "note": "MATCH"
+      "updated_at": "2025-03-31T04:30:09Z"
     },
     "C-3. Displacements - Heat of Hydration": {
       "article_id": "36006239859225",
       "verified_at": "2026-08-26",
-      "updated_at": "2025-03-31T04:32:24Z",
-      "note": "MATCH (COMP enum 10종)"
+      "updated_at": "2025-03-31T04:32:24Z"
     },
     "C-4. Allowable Tensile Stress - Heat of Hydration": {
       "article_id": "36006326138521",
       "verified_at": "2026-08-26",
-      "updated_at": "2025-03-31T04:34:40Z",
-      "note": "MATCH"
+      "updated_at": "2025-03-31T04:34:40Z"
     },
     "C-5. Crack Ratio - Heat of Hydration": {
       "article_id": "36006358418713",
       "verified_at": "2026-08-26",
-      "updated_at": "2025-03-31T04:36:50Z",
-      "note": "MATCH (Specifications 표만 HY_CRACK RATIO 오타, 스키마/예제는 정상)"
+      "updated_at": "2025-03-31T04:36:50Z"
     },
     "D-1. Element Force Smart Graph - db/THRE": {
       "article_id": "39236753314073",
       "verified_at": "2026-08-26",
-      "updated_at": "2025-11-04T00:20:00Z",
-      "note": "MATCH (표의 TYPE_ELEMENT를 THIS_ELEMENT로 적은 것은 표만의 오타)"
+      "updated_at": "2025-11-04T00:20:00Z"
     },
     "D-2. General Link Smart Graph - db/THRG": {
       "article_id": "35992341376025",
       "verified_at": "2026-08-26",
-      "updated_at": "2025-03-07T08:22:40Z",
-      "note": "COMP enum 표가 3개까지만 기재(누락), D-3과 교차확인해 6개 전체 유지"
+      "updated_at": "2025-03-07T08:22:40Z"
     },
     "D-3. Inelastic Hinge Smart Graph - db/THRI": {
       "article_id": "35992399685017",
       "verified_at": "2026-08-26",
-      "updated_at": "2025-11-04T00:19:08Z",
-      "note": "MATCH"
+      "updated_at": "2025-11-04T00:19:08Z"
     },
     "D-4. Seismic Devices Smart Graph - db/THRS": {
       "article_id": "35992460196121",
       "verified_at": "2026-08-26",
-      "updated_at": "2025-03-07T08:25:51Z",
-      "note": "공식 예제 TYPE_RES:4가 자체 enum 표에 없음(원문 모순, 오류제보 대상). Python 예제가 TYPE_RES:3으로 잘못 적혀있던 내부 불일치도 정정"
+      "updated_at": "2025-03-07T08:25:51Z"
     }
   },
   "23_POST_Design.md": {
     "1. P-M Interaction Diagram": {
       "article_id": "36021337973017",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-08-05T07:00:50Z",
-      "note": "MATCH (빈 Argument, 원문 자체가 스텁 수준)"
+      "updated_at": "2026-08-05T07:00:50Z"
     },
     "2. Steel Code Check": {
       "article_id": "44662732910233",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-08-05T07:37:13Z",
-      "note": "MATCH"
+      "updated_at": "2026-08-05T07:37:13Z"
     },
     "3. Concrete Design - Beam Design Forces": {
       "article_id": "49514295460889",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-08-05T06:55:59Z",
-      "note": "MATCH"
+      "updated_at": "2026-08-05T06:55:59Z"
     },
     "4. Concrete Design - Column Design Forces": {
       "article_id": "49514320078489",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-08-05T07:00:02Z",
-      "note": "MATCH"
+      "updated_at": "2026-08-05T07:00:02Z"
     },
     "5. Concrete Design - Brace Design Forces": {
       "article_id": "49514395318041",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-08-05T06:57:15Z",
-      "note": "MATCH (원문이 Column과 동일 예제 수치를 재사용, 정상)"
+      "updated_at": "2026-08-05T06:57:15Z"
     },
     "6. Concrete Design - Wall Design Forces": {
       "article_id": "49514433321881",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-08-05T07:36:47Z",
-      "note": "MATCH (STORY_NAMES 전용 파라미터 포함)"
+      "updated_at": "2026-08-05T07:36:47Z"
     },
     "7. Steel Design - Steel Member Design Forces": {
       "article_id": "49514496461593",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-08-05T07:36:36Z",
-      "note": "MATCH"
+      "updated_at": "2026-08-05T07:36:36Z"
     },
     "8. SRC Design - SRC Beam Design Forces": {
       "article_id": "49514560567961",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-08-05T07:35:48Z",
-      "note": "MATCH (My(+)/My(-) 열 순서 RC와 다름 확인)"
+      "updated_at": "2026-08-05T07:35:48Z"
     },
     "9. SRC Design - SRC Column Design Forces": {
       "article_id": "49514609393049",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-08-05T07:36:05Z",
-      "note": "MATCH"
+      "updated_at": "2026-08-05T07:36:05Z"
     },
     "10. Cold Formed Design - Cold Formed Steel Member Design Forces": {
       "article_id": "49514621265305",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-08-05T06:58:52Z",
-      "note": "MATCH"
+      "updated_at": "2026-08-05T06:58:52Z"
     }
   },
   "24_DB_Design.md": {
     "1. /db/DCON - RC 설계 코드": {
       "article_id": "35993633394969",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-07-02T07:34:53Z",
-      "note": "MATCH"
+      "updated_at": "2026-07-02T07:34:53Z"
     },
     "2. /db/DSTL - 강재 설계 코드": {
       "article_id": "52149417728665",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-07-21T01:25:33Z",
-      "note": "MATCH"
+      "updated_at": "2026-07-21T01:25:33Z"
     },
     "3. /db/RCHK - 검토용 철근 입력": {
       "article_id": "35993850335897",
       "verified_at": "2026-08-26",
-      "updated_at": null,
-      "note": "MATCH. 비틀림/다발/종방향 철근 7개 필드(vi~xii)가 공식 스키마엔 있으나 Specifications 표엔 누락됨을 확인, 주석 추가"
+      "updated_at": null
     },
     "4. /db/LENG - 비지지 길이": {
       "article_id": "49513511154329",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-07-02T08:03:49Z",
-      "note": "MATCH"
+      "updated_at": "2026-07-02T08:03:49Z"
     },
     "5. /db/MEMB - 설계 부재 배정": {
       "article_id": "49513603328793",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-07-02T08:20:18Z",
-      "note": "MATCH"
+      "updated_at": "2026-07-02T08:20:18Z"
     },
     "6. /db/DCTL - 프레임 정의": {
       "article_id": "49513652948377",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-07-02T08:26:59Z",
-      "note": "MATCH"
+      "updated_at": "2026-07-02T08:26:59Z"
     },
     "7. /db/LTSR - 세장비 제한": {
       "article_id": "49513681377689",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-07-02T08:33:33Z",
-      "note": "MATCH (원문 예제가 Assign 대신 LTSR 키를 쓴다는 기존 주석도 재확인)"
+      "updated_at": "2026-07-02T08:33:33Z"
     },
     "8. /db/MBTP - 부재 타입 수정": {
       "article_id": "49513816193689",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-07-02T08:52:24Z",
-      "note": "MATCH"
+      "updated_at": "2026-07-02T08:52:24Z"
     },
     "9. /db/WMAK - 벽체 마크 설계 수정": {
       "article_id": "49513846785817",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-07-02T08:57:40Z",
-      "note": "MATCH. JSON Schema 블록에 누락됐던 외곽 WMAK 래퍼 키 보강"
+      "updated_at": "2026-07-02T08:57:40Z"
     },
     "10. /db/REBB - 보 철근 데이터 수정": {
       "article_id": "49513985245849",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-07-21T02:05:12Z",
-      "note": "전면 정정: CREATE_SUB_SECTION/ELEMS 허구 필드 삭제, MAIN_BAR LAYER1/LAYER2 구조를 실제 vMAIN_BAR_TOP/BOT 배열 구조로, SKIN_BAR 중첩객체를 SKIN_BAR_NAME/NUM 평면 필드로 정정 (Request/Response 예제 자체는 원래도 정확했음)"
+      "updated_at": "2026-07-21T02:05:12Z"
     },
     "11. /db/REBC - 기둥 철근 데이터 수정": {
       "article_id": "49513980544793",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-07-21T02:12:24Z",
-      "note": "전면 정정: POST 전용 오기(실제 CRUD 전체 지원, 챕터 서두 안내문도 수정) + CREATE_SUB_SECTION/ELEMS/HOOK_TYPE 허구 필드 삭제 + MAIN_BAR(단일객체)→vMAIN_BAR(배열) + DO→D0(vMAIN_BAR 내부) + HOOP_TYPE 문자열→정수(1=Tied,2=Spiral) + bSAME_SPACE_END_CEN/NUM_BAR_BC_JOINT 누락 필드 보강"
+      "updated_at": "2026-07-21T02:12:24Z"
     },
     "12. /db/REBW - 벽체 철근 데이터 수정": {
       "article_id": "49514033006745",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-07-21T02:20:38Z",
-      "note": "전면 정정: 필드명 전체가 실제와 다름(VERTICAL_REBAR→VER_BAR, HORIZONTAL_REBAR→HOR_BAR, END_REBAR+USE_END_REBAR→END_BAR+NUM_END_BAR, BE_HORIZONTAL_REBAR→BE_HOR_BAR, BOUNDARY_ELEMENT_LENGTH→BE_LENGTH, CONCRETE_FACE_TO_CENTER_OF_REBAR.DW/DE→최상위 DW/DE, USE_MODEL_THICKNESS/THICKNESS→bUSE_MODEL_THICK/THICK), CREATE_SUB_WALL_ID/SUB_WALL_ID/STORY 허구 구조를 실제 vSTORY_KEY 배열로 정정"
+      "updated_at": "2026-07-21T02:20:38Z"
     },
     "13. /db/REBR - 가새 철근 데이터 수정": {
       "article_id": "59358972353817",
       "verified_at": "2026-08-26",
-      "updated_at": "2026-08-11T23:59:34Z",
-      "note": "MATCH — 10~12절과 달리 이 절은 원래부터 정확했음(MAIN_BAR 단일객체, DO, HOOP_TYPE 문자열 Ties/Spirals, CREATE_SUB_SECTION/ELEMS 모두 실재). 10~12절의 허구 필드 오염이 이 절 구조를 오인용한 것으로 추정"
+      "updated_at": "2026-08-11T23:59:34Z"
     }
   },
   "25_Design_Steel_KDS41302022.md": {
@@ -2571,632 +2179,507 @@
       "article_id": "57568269363737",
       "article_title": "Design Code",
       "updated_at": "2026-09-04T06:13:53Z",
-      "verified_at": "2026-09-06",
-      "note": "신규 작성(2026-09-06 정기 점검): DESIGN/STEEL/DSTL(강재 설계 코드 선택). 원문 생성일 2026-05-04로 이전부터 있었으나 매뉴얼에 누락돼 있던 것을, 이 아티클과 랜딩 페이지가 함께 2026-09-04 갱신된 것을 계기로 발견. KDS-41-30-2022 접두사를 쓰지 않는 별도 URI라 ## 0.으로 추가. 26장 DESIGN/RC/DRC의 강재 대응 엔드포인트. GET 응답 최상위 키는 엔드포인트명과 같은 'DSTL'(RC 쪽은 'DCON'이라 규칙이 다름). ⚠️ 원문 스키마에 maxProperties가 'maxroperties'로 오타 — 오류 제보 대상"
+      "verified_at": "2026-09-06"
     },
     "1. DCO": {
       "article_id": "57365469935257",
-      "verified_at": "2026-08-26",
-      "note": "MATCH"
+      "verified_at": "2026-08-26"
     },
     "2. DCTL": {
       "article_id": "57365599209497",
-      "verified_at": "2026-08-26",
-      "note": "MATCH"
+      "verified_at": "2026-08-26"
     },
     "3. LLRF": {
       "article_id": "57365732533145",
-      "verified_at": "2026-08-26",
-      "note": "MATCH"
+      "verified_at": "2026-08-26"
     },
     "4. LCTB": {
       "article_id": "57366206820249",
-      "verified_at": "2026-08-26",
-      "note": "MATCH"
+      "verified_at": "2026-08-26"
     },
     "5. SRDF": {
       "article_id": "57369593628057",
-      "verified_at": "2026-08-26",
-      "note": "MATCH"
+      "verified_at": "2026-08-26"
     },
     "6. SERV": {
       "article_id": "57369714731673",
-      "verified_at": "2026-08-26",
-      "note": "MATCH"
+      "verified_at": "2026-08-26"
     },
     "7. EQCT": {
       "article_id": "57369505978777",
-      "verified_at": "2026-08-26",
-      "note": "MATCH"
+      "verified_at": "2026-08-26"
     },
     "8. ULCT": {
       "article_id": "57424449702681",
-      "verified_at": "2026-08-26",
-      "note": "MATCH"
+      "verified_at": "2026-08-26"
     },
     "9. SUEQ": {
       "article_id": "57369321629081",
-      "verified_at": "2026-08-26",
-      "note": "MATCH"
+      "verified_at": "2026-08-26"
     },
     "10. CRCM": {
       "article_id": "57371843417497",
-      "verified_at": "2026-08-26",
-      "note": "MATCH"
+      "verified_at": "2026-08-26"
     },
     "11. HCBM": {
       "article_id": "57367569665177",
-      "verified_at": "2026-08-26",
-      "note": "MATCH"
+      "verified_at": "2026-08-26"
     },
     "12. LENG": {
       "article_id": "57368323557785",
-      "verified_at": "2026-08-26",
-      "note": "MATCH"
+      "verified_at": "2026-08-26"
     },
     "13. KFAC": {
       "article_id": "57368572755353",
-      "verified_at": "2026-08-26",
-      "note": "MATCH"
+      "verified_at": "2026-08-26"
     },
     "14. LTSR": {
       "article_id": "57368629920793",
-      "verified_at": "2026-08-26",
-      "note": "MATCH"
+      "verified_at": "2026-08-26"
     },
     "15. CMFT": {
       "article_id": "57368834102041",
-      "verified_at": "2026-08-26",
-      "note": "MATCH"
+      "verified_at": "2026-08-26"
     },
     "16. FMAG": {
       "article_id": "57369103995033",
-      "verified_at": "2026-08-26",
-      "note": "MATCH"
+      "verified_at": "2026-08-26"
     },
     "17. CBFT": {
       "article_id": "57370057195545",
-      "verified_at": "2026-08-26",
-      "note": "MATCH"
+      "verified_at": "2026-08-26"
     },
     "18. MBTP": {
       "article_id": "57369329156377",
-      "verified_at": "2026-08-26",
-      "note": "MATCH"
+      "verified_at": "2026-08-26"
     },
     "19. SLRS": {
       "article_id": "57371787001881",
-      "verified_at": "2026-08-26",
-      "note": "MATCH"
+      "verified_at": "2026-08-26"
     },
     "20. MLLR": {
       "article_id": "57400611535513",
-      "verified_at": "2026-08-26",
-      "note": "MATCH"
+      "verified_at": "2026-08-26"
     },
     "21. MEMB": {
       "article_id": "57670595775641",
-      "verified_at": "2026-08-26",
-      "note": "MATCH"
+      "verified_at": "2026-08-26"
     },
     "22. SMODI": {
       "article_id": "57389316545177",
-      "verified_at": "2026-08-26",
-      "note": "MATCH"
+      "verified_at": "2026-08-26"
     },
     "23. CODE-ANAL": {
       "article_id": "57389469766681",
-      "verified_at": "2026-08-26",
-      "note": "MATCH. 공식 스키마(oneOf ELEMS/SECTIONS 필수)와 공식 예제(PERFORM_TYPE=ALL만 사용, 둘 다 생략)가 서로 모순되는 원문 자체 이슈 확인, 예제 기준 유지 + 주석 추가"
+      "verified_at": "2026-08-26"
     },
     "24. CODE-TABLE": {
       "article_id": "57389596454553",
-      "verified_at": "2026-08-26",
-      "note": "MATCH"
+      "verified_at": "2026-08-26"
     },
     "25. CODE-REPORT": {
       "article_id": "57389577645209",
-      "verified_at": "2026-08-26",
-      "note": "MATCH"
+      "verified_at": "2026-08-26"
     },
     "26. DREULT": {
       "article_id": "57390686440345",
-      "verified_at": "2026-08-26",
-      "note": "MATCH"
+      "verified_at": "2026-08-26"
     },
     "27. TABLE": {
       "article_id": "57474427261465",
-      "verified_at": "2026-08-26",
-      "note": "MATCH"
+      "verified_at": "2026-08-26"
     }
   },
   "26_Design_RC_KDS41202022.md": {
     "0. DRC": {
       "article_id": "59120800558361",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "1. DCO": {
       "article_id": "59398215969561",
-      "verified_at": "2026-08-27",
-      "note": "Request/Response 예제의 DESIGN_CD 값에 있던 존재하지 않는 trailing space 제거 (repo 자체 오타)"
+      "verified_at": "2026-08-27"
     },
     "2. DCTL": {
       "article_id": "57399235907097",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "3. LLRF": {
       "article_id": "59398737034009",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "4. LCTB": {
       "article_id": "57400849512089",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "5. SRDF": {
       "article_id": "59398928723865",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "6. EQCT": {
       "article_id": "57401739847065",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "7. ULCT": {
       "article_id": "57424526808345",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "8. SUEQ": {
       "article_id": "57401718595481",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "9. SDGN": {
       "article_id": "57401906803225",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "10. SCOL": {
       "article_id": "57402506763289",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "11. MBTP": {
       "article_id": "57401721345305",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "12. MEMB": {
       "article_id": "59398810145817",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "13. MATD": {
       "article_id": "59398794726041",
-      "verified_at": "2026-08-27",
-      "note": "MATCH. GET 응답 예제 CODE 값이 대문자 STANDARD로, 스키마 oneOf/PUT 예제의 Standard와 표기가 다른 원문 자체 모순 확인, 예제 원문 유지 + 주석 추가"
+      "verified_at": "2026-08-27"
     },
     "14. LENG": {
       "article_id": "57401130563353",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "15. KFAC": {
       "article_id": "57401483836313",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "16. CMFT": {
       "article_id": "57401571080345",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "17. FMAG": {
       "article_id": "57401658783385",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "18. MLLR": {
       "article_id": "57401688698393",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "19. HCBM": {
       "article_id": "57401028854553",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "20. MRFT": {
       "article_id": "57402191658777",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "21. TRFT": {
       "article_id": "57402250238617",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "22. MCMB": {
       "article_id": "57402267791001",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "23. DFBA": {
       "article_id": "57402315435545",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "24. PMDM": {
       "article_id": "57402389191065",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "25. WMAK": {
       "article_id": "57402556185625",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "26. BEMW": {
       "article_id": "57402573014169",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "27. REXC": {
       "article_id": "57424760263833",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "28. LMRR": {
       "article_id": "57475390140313",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "29. DCRM-BEAM": {
       "article_id": "57402955647769",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "30. DCRM-COLUMN": {
       "article_id": "57403168622873",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "31. DCRM-BRACE": {
       "article_id": "57403194027033",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "32. DCRM-WALL": {
       "article_id": "57567874715289",
-      "verified_at": "2026-08-27",
-      "note": "Request/Response 예제가 원문이 아닌 자체 단순화 값으로 대체되어 있던 것을 원문 예제(벽체 ID 3/14, 값 1.6404199475065615)로 교체"
+      "verified_at": "2026-08-27"
     },
     "33. DCRE": {
       "article_id": "57404666280729",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "34. DCREM": {
       "article_id": "57407575510937",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "35. REBB": {
       "article_id": "59236057502873",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "36. REBC": {
       "article_id": "59236266281625",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "37. REBW": {
       "article_id": "59236271208729",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "38. REBR": {
       "article_id": "59236188355097",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "39. BD-ANAL": {
       "article_id": "57426912432793",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "40. BD-TABLE": {
       "article_id": "57426948142105",
-      "verified_at": "2026-08-27",
-      "note": "Response DATA가 6행(부재 859/860 각 I/M/J) 중 2행만 남아있던 것을 원문 전체로 보강"
+      "verified_at": "2026-08-27"
     },
     "41. BD-REPORT": {
       "article_id": "57427789377433",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "42. CD-ANAL": {
       "article_id": "57429905171225",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "43. CD-TABLE": {
       "article_id": "57430243603225",
-      "verified_at": "2026-08-27",
-      "note": "Response DATA가 3행(915/1058/1059) 중 1058행이 누락되어 있던 것을 보강"
+      "verified_at": "2026-08-27"
     },
     "44. CD-REPORT": {
       "article_id": "57430321588249",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "45. BRD-ANAL": {
       "article_id": "57430416643225",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "46. BRD-TABLE": {
       "article_id": "57430428520601",
-      "verified_at": "2026-08-27",
-      "note": "Response DATA가 5행 중 789/873 2행만 남아있던 것을 원문 전체(867/868/871 포함)로 보강"
+      "verified_at": "2026-08-27"
     },
     "47. BRD-REPORT": {
       "article_id": "57430481485081",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "48. WD-ANAL": {
       "article_id": "57430514941209",
-      "verified_at": "2026-08-27",
-      "note": "SELECTIONS/WALL_IDS/STORY가 실제로는 선택사항인데 필수로 잘못 표기되어 있던 것을 정정"
+      "verified_at": "2026-08-27"
     },
     "49. WD-TABLE": {
       "article_id": "57442273865625",
-      "verified_at": "2026-08-27",
-      "note": "PRI_SORT_WID·EXPORT_PATH 필드 누락 보강, PRI_SORT 설명 정정(Story/WID), Response ROWS가 5개 중 2개만 남아있던 것을 원문 전체로 보강, COMPONENTS enum이 예제 13개 외 35개 전체 선택 가능함을 주석으로 명시(WallMark 표기 불일치 포함)"
+      "verified_at": "2026-08-27"
     },
     "50. WD-REPORT": {
       "article_id": "57442429841561",
-      "verified_at": "2026-08-27",
-      "note": "SELECTIONS를 필수로 잘못 표기, CURRENT_MODE_WID enum에 없는 Detail이 포함되어 있던 것을 정정"
+      "verified_at": "2026-08-27"
     },
     "51. HCD-ANAL": {
       "article_id": "57456785885465",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "52. HCD-TABLE": {
       "article_id": "57457041716889",
-      "verified_at": "2026-08-27",
-      "note": "Response DATA가 18행(부재 1065/1073 각 9행, NG 사례 포함) 중 2행만 남아있던 것을 원문 전체로 보강"
+      "verified_at": "2026-08-27"
     },
     "53. HCD-REPORT": {
       "article_id": "57457044886169",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "54. BC-ANAL": {
       "article_id": "57457104239129",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "55. BC-TABLE": {
       "article_id": "57457223050521",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "56. BC-REPORT": {
       "article_id": "57457268302233",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "57. CC-ANAL": {
       "article_id": "57457806251929",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "58. CC-TABLE": {
       "article_id": "57458140117657",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "59. CC-REPORT": {
       "article_id": "57458112575641",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "60. BRC-ANAL": {
       "article_id": "57458218715417",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "61. BRC-TABLE": {
       "article_id": "57458359943449",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "62. BRC-REPORT": {
       "article_id": "57458379586713",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "63. WC-ANAL": {
       "article_id": "57458454433689",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "64. WC-TABLE": {
       "article_id": "57458599023897",
-      "verified_at": "2026-08-27",
-      "note": "Response DATA가 5행(NG 사례 WID 12 포함) 중 2행만 남아있던 것을 원문 전체로 보강"
+      "verified_at": "2026-08-27"
     },
     "65. WC-REPORT": {
       "article_id": "57458710549913",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "66. CDESIGN": {
       "article_id": "57458836502553",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "67. TABLE-Column": {
       "article_id": "57459388328601",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "68. TABLE-Brace": {
       "article_id": "57459768200217",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "69. TABLE-Beam": {
       "article_id": "57474262026905",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     }
   },
   "27_Design_SRC_AIKSRC2K.md": {
     "1. DSRC": {
       "article_id": "57465267608345",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "2. DCO": {
       "article_id": "57465303138329",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "3. DCTL": {
       "article_id": "57465737477273",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "4. LLRF": {
       "article_id": "57465892856857",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "5. LCTB": {
       "article_id": "57465890420505",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "6. LENG": {
       "article_id": "57466007733785",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "7. KFAC": {
       "article_id": "57466103707801",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "8. LTSR": {
       "article_id": "57466235159577",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "9. CMFT": {
       "article_id": "57466258537625",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "10. FMAG": {
       "article_id": "57466283605657",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "11. MLLR": {
       "article_id": "57466533347993",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "12. SUEQ": {
       "article_id": "57466547756313",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "13. MBTP": {
       "article_id": "57466577314201",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "14. EQCT": {
       "article_id": "57466649126041",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "15. BC-ANAL": {
       "article_id": "57471631056153",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "16. BC-TABLE": {
       "article_id": "57471707745945",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "17. BC-REPORT": {
       "article_id": "57471700233369",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "18. CC-ANAL": {
       "article_id": "57471905977241",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "19. CC-TABLE": {
       "article_id": "57471932075033",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "20. CC-REPORT": {
       "article_id": "57471918632857",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "21. OCHECK": {
       "article_id": "57472245522201",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "22. TABLE (보)": {
       "article_id": "57473503612569",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "23. TABLE (기둥)": {
       "article_id": "57473614628889",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "24. MATD": {
       "article_id": "59471948895129",
-      "verified_at": "2026-08-27",
-      "note": "MATCH. GET/PUT 응답 예제 CODE 값이 대문자 STANDARD로, 스키마 oneOf/요청 예제의 Standard와 대소문자가 다른 원문 자체 모순 확인 (26장 MATD와 동일 패턴), 예제 원문 유지 + 주석 추가"
+      "verified_at": "2026-08-27"
     },
     "25. MCRD": {
       "article_id": "59472022302617",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "26. MEMB": {
       "article_id": "59472072271385",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     },
     "27. MRBD": {
       "article_id": "59472130238873",
-      "verified_at": "2026-08-27",
-      "note": "MATCH"
+      "verified_at": "2026-08-27"
     }
   }
 }

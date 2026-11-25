@@ -9,7 +9,7 @@
 > **인증 헤더:** `MAPI-Key: <발급된 키>`  
 > **출처:** [MIDAS API Online Manual](https://support.midasuser.com/hc/en-us/articles/33016922742937)
 
-이 파트는 해석 결과 테이블 중 **판(Plate)·평면응력(Plane Stress)·평면변형률(Plane Strain)·축대칭(Axisymmetric)·솔리드(Solid)·링크(Link)·모드(Mode)·텐던(Tendon)·시공단계 합성단면(Composite Section for C.S.)·벽체(Wall)** 결과를 다룹니다. 모든 엔드포인트는 **공통 URI `{base url}/post/TABLE`** 를 사용하며 `POST` 메서드만 지원합니다. 요청 바디의 `"Argument"` 객체에서 `TABLE_TYPE` 값으로 테이블 종류를 결정합니다.
+이 파트는 해석 결과 테이블 중 **판(Plate)·평면응력(Plane Stress)·평면변형률(Plane Strain)·축대칭(Axisymmetric)·솔리드(Solid)·링크(Link)·모드(Mode)·텐던(Tendon)·시공단계 합성단면(Composite Section for C.S.)·벽체(Wall)** 결과를 다룹니다. 40~49절은 **합력(Resultant Forces)·유효 경간·응답스펙트럼 절점 결과·시공단계 요소/단면 성질·Lack of Fit Force·평형/초기 요소력** 테이블입니다. 모든 엔드포인트는 **공통 URI `{base url}/post/TABLE`** 를 사용하며 `POST` 메서드만 지원합니다. 요청 바디의 `"Argument"` 객체에서 `TABLE_TYPE` 값으로 테이블 종류를 결정합니다.
 
 ---
 
@@ -27,7 +27,7 @@
 
 ### 공통 Request 구조 및 파라미터
 
-전처리 테이블(18장)보다 확장된 구조로, `UNIT`·`STYLES`·`COMPONENTS`·`NODE_ELEMS`·`LOAD_CASE_NAMES`·`OPT_CS`·`STAGE_STEP`를 지원합니다. **아래 파라미터 표는 본 파트의 39개 테이블 전체에 공통 적용**되며, 각 절에서는 `TABLE_TYPE` enum과 응답 `HEAD` 열, 대표 예시만 별도 기술합니다.
+전처리 테이블(18장)보다 확장된 구조로, `UNIT`·`STYLES`·`COMPONENTS`·`NODE_ELEMS`·`LOAD_CASE_NAMES`·`OPT_CS`·`STAGE_STEP`를 지원합니다. **아래 파라미터 표는 본 파트의 1~39절 테이블에 공통 적용**되며(40~49절은 [40~49절 공통 파라미터](#4049절-공통-파라미터) 참고), 각 절에서는 `TABLE_TYPE` enum과 응답 `HEAD` 열, 대표 예시만 별도 기술합니다.
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
@@ -56,7 +56,7 @@
 > Post 결과를 반환하며, **필드를 생략하면 현재 뷰 모드를 유지**한 채 그에 맞는 결과를 반환한다.
 > 즉 `false`를 명시하는 것과 아예 안 보내는 것은 같지 않다. 원문 근거와 Default 열 불일치에 대한
 > 자세한 내용은 [19장 공통 파라미터 표](./19_POST_AnalysisResult_1.md#공통-request-구조-및-파라미터)의
-> 같은 항목 주석을 참고할 것. **실제 API 동작은 검증하지 않았다.**
+> 같은 항목 주석을 참고할 것.
 
 **`LOAD_CASE_NAMES` 접미사 규칙**
 
@@ -140,6 +140,16 @@
 | 37 | [Composite Section for C.S. (Force and Stress)](#37-composite-section-for-cs-force-and-stress) | `COMPSECTBEAMFORCE` / `COMPSECTBEAMSTRESS` |
 | 38 | [Composite Section for C.S. (Self-Constraint Force and Stress)](#38-composite-section-for-cs-self-constraint-force-and-stress) | `SELF_CONST_BEAM_FORCE` / `SELF_CONST_BEAM_STRESS` |
 | 39 | [Wall Force](#39-wall-force) | `WALL_FORCE_MOMENT` |
+| 40 | [Resultant Forces](#40-resultant-forces) | `RESULTANT_FORCES` / `RESULTANT_FORCESVBM` |
+| 41 | [Effective Span Length](#41-effective-span-length) | `EFFECTIVE_LENGTH_TRUSS` / `EFFECTIVE_LENGTH_BEAM` / `EFFECTIVE_LENGTH_PLATE` |
+| 42 | [Nodal Results of RS](#42-nodal-results-of-rs) | `RS_NODAL_INERTIA` / `RS_NODAL_ACCEL` |
+| 43 | [Element Properties at Each Stage](#43-element-properties-at-each-stage) | `ELEM_PROP_EACH_STAGE` |
+| 44 | [Beam Section Properties at Last Stage](#44-beam-section-properties-at-last-stage) | `SECT_PROP_LAST_STAGE` |
+| 45 | [Lack of Fit Force (Truss)](#45-lack-of-fit-force-truss) | `LACK_OF_FIT_FORCE_TRUSS` |
+| 46 | [Lack of Fit Force (Beam)](#46-lack-of-fit-force-beam) | `LACK_OF_FIT_FORCE_BEAM` |
+| 47 | [Lack of Fit Force (Plate)](#47-lack-of-fit-force-plate) | `LACK_OF_FIT_FORCE_PLATE` |
+| 48 | [Equilibrium Element Nodal Force](#48-equilibrium-element-nodal-force) | `EQUILIBRIUM_ELEM_FORCE` |
+| 49 | [Initial Element Force](#49-initial-element-force) | `INITIAL_ELEM_FORCE` |
 
 ---
 
@@ -3534,7 +3544,7 @@ for row in table.get("DATA", []):
 
 > ⚠️ 2026-08-26 확인: 시공단계 조회 시 `Stage`/`Step` 컬럼이 추가되는 점이 이전 버전 문서에
 > 누락되어 있었음(37절의 공식 예제는 이 컬럼을 포함하지 않아 37절 자체는 정정하지 않음 — 원문
-> 아티클 간 표기 차이로 판단, 오류제보 대상).
+> 아티클 간 표기 차이로 판단).
 
 ### Request / Response JSON
 
@@ -3649,7 +3659,7 @@ for row in table.get("DATA", []):
 | --- | --- | --- | --- | --- | --- |
 | 1 | 층 이름 지정 | `"STORY_NAMES"` | Array [String] | All | Optional |
 
-> ℹ️ **2026-07-30 공식 확인:** 이전 버전 문서는 JSON Schema에만 등장하던 `SECT_POSITION`·`PARTS`를 추정 설명과 함께 실었으나, 공식 담당자 확인 결과 이 Table Type(`WALL_FORCE_MOMENT`)은 두 항목을 지원하지 않으며 공식 아티클에서도 제거되었습니다. 이에 맞춰 위 표에서도 제거했습니다.
+> ℹ️ **2026-07-30 공식 확인:** 이전 버전 문서는 JSON Schema에만 등장하던 `SECT_POSITION`·`PARTS`를 추정 설명과 함께 실었으나, 이 Table Type(`WALL_FORCE_MOMENT`)의 공식 아티클에서 두 항목이 제거되었습니다. 이에 맞춰 위 표에서도 제거했습니다.
 
 ### Request / Response JSON
 
@@ -3718,6 +3728,1076 @@ for row in table.get("DATA", []):
     top = row[5:12]    # Part, Axial, Shear-y, Shear-z, Torsion, Moment-y, Moment-z
     bot = row[12:19]   # 동일 순서의 하단 값
     print(f"  Wall {wall} ({story}, {load}): Axial top={top[1]} / bot={bot[1]}")
+```
+
+---
+
+## 40~49절 공통 파라미터
+
+40~49절은 위 1~39절의 공통 파라미터 표 대신 아래 6개 항목을 공통으로 쓰고, 나머지는 각 절의 전용 파라미터를 봅니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Table Name · Response Table Title | `"TABLE_NAME"` | String | Empty | Optional |
+| 2 | Result Table Type | `"TABLE_TYPE"` | String | - | **Required** |
+| 3 | Result Table Save Path | `"EXPORT_PATH"` | String | - | Optional |
+| 4 | Response Unit Setting | `"UNIT"` | Object | System | Optional |
+| (1) | └ Force | `"FORCE"` | String | - | Optional |
+| (2) | └ Length | `"DIST"` | String | - | Optional |
+| (3) | └ Heat | `"HEAT"` | String | - | Optional |
+| (4) | └ Temperature | `"TEMP"` | String | - | Optional |
+| 5 | Response Number Format | `"STYLES"` | Object | System | Optional |
+| (1) | └ Number Format · "Default" · "Fixed" · "Scientific" · "General" | `"FORMAT"` | String | - | Optional |
+| (2) | └ Digit Place · 0 to 15 | `"PLACE"` | Integer | - | Optional |
+| 6 | Components of Result Table | `"COMPONENTS"` | Array[String] | All | Optional |
+
+---
+
+## 40. Resultant Forces
+
+> **기능:** 가상 보(Virtual Beam)의 합력(Resultant Force)을 일반/최종 시공단계, 시공단계, 최댓값 항목 보기로 추출합니다.
+>
+> **Source**: [Resultant Forces - Analysis Result Table ↗](https://support.midasuser.com/hc/en-us/articles/36017614482201) (2026-11-26 문서화)
+>
+> ⚠️ `PARTS` 값은 Specifications 표가 `"Part I"`처럼 공백을 넣어 적었고 요청 예제는 `"PartI"`/`"PartJ"`입니다. 19장과 같이 예제 표기를 씁니다.
+
+### `TABLE_TYPE`
+
+| 값 | 설명 |
+| --- | --- |
+| `"RESULTANT_FORCES"` | Force |
+| `"RESULTANT_FORCESVBM"` | Force - View by Max Value Items |
+
+### Response HEAD
+
+**Resultant Forces - General/Post CS**: `["Index", "VirtualBeam", "Load", "Part", "Axial", "Shear-Y", "Shear-Z", "Torsion", "Moment-Y", "Moment-Z"]`
+
+**Resultant Forces - Construction Stage**: `["Index", "VirtualBeam", "Load", "Stage", "Step", "Part", "Axial", "Shear-Y", "Shear-Z", "Torsion", "Moment-Y", "Moment-Z"]`
+
+**Resultant Forces - View By Max Value Items**: `["Index", "VirtualBeam", "Load", "Part", "Component", "Axial", "Shear-Y", "Shear-Z", "Torsion", "Moment-Y", "Moment-Z"]`
+
+### 전용 파라미터
+
+공통 파라미터(1~6번) 외에 아래 항목을 지원합니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 7 | Node / Element No. Input · Use Only One of the Three Methods | `"NODE_ELEMS"` | Object | All | Optional |
+| (1) | └ [Method 1: Specify Each ID] "KEYS": [101, 102, 103] | `"KEYS"` | Array[Integer] | - | Optional |
+| (1) | └ [Method 2: Specify ID Range] "TO": "101 to 105" | `"TO"` | String | - | Optional |
+| (1) | └ [Method 3: Specify Structure Group Name] "STRUCTURE_GROUP_NAME": "SG1" | `"STRUCTURE_GROUP_NAME"` | String | - | Optional |
+| 8 | Load Name & Type · Static Load Cases / NAME + "(ST)" · Load Combinations / NAME + "(CB)" / NAME + "(CB:all)" / NAME + "(CB:max)" / NAME + "(CB:min)" · Construction Stage / NAME + "(CS)" · Response Spectrum / NAME + "(RS)" · Moving Load / NAME + "(MV:all)" / NAME + "(MV:max)" / NAME + "(MV:min)" · Settlement Load / NAME + "(SM:all)" / NAME + "(SM:max)" / NAME + "(SM:min)" | `"LOAD_CASE_NAMES"` | Array[String] | All | Optional |
+| 9 | Element Part Number · "Part I" · "Part J" | `"PARTS"` | Array[String] | ALL | Optional |
+| 10 | [Construction Stage] Activation - Construction Stage Step | `"OPT_CS"` | Boolean | false | Optional |
+| 11 | Stage Step Name | `"STAGE_STEP"` | Array[String] | All | Optional |
+| 12 | [View By Max Value Items] Select Component · Resultant Force / "Axial" / "Shear-y" / "Shear-z" / "Torsion" / "Moment-y" / "Moment-z" | `"ITEM_TO_DISPLAY"` | Array[String] | All | Optional |
+
+### Request / Response JSON
+
+**POST Request Body — Resultant Forces - General/Post CS**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "ResultantForces",
+    "TABLE_TYPE": "RESULTANT_FORCES",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "kN", "DIST": "m"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["VirtualBeam", "Load", "Part", "Axial", "Shear-Y", "Shear-Z", "Torsion", "Moment-Y", "Moment-Z"],
+    "NODE_ELEMS": {"KEYS": [1]},
+    "LOAD_CASE_NAMES": ["SWofGirders(ST)"],
+    "PARTS": ["PartI", "PartJ"]
+  }
+}
+```
+
+**POST Request Body — Resultant Forces - Construction Stage**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "ResultantForces",
+    "TABLE_TYPE": "RESULTANT_FORCES",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "kN", "DIST": "m"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["VirtualBeam", "Load", "Stage", "Step", "Part", "Axial", "Shear-Y", "Shear-Z", "Torsion", "Moment-Y", "Moment-Z"],
+    "NODE_ELEMS": {"KEYS": [1]},
+    "LOAD_CASE_NAMES": ["Summation(CS)"],
+    "PARTS": ["PartI", "PartJ"],
+    "OPT_CS": true,
+    "STAGE_STEP": ["CS1:001(first)", "CS1:002(last)"]
+  }
+}
+```
+
+**POST Request Body — Resultant Forces - View By Max Value Items**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "ResultantForcesViewByMaxValueItems",
+    "TABLE_TYPE": "RESULTANT_FORCESVBM",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "kN", "DIST": "m"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["VirtualBeam", "Load", "Part", "Component", "Axial", "Shear-Y", "Shear-Z", "Torsion", "Moment-Y", "Moment-Z"],
+    "NODE_ELEMS": {"KEYS": [1]},
+    "LOAD_CASE_NAMES": ["STLENV_STR(CB:max)", "STLENV_STR(CB:min)"],
+    "PARTS": ["PartI", "PartJ"],
+    "ITEM_TO_DISPLAY": ["Axial", "Shear-y", "Shear-z", "Torsion", "Moment-y", "Moment-z"]
+  }
+}
+```
+
+**POST Response Body — Resultant Forces - General/Post CS**
+
+```json
+{
+  "ResultantForces": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "VirtualBeam", "Load", "Part", "Axial", "Shear-Y", "Shear-Z", "Torsion", "Moment-Y", "Moment-Z"],
+    "DATA": [
+      ["1", "1", "SWofGirders", "I", "0.238908000000", "-2.412530000000", "-24.814800000000", "3.963010000000", "-0.080275500000", "-0.297629000000"],
+      ["2", "1", "SWofGirders", "J", "-0.977785000000", "3.309780000000", "21.382900000000", "-3.866080000000", "-27.834000000000", "-1.721530000000"]
+    ]
+  }
+}
+```
+
+**POST Response Body — Resultant Forces - Construction Stage**
+
+```json
+{
+  "ResultantForces": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "VirtualBeam", "Load", "Stage", "Step", "Part", "Axial", "Shear-Y", "Shear-Z", "Torsion", "Moment-Y", "Moment-Z"],
+    "DATA": [
+      ["1", "1", "Summation", "CS1", "001(first)", "I", "0.238908000000", "-2.412530000000", "-24.814800000000", "3.963010000000", "-0.080275500000", "-0.297629000000"],
+      ["2", "1", "Summation", "CS1", "001(first)", "J", "-0.977785000000", "3.309780000000", "21.382900000000", "-3.866080000000", "-27.834000000000", "-1.721530000000"],
+      ["3", "1", "Summation", "CS1", "002(last)", "I", "0.238908000000", "-2.412530000000", "-24.814800000000", "3.963010000000", "-0.080275500000", "-0.297629000000"],
+      ["4", "1", "Summation", "CS1", "002(last)", "J", "-0.977785000000", "3.309780000000", "21.382900000000", "-3.866080000000", "-27.834000000000", "-1.721530000000"]
+    ]
+  }
+}
+```
+
+**POST Response Body — Resultant Forces - View By Max Value Items**
+
+> 원문 `DATA`는 24행이며 앞 4행만 발췌했습니다.
+
+```json
+{
+  "ResultantForcesViewByMaxValueItems": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "VirtualBeam", "Load", "Part", "Component", "Axial", "Shear-Y", "Shear-Z", "Torsion", "Moment-Y", "Moment-Z"],
+    "DATA": [
+      ["1", "1", "STLENV_STR(max)", "I", "Axial", "5.367480000000", "10.895500000000", "45.612500000000", "18.700800000000", "3.595340000000", "12.620600000000"],
+      ["2", "1", "STLENV_STR(max)", "I", "Shear-y", "5.367480000000", "10.895500000000", "45.612500000000", "18.700800000000", "3.595340000000", "12.620600000000"],
+      ["3", "1", "STLENV_STR(max)", "I", "Shear-z", "5.320110000000", "10.883100000000", "45.941600000000", "18.548000000000", "3.563550000000", "12.509000000000"],
+      ["4", "1", "STLENV_STR(max)", "I", "Torsion", "5.367480000000", "10.895500000000", "45.612500000000", "18.700800000000", "3.595340000000", "12.620600000000"]
+    ]
+  }
+}
+```
+
+### Python Example
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/gen"
+HEADERS = {"Content-Type": "application/json", "MAPI-Key": "YOUR_MAPI_KEY"}
+
+payload = {
+    'Argument': {
+        'TABLE_NAME': 'ResultantForces',
+        'TABLE_TYPE': 'RESULTANT_FORCES',
+        'UNIT': {'FORCE': 'kN', 'DIST': 'm'},
+        'STYLES': {'FORMAT': 'Fixed', 'PLACE': 12},
+        'NODE_ELEMS': {'KEYS': [1]},
+        'LOAD_CASE_NAMES': ['SWofGirders(ST)'],
+        'PARTS': ['PartI', 'PartJ']
+    }
+}
+
+resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
+table = resp.json().get('ResultantForces', {})
+print(table.get("HEAD"))
+print(len(table.get("DATA", [])), "rows")
+```
+
+---
+
+## 41. Effective Span Length
+
+> **기능:** 트러스·보·판 요소의 유효 경간 길이 테이블을 추출합니다.
+>
+> **Source**: [Effective Span Length - Analysis Result Table ↗](https://support.midasuser.com/hc/en-us/articles/36017771824281) (2026-11-26 문서화)
+
+### `TABLE_TYPE`
+
+| 값 | 설명 |
+| --- | --- |
+| `"EFFECTIVE_LENGTH_TRUSS"` | Truss |
+| `"EFFECTIVE_LENGTH_BEAM"` | Beam |
+| `"EFFECTIVE_LENGTH_PLATE"` | Plate |
+
+### Response HEAD
+
+**Effective Span Length-Truss**: `["Index", "Element", "Lane", "Max", "Min"]`
+
+**Effective Span Length-Beam**: `["Index", "Element", "Lane", "Parts", "My_max", "My_min", "Mz_max", "Mz_min", "Fx_max", "Fx_min", "ImpactFactor", "Parts", "My_max", "My_min", "Mz_max", "Mz_min", "Fx_max", "Fx_min", "ImpactFactor", "Parts", "My_max", "My_min", "Mz_max", "Mz_min", "Fx_max", "Fx_min", "ImpactFactor", "Parts", "My_max", "My_min", "Mz_max", "Mz_min", "Fx_max", "Fx_min", "ImpactFactor", "Parts", "My_max", "My_min", "Mz_max", "Mz_min", "Fx_max", "Fx_min", "ImpactFactor"]`
+
+**Effective Span Length-Plate**: `["Index", "Element", "Lane", "Parts", "Mxx_max", "Mxx_min", "Myy_max", "Myy_min", "Fxx_max", "Fxx_min", "Fyy_max", "Fyy_min", "ImpactFactor", "Parts", "Mxx_max", "Mxx_min", "Myy_max", "Myy_min", "Fxx_max", "Fxx_min", "Fyy_max", "Fyy_min", "ImpactFactor", "Parts", "Mxx_max", "Mxx_min", "Myy_max", "Myy_min", "Fxx_max", "Fxx_min", "Fyy_max", "Fyy_min", "ImpactFactor", "Parts", "Mxx_max", "Mxx_min", "Myy_max", "Myy_min", "Fxx_max", "Fxx_min", "Fyy_max", "Fyy_min", "ImpactFactor", "Parts", "Mxx_max", "Mxx_min", "Myy_max", "Myy_min", "Fxx_max", "Fxx_min", "Fyy_max", "Fyy_min", "ImpactFactor"]`
+
+### 전용 파라미터
+
+공통 파라미터(1~6번) 외의 항목은 없습니다.
+
+### Request / Response JSON
+
+**POST Request Body — Effective Span Length-Truss**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "EffectiveSpanLength-Truss",
+    "TABLE_TYPE": "EFFECTIVE_LENGTH_TRUSS",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "kN", "DIST": "m"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["Element", "Lane", "Max", "Min"]
+  }
+}
+```
+
+**POST Request Body — Effective Span Length-Beam**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "EffectiveSpanLength-Beam",
+    "TABLE_TYPE": "EFFECTIVE_LENGTH_BEAM",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "kN", "DIST": "m"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["Element", "Lane", "Parts", "My_max", "My_min", "Mz_max", "Mz_min", "Fx_max", "Fx_min", "ImpactFactor"]
+  }
+}
+```
+
+**POST Request Body — Effective Span Length-Plate**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "EffectiveSpanLength-Plate",
+    "TABLE_TYPE": "EFFECTIVE_LENGTH_PLATE",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "kN", "DIST": "m"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["Element", "Lane", "Parts", "Mxx_max", "Mxx_min", "Myy_max", "Myy_min", "Fxx_max", "Fxx_min", "Fyy_max", "Fyy_min", "ImpactFactor"]
+  }
+}
+```
+
+**POST Response Body — Effective Span Length-Truss**
+
+```json
+{
+  "EffectiveSpanLength-Truss": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "Element", "Lane", "Max", "Min"],
+    "DATA": [
+      ["1", "327", "Lane", "29.093330383301", "30.662572860718"],
+      ["2", "328", "Lane", "17.065862655640", "30.806716918945"],
+      ["3", "329", "Lane", "29.448398590088", "30.999086380005"],
+      ["4", "330", "Lane", "29.602096557617", "31.021806716919"]
+    ]
+  }
+}
+```
+
+**POST Response Body — Effective Span Length-Beam**
+
+```json
+{
+  "EffectiveSpanLength-Beam": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "Element", "Lane", "Parts", "My_max", "My_min", "Mz_max", "Mz_min", "Fx_max", "Fx_min", "ImpactFactor", "Parts", "My_max", "My_min", "Mz_max", "Mz_min", "Fx_max", "Fx_min", "ImpactFactor", "Parts", "My_max", "My_min", "Mz_max", "Mz_min", "Fx_max", "Fx_min", "ImpactFactor", "Parts", "My_max", "My_min", "Mz_max", "Mz_min", "Fx_max", "Fx_min", "ImpactFactor", "Parts", "My_max", "My_min", "Mz_max", "Mz_min", "Fx_max", "Fx_min", "ImpactFactor"],
+    "DATA": [
+      ["1", "1", "Lane", "i", "0.191279277205", "29.755615234375", "31.169471740723", "58.730529785156", "29.762704849243", "0.264897286892", "0.299999952316", "1/4", "0.108969882131", "0.119683347642", "29.775735855102", "30.720029830933", "29.762704849243", "0.264897286892", "0.299999952316", "1/2", "0.115155965090", "0.134036958218", "29.775785446167", "30.720037460327", "29.762704849243", "0.264897286892", "0.299999952316", "3/4", "30.765277862549", "30.130084991455", "29.775802612305", "30.720039367676", "29.762704849243", "0.264897286892", "0.299999952316", "j", "30.709918975830", "30.175632476807", "29.775810241699", "30.720041275024", "29.762704849243", "0.264897286892", "0.299999952316"],
+      ["2", "2", "Lane", "i", "0.037728607655", "0.288700938225", "24.931282043457", "5.864111423492", "6.163604736328", "0.337865054607", "0.299999952316", "1/4", "0.018981337547", "0.344051897526", "24.788684844971", "5.992788314819", "6.163604736328", "0.337865054607", "0.299999952316", "1/2", "0.114104285836", "0.337574899197", "24.624288558960", "6.142559528351", "6.163604736328", "0.337865054607", "0.299999952316", "3/4", "0.241120323539", "0.378061115742", "24.458116531372", "6.293346881866", "6.163604736328", "0.337865054607", "0.299999952316", "j", "0.467901885509", "0.384000271559", "24.290094375610", "6.445161342621", "6.163604736328", "0.337865054607", "0.299999952316"],
+      ["3", "3", "Lane", "i", "0.090889587998", "0.370849847794", "24.290128707886", "6.445128440857", "11.433344841003", "0.382448524237", "0.299999952316", "1/4", "0.793539702892", "0.379059672356", "24.033523559570", "6.708457946777", "11.433344841003", "0.382448524237", "0.299999952316", "1/2", "2.534597396851", "0.387370228767", "23.773052215576", "6.976361751556", "11.433344841003", "0.382448524237", "0.299999952316", "3/4", "29.703187942505", "0.395783394575", "23.508718490601", "7.248959541321", "11.433344841003", "0.382448524237", "0.299999952316", "j", "29.779031753540", "0.404031515121", "23.221227645874", "7.545688152313", "11.433344841003", "0.382448524237", "0.299999952316"]
+    ]
+  }
+}
+```
+
+**POST Response Body — Effective Span Length-Plate**
+
+```json
+{
+  "EffectiveSpanLength-Plate": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "Element", "Lane", "Parts", "Mxx_max", "Mxx_min", "Myy_max", "Myy_min", "Fxx_max", "Fxx_min", "Fyy_max", "Fyy_min", "ImpactFactor", "Parts", "Mxx_max", "Mxx_min", "Myy_max", "Myy_min", "Fxx_max", "Fxx_min", "Fyy_max", "Fyy_min", "ImpactFactor", "Parts", "Mxx_max", "Mxx_min", "Myy_max", "Myy_min", "Fxx_max", "Fxx_min", "Fyy_max", "Fyy_min", "ImpactFactor", "Parts", "Mxx_max", "Mxx_min", "Myy_max", "Myy_min", "Fxx_max", "Fxx_min", "Fyy_max", "Fyy_min", "ImpactFactor", "Parts", "Mxx_max", "Mxx_min", "Myy_max", "Myy_min", "Fxx_max", "Fxx_min", "Fyy_max", "Fyy_min", "ImpactFactor"],
+    "DATA": [
+      ["1", "339", "Lane", "cent", "8.194928169250", "3.990395784378", "16.432098388672", "44.075096130371", "0.289318472147", "0.110953427851", "10.210454940796", "3.109512567520", "0.299999952316", "i", "20.367460250854", "40.312923431396", "19.770799636841", "40.934535980225", "30.207958221436", "30.833641052246", "9.251276969910", "3.376792669296", "0.299999952316", "j", "20.538070678711", "0.144980564713", "21.649600982666", "39.096378326416", "30.207958221436", "30.833641052246", "11.539132118225", "2.641301631927", "0.299999952316", "k", "39.278167724609", "21.461851119995", "39.036582946777", "21.714025497436", "37.399719238281", "23.596715927124", "11.539132118225", "2.641301631927", "0.299999952316", "l", "40.664421081543", "20.028676986694", "40.946784973145", "19.759052276611", "37.399719238281", "23.596715927124", "9.251276969910", "3.376792669296", "0.299999952316"],
+      ["2", "340", "Lane", "cent", "0.833887219429", "0.343698084354", "15.838577270508", "44.656791687012", "0.346579194069", "0.338133722544", "12.353896141052", "2.192885875702", "0.299999952316", "i", "22.068010330200", "38.647983551025", "21.693302154541", "39.051540374756", "0.357556343079", "0.123849913478", "11.643419265747", "2.554860353470", "0.299999952316", "j", "21.633064270019", "39.114875793457", "22.323507308960", "38.429588317871", "0.357556343079", "0.123849913478", "13.108088493347", "1.770145893097", "0.299999952316", "k", "39.911121368408", "20.847139358521", "38.400314331055", "22.359739303589", "43.762157440185", "17.726825714111", "13.108088493347", "1.770145893097", "0.299999952316", "l", "36.910839080810", "23.815031051636", "38.972236633301", "21.777887344360", "43.762157440185", "17.726825714111", "11.643419265747", "2.554860353470", "0.299999952316"],
+      ["3", "341", "Lane", "cent", "26.133829116821", "0.375847131014", "16.451019287109", "44.120464324951", "0.383964627981", "29.946046829224", "13.805335998535", "1.529893159866", "0.299999952316", "i", "0.547343730927", "29.925048828125", "21.305864334106", "39.260505676270", "0.380776822567", "1.294615387917", "12.385931015015", "2.184647560120", "0.299999952316", "j", "30.084039688110", "31.028837203979", "25.375816345215", "35.468116760254", "0.380776822567", "1.294615387917", "14.907189369202", "1.230780839920", "0.299999952316", "k", "20.361610412598", "10.287482261658", "37.442798614502", "23.197538375854", "0.430020511150", "29.004285812378", "14.907189369202", "1.230780839920", "0.299999952316", "l", "31.022487640381", "30.161306381226", "37.257297515869", "23.595695495606", "0.430020511150", "29.004285812378", "12.385931015015", "2.184647560120", "0.299999952316"],
+      ["4", "342", "Lane", "cent", "29.845573425293", "0.384712785482", "29.585195541382", "31.146570205689", "0.436751663685", "29.880912780762", "15.834495544434", "1.952278614044", "0.299999952316", "i", "2.897219896317", "27.674240112305", "23.361423492432", "37.307735443115", "0.456818223000", "29.835124969482", "30.335161209106", "6.911101818085", "0.299999952316", "j", "30.150735855102", "30.924144744873", "29.887788772583", "30.896802902222", "0.456818223000", "29.835124969482", "29.891567230225", "31.353021621704", "0.299999952316", "k", "16.665954589844", "13.994219779968", "30.865278244019", "29.833909988403", "30.901102066040", "30.348457336426", "29.891567230225", "31.353021621704", "0.299999952316", "l", "31.037590026856", "30.119352340698", "35.723594665527", "25.107400894165", "30.901102066040", "30.348457336426", "30.335161209106", "6.911101818085", "0.299999952316"]
+    ]
+  }
+}
+```
+
+### Python Example
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/gen"
+HEADERS = {"Content-Type": "application/json", "MAPI-Key": "YOUR_MAPI_KEY"}
+
+payload = {
+    'Argument': {
+        'TABLE_NAME': 'EffectiveSpanLength-Truss',
+        'TABLE_TYPE': 'EFFECTIVE_LENGTH_TRUSS',
+        'UNIT': {'FORCE': 'kN', 'DIST': 'm'},
+        'STYLES': {'FORMAT': 'Fixed', 'PLACE': 12}
+    }
+}
+
+resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
+table = resp.json().get('EffectiveSpanLength-Truss', {})
+print(table.get("HEAD"))
+print(len(table.get("DATA", [])), "rows")
+```
+
+---
+
+## 42. Nodal Results of RS
+
+> **기능:** 응답스펙트럼 해석의 모드별 절점 관성력·절점 가속도를 추출합니다.
+>
+> **Source**: [Nodal Results of RS - Analysis Result Table ↗](https://support.midasuser.com/hc/en-us/articles/36017837129241) (2026-11-26 문서화)
+
+### `TABLE_TYPE`
+
+| 값 | 설명 |
+| --- | --- |
+| `"RS_NODAL_INERTIA"` | Nodal Inertia Force |
+| `"RS_NODAL_ACCEL"` | Nodal Acceleration |
+
+### Response HEAD
+
+**Nodal Inertia force**: `["Index", "LoadCase", "Mode", "Node", "FX", "FY", "FZ", "MX", "MY", "MZ"]`
+
+**Nodal Acceleration**: `["Index", "LoadCase", "Mode", "Node", "DX", "DY", "DZ", "RX", "RY", "RZ"]`
+
+### 전용 파라미터
+
+공통 파라미터(1~6번) 외에 아래 항목을 지원합니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 7 | Node / Element No. Input · Use Only One of the Three Methods | `"NODE_ELEMS"` | Object | All | Optional |
+| (1) | └ [Method 1: Specify Each ID] "KEYS": [101, 102, 103] | `"KEYS"` | Array[Integer] | - | Optional |
+| (1) | └ [Method 2: Specify ID Range] "TO": "101 to 105" | `"TO"` | String | - | Optional |
+| (1) | └ [Method 3: Specify Structure Group Name] "STRUCTURE_GROUP_NAME": "SG1" | `"STRUCTURE_GROUP_NAME"` | String | - | Optional |
+| 8 | Load Name & Type · Response Spectrum / NAME + "(RS)" | `"LOAD_CASE_NAMES"` | Array[String] | All | Optional |
+| 9 | Mode Number · "Mode " + "#" | `"MODES"` | Array[String] | All | Optional |
+
+### Request / Response JSON
+
+**POST Request Body — Nodal Inertia force**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "NodalInertiaforce",
+    "TABLE_TYPE": "RS_NODAL_INERTIA",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "kN", "DIST": "m"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["LoadCase", "Mode", "Node", "FX", "FY", "FZ", "MX", "MY", "MZ"],
+    "NODE_ELEMS": {"KEYS": [30]},
+    "LOAD_CASE_NAMES": ["X-dir(RS)", "Y-dir(RS)"],
+    "MODES": ["Mode1", "Mode2"]
+  }
+}
+```
+
+**POST Request Body — Nodal Acceleration**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "NodalAcceleration",
+    "TABLE_TYPE": "RS_NODAL_ACCEL",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "kN", "DIST": "m"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["LoadCase", "Mode", "Node", "DX", "DY", "DZ", "RX", "RY", "RZ"],
+    "NODE_ELEMS": {"KEYS": [30]},
+    "LOAD_CASE_NAMES": ["X-dir(RS)", "Y-dir(RS)"],
+    "MODES": ["Mode1", "Mode2"]
+  }
+}
+```
+
+**POST Response Body — Nodal Inertia force**
+
+```json
+{
+  "NodalInertiaforce": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "LoadCase", "Mode", "Node", "FX", "FY", "FZ", "MX", "MY", "MZ"],
+    "DATA": [
+      ["1", "X-dir", "1", "30", "25.943058430198", "-0.003640586497", "-1.472398533814", "0.000000000000", "0.000000000000", "0.000000000000"],
+      ["2", "X-dir", "2", "30", "0.000019431928", "0.006628306916", "-0.002590681069", "0.000000000000", "0.000000000000", "0.000000000000"],
+      ["3", "Y-dir", "1", "30", "-0.002095291305", "0.000000294032", "0.000118918278", "0.000000000000", "0.000000000000", "0.000000000000"],
+      ["4", "Y-dir", "2", "30", "0.115858734863", "39.519869125563", "-15.446384437339", "0.000000000000", "0.000000000000", "0.000000000000"]
+    ]
+  }
+}
+```
+
+**POST Response Body — Nodal Acceleration**
+
+```json
+{
+  "NodalAcceleration": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "LoadCase", "Mode", "Node", "DX", "DY", "DZ", "RX", "RY", "RZ"],
+    "DATA": [
+      ["1", "X-dir", "1", "30", "2.349857717681", "-0.000329755272", "-0.133366197648", "0.000013094089", "-0.002231134732", "-0.000009241792"],
+      ["2", "X-dir", "2", "30", "0.000001760096", "0.000600375557", "-0.000234657449", "-0.000061111265", "0.000000000660", "-0.000000000295"],
+      ["3", "Y-dir", "1", "30", "-0.000189786276", "0.000000026633", "0.000010771322", "-0.000000001058", "0.000000180198", "0.000000000746"],
+      ["4", "Y-dir", "2", "30", "0.010494196088", "3.579611467796", "-1.399095090427", "-0.364362907273", "0.000003932477", "-0.000001758164"]
+    ]
+  }
+}
+```
+
+### Python Example
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/gen"
+HEADERS = {"Content-Type": "application/json", "MAPI-Key": "YOUR_MAPI_KEY"}
+
+payload = {
+    'Argument': {
+        'TABLE_NAME': 'NodalInertiaforce',
+        'TABLE_TYPE': 'RS_NODAL_INERTIA',
+        'UNIT': {'FORCE': 'kN', 'DIST': 'm'},
+        'STYLES': {'FORMAT': 'Fixed', 'PLACE': 12},
+        'NODE_ELEMS': {'KEYS': [30]},
+        'LOAD_CASE_NAMES': ['X-dir(RS)', 'Y-dir(RS)'],
+        'MODES': ['Mode1', 'Mode2']
+    }
+}
+
+resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
+table = resp.json().get('NodalInertiaforce', {})
+print(table.get("HEAD"))
+print(len(table.get("DATA", [])), "rows")
+```
+
+---
+
+## 43. Element Properties at Each Stage
+
+> **기능:** 지정한 시공단계의 요소 물성 테이블을 추출합니다.
+>
+> **Source**: [Element Properties at Each Stage - Analysis Result Table ↗](https://support.midasuser.com/hc/en-us/articles/36018688503065) (2026-11-26 문서화)
+
+### `TABLE_TYPE`
+
+| 값 | 설명 |
+| --- | --- |
+| `"ELEM_PROP_EACH_STAGE"` | Element Properties at Each Stage |
+
+### Response HEAD
+
+`["Index", "Elem", "StartAge", "EndAge", "StartElasticity", "EndElasticity", "CumulativeShrinkage", "CreepCoeff."]`
+
+### 전용 파라미터
+
+공통 파라미터(1~6번) 외에 아래 항목을 지원합니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 7 | Additional Input | `"ADDITIONAL"` | Object | - | **Required** |
+| (1) | └ Set Stage | `"SET_STAGE"` | Object | - | **Required** |
+| - | 　　└ Construction Stage Name | `"STAGE"` | String | - | **Required** |
+
+### Request / Response JSON
+
+**POST Request Body — Element Properties at Each Stage**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "ElementPropertiesatEachStage",
+    "TABLE_TYPE": "ELEM_PROP_EACH_STAGE",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "kN", "DIST": "m"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["Elem", "StartAge", "EndAge", "StartElasticity", "EndElasticity", "CumulativeShrinkage", "CreepCoeff."],
+    "ADDITIONAL": {"SET_STAGE": {"STAGE": "CS14"}}
+  }
+}
+```
+
+**POST Response Body — Element Properties at Each Stage**
+
+```json
+{
+  "ElementPropertiesatEachStage": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "Elem", "StartAge", "EndAge", "StartElasticity", "EndElasticity", "CumulativeShrinkage", "CreepCoeff."],
+    "DATA": [
+      ["1", "1", "60.000000000000", "120.000000000000", "35277722.607700698078", "36171162.923823803663", "-0.000014369503", "0.613274715020"],
+      ["2", "2", "60.000000000000", "120.000000000000", "35277722.607700698078", "36171162.923823803663", "-0.000014369503", "0.613274715020"],
+      ["3", "3", "60.000000000000", "120.000000000000", "35277722.607700698078", "36171162.923823803663", "-0.000014369503", "0.613274715020"],
+      ["4", "4", "60.000000000000", "120.000000000000", "35277722.607700698078", "36171162.923823803663", "-0.000014369503", "0.613274715020"]
+    ]
+  }
+}
+```
+
+### Python Example
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/gen"
+HEADERS = {"Content-Type": "application/json", "MAPI-Key": "YOUR_MAPI_KEY"}
+
+payload = {
+    'Argument': {
+        'TABLE_NAME': 'ElementPropertiesatEachStage',
+        'TABLE_TYPE': 'ELEM_PROP_EACH_STAGE',
+        'UNIT': {'FORCE': 'kN', 'DIST': 'm'},
+        'STYLES': {'FORMAT': 'Fixed', 'PLACE': 12},
+        'ADDITIONAL': {'SET_STAGE': {'STAGE': 'CS14'}}
+    }
+}
+
+resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
+table = resp.json().get('ElementPropertiesatEachStage', {})
+print(table.get("HEAD"))
+print(len(table.get("DATA", [])), "rows")
+```
+
+---
+
+## 44. Beam Section Properties at Last Stage
+
+> **기능:** 최종 시공단계의 보 단면 성질 테이블을 추출합니다.
+>
+> **Source**: [Beam Section Properties at Last Stage - Analysis Result Table ↗](https://support.midasuser.com/hc/en-us/articles/36018718339353) (2026-11-26 문서화)
+>
+> ⚠️ 공식 요청 예제는 `NODE_ELEMS.KEYS`를 보내지만 Specifications 표와 JSON Schema에는 `NODE_ELEMS`가 없습니다. 예제를 따라 파라미터 표에 추가했습니다.
+
+### `TABLE_TYPE`
+
+| 값 | 설명 |
+| --- | --- |
+| `"SECT_PROP_LAST_STAGE"` | Beam Section Properties at Stage |
+
+### Response HEAD
+
+`["Index", "Elem", "Part", "Area", "Ixx", "Iyy", "Izz", "Cyp", "Cym", "Czp", "Czm", "WArea", "TranslationalDistance/Local-y", "TranslationalDistance/Local-z"]`
+
+### 전용 파라미터
+
+공통 파라미터(1~6번) 외에 아래 항목을 지원합니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 7 | Element Part Number for Section Properties at last stage · "I" · "J" | `"PART"` | Array[String] | All | Optional |
+| 8 | Node / Element No. Input | `"NODE_ELEMS"` | Object | - | Optional |
+| (1) | └ Specify Each ID | `"KEYS"` | Array[Integer] | - | Optional |
+
+### Request / Response JSON
+
+**POST Request Body — Beam Section Properties at Last Stage**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "BeamSectionPropertiesatLastStage",
+    "TABLE_TYPE": "SECT_PROP_LAST_STAGE",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "kN", "DIST": "m"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["Elem", "Part", "Area", "Ixx", "Iyy", "Izz", "Cyp", "Cym", "Czp", "Czm", "WArea", "TranslationalDistance/Local-y", "TranslationalDistance/Local-z"],
+    "NODE_ELEMS": {"KEYS": [1]},
+    "PART": ["I", "J"]
+  }
+}
+```
+
+**POST Response Body — Beam Section Properties at Last Stage**
+
+```json
+{
+  "BeamSectionPropertiesatLastStage": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "Elem", "Part", "Area", "Ixx", "Iyy", "Izz", "Cyp", "Cym", "Czp", "Czm", "WArea", "TranslationalDistance/Local-y", "TranslationalDistance/Local-z"],
+    "DATA": [
+      ["1", "1", "I", "8.727994548810", "20.682435509704", "9.223590468456", "89.978467537933", "6.350000000000", "6.350000000000", "1.052513157089", "1.647486842911", "8.640750000000", "0.000000000000", "-0.009566653602"],
+      ["2", "1", "J", "8.727994548810", "20.682435509704", "9.291774354805", "90.033273016173", "6.350000000000", "6.350000000000", "1.055989001303", "1.644010998697", "8.640750000000", "0.000000000000", "-0.013042497817"]
+    ]
+  }
+}
+```
+
+### Python Example
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/gen"
+HEADERS = {"Content-Type": "application/json", "MAPI-Key": "YOUR_MAPI_KEY"}
+
+payload = {
+    'Argument': {
+        'TABLE_NAME': 'BeamSectionPropertiesatLastStage',
+        'TABLE_TYPE': 'SECT_PROP_LAST_STAGE',
+        'UNIT': {'FORCE': 'kN', 'DIST': 'm'},
+        'STYLES': {'FORMAT': 'Fixed', 'PLACE': 12},
+        'NODE_ELEMS': {'KEYS': [1]},
+        'PART': ['I', 'J']
+    }
+}
+
+resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
+table = resp.json().get('BeamSectionPropertiesatLastStage', {})
+print(table.get("HEAD"))
+print(len(table.get("DATA", [])), "rows")
+```
+
+---
+
+## 45. Lack of Fit Force (Truss)
+
+> **기능:** 트러스 요소의 Lack-of-Fit Force 테이블을 추출합니다.
+>
+> **Source**: [Lack of Fit Force (Truss) - Analysis Result Table ↗](https://support.midasuser.com/hc/en-us/articles/36018798699161) (2026-11-26 문서화)
+
+### `TABLE_TYPE`
+
+| 값 | 설명 |
+| --- | --- |
+| `"LACK_OF_FIT_FORCE_TRUSS"` | Lack-of-Fit-Force - Truss |
+
+### Response HEAD
+
+`["Index", "Elem", "NodeI", "NodeJ", "Pretension", "LOFForce", "SUM", "LocalVector/V-X", "LocalVector/V-Y", "LocalVector/V-Z", "Angle", "Elasticity", "Area", "I-NodeDisp./DX", "I-NodeDisp./DY", "I-NodeDisp./DZ", "J-NodeDisp./DX", "J-NodeDisp./DY", "J-NodeDisp./DZ", "Deform"]`
+
+### 전용 파라미터
+
+공통 파라미터(1~6번) 외의 항목은 없습니다.
+
+### Request / Response JSON
+
+**POST Request Body — Lack-of-Fit-Force-Truss**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "Lack-of-Fit-Force-Truss",
+    "TABLE_TYPE": "LACK_OF_FIT_FORCE_TRUSS",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "kN", "DIST": "m"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["Elem", "NodeI", "NodeJ", "Pretension", "LOFForce", "SUM", "LocalVector/V-X", "LocalVector/V-Y", "LocalVector/V-Z", "Angle", "Elasticity", "Area", "I-NodeDisp./DX", "I-NodeDisp./DY", "I-NodeDisp./DZ", "J-NodeDisp./DX", "J-NodeDisp./DY", "J-NodeDisp./DZ", "Deform"]
+  }
+}
+```
+
+**POST Response Body — Lack-of-Fit-Force-Truss**
+
+> 원문 `DATA`는 8행이며 앞 4행만 발췌했습니다.
+
+```json
+{
+  "Lack-of-Fit-Force-Truss": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "Elem", "NodeI", "NodeJ", "Pretension", "LOFForce", "SUM", "LocalVector/V-X", "LocalVector/V-Y", "LocalVector/V-Z", "Angle", "Elasticity", "Area", "I-NodeDisp./DX", "I-NodeDisp./DY", "I-NodeDisp./DZ", "J-NodeDisp./DX", "J-NodeDisp./DY", "J-NodeDisp./DZ", "Deform"],
+    "DATA": [
+      ["1", "33", "34", "1", "3338.000000000000", "-71.570441945596", "3266.429558054400", "-0.707106781187", "-0.000000000000", "-0.707106781187", "45.000000000000", "157000000.000000000000", "0.005000000000", "-0.003645948432", "0.000000000000", "-0.003460574125", "0.000315659595", "0.000000000000", "-0.000125217000", "-0.005159733542"],
+      ["2", "34", "34", "3", "2544.000000000000", "1.201148565196", "2545.201148565200", "-0.447213595500", "-0.000000000000", "-0.894427191000", "63.434948822922", "157000000.000000000000", "0.005000000000", "0.000658780901", "0.000000000000", "-0.000523418293", "0.000156927287", "0.000000000000", "-0.000349016495", "0.000068446049"],
+      ["3", "35", "34", "7", "1930.000000000000", "516.135267421538", "2446.135267421540", "0.447213595500", "-0.000000000000", "-0.894427191000", "63.434948822922", "157000000.000000000000", "0.005000000000", "-0.029293751687", "0.000000000000", "-0.002012649350", "-0.000022599389", "0.000000000000", "-0.020270365002", "0.029420654589"],
+      ["4", "36", "34", "9", "3408.000000000000", "1798.293672338930", "5206.293672338930", "0.707106781187", "-0.000000000000", "-0.707106781187", "45.000000000000", "157000000.000000000000", "0.005000000000", "-0.047840849588", "0.000000000000", "-0.005208223202", "-0.000338171604", "0.000000000000", "-0.141045799290", "0.129641136919"]
+    ]
+  }
+}
+```
+
+### Python Example
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/gen"
+HEADERS = {"Content-Type": "application/json", "MAPI-Key": "YOUR_MAPI_KEY"}
+
+payload = {
+    'Argument': {
+        'TABLE_NAME': 'Lack-of-Fit-Force-Truss',
+        'TABLE_TYPE': 'LACK_OF_FIT_FORCE_TRUSS',
+        'UNIT': {'FORCE': 'kN', 'DIST': 'm'},
+        'STYLES': {'FORMAT': 'Fixed', 'PLACE': 12}
+    }
+}
+
+resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
+table = resp.json().get('Lack-of-Fit-Force-Truss', {})
+print(table.get("HEAD"))
+print(len(table.get("DATA", [])), "rows")
+```
+
+---
+
+## 46. Lack of Fit Force (Beam)
+
+> **기능:** 보 요소의 Lack-of-Fit Force 테이블을 추출합니다.
+>
+> **Source**: [Lack of Fit Force (Beam) - Analysis Result Table ↗](https://support.midasuser.com/hc/en-us/articles/36018843180057) (2026-11-26 문서화)
+
+### `TABLE_TYPE`
+
+| 값 | 설명 |
+| --- | --- |
+| `"LACK_OF_FIT_FORCE_BEAM"` | Lack-of-Fit-Force - Beam |
+
+### Response HEAD
+
+`["Index", "Elem", "Node", "LOFForce/Axial", "LOFForce/Shear-y", "LOFForce/Shear-z", "LOFForce/Torsion", "LOFForce/Moment-y", "LOFForce/Moment-z", "LOFForce/Bi-Moment", "Displacement/DX", "Displacement/DY", "Displacement/DZ", "Displacement/RX", "Displacement/RY", "Displacement/RZ", "Displacement/RW"]`
+
+### 전용 파라미터
+
+공통 파라미터(1~6번) 외의 항목은 없습니다.
+
+### Request / Response JSON
+
+**POST Request Body — Lack-of-Fit-Force-Beam**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "Lack-of-Fit-Force-Beam",
+    "TABLE_TYPE": "LACK_OF_FIT_FORCE_BEAM",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "kN", "DIST": "m"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["Elem", "Node", "LOFForce/Axial", "LOFForce/Shear-y", "LOFForce/Shear-z", "LOFForce/Torsion", "LOFForce/Moment-y", "LOFForce/Moment-z", "LOFForce/Bi-Moment", "Displacement/DX", "Displacement/DY", "Displacement/DZ", "Displacement/RX", "Displacement/RY", "Displacement/RZ", "Displacement/RW"]
+  }
+}
+```
+
+**POST Response Body — Lack-of-Fit-Force-Beam**
+
+```json
+{
+  "Lack-of-Fit-Force-Beam": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "Elem", "Node", "LOFForce/Axial", "LOFForce/Shear-y", "LOFForce/Shear-z", "LOFForce/Torsion", "LOFForce/Moment-y", "LOFForce/Moment-z", "LOFForce/Bi-Moment", "Displacement/DX", "Displacement/DY", "Displacement/DZ", "Displacement/RX", "Displacement/RY", "Displacement/RZ", "Displacement/RW"],
+    "DATA": [
+      ["1", "1", "1", "0.000000000000", "0.000000000000", "0.000000000000", "-0.000000000000", "0.000000000000", "-0.000000000000", "0.000000000000", "0.000000000000", "-0.000000000000", "-0.000125217000", "0.000000000000", "-0.000000000000", "0.000000000000", "0.000000000000"],
+      ["2", "1", "2", "0.000000000000", "-0.000000000000", "0.000000000000", "0.000000000000", "-0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "-0.000125217000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000"],
+      ["3", "2", "2", "0.000000000000", "0.000000000000", "0.000000000000", "-0.000000000000", "-0.000000000000", "-0.000000000000", "0.000000000000", "0.000000000000", "-0.000000000000", "-0.000125217000", "0.000000000000", "-0.000000000000", "0.000000000000", "0.000000000000"],
+      ["4", "2", "3", "0.000000000000", "-0.000000000000", "0.000000000000", "0.000000000000", "-0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000", "-0.000125217000", "0.000000000000", "0.000000000000", "0.000000000000", "0.000000000000"]
+    ]
+  }
+}
+```
+
+### Python Example
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/gen"
+HEADERS = {"Content-Type": "application/json", "MAPI-Key": "YOUR_MAPI_KEY"}
+
+payload = {
+    'Argument': {
+        'TABLE_NAME': 'Lack-of-Fit-Force-Beam',
+        'TABLE_TYPE': 'LACK_OF_FIT_FORCE_BEAM',
+        'UNIT': {'FORCE': 'kN', 'DIST': 'm'},
+        'STYLES': {'FORMAT': 'Fixed', 'PLACE': 12}
+    }
+}
+
+resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
+table = resp.json().get('Lack-of-Fit-Force-Beam', {})
+print(table.get("HEAD"))
+print(len(table.get("DATA", [])), "rows")
+```
+
+---
+
+## 47. Lack of Fit Force (Plate)
+
+> **기능:** 판 요소의 Lack-of-Fit Force 테이블을 추출합니다.
+>
+> **Source**: [Lack of Fit Force (Plate) - Analysis Result Table ↗](https://support.midasuser.com/hc/en-us/articles/36018883915289) (2026-11-26 문서화)
+
+### `TABLE_TYPE`
+
+| 값 | 설명 |
+| --- | --- |
+| `"LACK_OF_FIT_FORCE_PLATE"` | Lack-of-Fit-Force - Plate |
+
+### Response HEAD
+
+`["Index", "Elem", "Node", "LOFForce/Axial", "LOFForce/Shear-y", "LOFForce/Shear-z", "LOFForce/Torsion", "LOFForce/Moment-y", "LOFForce/Moment-z", "Displacement/DX", "Displacement/DY", "Displacement/DZ", "Displacement/RX", "Displacement/RY", "Displacement/RZ"]`
+
+### 전용 파라미터
+
+공통 파라미터(1~6번) 외의 항목은 없습니다.
+
+### Request / Response JSON
+
+**POST Request Body — Lack-of-Fit-Force-Plate**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "Lack-of-Fit-Force-Plate",
+    "TABLE_TYPE": "LACK_OF_FIT_FORCE_PLATE",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "kN", "DIST": "m"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["Elem", "Node", "LOFForce/Axial", "LOFForce/Shear-y", "LOFForce/Shear-z", "LOFForce/Torsion", "LOFForce/Moment-y", "LOFForce/Moment-z", "Displacement/DX", "Displacement/DY", "Displacement/DZ", "Displacement/RX", "Displacement/RY", "Displacement/RZ"]
+  }
+}
+```
+
+**POST Response Body — Lack-of-Fit-Force-Plate**
+
+```json
+{
+  "Lack-of-Fit-Force-Plate": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "Elem", "Node", "LOFForce/Axial", "LOFForce/Shear-y", "LOFForce/Shear-z", "LOFForce/Torsion", "LOFForce/Moment-y", "LOFForce/Moment-z", "Displacement/DX", "Displacement/DY", "Displacement/DZ", "Displacement/RX", "Displacement/RY", "Displacement/RZ"],
+    "DATA": [
+      ["1", "41", "10", "-168321.598386127996", "68553.467320799595", "-15055.328025669400", "6633.732291029450", "-137174.032178383000", "0.000000000000", "-0.001238722669", "0.000000000000", "0.100460883867", "0.000000000000", "-0.002622458857", "0.000000000000"],
+      ["2", "41", "11", "82629.756116493401", "-68553.389381897607", "15055.336527274600", "-6633.780871639610", "102900.577065460006", "0.000000000000", "0.000000000000", "0.000000000000", "0.105523438833", "0.000000000000", "0.000000000000", "0.000000000000"],
+      ["3", "41", "36", "-0.015566130713", "0.006494908504", "0.018618598860", "0.008981147036", "-0.071881229766", "0.000000000000", "0.000236808412", "-0.000271504041", "0.102153857884", "-0.000400408227", "-0.000499190607", "0.000000000000"],
+      ["4", "41", "37", "85691.857835765797", "-0.084433810480", "-0.027120204827", "0.005593038773", "109550.074029498996", "0.000000000000", "0.000000000000", "0.000511963192", "0.105668578602", "-0.000348787316", "0.000000000000", "0.000000000000"]
+    ]
+  }
+}
+```
+
+### Python Example
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/gen"
+HEADERS = {"Content-Type": "application/json", "MAPI-Key": "YOUR_MAPI_KEY"}
+
+payload = {
+    'Argument': {
+        'TABLE_NAME': 'Lack-of-Fit-Force-Plate',
+        'TABLE_TYPE': 'LACK_OF_FIT_FORCE_PLATE',
+        'UNIT': {'FORCE': 'kN', 'DIST': 'm'},
+        'STYLES': {'FORMAT': 'Fixed', 'PLACE': 12}
+    }
+}
+
+resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
+table = resp.json().get('Lack-of-Fit-Force-Plate', {})
+print(table.get("HEAD"))
+print(len(table.get("DATA", [])), "rows")
+```
+
+---
+
+## 48. Equilibrium Element Nodal Force
+
+> **기능:** 평형 요소 절점력(Equilibrium Element Nodal Force) 테이블을 추출합니다.
+>
+> **Source**: [Equilibrium Element Nodal Force - Analysis Result Table ↗](https://support.midasuser.com/hc/en-us/articles/36018955537177) (2026-11-26 문서화)
+
+### `TABLE_TYPE`
+
+| 값 | 설명 |
+| --- | --- |
+| `"EQUILIBRIUM_ELEM_FORCE"` | Equilibrium Element Nodal Force |
+
+### Response HEAD
+
+`["Index", "Type", "ID", "ElementNodalForce-i/Fx", "ElementNodalForce-i/Fy", "ElementNodalForce-i/Fz", "ElementNodalForce-i/Mx", "ElementNodalForce-i/My", "ElementNodalForce-i/Mz", "ElementNodalForce-j/Fx", "ElementNodalForce-j/Fy", "ElementNodalForce-j/Fz", "ElementNodalForce-j/Mx", "ElementNodalForce-j/My", "ElementNodalForce-j/Mz"]`
+
+### 전용 파라미터
+
+공통 파라미터(1~6번) 외의 항목은 없습니다.
+
+### Request / Response JSON
+
+**POST Request Body — Equilibrium Element Nodal Force**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "EquilibriumElementNodalForce",
+    "TABLE_TYPE": "EQUILIBRIUM_ELEM_FORCE",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "kN", "DIST": "m"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["Type", "ID", "ElementNodalForce-i/Fx", "ElementNodalForce-i/Fy", "ElementNodalForce-i/Fz", "ElementNodalForce-i/Mx", "ElementNodalForce-i/My", "ElementNodalForce-i/Mz", "ElementNodalForce-j/Fx", "ElementNodalForce-j/Fy", "ElementNodalForce-j/Fz", "ElementNodalForce-j/Mx", "ElementNodalForce-j/My", "ElementNodalForce-j/Mz"]
+  }
+}
+```
+
+**POST Response Body — Equilibrium Element Nodal Force**
+
+> 원문 `DATA`는 5행이며 앞 4행만 발췌했습니다.
+
+```json
+{
+  "EquilibriumElementNodalForce": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "Type", "ID", "ElementNodalForce-i/Fx", "ElementNodalForce-i/Fy", "ElementNodalForce-i/Fz", "ElementNodalForce-i/Mx", "ElementNodalForce-i/My", "ElementNodalForce-i/Mz", "ElementNodalForce-j/Fx", "ElementNodalForce-j/Fy", "ElementNodalForce-j/Fz", "ElementNodalForce-j/Mx", "ElementNodalForce-j/My", "ElementNodalForce-j/Mz"],
+    "DATA": [
+      ["1", "Beam", "1", "0.000000000000", "0.000000000000", "50.000000000001", "0.000000000000", "-300.000000000011", "0.000000000000", "0.000000000000", "0.000000000000", "-50.000000000001", "0.000000000000", "200.000000000009", "0.000000000000"],
+      ["2", "Beam", "2", "0.000000000000", "0.000000000000", "40.000000000001", "0.000000000000", "-200.000000000009", "0.000000000000", "0.000000000000", "0.000000000000", "-40.000000000001", "0.000000000000", "120.000000000007", "0.000000000000"],
+      ["3", "Beam", "3", "0.000000000000", "0.000000000000", "30.000000000002", "0.000000000000", "-120.000000000007", "0.000000000000", "0.000000000000", "0.000000000000", "-30.000000000002", "0.000000000000", "60.000000000003", "0.000000000000"],
+      ["4", "Beam", "4", "0.000000000000", "0.000000000000", "20.000000000001", "0.000000000000", "-60.000000000003", "0.000000000000", "0.000000000000", "0.000000000000", "-20.000000000001", "0.000000000000", "20.000000000002", "0.000000000000"]
+    ]
+  }
+}
+```
+
+### Python Example
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/gen"
+HEADERS = {"Content-Type": "application/json", "MAPI-Key": "YOUR_MAPI_KEY"}
+
+payload = {
+    'Argument': {
+        'TABLE_NAME': 'EquilibriumElementNodalForce',
+        'TABLE_TYPE': 'EQUILIBRIUM_ELEM_FORCE',
+        'UNIT': {'FORCE': 'kN', 'DIST': 'm'},
+        'STYLES': {'FORMAT': 'Fixed', 'PLACE': 12}
+    }
+}
+
+resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
+table = resp.json().get('EquilibriumElementNodalForce', {})
+print(table.get("HEAD"))
+print(len(table.get("DATA", [])), "rows")
+```
+
+---
+
+## 49. Initial Element Force
+
+> **기능:** 초기 요소력(Initial Element Force) 테이블을 추출합니다.
+>
+> **Source**: [Initial Element Force - Analysis Result Table ↗](https://support.midasuser.com/hc/en-us/articles/36018962493721) (2026-11-26 문서화)
+
+### `TABLE_TYPE`
+
+| 값 | 설명 |
+| --- | --- |
+| `"INITIAL_ELEM_FORCE"` | Initial Element Force |
+
+### Response HEAD
+
+`["Index", "Type", "ID", "MemberForce-i/Axial", "MemberForce-i/Shear(y)", "MemberForce-i/Shear(z)", "MemberForce-i/Torsion", "MemberForce-i/Moment(y)", "MemberForce-i/Moment(z)", "MemberForce-j/Axial", "MemberForce-j/Shear(y)", "MemberForce-j/Shear(z)", "MemberForce-j/Torsion", "MemberForce-j/Moment(y)", "MemberForce-j/Moment(z)"]`
+
+### 전용 파라미터
+
+공통 파라미터(1~6번) 외의 항목은 없습니다.
+
+### Request / Response JSON
+
+**POST Request Body — Initial Element Force**
+
+```json
+{
+  "Argument": {
+    "TABLE_NAME": "InitialElementForce",
+    "TABLE_TYPE": "INITIAL_ELEM_FORCE",
+    "EXPORT_PATH": "C:\\MIDAS\\Result\\Output.JSON",
+    "UNIT": {"FORCE": "kN", "DIST": "m"},
+    "STYLES": {"FORMAT": "Fixed", "PLACE": 12},
+    "COMPONENTS": ["Type", "ID", "MemberForce-i/Axial", "MemberForce-i/Shear(y)", "MemberForce-i/Shear(z)", "MemberForce-i/Torsion", "MemberForce-i/Moment(y)", "MemberForce-i/Moment(z)", "MemberForce-j/Axial", "MemberForce-j/Shear(y)", "MemberForce-j/Shear(z)", "MemberForce-j/Torsion", "MemberForce-j/Moment(y)", "MemberForce-j/Moment(z)"]
+  }
+}
+```
+
+**POST Response Body — Initial Element Force**
+
+> 원문 `DATA`는 5행이며 앞 4행만 발췌했습니다.
+
+```json
+{
+  "InitialElementForce": {
+    "FORCE": "kN",
+    "DIST": "m",
+    "HEAD": ["Index", "Type", "ID", "MemberForce-i/Axial", "MemberForce-i/Shear(y)", "MemberForce-i/Shear(z)", "MemberForce-i/Torsion", "MemberForce-i/Moment(y)", "MemberForce-i/Moment(z)", "MemberForce-j/Axial", "MemberForce-j/Shear(y)", "MemberForce-j/Shear(z)", "MemberForce-j/Torsion", "MemberForce-j/Moment(y)", "MemberForce-j/Moment(z)"],
+    "DATA": [
+      ["1", "Beam", "1", "0.000000000000", "0.000000000000", "-50.000000000001", "0.000000000000", "-300.000000000011", "0.000000000000", "0.000000000000", "0.000000000000", "-50.000000000001", "0.000000000000", "-200.000000000009", "0.000000000000"],
+      ["2", "Beam", "2", "0.000000000000", "0.000000000000", "-40.000000000001", "0.000000000000", "-200.000000000009", "0.000000000000", "0.000000000000", "0.000000000000", "-40.000000000001", "0.000000000000", "-120.000000000007", "0.000000000000"],
+      ["3", "Beam", "3", "0.000000000000", "0.000000000000", "-30.000000000002", "0.000000000000", "-120.000000000007", "0.000000000000", "0.000000000000", "0.000000000000", "-30.000000000002", "0.000000000000", "-60.000000000003", "0.000000000000"],
+      ["4", "Beam", "4", "0.000000000000", "0.000000000000", "-20.000000000001", "0.000000000000", "-60.000000000003", "0.000000000000", "0.000000000000", "0.000000000000", "-20.000000000001", "0.000000000000", "-20.000000000002", "0.000000000000"]
+    ]
+  }
+}
+```
+
+### Python Example
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/gen"
+HEADERS = {"Content-Type": "application/json", "MAPI-Key": "YOUR_MAPI_KEY"}
+
+payload = {
+    'Argument': {
+        'TABLE_NAME': 'InitialElementForce',
+        'TABLE_TYPE': 'INITIAL_ELEM_FORCE',
+        'UNIT': {'FORCE': 'kN', 'DIST': 'm'},
+        'STYLES': {'FORMAT': 'Fixed', 'PLACE': 12}
+    }
+}
+
+resp = requests.post(f"{BASE_URL}/post/TABLE", json=payload, headers=HEADERS)
+table = resp.json().get('InitialElementForce', {})
+print(table.get("HEAD"))
+print(len(table.get("DATA", [])), "rows")
 ```
 
 ---

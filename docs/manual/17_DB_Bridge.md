@@ -626,7 +626,7 @@ for key, val in resp.json().get("ULFC", {}).items():
 | 13 | 저장 이미지 확장자 · `"bmp"` / `"jpg"` / `"emf"` | `"EXTENSION"` | String (enum) | — | **Required** |
 
 > ✅ **2026-09-28 완전 해결 확인:** 원문 Specifications 표의 응력 성분 4번이 `"Sbz" 4`(부호·콜론
-> 모두 오표기)였던 것이 2026-08-27 오류 제보로 반영되어 현재 `-Sbz: 4`로
+> 모두 오표기)였던 것이 현재 `-Sbz: 4`로
 > 정정됐다(2026-09-01 갱신으로 부호 추가 → 2026-09-28 갱신으로 콜론까지 정정). 위 표의 `−Sbz`
 > 표기는 그대로 유효하다.
 > `BATCH=true`일 때는 `BRDG_GROUP`·`COMPONENTS`·`COMBINED_COMP`·`7TH_DOF_TYPE`을 최상위에 함께

@@ -1,0 +1,89 @@
+{
+ "_readme": "MIDAS Civil NX JP 제품 버전에서만 지원하는 항목 목록. 일본 설계코드를 뜻하지 않는다. 'exclude'는 JP 제품 버전을 대상으로 하지 않는 코드 생성에서 제외할 항목, 'needs_check'는 JP 전용인지 확정되지 않은 항목, 'kept'는 공식 표시는 있으나 설계코드 값이라 제외하지 않는 항목이다. 근거는 공식 문서의 'ᴶ⁾' 표시(MIDAS CIVIL NX JP Version only)이다.",
+ "checked": "2026-11-26",
+ "exclude": [
+  {
+   "type": "endpoint",
+   "uri": "/db/GALD",
+   "doc": "11_DB_Settlement_Misc_Loads.md §10",
+   "article_id": "39236719728281",
+   "evidence": "공식 목차의 ᴶ⁾ 표시, ko 번역본 없음"
+  },
+  {
+   "type": "table_type",
+   "uri": "/post/TABLE",
+   "values": ["FIBR_ELASTREMAIN"],
+   "doc": "22_POST_TH_HY_Pushover.md G-2",
+   "article_id": "39237678441497",
+   "evidence": "공식 목차의 ᴶ⁾ 표시, ko 번역본 없음"
+  },
+  {
+   "type": "table_type",
+   "uri": "/post/TABLE",
+   "values": ["FIBR_MAXCONTRACT"],
+   "doc": "22_POST_TH_HY_Pushover.md G-3",
+   "article_id": "39237774129433",
+   "evidence": "공식 목차의 ᴶ⁾ 표시, ko 번역본 없음"
+  },
+  {
+   "type": "table_type",
+   "uri": "/post/TABLE",
+   "values": ["FIBR_EVENTSTEP"],
+   "doc": "22_POST_TH_HY_Pushover.md G-4",
+   "article_id": "39237785220505",
+   "evidence": "공식 목차의 ᴶ⁾ 표시, ko 번역본 없음"
+  },
+  {
+   "type": "table_type",
+   "uri": "/post/TABLE",
+   "values": ["FIBR_MEANCOMPCONTRACT"],
+   "doc": "22_POST_TH_HY_Pushover.md G-5",
+   "article_id": "39237854424601",
+   "evidence": "공식 목차의 ᴶ⁾ 표시, ko 번역본 없음"
+  },
+  {
+   "type": "field",
+   "uri": "/db/STCT",
+   "keys": ["bSDLE", "vSDLE"],
+   "doc": "12_DB_Analysis_Control.md §17",
+   "article_id": "35990281053465",
+   "evidence": "글의 'Secondary Dead Load Effect for Grid Model ᴶ⁾' 묶음 행"
+  },
+  {
+   "type": "field",
+   "uri": "/view/DISPLAY",
+   "keys": ["MISC.GRID_MODEL_LOAD_LINE"],
+   "doc": "16_VIEW.md §6",
+   "article_id": "35996157533977",
+   "evidence": "글의 해당 행 ᴶ⁾ 표시"
+  }
+ ],
+ "needs_check": [
+  {
+   "type": "field",
+   "uri": "/db/STCT-M1",
+   "keys": ["bSDLE", "vSDLE"],
+   "doc": "12_DB_Analysis_Control.md §18",
+   "article_id": "57053813627673",
+   "reason": "/db/STCT에서 ᴶ⁾ 표시된 필드와 Key·설명이 같으나 이 글에는 표시가 없음"
+  },
+  {
+   "type": "field",
+   "uri": "/db/ACTL",
+   "keys": ["ACWC"],
+   "doc": "12_DB_Analysis_Control.md (주석만 있고 파라미터 표에는 없음)",
+   "article_id": "35409287717657",
+   "reason": "ja 번역본에만 있는 필드. 공식 JP 전용 표시는 확인되지 않음"
+  }
+ ],
+ "kept": [
+  {
+   "type": "enum",
+   "uri": "/db/SPFC",
+   "values": ["JP_BRG2017", "JP_BRG2012"],
+   "doc": "09_DB_Dynamic_Loads.md 1-2-F",
+   "article_id": "39473375938969",
+   "reason": "글에 ᴶ⁾ 표시가 있으나 설계코드 값이므로 제외 대상에서 뺌"
+  }
+ ]
+}

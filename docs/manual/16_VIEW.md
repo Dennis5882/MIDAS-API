@@ -821,7 +821,7 @@ print("POST (All):", resp.status_code, resp.json())
 > ⚠️ 2026-08-26 확인 (article id `35996157533977`): 원문 Examples에는 Node/Element/**Property**/
 > Boundary/Load/**MISC**/View 7종 예제가 있으나 이전 버전 문서엔 Property·MISC 2종이 누락되어
 > 있어 보강. Boundary/Load 예제는 원문이 전체 필드를 `true`로 나열하지만(단, 이는 표의
-> 상호배타(ˢ#⁾) 각주와 모순되는 원문 예제 자체의 문제로 판단, 오류제보 대상), 로컬 문서는 기존
+> 상호배타(ˢ#⁾) 각주와 모순되는 원문 예제 자체의 문제로 판단), 로컬 문서는 기존
 > 관례대로 대표 필드 일부만 발췌해 표기(값은 모두 정확).
 
 ### Parameters
@@ -1196,6 +1196,8 @@ print("POST:", resp.status_code, resp.json())
 ## 7. `/view/RESULTGRAPHIC` — Result Graphic
 
 > **기능:** 반력/변위/보 다이어그램/평면·판 응력/솔리드 응력 등 해석 결과를 모델 창에 그래픽으로 표시하는 방식을 제어합니다. 현재 결과 모드(`CURRENT_MODE`), 하중 케이스/조합(`LOAD_CASE_COMB`), 성분(`COMPONENTS`)과 함께 `TYPE_OF_DISPLAY` 객체 아래에서 컨투어(Contour)·수치(Values)·범례(Legend)·변형(Deform)·표시옵션·대칭 미러·절단 다이어그램/평면·재하하중·등가면(IsoSurface) 등을 세부 설정합니다. 이 엔드포인트는 `POST` 전용입니다.
+
+> 결과 모드(`CURRENT_MODE`)별 파라미터와 요청 예제 28건은 [16-2장](./16_2_VIEW_ResultGraphic.md)에 있습니다.
 
 ### Input URI
 

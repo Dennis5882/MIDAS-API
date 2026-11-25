@@ -522,7 +522,7 @@ midas_api("POST", "/db/SSPS", ssps_data)
 > ⚠️ 원문 Specifications 표는 `"LINK"` 값을 `"MULTI LINEAR"`·`"RAIL INTERACT"`(공백 포함)로
 > 적고 있으나, JSON Schema·Request Example은 모두 공백 없는 `"MULTILINEAR"`·`"RAILINTERACT"`를
 > 쓴다(예제가 표보다 우선). 아래는 정상 표기이니 되돌리지 말 것(아티클 id `35946439146649`,
-> 2026-08-25 확인 — 오류제보 대상).
+> 2026-08-25 확인).
 
 | LINK 값 | 설명 | 추가 키 |
 |---------|------|---------|
@@ -1517,7 +1517,7 @@ NLLP의 `APPLICATION_TYPE_D="ST"`에서 참조됩니다.
 > (SUMITOMO GR100 등)·`MULTIPL` 필드가 있는 것으로 적어놓았으나, 이는 **17번 절 SDVE(점탄성
 > 댐퍼) 페이지 내용이 잘못 섞여 들어간 것**으로 판단된다 — JSON Schema와 실제 Request
 > Example 어디에도 `MATERIAL_TYPE`은 없다. 대신 실제로는 `K0`/`P1`/`ALPHA1`/`KB`와 이력모델별
-> 하위 객체(`BL2`/`LY2`/`LY3`/`IK2`)가 쓰인다(아티클 id `35948150053529`, 오류제보 대상).
+> 하위 객체(`BL2`/`LY2`/`LY3`/`IK2`)가 쓰인다(아티클 id `35948150053529`).
 
 | No. | 설명 | 키 | 타입 | 필수 |
 |-----|------|----|------|------|
@@ -1696,7 +1696,7 @@ NLLP의 `APPLICATION_TYPE_D="IS"`에서 참조됩니다.
 > 비슷하지만 별개인 두 초기강성 필드) 중 `K0`을 누락, (4) NRB Data가 `KH` 하나뿐인 것으로
 > 잘못 기재(실제로는 `AR`/`TR`/`KH`/`DX{...}` 4+4개), (5) SB Data의 `QD`(Index)·`Pi_VALUE`를
 > 누락한 채 작성돼 있었다. 원문 JSON Schema + Request Example 대조로 전면 재작성했다
-> (아티클 id `35948330042649`, 오류제보 대상).
+> (아티클 id `35948330042649`).
 
 | No. | 설명 | 키 | 타입 | 필수 |
 |-----|------|----|------|------|

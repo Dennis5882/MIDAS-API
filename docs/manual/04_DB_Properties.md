@@ -2,7 +2,7 @@
 
 > **Source**: [MIDAS API Online Manual](https://support.midasuser.com/hc/ko/articles/33016922742937-MIDAS-API-Online-Manual)  
 > **Sync date**: 2026-07-12  
-> **Endpoints covered**: `/db/MATL`, `/db/MATL-M1`, `/db/IMFM`, `/db/IMFM-M1`, `/db/TDMF`, `/db/TDMT`, `/db/TDME`, `/db/EDMP`, `/db/TMAT`, `/db/EPMT`, `/db/EPMT-M1`, `/db/SECT`, `/db/THIK`, `/db/TSGR`, `/db/SECF`, `/db/RPSC`, `/db/STRPSSM`, `/db/PSSF`, `/db/VBEM`, `/db/VSEC`, `/db/EWSF`, `/db/IEHC`, `/db/IEHG`, `/db/IEHG-BEAM-M1`, `/db/IEHG-TRUSS-M1`, `/db/IEHG-GL-M1`, `/db/IEHG-PSS-M1`, `/db/FIMP`, `/db/FIBR`, `/db/GRDP`, `/db/ESSF`, `/db/MATD`, `/db/SECV`
+> **Endpoints covered**: `/db/MATL`, `/db/MATL-M1`, `/db/IMFM`, `/db/IMFM-M1`, `/db/TDMF`, `/db/TDMT`, `/db/TDME`, `/db/EDMP`, `/db/TMAT`, `/db/EPMT`, `/db/EPMT-M1`, `/db/SECT`, `/db/THIK`, `/db/TSGR`, `/db/SECF`, `/db/RPSC`, `/db/STRPSSM`, `/db/PSSF`, `/db/VBEM`, `/db/VSEC`, `/db/EWSF`, `/db/IEHC`, `/db/IEHG`, `/db/IEHG-BEAM-M1`, `/db/IEHG-TRUSS-M1`, `/db/IEHG-GL-M1`, `/db/IEHG-PSS-M1`, `/db/FIMP`, `/db/FIBR`, `/db/GRDP`, `/db/ESSF`, `/db/MATD`, `/db/SECV`, `DESIGN/SECT`
 
 ---
 
@@ -43,6 +43,7 @@
 | 31 | [`/db/ESSF`](#31-dbessf) | Element Stiffness Scale Factor | POST, GET, PUT, DELETE |
 | 32 | [`/db/MATD`](#32-dbmatd) | Modify Concrete Materials | GET, PUT |
 | 33 | [`/db/SECV`](#33-dbsecv) | Virtual Section for Design | POST, GET, PUT, DELETE |
+| 34 | [`DESIGN/SECT`](#34-designsect) | Section for Design | POST, GET, PUT, DELETE |
 
 ---
 
@@ -677,7 +678,7 @@ midas_api("POST", "/db/TDMT", tdmt_data)
 
 > ⚠️ 원문 Specifications 표가 "Scale Factor"(Number)와 "Function Data"(Array[Object]) 두
 > 필드 모두에 Key `"SCALE"`을 중복 표기하고 있다. 오타로 보이나 실제 키 이름이 무엇인지
-> 확인할 예제가 없어 원문 그대로 옮기고 이 주석으로 남긴다(오류제보 대상).
+> 확인할 예제가 없어 원문 그대로 옮기고 이 주석으로 남긴다.
 
 #### ¹⁾ Code Name 코드표 (`TDME.CODENAME`)
 
@@ -1627,66 +1628,77 @@ midas_api("POST", "/db/SECF", secf_data)
 
 ## 16. `/db/RPSC`
 
-> **Section Manager – Reinforcements** — PSC/RC 단면 철근 배근 데이터를 설정합니다.
+> **Section Manager – Reinforcements** — PSC/RC 단면 철근 배근 데이터를 설정합니다. 키는 단면 ID입니다.
 
 - **URL**: `{base url}/db/RPSC`
 - **Methods**: `POST`, `GET`, `PUT`, `DELETE`
 - **Source**: [Section Manager - Reinforcements ↗](https://support.midasuser.com/hc/en-us/articles/35943227821465)
 
+### ADDITIONAL — 종방향철근 구조 개정 (2026-11-25 공식 반영)
+
+> - 종방향철근이 최상위 `"MBAR_ITEMS"`가 아니라 **`"MBARS"[].MBAR_ITEMS`** 구조입니다.
+> - `"OPT_CRACKED"`가 Required → Optional로 바뀌었고 `"CONTRIBUTION_FACTOR"`가 추가됐습니다.
+> - `"LBAR_INC_FC"` 타입이 Integer(`0`/`1`) → Boolean입니다.
+> - PUT에서 `"MBARS": []`, 또는 `MBAR_ITEMS`가 없는 객체(`{}`, GET 응답 형태)를 보내면 해당 단면의
+>   기존 종방향철근이 유지됩니다. 삭제하려면 `{"MBAR_ITEMS": []}`를 보냅니다. 전단철근만 바꿀 때는
+>   앞의 세 형태 중 아무것이나 보내면 됩니다.
+>
+> 공식 문서 기준입니다.
+
 ### Specifications
 
-> ⚠️ **2026-08-25 재확인 전면 보강.** 이전 버전은 전단철근(`SBAR_ITEMS`) 중 대각철근(DR) 4개
-> 필드만 있고 SBW·TR·SR·Enclosing Stirrup 및 종방향철근(`MBAR_ITEMS`) 전체가 통째로 빠져
-> 있었다(아티클 id `35943227821465`). 원문 그대로 전체 필드를 보강했다.
-
-| No. | Description | Key | Value Type | Default | Required |
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 | --- | --- | --- | --- | --- | --- |
-| 1 | Same Rebar Data at i and j-end (Longitudinal) | `"OPT_MBAR_J"` | Boolean | - | **Required** |
-| 2 | Same Shear Rebar Data at i and j-end | `"OPT_SBAR_J"` | Boolean | - | **Required** |
-| 3 | Cracked Section | `"OPT_CRACKED"` | Boolean | - | **Required** |
-| 4 | Shear Reinforcement Data (Array, Index 0=i-section / 1=j-section) | `"SBAR_ITEMS"` | Array[Object] | - | **Required** |
-| 5 | Longitudinal Reinforcement Data (Array, Index 0=i-section / 1=j-section) | `"MBAR_ITEMS"` | Array[Object] | - | **Required** |
+| 1 | Same Longitudinal Rebar at I/J | `"OPT_MBAR_J"` | Boolean | - | **Required** |
+| 2 | Same Shear Rebar at I/J | `"OPT_SBAR_J"` | Boolean | - | **Required** |
+| 3 | Cracked Section Shown only for composite sections. If omitted, the stored value is kept (false for a new record). | `"OPT_CRACKED"` | Boolean | - | Optional |
+| 4 | Concrete Contribution Factor Steel composite Type 2 sections only. Applied when OPT_CRACKED is true (otherwise reset to 1). | `"CONTRIBUTION_FACTOR"` | Number | `1` | Optional |
+| 5 | Shear Reinforcement Items Constraints: · Items: 1 ~ 2 Index 0: i-section, Index 1: j-section (when OPT_SBAR_J is false) | `"SBAR_ITEMS"` | Array[Object] | - | **Required** |
+| 6 | Longitudinal Reinforcement Constraints: · Items: 0 ~ 2 Index 0: i-section, Index 1: j-section (when OPT_MBAR_J is false). On PUT, [] or an object without MBAR_ITEMS ({}, as returned by GET) keeps the existing longitudinal rebar of that section. | `"MBARS"` | Array[Object] | - | **Required** |
+| 6.1 | └ Longitudinal Rebar Items Constraints: · Items: min 0 If omitted, the existing rebar of the section is kept (PUT). [] deletes it. | `"MBAR_ITEMS"` | Array[Object] | - | Optional |
 
 #### `SBAR_ITEMS[]` — 전단철근
 
-| No. | Description | Key | Value Type | Default | Required |
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 | --- | --- | --- | --- | --- | --- |
-| (1) | Diagonal Reinforcement (DR) | `"OPT_DR"` | Boolean | `false` | Optional |
-| (2) | [DR] Pitch | `"DR_PITCH"` | Number | - | Optional |
-| (3) | [DR] Angle | `"DR_THETA"` | Number | - | Optional |
-| (4) | [DR] Area | `"DR_AW"` | Number | - | Optional |
-| (5) | Steel Bar for Web (SBW) | `"OPT_SBW"` | Boolean | `false` | Optional |
-| (6) | [SBW] Pitch | `"SBW_PITCH"` | Number | - | Optional |
-| (7) | [SBW] Angle | `"SBW_ANGLE"` | Number | - | Optional |
-| (8) | [SBW] Area | `"SBW_AP"` | Number | - | Optional |
-| (9) | [SBW] Pre-force | `"SBW_PS"` | Number | - | Optional |
-| (10) | [SBW] Shear Reduction Factor | `"SBW_FACTOR"` | Number | - | Optional |
-| (11) | Torsional Reinforcement (TR) | `"OPT_TR"` | Boolean | `false` | Optional |
-| (12) | [TR] Pitch | `"TR_PITCH"` | Number | - | Optional |
-| (13) | [TR] Area (Web) | `"TR_AWT"` | Number | - | Optional |
-| (14) | [TR] Area (Longitudinal) | `"TR_ALT"` | Number | - | Optional |
-| (15) | Stirrup Exist | `"OPT_SR"` | Boolean | `false` | Optional |
-| (16) | [SR] Pitch | `"SR_PITCH"` | Number | - | Optional |
-| (17) | [SR] Area | `"SR_AW"` | Number | - | Optional |
+| (1) | Diagonal Reinforcement | `"OPT_DR"` | Boolean | `false` | Optional |
+| (2) | [DR] Pitch (> 0) | `"DR_PITCH"` | Number | - | **Required** (`OPT_DR`) |
+| (3) | [DR] Angle | `"DR_THETA"` | Number | `0` | Optional |
+| (4) | [DR] Area (> 0) | `"DR_AW"` | Number | - | **Required** (`OPT_DR`) |
+| (5) | Steel Bar for Web | `"OPT_SBW"` | Boolean | `false` | Optional |
+| (6) | [SBW] Pitch (> 0) | `"SBW_PITCH"` | Number | - | **Required** (`OPT_SBW`) |
+| (7) | [SBW] Angle | `"SBW_ANGLE"` | Number | `90` | Optional |
+| (8) | [SBW] Area (> 0) | `"SBW_AP"` | Number | - | **Required** (`OPT_SBW`) |
+| (9) | [SBW] Pre-force (> 0) | `"SBW_PS"` | Number | - | **Required** (`OPT_SBW`) |
+| (10) | [SBW] Shear Reduction Factor (> 0) | `"SBW_FACTOR"` | Number | `1` | Optional |
+| (11) | Torsional Reinforcement | `"OPT_TR"` | Boolean | `false` | Optional |
+| (12) | [TR] Pitch (> 0) | `"TR_PITCH"` | Number | - | **Required** (`OPT_TR`) |
+| (13) | [TR] Area (Web) (> 0) | `"TR_AWT"` | Number | - | **Required** (`OPT_TR`) |
+| (14) | [TR] Area (Long.) (> 0) | `"TR_ALT"` | Number | - | **Required** (`OPT_TR`) |
+| (15) | Stirrup | `"OPT_SR"` | Boolean | `false` | Optional |
+| (16) | [SR] Pitch (> 0) | `"SR_PITCH"` | Number | - | **Required** (`OPT_SR`) |
+| (17) | [SR] Area (> 0) | `"SR_AW"` | Number | - | **Required** (`OPT_SR`) |
 | (18) | Enclosing Stirrup | `"OPT_LBAR_FLG"` | Boolean | `false` | Optional |
-| (19) | (Enclosed 단면적 산정용) Cover Thickness | `"LBAR_THICK"` | Number | - | Optional |
-| (20) | Include Flange/Cantilever · Off: `0` / On: `1` | `"LBAR_INC_FC"` | Integer | - | Optional |
+| (19) | Cover Thickness (> 0) | `"LBAR_THICK"` | Number | - | **Required** (`OPT_LBAR_FLG`) |
+| (20) | Include Flange/Cantilever | `"LBAR_INC_FC"` | Boolean | `false` | Optional |
 
-#### `MBAR_ITEMS[]` — 종방향철근
+#### `MBARS[].MBAR_ITEMS[]` — 종방향철근
 
-| No. | Description | Key | Value Type | Default | Required |
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 | --- | --- | --- | --- | --- | --- |
-| (1) | Section Position · `"I"` / `"J"` | `"IJ"` | String | - | **Required** |
-| (2) | Bar Name | `"NAME"` | String | - | **Required** |
-| (3) | Reference Y · Centroid: `0` / Left: `1` | `"REF_Y"` | Integer | - | **Required** |
-| (4) | Distance from Reference (Y-dir) | `"Y"` | Number | 0 | Optional |
-| (5) | Reference Z · Top: `0` / Bottom: `1` | `"REF_Z"` | Integer | - | **Required** |
-| (6) | Distance from Reference (Z-dir) | `"Z"` | Number | 0 | Optional |
-| (7) | Number of Rebar | `"NUM"` | Integer | - | **Required** |
-| (8) | Spacing between Rebars | `"SPACING"` | Number | 0 | Optional |
-| (9) | Part | `"PART"` | Integer | - | - |
+| (1) | 6.1.1 Section Positions - I / J · I: "I" · J: "J" | `"IJ"` | String | - | **Required** |
+| (2) | 6.1.2 Bar Name Constraints: · Length: min 1 Must be a rebar name of the concrete rebar material code of the model (e.g. D16, #5). Otherwise the request is rejected. | `"NAME"` | String | - | **Required** |
+| (3) | 6.1.3 Reference Y · Centroid: "0" · Left: "1" | `"REF_Y"` | Integer | - | **Required** |
+| (4) | 6.1.4 Distance from Reference in Y direction | `"Y"` | Number | `0` | Optional |
+| (5) | 6.1.5 Reference Z · Top: "0" · Bottom: "1" | `"REF_Z"` | Integer | - | **Required** |
+| (6) | 6.1.6 Distance from Reference in Z Direction | `"Z"` | Number | `0` | Optional |
+| (7) | 6.1.7 Number of Rebar Constraints: · Value Range: >= 0 | `"NUM"` | Integer | - | **Required** |
+| (8) | 6.1.8 Spacing Constraints: · Value Range: >= 0 | `"SPACING"` | Number | `0` | Optional |
+| (9) | 6.1.9 Part · 0: "0" · 1: "1" · 2: "2" — Allowed values depend on the section: non-composite 0, 1 or 2; concrete composite 1 or 2; steel composite 2. | `"PART"` | Integer | - | **Required** |
 
-### Request Body
+### Request / Response JSON
+
+**종방향철근** — 공식 예제는 I·J단 각 14개이며, 아래는 각 단의 앞 2개만 발췌한 것입니다.
 
 ```json
 {
@@ -1696,15 +1708,148 @@ midas_api("POST", "/db/SECF", secf_data)
       "OPT_SBAR_J": false,
       "OPT_CRACKED": false,
       "SBAR_ITEMS": [
-        { "OPT_DR": false },
-        { "OPT_DR": false }
+        {
+          "OPT_DR": false,
+          "OPT_SBW": false,
+          "OPT_TR": false,
+          "OPT_SR": false,
+          "OPT_LBAR_FLG": false
+        }
       ],
-      "MBAR_ITEMS": [
-        { "IJ": "I", "NAME": "D25", "REF_Y": 0, "Y": 0, "REF_Z": 1, "Z": 0.05, "NUM": 4, "SPACING": 0.15 }
+      "MBARS": [
+        {
+          "MBAR_ITEMS": [
+            {
+              "IJ": "I",
+              "NAME": "#18",
+              "REF_Y": 1,
+              "Y": 3.63,
+              "REF_Z": 1,
+              "Z": 2.148120340131863,
+              "NUM": 1,
+              "SPACING": 0,
+              "PART": 0
+            },
+            {
+              "IJ": "I",
+              "NAME": "#18",
+              "REF_Y": 0,
+              "Y": 0,
+              "REF_Z": 0,
+              "Z": 0.1,
+              "NUM": 2,
+              "SPACING": 0.1,
+              "PART": 0
+            }
+          ]
+        },
+        {
+          "MBAR_ITEMS": [
+            {
+              "IJ": "J",
+              "NAME": "#18",
+              "REF_Y": 1,
+              "Y": 3.63,
+              "REF_Z": 1,
+              "Z": 2.148120340131863,
+              "NUM": 1,
+              "SPACING": 0,
+              "PART": 0
+            },
+            {
+              "IJ": "J",
+              "NAME": "#18",
+              "REF_Y": 0,
+              "Y": 0,
+              "REF_Z": 0,
+              "Z": 0.1,
+              "NUM": 2,
+              "SPACING": 0.1,
+              "PART": 0
+            }
+          ]
+        }
       ]
     }
   }
 }
+```
+
+**전단철근**
+
+```json
+{
+  "Assign": {
+    "1": {
+      "OPT_MBAR_J": true,
+      "OPT_SBAR_J": false,
+      "OPT_CRACKED": false,
+      "MBARS": [
+        {
+          "MBAR_ITEMS": [
+            {
+              "IJ": "I",
+              "NAME": "D16",
+              "REF_Y": 1,
+              "Y": 610,
+              "REF_Z": 0,
+              "Z": 250,
+              "NUM": 1,
+              "SPACING": 0,
+              "PART": 1
+            }
+          ]
+        }
+      ],
+      "SBAR_ITEMS": [
+        {
+          "OPT_DR": true,
+          "DR_PITCH": 100,
+          "DR_THETA": 90,
+          "DR_AW": 402.2,
+          "OPT_SBW": false,
+          "OPT_TR": true,
+          "TR_PITCH": 150,
+          "TR_AWT": 402.2,
+          "TR_ALT": 4022,
+          "OPT_SR": false,
+          "OPT_LBAR_FLG": false
+        },
+        {
+          "OPT_DR": true,
+          "DR_PITCH": 100,
+          "DR_THETA": 90,
+          "DR_AW": 402.2,
+          "OPT_SBW": false,
+          "OPT_TR": true,
+          "TR_PITCH": 150,
+          "TR_AWT": 402.2,
+          "TR_ALT": 4022,
+          "OPT_SR": false,
+          "OPT_LBAR_FLG": false
+        }
+      ]
+    }
+  }
+}
+```
+
+### Python 예제
+
+```python
+# 전단철근만 변경: "MBARS": [] 는 기존 종방향철근을 유지합니다 (PUT)
+rpsc_data = {
+    "Assign": {
+        "1": {
+            "OPT_MBAR_J": True, "OPT_SBAR_J": True,
+            "MBARS": [],
+            "SBAR_ITEMS": [
+                {"OPT_DR": True, "DR_PITCH": 100, "DR_THETA": 90, "DR_AW": 402.2}
+            ]
+        }
+    }
+}
+midas_api("PUT", "/db/RPSC", rpsc_data)
 ```
 
 ---
@@ -1717,31 +1862,58 @@ midas_api("POST", "/db/SECF", secf_data)
 - **Methods**: `POST`, `GET`, `PUT`, `DELETE`
 - **Source**: [Section Manager - Stress Points ↗](https://support.midasuser.com/hc/en-us/articles/35943448721177)
 
+### ADDITIONAL — 좌표 Key 개정 (2026-11-25 공식 반영)
+
+> 좌표 객체의 Key가 `"PY"`/`"PZ"` → **`"Y"`/`"Z"`**이며, JSON Schema는 그 밖의 Key를 허용하지
+> 않습니다(`additionalProperties: false`). 공식 문서 기준입니다.
+
 ### Specifications
 
-| No. | Description | Key | Value Type | Default | Required |
-|-----|-------------|-----|------------|---------|----------|
-| 1 | Same Stress Points at i and j-end | `"OPT_SAME_J"` | Boolean | true | Optional |
-| 2 | Number of Stress Points (I) | `"POINT_SIZE_1"` | Integer | - | **Required** |
-| 3 | Number of Stress Points (J) | `"POINT_SIZE_2"` | Integer | - | **Required** |
-| 4 | Stress Point Coordinates (I) | `"POINT1"` | Array[{PY, PZ}] | - | **Required** |
-| (1) | Point Y | `"PY"` | Number | - | **Required** |
-| (2) | Point Z | `"PZ"` | Number | - | **Required** |
-| 5 | Stress Point Coordinates (J) | `"POINT2"` | Array[{PY, PZ}] | - | **Required** |
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Same Additional Stress Points Data at i and j-end When true, POINT1 is also applied to the j-end and POINT2 is ignored. If omitted on PUT, the stored value is kept. | `"OPT_SAME_J"` | Boolean | `true` | Optional |
+| 2 | Number of Stress Point for I Stored as the number of items in POINT1; a different value is ignored. | `"POINT_SIZE_1"` | Integer | - | **Required** |
+| 3 | Number of Stress Point for J Stored as the number of items in POINT2; a different value is ignored. | `"POINT_SIZE_2"` | Integer | - | **Required** |
+| 4 | Stress Point Coordinates for I · Insert the data as an object | `"POINT1"` | Array[Object] | - | **Required** |
+| (1) | └ Point Y | `"Y"` | Number | - | **Required** |
+| (2) | └ Point Z | `"Z"` | Number | - | **Required** |
+| 5 | Stress Point Coordinates for J · Insert the data as an object Used only when OPT_SAME_J is false. | `"POINT2"` | Array[Object] | - | **Required** |
+| (1) | └ Point Y | `"Y"` | Number | - | **Required** |
+| (2) | └ Point Z | `"Z"` | Number | - | **Required** |
 
-### Request Body
+### Request / Response JSON
 
 ```json
 {
   "Assign": {
     "9003": {
-      "OPT_SAME_J": true,
-      "POINT_SIZE_1": 2, "POINT_SIZE_2": 2,
-      "POINT1": [{"PY": 0.00583, "PZ": 0.00476}, {"PY": -0.00506, "PZ": 0.00097}],
-      "POINT2": [{"PY": 0.00583, "PZ": 0.00476}, {"PY": -0.00506, "PZ": 0.00097}]
+      "OPT_SAME_J": false,
+      "POINT_SIZE_1": 2,
+      "POINT_SIZE_2": 2,
+      "POINT1": [{"Y": 0.00583, "Z": 0.00476}, {"Y": -0.00506, "Z": 0.00097}],
+      "POINT2": [
+        {"Y": 0.007067356048348719, "Z": 0.005572125828318985},
+        {"Y": -0.0059233102292634635, "Z": 0.0011354962297204655}
+      ]
     }
   }
 }
+```
+
+### Python 예제
+
+```python
+strpssm_data = {
+    "Assign": {
+        "9003": {
+            "OPT_SAME_J": True,
+            "POINT_SIZE_1": 2, "POINT_SIZE_2": 2,
+            "POINT1": [{"Y": 0.00583, "Z": 0.00476}, {"Y": -0.00506, "Z": 0.00097}],
+            "POINT2": [{"Y": 0.00583, "Z": 0.00476}, {"Y": -0.00506, "Z": 0.00097}]
+        }
+    }
+}
+midas_api("POST", "/db/STRPSSM", strpssm_data)
 ```
 
 ---
@@ -2475,7 +2647,6 @@ midas_api("POST", "/db/ESSF", essf_data)
 > ✅ **2026-09-06 해결 확인:** 원문 Specifications 표 4번 Key가 `"RABAR_CODENAME"`(E 누락 오타)
 > 이던 것이 2026-09-01 원문 갱신으로 `"REBAR_CODENAME"`으로 정정됐다(재확인 시
 > `REBAR_CODENAME` 3회·`RABAR_CODENAME` 0회). 우리 문서는 처음부터 정상 표기였다.
-> 2026-08-27 오류 제보 반영 결과로 보인다.
 >
 > ⚠️ **스키마에만 존재하는 필드(설명 근거 없음).** `DATA1.DESIGN` 하위
 > `bLAMBDA`/`dLAMBDA`/`bTRANSFER`/`dTRANSFERFCI` 4개 필드는 JSON Schema에만 있고 원문
@@ -2514,9 +2685,6 @@ midas_api("POST", "/db/ESSF", essf_data)
 >
 > 9~11번(`bSERVCHECK`/`dSHORTTERM`/`dLONGTERM`)은 2026-09-01 원문 갱신으로 JSON Schema 최상위에
 > 추가된 뒤, **2026-09-28 원문 갱신으로 Specifications 표에도 행이 추가되었다**(위 표가 원문 표기 그대로).
-> 2026-09-18 라이브 검증에서 세 필드 모두 실제로 전송·저장되는 것이 확인됐다(`bSERVCHECK=true`,
-> `dSHORTTERM=1.25`, `dLONGTERM=1.5`). 검증 상세는
-> [live_verification_feedback_20260918.md](../error_reports/live_verification_feedback_20260918.md) 참고.
 >
 > ✅ **2026-10-04 재확인:** 원문 JSON Schema의 `SUBREBAR_B_FY` 블록 뒤 쉼표 누락(위 2026-09-06 구문 오류)도
 > 현재는 정상 쉼표로 고쳐져 있어 이 블록은 유효한 JSON이다.
@@ -2576,42 +2744,42 @@ midas_api("PUT", "/db/MATD/1", matd_data)
 - **Methods**: `POST`, `GET`, `PUT`, `DELETE`
 - **Source**: [Section Properties - Virtual Section for Design ↗](https://support.midasuser.com/hc/en-us/articles/64608751935897-Section-Properties-Virtual-Section-for-Design)
 
-> ⚠️ 공식 아티클은 `SECTTYPE`을 `"COMPOSITE"` 한 가지로만 허용하며, `SHAPE`는 `GI`/`CI`/`CT` 3종입니다. `SECT_AFTER.SLAB`은 공식 Specifications 표에 `Array [any]`로 표기되나 JSON Schema는 `[Bc, tc, Hh[, Sg]]` 3~4개 number로 정의하여 스키마 기준으로 적었습니다. `/db/SECT`의 `COMPOSITE`와 필드 구성이 유사하지만 별도 엔드포인트입니다. 이 엔드포인트의 실제 API 동작은 검증하지 않았습니다.
+> ⚠️ 공식 아티클은 `SECTTYPE`을 `"COMPOSITE"` 한 가지로만 허용하며, `SHAPE`는 `GI`/`CI`/`CT` 3종입니다. `SECT_AFTER.SLAB`은 공식 Specifications 표에 `Array [any]`로 표기되나 JSON Schema는 `[Bc, tc, Hh[, Sg]]` 3~4개 number로 정의하여 스키마 기준으로 적었습니다. `/db/SECT`의 `COMPOSITE`와 필드 구성이 유사하지만 별도 엔드포인트입니다.
 
 ### Specifications
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 | --- | --- | --- | --- | --- | --- |
-| 1 | Section Data Type — `"COMPOSITE"` 고정 | `"SECTTYPE"` | String | - | **Required** |
-| 2 | Section Name (최소 1자) | `"SECT_NAME"` | String | - | **Required** |
-| 3 | Section Data - Before (합성 전: 거더) | `"SECT_BEFORE"` | Object | - | Optional |
+| 1 | Section Data Type | `"SECTTYPE"` | String | - | **Required** |
+| 2 | Section Name Constraints: · Length: min 1 | `"SECT_NAME"` | String | - | **Required** |
+| 3 | Section Data - Before | `"SECT_BEFORE"` | Object | - | Optional |
 | 3.1 | └ Cardinal Point | `"OFFSET_PT"` | String | - | Optional |
-| 3.2 | └ Offset Center (0: Centroid, 1: Center of Section) | `"OFFSET_CENTER"` | Integer | - | Optional |
-| 3.3 | └ User Offset Reference (0: Centroid, 1: Extreme Fiber(s)) | `"USER_OFFSET_REF"` | Integer | - | Optional |
-| 3.4 | └ Horizontal Offset Option (0: Extreme Fiber, 1: User-defined) | `"HORZ_OFFSET_OPT"` | Integer | - | Optional |
+| 3.2 | └ Offset Center | `"OFFSET_CENTER"` | Integer | - | Optional |
+| 3.3 | └ User Offset Reference | `"USER_OFFSET_REF"` | Integer | - | Optional |
+| 3.4 | └ Horizontal Offset Option | `"HORZ_OFFSET_OPT"` | Integer | - | Optional |
 | 3.5 | └ User Offset Y at I | `"USERDEF_OFFSET_YI"` | Number | - | Optional |
 | 3.6 | └ User Offset Y at J | `"USERDEF_OFFSET_YJ"` | Number | - | Optional |
-| 3.7 | └ Vertical Offset Option (0: Extreme Fiber, 1: User-defined) | `"VERT_OFFSET_OPT"` | Integer | - | Optional |
+| 3.7 | └ Vertical Offset Option | `"VERT_OFFSET_OPT"` | Integer | - | Optional |
 | 3.8 | └ User Offset Z at I | `"USERDEF_OFFSET_ZI"` | Number | - | Optional |
 | 3.9 | └ User Offset Z at J | `"USERDEF_OFFSET_ZJ"` | Number | - | Optional |
 | 3.10 | └ Consider Shear Deformation | `"USE_SHEAR_DEFORM"` | Boolean | false | Optional |
 | 3.11 | └ Consider Warping Effect | `"USE_WARPING_EFFECT"` | Boolean | false | Optional |
 | 3.12 | └ Hambly Equivalent Section | `"USE_HAMBLY_EQ"` | Boolean | false | Optional |
-| 3.13 | └ Girder Shape — `"GI"`: Steel Composite I, `"CI"`: PSC Composite I, `"CT"`: PSC Composite T | `"SHAPE"` | String | - | **Required** (`SECT_BEFORE` 지정 시) |
+| 3.13 | └ Girder Shape · Steel Composite I: "GI" · PSC Composite I: "CI" · PSC Composite T: "CT" | `"SHAPE"` | String | - | **Required** (`SECT_BEFORE` 지정 시) |
 | 3.14 | └ Section Data Type | `"DATATYPE"` | Integer | - | Optional |
 | 3.15 | └ Section Type | `"TYPE"` | Integer | - | Optional |
 | 3.16 | └ I-End Girder Section | `"SECT_I"` | Object | - | Optional |
-| 3.16.1 | 　　└ I-End Section Dimensions (GI: `[B1, B2, B3, B4, H, t1, t2, tw]`) | `"vSIZE"` | Array[Number] | - | Optional |
-| 3.16.2 | 　　└ PSC Dimensions A | `"vSIZE_PSC_A"` | Array[Number] | - | Optional |
-| 3.16.3 | 　　└ PSC Dimensions B | `"vSIZE_PSC_B"` | Array[Number] | - | Optional |
-| 3.16.4 | 　　└ PSC Dimensions C | `"vSIZE_PSC_C"` | Array[Number] | - | Optional |
-| 3.16.5 | 　　└ PSC Dimensions D | `"vSIZE_PSC_D"` | Array[Number] | - | Optional |
-| 3.16.6 | 　　└ Use Symmetric Calculation | `"USE_SYM_CALC"` | Boolean | - | Optional |
-| 3.16.7 | 　　└ Section Stiffness | `"SODSTIFF"` | Object | - | Optional |
-| 3.16.7.1 | 　　　　└ Torsional Stiffness Number | `"TOSTIFNOS"` | Integer | - | Optional |
-| 3.16.7.2 | 　　　　└ Deck Stiffness Number | `"DECKSTIFFNO"` | Integer | - | Optional |
+| 3.16.1 | 　　└ 3.16.1 I-End Section Dimensions — GI uses [B1, B2, B3, B4, H, t1, t2, tw]. | `"vSIZE"` | Array[Number] | - | Optional |
+| 3.16.2 | 　　└ 3.16.2 PSC Dimensions A | `"vSIZE_PSC_A"` | Array[Number] | - | Optional |
+| 3.16.3 | 　　└ 3.16.3 PSC Dimensions B | `"vSIZE_PSC_B"` | Array[Number] | - | Optional |
+| 3.16.4 | 　　└ 3.16.4 PSC Dimensions C | `"vSIZE_PSC_C"` | Array[Number] | - | Optional |
+| 3.16.5 | 　　└ 3.16.5 PSC Dimensions D | `"vSIZE_PSC_D"` | Array[Number] | - | Optional |
+| 3.16.6 | 　　└ 3.16.6 Use Symmetric Calculation | `"USE_SYM_CALC"` | Boolean | - | Optional |
+| 3.16.7 | 　　└ 3.16.7 Section Stiffness | `"SODSTIFF"` | Object | - | Optional |
+| 3.16.7.1 | 　　　　└ 3.16.7.1 Torsional Stiffness Number | `"TOSTIFNOS"` | Integer | - | Optional |
+| 3.16.7.2 | 　　　　└ 3.16.7.2 Deck Stiffness Number | `"DECKSTIFFNO"` | Integer | - | Optional |
 | 3.17 | └ J-End Girder Section | `"SECT_J"` | Object | - | Optional |
-| 3.17.1 | 　　└ J-End Section Dimensions | `"vSIZE"` | Array[Number] | - | Optional |
+| 3.17.1 | 　　└ 3.17.1 J-End Section Dimensions | `"vSIZE"` | Array[Number] | - | Optional |
 | 3.18 | └ Y Variation | `"Y_VAR"` | Integer | - | Optional |
 | 3.19 | └ Z Variation | `"Z_VAR"` | Integer | - | Optional |
 | 3.20 | └ Source Section Type | `"SRC_TYPE"` | Integer | - | Optional |
@@ -2626,13 +2794,13 @@ midas_api("PUT", "/db/MATD/1", matd_data)
 | 3.29 | └ PSC Shape Option 1 | `"PSC_OPT1"` | String | - | Optional |
 | 3.30 | └ PSC Shape Option 2 | `"PSC_OPT2"` | String | - | Optional |
 | 3.31 | └ Joint Options | `"JOINT"` | Array[Boolean] | - | Optional |
-| 3.32 | └ Long-Term Es/Ec (`USE_MULTI_ELAST`가 true일 때) | `"LONGTERM_ESEC"` | Number | - | Optional |
-| 3.33 | └ Shrinkage Es/Ec (`USE_MULTI_ELAST`가 true일 때) | `"SHRINK_ESEC"` | Number | - | Optional |
-| 4 | Section Data - After (합성 후: 슬래브) — `SHAPE`가 `CI`/`CT`이면 필수 | `"SECT_AFTER"` | Object | - | Optional |
+| 3.32 | └ Long-Term Es/Ec | `"LONGTERM_ESEC"` | Number | - | Optional |
+| 3.33 | └ Shrinkage Es/Ec | `"SHRINK_ESEC"` | Number | - | Optional |
+| 4 | Section Data - After | `"SECT_AFTER"` | Object | - | Optional |
 | 4.1 | └ After-Composite Section | `"SECT_I"` | Object | - | Optional |
-| 4.1.1 | 　　└ After-Composite I-End Dimensions (GI: `[Sg, Top, Bot]`) | `"vSIZE"` | Array[Number] | - | Optional |
-| 4.2 | └ Slab Dimensions `[Bc, tc, Hh[, Sg]]` (3~4개) | `"SLAB"` | Array[Number] | - | **Required** (`CI`/`CT`) |
-| 5 | Composite J-End (Tapered) | `"COMPOSITE_J"` | Object | - | Optional |
+| 4.1.1 | 　　└ 4.1.1 After-Composite I-End Dimensions — GI uses [Sg, Top, Bot]. | `"vSIZE"` | Array[Number] | - | Optional |
+| 4.2 | └ Slab Dimensions Constraints: · Items: 3 ~ 4 [Bc, tc, Hh[, Sg]]; CI/CT requires 3 or 4 values. | `"SLAB"` | Array[Number] | - | **Required** (`CI`/`CT`) |
+| 5 | Composite J-End | `"COMPOSITE_J"` | Object | - | Optional |
 | 5.1 | └ Base Section Name | `"DB_NAME"` | String | - | Optional |
 | 5.2 | └ J-End Section Name | `"SECT_NAME"` | String | - | Optional |
 | 5.3 | └ J-End Composite Dimensions | `"vSIZE"` | Array[Number] | - | Optional |
@@ -2695,6 +2863,54 @@ secv_data = {
     }
 }
 midas_api("POST", "/db/SECV", secv_data)
+```
+
+---
+
+## 34. `DESIGN/SECT`
+
+> **Section for Design** — 설계용 단면을 정의합니다. 키는 단면 ID이며, 각 값의 구조는
+> [`/db/SECT`](#12-dbsect)와 같습니다.
+
+- **URL**: `{base url}/DESIGN/SECT`
+- **Methods**: `POST`, `GET`, `PUT`, `DELETE`
+- **Source**: [DESIGN/SECT : Section for Design ↗](https://support.midasuser.com/hc/en-us/articles/59471991932441)
+
+> ⚠️ 2026-11-26 문서화. 공식 아티클에는 **요청·응답 예제가 없고**, 본문 필드는 `/db/SECT`의 단면 유형별
+> 아티클을 참조하도록 되어 있습니다. 아래 예제는 이 장 12절의 DB/User 단면 구조를 옮긴 것이며
+
+### Specifications
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Keyed object (dictionary). Each property name is a section ID string (e.g., "1"). Each value uses the same payload structure as /db/SECT. | `"Assign"` | Object | - | **Required** |
+| 1.1 | └ Section Body ([/db/SECT](#12-dbsect)) | (단면 ID) | Object | - | **Required** |
+
+### Request Body
+
+```json
+{
+  "Assign": {
+    "1": {
+      "SECTTYPE": "DBUSER",
+      "SECT_NAME": "H300x150",
+      "SECT_BEFORE": {
+        "OFFSET_PT": "CC",
+        "USE_SHEAR_DEFORM": true,
+        "SHAPE": "H",
+        "DATATYPE": 1,
+        "SECT_I": {"DB_NAME": "KS21", "SECT_NAME": "H300x150x6.5/9"}
+      }
+    }
+  }
+}
+```
+
+### Python 예제
+
+```python
+# 설계용 단면 조회
+midas_api("GET", "/DESIGN/SECT")
 ```
 
 ---

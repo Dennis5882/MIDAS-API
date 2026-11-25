@@ -13,28 +13,29 @@
 | [01_DOC.md](./01_DOC.md) | DOC | 문서 생성·열기·저장·닫기·해석 실행 (11개) |
 | [02_DB_Project_Structure.md](./02_DB_Project_Structure.md) | DB – Project / Structure | 프로젝트 정보·단위·구조타입·그룹·층 데이터 (15개) |
 | [03_DB_Node_Element.md](./03_DB_Node_Element.md) | DB – Node / Element | 노드·요소·로컬축·도메인 (6개) |
-| [04_DB_Properties.md](./04_DB_Properties.md) | DB – Properties | 재료·단면·두께·힌지·섬유단면 (33개) |
+| [04_DB_Properties.md](./04_DB_Properties.md) | DB – Properties | 재료·단면·두께·힌지·섬유단면 (34개) |
 | [05_DB_Boundary.md](./05_DB_Boundary.md) | DB – Boundary | 지지·스프링·링크·해제·내진장치 (24개) |
 | [06_DB_Static_Loads.md](./06_DB_Static_Loads.md) | DB – Static Loads | 정적하중케이스·자중·보하중·바닥하중·풍하중·지진하중 (21개) |
 | [07_DB_Temperature_Prestress.md](./07_DB_Temperature_Prestress.md) | DB – Temperature / Prestress | 온도·텐던·PS 하중 (12개) |
 | [08_DB_Moving_Loads.md](./08_DB_Moving_Loads.md) | DB – Moving Loads | 이동하중 (교량 전용, 28개) |
 | [09_DB_Dynamic_Loads.md](./09_DB_Dynamic_Loads.md) | DB – Dynamic Loads | 응답스펙트럼·시간이력 (12개) |
 | [10_DB_Construction_Stage.md](./10_DB_Construction_Stage.md) | DB – Construction Stage / Hydration | 시공단계·수화열 (14개) |
-| [11_DB_Settlement_Misc_Loads.md](./11_DB_Settlement_Misc_Loads.md) | DB – Settlement / Misc Loads | 침하·파도·비선형 초기하중 등 (9개) |
+| [11_DB_Settlement_Misc_Loads.md](./11_DB_Settlement_Misc_Loads.md) | DB – Settlement / Misc Loads | 침하·파도·비선형 초기하중·격자 해석 하중 등 (10개) |
 | [12_DB_Analysis_Control.md](./12_DB_Analysis_Control.md) | DB – Analysis Control | 해석 제어 데이터 (21개) |
 | [13_DB_Load_Combinations.md](./13_DB_Load_Combinations.md) | DB – Load Combinations / Results | 하중조합·결과 설정 (8개) |
 | [14_DB_Pushover.md](./14_DB_Pushover.md) | DB – Pushover | 푸시오버 해석 제어·힌지·하중 (6개) |
 | [15_OPE.md](./15_OPE.md) | OPE | GUI 연동 운영 함수 (19개) |
 | [16_VIEW.md](./16_VIEW.md) | VIEW | 뷰 제어·캡처·결과 표시 (7개) |
+| [16_2_VIEW_ResultGraphic.md](./16_2_VIEW_ResultGraphic.md) | VIEW – Result Graphic | 결과 모드별 표시 요청 (28개) |
 | [17_DB_Bridge.md](./17_DB_Bridge.md) | DB – Bridge Specialization | 거더·캠버·케이블 결과 설정 (5개) |
 | [18_POST_PreProcess.md](./18_POST_PreProcess.md) | POST – Pre-Process Tables | 중량·질량·하중·재료·단면·층 요약 (~10개) |
 | [19_POST_AnalysisResult_1.md](./19_POST_AnalysisResult_1.md) | POST – Analysis Result Tables Part 1 | 반력·변위·트러스·케이블·보 결과 (13개) |
-| [20_POST_AnalysisResult_2.md](./20_POST_AnalysisResult_2.md) | POST – Analysis Result Tables Part 2 | 판·평면·축대칭·솔리드·링크·모드·텐던·시공단계·벽체 (39개) |
+| [20_POST_AnalysisResult_2.md](./20_POST_AnalysisResult_2.md) | POST – Analysis Result Tables Part 2 | 판·평면·축대칭·솔리드·링크·모드·텐던·시공단계·벽체·합력·Lack of Fit 등 (49개) |
 | [21_POST_StoryTables.md](./21_POST_StoryTables.md) | POST – Analysis Story Tables | 층변위·층전단·층비틀림·불규칙 검토 (17개) |
-| [22_POST_TH_HY_Pushover.md](./22_POST_TH_HY_Pushover.md) | POST – TH / HY / Pushover Result Tables | 시간이력·수화열·푸시오버 결과 (28개) |
+| [22_POST_TH_HY_Pushover.md](./22_POST_TH_HY_Pushover.md) | POST – TH / HY / Pushover Result Tables | 시간이력·수화열·푸시오버 결과 (43개) |
 | [23_POST_Design.md](./23_POST_Design.md) | POST – Design Tables | P-M·Steel·RC·SRC·냉간성형 설계 결과 (~10개) |
-| [24_DB_Design.md](./24_DB_Design.md) | DB – Design | RC·Steel 설계 코드·부재·비지지 길이 (13개) |
-| [25_Design_Steel_KDS41302022.md](./25_Design_Steel_KDS41302022.md) | Design Code – STEEL KDS 41 30:2022 | 강재 설계 코드 설정·부재·비지지길이·좌굴·설계검토 (28개) |
+| [24_DB_Design.md](./24_DB_Design.md) | DB – Design | RC·Steel 설계 코드·부재·비지지 길이 (14개) |
+| [25_Design_Steel_KDS41302022.md](./25_Design_Steel_KDS41302022.md) | Design Code – STEEL KDS 41 30:2022 | 강재 설계 코드 설정·부재·비지지길이·좌굴·설계검토 (29개) |
 | [26_Design_RC_KDS41202022.md](./26_Design_RC_KDS41202022.md) | Design Code – RC KDS 41 20:2022 | RC 설계 코드 설정·보·기둥·벽체·슬래브 설계 (70개) |
 | [27_Design_SRC_AIKSRC2K.md](./27_Design_SRC_AIKSRC2K.md) | Design Code – SRC AIK-SRC2K | SRC 합성부재 설계 코드 설정·보·기둥 설계 (27개) |
 
@@ -169,6 +170,7 @@ MIDAS NX 파일에 저장되는 데이터. MCT/MGT 기능과 동일한 역할.
 | 31 | `/db/ESSF` | Element Stiffness Scale Factor |
 | 32 | `/db/MATD` | Modify Concrete Materials |
 | 33 | `/db/SECV` | Virtual Section for Design |
+| 34 | `DESIGN/SECT` | Section for Design |
 
 ### Boundary
 
@@ -340,6 +342,12 @@ MIDAS NX 파일에 저장되는 데이터. MCT/MGT 기능과 동일한 역할.
 | 6 | `/db/EFCT` | Small Displacement – Initial Force Control Data |
 | 7 | `/db/INMF` | Small Displacement – Initial Element Force |
 
+### Grid Model Analysis Loads
+
+| No. | Endpoint | 기능 |
+| --- | --- | --- |
+| 1 | `/db/GALD` ᴶ⁾ | Grid Analysis Load |
+
 ### Analysis Control
 
 | No. | Endpoint | 기능 |
@@ -413,9 +421,10 @@ MIDAS NX 파일에 저장되는 데이터. MCT/MGT 기능과 동일한 역할.
 | 8 | `/db/MBTP` | Modify Member Type |
 | 9 | `/db/WMAK` | Modify Wall Mark Design |
 | 10 | `/db/REBB` | Modify Beam Rebar Data |
-| 11 | `/db/REBC` | Modify Column Rebar Data (POST 전용) |
+| 11 | `/db/REBC` | Modify Column Rebar Data |
 | 12 | `/db/REBW` | Modify Wall Rebar Data |
 | 13 | `/db/REBR` | Modify Brace Rebar Data |
+| 14 | `/db/ULCT` | Underground Load Combination Type |
 
 ---
 
@@ -459,7 +468,7 @@ GUI 또는 사전처리 계산값 제어 함수. DB에 저장되지 않는 데�
 | 4 | `/view/ANGLE` | Viewpoint |
 | 5 | `/view/ACTIVE` | Active |
 | 6 | `/view/DISPLAY` | Display |
-| 7 | `/view/RESULTGRAPHIC` | Type of Display / 반력·변위·트러스·보·판·응력 등 결과 표시 |
+| 7 | `/view/RESULTGRAPHIC` | Type of Display / 반력·변위·트러스·보·판·응력 등 결과 표시 ([모드별 상세](./16_2_VIEW_ResultGraphic.md)) |
 
 ---
 
@@ -489,6 +498,12 @@ GUI 또는 사전처리 계산값 제어 함수. DB에 저장되지 않는 데�
 ### Analysis Story Table
 
 층간변위·층변위·층전단력·층모드형상·비틀림·전도모멘트·축력합·안정계수·불규칙 검토 등 16종
+
+### Heat of Hydration Results (DB)
+
+| No. | Endpoint | 기능 |
+| --- | --- | --- |
+| 1 | `/db/HHND` | Heat of Hydration Result Graph |
 
 ### Design (POST)
 
@@ -530,4 +545,5 @@ GUI 또는 사전처리 계산값 제어 함수. DB에 저장되지 않는 데�
 
 > **범례:**  
 > ᴴˢ⁾ = Hyper-S solver 전용  
-> ᴶ⁾ = MIDAS Civil NX JP 버전 전용
+> ᴶ⁾ = MIDAS Civil NX JP 버전 전용 — 해당 엔드포인트·`TABLE_TYPE`·필드의 전체 목록은
+> [jp_only.json](./jp_only.json)

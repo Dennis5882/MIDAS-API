@@ -31,6 +31,12 @@
 | 8 | [/db/EFCT](#8-dbefct--small-displacement--initial-force-control-data) | Small Displacement – Initial Force Control Data |
 | 9 | [/db/INMF](#9-dbinmf--small-displacement--initial-element-force) | Small Displacement – Initial Element Force |
 
+### Grid Model Analysis Loads (1개)
+
+| No. | Endpoint | 설명 |
+| --- | --- | --- |
+| 10 | [/db/GALD](#10-dbgald--grid-analysis-load) | Grid Analysis Load ᴶ⁾ (Civil NX JP 버전 전용) |
+
 ---
 
 ## 1. /db/SMPT — Settlement Group
@@ -1024,6 +1030,382 @@ def get_initial_element_force(record_id: int):
     return resp.json()
 
 set_initial_element_forces()
+```
+
+---
+
+## 10. /db/GALD — Grid Analysis Load
+
+> **MIDAS Civil NX JP 버전 전용** (공식 목차의 `ᴶ⁾` 표시). 격자 해석(Grid Model)용 하중을 정의합니다.
+
+- **URL**: `{base url}/db/GALD`
+- **Methods**: `POST`, `GET`, `PUT`, `DELETE`
+- **Source**: [Grid Analysis Load ↗](https://support.midasuser.com/hc/en-us/articles/39236719728281)
+
+> ⚠️ 2026-11-26 확인 (article id `39236719728281`, en-us·ja만 존재하고 ko 번역본은 없음).
+> 공식 원문에 아래 불일치가 있어 원문 표기를 그대로 두었습니다.
+>
+> - `SUBTYPE`은 표에 Required로 되어 있으나 enum 설명은 `LCTYPE = "VLL"`일 때만 있고,
+>   Dead Load(`DL`)·Other Live Load(`OLL`) 예제에는 이 키가 없습니다.
+> - Crowd Live Load(`CLL`) 예제의 `"SUBTYPE": "JAPANHW"`는 표의 enum에 없습니다.
+> - `LOAD`의 설명은 하중 유형 4종 모두 "Define Dead Load"로 되어 있습니다.
+
+### Specifications
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Load Case Name | `"LCNAME"` | String | - | **Required** |
+| 2 | Load Case Type · Dead Load : "DL" · Vehicles Live Load : "VLL" · Crowd Live Load : "CLL" · Other Live Load : "OLL" | `"LCTYPE"` | String | - | **Required** |
+| 3 | Sub Load Type <strong>· </strong>When Load Case Type = "VLL" / L-Load Type-A (Load Range 6m) : "L-LOAD-A" / L-Load Type-B (Load Range 10m) : "L-LOAD-B" / T-Load Type-A : "T-LOAD-A" / T-Load Type-B : "T-LOAD-B" | `"SUBTYPE"` | String | - | **Required** (위 ⚠️ 참고) |
+| 4 | Define Dead Load · Insert data as object | `"LOAD"` | Array[Object] | - | **Required** |
+
+#### `LOAD` 항목 — Dead Load (`LCTYPE = "DL"`)
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (1) | └ Dead Load Type · Point : "POINT" · Line : "LINE" · Area : "AREA" | `"LTYPE"` | String | - | **Required** |
+| (2) | └ Center Line | `"CLINE"` | String | - | **Required** |
+| (3) | └ Main Line Type - Start · Main Girder : "G" · Load Line : "L" | `"SMLTYPE"` | String | - | **Required** |
+| (4) | └ Main Line Type - End · Main Girder : "G" · Load Line : "L" | `"EMLTYPE"` | String | - | **Required** |
+| (5) | └ Main Line - Start | `"SMLINE"` | String | - | **Required** |
+| (6) | └ Main Line - End | `"EMLINE"` | String | - | **Required** |
+| (7) | └ Cross Beam - Start | `"SCROSS"` | String | - | **Required** |
+| (8) | └ Cross Line - End | `"ECROSS"` | String | - | **Required** |
+| (9) | └ Load Value - Start | `"SLOAD"` | Number | - | **Required** |
+| (10) | └ Load Value - End | `"ELOAD"` | Number | - | **Required** |
+
+#### `LOAD` 항목 — Vehicle Live Load (`LCTYPE = "VLL"`)
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (1) | └ Center Line | `"CLINE"` | String | - | **Required** |
+| (2) | └ Main Line Type - Start · Main Girder : "G" · Load Line : "L" | `"SMLTYPE"` | String | - | **Required** |
+| (3) | └ Main Line Type - End · Main Girder : "G" · Load Line : "L" | `"EMLTYPE"` | String | - | **Required** |
+| (4) | └ Main Line - Start | `"SMLINE"` | String | - | **Required** |
+| (5) | └ Main Line - End | `"EMLINE"` | String | - | **Required** |
+| (6) | └ Cross Beam - Start | `"SCROSS"` | String | - | **Required** |
+| (7) | └ Cross Line - End | `"ECROSS"` | String | - | **Required** |
+| (8) | └ Median - Start · None : "None" · Load Line : Load Line Name | `"SMEDIAN"` | String | - | **Required** |
+| (9) | └ Median - End · None : "None" · Load Line : Load Line Name | `"EMEDIAN"` | String | - | **Required** |
+| (10) | └ Main Load Width · When Sub Load Type is L-Load Type-A (Load Range 6m) or L-Load Type-B (Load Range 10m) | `"MLRANGE"` | Number | 0 | Optional |
+
+#### `LOAD` 항목 — Crowd Live Load (`LCTYPE = "CLL"`)
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (1) | └ Center Line | `"CLINE"` | String | - | **Required** |
+| (2) | └ Main Line Type - Start · Main Girder : "G" · Load Line : "L" | `"SMLTYPE"` | String | - | **Required** |
+| (3) | └ Main Line Type - End · Main Girder : "G" · Load Line : "L" | `"EMLTYPE"` | String | - | **Required** |
+| (4) | └ Main Line - Start | `"SMLINE"` | String | - | **Required** |
+| (5) | └ Main Line - End | `"EMLINE"` | String | - | **Required** |
+| (6) | └ Cross Beam - Start | `"SCROSS"` | String | - | **Required** |
+| (7) | └ Cross Line - End | `"ECROSS"` | String | - | **Required** |
+
+#### `LOAD` 항목 — Other Live Load (`LCTYPE = "OLL"`)
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (1) | └ Center Line | `"CLINE"` | String | - | **Required** |
+| (2) | └ Main Line Type - Start · Main Girder : "G" · Load Line : "L" | `"SMLTYPE"` | String | - | **Required** |
+| (3) | └ Main Line Type - End · Main Girder : "G" · Load Line : "L" | `"EMLTYPE"` | String | - | **Required** |
+| (4) | └ Main Line - Start | `"SMLINE"` | String | - | **Required** |
+| (5) | └ Main Line - End | `"EMLINE"` | String | - | **Required** |
+| (6) | └ Cross Beam - Start | `"SCROSS"` | String | - | **Required** |
+| (7) | └ Cross Line - End | `"ECROSS"` | String | - | **Required** |
+| (8) | └ Load Value | `"LLOAD"` | Number | - | **Required** |
+
+### Request / Response JSON
+
+**Dead Load Type**
+
+```json
+{
+  "Assign": {
+    "1": {
+      "LCNAME": "DL",
+      "LCTYPE": "DL",
+      "LOAD": [
+        {
+          "LTYPE": "POINT",
+          "CLINE": "L1",
+          "SMLTYPE": "G",
+          "EMLTYPE": "G",
+          "SMLINE": "G1",
+          "EMLINE": "G1",
+          "SCROSS": "C1",
+          "ECROSS": "C1",
+          "SLOAD": 12,
+          "ELOAD": 0
+        },
+        {
+          "LTYPE": "LINE",
+          "CLINE": "L1",
+          "SMLTYPE": "G",
+          "EMLTYPE": "G",
+          "SMLINE": "G1",
+          "EMLINE": "G2",
+          "SCROSS": "C1",
+          "ECROSS": "C1",
+          "SLOAD": 13,
+          "ELOAD": 11
+        },
+        {
+          "LTYPE": "AREA",
+          "CLINE": "L1",
+          "SMLTYPE": "L",
+          "EMLTYPE": "L",
+          "SMLINE": "L1",
+          "EMLINE": "L3",
+          "SCROSS": "C14",
+          "ECROSS": "C18",
+          "SLOAD": 21,
+          "ELOAD": 24
+        }
+      ]
+    }
+  }
+}
+```
+
+**Vehicle Live Load Type_L-Load Type-A (Load Range 6m)**
+
+```json
+{
+  "Assign": {
+    "1": {
+      "LCNAME": "VL01",
+      "LCTYPE": "VLL",
+      "SUBTYPE": "L-LOAD-A",
+      "LOAD": [
+        {
+          "CLINE": "L1",
+          "SMLTYPE": "G",
+          "EMLTYPE": "L",
+          "SMLINE": "G1",
+          "EMLINE": "L2",
+          "SCROSS": "C2",
+          "ECROSS": "C3",
+          "SMEDIAN": "L1",
+          "EMEDIAN": "L1",
+          "MLRANGE": 5.5
+        },
+        {
+          "CLINE": "L2",
+          "SMLTYPE": "G",
+          "EMLTYPE": "L",
+          "SMLINE": "G2",
+          "EMLINE": "L2",
+          "SCROSS": "C3",
+          "ECROSS": "C4",
+          "SMEDIAN": "L2",
+          "EMEDIAN": "L2",
+          "MLRANGE": 5.5
+        }
+      ]
+    }
+  }
+}
+```
+
+**Vehicle Live Load Type_L-Load Type-B (Load Range 10m)**
+
+```json
+{
+  "Assign": {
+    "1": {
+      "LCNAME": "VL02",
+      "LCTYPE": "VLL",
+      "SUBTYPE": "L-LOAD-B",
+      "LOAD": [
+        {
+          "CLINE": "L2",
+          "SMLTYPE": "L",
+          "EMLTYPE": "L",
+          "SMLINE": "L1",
+          "EMLINE": "L2",
+          "SCROSS": "C10",
+          "ECROSS": "C12",
+          "SMEDIAN": "L1",
+          "EMEDIAN": "L3",
+          "MLRANGE": 5.5
+        },
+        {
+          "CLINE": "L2",
+          "SMLTYPE": "L",
+          "EMLTYPE": "L",
+          "SMLINE": "L1",
+          "EMLINE": "L2",
+          "SCROSS": "C12",
+          "ECROSS": "C13",
+          "SMEDIAN": "L1",
+          "EMEDIAN": "L3",
+          "MLRANGE": 5.5
+        }
+      ]
+    }
+  }
+}
+```
+
+**Vehicle Live Load Type_T-Load Type-A**
+
+```json
+{
+  "Assign": {
+    "1": {
+      "LCNAME": "VL03",
+      "LCTYPE": "VLL",
+      "SUBTYPE": "T-LOAD-A",
+      "LOAD": [
+        {
+          "CLINE": "L1",
+          "SMLTYPE": "G",
+          "EMLTYPE": "G",
+          "SMLINE": "G1",
+          "EMLINE": "G2",
+          "SCROSS": "C13",
+          "ECROSS": "C11",
+          "SMEDIAN": "L1",
+          "EMEDIAN": "L2"
+        }
+      ]
+    }
+  }
+}
+```
+
+**Vehicle Live Load Type_T-Load Type-B**
+
+```json
+{
+  "Assign": {
+    "1": {
+      "LCNAME": "VL04",
+      "LCTYPE": "VLL",
+      "SUBTYPE": "T-LOAD-B",
+      "LOAD": [
+        {
+          "CLINE": "L1",
+          "SMLTYPE": "G",
+          "EMLTYPE": "G",
+          "SMLINE": "G2",
+          "EMLINE": "G3",
+          "SCROSS": "C10",
+          "ECROSS": "C11",
+          "SMEDIAN": "L1",
+          "EMEDIAN": "L1"
+        },
+        {
+          "CLINE": "L2",
+          "SMLTYPE": "G",
+          "EMLTYPE": "G",
+          "SMLINE": "G3",
+          "EMLINE": "G4",
+          "SCROSS": "C11",
+          "ECROSS": "C12",
+          "SMEDIAN": "L2",
+          "EMEDIAN": "L2"
+        }
+      ]
+    }
+  }
+}
+```
+
+**Crowd Live Load Type**
+
+```json
+{
+  "Assign": {
+    "1": {
+      "LCNAME": "CL",
+      "LCTYPE": "CLL",
+      "SUBTYPE": "JAPANHW",
+      "LOAD": [
+        {
+          "CLINE": "L1",
+          "SMLTYPE": "L",
+          "EMLTYPE": "G",
+          "SMLINE": "L2",
+          "EMLINE": "G2",
+          "SCROSS": "C15",
+          "ECROSS": "C10"
+        },
+        {
+          "CLINE": "L2",
+          "SMLTYPE": "L",
+          "EMLTYPE": "L",
+          "SMLINE": "L1",
+          "EMLINE": "L2",
+          "SCROSS": "C10",
+          "ECROSS": "C12"
+        }
+      ]
+    }
+  }
+}
+```
+
+**Other Live Load Type**
+
+```json
+{
+  "Assign": {
+    "1": {
+      "LCNAME": "OL",
+      "LCTYPE": "OLL",
+      "LOAD": [
+        {
+          "CLINE": "L1",
+          "SMLTYPE": "G",
+          "EMLTYPE": "G",
+          "SMLINE": "G2",
+          "EMLINE": "G3",
+          "SCROSS": "C7",
+          "ECROSS": "C9",
+          "LLOAD": 12
+        },
+        {
+          "CLINE": "L2",
+          "SMLTYPE": "L",
+          "EMLTYPE": "L",
+          "SMLINE": "L1",
+          "EMLINE": "L2",
+          "SCROSS": "C11",
+          "ECROSS": "C12",
+          "LLOAD": 23
+        }
+      ]
+    }
+  }
+}
+```
+
+### Python 예제
+
+```python
+import requests
+
+BASE_URL = "https://moa-engineers.midasit.com:443/civil"
+HEADERS = {"MAPI-Key": "<your_api_key>", "Content-Type": "application/json"}
+
+payload = {
+    "Assign": {
+        "1": {
+            "LCNAME": "OL",
+            "LCTYPE": "OLL",
+            "LOAD": [
+                {
+                    "CLINE": "L1", "SMLTYPE": "G", "EMLTYPE": "G",
+                    "SMLINE": "G2", "EMLINE": "G3",
+                    "SCROSS": "C7", "ECROSS": "C9", "LLOAD": 12
+                }
+            ]
+        }
+    }
+}
+res = requests.post(f"{BASE_URL}/db/GALD", headers=HEADERS, json=payload)
+print(res.status_code, res.json())
 ```
 
 ---

@@ -690,12 +690,7 @@ print("SPFC DELETE/1:", resp.status_code)
 > [Response Spectrum Load Cases](https://support.midasuser.com/hc/en-us/articles/35963719599641)).
 >
 > ✅ **2026-09-28 공식 반영 확인:** 원문 Specifications 표의 편심 목록 Key가 `"Along"`에서 `"ALONG"`으로
-> 정정되어 표와 스키마가 일치한다(오류 제보 반영). 위 표는 그대로 유효하다.
->
-> ✅ **2026-09-18 라이브 검증으로 스키마 표기가 맞음이 확인됐다.** `aACCECC_ECCEN_LIST[0].ALONG`
-> (대문자)로 보낸 값이 그대로 저장·조회됐다. 원문 표의 `"Along"` 표기가 오류이며, 위 표는
-> 그대로 두면 된다. 되돌리지 말 것. 검증 상세는
-> [live_verification_feedback_20260918.md](../error_reports/live_verification_feedback_20260918.md) 참고.
+> 정정되어 표와 스키마가 일치한다. 위 표는 그대로 유효하다.
 
 **비소산 요소 설계 파라미터** *(GEN NX only)*
 
@@ -1465,7 +1460,7 @@ Static(6-7)은 `bCONV`/`iMSTEP`/`bEN`/`EN`이 각각 모드별로 추가된다.
 | - 감쇠비 | `DAMPING` | Number |
 
 > ⚠️ 2026-08-25 확인: 이전 문서는 Key를 `aMDAMPING`으로 잘못 기재하고 있었음(원문 스키마·모든
-> Request 예제 모두 `aDAMP`). 실제 API 호출 시 필드가 무시될 수 있는 오류였음.
+> Request 예제 모두 `aDAMP`).
 
 **Mass & Stiffness Proportional 감쇠 (iMDTYPE=2)**
 

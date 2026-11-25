@@ -81,14 +81,8 @@
 >
 > 이 저장소는 en-us를 기준으로 하므로 **위 표는 9행 그대로 둔다.**
 >
-> **⚠️ 이것을 en-us/ko의 "표 누락"으로 단정하지 말 것.** ja 로케일은 일본 시장용 빌드(iGen 계열)를
-> 다루므로, `ACWC`가 **일본 전용 기능이라 애초에 en-us/ko에 없는 것**일 수 있다. 같은 구조의
-> 선례가 있다 — `AIJ-ASD02`는 API가 존재하는데도 일본 전용 빌드 대상이라 `docs/manual` 누락이
-> 아닌 것으로 정리했다. 따라서 현재로선 **제보 후보가 아니다.**
->
-> 판별하려면 일반 빌드(Gen NX / Civil NX)에서 `/db/ACTL`에 `ACWC`를 보내 수용되는지 확인하면
-> 된다 — 수용되면 en-us/ko 표 누락, 거부되면 일본 전용으로 확정된다. 그 전까지는 이 주석으로만
-> 남겨 둔다.
+> en-us·ko 표에 없는 것이 누락인지, ja에만 해당하는 필드인지는 공식 문서만으로 판단할 수 없어
+> 이 주석으로만 남겨 둔다.
 
 ### Request Body (POST)
 
@@ -2073,8 +2067,10 @@ update_nonlinear_control_m1_arc()
 | (1) | Erection Load Case Name | `"LTYPECC"` | String | - | Required |
 | (2) | Load Type for C.S ⁴⁾ | `"EREC"` | String | - | Required |
 | (3) | Load Case Name List | `"vLCNAME"` | Array [String] | - | Required |
-| 8 | Secondary Dead Load Effect for Grid Model (MIDAS Civil NX JP 버전 전용) | `"bSDLE"` | Boolean | false | Optional |
-| 9 | Load Case Name List (Grid Analysis Load, JP 버전 전용) | `"vSDLE"` | Array [String] | - | Required |
+| 8 | Secondary Dead Load Effect for Grid Model ᴶ⁾ | `"bSDLE"` | Boolean | false | Optional |
+| 9 | Load Case Name List (Grid Analysis Load) ᴶ⁾ | `"vSDLE"` | Array [String] | - | Required |
+
+> ᴶ⁾ = MIDAS Civil NX JP 버전 전용 ([jp_only.json](./jp_only.json))
 
 > **⁴⁾ `EREC` 값 목록** (Erection Load Type for C.S.): Dead Load: `"D"` / Dead Load of Component
 > and Attachments: `"DC"` / Dead Load of Wearing Surfaces and Utilities: `"DW"` / Earth Pressure:
@@ -2318,7 +2314,7 @@ Hyper-S(MEC) 솔버용 시공단계 해석 제어입니다. 기능별로 중첩 
 | 2 | Analysis Type 설정 | `"ANAL_TYPE"` | Object | - | Required |
 | 3 | Restart C.S. Analysis 설정 | `"RESTART_CS_ANAL"` | Object | - | Optional |
 | 4 | Erection Load 목록 | `"ERECTION_LOAD"` | Array [Object] | - | Optional |
-| 5 | Self-weight Dead Load for Erection 사용 / 목록 | `"bSDLE"` / `"vSDLE"` | Boolean / Array [String] | - | Optional |
+| 5 | Secondary Dead Load Effect for Grid Model / Load Case Name List | `"bSDLE"` / `"vSDLE"` | Boolean / Array [String] | false / - | Optional (`vSDLE`는 `bSDLE`가 true일 때 **Required**) |
 | 6 | Time Dependent Control | `"TIME_DEP_CONTROL"` | Object | - | Optional |
 | 7 | Cable Control | `"CABLE_CONTROL"` | Object | - | Optional |
 | 8 | Initial Force Control | `"INITIAL_CONTROL"` | Object | - | Optional |

@@ -56,7 +56,7 @@
 > Post 결과를 반환하며, **필드를 생략하면 현재 뷰 모드를 유지**한 채 그에 맞는 결과를 반환한다.
 > 즉 `false`를 명시하는 것과 아예 안 보내는 것은 같지 않다. 원문 근거와 Default 열 불일치에 대한
 > 자세한 내용은 [19장 공통 파라미터 표](./19_POST_AnalysisResult_1.md#공통-request-구조-및-파라미터)의
-> 같은 항목 주석을 참고할 것. **실제 API 동작은 검증하지 않았다.**
+> 같은 항목 주석을 참고할 것.
 
 **`LOAD_CASE_NAMES` 접미사 규칙**
 
@@ -1108,7 +1108,7 @@ for row in table.get("DATA", []):
 | 1-2 | └ 층간변위 산정 방식 선택 | `ADDITIONAL.SET_CALCULATION_METHOD` | Object | — | Optional |
 | 1-2-1 | 　　└ 방식: `"Drift at the Center of Mass"`(질량중심 변위) / `"Max. Drift of Outer Extreme Points"`(외곽 최대변위) / `"Max. Drift of All Vertical Elements"`(전 수직요소 최대변위) | `SET_CALCULATION_METHOD.STORY_DRIFT_METHOD` | String | — | Optional |
 
-> ℹ️ **2026-08-20 공식 반영 — `STORY_DRIFT_METHOD` 값 `"Drift at the Center of Mass"`로 최종 통일.** 이 값의 표기는 두 차례 뒤집혔던 이력이 있어 근거를 남긴다. (1) 2026-07-30 시점에는 공식 담당자가 "이 테이블이 속한 제품 화면은 실제로 'Drift on'을 쓴다"고 확인해줘 철자만 정정한 `"Drift on the Center of Mass"`로 기재했다. (2) 이후 API가 실제로는 `SET_STORY_DRIFT_METHOD`(무시됨)와 `SET_CALCULATION_METHOD.STORY_DRIFT_METHOD` 두 구조가 혼재해 값이 적용되는지조차 확인이 어렵다는 별도 이슈가 제기됐고, 담당 개발자가 검토 끝에 "at으로 통일하겠습니다"(2026-08-10)라고 결정 — 제품 UI와 API enum을 모두 `"Drift at the Center of Mass"`로 맞추는 쪽으로 정리됐다. 공식 아티클도 2026-08-20에 이 값으로 갱신되어 [13. Stiffness Irregularity Check](#13-stiffness-irregularity-check-soft-story)·[17. Weight Irregularity Check](#17-weight-irregularity-check)와 동일해졌다. 즉 이전 "on" 표기는 그 시점 기준으로는 정확했으나 이후 제품 자체가 "at"으로 바뀐 것이며, 오타 되돌림이 아니다.
+> ℹ️ **2026-08-20 공식 반영 — `STORY_DRIFT_METHOD` 값 `"Drift at the Center of Mass"`로 최종 통일.** 이 값의 표기는 이전에 `"Drift on the Center of Mass"`였으나, 공식 아티클이 2026-08-20에 `"Drift at the Center of Mass"`로 갱신되어 [13. Stiffness Irregularity Check](#13-stiffness-irregularity-check-soft-story)·[17. Weight Irregularity Check](#17-weight-irregularity-check)와 동일해졌다. "on" 표기로 되돌리지 말 것.
 
 **요청 예시 — `ADDITIONAL` 포함**
 

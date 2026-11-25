@@ -1106,8 +1106,7 @@ midas_api("DELETE", "/db/PNLD", {"Assign": {"2": {}}})
 > "ELEM_TYPE" is "IN_GROUP"` — `IN_GROUP`은 `SELECT_TYPE`의 값이지 `ELEM_TYPE`의 값이 아니므로
 > 의미상 성립하지 않는다). 한글·영문 페이지 모두 동일하게 오염되어 있다. 위 표는 실제 스키마와
 > Specifications 표 9번 설명(`SELECT_TYPE` = Element Selection Type)에 근거해 `SELECT_TYPE`으로
-> 정정해 적었다. 2026-09-27 오류 제보 시 이 행은 "표기가 맞으니 그대로 두면
-> 된다"고 확인했던 바로 그 행인데 이번 편집으로 새로 깨진 것 — 잔여 오류 제보 대상.
+> 정정해 적었다.
 
 ### Python 예제
 
@@ -2056,7 +2055,7 @@ midas_api("DELETE", "/db/SSEIS", {"Assign": {"2": {}}})
 
 > ⚠️ **원문 ko 로케일 오염 — 2026-09-28 재확인 결과 미해결(형태만 변경).** 2026-09-06에 처음
 > 발견한 오염은 "KDS·User Type 두 아티클의 ko 본문이 완전히 동일(56,247자)"한 형태였다. 2026-09-28
-> 공식 담당자가 수정게시했다고 알려와 재확인했으나, **KDS 아티클(`58908676674585`)의 ko 페이지는
+> 갱신본을 재확인했으나, **KDS 아티클(`58908676674585`)의 ko 페이지는
 > 여전히 내부적으로 어긋나 있다** — 증상만 바뀌었다:
 >
 > | 아티클 | 로케일 | 마지막 편집 | JSON Schema 절 | Examples·표 |
@@ -2072,19 +2071,10 @@ midas_api("DELETE", "/db/SSEIS", {"Assign": {"2": {}}})
 >
 > 추가로 **`IINHERENT_TORSION`(I 두 번) · `NHERENT_TORSION`(I 누락) 오타도 User Type 아티클
 > (`58908928576153`, ko·en-us 공통)에 그대로 남아 있다** — JSON Schema 설명 문구에
-> `IINHERENT_TORSION` 1회, 두 예제 중 하나에 `NHERENT_TORSION` 1회. 2026-09-18 라이브 검증(Gen NX
-> 2026)에서 이 오타 키들은 **HTTP 201을 받지만 조용히 무시되고** GET에는 정상 필드
-> `INHERENT_TORSION`이 기본값 `false`로 남는 것을 확인했다 — 오타 키를 그대로 복사한 사용자는 옵션이
-> 켜졌다고 오해하게 된다. 정상 키로 보내면 `true`가 그대로 저장된다.
->
-> ⚠️ 2026-09-18에 "`const`라서 ko 예제를 그대로 복사해 전송하면 스키마 검증에 실패한다"고 적었으나
-> **틀렸다.** 스키마의 `const`만 보고 서버도 그대로 거를 것이라 단정한 추론이었고, 라이브 검증으로
-> 뒤집혔다. **문서상 `const`/`enum` 표기가 곧 서버의 거부를 뜻하지는 않는다** — 실제 동작을 근거로
-> 쓰려면 라이브 검증 결과를 받아올 것.
+> `IINHERENT_TORSION` 1회, 두 예제 중 하나에 `NHERENT_TORSION` 1회.
 >
 > 아래 표와 예제는 **USER TYPE JSON Schema**(`SEISMIC_FORCE` 배열, `INHERENT_TORSION` boolean
-> 기본값 `false`)로 계속 뒷받침되므로 그대로 유지한다. 오류 제보 건으로 계속 추적 중이며,
-> 원문이 완전히 복구되면 재대조가 필요하다. `scripts/manual_sync`는
+> 기본값 `false`)로 계속 뒷받침되므로 그대로 유지한다. 원문이 완전히 복구되면 재대조가 필요하다. `scripts/manual_sync`는
 > `SYNC_LOCALE`(= **en-us**) 본문만 받아오므로 KDS ko 오염은 받아온 본문에는 나타나지 않는다 —
 > 아티클 레벨 `updated_at`이 로케일별 타임스탬프의 최댓값이라 ko 편집만으로도 changed 플래그가 떠서
 > 발견된 경우다. `check_diff.py`의 `locale_note`가 `en-us did NOT` 판정을 내주므로, 그런 건은
