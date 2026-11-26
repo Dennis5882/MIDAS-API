@@ -74,7 +74,7 @@
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | RC 설계 코드 이름 (아래 표의 문자열 중 하나) | `"DGNCODE"` | String | — | **Required** |
+| 1 | Design Code ¹⁾ | `"DGNCODE"` | String | — | **Required** |
 
 **주요 `DGNCODE` 값 (일부 발췌 — 원문 기준 총 64종):**
 
@@ -184,7 +184,7 @@ print("현재 설계 코드:", res.json())
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 강재 설계 코드 이름 (아래 표의 문자열 중 하나) | `"DGNCODE"` | String | — | **Required** |
+| 1 | Design Code ¹⁾ | `"DGNCODE"` | String | — | **Required** |
 
 **주요 `DGNCODE` 값 (일부 발췌 — 원문 기준 총 66종):**
 
@@ -388,22 +388,22 @@ print("현재 강재 코드:", requests.get(f"{BASE_URL}/db/DSTL", headers=HEADE
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 부재 타입 · 보: `"BEAM"` / 기둥: `"COLUMN"` | `"MEMBTYPE"` | String | — | **Required** |
-| 2 | 균열 검토(노출 환경) · Class 1: `0` / Class 2: `1` | `"ENVTYPE"` | Integer | — | **Required** |
+| 1 | Member Type · Beam: "BEAM" · Column: "COLUMN" | `"MEMBTYPE"` | String | — | **Required** |
+| 2 | Crack Checking · Class 1 Exposure Condition: 0 · Class 2 Exposuse Condition: 1 | `"ENVTYPE"` | Integer | — | **Required** |
 
 **MEMBTYPE == `"BEAM"` 일 때 — `"BEAM"` 객체**
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| (1) | 종방향 철근 (구간 [I, J, M] 별 객체 배열) | `"vMAIN"` | Array[Object] | — | **Required** |
+| (1) | [When Member Type is Beam] Longitudinal Rebar · Insert the data as an object · [I, J, M] | `"vMAIN"` | Array[Object] | — | **Required** |
 | i | 구간 · I단: `"I"` / J단: `"J"` / 중앙: `"M"` | `"SECTOR"` | String | — | **Required** |
 | ii | 상단 레이어 정보¹⁾ | `"POS_TOP_LAYERS"` | Array[Object] | — | **Required** |
 | iii | 하단 레이어 정보¹⁾ | `"POS_BOT_LAYERS"` | Array[Object] | — | **Required** |
-| (2) | 횡방향(전단/비틀림) 철근 (구간 [I, J, M] 별) | `"vSUB_BAR"` | Array[Object] | — | **Required** |
+| (2) | [When Member Type is Beam] Transverse Rebar · Insert the data as an Obejct · [I, J, M] | `"vSUB_BAR"` | Array[Object] | — | **Required** |
 | i | 구간 · `"I"` / `"J"` / `"M"` | `"SECTOR"` | String | — | **Required** |
-| ii | 철근 개수 | `"dSUB_BARNUM"` | Integer | — | **Required** |
-| iii | 철근 규격 | `"SUB_BARNAME"` | String | — | **Required** |
-| iv | 철근 간격 | `"dSUB_BARDIST"` | Number | — | **Required** |
+| ii | [When Member Type is Beam] Number of Rebars | `"dSUB_BARNUM"` | Integer | — | **Required** |
+| iii | [When Member Type is Beam] Rebar Size | `"SUB_BARNAME"` | String | — | **Required** |
+| iv | [When Member Type is Beam] Spacing of Rebars | `"dSUB_BARDIST"` | Number | — | **Required** |
 | v | 부재와의 각도 | `"dSUB_BARANGLE"` | Number | — | **Required** |
 | vi | 비틀림 철근 사용 여부 | `"bTORSIONAL_BAR"` | Boolean | — | Optional |
 | vii | 비틀림 철근 규격 | `"sTRTORBARNA"` | String | — | Optional |
@@ -422,37 +422,37 @@ print("현재 강재 코드:", requests.get(f"{BASE_URL}/db/DSTL", headers=HEADE
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| (1) | 종방향 철근 레이어 배열 | `"vLAYER"` | Array[Object] | — | **Required** |
-| i | 레이어 인덱스 (1~5) | `"INDEX"` | Integer | — | **Required** |
-| ii | 표면~철근중심 피복 거리 | `"dDc"` | Number | — | **Required** |
+| (1) | [When Member Type is Column] Longitudinal Rebar · Insert the data as an object | `"vLAYER"` | Array[Object] | — | **Required** |
+| i | [When Member Type is Column] Index of Layers · 1 to 5 | `"INDEX"` | Integer | — | **Required** |
+| ii | [When Member Type is Column] Cover Distance from Surface to Center of Rebars | `"dDc"` | Number | — | **Required** |
 | iii | 철근 레이어(위치별)²⁾ | `"vPOSITION"` | Array[Object] | — | **Required** |
-| (2) | 횡방향 철근 | `"SUB_BAR"` | Object | — | **Required** |
-| i | 철근 규격 | `"SUBBAR_NAME"` | String | — | **Required** |
-| ii | 철근 간격 | `"SUBBAR_DIST"` | Number | — | **Required** |
-| iii | 철근 개수 | `"SUBBAR_NUM"` | Integer | — | **Required** |
-| iv | Y방향 철근 규격 | `"SUBBAR_NAME_Y"` | String | — | **Required** |
-| v | Z방향 철근 규격 | `"SUBBAR_NAME_Z"` | String | — | **Required** |
-| vi | Y방향 철근 개수 | `"SUBBAR_NUM_Y"` | Integer | — | **Required** |
-| vii | Z방향 철근 개수 | `"SUBBAR_NUM_Z"` | Integer | — | **Required** |
+| (2) | [When Member Type is Column] Transverse Rebar · Insert the data as an Obejct | `"SUB_BAR"` | Object | — | **Required** |
+| i | [When Member Type is Column] Rebar Size | `"SUBBAR_NAME"` | String | — | **Required** |
+| ii | [When Member Type is Column] Rebar Spacing | `"SUBBAR_DIST"` | Number | — | **Required** |
+| iii | [When Member Type is Column] Number of Rebars | `"SUBBAR_NUM"` | Integer | — | **Required** |
+| iv | [When Member Type is Column] Rebar Size for Y direction | `"SUBBAR_NAME_Y"` | String | — | **Required** |
+| v | [When Member Type is Column] Rebar Size for Z direction | `"SUBBAR_NAME_Z"` | String | — | **Required** |
+| vi | [When Member Type is Column] Number of Rebar for Y direction | `"SUBBAR_NUM_Y"` | Integer | — | **Required** |
+| vii | [When Member Type is Column] Number of Rebar for Z direction | `"SUBBAR_NUM_Z"` | Integer | — | **Required** |
 
 **¹⁾ 보 철근 레이어 (`POS_TOP_LAYERS` / `POS_BOT_LAYERS` 항목 구조)**
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| (1) | 레이어 번호 | `"LAYER"` | Integer | — | **Required** |
-| (2) | 표면~철근중심 피복 거리 | `"dD"` | Number | — | **Required** |
-| (3) | 철근 개수 | `"BAR_NUM"` | Integer | — | **Required** |
-| (4) | 철근 규격 1 | `"BAR_NAME1"` | String | — | **Required** |
-| (5) | 철근 규격 2 | `"BAR_NAME2"` | String | Blank | Optional |
+| (1) | Number of Layers | `"LAYER"` | Integer | — | **Required** |
+| (2) | Cover Distance from Surface to Center of Rebars | `"dD"` | Number | — | **Required** |
+| (3) | Number of Rebars | `"BAR_NUM"` | Integer | — | **Required** |
+| (4) | Size of Rebar 1 | `"BAR_NAME1"` | String | — | **Required** |
+| (5) | Size of Rebar 2 | `"BAR_NAME2"` | String | Blank | Optional |
 
 **²⁾ 기둥 철근 레이어 (`vPOSITION` 항목 구조)**
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| (1) | 표면 위치 · 원형: `"P1"` / 사각형: `"P1"`, `"P2"` | `"POSITION"` | String | — | **Required** |
-| (2) | 철근 개수 | `"BAR_NUM"` | Number | — | **Required** |
-| (3) | 철근 규격 1 | `"BAR_NAME1"` | String | — | **Required** |
-| (4) | 철근 규격 2 | `"BAR_NAME2"` | String | Blank | Optional |
+| (1) | Surface Positions · Circle: "P1" · Rectangle: "P1"/"P2" | `"POSITION"` | String | — | **Required** |
+| (2) | Number of Rebars | `"BAR_NUM"` | Number | — | **Required** |
+| (3) | Size of Rebar 1 | `"BAR_NAME1"` | String | — | **Required** |
+| (4) | Size of Rebar 2 | `"BAR_NAME2"` | String | Blank | Optional |
 
 ### Request / Response JSON
 
@@ -659,12 +659,12 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `OPTION
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 비지지 길이 Ly (강축) | `"LY"` | Number | `0` | Optional |
-| 2 | 비지지 길이 Lz (약축) | `"LZ"` | Number | `0` | Optional |
-| 3 | 횡방향 비지지 길이 Lb | `"LB"` | Number | `0` | Optional |
-| 4 | 횡방향 비지지 길이 미고려 | `"bNOTUSE"` | Boolean | `false` | Optional |
-| 5 | 코드에 의한 자동 계산 | `"bAUTOCALC"` | Boolean | `false` | Optional |
-| 6 | 비틀림 비지지 길이 Lt | `"LT"` | Number | `0` | Optional |
+| 1 | Unbraced Length Ly | `"LY"` | Number | `0` | Optional |
+| 2 | Unbraced Length Lz | `"LZ"` | Number | `0` | Optional |
+| 3 | Laterally Unbraced Length | `"LB"` | Number | `0` | Optional |
+| 4 | Do not consider of laterally unbraced length | `"bNOTUSE"` | Boolean | `false` | Optional |
+| 5 | Calculate by Code | `"bAUTOCALC"` | Boolean | `false` | Optional |
+| 6 | Torsional Unbraced Length | `"LT"` | Number | `0` | Optional |
 
 ### Request / Response JSON
 
@@ -866,10 +866,10 @@ print(requests.get(f"{BASE_URL}/db/MEMB", headers=HEADERS).json())
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 프레임 X방향 · 비횡구속·Sway: `"Unbraced Sway"` / 횡구속·Non-sway: `"Braced Non-sway"` | `"FRAMEX"` | String | `"Braced Non-sway"` | Optional |
-| 2 | 프레임 Y방향 · `"Unbraced Sway"` / `"Braced Non-sway"` | `"FRAMEY"` | String | `"Braced Non-sway"` | Optional |
-| 3 | 유효좌굴길이계수 자동 계산 | `"bAUTOKF"` | Boolean | `false` | Optional |
-| 4 | 설계 타입 · 3-D: `"3D"` / X-Z 평면: `"XZ"` / Y-Z 평면: `"YZ"` / X-Y 평면: `"XY"` | `"DT"` | String | `"3D"` | Optional |
+| 1 | X-Direction of Frame · Unbraced \| Sway: “Unbraced Sway” · Braced \| Non-sway: “Braced Non-sway” | `"FRAMEX"` | String | `"Braced Non-sway"` | Optional |
+| 2 | Y-Direction of Frame · Unbraced \| Sway: “Unbraced Sway” · Braced \| Non-sway: “Braced Non-sway” | `"FRAMEY"` | String | `"Braced Non-sway"` | Optional |
+| 3 | Auto Calculate Effective Length Factor | `"bAUTOKF"` | Boolean | `false` | Optional |
+| 4 | Design Type · 3-D : “3D” · X-Z Plane : “XZ” · Y-Z Plane : “YZ” · X-Y Plane : “XY” | `"DT"` | String | `"3D"` | Optional |
 
 ### Request / Response JSON
 
@@ -962,9 +962,9 @@ print(requests.get(f"{BASE_URL}/db/DCTL", headers=HEADERS).json())
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 세장비 검토 생략 | `"bNOTCHECK"` | Boolean | `false` | Optional |
-| 2 | 압축 한계 세장비 | `"COMP"` | Number | — | **Required** |
-| 3 | 인장 한계 세장비 | `"TENS"` | Number | — | **Required** |
+| 1 | Do not check for Slenderness Ratio | `"bNOTCHECK"` | Boolean | `false` | Optional |
+| 2 | Limiting Slenderness Ratio for Compression | `"COMP"` | Number | — | **Required** |
+| 3 | Limiting Slenderness Ratio for Tension | `"TENS"` | Number | — | **Required** |
 
 ### Request / Response JSON
 
@@ -1049,7 +1049,7 @@ print(requests.get(f"{BASE_URL}/db/LTSR", headers=HEADERS).json())
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 부재 타입 · 기둥: `"COLUMN"` / 보: `"BEAM"` / 가새: `"BRACE"` | `"TYPE"` | String | — | **Required** |
+| 1 | Member Type · Column : "COLUMN" · Beam : "BEAM" · Brace : "BRACE" | `"TYPE"` | String | — | **Required** |
 
 ### Request / Response JSON
 
@@ -1139,8 +1139,8 @@ print(requests.get(f"{BASE_URL}/db/MBTP", headers=HEADERS).json())
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 벽체 마크 이름 | `"MARKNAME"` | String | — | **Required** |
-| 2 | 벽체 ID 목록 | `"WID_LIST"` | Array[Integer] | — | **Required** |
+| 1 | Wall Mark Name | `"MARKNAME"` | String | — | **Required** |
+| 2 | Wall ID List | `"WID_LIST"` | Array[Integer] | — | **Required** |
 
 ### Request / Response JSON
 
@@ -1268,17 +1268,17 @@ print(requests.get(f"{BASE_URL}/db/WMAK", headers=HEADERS).json())
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 섹션 번호 문자열을 키로 갖는 맵 | `"Assign"` | Object | — | **Required** |
+| 1 | [Root Object] Keyed object (dictionary). Each property name is a section number string (e.g., "1"). | `"Assign"` | Object | — | **Required** |
 | 2 | 보 철근 항목 목록 | `"ITEMS"` | Array[Object] | — | **Required** |
 | 3 | 서브 구간 ID (읽기 전용) | `"ID"` | Integer | — | Required |
 | 4 | I단 구간 철근 | `"BAR_SECTOR_I"` | Object | — | **Required** |
 | 5 | 중앙(M) 구간 철근 | `"BAR_SECTOR_M"` | Object | — | **Required** |
 | 6 | J단 구간 철근 | `"BAR_SECTOR_J"` | Object | — | **Required** |
-| 7 | 상단 피복 거리 (콘크리트면~주철근 중심) | `"MAIN_BAR_DC_TOP"` | Number | — | **Required** |
-| 8 | 하단 피복 거리 (콘크리트면~주철근 중심) | `"MAIN_BAR_DC_BOT"` | Number | — | **Required** |
-| 9 | 상·하단 주철근 규격 동일 | `"bSAME_SIZE_TOP_BOT"` | Boolean | — | **Required** |
-| 10 | I·M·J 주철근 규격 동일 | `"bSAME_SIZE_IMJ"` | Boolean | — | **Required** |
-| 11 | 층(레이어)별 주철근 규격 동일 | `"bSAME_SIZE_LAYER"` | Boolean | — | **Required** |
+| 7 | Dc Top : Top bar center~conc. face(Top) | `"MAIN_BAR_DC_TOP"` | Number | — | **Required** |
+| 8 | Dc Bottom : Bottom bar center~conc. face(bottom) | `"MAIN_BAR_DC_BOT"` | Number | — | **Required** |
+| 9 | Same Main Bar Size at Top & Bottom (check box option) | `"bSAME_SIZE_TOP_BOT"` | Boolean | — | **Required** |
+| 10 | Same Main Bar Size at I, M, J (check box option) | `"bSAME_SIZE_IMJ"` | Boolean | — | **Required** |
+| 11 | Same Main Bar Size at Each Layer (check box option) | `"bSAME_SIZE_LAYER"` | Boolean | — | **Required** |
 
 **`BAR_SECTOR_I/M/J` 구간 객체**
 
@@ -1499,15 +1499,15 @@ print(requests.get(f"{BASE_URL}/db/REBB", headers=HEADERS).json())
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 섹션 번호 문자열을 키로 갖는 맵 | `"Assign"` | Object | — | **Required** |
+| 1 | [Root Object] Keyed object (dictionary). Each property name is a section number string (e.g., "1"). | `"Assign"` | Object | — | **Required** |
 | 2 | 기둥 철근 항목 목록 | `"ITEMS"` | Array[Object] | — | **Required** |
 | 3 | 서브 구간 ID (읽기 전용) | `"ID"` | Integer | — | Optional |
 | 4 | 주철근 목록 | `"vMAIN_BAR"` | Array[Object] | — | **Required** |
 | 5 | 단부 전단철근 | `"SHEAR_BAR_END"` | Object | — | **Required** |
 | 6 | 중앙부 전단철근 | `"SHEAR_BAR_CEN"` | Object | — | **Required** |
 | 7 | 띠철근 형식 · `1`: Tied / `2`: Spiral | `"HOOP_TYPE"` | Integer (enum) | — | **Required** |
-| 8 | 단부·중앙부 철근 간격 동일 | `"bSAME_SPACE_END_CEN"` | Boolean | — | **Required** |
-| 9 | 보-기둥 접합부 철근 수 (특정 설계기준 + 특수 내진 규정) | `"NUM_BAR_BC_JOINT"` | Integer | — | **Required** |
+| 8 | Same Rebar Spaces at End and Center (check box option) | `"bSAME_SPACE_END_CEN"` | Boolean | — | **Required** |
+| 9 | Number of Rebars for Beam-Column Joint (for specific design code + Special seismic provisions) · Eurocode2:04 · ACI318-14 / ACI318M-14 · ACI318-19 / ACI318M-19 · NSR-10 · NSCP 2015 · KDS41 30 : 2018 · KDS41 20 : 2022 · IS456:2000 | `"NUM_BAR_BC_JOINT"` | Integer | — | **Required** |
 
 **`vMAIN_BAR` 원소**
 
@@ -1517,7 +1517,7 @@ print(requests.get(f"{BASE_URL}/db/REBB", headers=HEADERS).json())
 | b | 철근 총 개수 | `"NUM"` | Integer | — | **Required** |
 | c | 기둥 열(row) 수 | `"ROW"` | Integer | — | **Required** |
 | d | 콘크리트면~철근 중심 거리 | `"D0"` | Number | — | **Required** |
-| e | 코너 철근 사용 | `"bUSE_CORNER"` | Boolean | — | **Required** |
+| e | Use Corner rebar | `"bUSE_CORNER"` | Boolean | — | **Required** |
 | f | 코너 철근 규격 | `"NAME_CORNER"` | String | — | **Required** |
 
 **`SHEAR_BAR_END` / `SHEAR_BAR_CEN` 객체 (공통 구조)**
@@ -1684,20 +1684,20 @@ print(requests.get(f"{BASE_URL}/db/REBC", headers=HEADERS).json())
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 벽체 번호 문자열을 키로 갖는 맵 | `"Assign"` | Object | — | **Required** |
+| 1 | [Root Object] Keyed object (dictionary). Each property name is a wall ID string (e.g., "1"). | `"Assign"` | Object | — | **Required** |
 | 2 | 벽체 철근 항목 목록 | `"ITEMS"` | Array[Object] | — | **Required** |
-| 3 | 서브 구간 ID | `"ID"` | Integer | — | Required |
-| 4 | 모델 두께 사용 여부 | `"bUSE_MODEL_THICK"` | Boolean | — | **Required** |
-| 5 | 두께 (`bUSE_MODEL_THICK=false` 일 때 입력) | `"THICK"` | Number | — | **Required** |
+| 3 | ID (Sub Section number) | `"ID"` | Integer | — | **Required** |
+| 4 | Use Model Thickness | `"bUSE_MODEL_THICK"` | Boolean | — | **Required** |
+| 5 | Thickness (Input check-off Use Model Thickness) | `"THICK"` | Number | — | **Required** |
 | 6 | 콘크리트면~철근 중심 거리 (면외, dw) | `"DW"` | Number | — | **Required** |
 | 7 | 콘크리트면~철근 중심 거리 (면내, de) | `"DE"` | Number | — | **Required** |
-| 8 | 수직 철근 · 규격 `NAME`, 간격 `DIST` | `"VER_BAR"` | Object | — | **Required** |
-| 9 | 수평 철근 · 규격 `NAME`, 간격 `DIST` | `"HOR_BAR"` | Object | — | **Required** |
-| 10 | 단부 철근 · 규격 `NAME`, 간격 `DIST` | `"END_BAR"` | Object | — | **Required** |
-| 11 | 단부 철근 개수 | `"NUM_END_BAR"` | Integer | — | **Required** |
-| 12 | 경계요소 수평 철근 · 규격 `NAME`, 간격 `DIST` | `"BE_HOR_BAR"` | Object | — | **Required** |
-| 13 | 경계요소 길이 | `"BE_LENGTH"` | Number | — | **Required** |
-| 14 | 적용 층 목록 (층 키) | `"vSTORY_KEY"` | Array[Integer] | — | **Required** |
+| 8 | Vertical rebar list | `"VER_BAR"` | Object | — | **Required** |
+| 9 | Horizontal rebar list | `"HOR_BAR"` | Object | — | **Required** |
+| 10 | End rebar list | `"END_BAR"` | Object | — | **Required** |
+| 11 | Number of End rebar | `"NUM_END_BAR"` | Integer | — | **Required** |
+| 12 | Boundary Element Hor. Rebar | `"BE_HOR_BAR"` | Object | — | **Required** |
+| 13 | Boundary Element Length | `"BE_LENGTH"` | Number | — | **Required** |
+| 14 | Story Key List | `"vSTORY_KEY"` | Array[Integer] | — | **Required** |
 
 > ⚠️ **공식 표기 불일치 (2026-10-04 확인).** 공식 표는 수직·수평·단부·경계요소 철근의 규격 키를 `"NUM"`(String)으로 적었으나, 공식 JSON Schema와 예제는 `"NAME"`을 쓴다. 위 표는 스키마·예제를 따랐다.
 
@@ -1895,17 +1895,17 @@ print(requests.get(f"{BASE_URL}/db/REBW", headers=HEADERS).json())
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 단면 번호 문자열을 키로 갖는 맵 | `"Assign"` | Object | — | **Required** |
-| 1 | 콘크리트 가새 철근 항목 (min 1) | `"ITEMS"` | Array[Object] | — | **Required** |
-| (1) | 서브 단면 생성 여부 | `"CREATE_SUB_SECTION"` | Boolean | `false` | Optional |
-| (2) | 주철근 | `"MAIN_BAR"` | Object | — | **Required** |
+| 1 | [Root Object] Keyed object (dictionary). Each property name is a section number string (e.g., "1"). | `"Assign"` | Object | — | **Required** |
+| 1 | [General] Concrete brace rebar items. Constraints: · Items: min 1 | `"ITEMS"` | Array[Object] | — | **Required** |
+| (1) | [General] Create Sub Section | `"CREATE_SUB_SECTION"` | Boolean | `false` | Optional |
+| (2) | [General] Main Rebar | `"MAIN_BAR"` | Object | — | **Required** |
 | (2)a | 규격 · `D4`~`D57` | `"NAME"` | String | — | **Required** |
-| (2)b | 개수 (min 4) | `"NUM"` | Integer | — | **Required** |
-| (2)c | 열(row) 수 | `"ROW"` | Integer | — | **Required** |
-| (3) | 단부 전단철근 | `"SHEAR_BAR_END"` | Object | — | **Required** |
-| (4) | 중앙부 전단철근 | `"SHEAR_BAR_CEN"` | Object | — | **Required** |
-| (5) | 콘크리트면~철근중심 거리 (do) | `"DO"` | Number | — | **Required** |
-| (6) | 후프 철근 타입 · `"Ties"` / `"Spirals"` | `"HOOP_TYPE"` | String | `"Ties"` | Optional |
+| (2)b | [General] Numbers | `"NUM"` | Integer | — | **Required** |
+| (2)c | [General] Rows | `"ROW"` | Integer | — | **Required** |
+| (3) | [General] Shear Bar End | `"SHEAR_BAR_END"` | Object | — | **Required** |
+| (4) | [General] Shear Bar Center | `"SHEAR_BAR_CEN"` | Object | — | **Required** |
+| (5) | [General] Concrete Face to Center of Rebar (do) | `"DO"` | Number | — | **Required** |
+| (6) | [General] Type of Hoop Rebar · Ties: "Ties" · Spirals: "Spirals" | `"HOOP_TYPE"` | String | `"Ties"` | Optional |
 
 **`SHEAR_BAR_END` / `SHEAR_BAR_CEN` 객체 (공통 구조)**
 
@@ -1920,10 +1920,10 @@ print(requests.get(f"{BASE_URL}/db/REBW", headers=HEADERS).json())
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| (1) | 서브 단면 ID (읽기 전용) | `"ID"` | Integer | — | Optional |
-| a | 요소 ID 배열 | `"KEYS"` | Array[Integer] | — | Optional |
-| b | ID 범위 (예: `"1to160"`) | `"TO"` | String | — | Optional |
-| c | 구조 그룹 이름 | `"STRUCTURE_GROUP_NAME"` | String | — | Optional |
+| (1) | [When "CREATE_SUB_SECTION" is true] Sub Section ID Read Only | `"ID"` | Integer | — | Optional |
+| a | [oneOf Choose exactly one of the following keys: "KEYS", "TO", or "STRUCTURE_GROUP_NAME".] Specify Each ID | `"KEYS"` | Array[Integer] | — | Optional |
+| b | [oneOf Choose exactly one of the following keys: "KEYS", "TO", or "STRUCTURE_GROUP_NAME".] Specify ID Range | `"TO"` | String | — | Optional |
+| c | [oneOf Choose exactly one of the following keys: "KEYS", "TO", or "STRUCTURE_GROUP_NAME".] Structure Group Name | `"STRUCTURE_GROUP_NAME"` | String | — | Optional |
 
 ### Request / Response JSON
 

@@ -856,8 +856,8 @@ for did, d in domains.items():
 |-----|-------------|-----|------------|---------|----------|
 | 5 | Member Type Civil • None: 0 • Plate Beam (1D): 1 • Plate Column (1D): 2 • Shell: 3 | `"MEMB_TYPE_CIVIL"` | Integer | - | **Required** |
 | 6 | Rebar Direction • Local: 0 • UCS: 1 • Reference Axis: 2 | `"REBAR_AXIS_TYPE"` | Integer | 0 | Optional |
-| 7 | UCS (Rebar Direction이 UCS인 경우) | `"STR_UCS"` | String | Blank | Optional |
-| 8 | Axis Vector (Rebar Direction이 Reference Axis인 경우) | `"AXIS_VECTOR"` | Number | 0 | Optional |
+| 7 | [CIVIL NX Only] UCS · When the Rebar Direction is UCS | `"STR_UCS"` | String | Blank | Optional |
+| 8 | [CIVIL NX Only] Axis Vector · When the Rebar Direction is Reference Axis | `"AXIS_VECTOR"` | Number | 0 | Optional |
 
 #### GEN NX Only
 

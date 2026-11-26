@@ -155,7 +155,7 @@
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 | --- | --- | --- | --- | --- | --- |
-| 1 | 세부 설정 객체 | `"ADDITIONAL"` | Object | — | Optional |
+| 1 | Additional Setting | `"ADDITIONAL"` | Object | — | Optional |
 | 1-1 | └ 층간변위비 판정 파라미터 | `ADDITIONAL.SET_STORY_DRIFT_PARAMS` | Object | — | Optional |
 | 1-1-1 | 　　└ 판정 방식: `true`=Method 1(응답수정계수), `false`=Method 2(변위증폭계수) | `SET_STORY_DRIFT_PARAMS.RESPONSE_MOD_FACTOR_CHECK` | Boolean | `false` | Optional |
 | 1-1-2 | 　　└ (Method 1) 응답수정계수 값 — `RESPONSE_MOD_FACTOR_CHECK: true`일 때만 | `SET_STORY_DRIFT_PARAMS.RESPONSE_MOD_FACTOR_VALUE` | Number | `1` | Optional |
@@ -583,7 +583,7 @@ for row in table.get("DATA", []):
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 | --- | --- | --- | --- | --- | --- |
-| 1 | 조회할 모드 번호 목록 (`"Mode" + 번호`, 예: `"Mode1"`) | `"MODES"` | Array [String] | All | Optional |
+| 1 | Mode Number · "Mode + "#" " | `"MODES"` | Array [String] | All | Optional |
 
 **요청 예시 — `MODES` 포함**
 
@@ -689,8 +689,8 @@ for row in table.get("DATA", []):
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 | --- | --- | --- | --- | --- | --- |
-| 1 | 대상 층 이름 목록 | `"STORY_NAMES"` | Array [String] | All | Optional |
-| 2 | 세부 설정 객체 | `"ADDITIONAL"` | Object | — | Optional |
+| 1 | Story Names | `"STORY_NAMES"` | Array [String] | All | Optional |
+| 2 | Additional Setting | `"ADDITIONAL"` | Object | — | Optional |
 | 2-1 | └ 각도 설정 | `ADDITIONAL.SET_ANGLE` | Object | — | **Required** |
 | 2-1-1 | 　　└ Angle1 입력값 (Angle2 = Angle1 + 90°) | `SET_ANGLE.ANGLE` | Number | — | **Required** |
 
@@ -907,7 +907,7 @@ for row in table.get("DATA", []):
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 | --- | --- | --- | --- | --- | --- |
-| 1 | 세부 설정 객체 | `"ADDITIONAL"` | Object | — | Optional |
+| 1 | Additional Setting | `"ADDITIONAL"` | Object | — | Optional |
 | 1-1 | └ 각도 설정 | `ADDITIONAL.SET_ANGLE` | Object | — | Optional |
 | 1-1-1 | 　　└ Angle1 입력값 (Angle2 = Angle1 + 90°) | `SET_ANGLE.ANGLE` | Number | `0` | Optional |
 | 1-2 | └ 전도모멘트 산정 파라미터 | `ADDITIONAL.SET_OVERTURNING_MOMENT_PARAMS` | Object | — | Optional |
@@ -1094,7 +1094,7 @@ for row in table.get("DATA", []):
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 | --- | --- | --- | --- | --- | --- |
-| 1 | 세부 설정 객체 | `"ADDITIONAL"` | Object | — | Optional |
+| 1 | Additional Setting | `"ADDITIONAL"` | Object | — | Optional |
 | 1-1 | └ 안정계수 산정 파라미터 | `ADDITIONAL.SET_STABILITY_COEFFICIENT_PARAMS` | Object | — | Optional |
 | 1-1-1 | 　　└ 변위증폭계수(Cd) | `SET_STABILITY_COEFFICIENT_PARAMS.DEFLECTION_AMPL_FACTOR_VALUE` | Number | System | Optional |
 | 1-1-2 | 　　└ 중요도계수 | `SET_STABILITY_COEFFICIENT_PARAMS.IMPORTANCE_FACTOR_VALUE` | Integer | System | Optional |
@@ -1221,7 +1221,7 @@ for row in table.get("DATA", []):
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 | --- | --- | --- | --- | --- | --- |
-| 1 | 세부 설정 객체 | `"ADDITIONAL"` | Object | — | Optional |
+| 1 | Additional Setting | `"ADDITIONAL"` | Object | — | Optional |
 | 1-1 | └ 비틀림 불규칙 검토 대상 극단부 절점 선택 | `ADDITIONAL.SELECT_IRREGULAR_ENDS` | Object | — | Required |
 | 1-1-1 | 　　└ 절점 선택 방식: `false`=자동 계산 / `true`=사용자 지정 | `SELECT_IRREGULAR_ENDS.USER_DEFINE` | Boolean | — | Required |
 | 1-1-2 | 　　└ 극단부 절점 번호 2개 지정 — `USER_DEFINE: true`일 때만 | `SELECT_IRREGULAR_ENDS.SELECT_NODES` | Array [Integer] | — | Required |
@@ -1324,7 +1324,7 @@ for row in table.get("DATA", []):
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 | --- | --- | --- | --- | --- | --- |
-| 1 | 세부 설정 객체 | `"ADDITIONAL"` | Object | — | Optional |
+| 1 | Additional Setting | `"ADDITIONAL"` | Object | — | Optional |
 | 1-1 | └ 비틀림 증폭계수 산정 대상 극단부 절점 선택 | `ADDITIONAL.SELECT_IRREGULAR_ENDS` | Object | — | Required |
 | 1-1-1 | 　　└ 절점 선택 방식: `false`=자동 계산 / `true`=사용자 지정 | `SELECT_IRREGULAR_ENDS.USER_DEFINE` | Boolean | — | Required |
 | 1-1-2 | 　　└ 극단부 절점 번호 2개 지정 — `USER_DEFINE: true`일 때만 | `SELECT_IRREGULAR_ENDS.SELECT_NODES` | Array [Integer] | — | Required |
@@ -1427,7 +1427,7 @@ for row in table.get("DATA", []):
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 | --- | --- | --- | --- | --- | --- |
-| 1 | 세부 설정 객체 | `"ADDITIONAL"` | Object | — | Optional |
+| 1 | Additional Setting | `"ADDITIONAL"` | Object | — | Optional |
 | 1-1 | └ 산정방식 설정 | `ADDITIONAL.SET_CALCULATION_METHOD` | Object | — | Required |
 | 1-1-1 | 　　└ 층간변위 산정방식: `"Drift at the Center of Mass"`(질량중심 변위) / `"Max. Drift of Outer Extreme Points"`(외곽 최대변위) / `"Max. Drift of All Vertical Elements"`(전 수직요소 최대변위) | `SET_CALCULATION_METHOD.STORY_DRIFT_METHOD` | String | `System` | Optional |
 | 1-1-2 | 　　└ 층강성 산정방식: `"1 / Story Drift Ratio"`(층간변위비 역수) / `"Story Shear / Story Drift"`(층전단력/층간변위) | `SET_CALCULATION_METHOD.STORY_STIFFNESS_METHOD` | String | `System` | Optional |
@@ -1537,7 +1537,7 @@ for row in table.get("DATA", []):
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 | --- | --- | --- | --- | --- | --- |
-| 1 | 세부 설정 객체 | `"ADDITIONAL"` | Object | — | Optional |
+| 1 | Additional Setting | `"ADDITIONAL"` | Object | — | Optional |
 | 1-1 | └ 각도 설정 | `ADDITIONAL.SET_ANGLE` | Object | — | Required |
 | 1-1-1 | 　　└ Angle1 입력 각도(°) — Angle2 = Angle1 + 90° | `SET_ANGLE.ANGLE` | Number | — | Required |
 
@@ -1707,7 +1707,7 @@ for row in table.get("DATA", []):
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 | --- | --- | --- | --- | --- | --- |
-| 1 | 세부 설정 객체 | `"ADDITIONAL"` | Object | — | Optional |
+| 1 | Additional Setting | `"ADDITIONAL"` | Object | — | Optional |
 | 1-1 | └ 각도 설정 | `ADDITIONAL.SET_ANGLE` | Object | — | Optional |
 | 1-1-1 | 　　└ 산정 각도(°) | `SET_ANGLE.ANGLE` | Number | — | Optional |
 
@@ -1809,7 +1809,7 @@ for row in table.get("DATA", []):
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 | --- | --- | --- | --- | --- | --- |
-| 1 | 산정방식 설정 (`"ADDITIONAL"`이 아닌 `"Argument"` 최상위 필드) | `"SET_CALCULATION_METHOD"` | Object | — | Optional |
+| 1 | [General] Calculation Method | `"SET_CALCULATION_METHOD"` | Object | — | Optional |
 | 1-1 | └ 층간변위 산정방식: `"Drift at the Center of Mass"`(질량중심 변위) / `"Max. Drift of Outer Extreme Points"`(외곽 최대변위) / `"Max. Drift of All Vertical Elements"`(전 수직요소 최대변위) | `SET_CALCULATION_METHOD.STORY_DRIFT_METHOD` | String | `""` | Optional |
 
 **요청 예시 — `SET_CALCULATION_METHOD` 포함**

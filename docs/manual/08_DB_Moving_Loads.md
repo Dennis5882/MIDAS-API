@@ -550,7 +550,7 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `ELEMS`
 | 11 | Analysis Lane Offset | `"ANAL_LANE_OFFSET"` | Number | – | Optional |
 | 12 | Wheel Spacing | `"WHEEL_SPACE"` | Number | 0 | Optional |
 | 13 | Margin | `"MARGIN"` | Number | 0 | Optional |
-| 14 | Lane Items (ELEM, ECC, 코드별 추가 필드) | `"LANE_ITEMS"` | Array[Object] | – | Required |
+| 14 | Lane Items · Insert the data as an object | `"LANE_ITEMS"` | Array[Object] | – | **Required** |
 
 ### Python 예제
 
@@ -929,7 +929,7 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `LANE_I
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
 | 1 | Moving Load Code (Integer) | `"MVLD_CODE"` | Integer | – | Required |
-| 2 | Vehicular Load Name (사용자 지정) | `"VEHICLE_LOAD_NAME"` | String | – | Required |
+| 2 | Vehicular Load Name | `"VEHICLE_LOAD_NAME"` | String | – | **Required** |
 | 3 | Vehicular Load Number | `"VEHICLE_LOAD_NUM"` | Integer | – | Required |
 | 4 | Vehicular Type Name (기본 차량 이름) | `"VEHICLE_TYPE_NAME"` | String | – | Required |
 | 5 | Standard Code ¹⁾ | `"STANDARD_CODE"` | String | – | Required |
@@ -971,17 +971,17 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `LANE_I
 | 2 | Lane Loaded Length (User Defined Truck/Lane 전용) | `"LOADED_LENGTH"` | Number | `60` | Optional |
 | 3 | Distribution Load Not Exceeding Loaded Length | `"W1"` | Number | `12.7` | Optional |
 | 4 | Distribution Load Exceeding Loaded Length | `"W2"` | Number | `12.7` | Optional |
-| 5 | Spacing dD1 (User Defined Train 전용) | `"D1"` | Number | `0` | Optional |
-| 6 | Spacing dD2 (User Defined Train 전용) | `"D2"` | Number | `0` | Optional |
+| 5 | [For User Defined Vehicle - Train] Spacing - dD1 | `"D1"` | Number | `0` | Optional |
+| 6 | [For User Defined Vehicle - Train] Spacing - dD2 | `"D2"` | Number | `0` | Optional |
 | 7 | Exponent to Calculate Distribution Load of W2 | `"EXP"` | Number | `0.1` | Optional |
 | 8 | Dynamic Load Allowance (%) | `"DYN_LOAD_ALLOWANCE"` | Number | `0` | Optional |
 | 9 | Length of Lane Load · `0`=1st Model / `1`=2nd Model | `"LENGTH_LANE"` | Integer | — | Required |
 | 10 | Length of Lane Load(User) — `LENGTH_LANE: 0`일 때 | `"LENGTH_LANE_USER"` | Number | `0` | Optional |
 | 11 | Convert Point Load to Distributed Load | `"CONVERT_DIST_LOAD"` | Boolean | `false` | Optional |
-| 12 | Number of Uniform Load (Lane 전용) · N개면 N-1 | `"UNIFORM_LOAD_NUM"` | Number | `0` | Optional |
-| 13 | Uniform Load Distance (Lane 전용) | `"UNIFORM_LOAD_DIST"` | Number | `0` | Optional |
-| 14 | Uniform Load (Lane 전용) | `"UNIFORM_LOAD_W"` | Number | — | Required |
-| 15 | Uniform Load Length (Lane 전용) | `"UNIFORM_LOAD_LOAD_LENGTH_L"` | Number | — | Required |
+| 12 | [For User Defined Vehicle - Lane] Number of Uniform Load · N: N-1 | `"UNIFORM_LOAD_NUM"` | Number | `0` | Optional |
+| 13 | [For User Defined Vehicle - Lane] Distance | `"UNIFORM_LOAD_DIST"` | Number | `0` | Optional |
+| 14 | [For User Defined Vehicle - Lane] Uniform Load | `"UNIFORM_LOAD_W"` | Number | — | **Required** |
+| 15 | [For User Defined Vehicle - Lane] Uniform Load Length | `"UNIFORM_LOAD_LOAD_LENGTH_L"` | Number | — | **Required** |
 | 16 | 축하중 배열 | `"POINT_ITEMS"` | Array [Object] | — | Required |
 | 16-1 | └ 하중(Load) | `POINT_ITEMS[].POINT_LOAD` | Number | — | Required |
 | 16-2 | └ 간격(Spacing) | `POINT_ITEMS[].POINT_DIST` | Number | — | Required |
@@ -1183,13 +1183,13 @@ result = mv_post("MVHL", {
 | User Defined - Truck/Lane 공통 | | | | | |
 | 4 | Truck/Lane Type · Crawler:`1` · Lane1:`0` · GC:`2` · Lane2:`5` | `"TRUCK_TYPE"` | Integer | - | Required |
 | 5 | Axle Load(P), Lane1 전용 | `"P_"` | Number | 0 | Optional |
-| 6 | Distribution Load 1(Qm), Lane1 전용 | `"QM"` | Number | 0 | Optional |
+| 6 | [For User Defined Vehicle - Truck/Lane: Lane Load 1] Distribution Load 1 (Qm) | `"QM"` | Number | 0 | Optional |
 | 7 | Distribution Load 2(Qq)/Uniform Load(qk), Lane1·2 | `"QQ"` | Number | 0 | Optional |
 | 8 | Axle Load(Pk) L≤, Lane2 전용 | `"PA"` | Number | 0 | Optional |
 | 9 | Loaded Length(L≤), Lane2 전용 | `"D1"` | Number | 0 | Optional |
 | 10 | Axle Load(Pk) L≥, Lane2 전용 | `"PB"` | Number | 0 | Optional |
 | 11 | Loaded Length(L≥), Lane2 전용 | `"D2"` | Number | 0 | Optional |
-| 12 | Uniform Distribution Load(dW1), Crawler 전용 | `"W_TRAILER"` | Number | 0 | Optional |
+| 12 | [For User Defined Vehicle - Truck/Lane: Crawler Type Load] Uniform Distribution Load (dW1) | `"W_TRAILER"` | Number | 0 | Optional |
 | 13 | Loaded Length(dD1), Crawler 전용 | `"D_TRAILER"` | Number | 0 | Optional |
 | 14 | Axle Load 배열 · `POINT_LOAD`/`POINT_DIST` | `"LOAD_ITEMS"` | Array [Object] | - | Optional |
 | User Defined - Train/Exceptional | | | | | |
@@ -1200,8 +1200,8 @@ result = mv_post("MVHL", {
 | 19 | Impact Factor Reduction Coefficient, Subway 전용 | `"IMPACT_COEF"` | Number | 0 | Optional |
 | 20 | Axle Load[P1~P4]/Distance[D1~D3], Subway 전용 | `"P_SUBWAY"`/`"D_SUBWAY"` | Array [Number,4]/[Number,3] | 0 | Optional |
 | 21 | Distance between Carriages(dD)/Number of Carriage(1~15), Subway 전용 | `"CARRIAGE_DIST"`/`"NUM_CARRIAGE"` | Number/Integer | 0/- | Optional/Required |
-| 22 | Axle load for Negative Influence Line(Po), Subway 전용 | `"P_OPPOSITE"` | Number | 0 | Optional |
-| 23 | 추가 축하중 배열(Type2 Heavy Vehicle용) · `POINT_LOAD`/`POINT_DIST` | `"LOAD_ITEMS2"` | Array [Object] | - | Optional |
+| 22 | [For User Defined Vehicle - Train/Exceptional: Subway] Axle load for Negative Influence Line (Po) | `"P_OPPOSITE"` | Number | 0 | Optional |
+| 23 | [For User Defined Vehicle - Train/Exceptional: Type 2] Axle Load of Heavy Vehicles · Insert the data as an object | `"LOAD_ITEMS2"` | Array [Object] | - | Optional |
 | User Defined - Crowd | | | | | |
 | 24 | Crowd Load Type1 | `"VEHICLE_LOAD_USER_NUM"` | Integer | - | Required |
 | 25 | Uniform Distribution Load(Type1) | `"W_CROWD"` | Number | 0 | Optional |
@@ -2164,8 +2164,8 @@ mv_post("MVLDid", {
 | 3 | Moving Load Optimization | `"bAUTOOPTIMIZE"` | Boolean | false | Optional |
 | 4 | Load Model · Standard(BD37/01,BS5400):`"STANDER"` · Special(BD86/11):`"SPECAIL"` · CS454 ALL Mode1:`"ALL_MODE_1"` · CS454 ALL Mode2:`"ALL_MODE_2"` | `"LOADMODEL"` | String | – | Required |
 | 5 | Auto Live Load Combination | `"bAUTOLIVELOADCOMB"` | Boolean | false | Optional |
-| 6 | Design Combination Factor Type · `"bAUTOLIVELOADCOMB"`=true 시 · Ultimate:`"ULTIMATE"` · Serviceability:`"SERVICEABIL"` | `"DGNCOMBFACTORTYPE"` | String | – | Required |
-| 7 | Combination Method · `"bAUTOLIVELOADCOMB"`=true 시 · Comb.1:`"COMB_1"` · Comb.2/3:`"COMB_2_3"` | `"COMBMETHOD"` | String | – | Required |
+| 6 | Type of Design Combination Factor · if "bAUTOLIVELOADCOMB": true / Ultimate Limit State: "ULTIMATE" / Serviceability Limit State: "SERVICEABIL" | `"DGNCOMBFACTORTYPE"` | String | – | **Required** |
+| 7 | Combination of Loads · if "bAUTOLIVELOADCOMB": true / Combination 1: "COMB_1" / Combination 2 or 3: "COMB_2_3" | `"COMBMETHOD"` | String | – | **Required** |
 | 8 | Standard Load Case Data(General, `LOADMODEL`="STANDER") | `"LCDATA_STANDARD"` | Object | – | Required |
 | 9 | Special Load Case Data(General, `LOADMODEL`="SPECAIL") | `"LCDATA_SPECIAL"` | Object | – | Required |
 | 10 | CS 454 Assessment Data(General, `LOADMODEL`="ALL_MODE_1"/"ALL_MODE_2") | `"LCDATA_ALLMODE"` | Object | – | Required |
@@ -2875,10 +2875,10 @@ print(result)
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
 | 1 | Input Type (`"AutoInput"` / `"UserInput"`) ¹⁾ | `"TYPE"` | String | – | Required |
-| 2 | Structure Group Name (AutoInput 전용) | `"GROUP_NAME"` | String | – | Required (AutoInput) |
+| 2 | Structure Group Name · Only for "Auto Input" | `"GROUP_NAME"` | String | – | **Required** |
 | 3 | Element ID | `"ELEMENT_NO"` | Integer | – | Required (UserInput) |
 | 4 | Element Type (`"BEAM"` / `"PLATE"`) | `"ELEMENT_TYPE"` | String | – | Required (UserInput) |
-| 5 | Position (`"Both"` / `"End-I"` / `"End-J"`, BEAM 전용) | `"POSITION"` | String | – | Required (BEAM) |
+| 5 | Support Position · Only for "BEAM" / Both: "Both" / End-i: "End-I" / End-j: "End-J" | `"POSITION"` | String | – | **Required** |
 
 > ¹⁾ AutoInput은 AASHTO LRFD에서만 사용 가능
 
@@ -2931,7 +2931,7 @@ print(result, result2)
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
-| 1 | Fixed Value: 0 (Key는 Node ID) | `"NODE"` | Integer | – | Required |
+| 1 | Fixed Value: 0 | `"NODE"` | Integer | – | **Required** |
 
 > **참고:** `"Assign"` 오브젝트의 키 값이 지지 절점 ID이며, 값 `{"NODE": 0}`은 고정값입니다.
 
@@ -3181,8 +3181,8 @@ print(result)
 | 2 | Determinant Length (Lφ) | `"LENGTH"` | Number | – | Required (Auto) |
 | 3 | Quality of Track Maintenance (0=Carefully, 1=Standard) | `"MAINTAIN_TYPE"` | Integer | – | Required (Auto) |
 | 4 | Consider Reduced Dynamic Effect | `"OPT_REDUCE_EFF"` | Boolean | false | Optional |
-| 5 | Height of Cover (h) (OPT_REDUCE_EFF=true 시) | `"HEIGHT_COVER"` | Number | – | Required |
-| 6 | Dynamic Factor (φ) (INPUT_TYPE=1 시) | `"DYN_FACTOR"` | Number | – | Required (User) |
+| 5 | Height of Cover (h) · if "OPT_REDUCE_EFF": true | `"HEIGHT_COVER"` | Number | – | **Required** |
+| 6 | Dynamic Factor (φ) · if "INPUT_TYPE": 1 | `"DYN_FACTOR"` | Number | – | **Required** |
 
 ### Python 예제
 

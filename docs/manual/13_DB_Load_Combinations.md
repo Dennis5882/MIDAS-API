@@ -102,16 +102,16 @@
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 조합 번호 (읽기 전용) | `"NO"` | Integer | — | Read Only |
-| 2 | 조합 이름 | `"NAME"` | String | — | **Required** |
-| 3 | 활성 타입 · `"INACTIVE"` / `"ACTIVE"` | `"ACTIVE"` | String | `"ACTIVE"` | Optional |
-| 4 | 합산 방식 · `0`=Add / `1`=Envelope / `2`=ABS / `3`=SRSS | `"iTYPE"` | Integer | `0` | Optional |
-| 5 | 설명 | `"DESC"` | String | `""` | Optional |
-| 6 | 결과 타입 (읽기 전용) · `false`=General / `true`=Min/Max/All | `"bCB"` | Boolean | — | Read Only |
-| 7 | 조합 항목 배열 | `"vCOMB"` | Array | — | **Required** |
-| — | (vCOMB) 해석 타입 | `"ANAL"` | String | — | **Required** |
-| — | (vCOMB) 하중케이스명 | `"LCNAME"` | String | — | **Required** |
-| — | (vCOMB) 계수 | `"FACTOR"` | Number | — | **Required** |
+| 1 | Combination Number | `"NO"` | Integer | — | Read Only |
+| 2 | Combination Name | `"NAME"` | String | — | **Required** |
+| 3 | Active Type · Inactive: "INACTIVE" · Active: "ACTIVE" | `"ACTIVE"` | String | `"ACTIVE"` | Optional |
+| 4 | Summation method · Add: 0 · Envelope: 1 · ABS: 2 · SRSS: 3 | `"iTYPE"` | Integer | `0` | Optional |
+| 5 | Description | `"DESC"` | String | `""` | Optional |
+| 6 | Result Type · General: false · Min/Max/All: true | `"bCB"` | Boolean | — | Read Only |
+| 7 | Combinations List | `"vCOMB"` | Array | — | **Required** |
+| — | └ Static Load Case: "ST" · Construction Stage Case: "CS" · Moving Load Case: "MV" · Settlement Case: "SM" · Response Spectrum Case: "RS" · Time History Cases: "TH" · General Comb.: "CB" | `"ANAL"` | String | — | **Required** |
+| — | └ Load Case Name | `"LCNAME"` | String | — | **Required** |
+| — | └ Factor | `"FACTOR"` | Number | — | **Required** |
 
 ### Request / Response JSON
 
@@ -267,17 +267,19 @@ print("DELETE:", resp.status_code)
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 조합 번호 (읽기 전용) | `"NO"` | Integer | — | Read Only |
-| 2 | 조합 이름 | `"NAME"` | String | — | **Required** |
-| 3 | 활성 타입 · `"INACTIVE"` / `"STRENGTH"` / `"SERVICE"` | `"ACTIVE"` | String | `"ACTIVE"` | Optional |
-| 4 | 콘크리트 설계 전용 옵션 (E) | `"bES"` | Boolean | `false` | Optional |
-| 5 | 합산 방식 · `0`=Add / `1`=Envelope / `2`=ABS / `3`=SRSS | `"iTYPE"` | Integer | `0` | Optional |
-| 6 | 설명 | `"DESC"` | String | `""` | Optional |
-| 7 | 결과 타입 (읽기 전용) · `false`=General / `true`=Min/Max/All | `"bCB"` | Boolean | — | Read Only |
-| 8 | 조합 항목 배열 | `"vCOMB"` | Array | — | **Required** |
-| — | (vCOMB) 해석 타입 | `"ANAL"` | String | — | **Required** |
-| — | (vCOMB) 하중케이스명 | `"LCNAME"` | String | — | **Required** |
-| — | (vCOMB) 계수 | `"FACTOR"` | Number | — | **Required** |
+| 1 | Combination Number | `"NO"` | Integer | — | Read Only |
+| 2 | Combination Name | `"NAME"` | String | — | **Required** |
+| 3 | Active Type · Inactive: "INACTIVE" · Active: "ACTIVE" | `"ACTIVE"` | String | `"ACTIVE"` | Optional |
+| 4 | Concrete Design Option | `"bES"` | Boolean | `false` | Optional |
+| 5 | Summation method · Add: 0 · Envelope: 1 · ABS: 2 · SRSS: 3 | `"iTYPE"` | Integer | `0` | Optional |
+| 6 | Description | `"DESC"` | String | `""` | Optional |
+| 7 | Result Type · General: false · Min/Max/All: true | `"bCB"` | Boolean | — | Read Only |
+| 8 | Combinations List | `"vCOMB"` | Array | — | **Required** |
+| — | └ Static Load Case: "ST" · Construction Stage Case: "CS" · Moving Load Case: "MV" · Settlement Case: "SM" · Response Spectrum Case: "RS" · Time History Cases: "TH" · General Comb.: "CB" | `"ANAL"` | String | — | **Required** |
+| — | └ Load Case Name | `"LCNAME"` | String | — | **Required** |
+| — | └ Factor | `"FACTOR"` | Number | — | **Required** |
+
+> ⚠️ 공식 Specifications 표(ko·en 모두)는 `ACTIVE` 값을 `"INACTIVE"`/`"ACTIVE"`로 적지만, 같은 글의 요청 예제는 `"STRENGTH"`·`"SERVICE"`를 쓰며 LCOM-STEEL·SRC 등 다른 설계용 조합 글의 표도 `"INACTIVE"`/`"STRENGTH"`/`"SERVICE"`입니다. 표 원문을 그대로 옮겼습니다.
 
 ### Request / Response JSON
 
@@ -441,16 +443,16 @@ for key, val in resp.json().get("LCOM-CONC", {}).items():
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 조합 번호 (읽기 전용) | `"NO"` | Integer | — | Read Only |
-| 2 | 조합 이름 | `"NAME"` | String | — | **Required** |
-| 3 | 활성 타입 · `"INACTIVE"` / `"STRENGTH"` / `"SERVICE"` | `"ACTIVE"` | String | `"ACTIVE"` | Optional |
-| 4 | 합산 방식 · `0`=Add / `1`=Envelope / `3`=SRSS | `"iTYPE"` | Integer | `0` | Optional |
-| 5 | 설명 | `"DESC"` | String | `""` | Optional |
-| 6 | 결과 타입 (읽기 전용) · `false`=General / `true`=Min/Max/All | `"bCB"` | Boolean | — | Read Only |
-| 7 | 조합 항목 배열 | `"vCOMB"` | Array | — | **Required** |
-| — | (vCOMB) 해석 타입 | `"ANAL"` | String | — | **Required** |
-| — | (vCOMB) 하중케이스명 | `"LCNAME"` | String | — | **Required** |
-| — | (vCOMB) 계수 | `"FACTOR"` | Number | — | **Required** |
+| 1 | Combination Number | `"NO"` | Integer | — | Read Only |
+| 2 | Combination Name | `"NAME"` | String | — | **Required** |
+| 3 | Active Type · Inactive: "INACTIVE" · Strength/Stress: "STRENGTH" · Serviceability: "SERVICE" | `"ACTIVE"` | String | `"ACTIVE"` | Optional |
+| 4 | Summation method · Add: 0 · Envelope: 1 · SRSS: 3 | `"iTYPE"` | Integer | `0` | Optional |
+| 5 | Description | `"DESC"` | String | `""` | Optional |
+| 6 | Result Type · General: false · Min/Max/All: true | `"bCB"` | Boolean | — | Read Only |
+| 7 | Combinations List | `"vCOMB"` | Array | — | **Required** |
+| — | └ Static Load Case: "ST" · Construction Stage Case: "CS" · Moving Load Case: "MV" · Settlement Case: "SM" · Response Spectrum Case: "RS" · Time History Cases: "TH" · General Comb.: "CB" | `"ANAL"` | String | — | **Required** |
+| — | └ Load Case Name | `"LCNAME"` | String | — | **Required** |
+| — | └ Factor | `"FACTOR"` | Number | — | **Required** |
 
 ### Request / Response JSON
 
@@ -603,16 +605,16 @@ print("POST:", resp.status_code, resp.json())
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 조합 번호 (읽기 전용) | `"NO"` | Integer | — | Read Only |
-| 2 | 조합 이름 | `"NAME"` | String | — | **Required** |
-| 3 | 활성 타입 · `"INACTIVE"` / `"STRENGTH"` / `"SERVICE"` | `"ACTIVE"` | String | `"ACTIVE"` | Optional |
-| 4 | 합산 방식 · `0`=Add / `1`=Envelope / `3`=SRSS | `"iTYPE"` | Integer | `0` | Optional |
-| 5 | 설명 | `"DESC"` | String | `""` | Optional |
-| 6 | 결과 타입 (읽기 전용) | `"bCB"` | Boolean | — | Read Only |
-| 7 | 조합 항목 배열 | `"vCOMB"` | Array | — | **Required** |
-| — | (vCOMB) 해석 타입 | `"ANAL"` | String | — | **Required** |
-| — | (vCOMB) 하중케이스명 | `"LCNAME"` | String | — | **Required** |
-| — | (vCOMB) 계수 | `"FACTOR"` | Number | — | **Required** |
+| 1 | Combination Number | `"NO"` | Integer | — | Read Only |
+| 2 | Combination Name | `"NAME"` | String | — | **Required** |
+| 3 | Active Type · Inactive: "INACTIVE" · Strength/Stress: "STRENGTH" · Serviceability: "SERVICE" | `"ACTIVE"` | String | `"ACTIVE"` | Optional |
+| 4 | Summation method · Add: 0 · Envelope: 1 · SRSS: 3 | `"iTYPE"` | Integer | `0` | Optional |
+| 5 | Description | `"DESC"` | String | `""` | Optional |
+| 6 | Result Type · General: false · Min/Max/All: true | `"bCB"` | Boolean | — | Read Only |
+| 7 | Combinations List | `"vCOMB"` | Array | — | **Required** |
+| — | └ Static Load Case: "ST" · Construction Stage Case: "CS" · Moving Load Case: "MV" · Settlement Case: "SM" · Response Spectrum Case: "RS" · Time History Cases: "TH" · General Comb.: "CB" | `"ANAL"` | String | — | **Required** |
+| — | └ Load Case Name | `"LCNAME"` | String | — | **Required** |
+| — | └ Factor | `"FACTOR"` | Number | — | **Required** |
 
 ### Request / Response JSON
 
@@ -773,16 +775,16 @@ print("PUT:", resp.status_code, resp.json())
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 조합 번호 (읽기 전용) | `"NO"` | Integer | — | Read Only |
-| 2 | 조합 이름 | `"NAME"` | String | — | **Required** |
-| 3 | 활성 타입 · `"INACTIVE"` / `"STRENGTH"` / `"SERVICE"` | `"ACTIVE"` | String | `"ACTIVE"` | Optional |
-| 4 | 합산 방식 · `0`=Add / `1`=Envelope / `3`=SRSS | `"iTYPE"` | Integer | `0` | Optional |
-| 5 | 설명 | `"DESC"` | String | `""` | Optional |
-| 6 | 결과 타입 (읽기 전용) | `"bCB"` | Boolean | — | Read Only |
-| 7 | 조합 항목 배열 | `"vCOMB"` | Array | — | **Required** |
-| — | (vCOMB) 해석 타입 | `"ANAL"` | String | — | **Required** |
-| — | (vCOMB) 하중케이스명 | `"LCNAME"` | String | — | **Required** |
-| — | (vCOMB) 계수 | `"FACTOR"` | Number | — | **Required** |
+| 1 | Combination Number | `"NO"` | Integer | — | Read Only |
+| 2 | Combination Name | `"NAME"` | String | — | **Required** |
+| 3 | Active Type · Inactive: "INACTIVE" · Strength/Stress: "STRENGTH" · Serviceability: "SERVICE" | `"ACTIVE"` | String | `"ACTIVE"` | Optional |
+| 4 | Summation method · Add: 0 · Envelope: 1 · SRSS: 3 | `"iTYPE"` | Integer | `0` | Optional |
+| 5 | Description | `"DESC"` | String | `""` | Optional |
+| 6 | Result Type · General: false · Min/Max/All: true | `"bCB"` | Boolean | — | Read Only |
+| 7 | Combinations List | `"vCOMB"` | Array | — | **Required** |
+| — | └ Static Load Case: "ST" · Construction Stage Case: "CS" · Moving Load Case: "MV" · Settlement Case: "SM" · Response Spectrum Case: "RS" · Time History Cases: "TH" · General Comb.: "CB" | `"ANAL"` | String | — | **Required** |
+| — | └ Load Case Name | `"LCNAME"` | String | — | **Required** |
+| — | └ Factor | `"FACTOR"` | Number | — | **Required** |
 
 ### Request / Response JSON
 
@@ -940,16 +942,16 @@ for key, val in resp.json().get("LCOM-STLCOMP", {}).items():
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 조합 번호 (읽기 전용) | `"NO"` | Integer | — | Read Only |
-| 2 | 조합 이름 | `"NAME"` | String | — | **Required** |
-| 3 | 활성 타입 · `"INACTIVE"` / `"ACTIVE"` | `"ACTIVE"` | String | `"ACTIVE"` | Optional |
-| 4 | 합산 방식 · `0`=Add / `1`=Envelope / `3`=SRSS | `"iTYPE"` | Integer | `0` | Optional |
-| 5 | 설명 | `"DESC"` | String | `""` | Optional |
-| 6 | 결과 타입 (읽기 전용) | `"bCB"` | Boolean | — | Read Only |
-| 7 | 조합 항목 배열 | `"vCOMB"` | Array | — | **Required** |
-| — | (vCOMB) 해석 타입 | `"ANAL"` | String | — | **Required** |
-| — | (vCOMB) 하중케이스명 | `"LCNAME"` | String | — | **Required** |
-| — | (vCOMB) 계수 | `"FACTOR"` | Number | — | **Required** |
+| 1 | Combination Number | `"NO"` | Integer | — | Read Only |
+| 2 | Combination Name | `"NAME"` | String | — | **Required** |
+| 3 | Active Type · Inactive: "INACTIVE" · Active: "ACTIVE" | `"ACTIVE"` | String | `"ACTIVE"` | Optional |
+| 4 | Summation method · Add: 0 · Envelope: 1 · SRSS: 3 | `"iTYPE"` | Integer | `0` | Optional |
+| 5 | Description | `"DESC"` | String | `""` | Optional |
+| 6 | Result Type · General: false · Min/Max/All: true | `"bCB"` | Boolean | — | Read Only |
+| 7 | Combinations List | `"vCOMB"` | Array | — | **Required** |
+| — | └ Static Load Case: "ST" · Construction Stage Case: "CS" · Moving Load Case: "MV" · Settlement Case: "SM" · Response Spectrum Case: "RS" · Time History Cases: "TH" · General Comb.: "CB" | `"ANAL"` | String | — | **Required** |
+| — | └ Load Case Name | `"LCNAME"` | String | — | **Required** |
+| — | └ Factor | `"FACTOR"` | Number | — | **Required** |
 
 ### Request / Response JSON
 
@@ -1104,18 +1106,18 @@ print(f"내진 하중조합 수: {len(seismic_combos)}")
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 절단선 이름 | `"NAME"` | String | — | **Required** |
-| 2 | 방향 · `"NORMAL"` = 법선 방향 / `"DIR"` = 면 내 방향 | `"DIR"` | String | — | **Required** |
-| 3 | 점 1 – X 좌표 | `"PT1X"` | Number | — | **Required** |
-| 4 | 점 1 – Y 좌표 | `"PT1Y"` | Number | — | **Required** |
-| 5 | 점 1 – Z 좌표 | `"PT1Z"` | Number | — | **Required** |
-| 6 | 점 2 – X 좌표 | `"PT2X"` | Number | — | **Required** |
-| 7 | 점 2 – Y 좌표 | `"PT2Y"` | Number | — | **Required** |
-| 8 | 점 2 – Z 좌표 | `"PT2Z"` | Number | — | **Required** |
-| 9 | 선 색상 – 빨강(R) 값 (0–255) | `"R"` | Integer | `0` | Optional |
-| 10 | 선 색상 – 초록(G) 값 (0–255) | `"G"` | Integer | `0` | Optional |
-| 11 | 선 색상 – 파랑(B) 값 (0–255) | `"B"` | Integer | `0` | Optional |
-| 12 | 타입 | `"TYPE"` | Integer | `0` | Optional |
+| 1 | Name of Cutting Line | `"NAME"` | String | — | **Required** |
+| 2 | Direction · Normal: "NORMAL" · In Plane: "DIR" | `"DIR"` | String | — | **Required** |
+| 3 | Point 1 - X | `"PT1X"` | Number | — | **Required** |
+| 4 | Point 1 - Y | `"PT1Y"` | Number | — | **Required** |
+| 5 | Point 1 - Z | `"PT1Z"` | Number | — | **Required** |
+| 6 | Point 2 - X | `"PT2X"` | Number | — | **Required** |
+| 7 | Point 2 - Y | `"PT2Y"` | Number | — | **Required** |
+| 8 | Point 2 - Z | `"PT2Z"` | Number | — | **Required** |
+| 9 | Line Color · Red | `"R"` | Integer | `0` | Optional |
+| 10 | Line Color · Green | `"G"` | Integer | `0` | Optional |
+| 11 | Line Color · Blue | `"B"` | Integer | `0` | Optional |
+| 12 | Type | `"TYPE"` | Integer | `0` | Optional |
 
 ### Request / Response JSON
 
@@ -1275,20 +1277,22 @@ print("DELETE:", resp.status_code)
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 절단선 이름 | `"NAME"` | String | — | **Required** |
-| 2 | 방향 · `"NORMAL"` = 법선 / `"DIR"` = 면 내 / `"PLANE"` = 평면 | `"DIR"` | String | — | **Required** |
-| 3 | 점 1 – X 좌표 | `"PT1X"` | Number | — | **Required** |
-| 4 | 점 1 – Y 좌표 | `"PT1Y"` | Number | — | **Required** |
-| 5 | 점 1 – Z 좌표 | `"PT1Z"` | Number | — | **Required** |
-| 6 | 점 2 – X 좌표 | `"PT2X"` | Number | — | **Required** |
-| 7 | 점 2 – Y 좌표 | `"PT2Y"` | Number | — | **Required** |
-| 8 | 점 2 – Z 좌표 | `"PT2Z"` | Number | — | **Required** |
-| 9 | 점 3 – X 좌표 | `"PT3X"` | Number | — | **Required** |
-| 10 | 점 3 – Y 좌표 | `"PT3Y"` | Number | — | **Required** |
-| 11 | 점 3 – Z 좌표 | `"PT3Z"` | Number | — | **Required** |
-| 12 | 선 색상 – 빨강(R) 값 (0–255) | `"R"` | Integer | `0` | Optional |
-| 13 | 선 색상 – 초록(G) 값 (0–255) | `"G"` | Integer | `0` | Optional |
-| 14 | 선 색상 – 파랑(B) 값 (0–255) | `"B"` | Integer | `0` | Optional |
+| 1 | Name of Cutting Line | `"NAME"` | String | — | **Required** |
+| 2 | Direction · Normal: "NORMAL" · In Plane: "DIR" | `"DIR"` | String | — | **Required** |
+| 3 | Point 1 - X | `"PT1X"` | Number | — | **Required** |
+| 4 | Point 1 - Y | `"PT1Y"` | Number | — | **Required** |
+| 5 | Point 1 - Z | `"PT1Z"` | Number | — | **Required** |
+| 6 | Point 2 - X | `"PT2X"` | Number | — | **Required** |
+| 7 | Point 2 - Y | `"PT2Y"` | Number | — | **Required** |
+| 8 | Point 2 - Z | `"PT2Z"` | Number | — | **Required** |
+| 9 | Point 3 - X | `"PT3X"` | Number | — | **Required** |
+| 10 | Point 3 - Y | `"PT3Y"` | Number | — | **Required** |
+| 11 | Point 3 - Z | `"PT3Z"` | Number | — | **Required** |
+| 12 | Line Color · Red | `"R"` | Integer | `0` | Optional |
+| 13 | Line Color · Green | `"G"` | Integer | `0` | Optional |
+| 14 | Line Color · Blue | `"B"` | Integer | `0` | Optional |
+
+> ⚠️ 공식 Specifications 표는 `DIR` 값을 `"NORMAL"`/`"DIR"` 두 가지로만 적지만, 같은 글의 요청 예제는 `"DIR": "PLANE"`을 씁니다. 표 원문을 그대로 옮겼습니다.
 
 > **참고 — CUTL vs CLWP 비교:**
 >

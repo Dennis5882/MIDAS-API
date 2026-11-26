@@ -34,12 +34,14 @@ HC = "https://support.midasuser.com/hc/en-us/articles/"
 
 
 def read(path):
-    raw = open(path, "rb").read()
+    with open(path, "rb") as f:
+        raw = f.read()
     return raw.decode("utf-8").replace("\r\n", "\n"), b"\r\n" in raw
 
 
 def write(path, text, crlf):
-    open(path, "wb").write((text.replace("\n", "\r\n") if crlf else text).encode("utf-8"))
+    with open(path, "wb") as f:
+        f.write((text.replace("\n", "\r\n") if crlf else text).encode("utf-8"))
 
 
 def strip_blocks():

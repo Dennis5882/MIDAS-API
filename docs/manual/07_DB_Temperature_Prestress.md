@@ -80,7 +80,7 @@ def midas_api(method: str, endpoint: str, body=None):
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
-| 1 | Element Temperature (배열 오브젝트로 입력) | `"ITEMS"` | Array \[Object\] | - | Required |
+| 1 | Element Temperature · Insert the data as an object | `"ITEMS"` | Array \[Object\] | - | **Required** |
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Load Case Name | `"LCNAME"` | String | - | Required |
 | (3) | Load Group Name | `"GROUP_NAME"` | String | Blank | Optional |
@@ -203,17 +203,17 @@ midas_api("DELETE", "/db/ETMP", {"Assign": {"1": {}}})
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
-| 1 | Temperature Gradient (배열 오브젝트로 입력) | `"ITEMS"` | Array \[Object\] | - | Required |
+| 1 | Temperature Gradient · Insert the data as an object | `"ITEMS"` | Array \[Object\] | - | **Required** |
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Load Case Name | `"LCNAME"` | String | - | Required |
 | (3) | Load Group Name | `"GROUP_NAME"` | String | Blank | Optional |
 | (4) | Element Type · Beam: `1` · Plate: `2` | `"TYPE"` | Integer | - | Required |
 | (5) | T2z − T1z | `"TZ"` | Number | - | Required |
 | (6) | Use Section Hz | `"USE_HZ"` | Boolean | `false` | Optional |
-| (7) | Hz value (`USE_HZ` = false 일 때 사용) | `"HZ"` | Number | - | Optional |
-| (8) | T2y − T1y (Beam 타입 전용) | `"TY"` | Number | - | Required (Beam) |
-| (9) | Use Section Hy (Beam 타입 전용) | `"USE_HY"` | Boolean | `false` | Optional |
-| (10) | Hy value (`USE_HY` = false 일 때 사용, Beam 전용) | `"HY"` | Number | - | Optional |
+| (7) | Hz value | `"HZ"` | Number | - | Optional |
+| (8) | [When Element Type, "TYPE" is 1 (Beam)] T2y-T1y | `"TY"` | Number | - | **Required** |
+| (9) | [When Element Type, "TYPE" is 1 (Beam)] Use Section Hy | `"USE_HY"` | Boolean | `false` | Optional |
+| (10) | [When Element Type, "TYPE" is 1 (Beam)] Hy value | `"HY"` | Number | - | Optional |
 
 ### Python 예제
 
@@ -379,13 +379,13 @@ midas_api("POST", "/db/GTMP", gtmp_plate)
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
-| 1 | Beam Section Temperature (배열 오브젝트로 입력) | `"ITEMS"` | Array \[Object\] | - | Required |
+| 1 | Beam Section Temperature · Insert the data as an object | `"ITEMS"` | Array \[Object\] | - | **Required** |
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Load Case Name | `"LCNAME"` | String | - | Required |
 | (3) | Load Group Name | `"GROUP_NAME"` | String | Blank | Optional |
 | (4) | Direction · Local-y: `"LY"` · Local-z: `"LZ"` | `"DIR"` | String | `"LZ"` | Optional |
 | (5) | Ref. Position · `"Centroid"` · `"+End(Top)"` → `"Top"` · `"-End(Bot)"` → `"Bot"` | `"REF"` | String | `"Centroid"` | Optional |
-| (6) | Number of Section Temperature (`vSECTTMP` 항목 수) | `"NUM"` | Integer | - | Required |
+| (6) | Number of Section Temperature ("vSECTTMP") | `"NUM"` | Integer | - | **Required** |
 | (7) | Section Type · General: `false` · PSC/Composite: `true` | `"bPSC"` | Boolean | `false` | Optional |
 | (8) | Section Temperature List | `"vSECTTMP"` | Array \[Object\] | - | Required |
 | i | Material Type · Element: `"ELEMENT"` · Input: `"INPUT"` | `"TYPE"` | String | `"ELEMENT"` | Optional |
@@ -394,8 +394,8 @@ midas_api("POST", "/db/GTMP", gtmp_plate)
 | iv | H2 Value | `"VAL_H2"` | Number | - | Optional |
 | v | T1 Value | `"VAL_T1"` | Number | 0 | Optional |
 | vi | T2 Value | `"VAL_T2"` | Number | 0 | Optional |
-| vii | Modulus of Elasticity (`TYPE` = `"INPUT"` 일 때) | `"ELAST"` | Number | - | Optional |
-| viii | Thermal Coefficient (`TYPE` = `"INPUT"` 일 때) | `"THERMAL"` | Number | - | Optional |
+| vii | [When Material Type, "TYPE" is "INPUT"] Modulus of Elasticity | `"ELAST"` | Number | - | Optional |
+| viii | [When Material Type, "TYPE" is "INPUT"] Thermal Coefficient | `"THERMAL"` | Number | - | Optional |
 | ix | Ref. (`bPSC` = true) · Top: `0` · Bottom: `1` | `"REF"` | Integer | 0 | Optional |
 | x | B-Type (`bPSC` = true) · Section: `0` · Value: `1` | `"OPT_B"` | Integer | 1 | Optional |
 | xi | H1-Type (`bPSC` = true) · Z1:`0` · Z2:`1` · Z3:`2` · Value:`3` | `"OPT_H1"` | Integer | 3 | Optional |
@@ -552,7 +552,7 @@ midas_api("DELETE", "/db/STMP", {"Assign": {"2": {}}})
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
-| 1 | Nodal Temperature (배열 오브젝트로 입력) | `"ITEMS"` | Array \[Object\] | - | Required |
+| 1 | Nodal Temperature · Insert the data as an object | `"ITEMS"` | Array \[Object\] | - | **Required** |
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Load Case Name | `"LCNAME"` | String | - | Required |
 | (3) | Load Group Name | `"GROUP_NAME"` | String | Blank | Optional |
@@ -656,26 +656,26 @@ midas_api("DELETE", "/db/NTMP", {"Assign": {"190": {}}})
 |-----|-------------|-----|-----------|---------|----------|
 | 1 | Tendon Name | `"NAME"` | String | - | Required |
 | 2 | Tendon Type · Internal: `"INTERNAL"` · External: `"EXTERNAL"` | `"TYPE"` | String | `"EXTERNAL"` | Optional |
-| 3 | Tensioning Type · Post-Tension: `"POST"` · Pre-Tension: `"PRE"` · External: 미사용 | `"LT"` | String | `"PRE"` | Optional |
+| 3 | Tensioning Type · Post-Tension: "POST" · Pre-Tension: "PRE" · External: Not use | `"LT"` | String | `"PRE"` | Optional |
 | 4 | Tendon Material No. | `"MATL"` | Integer | - | Required |
 | 5 | Total Tendon Area | `"AREA"` | Number | - | Required |
-| 6 | Diameter · Post: Duct 직경 · Pre: Strand 직경 · External: 미사용 | `"D_AREA"` | Number | - | Required |
-| 7 | Anchorage Slip - Begin (Post/External 전용) | `"ASB"` | Number | 0 | Optional |
-| 8 | Anchorage Slip - End (Post/External 전용) | `"ASE"` | Number | 0 | Optional |
-| 9 | Bond Type (Post 전용) | `"bBONDED"` | Boolean | `false` | Optional |
-| 10 | External Cable Moment Magnifier (External 전용) | `"ALPHA"` | Number | 0 | Optional |
+| 6 | Dimeter · Post-Tension: Duct diameter · Pre-Tension: Strand diameter · External: Not use | `"D_AREA"` | Number | - | **Required** |
+| 7 | Anchorage Slip - Begin · Post-Tension/External: Use · Pre-Tension: Not use | `"ASB"` | Number | 0 | Optional |
+| 8 | Anchorage Slip - End · Post-Tension/External: Use · Pre-Tension: Not use | `"ASE"` | Number | 0 | Optional |
+| 9 | Bond Type · Post-Tension: Use · Pre-Tension/External: Not use | `"bBONDED"` | Boolean | `false` | Optional |
+| 10 | External Cable Moment Magnifier · External: Use · Pre/Post-Tension: Not use | `"ALPHA"` | Number | 0 | Optional |
 | 11 | Relaxation Coefficient – Code ¹⁾ | `"RM"` | Integer | - | Required |
 | 12 | Relaxation Coefficient – Factor ¹⁾ | `"RV"` | Integer | - | Required |
 | 13 | Ultimate Strength | `"US"` | Number | 0 | Optional |
 | 14 | Yield Strength | `"YS"` | Number | 0 | Optional |
 | 15 | Curvature Friction Factor (Post/External 전용) | `"FF"` | Number | 0 | Optional |
 | 16 | Wobble Friction Factor (Post 전용, Magura/IRC/KSCE/IRC112 코드) | `"WF"` | Number | 0 | Optional |
-| 16 | Wobble Type (CEB-FIP/European 코드) · Fraction Factor: `0` · Unintentional Angular: `1` | `"W_TYPE"` | Integer | 0 | Optional |
+| 16 | [CEB-FIP 1978, 1990, 2010, European] Wobble Type · Wobble Fraction Factor: 0 · Unintentional Angular Disp.: 1 | `"W_TYPE"` | Integer | 0 | Optional |
 | 17 | Wobble Fraction Factor (`W_TYPE`=0) | `"WF"` | Number | 0 | Optional |
 | 17 | Unintentional Angular Disp. (`W_TYPE`=1) | `"W_ANGLE"` | Number | 0 | Optional |
-| 18 | Relaxation Coefficient Class (CEB-FIP 2010 전용) | `"TDMFK"` | Integer | 1 | Optional |
+| 18 | [CEB-FIP 1978, 1990, 2010, European] Relaxation Coefficient Class ¹⁾ · Only for CEB-FIP 2010 | `"TDMFK"` | Integer | 1 | Optional |
 | — | Relaxation Factor ξ (TB05/TB10092/Q-CR/AS/JTJ/JTG 코드) | `"FT"` | Number | - | Required |
-| — | Low Relaxation (TB05/TB10092/Q-CR 코드) | `"LR"` | Boolean | `false` | Optional |
+| — | [TB05, TB10092-17, Q/CR 9300-18] Low Relaxation | `"LR"` | Boolean | `false` | Optional |
 | — | Overstress Reduction Factor 적용 (TB05/TB10092/Q-CR/JTG 코드) | `"bOSRF"` | Boolean | `false` | Optional |
 | — | Characteristic Strength fpk (TB05/TB10092/Q-CR/JTJ/JTG 코드) | `"FPK"` | Number | - | Required |
 | — | Relaxation Function Name (User Defined) | `"TDMFNAME"` | String | - | Required |
@@ -840,15 +840,15 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `bRELAX
 | 4 | Assigned Elements No. | `"ELEM"` | Array \[Integer\] | - | Required |
 | 5 | Input Type · 2D: `"2D"` · 3D: `"3D"` | `"INPUT"` | String | - | Required |
 | 6 | Curve Type · Spline: `"SPLINE"` · Round: `"ROUND"` | `"CURVE"` | String | - | Required |
-| 7 | Straight Length – Begin (Spline 전용) | `"BELENG"` | Number | 0 | Optional |
-| 8 | Straight Length – End (Spline 전용) | `"ELENG"` | Number | 0 | Optional |
+| 7 | Straight Length of Tendon - Begin · Only for Spline Type | `"BELENG"` | Number | 0 | Optional |
+| 8 | Straight Length of Tendon - End · Only for Spline Type | `"ELENG"` | Number | 0 | Optional |
 | 9 | Typical Tendon | `"bTP"` | Boolean | `false` | Optional |
-| 10 | No. of Tendons (`bTP` = true 일 때 필수) | `"CNT"` | Number | - | Optional |
+| 10 | No. of Tendons · Required if "bTP" = true | `"CNT"` | Number | - | Optional |
 | 11 | Transfer Length Option · `"USER"` · `"AUTO1"` · `"AUTO2"` | `"LENG_OPT"` | String | - | Required |
 | 12 | Transfer Length – Begin | `"BLEN"` | Number | 0 | Optional |
 | 13 | Transfer Length – End | `"ELEN"` | Number | 0 | Optional |
-| 14 | Debonded Length – Begin (Pre-tensioning 전용) | `"DeBondBLEN"` | Number | 0 | Optional |
-| 15 | Debonded Length – End (Pre-tensioning 전용) | `"DeBondELEN"` | Number | 0 | Optional |
+| 14 | Debonded Length - Begin · Only for Pre-tensioning | `"DeBondBLEN"` | Number | 0 | Optional |
+| 15 | Debonded Length - End · Only for Pre-tensioning | `"DeBondELEN"` | Number | 0 | Optional |
 | 16 | Reference Axis · `"ELEMENT"` · `"STRAIGHT"` · `"CURVE"` | `"SHAPE"` | String | - | Required |
 
 **SHAPE = "ELEMENT" 일 때 추가 파라미터:**
@@ -1095,7 +1095,7 @@ midas_api("DELETE", "/db/TDCS", {"Assign": {"1": {}}})
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
-| 1 | Tendon Prestress (배열 오브젝트로 입력) | `"ITEMS"` | Array \[Object\] | - | Required |
+| 1 | Tendon Prestress · Insert the data as an object | `"ITEMS"` | Array \[Object\] | - | **Required** |
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Load Case Name | `"LCNAME"` | String | - | Required |
 | (3) | Load Group Name | `"GROUP_NAME"` | String | Blank | Optional |
@@ -1174,7 +1174,7 @@ midas_api("DELETE", "/db/TDPL", {"Assign": {"1": {}}})
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
-| 1 | Prestress Beam Loads (배열 오브젝트로 입력) | `"ITEMS"` | Array \[Object\] | - | Required |
+| 1 | Prestress Beam Loads · Insert the data as an object | `"ITEMS"` | Array \[Object\] | - | **Required** |
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Load Case Name | `"LCNAME"` | String | - | Required |
 | (3) | Load Group Name | `"GROUP_NAME"` | String | Blank | Optional |
@@ -1258,7 +1258,7 @@ midas_api("DELETE", "/db/PRST", {"Assign": {"1101": {}}})
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
-| 1 | Pretension Loads (배열 오브젝트로 입력) | `"ITEMS"` | Array \[Object\] | - | Required |
+| 1 | Pretension Loads · Insert the data as an object | `"ITEMS"` | Array \[Object\] | - | **Required** |
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Load Case Name | `"LCNAME"` | String | - | Required |
 | (3) | Load Group Name | `"GROUP_NAME"` | String | Blank | Optional |
@@ -1316,7 +1316,7 @@ midas_api("DELETE", "/db/PTNS", {"Assign": {"3431": {}}})
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
-| 1 | Load Case Name (프리텐션 하중이 있는 케이스만 입력) | `"LCNAME_ITEM"` | Array \[String\] | - | Required |
+| 1 | Load Case Name · Only load cases with pre-tension load | `"LCNAME_ITEM"` | Array \[String\] | - | **Required** |
 
 ### Python 예제
 

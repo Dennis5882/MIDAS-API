@@ -547,7 +547,7 @@ for row in brace["DATA"]:
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 | --- | --- | --- | --- | --- | --- |
-| 9 | 층 이름 지정 (예: `["1F", "2F"]`) | `"STORY_NAMES"` | Array [String] | All | Optional |
+| 9 | Story Names | `"STORY_NAMES"` | Array [String] | All | Optional |
 
 ### Request / Response JSON
 

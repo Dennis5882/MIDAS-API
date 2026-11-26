@@ -300,7 +300,7 @@ set_precomposite_load_cases()
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 1 | Load Case Names (순서 배열) | `"LCNAME_ITEM"` | Array [String] | - | Required |
+| 1 | Load Case Name | `"LCNAME_ITEM"` | Array [String] | - | **Required** |
 
 > **참고**: Assign Key는 하중 순서 세트 번호입니다. `LCNAME_ITEM` 배열의 순서가 비선형 해석에서의 하중 적용 순서가 됩니다.
 

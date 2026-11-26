@@ -3248,13 +3248,13 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `ASSIGN
 | (3) | Area | `"AREA"` | Number | - | **Required** |
 | (4) | Center Y | `"CENTER_Y"` | Number | - | **Required** |
 | (5) | Center Z | `"CENTER_Z"` | Number | - | **Required** |
-| (6) | Fiber Material ID(`FIMP_NAME`/`FIMP_COLOR` 배열의 몇 번째 재료인지) | `"FIBER_MATL_ID"` | Number | - | **Required** |
+| (6) | Fiber Material ID | `"FIBER_MATL_ID"` | Number | - | **Required** |
 | (7) | Area Consider Rebar | `"AREA_CONSIDER_REBAR"` | Number | - | **Required** |
 | (8) | Is Rebar | `"OPT_IS_REBAR"` | Boolean | - | **Required** |
-| (9) | Fiber 외곽 다각형 Point Y 목록 | `"POINT_Y"` | Array[Number] | - | **Required** |
-| (10) | Fiber 외곽 다각형 Point Z 목록 | `"POINT_Z"` | Array[Number] | - | **Required** |
-| 7 | Monitored Fiber 사용 여부 | `"OPT_MONITORED_FIBER"` | Boolean | - | **Required** |
-| 8 | Monitored Fiber(`FIBR_BASE` 각 항목에 대응하는 0/1 플래그 배열) | `"MONITORED_FIBER"` | Array[Integer] | - | **Required** |
+| (9) | Point Y | `"POINT_Y"` | Array[Number] | - | **Required** |
+| (10) | Point Z | `"POINT_Z"` | Array[Number] | - | **Required** |
+| 7 | Monitored Fiber Option | `"OPT_MONITORED_FIBER"` | Boolean | - | **Required** |
+| 8 | Monitored Fiber | `"MONITORED_FIBER"` | Array[Integer] | - | Require |
 
 ### Request Body
 

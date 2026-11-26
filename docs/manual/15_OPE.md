@@ -246,13 +246,13 @@ for row in status.get("DATA_LOAD", []):
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 분할 대상 요소 ID | `"TARGETS"` | Array [Integer] | — | Optional |
-| 2 | 시작 노드/요소 번호 | `"START_NUMBER"` | Object | System | Optional |
+| 1 | Divide Element ID Number | `"TARGETS"` | Array [Integer] | — | Optional |
+| 2 | Starting Node/Element Number | `"START_NUMBER"` | Object | System | Optional |
 | 2-1 | └ 노드 번호 옵션 · 최소 미사용: `"Smallest"` / 최대+1: `"Largest"` / 사용자지정: `"User"` | `START_NUMBER.NODE_NUMBER.NUMBER_OPTION` | String | — | Optional |
 | 2-2 | └ 사용자 지정 노드 번호 (`NUMBER_OPTION="User"`일 때) | `START_NUMBER.NODE_NUMBER.USER_NUM` | Integer | — | Optional |
 | 2-3 | └ 요소 번호 옵션 (노드와 동일 enum) | `START_NUMBER.ELEM_NUMBER.NUMBER_OPTION` | String | — | Optional |
 | 2-4 | └ 사용자 지정 요소 번호 | `START_NUMBER.ELEM_NUMBER.USER_NUM` | Integer | — | Optional |
-| 3 | 분할 설정 | `"DIVIDE"` | Object | — | **Required** |
+| 3 | Setting Divide | `"DIVIDE"` | Object | — | **Required** |
 | 3-1 | └ 요소 타입 · 선요소: `"Frame"` / 벽: `"Wall"` / 평면: `"Planar"` / 솔리드: `"Solid"` | `DIVIDE.ELEM_TYPE` | String | — | **Required** |
 | 3-2 | └ 분할 방법 · 등분할: `"Equal"` / 비등분할: `"Unequal"` / 비율분할: `"ParametricUnequal"` / 평행브레이싱: `"ParallelBracing"` / 노드기준: `"DividebyNode"` | `DIVIDE.DIV_METHOD` | String | — | **Required** |
 | 3-3 | └ 분할 옵션 (DIV_METHOD별 하위 객체 중 하나) | `DIVIDE.OPTION` | Object | — | **Required** |
@@ -532,12 +532,12 @@ for sect_id, result in props.items():
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 하중케이스/설계조합 이름 접두어 | `"PREFIX"` | String | System | Optional |
-| 2 | 설계조합 생성 위치 · 강재: `"STEEL"` / 콘크리트: `"CONC"` / SRC: `"SRC"` | `"POSITION"` | String | — | **Required** |
-| 3 | 선택된 조합 목록 | `"LCOM_LIST"` | Array [Object] | — | **Required** |
+| 1 | Load Case & Design Combination Name | `"PREFIX"` | String | System | Optional |
+| 2 | Desing Combination Generate Position · Steel Design: "STEEL" · Concrete Design: "CONC" · SRC Design: "SRC" | `"POSITION"` | String | — | **Required** |
+| 3 | Select Combinations · Insert data as object | `"LCOM_LIST"` | Array [Object] | — | **Required** |
 | 3-1 | └ 하중조합 타입 · 일반: `"GEN"` / 강재: `"STEEL"` / 콘크리트: `"CONC"` / SRC: `"SRC"` / 강합성거더: `"STLCOMP"` / 내진: `"SEISMIC"` | `LCOM_LIST[].TYPE` | String | — | **Required** |
 | 3-2 | └ 하중조합 이름 | `LCOM_LIST[].NAME` | String | — | **Required** |
-| 4 | 선택 하중 종류 | `"LOADS"` | Object | — | Optional |
+| 4 | Select Loads | `"LOADS"` | Object | — | Optional |
 | 4-1 | └ 자중 | `LOADS.SELF_WEIGHT` | Boolean | `true` | Optional |
 | 4-2 | └ 절점체적력 | `LOADS.NODAL_BODY_FROCE` | Boolean | `true` | Optional |
 | 4-3 | └ 절점하중 | `LOADS.NODAL_LOAD` | Boolean | `true` | Optional |
@@ -724,21 +724,21 @@ print("POST:", resp.status_code, resp.json())
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 하중케이스 이름 | `"LCNAME"` | String | — | **Required** |
-| 2 | 하중 그룹 이름 | `"GROUP_NAME"` | String | — | Optional |
+| 1 | Load Case Name | `"LCNAME"` | String | — | **Required** |
+| 2 | Load Group Name | `"GROUP_NAME"` | String | — | Optional |
 | 3 | 하중 타입 · 집중하중: `"CONLOAD"` / 집중모멘트: `"CONMOMENT"` / 등분포하중: `"UNILOAD"` / 등분포모멘트: `"UNIMOMENT"` / 사다리꼴하중: `"TRALOAD"` / 사다리꼴모멘트: `"TRAMOMENT"` / 등분포압력: `"UNIPRESSURE"` / 사다리꼴압력: `"TRAPRESSURE"` / 곡선하중: `"CURVED"` | `"TYPE"` | String | — | **Required** |
-| 4 | 하중 적용 대상 정보 | `"TARGET"` | Object | — | **Required** |
+| 4 | Method, Elements and Nodes Information to load | `"TARGET"` | Object | — | **Required** |
 | 4-1 | └ 적용 방법 · 하중선 위: `0` / 선택 요소: `1` | `TARGET.METHOD` | Integer | — | **Required** |
 | 4-2 | └ 적용 대상 요소 목록 | `TARGET.ELEM` | Array [Integer] | — | **Required** |
 | 4-3 | └ 하중선 정의 노드 (2개) | `TARGET.NODE` | Array [Integer, 2] | — | **Required** |
-| 5 | 편심 옵션(`TYPE`이 CONLOAD/UNILOAD/TRALOAD/CURVED일 때만 사용 가능) | `"ECCEN"` | Object | — | Optional |
+| 5 | Option - Eccentricity · It is available when "TYPE" value is as follows; / "CONLOAD" / "UNILOAD" / "TRALOAD" / "CURVED" | `"ECCEN"` | Object | — | Optional |
 | 5-1 | └ 활성화 | `ECCEN.USE` | Boolean | `false` | — |
 | 5-2 | └ 타입 · 도심: `0` / 옵셋: `1` | `ECCEN.TYPE` | Integer | — | — |
 | 5-3 | └ 방향 · 국부y: `"LY"` / 국부z: `"LZ"` / 전체X: `"GX"` / 전체Y: `"GY"` / 전체Z: `"GZ"` | `ECCEN.DIR` | String | — | — |
 | 5-4 | └ I단 편심량 | `ECCEN.I_END` | Number | — | — |
 | 5-5 | └ J단 편심량(`USE_J_END=true`일 때) | `ECCEN.J_END` | Number | — | — |
 | 5-6 | └ J단 편심 활성화 | `ECCEN.USE_J_END` | Boolean | — | — |
-| 6 | 상단 추가높이 옵션(`TYPE`이 UNIPRESSURE/TRAPRESSURE일 때만 사용 가능) | `"ADD_H"` | Object | — | Optional |
+| 6 | Option - Additional H from Top · It is available when "TYPE" value is as follows; / "UNIPRESSURE" / "TRAPRESSURE" | `"ADD_H"` | Object | — | Optional |
 | 6-1 | └ 활성화 | `ADD_H.USE` | Boolean | `false` | — |
 | 6-2 | └ I단 값 | `ADD_H.I_END` | Number | — | — |
 | 6-3 | └ J단 값(`USE_J_END=true`일 때) | `ADD_H.J_END` | Number | — | — |
@@ -752,7 +752,7 @@ print("POST:", resp.status_code, resp.json())
 | 7-6 | └ 곡선식 계수 a (`CURVED` 전용) | `LOAD.A` | Number | — | **Required** |
 | 7-7 | └ 곡선식 계수 b (`CURVED` 전용) | `LOAD.B` | Number | — | **Required** |
 | 7-8 | └ 곡선식 계수 c (`CURVED` 전용) | `LOAD.C` | Number | — | **Required** |
-| 8 | 복사 옵션 | `"COPY"` | Object | — | Optional |
+| 8 | Copy Options | `"COPY"` | Object | — | Optional |
 | 8-1 | └ 활성화 | `COPY.USE` | Boolean | `false` | — |
 | 8-2 | └ 복사 축 · `"X"`/`"Y"`/`"Z"` | `COPY.AXIS` | String | — | — |
 | 8-3 | └ 복사 거리 (예: `"10@3.0"`) | `COPY.DIST` | String | — | — |
@@ -990,7 +990,7 @@ print("POST (복사):", resp.status_code, resp.json())
 | 1-5-c | 　└ 포함 노드 번호(User일 때) | `INCLUDE_INTERIOR_NODES.VALUE` | Array [Integer] | — | **Required**(User일 때) |
 | 1-6 | └ 영역 내 선요소 고려 옵션 (구조는 1-5와 동일) | `MESHER.INCLUDE_INTERIOR_LINES` | Object | — | Optional |
 | 1-7 | └ 메시 경계 연결 여부 | `MESHER.INCLUDE_BOUNDARY_CONNECTIVITY` | Boolean | `true` | Optional |
-| 2 | 메시 크기 | `"MESH_SIZE"` | Object | — | **Required** |
+| 2 | Mesh Size | `"MESH_SIZE"` | Object | — | **Required** |
 | 2-1 | └ 길이 기준 (`DIV`와 동시 사용 불가) | `MESH_SIZE.LENGTH` | Number | — | **Required** |
 | 2-2 | └ 분할수 기준 (`LENGTH`와 동시 사용 불가) | `MESH_SIZE.DIV` | Number | — | **Required** |
 | 3 | 요소 속성 | `"PROPERTY"` | Object | — | **Required** |
@@ -1000,9 +1000,9 @@ print("POST (복사):", resp.status_code, resp.json())
 | 3-2-b | 　└ Drilling DOF 사용(`Plate`/`PlaneStress`일 때) | `ELEMENT_SUB_TYPE.WITH_DRILLING_DOF` | Boolean | `true` | Optional |
 | 3-3 | └ 재료 번호 | `PROPERTY.MATERIAL` | Integer | — | **Required** |
 | 3-4 | └ 두께 번호(`Plate`/`PlaneStress`일 때) | `PROPERTY.THICKNESS` | Integer | — | Optional |
-| 4 | 도메인 이름 | `"DOMAIN_NAME"` | Object | — | **Required** |
+| 4 | Domain Name | `"DOMAIN_NAME"` | Object | — | **Required** |
 | 4-1 | └ 이름 | `DOMAIN_NAME.NAME` | String | — | **Required** |
-| 5 | 추가 옵션 | `"ADDITIONAL_OPTION"` | Object | — | Optional |
+| 5 | Additional Option | `"ADDITIONAL_OPTION"` | Object | — | Optional |
 | 5-1 | └ 원본 선/경계 요소 삭제 | `ADDITIONAL_OPTION.DELETE_LINE_ELEM` | Boolean | `false` | Optional |
 | 5-2 | └ 원본 선/경계 요소 재분할 | `ADDITIONAL_OPTION.SUBDIVIDE_LINE_ELEM` | Boolean | `true` | Optional |
 
@@ -1169,10 +1169,10 @@ print("POST:", resp.status_code, resp.json())
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
 | 1 | 변환 방식 · 점스프링: `"POINT_SPRING"` / 탄성링크: `"ELASTIC_LINK"` | `"CONVERT_TO"` | String | — | **Required** |
-| 2 | 경계 그룹 이름 | `"GROUP_NAME"` | String | `""` | Optional |
-| 3 | 대상 노드/요소 번호 목록 | `"NODE_ELEMS"` | Object | — | **Required** |
+| 2 | Boundary Group Name | `"GROUP_NAME"` | String | `""` | Optional |
+| 3 | Node / Element No.Input | `"NODE_ELEMS"` | Object | — | **Required** |
 | 3-1 | └ 번호 배열 | `NODE_ELEMS.KEYS` | Array [Integer] | — | **Required** |
-| 4 | 요소 타입 정보 | `"ELEMENT"` | Object | — | **Required** |
+| 4 | Element Type | `"ELEMENT"` | Object | — | **Required** |
 | 4-1 | └ 타입 · 프레임: `"FRAME"` / 평면: `"PLANAR"` / 솔리드(면): `"SOLID_FACE"` / 솔리드(절점): `"SOLID_NODE"` | `ELEMENT.TYPE` | String | — | **Required** |
 | 4-2 | └ 폭 (`FRAME` 전용) | `ELEMENT.WIDTH` | Number | — | **Required**(FRAME일 때) |
 | 4-3 | └ 면 번호 1~6 (`SOLID_FACE` 전용) | `ELEMENT.FACE` | Integer | — | **Required**(SOLID_FACE일 때) |
@@ -1333,13 +1333,13 @@ print("POST (Elastic Link):", resp.status_code, resp.json())
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 대상 노드/요소 번호 | `"NODE_ELEMS"` | Object | — | **Required** |
+| 1 | Node / Element No.Input | `"NODE_ELEMS"` | Object | — | **Required** |
 | 1-1 | └ 번호 배열 (예: `[101, 102, 103]`) | `NODE_ELEMS.KEYS` | Array [Integer] | — | **Required** |
-| 2 | 변경 방법 · 명목크기: `"NSM"` / 체적표면비: `"VSR"` | `"TYPE"` | String | `"NSM"` | Optional |
-| 3 | 자동계산 여부 (체적표면비는 `false`만 가능) | `"AUTO"` | Boolean | `false` | Optional |
-| 4 | 기준 코드 · 한국표준: `"Korean Standard"` / CEB-FIP(1990) / 일본표준 / 중국표준 (`AUTO=true`이고 `TYPE="NSM"`일 때만 사용) | `"CODE"` | String | `"Korean Standard"` | Optional |
-| 5 | 파라미터 값(a) (`AUTO=false`일 때 필수) | `"PARAMETER"` | Number | — | **Required**(AUTO=false) |
-| 6 | 변경값 · 명목크기: h / 체적표면비: v/s | `"H_VS"` | Number | — | **Required** |
+| 2 | Change Property Method · Notional Size of Member: "NSM" · Volume Surface Ratio: "VSR" | `"TYPE"` | String | `"NSM"` | Optional |
+| 3 | Auto Calculate · Volume Surface Ratio can only be false | `"AUTO"` | Boolean | `false` | Optional |
+| 4 | [Auto Calculate: true(Only for Notional Size of Member)] Code · Korean Standard: "Korean Standard" · CEB-FIP(1990): "CEB-FIP(1990)" · Japanese Standard: "Japanese Standard" · Chinese Standard: "Chinese Standard" | `"CODE"` | String | `"Korean Standard"` | Optional |
+| 5 | [Auto Calculate: true(Only for Notional Size of Member)] Parameter Value(a) | `"PARAMETER"` | Number | — | **Required** |
+| 6 | [Auto Calculate: false] Change Property Value · Notional Size of Member: h · Volume Surface Ratio: v/s | `"H_VS"` | Number | — | **Required** |
 
 ### Request / Response JSON
 
@@ -1477,10 +1477,10 @@ print("POST (VSR):", resp.status_code, resp.json())
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 지진 우발편심 | `"SEIS_ECC"` | Object | — | **Required** |
+| 1 | Seismic Accidental Eccentricity | `"SEIS_ECC"` | Object | — | **Required** |
 | 1-1 | └ 지진 우발편심 포함 여부 | `SEIS_ECC.INC_SEIS_ECC` | Boolean | — | **Required** |
 | 1-2 | └ 지진 우발편심 값(%) | `SEIS_ECC.SEIS_ECC_VALUE` | Number | — | **Required** |
-| 2 | 풍하중 편심 | `"WIND_ECC"` | Object | — | **Required** |
+| 2 | Wind Eccentricity | `"WIND_ECC"` | Object | — | **Required** |
 | 2-1 | └ 풍하중 편심 포함 여부 | `WIND_ECC.INC_WIND_ECC` | Boolean | — | **Required** |
 | 2-2 | └ 풍하중 편심 값(%) | `WIND_ECC.WIND_ECC_VALUE` | Number | — | **Required** |
 
@@ -1629,10 +1629,10 @@ print("GET:", resp.json())
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 국가 기준코드 · `"NTC2018"` / `"NTC2012"` / `"NTC2008"` / `"KBC2009"` / `"NSR-10"` / `"NTCS2020"` / `"NTCS2023"` / `"NSCP2015"` / `"IS1893(2016)"` / `"IS16700(2023)"` | `"COUNTRY_CODE"` | String | — | **Required** |
-| 2 | 층간변위 산정방법 · 질량중심 변위: `"Drift at the Center of Mass"` / 최외곽점 최대변위: `"Max. Drift of Outer Extreme Points"` / 전체 수직요소 최대변위: `"Max. Drift of All Vertical Elements"` | `"STORY_DRIFT_METHOD"` | String | — | **Required** |
-| 3 | 층강성 산정방법 · `"1 / Story Drift Ratio"` / `"Story Shear / Story Drift"` | `"STORY_STIFFNESS_METHOD"` | String | — | **Required** |
-| 4 | 지진거동계수(`COUNTRY_CODE`가 `"NTCS2023"` 또는 `"NTCS2020"`일 때만 필요) · `"4"` / `"3 or below"` | `"SEISMIC_BEHAVIOR_FACTOR"` | String | — | 조건부 **Required** |
+| 1 | Set Country Code · "NTC2018" · "NTC2012" · "NTC2008" · "KBC2009" · "NSR-10" · "NTCS2020" · "NTCS2023" · "NSCP2015" · "IS1893(2016)" · "IS16700(2023)" | `"COUNTRY_CODE"` | String | — | **Required** |
+| 2 | Story Drift Method · "Drift at the Center of Mass" · "Max. Drift of Outer Extreme Points" · "Max. Drift of All Vertical Elements" | `"STORY_DRIFT_METHOD"` | String | — | **Required** |
+| 3 | Story Stiffness Method · "1 / Story Drift Ratio" · "Story Shear / Story Drift" | `"STORY_STIFFNESS_METHOD"` | String | — | **Required** |
+| 4 | [In Case of "COUNTRY_CODE": "NTCS2023" or "NTCS2020"] Seismic Behavior Factor · "4" · "3 or below" | `"SEISMIC_BEHAVIOR_FACTOR"` | String | — | **Required** |
 
 ### Python Example
 
@@ -1728,8 +1728,8 @@ print("GET:", resp.json())
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 힘 단위 · `"N"`/`"KN"`/`"KGF"`/`"TONF"`/`"LBF"`/`"KIPS"` | `"FORCE_UNIT"` | String | System | Optional |
-| 2 | 길이 단위 · `"M"`/`"CM"`/`"MM"`/`"FT"`/`"IN"` | `"LENGTH_UNIT"` | String | System | Optional |
+| 1 | Force Unit of Response Unit Setting · "N", "KN", "KGF", "TONF", "LBF", "KIPS" | `"FORCE_UNIT"` | String | System | Optional |
+| 2 | Length Unit of Response Unit Setting · "M", "CM", "MM", "FT", "IN" | `"LENGTH_UNIT"` | String | System | Optional |
 | 3 | 응답 숫자 형식 · `"Fixed"`/`"Scientific"` | `"FORMAT"` | String | System | Optional |
 | 4 | 응답 숫자 소수 자릿수(0~15) | `"PLACE"` | String | System | Optional |
 
@@ -1819,10 +1819,12 @@ for row in result.get("DATA", []):
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 배정 타입 · 수동: `"MANUAL"` / 자동: `"AUTO"` | `"ASSIGN_TYPE"` | String | — | **Required** |
-| 2 | 선택 타입 · 전체: `"ALL"`(`ASSIGN_TYPE="AUTO"`일 때만 가능) / 선택: `"SELECTION"` | `"SELECTION_TYPE"` | String | — | **Required** |
-| 3 | 대상 요소 목록 (`SELECTION_TYPE="ALL"`이면 무시됨) | `"ELEM_LIST"` | Array | — | 조건부 **Required** |
-| 4 | 단일요소 부재 허용 여부 | `"ALLOW_SINGLE"` | Boolean | — | **Required** |
+| 1 | Assign Type · "MANUAL" · "AUTO" | `"ASSIGN_TYPE"` | String | — | **Required** |
+| 2 | Selection Type · "ALL" · "SELECTION" | `"SELECTION_TYPE"` | String | — | **Required** |
+| 3 | Element List | `"ELEM_LIST"` | Array | — | Required(*) |
+| 4 | Allow Single Element Member | `"ALLOW_SINGLE"` | Boolean | — | **Required** |
+
+\* If Selection Type is set to "ALL", the Element List will be ignored.
 
 > ✅ **2026-09-28 공식 반영 확인.** 원문 아티클(id `49514964272665`)의 한글/영문 페이지 불일치와
 > 표 2행 `"SELETION_TYPE"` 오타가 모두 정정되었다 — 이제 한글·영문 페이지가 완전히 동일한 본문을
@@ -1956,16 +1958,16 @@ print("POST (자동):", resp.status_code, resp.json())
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 풍하중 기준코드 · `"KDS(41-12:2022)"` | `"WIND_CODE"` | String (enum) | — | **Required** |
-| 2 | 구조물 타입 · 강성: `"RIGID"` / 유연: `"FLEXIBLE"` | `"STRUCTURE_TYPE"` | String (enum) | — | **Required** |
+| 1 | WIND_CODE · KDS(41-12:2022) | `"WIND_CODE"` | String (enum) | — | **Required** |
+| 2 | Structure type classification. · RIGID · FLEXIBLE | `"STRUCTURE_TYPE"` | String (enum) | — | **Required** |
 | **STRUCTURE_TYPE = "RIGID"인 경우** |
-| 3 | 강성구조 파라미터 | `"RIGID_PARAM"` | Object | — | 조건부 **Required** |
+| 3 | [When "STRUCTURE_TYPE" is RIGID] Parameters | `"RIGID_PARAM"` | Object | — | Conditional |
 | 3-1 | └ 지표면 노출유형 | `RIGID_PARAM.EXP_CATEGORY` | String | — | **Required** |
 | 3-2 | └ 지붕높이 | `RIGID_PARAM.ROOF_HEIGHT` | Number (≥0) | — | **Required** |
 | 3-3 | └ 평면 폭(X방향) | `RIGID_PARAM.BREADTH_X` | Number (≥0) | — | **Required** |
 | 3-4 | └ 평면 폭(Y방향) | `RIGID_PARAM.BREADTH_Y` | Number (≥0) | — | **Required** |
 | **STRUCTURE_TYPE = "FLEXIBLE"인 경우** |
-| 4 | 유연구조 파라미터 | `"FLEXIBLE_PARAM"` | Object | — | 조건부 **Required** |
+| 4 | [When "STRUCTURE_TYPE" is FLEXIBLE] Parameters | `"FLEXIBLE_PARAM"` | Object | — | Conditional |
 | 4-1 | └ 지표면 노출유형 | `FLEXIBLE_PARAM.EXP_CATEGORY` | String | — | **Required** |
 | 4-2 | └ 기본풍속(m/s) | `FLEXIBLE_PARAM.BASIC_WIND_SPEED` | Number (≥0) | — | **Required** |
 | 4-3 | └ 중요도계수 | `FLEXIBLE_PARAM.IMPORTANCE_FACTOR` | Number (≥0) | — | **Required** |
@@ -3967,14 +3969,14 @@ print("POST (LCOM-SRC, AIK-SRC2K):", resp.status_code, resp.json())
 |-----|-------------|-----|-----------|---------|----------|
 | 1 | Load Case/Combination Name | `"LC_NAME"` | String | – | Required |
 | 2 | Diagram Type (Stress: `0` / Force: `1`) | `"DGRM_TYPE"` | Integer | – | Required |
-| 3 | Batch Option (생략 시 true) | `"BATCH"` | Boolean | true | Optional |
+| 3 | Batch option When omitted, the default is treated as true. | `"BATCH"` | Boolean | true | Optional |
 | 4 | X-Axis Type (Distance: `0` / Node: `1`) | `"X_AXIS_TYPE"` | Integer | 0 | Optional |
-| 5 | Batch Output Group-Name List (`BATCH=true`일 때, 각 항목은 문자열 그대로) | `"BATCH_LIST"` | Array[String] | – | Required (`BATCH=true`) |
-| 6 | Bridge Girder Element Group (`BATCH=false`일 때) | `"BRDG_GROUP"` | String | – | Required (`BATCH=false`) |
+| 5 | [When BATCH = true or omitted] Batch output group-name list · Each item is entered directly as a non-empty string. · BRDG_GROUP, COMPONENTS, COMBINED_COMP, and 7TH_DOF_TYPE are not allowed at the top level in batch mode. | `"BATCH_LIST"` | Array[String] | – | **Required** |
+| 6 | [When BATCH = false] Bridge Girder Element Group | `"BRDG_GROUP"` | String | – | **Required** |
 | 7 | Component — Stress(`DGRM_TYPE=0`): Sax:0/+Sby:1/-Sby:2/+Sbz:3/-Sbz:4/Combined:5/7th DOF:6, Force(`DGRM_TYPE=1`): Fx:0/Fy:1/Fz:2/Mx:3/My:4/Mz:5/Mb:6/Mt:7/Mw:8 | `"COMPONENTS"` | Integer | 0 | Optional |
 | 8 | Location for Display of Stress (`BATCH=false`, `DGRM_TYPE=0`, `COMPONENTS=5`) — Max:0 / 1(-y,+z):1 / 2(+y,+z):2 / 3(+y,-z):3 / 4(-y,-z):4 | `"COMBINED_COMP"` | Integer | 0 | Optional |
 | 9 | 7th DOF Type (`BATCH=false`, `DGRM_TYPE=0`, `COMPONENTS=6`) — Sax(Warping):0 / Ssy(Mt):1 / Ssy(Mw):2 / Ssz(Mt):3 / Ssz(Mw):4 / Combined(Ssy):5 / Combined(Ssz):6 | `"7TH_DOF_TYPE"` | Integer | 0 | Optional |
-| 10 | Allowable Stress Line (`DGRM_TYPE=0`일 때만) | `"STRESS_LINE"` | Object | – | Optional |
+| 10 | [When DGRM_TYPE = 0 (Stress)] Allowable Stress Line | `"STRESS_LINE"` | Object | – | Optional |
 | 10-(1) | Draw Allowable Stress Line | `"STRESS_LINE.OPT_USE"` | Boolean | false | Optional |
 | 10-(2) | Allowable Compression Stress (`OPT_USE=true`) | `"STRESS_LINE.COMP"` | Integer | – | Required |
 | 10-(3) | Allowable Tension Stress (`OPT_USE=true`) | `"STRESS_LINE.TENS"` | Integer | – | Required |

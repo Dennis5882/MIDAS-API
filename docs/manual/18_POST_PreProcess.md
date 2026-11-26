@@ -123,10 +123,10 @@
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 테이블 이름 | `"TABLE_NAME"` | String | Empty | Optional |
-| 2 | 결과 테이블 타입 · `"ELEMENTWEIGHT"` | `"TABLE_TYPE"` | String | — | **Required** |
-| 3 | 결과 테이블 저장 경로 | `"EXPORT_PATH"` | String | — | Optional |
-| 4 | 노드/요소 지정 (아래 3방식 중 하나만 사용) | `"NODE_ELEMS"` | Object | All | Optional |
+| 1 | Table Name · Response Table Title | `"TABLE_NAME"` | String | Empty | Optional |
+| 2 | Result Table Type · "ELEMENTWEIGHT" | `"TABLE_TYPE"` | String | — | **Required** |
+| 3 | Result Table Save Path | `"EXPORT_PATH"` | String | — | Optional |
+| 4 | Node / Element No. Input · Use Only One of the Three Methods | `"NODE_ELEMS"` | Object | All | Optional |
 | 4-1 | 방식1: ID 각각 지정 (예: `[101, 102, 103]`) | `NODE_ELEMS.KEYS` | Array [Integer] | — | Optional |
 | 4-2 | 방식2: ID 범위 지정 (예: `"101 to 105"`) | `NODE_ELEMS.TO` | String | — | Optional |
 | 4-3 | 방식3: 구조 그룹명 지정 (예: `"SG1"`) | `NODE_ELEMS.STRUCTURE_GROUP_NAME` | String | — | Optional |
@@ -226,9 +226,9 @@ for row in table.get("DATA", []):
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 테이블 이름 | `"TABLE_NAME"` | String | Empty | Optional |
-| 2 | 결과 테이블 타입 · `"NODALBODYFORCE"` | `"TABLE_TYPE"` | String | — | **Required** |
-| 3 | 결과 테이블 저장 경로 | `"EXPORT_PATH"` | String | — | Optional |
+| 1 | Table Name · Result Table Title | `"TABLE_NAME"` | String | Empty | Optional |
+| 2 | Result Table Type · "NODALBODYFORCE" | `"TABLE_TYPE"` | String | — | **Required** |
+| 3 | Result Table Save Path | `"EXPORT_PATH"` | String | — | Optional |
 
 ### Request / Response JSON
 
@@ -317,9 +317,9 @@ print(f"총 {len(table.get('DATA', []))}개 행")
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 테이블 이름 | `"TABLE_NAME"` | String | Empty | Optional |
-| 2 | 결과 테이블 타입 · X방향: `"MASS_SUMMARY_X"` / Y방향: `"MASS_SUMMARY_Y"` / Z방향: `"MASS_SUMMARY_Z"` | `"TABLE_TYPE"` | String | — | **Required** |
-| 3 | 결과 테이블 저장 경로 | `"EXPORT_PATH"` | String | — | Optional |
+| 1 | Table Name · Result Table Title | `"TABLE_NAME"` | String | Empty | Optional |
+| 2 | Result Table Type · "MASS_SUMMARY_X" · "MASS_SUMMARY_Y" · "MASS_SUMMARY_Z" | `"TABLE_TYPE"` | String | — | **Required** |
+| 3 | Result Table Save Path | `"EXPORT_PATH"` | String | — | Optional |
 
 ### Request / Response JSON
 
@@ -409,9 +409,9 @@ for direction in ["X", "Y", "Z"]:
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 테이블 이름 | `"TABLE_NAME"` | String | Empty | Optional |
-| 2 | 결과 테이블 타입 · X방향: `"LOAD_SUMMARY_X"` / Y방향: `"LOAD_SUMMARY_Y"` / Z방향: `"LOAD_SUMMARY_Z"` | `"TABLE_TYPE"` | String | — | **Required** |
-| 3 | 결과 테이블 저장 경로 | `"EXPORT_PATH"` | String | — | Optional |
+| 1 | Table Name · Result Table Title | `"TABLE_NAME"` | String | Empty | Optional |
+| 2 | Result Table Type · "LOAD_SUMMARY_X" · "LOAD_SUMMARY_Y" · "LOAD_SUMMARY_Z" | `"TABLE_TYPE"` | String | — | **Required** |
+| 3 | Result Table Save Path | `"EXPORT_PATH"` | String | — | Optional |
 
 ### Request / Response JSON
 
@@ -500,9 +500,9 @@ for row in table.get("DATA", []):
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 테이블 이름 | `"TABLE_NAME"` | String | Empty | Optional |
-| 2 | 결과 테이블 타입 · `"MATERIAL"` | `"TABLE_TYPE"` | String | — | **Required** |
-| 3 | 결과 테이블 저장 경로 | `"EXPORT_PATH"` | String | — | Optional |
+| 1 | Table Name · Result Table Title | `"TABLE_NAME"` | String | Empty | Optional |
+| 2 | Result Table Type · "MATERIAL" | `"TABLE_TYPE"` | String | — | **Required** |
+| 3 | Result Table Save Path | `"EXPORT_PATH"` | String | — | Optional |
 
 ### Request / Response JSON
 
@@ -591,9 +591,9 @@ for row in table.get("DATA", []):
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 테이블 이름 | `"TABLE_NAME"` | String | Empty | Optional |
-| 2 | 결과 테이블 타입 (아래 10종 중 하나) | `"TABLE_TYPE"` | String | — | **Required** |
-| 3 | 결과 테이블 저장 경로 | `"EXPORT_PATH"` | String | — | Optional |
+| 1 | Table Name · Result Table Title | `"TABLE_NAME"` | String | Empty | Optional |
+| 2 | Result Table Type · "SECTIONALL" · "SECTIONCOMBINED" · "SECTIONCOMPOSITE" · "SECTIONCONSTRUCTION" · "SECTIONDB/USER" · "SECTIONPSC" · "SECTIONSRC" · "SECTIONSTEELGIRDER" · "SECTIONTAPERED" · "SECTIONVALUE" | `"TABLE_TYPE"` | String | — | **Required** |
+| 3 | Result Table Save Path | `"EXPORT_PATH"` | String | — | Optional |
 
 **`TABLE_TYPE` 값 목록**
 
@@ -697,9 +697,9 @@ for row in table.get("DATA", []):
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 테이블 이름 | `"TABLE_NAME"` | String | Empty | Optional |
-| 2 | 결과 테이블 타입 · `"SUPPORTS"` | `"TABLE_TYPE"` | String | — | **Required** |
-| 3 | 결과 테이블 저장 경로 | `"EXPORT_PATH"` | String | — | Optional |
+| 1 | Table Name · Result Table Title | `"TABLE_NAME"` | String | Empty | Optional |
+| 2 | Result Table Type · "SUPPORTS" | `"TABLE_TYPE"` | String | — | **Required** |
+| 3 | Result Table Save Path | `"EXPORT_PATH"` | String | — | Optional |
 
 ### Request / Response JSON
 
@@ -769,18 +769,18 @@ for row in table.get("DATA", []):
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 테이블 이름 | `"TABLE_NAME"` | String | Empty | Optional |
-| 2 | 결과 테이블 타입 · `"STORY_MASS"` / `"STORY_MASS_X"` / `"STORY_MASS_Y"` / `"STORY_MASS_Z"` | `"TABLE_TYPE"` | String | — | **Required** |
-| 3 | 결과 테이블 저장 경로 | `"EXPORT_PATH"` | String | — | Optional |
-| 4 | 응답 단위 설정 | `"UNIT"` | Object | System | Optional |
+| 1 | Table Name · Response Table Title | `"TABLE_NAME"` | String | Empty | Optional |
+| 2 | Result Table Type · "STORY_MASS" · "STORY_MASS_X" · "STORY_MASS_Y" · "STORY_MASS_Z" | `"TABLE_TYPE"` | String | — | **Required** |
+| 3 | Result Table Save Path | `"EXPORT_PATH"` | String | — | Optional |
+| 4 | Response Unit Setting | `"UNIT"` | Object | System | Optional |
 | 4-1 | └ 힘 단위 | `UNIT.FORCE` | String | — | Optional |
 | 4-2 | └ 길이 단위 | `UNIT.DIST` | String | — | Optional |
 | 4-3 | └ 열 단위 | `UNIT.HEAT` | String | — | Optional |
 | 4-4 | └ 온도 단위 | `UNIT.TEMP` | String | — | Optional |
-| 5 | 응답 숫자 형식 | `"STYLES"` | Object | System | Optional |
+| 5 | Response Number Format | `"STYLES"` | Object | System | Optional |
 | 5-1 | └ 숫자 형식 · `"Default"` / `"Fixed"` / `"Scientific"` / `"General"` | `STYLES.FORMAT` | String | — | Optional |
 | 5-2 | └ 소수 자릿수 (0~15) | `STYLES.PLACE` | Integer | — | Optional |
-| 6 | 결과 테이블 표시 열 | `"COMPONENTS"` | Array [String] | All | Optional |
+| 6 | Components of Result Table | `"COMPONENTS"` | Array [String] | All | Optional |
 
 ### Request / Response JSON
 
@@ -1016,9 +1016,9 @@ for direction in ["X", "Y", "Z"]:
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 테이블 이름 (출력 제목) | `"TABLE_NAME"` | String | Empty | Optional |
+| 1 | Table Name (Output Title) | `"TABLE_NAME"` | String | Empty | Optional |
 | 2 | 결과 테이블 타입 · `"STORYWEIGHT"` | `"TABLE_TYPE"` | String | — | **Required** |
-| 3 | 결과 테이블 저장 경로(JSON) | `"EXPORT_PATH"` | String | — | Optional |
+| 3 | Result Table Save Path (JSON Format) | `"EXPORT_PATH"` | String | — | Optional |
 | 4 | 응답 단위 설정 | `"UNIT"` | Object | System | Optional |
 | 4-1 | └ 힘 단위 | `UNIT.FORCE` | String | — | Optional |
 | 4-2 | └ 길이 단위 | `UNIT.DIST` | String | — | Optional |

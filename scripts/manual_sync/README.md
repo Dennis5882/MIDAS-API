@@ -24,6 +24,7 @@
 | `check_coverage.py` | 변경 여부와 무관한 누락 점검 — (A) manual 섹션의 모든 글이 `docs/manual`에 섹션을 갖는지, (B) 공식 목차 표와 `docs/manual`의 양방향 대조 및 목차↔글 본문 Input URI 대조 | ✗ |
 | `check_fields.py` | 필드 단위 누락 점검 — 공식 글의 Specifications 표 Key와 Schema·요청 예제의 JSON Key가 해당 문서 섹션(챕터 공통 표 포함)에 있는지 대조 | ✗ |
 | `fill_fields.py` | 빠진 Key를 공식 Specifications 표에서 원문 그대로 옮겨 해당 섹션 끝에 `<!-- om-fields -->` 블록으로 추가. 기존 텍스트는 수정하지 않고, 재실행하면 블록만 다시 만듦 | ✗ |
+| `restore_descriptions.py` | 공식 Specifications의 설명·필수 표기와 비교. 적용은 공식 행과 일치하는 한글 설명을 대상으로 함 | ✗ |
 | `build_index.py` | `docs/index/endpoints.json`·`chunks.jsonl` 생성 (AI·RAG용) | ✗ |
 | `eval_retrieval.py` | 청크 색인의 검색 시험 (BM25, 질문은 공식 글에서만 생성) | ✗ |
 | `om_parse.py` | 공식 글 HTML의 Specifications 표 파서 (공용) | ✗ |
@@ -69,7 +70,19 @@ python3 check_coverage.py
 
 # 필드 단위 누락 점검 (--out 으로 글별 상세 JSON 저장)
 python3 check_fields.py --out fields.json
+
+# 설명과 필수 표기 차이 점검
+python3 restore_descriptions.py --dry-run
+
+# 한 챕터의 한글 설명 복원 후보 확인 및 보고서 경로 지정
+python3 restore_descriptions.py --file 13_DB_Load_Combinations.md --dry-run --korean-only --report ../../work_orders/13_review.md
 ```
+
+`restore_descriptions.py --dry-run`은 따옴표로 묶인 Key가 있는 6열 파라미터 표를 대조하고
+결과를 보고서에 덧붙입니다. 차이가 보이면 공식 글을 확인해 원문 변경과 기존 편집을 구분합니다.
+`--dry-run` 없이 실행하면 한글 설명 중 짝이 확인된 행의 설명과 필수 표기를 복원합니다.
+JP 전용·확인 대상, ⚠️로 보호된 행, 기존 필드 범위를 보존해야 하는 행, 매칭이 모호하거나 짝이 없는
+행은 보고서에서 확인할 수 있습니다.
 
 ## 필드 점검 읽는 법 (`check_fields.py`)
 

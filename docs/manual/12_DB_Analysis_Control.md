@@ -631,7 +631,7 @@ Hyper-S(MEC) 솔버용 고유치 해석 제어입니다. UI의 Subspace Iteratio
 | (2) | Number of Generations (when `OPT_USE` true) | `"GLINK_NUMBER"` | Integer | - | Required |
 | 3 | Ritz Load Cases | `"RITZ_LOAD"` | Array [Object] | - | Required |
 | (1) | Type (Ground Acc.: `"GROUND"` / Load: `"LOAD"`) | `"TYPE"` | String (enum) | - | Required |
-| (2) | Load Name (`"ACCX"`/`"ACCY"`/`"ACCZ"` 또는 하중케이스명) | `"LOAD_NAME"` | String | - | Required |
+| (2) | [When ANAL_TYPE = "RITZ"] Load Case Name | `"LOAD_NAME"` | String | - | **Required** |
 | (3) | Number of Generations | `"NUM_OF_GEN"` | Integer | - | Required |
 
 ### Request Body — Lanczos
@@ -737,7 +737,7 @@ update_eigenvalue_m1_ritz()
 | 4 | Initial Temperature | `"INIT_TEMP"` | Number | 0 | Optional |
 | 5 | Element Stress Evaluation (`"CENTER"` / `"GAUSS"` / `"NODAL"`) | `"EVAL"` | String | "CENTER" | Optional |
 | 6 | Creep & Shrinkage Option | `"OPT_IS_CREEP_SHRINKAGE"` | Boolean | false | Optional |
-| 7 | Creep & Shrinkage 설정 객체 | `"ITEM"` | Object | - | Optional |
+| 7 | Creep & Shrinkage · Insert the data as an object | `"ITEM"` | Object | - | Optional |
 | (1) | Type (Creep: `"CREEP"` / Shrinkage: `"SHRINK"` / Both: `"BOTH"`) | `"TYPE"` | String | "CREEP" | Optional |
 | (2) | Creep Calculation Method (General: 0 / Effective Modulus: 1) | `"CREEP_CALC_METHOD"` | Integer | 0 | Optional |
 | (3) | General Data (when method 0) | `"M_GENERAL"` | Object | - | Optional |
@@ -886,7 +886,7 @@ Hyper-S(MEC) 솔버용 수화열 해석 제어입니다. 반복 횟수(`ITER`)�
 | 8 | Include Selfweight Load | `"OPT_INCL_SELF_WEIGHT"` | Boolean | false | Optional |
 | 9 | Self Weight Factor (when option true) | `"SELF_WEIGHT_FACTOR"` | Number | - | Required |
 | 10 | Max. No. of Iterations per Increment | `"ITER"` | Integer | 50 | Optional |
-| 11 | Convergence Criteria (DISP/LOAD/WORK 중 최소 1개 필수) | `"CONVERGENCE"` | Object | - | Optional |
+| 11 | [When OPT_INCL_SELF_WEIGHT = true] Convergence Criteria / Error Tolerance At least one of DISP, LOAD, or WORK is required. | `"CONVERGENCE"` | Object | - | Optional |
 | (1) | Displacement(U) | `"DISP"` | Object | - | Optional |
 | (2) | Load(P) | `"LOAD"` | Object | - | Optional |
 | (3) | Work(W) | `"WORK"` | Object | - | Optional |
@@ -1130,14 +1130,14 @@ set_moving_load_control()
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 21 | Impact Factor 사용 | `"bIF"` | Boolean | false | Optional |
+| 21 | Impact Factor · Active/Inactive | `"bIF"` | Boolean | false | Optional |
 | 22 | Code Type (`0`=JTG D60-2015/JTG04 / `1`=Other Codes / `2`=TB 10002-2017 / `3`=Q/CR 9300-2018) | `"iCODETYPE"` | Integer | - | Required |
 | 23 | Natural Frequency Method (`iCODETYPE`=0일 때 필수. `0`=User Input / `1`=Simple Beam / `2`=Continuous Beam / `3`=Arch Bridge / `4`=Cable Stayed Bridge / `5`=Suspension Bridge) | `"iNFM"` | Integer | - | Required (조건부) |
 | 24 | Span Length (`0`=Span Length by Lane Input / `1`=Loaded Length by Influence Line) | `"iSLCM"` | Integer | - | Required |
-| 25 | Vehicle Load Class 사용 | `"bBC"` | Boolean | false | Optional |
+| 25 | Vehicle Load Class · Active/Inactive | `"bBC"` | Boolean | false | Optional |
 | 26 | Vehicle Load Class Type (`0`=Class I / `1`=Class II) | `"iBC"` | Integer | 0 | Required |
-| 27 | Frequency Data (`iCODETYPE`=0일 때 필수) | `"FREQ"` | Object | - | Required (조건부) |
-| 28 | Bridge Data — Other Codes (`iCODETYPE`=1일 때 필수) | `"BRIDGE1"` | Object | - | Required (조건부) |
+| 27 | [When the Code Type is JTG D60-2015/JTG04] Natural Frequency Data | `"FREQ"` | Object | - | **Required** |
+| 28 | [When the Code Type is Other Code] Bridge Data | `"BRIDGE1"` | Object | - | **Required** |
 | 29 | Bridge Data — TB 10002-2017 / Q·CR 9300-2018 (`iCODETYPE`=2 또는 3일 때 필수) | `"BRIDGE2"` | Object | - | Required (조건부) |
 
 > ⚠️ **2026-08-25 확인:** `iCODETYPE`/`iNFM`/`iSLCM`/`iBC` 4개 필드 모두 원문 Specifications
@@ -1656,11 +1656,11 @@ set_settlement_control()
 |-----|-------------|-----|------------|---------|----------|
 | 1 | Nonlinear Type (Geometry: `"GEOM"` / Material: `"MATL"` / Both: `"GEOM+MATL"`) | `"NONLINEAR_TYPE"` | String | "GEOM" | Optional |
 | 2 | Iteration Method (Newton-Raphson: `"NEWTON"` / Arc-Length: `"ARC"` / Displacement-Control: `"DISP"`) | `"ITERATION_METHOD"` | String | "NEWTON" | Optional |
-| 3 | Energy Norm 사용 | `"OPT_ENERGY_NORM"` | Boolean | false | Optional |
+| 3 | Energy Norm · Active/Inactive | `"OPT_ENERGY_NORM"` | Boolean | false | Optional |
 | 4 | Energy Norm | `"ENERGY_NORM"` | Number | - | Required |
-| 5 | Displacement Norm 사용 | `"OPT_DISPLACEMENT_NORM"` | Boolean | false | Optional |
+| 5 | Displacement Norm · Active/Inactive | `"OPT_DISPLACEMENT_NORM"` | Boolean | false | Optional |
 | 6 | Displacement Norm | `"DISPLACEMENT_NORM"` | Number | - | Required |
-| 7 | Force Norm 사용 | `"OPT_FORCE_NORM"` | Boolean | false | Optional |
+| 7 | Force Norm · Active/Inactive | `"OPT_FORCE_NORM"` | Boolean | false | Optional |
 | 8 | Force Norm | `"FORCE_NORM"` | Number | - | Required |
 
 ### Parameters — Newton-Raphson (`ITERATION_METHOD = "NEWTON"`)
@@ -2152,7 +2152,7 @@ update_nonlinear_control_m1_arc()
 |-----|-------------|-----|------------|---------|----------|
 | - | Number of Load Steps | `"iLSTEP"` | Integer | - | Optional |
 | - | Maximum Number of Iterations | `"iMAXITER"` | Integer | - | Optional |
-| - | Convergence Failure 사용 | `"CF"` | Boolean | false | Optional |
+| - | Convergence Failure | `"CF"` | Boolean | false | - |
 | - | Max Bi-Section Level for a Load Step | `"BSSTEP"` | Integer | - | Optional |
 | - | Max Allowable Diverged Steps | `"ADSTEP"` | Integer | - | Optional |
 | - | Energy Norm 사용 / 값 | `"bENEG"` / `"EV"` | Boolean / Number | - | Optional |
@@ -2165,7 +2165,7 @@ update_nonlinear_control_m1_arc()
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
 | - | Include Time Dependent Effect | `"bINC_TDE"` | Boolean | false | Optional |
-| - | Creep & Shrinkage 사용 | `"bCNS"` | Boolean | false | Optional |
+| - | Creep & Shrinkage | `"bCNS"` | Boolean | false | Optional |
 | - | Creep & Shrinkage Type (`"CREEP"`/`"SHRINK"`/`"BOTH"`) | `"TYPE"` | String | - | Optional |
 | - | Number of Creep Iterations | `"iITER_CR"` | Integer | - | Optional |
 | - | Creep Tolerance | `"TOL_CR"` | Number | 0 | Optional |
@@ -2333,9 +2333,9 @@ Hyper-S(MEC) 솔버용 시공단계 해석 제어입니다. 기능별로 중첩 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
 | 1 | Final Stage Option (Last: true / Other: false) | `"bLAST_FINAL"` | Boolean | - | Optional |
-| 2 | Analysis Type 설정 | `"ANAL_TYPE"` | Object | - | Required |
-| 3 | Restart C.S. Analysis 설정 | `"RESTART_CS_ANAL"` | Object | - | Optional |
-| 4 | Erection Load 목록 | `"ERECTION_LOAD"` | Array [Object] | - | Optional |
+| 2 | Analysis Type Object | `"ANAL_TYPE"` | Object | - | Optional |
+| 3 | [When bLAST_FINAL = false] Restart Construction Stage Analysis | `"RESTART_CS_ANAL"` | Object | - | Optional |
+| 4 | Load Cases to be Distinguished from Dead Load for C.S. Output | `"ERECTION_LOAD"` | Array [Object] | - | Optional |
 | 5 | Secondary Dead Load Effect for Grid Model / Load Case Name List | `"bSDLE"` / `"vSDLE"` | Boolean / Array [String] | false / - | Optional (`vSDLE`는 `bSDLE`가 true일 때 **Required**) |
 | 6 | Time Dependent Control | `"TIME_DEP_CONTROL"` | Object | - | Optional |
 | 7 | Cable Control | `"CABLE_CONTROL"` | Object | - | Optional |
@@ -2769,8 +2769,8 @@ Hyper-S(MEC) 솔버용 경계 그룹 조합(Boundary Group Combination)을 정�
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 1 | Boundary Combination Name (1~20자, 모델 내 유일) | `"BCG_NAME"` | String | - | Required |
-| 2 | Boundary Group List (선택한 경계 그룹 이름 배열, 중복 자동 제거) | `"GROUP_LIST"` | Array [String] | - | Required |
+| 1 | Boundary Combination Name | `"BCG_NAME"` | String | - | **Required** |
+| 2 | Boundary Group List | `"GROUP_LIST"` | Array [String] | - | **Required** |
 
 ### Request Body (POST)
 
@@ -2841,8 +2841,8 @@ Hyper-S(MEC) 솔버용 경계 조합 할당 데이터입니다. 해석 타입·�
 |-----|-------------|-----|------------|---------|----------|
 | 1 | Assign Boundary Combination to Analyses & Load Cases | `"BC_ASSIGN"` | Array [Object] | - | Required |
 | (1) | Analysis Type | `"ANAL_TYPE"` | String (enum) | - | Required |
-| (2) | Load Case Name (ANAL_TYPE ∈ {ST, NLTH, PO}일 때 필수) | `"LCNAME"` | String | - | Conditional |
-| (3) | Boundary Group Combination Name (빈 문자열 = 변경 없음) | `"BGCNAME"` | String | "" | Optional |
+| (2) | Load Case Name | `"LCNAME"` | String | - | **Required** |
+| (3) | Boundary Combination Name | `"BGCNAME"` | String | "" | Optional |
 | 2 | Apply to Boundary Change | `"BC_SELECT"` | Array [String (enum)] | - | Required |
 
 **`BC_ASSIGN.ANAL_TYPE` 값 (enum):**

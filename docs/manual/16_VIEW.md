@@ -297,9 +297,9 @@ print("POST:", resp.status_code, resp.json())
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 이미지 파일 저장 경로 및 파일명 | `"EXPORT_PATH"` | String | — | **Required** |
-| 2 | 미리보기 그림 타입 · 단면 섬유분할: `"FIBR"` | `"VIEW_TYPE"` | String | — | **Required** |
-| 3 | 캡처 옵션 | `"OPTION"` | Object | — | **Required** |
+| 1 | Image File Save Path & File Name | `"EXPORT_PATH"` | String | — | **Required** |
+| 2 | Preview Picture Type · Fiber Division of Section: "FIBR" | `"VIEW_TYPE"` | String | — | **Required** |
+| 3 | Image File Save Path & File Name | `"OPTION"` | Object | — | **Required** |
 | 3-1 | └ 그림 타입 ID 번호 | `OPTION.ID` | Integer | — | **Required** |
 
 ### Request / Response JSON
@@ -399,8 +399,8 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `Proper
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 수평 시점 각도 | `"HORIZONTAL"` | Number | `0` | Optional |
-| 2 | 수직 시점 각도 | `"VERTICAL"` | Number | `0` | Optional |
+| 1 | Angle of Horizontal View | `"HORIZONTAL"` | Number | `0` | Optional |
+| 2 | Angle of Vertical View | `"VERTICAL"` | Number | `0` | Optional |
 
 ### Request / Response JSON
 

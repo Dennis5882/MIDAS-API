@@ -65,16 +65,16 @@
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 그룹 이름 | `"NAME"` | String | — | **Required** |
-| 2 | 일괄 처리(Batch) | `"BATCH"` | Boolean | `true` | **Required** |
-| 3 | 교량 거더 요소 그룹 | `"BODY_ELEM_GRUP_K"` | Integer | — | **Required** |
-| 4 | 생성 옵션 · 현재 단계-스텝: `false` / 전체 단계(마지막 스텝): `true` | `"ALLSTAGE"` | Boolean | `false` | Optional |
-| 5 | 결과 타입 · 보 응력: `0` / 보 부재력·모멘트: `1` | `"DGRM_TYPE"` | Integer | `0` | Optional |
-| 6 | (응력일 때) 보 응력 성분 · Sax: `0` / +Sby: `1` / −Sby: `2` / +Sbz: `3` / −Sbz: `4` / Combined: `5` / 7th DOF: `6` | `"BSTRSCOMP"` | Integer | `0` | Optional |
-| 7 | (응력·7th DOF일 때) 응력 표시 위치 · Maximum: `0` / 1(−y,+z): `1` / 2(+y,+z): `2` / 3(+y,−z): `3` / 4(−y,−z): `4` | `"BSTRSCOMP_SUB"` | Integer | `0` | Optional |
-| 8 | (응력·7th DOF일 때) 7th DOF 타입 · Sax(Warping): `0` / Ssy(Mt): `1` / Ssy(Mw): `2` / Ssz(Mt): `3` / Ssz(Mw): `4` / Combined(Ssy): `5` / Combined(Ssz): `6` | `"_7TH_DOF_TYPE"` | Integer | `0` | Optional |
-| 9 | (부재력일 때) 보 부재력·모멘트 성분 · Fx: `0` / Fy: `1` / Fz: `2` / Mx: `3` / My: `4` / Mz: `5` / Mb: `6` / Mt: `7` / Mw: `8` | `"MOMENT_COMP"` | Integer | `0` | Optional |
-| 10 | 스케일 | `"SCALEFACTOR"` | Number | `0` | Optional |
+| 1 | Group Name | `"NAME"` | String | — | **Required** |
+| 2 | Batch | `"BATCH"` | Boolean | `true` | **Required** |
+| 3 | Bridge Girder Element Group | `"BODY_ELEM_GRUP_K"` | Integer | — | **Required** |
+| 4 | Generation Option · Current Stage-Step: false · Stages(Last Step): true | `"ALLSTAGE"` | Boolean | `false` | Optional |
+| 5 | Type of Result · Beam Stresses: 0 · Beam Forces/Moments: 1 | `"DGRM_TYPE"` | Integer | `0` | Optional |
+| 6 | [When Type of Result is Beam Stresses] Beam Stresses Components · Sax: 0 · +Sby: 1 · -Sby: 2 · +Sbz: 3 · -Sbz: 4 · Combined: 5 · 7th DOF: 6 | `"BSTRSCOMP"` | Integer | `0` | Optional |
+| 7 | [When Type of Result is Beam Stresses] Location for the Display of Stress · When Beam Stresses Components is 7th DOF · Maximum: 0 · 1(-y, +z): 1 · 2(+y, +z): 2 · 3(+y, -z): 3 · 4(-y, -z): 4 | `"BSTRSCOMP_SUB"` | Integer | `0` | Optional |
+| 8 | [When Type of Result is Beam Stresses] 7th DOF Type · When Beam Stresses Components is 7th DOF · Sax(Warping): 0 · Ssy(Mt): 1 · Ssy(Mw): 2 · Ssz(Mt): 3 · Ssz(Mw): 4 · Combined(Ssy): 5 · Combined(Ssz): 6 | `"_7TH_DOF_TYPE"` | Integer | `0` | Optional |
+| 9 | [When Type of Result is Beam Forces/Moments] Beam Forces/Moments Components · Fx: 0 · Fy: 1 · Fz: 2 · Mx: 3 · My: 4 · Mz: 5 · Mb: 6 · Mt: 7 · Mw: 8 | `"MOMENT_COMP"` | Integer | `0` | Optional |
+| 10 | [When Type of Result is Beam Forces/Moments] Scale | `"SCALEFACTOR"` | Number | `0` | Optional |
 
 ### Request / Response JSON
 
@@ -227,8 +227,8 @@ for key, val in resp.json().get("GSBG", {}).items():
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 시작점 0 설정 | `"bSTART_PT_ZERO"` | Boolean | `true` | Optional |
-| 2 | 일반 캠버 기준 항목 배열 | `"GCMB_BASE_ITEMS"` | Array [Object] | — | **Required** |
+| 1 | Set Start Point Zero | `"bSTART_PT_ZERO"` | Boolean | `true` | Optional |
+| 2 | General Camber Base Items · Insert data as object | `"GCMB_BASE_ITEMS"` | Array [Object] | — | **Required** |
 | 2-1 | └ 구조 그룹 이름 | `GCMB_BASE_ITEMS[].GRUP_NAME` | String | — | **Required** |
 | 2-2 | └ 방향 · `"+DX"` / `"-DX"` / `"+DY"` / `"-DY"` | `GCMB_BASE_ITEMS[].DIRECTION` | String | — | **Required** |
 
@@ -337,9 +337,9 @@ for key, val in data.items():
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 교량 거더 요소 그룹 | `"BODY_GROUP_NAME"` | String | — | **Required** |
-| 2 | 지점 노드 그룹 | `"SUPP_GROUP_NAME"` | String | — | **Required** |
-| 3 | 키 세그먼트 요소 그룹 | `"KEYSEG_GROUP_NAME"` | String | — | **Required** |
+| 1 | Bridge Girder Element Group | `"BODY_GROUP_NAME"` | String | — | **Required** |
+| 2 | Support Node Group | `"SUPP_GROUP_NAME"` | String | — | **Required** |
+| 3 | Key Segment Element Group | `"KEYSEG_GROUP_NAME"` | String | — | **Required** |
 
 ### Request / Response JSON
 
@@ -446,21 +446,21 @@ print("GET:", resp.json())
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 제약조건 이름 | `"NAME"` | String | — | **Required** |
-| 2 | 제약조건 타입 · 반력: `"REAC"` / 변위: `"DISP"` / 트러스력: `"TRUSS"` / 보력: `"BEAM"` | `"TYPE"` | String | — | **Required** |
-| 3 | 요소/노드 ID | `"OBJ_ID"` | Integer | — | **Required** |
-| 4 | 위치(Point) · (`TYPE="BEAM"`일 때) I단: `0` / 1/4: `1` / 2/4: `2` / 3/4: `3` / J단: `4` | `"POINT"` | Integer | — | **Required** |
-| 5 | 성분(Component) · 반력·보력/변위/트러스 기준 · FX/DX/I단: `0` / FY/DY/J단: `1` / FZ/DZ: `2` / MX/RX: `3` / MY/RY: `4` / MZ/RZ: `5` | `"COMP"` | Integer | — | **Required** |
-| 6 | 등호/부등호 조건 · 등호: `true` / 부등호: `false` | `"EQ"` | Boolean | `false` | Optional |
+| 1 | Constraint Name | `"NAME"` | String | — | **Required** |
+| 2 | Constraint Type · Reaction: "REAC" · Displacement: "DISP" · Truss Force: "TRUSS" · Beam Force: "BEAM" | `"TYPE"` | String | — | **Required** |
+| 3 | Element/Node ID | `"OBJ_ID"` | Integer | — | **Required** |
+| 4 | Point · When "TYPE" is Beam Force / I-end: 0 / 1/4: 1 / 2/4: 2 / 3/4: 3 / J-end: 4 | `"POINT"` | Integer | — | **Required** |
+| 5 | Component · Reaction & Beam Force/Displacement/Truss / FX/DX/I-end: 0 / FY/DY/J-end: 1 / FZ/DZ: 2 / MX/RX: 3 / MY/RY: 4 / MZ/RZ: 5 | `"COMP"` | Integer | — | **Required** |
+| 6 | Equality/Inequality Condition · Equality: true · Inequality: false | `"EQ"` | Boolean | `false` | Optional |
 | **등호(Equality) 조건 (`EQ=true`)** |
-| 7 | 값 확인(Check Value) | `"bVALUE"` | Boolean | `false` | Optional |
-| 8 | 값(Value) | `"VALUE"` | Number | — | **Required** |
-| 9 | 다른 객체(`bVALUE=false`일 때) | `"OtherObject"` | Integer | `0` | Optional |
+| 7 | [Equality Condition] Check Value | `"bVALUE"` | Boolean | `false` | Optional |
+| 8 | [Equality Condition] Value Double | `"VALUE"` | Number | — | **Required** |
+| 9 | [Equality Condition] Other Object · When "bValue" is False | `"OtherObject"` | Integer | `0` | Optional |
 | **부등호(Inequality) 조건 (`EQ=false`)** |
-| 7 | 상한 확인(Check Upper Bound) | `"bUB"` | Boolean | `false` | Optional |
-| 8 | 상한 값(Upper Bound Value) | `"UB_VALUE"` | Number | — | **Required** |
-| 9 | 하한 확인(Check Lower Bound) | `"bLB"` | Boolean | `false` | Optional |
-| 10 | 하한 값(Lower Bound Value) | `"LB_VALUE"` | Number | — | **Required** |
+| 7 | [Inequality Condition] Check Upper Bound | `"bUB"` | Boolean | `false` | Optional |
+| 8 | [Inequality Condition] Upper Bound Value | `"UB_VALUE"` | Number | — | **Required** |
+| 9 | [Inequality Condition] Check Lower Bound | `"bLB"` | Boolean | `false` | Optional |
+| 10 | [Inequality Condition] Lower Bound Value | `"LB_VALUE"` | Number | — | **Required** |
 
 ### Request / Response JSON
 
@@ -605,25 +605,25 @@ for key, val in resp.json().get("ULFC", {}).items():
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 | --- | --- | --- | --- | --- | --- |
-| 1 | 하중케이스/조합 이름 | `"LC_NAME"` | String | — | **Required** |
-| 2 | 다이어그램 타입 · 응력: `0` / 부재력: `1` | `"DGRM_TYPE"` | Integer (enum) | — | **Required** |
-| 3 | 일괄 처리 여부 (생략 시 `true`) | `"BATCH"` | Boolean | `true` | Optional |
-| 4 | X축 타입 · 거리: `0` / 절점: `1` | `"X_AXIS_TYPE"` | Integer (enum) | `0` | Optional |
+| 1 | Load Case/Combination name | `"LC_NAME"` | String | — | **Required** |
+| 2 | Diagram Type · Stress: 0 · Force: 1 | `"DGRM_TYPE"` | Integer (enum) | — | **Required** |
+| 3 | Batch option When omitted, the default is treated as true. | `"BATCH"` | Boolean | `true` | Optional |
+| 4 | X-Axis Type · Distance: 0 · Node: 1 | `"X_AXIS_TYPE"` | Integer (enum) | `0` | Optional |
 | **BATCH = true(생략 포함)** | | | | | |
-| 5 | Export할 출력 그룹 이름 목록(문자열 배열) | `"BATCH_LIST"` | Array [String] | — | **Required** |
+| 5 | [When BATCH = true or omitted] Batch output group-name list · Each item is entered directly as a non-empty string. · BRDG_GROUP, COMPONENTS, COMBINED_COMP, and 7TH_DOF_TYPE are not allowed at the top level in batch mode. | `"BATCH_LIST"` | Array [String] | — | **Required** |
 | **BATCH = false** | | | | | |
-| 6 | 교량 거더 요소 그룹 | `"BRDG_GROUP"` | String | — | **Required** |
-| 7 | 성분 · 응력(DGRM_TYPE=0): Sax `0` / +Sby `1` / −Sby `2` / +Sbz `3` / −Sbz `4` / Combined `5` / 7th DOF `6` · 부재력(DGRM_TYPE=1): Fx `0` / Fy `1` / Fz `2` / Mx `3` / My `4` / Mz `5` / Mb `6` / Mt `7` / Mw `8` | `"COMPONENTS"` | Integer (enum) | `0` | Optional |
-| 8 | (응력·Combined일 때) 응력 표시 위치 · Maximum `0` / 1(−y,+z) `1` / 2(+y,+z) `2` / 3(+y,−z) `3` / 4(−y,−z) `4` | `"COMBINED_COMP"` | Integer (enum) | `0` | Optional |
-| 9 | (응력·7th DOF일 때) 7th DOF 타입 · Sax(Warping) `0` / Ssy(Mt) `1` / Ssy(Mw) `2` / Ssz(Mt) `3` / Ssz(Mw) `4` / Combined(Ssy) `5` / Combined(Ssz) `6` | `"7TH_DOF_TYPE"` | Integer (enum) | `0` | Optional |
+| 6 | [When BATCH = false] Bridge Girder Element Group | `"BRDG_GROUP"` | String | — | **Required** |
+| 7 | [When BATCH = false] Component Stress (DGRM_TYPE = 0) · Sax: 0 · +Sby: 1 · -Sby: 2 · +Sbz: 3 · -Sbz: 4 · Combined: 5 · 7th DOF: 6 Force (DGRM_TYPE = 1) · Fx: 0 · Fy: 1 · Fz: 2 · Mx: 3 · My: 4 · Mz: 5 · Mb: 6 · Mt: 7 · Mw: 8 | `"COMPONENTS"` | Integer (enum) | `0` | Optional |
+| 8 | [When BATCH = false, DGRM_TYPE = 0 (Stress), and COMPONENTS = 5 (Combined)] Location for the Display of Stress · Maximum: 0 · 1(-y, +z): 1 · 2(+y, +z): 2 · 3(+y, -z): 3 · 4(-y, -z): 4 | `"COMBINED_COMP"` | Integer (enum) | `0` | Optional |
+| 9 | [When BATCH = false, DGRM_TYPE = 0 (Stress), and COMPONENTS = 6 (7th DOF)] 7th DOF Type · Sax(Warping): 0 · Ssy(Mt): 1 · Ssy(Mw): 2 · Ssz(Mt): 3 · Ssz(Mw): 4 · Combined(Ssy): 5 · Combined(Ssz): 6 | `"7TH_DOF_TYPE"` | Integer (enum) | `0` | Optional |
 | **DGRM_TYPE = 0(응력)에서만** | | | | | |
-| 10 | 허용응력선 표시 | `"STRESS_LINE"` | Object | — | Optional |
+| 10 | [When DGRM_TYPE = 0 (Stress)] Allowable Stress Line | `"STRESS_LINE"` | Object | — | Optional |
 | (1) | 허용응력선 표시 여부 | `STRESS_LINE.OPT_USE` | Boolean | `false` | Optional |
 | (2) | 압축 허용응력(OPT_USE=true 시) | `STRESS_LINE.COMP` | Integer | — | 조건부 **Required** |
 | (3) | 인장 허용응력(OPT_USE=true 시) | `STRESS_LINE.TENS` | Integer | — | 조건부 **Required** |
-| 11 | 다이어그램 생성 대상 시공단계 목록 | `"STAGE_LIST"` | Array [String] | — | **Required** |
-| 12 | 생성 이미지 저장 경로 | `"EXPORT_PATH"` | String | — | **Required** |
-| 13 | 저장 이미지 확장자 · `"bmp"` / `"jpg"` / `"emf"` | `"EXTENSION"` | String (enum) | — | **Required** |
+| 11 | Stage list for diagram generation | `"STAGE_LIST"` | Array [String] | — | **Required** |
+| 12 | Export path for the generated diagram image | `"EXPORT_PATH"` | String | — | **Required** |
+| 13 | Export image file extension · "bmp" · "jpg" · "emf" | `"EXTENSION"` | String (enum) | — | **Required** |
 
 > ✅ **2026-09-28 완전 해결 확인:** 원문 Specifications 표의 응력 성분 4번이 `"Sbz" 4`(부호·콜론
 > 모두 오표기)였던 것이 현재 `-Sbz: 4`로

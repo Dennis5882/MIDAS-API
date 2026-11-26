@@ -527,9 +527,9 @@ print(result)
 | 1 | Structure Type · 3-D: `3D` / X-Z Plane: `XZ` / Y-Z Plane: `YZ` / X-Y Plane: `XY` / Constraint RZ: `RZ` | `"STYPE"` | String (enum) | `"3D"` | Optional |
 | 2 | Mass Control Parameter | `"MASS_CONTROL"` | Object | – | Required |
 | 2-(1) | └ Mass Type · Lumped Mass: `LUMPED` / Consistent Mass: `CONSISTENT` | `"MASS_TYPE"` | String (enum) | – | Required |
-| 2-(2) | └ Mass Position (`MASS_TYPE="LUMPED"`일 때) · Centroid: `CENTROID` / Offset: `OFFSET` | `"MASS_POS"` | String (enum) | – | 조건부 Required |
+| 2-(2) | └ [When MASS_TYPE = "LUMPED"] Mass Position · Consider Mass at the Centroid of Section: CENTROID · Consider Mass at the Offset Position: OFFSET | `"MASS_POS"` | String (enum) | – | **Required** |
 | 2-(3) | └ Convert Self-weight into Masses | `"SELFWEIGHT"` | Boolean | – | Required |
-| 2-(4) | └ Mass Axis (`SELFWEIGHT=true`일 때) · X,Y,Z: `XYZ` / X,Y: `XY` / Z: `Z` (`MASS_TYPE="CONSISTENT"`면 `XYZ`만 허용) | `"MASS_AXIS"` | String (enum) | – | 조건부 Required |
+| 2-(4) | └ [When SELFWEIGHT = true] Convert to X, Y, Z / Convert to X, Y / Convert to Z · X, Y, Z: XYZ · X, Y: XY · Z: Z When MASS_TYPE = "CONSISTENT", only XZY | `"MASS_AXIS"` | String (enum) | – | **Required** |
 | 3 | Gravity Acceleration | `"GRAV"` | Number | System | Optional |
 | 4 | Initial Temperature | `"TEMP"` | Number | `0` | Optional |
 | 5 | Align Top of Beam Section with Center Line (X-Y Plane) for Display | `"ALIGNBEAM"` | Boolean | `false` | Optional |
@@ -1367,7 +1367,7 @@ print(result)
 | 2 | Exact Span Option | `"bEXACTSPAN"` | Boolean | - | **Required** |
 | 3 | Inner Direction of Multiple Girders · `0`=(-) Local y / `1`=(+) Local y / `2`=Both / `3`=None | `"DIRECTION"` | Integer | - | **Required** |
 | 4 | Assign Elements · `0`=By Selection / `1`=Number | `"SECTTYPE"` | Integer | - | **Required** |
-| 5 | Span List (bEXACTSPAN=true 시) | `"SPAN_LIST"` | Array [Number] | - | Required (bEXACTSPAN=true) |
+| 5 | [When Exact Span Option, "bEXACTSPAN" is True] Span by Element Length | `"SPAN_LIST"` | Array [Number] | - | **Required** |
 | 6 | Span Base Items (bEXACTSPAN=true 시) · Element Key | `"SPAN_BASE_ITEMS"[].ELEM_KEY"` | Integer | - | Required (bEXACTSPAN=true) |
 | 7 | Span Base Items · Support type · `0`=None / `1`=Start / `2`=End | `"SPAN_BASE_ITEMS"[].SUPPORT"` | Integer | - | Required (bEXACTSPAN=true) |
 
@@ -1482,9 +1482,9 @@ print(result)
 |-----|-------------|-----|------------|---------|----------|
 | 1 | Story Name | `"STORY_NAME"` | String | - | **Required** |
 | 2 | Story Height (elevation) | `"STORY_LEVEL"` | Number | - | **Required** |
-| 3 | Floor Diaphragm (강성 다이아프램 가정 여부) | `"bFLOOR_DIAPHRAGM"` | Boolean | false | **Required** |
-| 4 | Wind Floor Width X-Dir (GCS Y방향 풍하중에 노출되는 X축 폭) | `"WIND_FLOOR_WIDTH_X"` | Number | - | Required |
-| 5 | Wind Floor Width Y-Dir (GCS X방향 풍하중에 노출되는 Y축 폭) | `"WIND_FLOOR_WIDTH_Y"` | Number | - | Required |
+| 3 | whether a floor at a given story level is assumed to act as a rigid diaphragm in lateral load distribution. | `"bFLOOR_DIAPHRAGM"` | Boolean | false | **Required** |
+| 4 | Effective width of the building in X-axis, subjected to GCS Y-direction wind load | `"WIND_FLOOR_WIDTH_X"` | Number | - | **Required** |
+| 5 | Effective width of the building in Y-axis, subjected to GCS X-direction wind load | `"WIND_FLOOR_WIDTH_Y"` | Number | - | **Required** |
 | 6 | Wind Floor Center Xc | `"WIND_CENTER_X"` | Number | - | Required |
 | 7 | Wind Floor Center Yc | `"WIND_CENTER_Y"` | Number | - | Required |
 | 8 | Wind Eccentricity X-Dir | `"WIND_ECCENT_X"` | Number | - | Required |

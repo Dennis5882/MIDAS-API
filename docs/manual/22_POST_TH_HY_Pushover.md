@@ -95,16 +95,16 @@
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
 | 1 | 결과 텍스트 타입 (엔드포인트별 enum, 각 절 참조) | `"TEXT_TYPE"` | String | — | **Required** |
-| 2 | 결과 저장 경로 | `"EXPORT_PATH"` | String | — | Optional |
-| 3 | 응답 단위 설정 | `"UNIT"` | Object | System | Optional |
+| 2 | Result Table Save Path | `"EXPORT_PATH"` | String | — | Optional |
+| 3 | Response Unit Setting | `"UNIT"` | Object | System | Optional |
 | 3-1 | └ 힘(Force) | `UNIT.FORCE` | String | — | Optional |
 | 3-2 | └ 길이(Length) | `UNIT.DIST` | String | — | Optional |
 | 3-3 | └ 열(Heat) | `UNIT.HEAT` | String | — | Optional |
 | 3-4 | └ 온도(Temperature) | `UNIT.TEMP` | String | — | Optional |
-| 4 | 응답 숫자 형식 | `"STYLES"` | Object | System | Optional |
+| 4 | Response Number Format | `"STYLES"` | Object | System | Optional |
 | 4-1 | └ 숫자 형식 · `"Fixed"` / `"Exponential"` | `STYLES.FORMAT` | String | — | Optional |
 | 4-2 | └ 소수 자릿수 (0~15) | `STYLES.PLACE` | Integer | — | Optional |
-| 5 | 결과 테이블 표시 열 | `"COMPONENTS"` | Array [String] | All | Optional |
+| 5 | Components of Result Table | `"COMPONENTS"` | Array [String] | All | Optional |
 | 6 | 노드/요소 지정 (아래 방식 중 하나) | `"NODE_ELEMS"` | Object | — | **Required** |
 | 6-1 | 방식1: ID 각각 지정 (예: `[101, 102, 103]`) | `NODE_ELEMS.KEYS` | Array [Integer] | — | Optional |
 | 6-2 | 방식2: ID 범위 지정 (예: `"101 to 105"`) | `NODE_ELEMS.TO` | String | — | Optional |
@@ -2282,12 +2282,12 @@ print(res.json())
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 시간이력 하중케이스명 | `"THIS_NAME"` | String | — | **Required** |
+| 1 | Time History Load Cases | `"THIS_NAME"` | String | — | **Required** |
 | 2 | 요소 타입 · Beam: `0` / Truss: `1` / Wall: `2` | `"TYPE_ELEMENT"` | Integer | — | **Required** |
-| 3 | 요소 번호 | `"PROPERTY_KEY"` | Integer | — | **Required** |
+| 3 | Element No. | `"PROPERTY_KEY"` | Integer | — | **Required** |
 | 4 | 층 이름 (`TYPE_ELEMENT`가 `2`(Wall)일 때) | `"STORY_NAME"` | String | Blank | Optional |
 | 5 | 결과 타입 · Force: `0` | `"TYPE_RES"` | Integer | `0` | Optional |
-| 6 | 위치 · I-end/Top: `0` / J-end/Bottom: `1` | `"LOCATION"` | Integer | `0` | Optional |
+| 6 | Location · I-end/Top: 0 · J-end/Bottom : 1 | `"LOCATION"` | Integer | `0` | Optional |
 | 7 | 성분 · Axial: `0` / Shear-y: `1` / Shear-z: `2` / Torsion: `3` / Moment-y: `4` / Moment-z: `5` | `"COMP"` | Integer | `0` | Optional |
 
 #### Request / Response JSON
@@ -2381,11 +2381,11 @@ requests.delete(f"{BASE_URL}/db/THRE/1", headers=HEADERS)
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 이름(시간이력 하중케이스명) | `"THIS_NAME"` | String | — | **Required** |
+| 1 | Name | `"THIS_NAME"` | String | — | **Required** |
 | 2 | 결과 타입 · Force-Deformation: `0` / Force: `1` / Deformation: `2` | `"TYPE_RES"` | Integer | `0` | Optional |
-| 3 | 위치 · i-end: `0` / j-end: `1` | `"LOCATION"` | Integer | `0` | Optional |
+| 3 | Location · i-end: 0 · j-end: 1 | `"LOCATION"` | Integer | `0` | Optional |
 | 4 | 성분 (Force-Deformation/Force/Deformation) · Fx-Dx/Fx/Dx: `0` / Fy-Dy/Fy/Dy: `1` / Fz-Dz/Fz/Dz: `2` / Mx-Rx/Mx/Rx: `3` / My-Ry/My/Ry: `4` / Mz-Rz/Mz/Rz: `5` | `"COMP"` | Integer | `0` | Optional |
-| 5 | 일반 링크 번호 | `"GENERAL_LINK"` | Integer | — | **Required** |
+| 5 | General Link Number | `"GENERAL_LINK"` | Integer | — | **Required** |
 
 > ⚠️ 2026-08-26 확인 (article id `35992341376025`): 공식 Specifications 표는 `COMP` enum을
 > `Fx(NL): 0 / Fy: 1 / Fz: 2` 3개까지만 기재하고 있으나(표 자체의 누락으로 보임), 동일 구조를
@@ -2488,12 +2488,12 @@ print(requests.get(f"{BASE_URL}/db/THRG/1", headers=HEADERS).json())
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 이름(시간이력 하중케이스명) | `"THIS_NAME"` | String | — | **Required** |
-| 2 | 요소 타입 · Beam: `0` / Truss: `1` / General Link: `3` | `"TYPE_ELEMENT"` | Integer | `0` | Optional |
-| 3 | 요소 선택(요소 번호) | `"PROPERTY_KEY"` | Integer | — | **Required** |
-| 4 | 층 이름 | `"STORY_NAME"` | String | Blank | Optional |
+| 1 | Name | `"THIS_NAME"` | String | — | **Required** |
+| 2 | Type of Element · Beam: 0 · Truss: 1 · General Link: 3 | `"TYPE_ELEMENT"` | Integer | `0` | Optional |
+| 3 | Select Element | `"PROPERTY_KEY"` | Integer | — | **Required** |
+| 4 | Name of Story | `"STORY_NAME"` | String | Blank | Optional |
 | 5 | 결과 타입 · Force-Deformation: `0` / Force: `1` / Deformation: `2` | `"TYPE_RES"` | Integer | `0` | Optional |
-| 6 | 위치 · 1-Pos: `0` / 2-Pos: `1` / 3-Pos: `2` | `"LOCATION"` | Integer | `0` | Optional |
+| 6 | Location · 1-Pos: 0 · 2-Pos: 1 · 3-Pos: 2 | `"LOCATION"` | Integer | `0` | Optional |
 | 7 | 성분 (Force-Deformation/Force/Deformation) · Fx-Dx/Fx/Dx: `0` / Fy-Dy/Fy/Dy: `1` / Fz-Dz/Fz/Dz: `2` / Mx-Rx/Mx/Rx: `3` / My-Ry/My/Ry: `4` / Mz-Rz/Mz/Rz: `5` | `"COMP"` | Integer | `0` | Optional |
 
 #### Request / Response JSON
@@ -2601,7 +2601,7 @@ print("정의된 힌지 그래프 개수:", len(res.get("THRI", {})))
 | 1 | 이름(시간이력 하중케이스명) | `"THIS_NAME"` | String | — | **Required** |
 | 2 | 결과 타입 · Force-Deformation: `0` / Force: `2` / Deformation: `3` / Ductility Factor: `5` / Energy: `7` | `"TYPE_RES"` | Integer | `0` | Optional |
 | 3 | 성분 | `"COMP"` | Integer | `0` | Optional |
-| 4 | 일반 링크 번호 | `"GENERAL_LINK"` | Integer | — | **Required** |
+| 4 | General Link Number | `"GENERAL_LINK"` | Integer | — | **Required** |
 
 > ⚠️ 2026-08-26 확인 (article id `35992460196121`): 공식 Request 예제의 3번째 레코드는
 > `"TYPE_RES": 4`를 사용하는데, 이 값은 공식 Specifications 표의 `TYPE_RES` enum(`0`/`2`/`3`/`5`/`7`)

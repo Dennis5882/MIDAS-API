@@ -1460,7 +1460,7 @@ midas_api("DELETE", "/db/FMLD", {"Assign": {"200": {}}})
 |-----|-------------|-----|-----------|---------|----------|
 | 1 | Soil Properties Name | `"NAME"` | String | - | Required |
 | 2 | Description | `"DESC"` | String | Blank | Optional |
-| 3 | Use N Value (true=N값 / false=내부마찰각) | `"OPT_USE_N"` | Number | false | Optional |
+| 3 | Use N Value · True : Use N Value of soil · False : Internal friction angle of soil | `"OPT_USE_N"` | Number | false | Optional |
 | 4 | Level of Ground Surface | `"GROUND_LEVEL"` | Number | - | Required |
 | 5 | Level of Bedrock | `"BEDROCK_LEVEL"` | Number | - | Required |
 | 6 | Level of Footing Bottom | `"FOOTING_LEVEL"` | Number | - | Required |

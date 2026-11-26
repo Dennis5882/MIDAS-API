@@ -150,18 +150,18 @@
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 기하비선형 타입 · None: `"NONE"` / Large Displacements: `"LARGE_DISP"` | `"GEOMNONLINEAR_TYPE"` | String | `"NONE"` | Optional |
-| 2 | 초기하중 방법 · 비선형 정적해석 수행: `"PERFORM_ANAL"` / 정적·시공단계 해석결과 가져오기: `"IMPORT_RESULT"` | `"INITLOADMETHOD"` | String | `"PERFORM_ANAL"` | Optional |
-| 3 | 초기하중 케이스 목록 | `"INITLOAD"` | Array [Object] | — | Optional |
-| — | (INITLOAD) 하중케이스명 | `"LC_NAME"` | String | — | Required |
-| — | (INITLOAD) 하중케이스 타입 | `"LC_TYPE"` | String | — | Required |
-| — | (INITLOAD) 축척계수 | `"SF"` | Number | — | Required |
-| 4 | 초기하중이 비선형 정적해석일 때, 무시 요소(IEPI) 고려 여부 | `"bCONSIGNOREELEM"` | Boolean | `false` | Optional |
-| 5 | 비선형 해석 옵션 | `"NONL_OPT"` | Object | — | **Required** |
-| 6 | 푸시오버 힌지 데이터 옵션 | `"PHOP_OPT"` | Object | — | Optional |
-| 7 | 벽체 노드 연결성 · 핀: `"PINNED"` / 고정: `"FIXED"` | `"NODECONNECTIVITY"` | String | — | Required |
-| 8 | 해석 후 푸시오버 곡선 결과 표시 | `"bSHOWGRAPHAFTER"` | Boolean | — | Required |
-| 9 | 해석 중 푸시오버 곡선 표시 | `"bSHOWGRAPGHDURING"` | Boolean | — | Required |
+| 1 | Geometric Nonlinearity Type · None: "NONE" · Large Displacements: "LARGE_DISP" | `"GEOMNONLINEAR_TYPE"` | String | `"NONE"` | Optional |
+| 2 | Initial Load · Perform Nonlinear Static Analysis: "PERFORM_ANAL" · Import Static/Construction Stage Analysis: "IMPORT_RESULT" | `"INITLOADMETHOD"` | String | `"PERFORM_ANAL"` | Optional |
+| 3 | Initial Load Case List · Insert the data as an object | `"INITLOAD"` | Array [Object] | — | Optional |
+| — | [Initial Load] Load Case Name | `"LC_NAME"` | String | — | **Required** |
+| — | [Initial Load] Load Case Type | `"LC_TYPE"` | String | — | **Required** |
+| — | [Initial Load] Scale Factor | `"SF"` | Number | — | **Required** |
+| 4 | Consider Ignore Elements for NL. Analysis Initial Load · When Initial Load is Perform Nonlinear Static Analysis | `"bCONSIGNOREELEM"` | Boolean | `false` | Optional |
+| 5 | Nonlinear Analysis Option | `"NONL_OPT"` | Object | — | **Required** |
+| 6 | Pushover Hinge Data Option | `"PHOP_OPT"` | Object | — | Optional |
+| 7 | Wall Node Connectivity · Pinned: "PINNED" · Fixed: "FIXED" | `"NODECONNECTIVITY"` | String | — | **Required** |
+| 8 | [Miscellaneous] Show Pushover Curve Result After Analysis · Active/Inactive | `"bSHOWGRAPHAFTER"` | Boolean | — | **Required** |
+| 9 | [Miscellaneous] Show Pushover Curve during Analysis · Active/Inactive | `"bSHOWGRAPGHDURING"` | Boolean | — | **Required** |
 
 **`NONL_OPT` (비선형 해석 옵션) 상세**
 
@@ -1280,7 +1280,7 @@ get_pushover_global_control()
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 비선형 해석 초기하중용 요소 무시 여부 | `"B_IGNORE"` | Boolean | `false` | Optional |
+| 1 | Ignore Elements for NL. Analysis Initial Load | `"B_IGNORE"` | Boolean | `false` | Optional |
 
 > **참고:** Assign Key는 **요소 ID**입니다 (일련번호 아님).
 
@@ -1387,10 +1387,10 @@ print("DELETE:", resp.status_code)
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 요소 ID | `"ID"` | Integer | — | **Required** |
+| 1 | ID | `"ID"` | Integer | — | **Required** |
 | 2 | 요소 타입 · Beam/Column: `"BEAM"` / Wall(⚠️ Gen NX 전용): `"WALL"` / Truss: `"TRUSS"` / General Link: `"G-LINK"` | `"TYPE"` | String | — | **Required** |
-| 3 | 푸시오버 힌지 타입 (예: `"Myz_15"`) | `"HINGE_TYPE"` | String | — | **Required** |
-| 4 | 파이버 키 | `"FIBER_KEY"` | Integer | — | **Required** |
+| 3 | Pushover Hinge Type | `"HINGE_TYPE"` | String | — | **Required** |
+| 4 | Fiber Key | `"FIBER_KEY"` | Integer | — | **Required** |
 
 > ⚠️ **2026-08-26 확인:** `TYPE`은 원문에서 `"BEAM"`/`"WALL"`/`"TRUSS"`/`"G-LINK"` 4개 값으로
 > 한정된 enum이며, `"WALL"`에는 원문상 "MIDAS GEN NX only" 아이콘이 붙어 있다 — 이전 문서는
@@ -1533,28 +1533,28 @@ for key, val in hinges.items():
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | 하중케이스 이름 | `"LCNAME"` | String | — | **Required** |
-| 2 | 설명 | `"DESC"` | String | `""` | Optional |
-| 3 | 증분 스텝 수 | `"INCRE_STEP"` | Integer | — | **Required** |
-| 4 | P-Delta 효과 고려 | `"bCONS_PDELTA"` | Boolean | `false` | **Required** |
-| 5 | 초기하중 사용 여부 | `"bUSEINITIAL"` | Boolean | `false` | Optional |
-| 6 | 초기하중에 의한 누적 반력/층전단력 출력 | `"bREACOUTPUT"` | Boolean | `false` | Optional |
-| 7 | 증분 방법 · 하중제어: `"LOAD"` / 변위제어: `"DISP"` | `"INCRE_METHOD"` | String | — | **Required** |
-| 8 | 스테핑 제어 옵션(`INCRE_METHOD="LOAD"`일 때) · 자동: `"AUTO"` / 등분할(1/nstep): `"EQUAL"` / 증분제어함수: `"INC_FUNC"` | `"STEPCTRLOPTION"` | String | — | **Required** |
-| 9 | 증분제어함수 키 (`STEPCTRLOPTION="INC_FUNC"`일 때) | `"INCFUNC_KEY"` | Integer | — | **Required** |
-| 10 | 현재 강성비(Cs) (`INCRE_METHOD="LOAD"`일 때) | `"STIFF_RATIO"` | Number | — | **Required** |
-| 11 | 변위 제어 옵션(`INCRE_METHOD="DISP"`일 때) · 전체: `"GLOBAL"` / 마스터 노드: `"NODE"` | `"DISPCTRLOPTION"` | String | — | **Required** |
-| 12 | 최대 병진 변위(`DISPCTRLOPTION="GLOBAL"`) | `"GLOBAL_MAX_DISP"` | Number | — | **Required** |
-| 13 | 마스터 노드 ID(`DISPCTRLOPTION="NODE"`) | `"MASTERNODE"` | Integer | — | **Required** |
-| 14 | 마스터 노드 방향 · `"DX"` / `"DY"` / `"DZ"` | `"MASTERDIRECTION"` | String | — | **Required** |
-| 15 | 마스터 노드 최대 변위 | `"MASTERMAXDISP"` | Number | — | **Required** |
-| 16 | 층간변형각 제한 사용 | `"bLIMITDEFORMANGLE"` | Boolean | `false` | Optional |
-| 17 | 층간변형각 제한값 (1/[rad]) | `"LIMITDEFORMANGLE"` | Number | — | **Required** |
-| 18 | 모든 수직요소의 최대 층간변위 | `"bDRIFTMAX"` | Boolean | `false` | Optional |
-| 19 | 바닥 다이아프램 중심 층간변위 | `"bDRIFTCENTER"` | Boolean | `false` | Optional |
-| 20 | 층 평균변위로 계산된 층간변위 | `"bDRIFTAVER"` | Boolean | `false` | Optional |
-| 21 | 하중 패턴 타입 · 정적하중: `"LOAD"` / 균등가속도: `"ACC"` / 모드형상: `"MODE"` / 정규화모드형상×질량: `"NOR_MODE"` | `"LOADPATTERNTYPE"` | String | — | **Required** |
-| 22 | 하중 패턴 목록 | `"LOADPATTERN"` | Array [Object] | — | **Required** |
+| 1 | Load Case Name | `"LCNAME"` | String | — | **Required** |
+| 2 | Description | `"DESC"` | String | `""` | Optional |
+| 3 | Increment Steps | `"INCRE_STEP"` | Integer | — | **Required** |
+| 4 | Consider P-Delta Effect | `"bCONS_PDELTA"` | Boolean | `false` | **Required** |
+| 5 | Use Initial Load | `"bUSEINITIAL"` | Boolean | `false` | Optional |
+| 6 | Cumulative Reaction / Story Shear by Initial Load | `"bREACOUTPUT"` | Boolean | `false` | Optional |
+| 7 | Increment Method · Load Control: "LOAD" · Displacement Control: "DISP" | `"INCRE_METHOD"` | String | — | **Required** |
+| 8 | [Stepping Control Option When Increment Method is "LOAD"] Stepping Control Option · Auto-Stepping Control: "AUTO" · Equal Step (1/nstep): "EQUAL" · Incremental Control Function: "INC_FUNC" | `"STEPCTRLOPTION"` | String | — | **Required** |
+| 9 | [Stepping Control Option When Increment Method is "LOAD"] Incremental Control Function Key · When "STEPCTRLOPTION" is "INC_FUNC" | `"INCFUNC_KEY"` | Integer | — | **Required** |
+| 10 | [Stepping Control Option When Increment Method is "LOAD"] Analysis Stopping Condition · Current Stiffness Ratio (Cs) | `"STIFF_RATIO"` | Number | — | **Required** |
+| 11 | [Stepping Control Option When Increment Method is "DISP"] Displacement Control Option · Global: "GLOBAL" · Master Node: "NODE" | `"DISPCTRLOPTION"` | String | — | **Required** |
+| 12 | [- Global Control] Max Translational Displacement | `"GLOBAL_MAX_DISP"` | Number | — | **Required** |
+| 13 | [- Master Node] Node ID Number | `"MASTERNODE"` | Integer | — | **Required** |
+| 14 | [- Master Node] Node Direction · "DX" · "DY" · "DZ" | `"MASTERDIRECTION"` | String | — | **Required** |
+| 15 | [- Master Node] Maximum Displacement | `"MASTERMAXDISP"` | Number | — | **Required** |
+| 16 | [Analysis Stopping Condition] Use Limit Inter-Story Deformation Angle | `"bLIMITDEFORMANGLE"` | Boolean | `false` | Optional |
+| 17 | [Analysis Stopping Condition] Limit Inter-Story Deformation Angle (1/[rad]) | `"LIMITDEFORMANGLE"` | Number | — | **Required** |
+| 18 | [Analysis Stopping Condition] Maximum Drift of All Vertical Elements | `"bDRIFTMAX"` | Boolean | `false` | Optional |
+| 19 | [Analysis Stopping Condition] Drift at the Center of Floor Diaphragm (Story Center) | `"bDRIFTCENTER"` | Boolean | `false` | Optional |
+| 20 | [Analysis Stopping Condition] Drift calculated by Average Displacement of Story | `"bDRIFTAVER"` | Boolean | `false` | Optional |
+| 21 | Load Pattern Type · Static Load Cases: "LOAD" · Uniform Acceleration: "ACC" · Mode Shape: "MODE" · Normalized Mode Shape * Mass: "NOR_MODE" | `"LOADPATTERNTYPE"` | String | — | **Required** |
+| 22 | Load Pattern Data List · Insert the data as an object | `"LOADPATTERN"` | Array [Object] | — | **Required** |
 
 **`LOADPATTERN` 배열 항목 – `LOADPATTERNTYPE` 별 필드**
 

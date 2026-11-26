@@ -10501,7 +10501,7 @@
      "id": "50694365571993",
      "title": "Concurrent Reaction - Analysis Result Table",
      "url": "https://support.midasuser.com/hc/ko/articles/50694365571993-Concurrent-Reaction-Analysis-Result-Table",
-     "updated_at": ""
+     "updated_at": "2025-09-17T06:20:17Z"
     },
     {
      "id": "58746274895769",
@@ -16422,7 +16422,7 @@
      "id": "57668691043865",
      "title": "Assign Inelastic Hinges - Beam",
      "url": "https://support.midasuser.com/hc/ko/articles/57668691043865-Assign-Inelastic-Hinges-Beam",
-     "updated_at": ""
+     "updated_at": "2026-05-07T01:20:06Z"
     }
    ],
    "keys": [
@@ -16455,7 +16455,7 @@
      "id": "57668724267545",
      "title": "Assign Inelastic Hinges - Truss",
      "url": "https://support.midasuser.com/hc/ko/articles/57668724267545-Assign-Inelastic-Hinges-Truss",
-     "updated_at": ""
+     "updated_at": "2026-05-07T01:20:04Z"
     }
    ],
    "keys": [
@@ -16488,7 +16488,7 @@
      "id": "57668691115801",
      "title": "Assign Inelastic Hinges - General Link",
      "url": "https://support.midasuser.com/hc/ko/articles/57668691115801-Assign-Inelastic-Hinges-General-Link",
-     "updated_at": ""
+     "updated_at": "2026-05-07T01:20:05Z"
     }
    ],
    "keys": [
@@ -16521,7 +16521,7 @@
      "id": "57668755432473",
      "title": "Assign Inelastic Hinges - Point Spring Support",
      "url": "https://support.midasuser.com/hc/ko/articles/57668755432473-Assign-Inelastic-Hinges-Point-Spring-Support",
-     "updated_at": ""
+     "updated_at": "2026-05-07T01:20:05Z"
     }
    ],
    "keys": [
@@ -16581,7 +16581,7 @@
      "id": "57871862778009",
      "title": "DESIGN/RC/KDS-41-20-2022/REBB : Modify Beam Rebar Data",
      "url": "https://support.midasuser.com/hc/ko/articles/57871862778009-DESIGN-RC-KDS-41-20-2022-REBB-Modify-Beam-Rebar-Data",
-     "updated_at": ""
+     "updated_at": "2026-05-13T05:51:31Z"
     },
     {
      "id": "59236057502873",
@@ -16650,7 +16650,7 @@
      "id": "57945478412697",
      "title": "DESIGN/PSC/AASHTO-LRFD24/DSPSC : Design Code",
      "url": "https://support.midasuser.com/hc/ko/articles/57945478412697-DESIGN-PSC-AASHTO-LRFD24-DSPSC-Design-Code",
-     "updated_at": ""
+     "updated_at": "2026-05-15T06:58:20Z"
     }
    ],
    "keys": [
@@ -16675,7 +16675,7 @@
      "id": "57945475575321",
      "title": "DESIGN/PSC/AASHTO-LRFD24/DPSC : Design Code Option",
      "url": "https://support.midasuser.com/hc/ko/articles/57945475575321-DESIGN-PSC-AASHTO-LRFD24-DPSC-Design-Code-Option",
-     "updated_at": ""
+     "updated_at": "2026-05-15T06:59:20Z"
     },
     {
      "id": "57945497373465",
@@ -16721,7 +16721,7 @@
      "id": "57945514821529",
      "title": "DESIGN/PSC/AASHTO-LRFD24/MEMB : PSC Segment Assignment",
      "url": "https://support.midasuser.com/hc/ko/articles/57945514821529-DESIGN-PSC-AASHTO-LRFD24-MEMB-PSC-Segment-Assignment",
-     "updated_at": ""
+     "updated_at": "2026-05-15T07:00:02Z"
     },
     {
      "id": "57945530824345",
@@ -16761,7 +16761,7 @@
      "id": "57945562325273",
      "title": "DESIGN/PSC/AASHTO-LRFD24/MEMB-VBEAM : PSC Segment Assignment",
      "url": "https://support.midasuser.com/hc/ko/articles/57945562325273-DESIGN-PSC-AASHTO-LRFD24-MEMB-VBEAM-PSC-Segment-Assignment",
-     "updated_at": ""
+     "updated_at": "2026-05-15T07:00:36Z"
     }
    ],
    "keys": [
@@ -16795,7 +16795,7 @@
      "id": "57945593541657",
      "title": "DESIGN/PSC/AASHTO-LRFD24/SLCT : Serviceability Load Combination Type",
      "url": "https://support.midasuser.com/hc/ko/articles/57945593541657-DESIGN-PSC-AASHTO-LRFD24-SLCT-Serviceability-Load-Combination-Type",
-     "updated_at": ""
+     "updated_at": "2026-05-15T07:01:17Z"
     }
    ],
    "keys": [
@@ -16821,7 +16821,7 @@
      "id": "57945592046233",
      "title": "DESIGN/PSC/AASHTO-LRFD24/INFS : Interface shear",
      "url": "https://support.midasuser.com/hc/ko/articles/57945592046233-DESIGN-PSC-AASHTO-LRFD24-INFS-Interface-shear",
-     "updated_at": ""
+     "updated_at": "2026-05-15T07:01:55Z"
     },
     {
      "id": "57945615379609",
@@ -16860,7 +16860,7 @@
      "id": "57945623305113",
      "title": "DESIGN/PSC/AASHTO-LRFD24/INFS-VBEAM : Interface shear",
      "url": "https://support.midasuser.com/hc/ko/articles/57945623305113-DESIGN-PSC-AASHTO-LRFD24-INFS-VBEAM-Interface-shear",
-     "updated_at": ""
+     "updated_at": "2026-05-15T07:02:39Z"
     },
     {
      "id": "57945623457561",
@@ -16905,7 +16905,7 @@
      "id": "57946914266905",
      "title": "DESIGN/PSC/AASHTO-LRFD24/RPSC : Logitudinal Rebar-Reinforcements",
      "url": "https://support.midasuser.com/hc/ko/articles/57946914266905-DESIGN-PSC-AASHTO-LRFD24-RPSC-Logitudinal-Rebar-Reinforcements",
-     "updated_at": ""
+     "updated_at": "2026-05-15T07:35:32Z"
     }
    ],
    "keys": [
@@ -16971,7 +16971,7 @@
      "id": "57946974912921",
      "title": "DESIGN/PSC/AASHTO-LRFD24/SECF : Logitudinal Rebar-Stiffness",
      "url": "https://support.midasuser.com/hc/ko/articles/57946974912921-DESIGN-PSC-AASHTO-LRFD24-SECF-Logitudinal-Rebar-Stiffness",
-     "updated_at": ""
+     "updated_at": "2026-05-15T07:37:24Z"
     },
     {
      "id": "57946987740569",
@@ -17020,7 +17020,7 @@
      "id": "57947082529945",
      "title": "DESIGN/PSC/AASHTO-LRFD24/PSC-ANAL : Perform Design",
      "url": "https://support.midasuser.com/hc/ko/articles/57947082529945-DESIGN-PSC-AASHTO-LRFD24-PSC-ANAL-Perform-Design",
-     "updated_at": ""
+     "updated_at": "2026-05-15T07:40:39Z"
     },
     {
      "id": "57947090728857",
@@ -18367,7 +18367,7 @@
      "id": "64608751935897",
      "title": "Section Properties - Virtual Section for Design",
      "url": "https://support.midasuser.com/hc/en-us/articles/64608751935897-Section-Properties-Virtual-Section-for-Design",
-     "updated_at": "2026-11-25T04:35:54Z"
+     "updated_at": "2026-11-26T01:17:02Z"
     }
    ],
    "keys": [

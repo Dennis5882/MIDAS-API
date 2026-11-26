@@ -70,10 +70,10 @@ RW는 Warping Torsion 자유도입니다.
 
 | No. | 설명 | 키 | 타입 | 기본값 | 필수 |
 |-----|------|----|------|--------|------|
-| 1 | Constraint Supports (배열로 삽입) | `"ITEMS"` | Array[Object] | — | Required |
+| 1 | Constraint Supports · Insert the data as an object | `"ITEMS"` | Array[Object] | — | **Required** |
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Boundary Group Name | `"GROUP_NAME"` | String | Blank | Optional |
-| (3) | Constraint `[DX,DY,DZ,RX,RY,RZ,RW]` · `1`=구속, `0`=자유 | `"CONSTRAINT"` | String(7) | — | Required |
+| (3) | Constraint · [DX, DY, DZ, RX, RY, RZ, RW] / Constraint: 1 / Unconstraint: 0 / RW: Warping Torsion | `"CONSTRAINT"` | String(7) | — | **Required** |
 
 ### 요청 바디 예시
 
@@ -157,11 +157,11 @@ midas_api("DELETE", "/db/CONS", {"Assign": {"10": {}}})
 
 | No. | 설명 | 키 | 타입 | 기본값 | 필수 |
 | --- | --- | --- | --- | --- | --- |
-| 1 | Point Spring (배열로 삽입) | `"ITEMS"` | Array[Object] | — | Required |
+| 1 | Point Spring · Insert the data as an object | `"ITEMS"` | Array[Object] | — | **Required** |
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Spring Type · `"LINEAR"` / `"COMP"` / `"TENS"` / `"MULTI"` | `"TYPE"` | String | — | Required |
 | (3) | Boundary Group Name | `"GROUP_NAME"` | String | Blank | Optional |
-| (4) | Create Function Type · 0=점 스프링 함수, 1=면 스프링 함수 | `"FormType"` | Integer | 0 | Optional |
+| (4) | Create Function Type · by Point Spring Function: 0 · by Surface Spring Function: 1 | `"FormType"` | Integer | 0 | Optional |
 
 #### LINEAR 전용
 
@@ -169,7 +169,7 @@ midas_api("DELETE", "/db/CONS", {"Assign": {"10": {}}})
 | --- | --- | --- | --- | --- | --- |
 | (5) | Spring Stiffness `[SDx, SDy, SDz, SRx, SRy, SRz]` | `"SDR"` | Array[Number,6] | — | Required |
 | (6) | Fixed Option `[SDx, SDy, SDz, SRx, SRy, SRz]` | `"F_S"` | Array[Boolean,6] | false | Optional |
-| (7) | Damping Constant 사용 여부 | `"DAMPING"` | Boolean | false | Optional |
+| (7) | [Linear Type] Damping Constant | `"DAMPING"` | Boolean | false | Optional |
 | (8) | Damping `[Cx, Cy, Cz, CRx, CRy, CRz]` | `"Cr"` | Array[Number,6] | 0 | Optional |
 
 #### COMP(Compression-Only) / TENS(Tension-Only) 전용
@@ -296,11 +296,11 @@ all_nspr = midas_api("GET", "/db/NSPR")
 | --- | --- | --- | --- | --- | --- |
 | 1 | General Spring Name | `"NAME"` | String | — | Required |
 | 2 | Stiffness Matrix Option | `"OPT_STIFFNESS"` | Boolean | false | Optional |
-| 3 | Stiffness Matrix (21항) ¹⁾ | `"SPRING"` | Array[Number,21] | 0 | Optional |
+| 3 | Stiffness Matrix ¹⁾ | `"SPRING"` | Array[Number,21] | 0 | Optional |
 | 4 | Mass Matrix Option | `"OPT_MASS"` | Boolean | false | Optional |
-| 5 | Mass Matrix (21항) ¹⁾ | `"MASS"` | Array[Number,21] | 0 | Optional |
+| 5 | Mass Matrix¹⁾ | `"MASS"` | Array[Number,21] | 0 | Optional |
 | 6 | Damping Matrix Option | `"OPT_DAMPING"` | Boolean | false | Optional |
-| 7 | Damping Matrix (21항) ¹⁾ | `"DAMPING"` | Array[Number,21] | 0 | Optional |
+| 7 | Damping Matrix¹⁾ | `"DAMPING"` | Array[Number,21] | 0 | Optional |
 
 > **주의:** `SPRING`/`MASS`/`DAMPING` 배열은 옵션 플래그가 `true`일 때만 유효합니다.
 
@@ -378,10 +378,10 @@ GSTP에서 정의한 일반 스프링 타입을 절점에 배정합니다.
 
 | No. | 설명 | 키 | 타입 | 기본값 | 필수 |
 |-----|------|----|------|--------|------|
-| 1 | General Spring (배열로 삽입) | `"ITEMS"` | Array[Object] | — | Required |
+| 1 | General Spring · Insert the data as an object | `"ITEMS"` | Array[Object] | — | **Required** |
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Boundary Group Name | `"GROUP_NAME"` | String | Blank | Optional |
-| (3) | Defined General Spring Name (GSTP에서 정의한 이름) | `"TYPE_NAME"` | String | — | Required |
+| (3) | Defined General Spring Name | `"TYPE_NAME"` | String | — | **Required** |
 
 ### 요청 바디 예시
 
@@ -427,14 +427,14 @@ midas_api("POST", "/db/GSPR", gspr_data)
 
 | No. | 설명 | 키 | 타입 | 기본값 | 필수 |
 |-----|------|----|------|--------|------|
-| 1 | Surface Spring (배열로 삽입) | `"ITEMS"` | Array[Object] | — | Required |
+| 1 | Surface Spring · Insert the data as an object | `"ITEMS"` | Array[Object] | — | **Required** |
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Boundary Group Name | `"GROUP_NAME"` | String | Blank | Optional |
 | (3) | Element Type · `"FRAME"` / `"PLANAR(FACE)"` / `"PLANAR(EDGE)"` / `"SOLID"` | `"ELEM_TYPE"` | String | — | Required |
-| (4) | Edge/Face 선택 · FRAME: Local x=2, y=0, z=1 · PLANAR/SOLID: Edge#1∼4=0∼3 | `"EDGE_FACE"` | Integer | 0 | Optional |
+| (4) | Frame (Local Axis) · Local x: 2 · Local y: 0 · Local z: 1 Planar & Solid (Edge Face) · Edge#1: 0 · Edge#2: 1 · Edge#3: 2 · Edge#4: 3 | `"EDGE_FACE"` | Integer | 0 | Optional |
 | (5) | Spring Type · 0=Linear, 1=Comp.-Only, 2=Tens.-Only | `"SPRING_TYPE"` | Integer | 0 | Optional |
 | (6) | Modulus of Subgrade Reaction Ks | `"MODULUS"` | Number | — | Required |
-| (7) | Width(FRAME 전용) | `"WIDTH"` | Number | — | Required(FRAME) |
+| (7) | Width · Only for Frame Type | `"WIDTH"` | Number | — | **Required** |
 
 ### 요청 바디 예시 (FRAME / PLANAR / SOLID)
 
@@ -619,10 +619,10 @@ midas_api("POST", "/db/ELNK", elnk_data)
 
 | No. | 설명 | 키 | 타입 | 기본값 | 필수 |
 |-----|------|----|------|--------|------|
-| 1 | Rigid Link (배열로 삽입) | `"ITEMS"` | Array[Object] | — | Required |
-| (1) | Serial Number (마스터 절점 ID) | `"ID"` | Integer | 0 | Optional |
+| 1 | Rigid Link · Insert the data as an object | `"ITEMS"` | Array[Object] | — | **Required** |
+| (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Boundary Group Name | `"GROUP_NAME"` | String | Blank | Optional |
-| (3) | Degree of Freedom (정수: 각 자리가 DX∼RZ) | `"DOF"` | Integer | — | Required |
+| (3) | Degree of Freedom · Rigid: 1, Free: 0 / 6th decimal place: DX / 5th decimal place: DY / 4th decimal place: DZ / 3rd decimal place: RX / 2nd decimal place: RY / 1st decimal place: RZ | `"DOF"` | Integer | — | **Required** |
 | (4) | Slave Node ID Numbers | `"S_NODE"` | Array[Integer] | — | Required |
 
 **DOF 예시:**  
@@ -994,7 +994,7 @@ midas_api("POST", "/db/NLNK-M1", nlnk_m1_data)
 | No. | 설명 | 키 | 타입 | 기본값 | 필수 |
 |-----|------|----|------|--------|------|
 | 1 | General Link ID Number | `"GLINK_KEY"` | Integer | — | Required |
-| 2 | Change Property Name (NLLP에서 정의된 이름) | `"CHANGE_PROPERTY_NAME"` | String | — | Required |
+| 2 | Change Property Name | `"CHANGE_PROPERTY_NAME"` | String | — | **Required** |
 | 3 | Boundary Group Name | `"GROUP_NAME"` | String | Blank | Optional |
 
 ### 요청 바디 예시
@@ -1038,7 +1038,7 @@ midas_api("POST", "/db/CGLP", cglp_data)
 
 | No. | 설명 | 키 | 타입 | 기본값 | 필수 |
 |-----|------|----|------|--------|------|
-| 1 | Beam End Release (배열로 삽입) | `"ITEMS"` | Array[Object] | — | Required |
+| 1 | Beam End Release · Insert the data as an object | `"ITEMS"` | Array[Object] | — | **Required** |
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Load Group Name | `"GROUP_NAME"` | String | Blank | Optional |
 | (3) | Input Method · false=Relative, true=Value | `"bVALUE"` | Boolean | false | Optional |
@@ -1116,22 +1116,22 @@ midas_api("POST", "/db/FRLS", frls_data)
 
 | No. | 설명 | 키 | 타입 | 기본값 | 필수 |
 |-----|------|----|------|--------|------|
-| 1 | Beam End Offsets (배열로 삽입) | `"ITEMS"` | Array[Object] | — | Required |
+| 1 | Beam End Offsets · Insert the data as an object | `"ITEMS"` | Array[Object] | — | **Required** |
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Load Group Name | `"GROUP_NAME"` | String | Blank | Optional |
 | (3) | Reference CS · `"GLOBAL"` / `"ELEMENT"` | `"TYPE"` | String | — | Required |
 | — | **GLOBAL 전용** | | | | |
-| (4) | i-단 X방향 오프셋 (GCS) | `"RGDXi"` | Number | 0 | Optional |
-| (5) | i-단 Y방향 오프셋 (GCS) | `"RGDYi"` | Number | 0 | Optional |
-| (6) | i-단 Z방향 오프셋 (GCS) | `"RGDZi"` | Number | 0 | Optional |
-| (7) | j-단 X방향 오프셋 (GCS) | `"RGDXj"` | Number | 0 | Optional |
-| (8) | j-단 Y방향 오프셋 (GCS) | `"RGDYj"` | Number | 0 | Optional |
-| (9) | j-단 Z방향 오프셋 (GCS) | `"RGDZj"` | Number | 0 | Optional |
+| (4) | [Global ¹⁾] Vector of the End Offset Distance at N1 end in GCS X-Direction | `"RGDXi"` | Number | 0 | Optional |
+| (5) | [Global ¹⁾] Vector of the End Offset Distance at N1 end in GCS Y-Direction | `"RGDYi"` | Number | 0 | Optional |
+| (6) | [Global ¹⁾] Vector of the End Offset Distance at N1 end in GCS Z-Direction | `"RGDZi"` | Number | 0 | Optional |
+| (7) | [Global ¹⁾] Vector of the End Offset Distance at N2 end in GCS X-Direction | `"RGDXj"` | Number | 0 | Optional |
+| (8) | [Global ¹⁾] Vector of the End Offset Distance at N2 end in GCS Y-Direction | `"RGDYj"` | Number | 0 | Optional |
+| (9) | [Global ¹⁾] Vector of the End Offset Distance at N2 end in GCS Z-Direction | `"RGDZj"` | Number | 0 | Optional |
 | — | **ELEMENT 전용** | | | | |
-| (4) | i-단 y방향 오프셋 (ECS) | `"RGDYi"` | Number | 0 | Optional |
-| (5) | i-단 z방향 오프셋 (ECS) | `"RGDZi"` | Number | 0 | Optional |
-| (6) | j-단 y방향 오프셋 (ECS) | `"RGDYj"` | Number | 0 | Optional |
-| (7) | j-단 z방향 오프셋 (ECS) | `"RGDZj"` | Number | 0 | Optional |
+| (4) | [Element ¹⁾] End Offset Distance in the Element’s Local (+) X-Y Plane at N1 end | `"RGDYi"` | Number | 0 | Optional |
+| (5) | [Element ¹⁾] End Offset Distance in the Element’s Local (+) X-Z Plane at N1 end | `"RGDZi"` | Number | 0 | Optional |
+| (6) | [Element ¹⁾] End Offset Distance in the Element’s Local (+) X-Y Plane at N2 end | `"RGDYj"` | Number | 0 | Optional |
+| (7) | [Element ¹⁾] End Offset Distance in the Element’s Local (+) X-Z Plane at N2 end | `"RGDZj"` | Number | 0 | Optional |
 
 ### 요청 바디 예시
 
@@ -1195,10 +1195,10 @@ midas_api("POST", "/db/OFFS", offs_data)
 
 | No. | 설명 | 키 | 타입 | 기본값 | 필수 |
 |-----|------|----|------|--------|------|
-| 1 | Plate End Release (배열로 삽입) | `"ITEMS"` | Array[Object] | — | Required |
+| 1 | Plate End Release · Insert the data as an object | `"ITEMS"` | Array[Object] | — | **Required** |
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Load Group Name | `"GROUP_NAME"` | String | Blank | Optional |
-| (3) | Position N1 `[Fx,Fy,Fz,Mx,My]` · 1=해제 | `"N1"` | Array[Integer,5] | — | Required |
+| (3) | Position - N1 · Release: 1 · Connect: 0 · [Fx, Fy, Fz, Mx, My] | `"N1"` | Array[Integer,5] | — | **Required** |
 | (4) | Position N2 `[Fx,Fy,Fz,Mx,My]` | `"N2"` | Array[Integer,5] | — | Required |
 | (5) | Position N3 `[Fx,Fy,Fz,Mx,My]` | `"N3"` | Array[Integer,5] | — | Required |
 | (6) | Position N4 `[Fx,Fy,Fz,Mx,My]` | `"N4"` | Array[Integer,5] | — | Required |
@@ -1260,10 +1260,10 @@ Elastic Link (MULTILINEAR) 또는 General Link (FORCE 타입)에서 참조하는
 | No. | 설명 | 키 | 타입 | 기본값 | 필수 |
 |-----|------|----|------|--------|------|
 | 1 | Function Name | `"NAME"` | String | — | Required |
-| 2 | Type · `"FORCE"` (힘-변위) / `"MOMENT"` (모멘트-회전각) | `"TYPE"` | String | `"MOMENT"` | Optional |
-| 3 | Symmetric · true=대칭, false=비대칭 | `"SYMM"` | Boolean | false | Optional |
+| 2 | Type of Function · Force: "FORCE" · Moment: "MOMENT" | `"TYPE"` | String | `"MOMENT"` | Optional |
+| 3 | Symmetric Boolean · Symmetric: true · Unsymmetric: false | `"SYMM"` | Boolean | false | Optional |
 | 4 | Function ID | `"FUNC_ID"` | Integer | 0 | Optional |
-| 5 | Function Data (X=변위/회전, Y=힘/모멘트) | `"ITEMS"` | Array[Object] | — | Required |
+| 5 | Function Data · Insert the data as an object | `"ITEMS"` | Array[Object] | — | **Required** |
 | (1) | X-Axis (Displacement m / Radian) | `"X"` | Number | — | Required |
 | (2) | Y-Axis (Force kN / Moment kN·m) | `"Y"` | Number | — | Required |
 
@@ -1945,10 +1945,10 @@ midas_api("POST", "/db/SDIS", sdis_lrb_data)
 
 | No. | 설명 | 키 | 타입 | 기본값 | 필수 |
 |-----|------|----|------|--------|------|
-| 1 | Linear Constraints (배열로 삽입) | `"ITEMS"` | Array[Object] | — | Required |
+| 1 | Linear Constraints · Insert the data as an object | `"ITEMS"` | Array[Object] | — | **Required** |
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Load Group Name | `"GROUP_NAME"` | String | Blank | Optional |
-| (3) | DOF of Constraint Node (6자리: DX∼RZ) | `"SLAVE_TYPE"` | String(6) | — | Required |
+| (3) | DOF of Constraint Node · 6th decimal place: DX · 5th decimal place: DY · 4th decimal place: DZ · 3rd decimal place: RX · 2nd decimal place: RY · 1st decimal place: RZ | `"SLAVE_TYPE"` | String(6) | — | **Required** |
 | (4) | Constraint Type · `"EX"`=Explicit, `"WD"`=Weighted Displacement | `"TYPE"` | String | — | Required |
 | (5) | Independent Nodes | `"SLAVES"` | Array[Object] | — | Required |
 
@@ -2160,7 +2160,7 @@ midas_api("POST", "/db/CLDR", cldr_data)
 
 | No. | 설명 | 키 | 타입 | 기본값 | 필수 |
 |-----|------|----|------|--------|------|
-| 1 | Assign Object · 키=절점 번호, 값=빈 객체 | `"Assign"` | Object | `{}` | Required |
+| 1 | Assign Object · Defines unit assignment by index. · Keys: Node Number · Value: Dummy Integer Value | `"Assign"` | Object | `{}` | **Required** |
 
 ### 요청 바디 예시
 

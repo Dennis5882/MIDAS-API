@@ -153,8 +153,8 @@
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 | --- | --- | --- | --- | --- | --- |
-| 1 | Assign 래퍼 (ID 문자열 키, 1개) | `"Assign"` | Object | — | **필수** |
-| 2 | 강재 설계 코드 · 현재 `"KDS 41 30 : 2022"` 1개 값만 지원 | `"DGNCODE"` | String (enum) | — | **필수** |
+| 1 | [Root Object] Keyed object (dictionary). Each property name is an ID string (e.g., "1"). | `"Assign"` | Object | — | **Required** |
+| 2 | [General] Design Code · KDS 41 30 : 2022: "KDS 41 30 : 2022" | `"DGNCODE"` | String (enum) | — | **Required** |
 
 ### Request / Response JSON
 
@@ -316,15 +316,15 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| 1 | Assign 래퍼 (ID 문자열 키) | `"Assign"` | Object | — | **필수** |
-| 2 | 설계 코드 (KDS 41 30 : 2022 고정) | `"DGNCODE"` | String (enum) | — | **필수** |
-| 3 | 모든 보/거더 횡지지 가정 | `"LAT_BRACE"` | Boolean | `false` | 선택 |
-| 4 | 보/기둥 처짐 검토 | `"DEFL_CHK"` | Boolean | `true` | 선택 |
-| 5 | 내진설계 특별규정 적용 | `"SEISMIC"` | Boolean | `false` | 선택 |
-| 6 | 원형단면 조합비 방법 (0=SRSS, 1=Linear Sum) | `"COMB_RATIO"` | Integer | `0` | 선택 |
-| 7 | 내진 저항시스템 (SEISMIC=true일 때) — Special/Intermediate/Ordinary Moment Frames, Special/Ordinary Concentrically Braced Frames, Eccentrically Braced Frames, Buckling-Restrained Braced Frames, Special Plate Shear Walls | `"SEIS_SYS"` | String (enum) | `"Special Moment Frames"` | 조건부 필수 |
-| 8 | 최상층 강기둥-약보 고려 | `"COL_WEAK"` | Boolean | `true` | 선택 |
-| 9 | 지하부재에 지하 하중조합 타입 사용 | `"UNDGR_LD"` | Boolean | `true` | 선택 |
+| 1 | [Root Object] Keyed object (dictionary). Each property name is an ID string (e.g., "1"). | `"Assign"` | Object | — | **Required** |
+| 2 | [General] Design Code · KDS 41 30 : 2022: "KDS 41 30 : 2022" | `"DGNCODE"` | String (enum) | — | **Required** |
+| 3 | [General] All Beams/Girders are Laterally Braced | `"LAT_BRACE"` | Boolean | `false` | Optional |
+| 4 | [General] Check Beam/Column Deflection | `"DEFL_CHK"` | Boolean | `true` | Optional |
+| 5 | [General] Apply Special Provisions for Seismic Design | `"SEISMIC"` | Boolean | `false` | Optional |
+| 6 | [General] Combined Ratio Method for Circular Section · SRSS (Square root of sum of square): "0" · Linear Sum: "1" | `"COMB_RATIO"` | Integer | `0` | Optional |
+| 7 | [When "SEISMIC" is true] System · Special Moment Frames: "Special Moment Frames" · Intermediate Moment Frames: "Intermediate Moment Frames" · Ordinary Moment Frames: "Ordinary Moment Frames" · Special Concentrically Braced Frames: "Special Concentrically Braced Frames" · Ordinary Concentrically Braced Frames: "Ordinary Concentrically Braced Frames" · Eccentrically Braced Frames: "Eccentrically Braced Frames" · Buckling-Restrained Braced Frames: "Buckling-Restrained Braced Frames" · Special Plate Shear Walls: "Special Plate Shear Walls" | `"SEIS_SYS"` | String (enum) | `"Special Moment Frames"` | **Required** |
+| 8 | [When "SEISMIC" is true] Consider strong column-weak beam on last floor | `"COL_WEAK"` | Boolean | `true` | Optional |
+| 9 | [General] Use Under Ground Load Combination Type for Under Ground Members | `"UNDGR_LD"` | Boolean | `true` | Optional |
 
 ### Request / Response JSON
 
@@ -509,11 +509,11 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| 1 | Assign 래퍼 (ID 1개만 허용, maxProperties=1) | `"Assign"` | Object | — | **필수** |
-| 2 | X방향 프레임 (`"Unbraced Sway"`=비횡지지·Sway, `"Braced Non-sway"`=횡지지·Non-sway) | `"FRAMEX"` | String (oneOf) | `"Braced Non-sway"` | 선택 |
-| 3 | Y방향 프레임 (값은 FRAMEX와 동일) | `"FRAMEY"` | String (oneOf) | `"Braced Non-sway"` | 선택 |
-| 4 | 유효좌굴길이계수 자동계산 | `"bAUTOKF"` | Boolean | `false` | 선택 |
-| 5 | 설계 타입 (`"3D"`=3-D, `"XZ"`=X-Z평면, `"YZ"`=Y-Z평면, `"XY"`=X-Y평면) | `"DT"` | String (oneOf) | `"3D"` | 선택 |
+| 1 | [Root Object] Keyed object (dictionary). Each property name is an ID string (e.g., "1"). | `"Assign"` | Object | — | **Required** |
+| 2 | [General] X-Direction of Frame · Unbraced \| Sway: "Unbraced Sway" · Braced \| Non-sway: "Braced Non-sway" | `"FRAMEX"` | String (oneOf) | `"Braced Non-sway"` | Optional |
+| 3 | [General] Y-Direction of Frame · Unbraced \| Sway: "Unbraced Sway" · Braced \| Non-sway: "Braced Non-sway" | `"FRAMEY"` | String (oneOf) | `"Braced Non-sway"` | Optional |
+| 4 | [General] Auto Calculate Effective Length Factor | `"bAUTOKF"` | Boolean | `false` | Optional |
+| 5 | [General] Design Type · 3-D: "3D" · X-Z Plane: "XZ" · Y-Z Plane: "YZ" · X-Y Plane: "XY" | `"DT"` | String (oneOf) | `"3D"` | Optional |
 
 ### Request / Response JSON
 
@@ -737,18 +737,18 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| 1 | Assign 래퍼 | `"Assign"` | Object | — | **필수** |
-| 2 | 계산 규칙 (0=by General Design Code, 1=by Chinese Standard) | `"CALC_RULE"` | Integer | `0` | 선택 |
-| 3 | 적용 성분 (`"ALL"`,`"AXIAL"`,`"MOMENTS"`,`"SHEAR"`) | `"APPLIED_COMP"` | Array[String] | `["AXIAL"]` | 선택 |
-| 4 | 활하중 케이스 이름 목록 | `"LIVE_LOAD_CASES"` | Array[String] | — | 선택 |
-| 5 | 저감계수 테이블 데이터 | `"REDUCTION_DATA"` | Array[Object] | — | **필수** |
-| 5.1 | 층 이름 | `"STORY"` | String | — | **필수** |
-| 5.2 | X 최소 좌표 | `"XMIN"` | Number | `0` | 선택 |
-| 5.3 | X 최대 좌표 | `"XMAX"` | Number | `0` | 선택 |
-| 5.4 | Y 최소 좌표 | `"YMIN"` | Number | `0` | 선택 |
-| 5.5 | Y 최대 좌표 | `"YMAX"` | Number | `0` | 선택 |
-| 5.6 | Rmax (General Design Code 전용, enum 1~0.5) | `"RANGE_MAX"` | Number | `1` | 선택 |
-| 5.7 | Rmin (General Design Code 전용, enum 1~0.5) | `"RANGE_MIN"` | Number | `0.5` | 선택 |
+| 1 | [Root Object] Keyed object (dictionary). Each property name is an ID string (e.g., "1"). | `"Assign"` | Object | — | **Required** |
+| 2 | Calculation Rule · by General Design Code: "0" · by Chinese Standard: "1" | `"CALC_RULE"` | Integer | `0` | Optional |
+| 3 | [General] Applied Components · All Forces: "ALL" · Axial Force: "AXIAL" · Moments: "MOMENTS" · Shear Forces: "SHEAR" | `"APPLIED_COMP"` | Array[String] | `["AXIAL"]` | Optional |
+| 4 | [General] Live Load Case Name | `"LIVE_LOAD_CASES"` | Array[String] | — | Optional |
+| 5 | [General] Reduction Data Table | `"REDUCTION_DATA"` | Array[Object] | — | **Required** |
+| 5.1 | [General] Story | `"STORY"` | String | — | **Required** |
+| 5.2 | [General] X Min | `"XMIN"` | Number | `0` | Optional |
+| 5.3 | [General] X Max | `"XMAX"` | Number | `0` | Optional |
+| 5.4 | [General] Y Min | `"YMIN"` | Number | `0` | Optional |
+| 5.5 | [General] Y Max | `"YMAX"` | Number | `0` | Optional |
+| 5.6 | [When "CALC_RULE" is 0] Max(Rmax) · 1: "1" · 0.95: "0.95" · 0.9: "0.9" · 0.85: "0.85" · 0.8: "0.8" · 0.75: "0.75" · 0.7: "0.7" · 0.65: "0.65" · 0.6: "0.6" · 0.55: "0.55" · 0.5: "0.5" | `"RANGE_MAX"` | Number | `1` | Optional |
+| 5.7 | [When "CALC_RULE" is 0] Min(Rmin) · 1: "1" · 0.95: "0.95" · 0.9: "0.9" · 0.85: "0.85" · 0.8: "0.8" · 0.75: "0.75" · 0.7: "0.7" · 0.65: "0.65" · 0.6: "0.6" · 0.55: "0.55" · 0.5: "0.5" | `"RANGE_MIN"` | Number | `0.5` | Optional |
 
 ### Request / Response JSON
 
@@ -967,12 +967,12 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| 1 | Assign 래퍼 | `"Assign"` | Object | — | **필수** |
-| 2 | 하중기여 이름 | `"NAME"` | String | — | **필수** |
-| 3 | 설명 | `"DESC"` | String | `""` | 선택 |
-| 4 | 하중기여 항목 | `"BASE_ITEM"` | Array[Object] | — | **필수** |
-| 4.1 | 계수 | `"FACTOR"` | Number | — | **필수** |
-| 4.2 | 하중케이스 이름 | `"LOAD_CASE_NAME"` | String | — | **필수** |
+| 1 | [Root Object] Keyed object (dictionary). Each property name is an ID string (e.g., "1"). | `"Assign"` | Object | — | **Required** |
+| 2 | [General] Load Contribution Name | `"NAME"` | String | — | **Required** |
+| 3 | [General] Description | `"DESC"` | String | `""` | Optional |
+| 4 | [General] Load Contribution Items | `"BASE_ITEM"` | Array[Object] | — | **Required** |
+| 4.1 | [General] Factor | `"FACTOR"` | Number | — | **Required** |
+| 4.2 | [General] Load Case Name | `"LOAD_CASE_NAME"` | String | — | **Required** |
 
 ### Request / Response JSON
 
@@ -1116,12 +1116,12 @@ print("GET:", res.status_code, res.json())
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| 1 | Assign 래퍼 (ID 1개만 허용, maxProperties=1) | `"Assign"` | Object | — | **필수** |
-| 2 | 총단면 항복 (φ_t1) | `"PHI_T1"` | Number | `0.9` | 선택 |
-| 3 | 순단면 파단 (φ_t2) — 0.75 고정 read-only | `"PHI_T2"` | Number (const 0.75) | `0.75` | 선택 |
-| 4 | 압축부재 (φ_c) | `"PHI_C"` | Number | `0.9` | 선택 |
-| 5 | 휨부재 (φ_b) | `"PHI_B"` | Number | `0.9` | 선택 |
-| 6 | 전단 (φ_v) | `"PHI_V"` | Number | `0.9` | 선택 |
+| 1 | [Root Object] Object keyed by ID strings (e.g., "1"), where each entry represents an element. | `"Assign"` | Object | — | **Required** |
+| 2 | [General] For Yielding in Gross Section (phi_t1) | `"PHI_T1"` | Number | `0.9` | Optional |
+| 3 | [General] For Fracture in Net Section (phi_t2) - read-only fixed value | `"PHI_T2"` | Number (const 0.75) | `0.75` | Optional |
+| 4 | [General] For Compression Members (phi_c) | `"PHI_C"` | Number | `0.9` | Optional |
+| 5 | [General] For Flexural Members (phi_b) | `"PHI_B"` | Number | `0.9` | Optional |
+| 6 | [General] For Shear (phi_v) | `"PHI_V"` | Number | `0.9` | Optional |
 
 ### Request / Response JSON
 
@@ -1247,9 +1247,9 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| 1 | Assign 래퍼 | `"Assign"` | Object | — | **필수** |
-| 2 | 처짐 제어값 (span/n) | `"DEFLECT_CONTROL"` | Number | `300` | 선택 |
-| 3 | 처짐 증폭계수 | `"DAF"` | Number | `1` | 선택 |
+| 1 | [Root Object] Object keyed by ID strings (e.g., "1"), where each entry represents an element. | `"Assign"` | Object | — | **Required** |
+| 2 | [General] Deflection Control | `"DEFLECT_CONTROL"` | Number | `300` | Optional |
+| 3 | [General] Deflection Amplification Factor | `"DAF"` | Number | `1` | Optional |
 
 ### Request / Response JSON
 
@@ -1389,8 +1389,8 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| 1 | Assign 래퍼 | `"Assign"` | Object | — | **필수** |
-| 2 | 부재 타입 (`"Special Seismic Loads"`, `"Vertical Seismic Forces"`) | `"TYPE"` | String (oneOf) | — | **필수** |
+| 1 | [Root Object] Object keyed by ID strings (e.g., "1"), where each entry represents an element. | `"Assign"` | Object | — | **Required** |
+| 2 | [General] Assign Member Type · Special Seismic Loads: "Special Seismic Loads" · Vertical Seismic Forces: "Vertical Seismic Forces" | `"TYPE"` | String (oneOf) | — | **Required** |
 
 ### Request / Response JSON
 
@@ -1530,7 +1530,7 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| 1 | Assign 래퍼 | `"Assign"` | Object | — | **필수** |
+| 1 | [Root Object] Object keyed by ID strings (e.g., "1"), where each entry represents an element. | `"Assign"` | Object | — | **Required** |
 | 2 | 지하 하중 타입 (`true`=지하 하중용, `false`=비지하 하중용) | `"bUNDERLOADTYPE"` | Boolean (oneOf) | `false` | 선택 |
 
 ### Request / Response JSON
@@ -1673,13 +1673,13 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| 1 | Assign 래퍼 | `"Assign"` | Object | — | **필수** |
-| 2 | 하중케이스 - 축력 증폭계수 | `"LC_AXIAL"` | Number | `1` | 선택 |
-| 3 | 하중케이스 - 모멘트 증폭계수 | `"LC_MOMENT"` | Number | `1` | 선택 |
-| 4 | 하중케이스 - 전단 증폭계수 | `"LC_SHEAR"` | Number | `1` | 선택 |
-| 5 | 하중조합 - 축력 증폭계수 | `"LCOM_AXIAL"` | Number | `1` | 선택 |
-| 6 | 하중조합 - 모멘트 증폭계수 | `"LCOM_MOMENT"` | Number | `1` | 선택 |
-| 7 | 하중조합 - 전단 증폭계수 | `"LCOM_SHEAR"` | Number | `1` | 선택 |
+| 1 | [Root Object] Object keyed by ID strings (e.g., "1"), where each entry represents an element. | `"Assign"` | Object | — | **Required** |
+| 2 | [General] Load Case - Axial Scale Factor | `"LC_AXIAL"` | Number | `1` | Optional |
+| 3 | [General] Load Case - Moment Scale Factor | `"LC_MOMENT"` | Number | `1` | Optional |
+| 4 | [General] Load Case - Shear Scale Factor | `"LC_SHEAR"` | Number | `1` | Optional |
+| 5 | [General] Load Combination - Axial Scale Factor | `"LCOM_AXIAL"` | Number | `1` | Optional |
+| 6 | [General] Load Combination - Moment Scale Factor | `"LCOM_MOMENT"` | Number | `1` | Optional |
+| 7 | [General] Load Combination - Shear Scale Factor | `"LCOM_SHEAR"` | Number | `1` | Optional |
 
 ### Request / Response JSON
 
@@ -1832,8 +1832,8 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| 1 | Assign 래퍼 | `"Assign"` | Object | — | **필수** |
-| 2 | 조합강도 방법 (`"SRSS"`, `"Linear Sum"`) | `"METHOD"` | String (oneOf) | — | **필수** |
+| 1 | [Root Object] Object keyed by ID strings (e.g., "1"), where each entry represents an element. | `"Assign"` | Object | — | **Required** |
+| 2 | [General] Combined Strength Method · SRSS: "SRSS" · Linear Sum: "Linear Sum" | `"METHOD"` | String (oneOf) | — | **Required** |
 
 ### Request / Response JSON
 
@@ -2087,17 +2087,17 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| 1 | Assign 래퍼 | `"Assign"` | Object | — | **필수** |
-| 2 | 헌치 이름 | `"NAME"` | String | — | **필수** |
-| 3 | Part A 요소 입력 (방법 1개만 사용) | `"PART_A"` | Object | — | **필수** |
-| 3.1 | 입력 방법 (`"KEYS"`=개별 ID, `"TO"`=범위) | `"INPUT_METHOD"` | String (oneOf) | — | **필수** |
-| 3.2 | 개별 요소 ID (INPUT_METHOD=KEYS, minItems 1) | `"KEYS"` | Array[Integer] | — | 조건부 |
-| 3.3 | ID 범위 문자열 (INPUT_METHOD=TO, 예 `"101 to 105"`) | `"TO"` | String | — | 조건부 |
-| 4 | Part B 요소 입력 (구조는 PART_A와 동일) | `"PART_B"` | Object | — | **필수** |
-| 5 | Part C 요소 입력 (구조는 PART_A와 동일) | `"PART_C"` | Object | — | **필수** |
-| 6 | 설계 위치 타입 (0=Part 1/2, 1=User) | `"POS_TYPE"` | Integer (oneOf) | — | **필수** |
-| 7 | 사용자 정의 L1 거리 (POS_TYPE=1) | `"L1"` | Number | `1` | 선택 |
-| 8 | 사용자 정의 L2 거리 (POS_TYPE=1) | `"L2"` | Number | `1` | 선택 |
+| 1 | [Root Object] Keyed object (dictionary). Each property name is an ID string (e.g., "1"). | `"Assign"` | Object | — | **Required** |
+| 2 | [General] Haunch Name | `"NAME"` | String | — | **Required** |
+| 3 | [General] Element No. Input for Part A (Use only one method) | `"PART_A"` | Object | — | **Required** |
+| 3.1 | [General] Select input method for Part B · Specify each Element ID: "KEYS" · Specify ID range: "TO" | `"INPUT_METHOD"` | String (oneOf) | — | **Required** |
+| 3.2 | [When "INPUT_METHOD" is KEYS] Specify each Element ID Constraints: · Items: min 1 | `"KEYS"` | Array[Integer] | — | Optional |
+| 3.3 | [When "INPUT_METHOD" is TO] Specify ID range (e.g. "101 to 105") | `"TO"` | String | — | Optional |
+| 4 | [General] Element No. Input for Part B (Use only one method) | `"PART_B"` | Object | — | **Required** |
+| 5 | [General] Element No. Input for Part C (Use only one method) | `"PART_C"` | Object | — | **Required** |
+| 6 | [General] Design Position Type · Part 1/2: "0" · User: "1" | `"POS_TYPE"` | Integer (oneOf) | — | **Required** |
+| 7 | [When "POS_TYPE" is 1] User defined L1 distance | `"L1"` | Number | `1` | Optional |
+| 8 | [When "POS_TYPE" is 1] User defined L2 distance | `"L2"` | Number | `1` | Optional |
 
 ### Request / Response JSON
 
@@ -2282,12 +2282,12 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| 1 | Assign 래퍼 | `"Assign"` | Object | — | **필수** |
-| 2 | 비지지 길이 Ly | `"LY"` | Number | `0` | 선택 |
-| 3 | 비지지 길이 Lz | `"LZ"` | Number | `0` | 선택 |
-| 4 | 횡비지지 길이 Lb | `"LB"` | Number | `0` | 선택 |
-| 5 | 횡비지지 길이 미고려 | `"bNOTUSE"` | Boolean | `false` | 선택 |
-| 6 | 비틀림 비지지 길이 Lt | `"LT"` | Number | `0` | 선택 |
+| 1 | [Root Object] Keyed object (dictionary). Each property name is an ID string (e.g., "1"). | `"Assign"` | Object | — | **Required** |
+| 2 | [General] Unbraced Length Ly | `"LY"` | Number | `0` | Optional |
+| 3 | [General] Unbraced Length Lz | `"LZ"` | Number | `0` | Optional |
+| 4 | [General] Laterally Unbraced Length | `"LB"` | Number | `0` | Optional |
+| 5 | [General] Do not consider of laterally unbraced length | `"bNOTUSE"` | Boolean | `false` | Optional |
+| 6 | [General] Torsional Unbraced Length | `"LT"` | Number | `0` | Optional |
 
 ### Request / Response JSON
 
@@ -2432,10 +2432,10 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| 1 | Assign 래퍼 | `"Assign"` | Object | — | **필수** |
-| 2 | 유효좌굴길이계수 Ky | `"Ky"` | Number | `1` | 선택 |
-| 3 | 유효좌굴길이계수 Kz | `"Kz"` | Number | `1` | 선택 |
-| 4 | 유효좌굴길이계수 Kt | `"Kt"` | Number | `1` | 선택 |
+| 1 | [Root Object] Object keyed by ID strings (e.g., "1"), where each entry represents an element | `"Assign"` | Object | — | **Required** |
+| 2 | [General] Ky | `"Ky"` | Number | `1` | Optional |
+| 3 | [General] Kz | `"Kz"` | Number | `1` | Optional |
+| 4 | [General] Kt | `"Kt"` | Number | `1` | Optional |
 
 ### Request / Response JSON
 
@@ -2578,10 +2578,10 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| 1 | Assign 래퍼 | `"Assign"` | Object | — | **필수** |
-| 2 | 세장비 검토 안함 | `"bNOTCHECK"` | Boolean | `false` | 선택 |
-| 3 | 압축 세장비 제한 | `"COMP"` | Number | — | **필수** |
-| 4 | 인장 세장비 제한 | `"TENS"` | Number | — | **필수** |
+| 1 | [Root Object] Object keyed by ID strings (e.g., "1"), where each entry represents an element. | `"Assign"` | Object | — | **Required** |
+| 2 | [General] Do not check for Slenderness Ratio | `"bNOTCHECK"` | Boolean | `false` | Optional |
+| 3 | [General] Limiting Slenderness Ratio for Compression | `"COMP"` | Number | — | **Required** |
+| 4 | [General] Limiting Slenderness Ratio for Tension | `"TENS"` | Number | — | **Required** |
 
 ### Request / Response JSON
 
@@ -2714,8 +2714,8 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| 1 | Assign 래퍼 | `"Assign"` | Object | — | **필수** |
-| 2 | 자동계산 | `"OPT_AUTO"` | Boolean | `false` | 선택 |
+| 1 | [Root Object] Object keyed by ID strings (e.g., "1"), where each entry represents an element. | `"Assign"` | Object | — | **Required** |
+| 2 | [General] Auto Calculate | `"OPT_AUTO"` | Boolean | `false` | Optional |
 | 3 | CMy | `"CMY"` | Number | `0` | 선택 |
 | 4 | CMz | `"CMZ"` | Number | `0` | 선택 |
 
@@ -2864,11 +2864,11 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| 1 | Assign 래퍼 | `"Assign"` | Object | — | **필수** |
-| 2 | B1y - Δby (1차 모멘트 Y) | `"B1Y_DELTA_BY"` | Number | `1` | 선택 |
-| 3 | B1z - Δbz (1차 모멘트 Z) | `"B1Z_DELTA_BZ"` | Number | `1` | 선택 |
-| 4 | B2y - Δsy (2차 모멘트 Y) | `"B2Y_DELTA_SY"` | Number | `1` | 선택 |
-| 5 | B2z - Δsz (2차 모멘트 Z) | `"B2Z_DELTA_SZ"` | Number | `1` | 선택 |
+| 1 | [Root Object] Object keyed by ID strings (e.g., "1"), where each entry represents an element. | `"Assign"` | Object | — | **Required** |
+| 2 | [General] B1y - Delta by (First Order Moment Y) | `"B1Y_DELTA_BY"` | Number | `1` | Optional |
+| 3 | [General] B1z - Delta bz (First Order Moment Z) | `"B1Z_DELTA_BZ"` | Number | `1` | Optional |
+| 4 | [General] B2y - Delta sy (Second Order Moment Y) | `"B2Y_DELTA_SY"` | Number | `1` | Optional |
+| 5 | [General] B2z - Delta sz (Second Order Moment Z) | `"B2Z_DELTA_SZ"` | Number | `1` | Optional |
 
 ### Request / Response JSON
 
@@ -3000,9 +3000,9 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| 1 | Assign 래퍼 | `"Assign"` | Object | — | **필수** |
-| 2 | 프로그램 자동계산 | `"AUTO_CAL"` | Boolean | `false` | 선택 |
-| 3 | 휨계수 Cb 값 (AUTO_CAL=false일 때) | `"VALUE"` | Number | `1` | 선택 |
+| 1 | [Root Object] Object keyed by ID strings (e.g., "1"), where each entry represents an element. | `"Assign"` | Object | — | **Required** |
+| 2 | [General] Auto Calculate by Program | `"AUTO_CAL"` | Boolean | `false` | Optional |
+| 3 | [When "AUTO_CAL" is false] Bending Coefficient (Cb) Value | `"VALUE"` | Number | `1` | Optional |
 
 ### Request / Response JSON
 
@@ -3149,8 +3149,8 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| 1 | Assign 래퍼 | `"Assign"` | Object | — | **필수** |
-| 2 | 부재 타입 (`"COLUMN"`, `"BEAM"`, `"BRACE"`) | `"TYPE"` | String (oneOf) | — | **필수** |
+| 1 | [Root Object] Object keyed by ID strings (e.g., "1"), where each entry represents an element. | `"Assign"` | Object | — | **Required** |
+| 2 | [General] Member Type · Column: "COLUMN" · Beam: "BEAM" · Brace: "BRACE" | `"TYPE"` | String (oneOf) | — | **Required** |
 
 ### Request / Response JSON
 
@@ -3328,9 +3328,9 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| 1 | Assign 래퍼 | `"Assign"` | Object | — | **필수** |
-| 2 | 내진 저항시스템 골조 타입 (`"Special Concentrically Braced Frames"`, `"Ordinary Concentrically Braced Frames"`, `"Eccentrically Braced Frames"`, `"Buckling Restrained Braced Frames"`, `"Special Plate Shear Walls"`) | `"FRAME_TYPE"` | String (oneOf) | — | **필수** |
-| 3 | 가새 세장비 검토 / 링크 검토 (Buckling Restrained·Special Plate Shear Walls는 미지원 → false 강제) | `"CHECK_OPTION"` | Boolean | `true` | 선택 |
+| 1 | [Root Object] Object keyed by ID strings (e.g., "1"), where each entry represents an element. | `"Assign"` | Object | — | **Required** |
+| 2 | [General] Seismic Load Resisting System Frame Type · Special Concentrically Braced Frames: "Special Concentrically Braced Frames" · Ordinary Concentrically Braced Frames: "Ordinary Concentrically Braced Frames" · Eccentrically Braced Frames: "Eccentrically Braced Frames" · Buckling Restrained Braced Frames: "Buckling Restrained Braced Frames" · Special Plate Shear Walls: "Special Plate Shear Walls" | `"FRAME_TYPE"` | String (oneOf) | — | **Required** |
+| 3 | [General] Check for Brace Slenderness Ratio / Check for Links (not supported for Buckling-Restrained Braced Frames and Special Plate Shear Walls) | `"CHECK_OPTION"` | Boolean | `true` | Optional |
 
 ### Request / Response JSON
 
@@ -3486,12 +3486,12 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| 1 | Assign 래퍼 | `"Assign"` | Object | — | **필수** |
-| 2 | 저감계수 (범위 0.3 ~ 1.0) | `"FACTOR"` | Number | `1` | 선택 |
-| 3 | 적용 성분 | `"COMPONENTS"` | Object | — | 선택 |
-| 3.1 | 축력 | `"AXIAL"` | Boolean | `false` | 선택 |
-| 3.2 | 모멘트 | `"MOMENT"` | Boolean | `false` | 선택 |
-| 3.3 | 전단력 | `"SHEAR"` | Boolean | `false` | 선택 |
+| 1 | [Root Object] Object keyed by ID strings (e.g., "1"), where each entry represents an element. | `"Assign"` | Object | — | **Required** |
+| 2 | [General] Reduction Factor Constraints: · Value Range: >= 0.3, <= 1 | `"FACTOR"` | Number | `1` | Optional |
+| 3 | [General] Applied Components | `"COMPONENTS"` | Object | — | Optional |
+| 3.1 | [General] Axial Force | `"AXIAL"` | Boolean | `false` | Optional |
+| 3.2 | [General] Moments | `"MOMENT"` | Boolean | `false` | Optional |
+| 3.3 | [General] Shear Forces | `"SHEAR"` | Boolean | `false` | Optional |
 
 ### Request / Response JSON
 
@@ -3641,9 +3641,9 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| 1 | Assign 래퍼 | `"Assign"` | Object | — | **필수** |
-| 2 | 요소 리스트 | `"AELEM"` | Array[Integer] | — | **필수** |
-| 3 | 로컬 방향 반전 | `"bREVERSE"` | Boolean | `false` | 선택 |
+| 1 | [Root Object] Keyed object (dictionary). Each property name is an ID string (e.g., "1"). | `"Assign"` | Object | — | **Required** |
+| 2 | [General] Element Lists | `"AELEM"` | Array[Integer] | — | **Required** |
+| 3 | [General] Reverse Local Direction | `"bREVERSE"` | Boolean | `false` | Optional |
 
 ### Request / Response JSON
 
@@ -4164,20 +4164,20 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| 1 | Assign 래퍼 (재질 ID 문자열 키) | `"Assign"` | Object | — | **필수** |
-| 2 | 재질 코드 타입 (`"None"`=사용자정의, `"Standard"`=표준코드) | `"CODE"` | String (oneOf) | — | **필수** |
-| 3 | 표준 코드 (CODE=Standard, 현재 `"KS22(S)"`만 지원) | `"STANDARD_CODE"` | String (oneOf) | — | 조건부 필수 |
-| 4 | 강종 Grade (CODE=Standard) — SS235/SS275/…/SM355/…/SN460/SHN460/HSB690/HSA650/… 등 KS22(S) 68종 | `"GRADE"` | String (oneOf) | — | 조건부 필수 |
-| 5 | 사용자 정의 재질명 (CODE=None) | `"NAME"` | String | — | 조건부 필수 |
-| 6 | 항복강도 Fy (CODE=None) | `"FY"` | Number | — | 조건부 필수 |
-| 7 | 탄성계수 Es (CODE=None 입력 / Standard 자동채움) | `"ES"` | Number | — | 조건부 필수 |
-| 8 | 포아송비 Ps (CODE=None 입력 / Standard 자동채움) | `"PS"` | Number | — | 조건부 필수 |
-| 9 | 인장강도 Fu (CODE=None 입력 / Standard 자동채움) | `"FU"` | Number | — | 조건부 필수 |
-| 10 | 항복강도 Fy1 (CODE=Standard 자동채움) | `"FY1"` | Number | — | 선택 |
-| 11 | 항복강도 Fy2 (CODE=Standard 자동채움) | `"FY2"` | Number | — | 선택 |
-| 12 | 항복강도 Fy3 (CODE=Standard 자동채움) | `"FY3"` | Number | — | 선택 |
-| 13 | 항복강도 Fy4 (CODE=Standard 자동채움) | `"FY4"` | Number | — | 선택 |
-| 14 | 항복강도 Fy5 (CODE=Standard 자동채움) | `"FY5"` | Number | — | 선택 |
+| 1 | [Root Object] Keyed object (dictionary). Each property name is a material ID string (e.g., "1"). | `"Assign"` | Object | — | **Required** |
+| 2 | [General] Code · None: "None" · Standard: "Standard" | `"CODE"` | String (oneOf) | — | **Required** |
+| 3 | [When "CODE" is Standard] Standard Code · KS22(S): "KS22(S)" | `"STANDARD_CODE"` | String (oneOf) | — | **Required** |
+| 4 | [When "CODE" is Standard] Grade · SS235: "SS235" · SS275: "SS275" · SS315: "SS315" · SS410: "SS410" · SS450: "SS450" · SS550: "SS550" · SM275: "SM275" · SM355: "SM355" · SM420: "SM420" · SM460: "SM460" · SM275TMC: "SM275TMC" · SM355TMC: "SM355TMC" · SM420TMC: "SM420TMC" · SM460TMC: "SM460TMC" · SMA275A: "SMA275A" · SMA275B: "SMA275B" · SMA275C: "SMA275C" · SMA355A: "SMA355A" · SMA355B: "SMA355B" · SMA355C: "SMA355C" · SMA460: "SMA460" · HSM500: "HSM500" · SN275A: "SN275A" · SN275B: "SN275B" · SN275C: "SN275C" · SN355: "SN355" · SN460: "SN460" · SHN275: "SHN275" · SHN355: "SHN355" · SHN420: "SHN420" · SHN460: "SHN460" · HSB380: "HSB380" · HSB460: "HSB460" · HSB690: "HSB690" · HSA650: "HSA650" · SGT275: "SGT275" · SGT355: "SGT355" · SGT410: "SGT410" · SGT450: "SGT450" · SGT550: "SGT550" · SRT275: "SRT275" · SRT355: "SRT355" · SRT410: "SRT410" · SRT450: "SRT450" · SRT550: "SRT550" · SNT275: "SNT275" · SNT355: "SNT355" · SNT460: "SNT460" · SHT410: "SHT410" · SHT460: "SHT460" · SNRT295E: "SNRT295E" · SNRT390E: "SNRT390E" · SNRT275A: "SNRT275A" · SNRT355A: "SNRT355A" · SSC275: "SSC275" · SWH275: "SWH275" · SWH355: "SWH355" · SWH420: "SWH420" · SWH460: "SWH460" · SF490: "SF490" · SF540: "SF540" · SDP1: "SDP1" · SDP2: "SDP2" · SDP3: "SDP3" · SWPC1: "SWPC1" · SWPD1: "SWPD1" · SWPC: "SWPC" · SWPD: "SWPD" | `"GRADE"` | String (oneOf) | — | **Required** |
+| 5 | [When "CODE" is None] Name | `"NAME"` | String | — | **Required** |
+| 6 | [When "CODE" is None] Yield Strength (Fy) | `"FY"` | Number | — | **Required** |
+| 7 | [When "CODE" is None] Modulus of Elasticity (Es) [User input when Code=None / Auto-filled when Code=Standard] | `"ES"` | Number | — | **Required** |
+| 8 | [When "CODE" is None] Poisson's Ratio (Ps) [User input when Code=None / Auto-filled when Code=Standard] | `"PS"` | Number | — | **Required** |
+| 9 | [When "CODE" is None] Tensile Strength (Fu) [User input when Code=None / Auto-filled when Code=Standard] | `"FU"` | Number | — | **Required** |
+| 10 | [When "CODE" is Standard] Yield Strength (Fy1) [Auto-filled when Code=Standard] | `"FY1"` | Number | — | Optional |
+| 11 | [When "CODE" is Standard] Yield Strength (Fy2) [Auto-filled when Code=Standard] | `"FY2"` | Number | — | Optional |
+| 12 | [When "CODE" is Standard] Yield Strength (Fy3) [Auto-filled when Code=Standard] | `"FY3"` | Number | — | Optional |
+| 13 | [When "CODE" is Standard] Yield Strength (Fy4) [Auto-filled when Code=Standard] | `"FY4"` | Number | — | Optional |
+| 14 | [When "CODE" is Standard] Yield Strength (Fy5) [Auto-filled when Code=Standard] | `"FY5"` | Number | — | Optional |
 
 ### Request / Response JSON
 
@@ -4765,24 +4765,24 @@ print(res.json())
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| 1 | Argument 래퍼 | `"Argument"` | Object | — | **필수** |
-| 2 | 표 타입 (`"MEMB"`=부재기준, `"PROP"`=단면기준) | `"TABLE_TYPE"` | String (enum) | — | **필수** |
-| 3 | 요소 입력 (ELEMS/SECTIONS 중 하나) — `KEYS`/`TO`/`STRUCTURE_GROUP_NAME` | `"ELEMS"` | Object | — | 조건부 |
-| 4 | 단면 번호 (ELEMS/SECTIONS 중 하나) | `"SECTIONS"` | Array[Integer] | — | 조건부 |
-| 5 | 1차 정렬 (0=SECT, 1=MEMB) | `"PRI_SORT"` | Integer (oneOf) | `1` | 선택 |
-| 6 | 결과 필터 (0=All, 1=OK, 2=NG) | `"RESULT"` | Integer (oneOf) | `0` | 선택 |
-| 7 | RatPc > 0.4 부재만 표시 | `"VIEW_RATPC"` | Boolean | `false` | 선택 |
-| 8 | 응답 표 제목 | `"TABLE_NAME"` | String | `""` | 선택 |
-| 9 | 결과 파일 저장 경로 | `"EXPORT_PATH"` | String | — | 선택 |
-| 10 | 단위 설정 | `"UNIT"` | Object | — | 선택 |
-| 10.1 | 힘 단위 | `"FORCE"` | String | — | 선택 |
-| 10.2 | 길이 단위 | `"DIST"` | String | — | 선택 |
-| 10.3 | 열 단위 | `"HEAT"` | String | — | 선택 |
-| 10.4 | 온도 단위 | `"TEMP"` | String | — | 선택 |
-| 11 | 숫자 포맷 | `"STYLES"` | Object | — | 선택 |
-| 11.1 | 포맷 (Default/Fixed/Scientific/General) | `"FORMAT"` | String (enum) | — | 선택 |
-| 11.2 | 소수 자릿수 (0~15) | `"PLACE"` | Integer | — | 선택 |
-| 12 | 결과 표 성분 목록 | `"COMPONENTS"` | Array[String] | — | 선택 |
+| 1 | [Root Object] Map of keyed objects where each key is a string identifier. | `"Argument"` | Object | — | **Required** |
+| 2 | [General] Table Type · MEMB: "MEMB" · PROP: "PROP" | `"TABLE_TYPE"` | String (enum) | — | **Required** |
+| 3 | [oneOf Choose exactly one of the following keys: "ELEMS" or "SECTIONS".] Element No. Use either ELEMS or SECTIONS, not both. | `"ELEMS"` | Object | — | Optional |
+| 4 | [oneOf Choose exactly one of the following keys: "ELEMS" or "SECTIONS".] Section Numbers Use either ELEMS or SECTIONS, not both. | `"SECTIONS"` | Array[Integer] | — | Optional |
+| 5 | Primary Sorting Option · SECT: "0" · MEMB: "1" | `"PRI_SORT"` | Integer (oneOf) | `1` | Optional |
+| 6 | Result View Option · All: "0" · OK: "1" · NG: "2" | `"RESULT"` | Integer (oneOf) | `0` | Optional |
+| 7 | View RatPc > 0.4 | `"VIEW_RATPC"` | Boolean | `false` | Optional |
+| 8 | Table Name Output table title in response | `"TABLE_NAME"` | String | `""` | Optional |
+| 9 | Export Path Optional: Save results to file path | `"EXPORT_PATH"` | String | — | Optional |
+| 10 | Unit Settings | `"UNIT"` | Object | — | Optional |
+| 10.1 | Force unit | `"FORCE"` | String | — | Optional |
+| 10.2 | Length/Distance unit | `"DIST"` | String | — | Optional |
+| 10.3 | Heat unit | `"HEAT"` | String | — | Optional |
+| 10.4 | Temperature unit | `"TEMP"` | String | — | Optional |
+| 11 | Number Format | `"STYLES"` | Object | — | Optional |
+| 11.1 | Number format · Default: "Default" · Fixed: "Fixed" · Scientific: "Scientific" · General: "General" | `"FORMAT"` | String (enum) | — | Optional |
+| 11.2 | Digit place Constraints: · Value Range: >= 0, <= 15 | `"PLACE"` | Integer | — | Optional |
+| 12 | Components · Strength Check Result: "CHK" · Member Number: "MEMB" · Max Combined Interaction Ratio: "COM" · Section Number: "SECT" · Shear Stress Ratio: "SHR" · Section Name: "Section" · Material Name: "Material" · Yield Strength: "Fy" · Critical Load Combination No.: "LCB" · Member Length: "Len" · Lateral Bracing Length: "Lb" · Unbraced Length: "Ly" · Unbraced Length: "Lz" · Bending Coefficient: "Cb" · Effective Length Factor: "Ky" · Effective Length Factor: "Kz" · Moment Magnification Factor B1: "B1y" · Moment Magnification Factor B1: "B1z" · Moment Magnification Factor B2: "B2y" · Moment Magnification Factor B2: "B2z" · Axial Strength Ratio: "RatPc" · Required Axial Strength: "Pu" · Design Axial Strength: "pPn" · Required Flexural Strength: "Muy" · Design Flexural Strength φMny: "pMny" · Required Flexural Strength: "Muz" · Design Flexural Strength φMnz: "pMnz" · Required Shear Strength: "Vuy" · Design Shear Strength φVny: "pVny" · Required Shear Strength: "Vuz" · Design Shear Strength φVnz: "pVnz" · Required Torsional Strength: "Tu" · Design Torsional Strength: "pTn" · Serviceability Deflection: "Def" · Allowable Deflection: "Defa" | `"COMPONENTS"` | Array[String] | — | Optional |
 
 > **`COMPONENTS` 주요 성분:** `CHK`(검토결과), `MEMB`(부재번호), `COM`(최대 조합 상호작용비), `SECT`(단면번호), `SHR`(전단응력비), `Section`(단면명), `Material`(재질명), `Fy`(항복강도), `LCB`(지배 하중조합), `Len`(부재길이), `Lb`(횡지지길이), `Ly`/`Lz`(비지지길이), `Cb`(휨계수), `Ky`/`Kz`(유효길이계수), `B1y`/`B1z`/`B2y`/`B2z`(모멘트 증폭계수), `RatPc`(축강도비), `Pu`/`pPn`(소요/설계 축강도), `Muy`/`pMny`·`Muz`/`pMnz`(소요/설계 휨강도), `Vuy`/`pVny`·`Vuz`/`pVnz`(소요/설계 전단강도), `Tu`/`pTn`(소요/설계 비틀림강도), `Def`/`Defa`(처짐/허용처짐).
 
@@ -5173,13 +5173,13 @@ print(res.json())
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| 1 | Argument 래퍼 | `"Argument"` | Object | — | **필수** |
-| 2 | 보고서 표 타입 (`"MEMB"`, `"PROP"`) | `"REPORT_TYPE"` | String (enum) | — | **필수** |
-| 3 | 출력 모드 (`"Graphic"`=JPG, `"Detail"`=DOC, `"Summary"`=TXT) | `"CURRENT_MODE"` | String (oneOf) | — | **필수** |
-| 4 | 요소 입력 (ELEMS/SECTIONS 중 하나) — `KEYS`/`TO`/`STRUCTURE_GROUP_NAME` | `"ELEMS"` | Object | — | 조건부 |
-| 5 | 단면 번호 (ELEMS/SECTIONS 중 하나) | `"SECTIONS"` | Array[Integer] | — | 조건부 |
-| 6 | 저장 디렉터리 경로 (예 `C:\\MIDAS\\Report\\`) | `"EXPORT_PATH"` | String | — | **필수** |
-| 7 | 출력 파일 기본 이름 (다중 요소 시 인덱스·요소번호 접두어 부가) | `"OUTPUT_NAME"` | String | — | **필수** |
+| 1 | [Root Object] Map of keyed objects where each key is a string identifier. | `"Argument"` | Object | — | **Required** |
+| 2 | [General] Table Type · MEMB: "MEMB" · PROP: "PROP" | `"REPORT_TYPE"` | String (enum) | — | **Required** |
+| 3 | [General] Report Mode · Graphic (JPG image): "Graphic" · Detail (DOC document): "Detail" · Summary (TXT text): "Summary" | `"CURRENT_MODE"` | String (oneOf) | — | **Required** |
+| 4 | [oneOf Choose exactly one of the following keys: "ELEMS" or "SECTIONS".] Element Numbers Use either ELEMS or SECTIONS, not both. | `"ELEMS"` | Object | — | Optional |
+| 5 | [oneOf Choose exactly one of the following keys: "ELEMS" or "SECTIONS".] Section Numbers Use either ELEMS or SECTIONS, not both. | `"SECTIONS"` | Array[Integer] | — | Optional |
+| 6 | Export Path e.g. C:\MIDAS\Report\ | `"EXPORT_PATH"` | String | — | **Required** |
+| 7 | Output File Name | `"OUTPUT_NAME"` | String | — | **Required** |
 
 ### Request / Response JSON
 
@@ -5720,24 +5720,24 @@ print(res.json())
 |-----|------|-----|------|--------|------|
 | 1 | Argument 래퍼 | `"Argument"` | Object | — | **필수** |
 | 2 | 이미지 저장 경로 및 파일명 | `"EXPORT_PATH"` | String | — | **필수** |
-| 3 | 스마트 리포트 이미지 이름 | `"FIGURE_NAME"` | String | — | 선택 |
-| 4 | Hidden 옵션 | `"SET_HIDDEN"` | Boolean | `false` | 선택 |
-| 5 | View/Active 설정 (Active 문서 참조) | `"ACTIVE"` | Object | — | 선택 |
+| 3 | [General] Smart Report Image Name | `"FIGURE_NAME"` | String | — | Optional |
+| 4 | [General] Hidden Option | `"SET_HIDDEN"` | Boolean | `false` | Optional |
+| 5 | [General] Active *) | `"ACTIVE"` | Object | — | Optional |
 | 6 | 이미지 폭 px (100~10000) | `"WIDTH"` | Integer | `1000` | 선택 |
 | 7 | 이미지 높이 px (100~10000) | `"HEIGHT"` | Integer | `1000` | 선택 |
-| 8 | 시공단계 이름 | `"STAGE_NAME"` | String | — | 선택 |
-| 9 | 뷰 각도 | `"ANGLE"` | Object | — | 선택 |
-| 9.1 | 수평 회전각 | `"HORIZONTAL"` | Number | `0` | 선택 |
-| 9.2 | 수직 회전각 | `"VERTICAL"` | Number | `0` | 선택 |
-| 10 | View/Display 설정 (Display 문서 참조) | `"DISPLAY"` | Object | — | 선택 |
-| 11 | 원근투영 | `"PERSPECTIVE"` | Boolean | `false` | 선택 |
-| 12 | 줌 레벨 (25~200) | `"ZOOM_LEVEL"` | Number | `100` | 선택 |
-| 13 | 상단 배경색 (R/G/B, 0~255) | `"BGCOLOR_TOP"` | Object | — | 선택 |
-| 14 | 결과 그래픽 설정 | `"RESULT_GRAPHIC"` | Object | — | **필수** |
+| 8 | [General] Construction Stage Name | `"STAGE_NAME"` | String | — | Optional |
+| 9 | [General] Angle | `"ANGLE"` | Object | — | Optional |
+| 9.1 | [General] Horizontal | `"HORIZONTAL"` | Number | `0` | Optional |
+| 9.2 | [General] Vertical | `"VERTICAL"` | Number | `0` | Optional |
+| 10 | [General] Display Settings *) | `"DISPLAY"` | Object | — | Optional |
+| 11 | [General] Perspective | `"PERSPECTIVE"` | Boolean | `false` | Optional |
+| 12 | [General] Zoom Level Constraints: · Value Range: >= 25, <= 200 | `"ZOOM_LEVEL"` | Number | `100` | Optional |
+| 13 | [General] Background Color Top | `"BGCOLOR_TOP"` | Object | — | Optional |
+| 14 | [General] Result Graphic | `"RESULT_GRAPHIC"` | Object | — | **Required** |
 | 14.1 | 현재 모드 (`"INFLL_DESIGN_STEEL"`=Steel Design) | `"CURRENT_MODE"` | String (oneOf) | — | **필수** |
-| 14.2 | 하중케이스/조합 | `"LOAD_CASE_COMB"` | Object | — | **필수** |
+| 14.2 | [General] Load Cases/Combinations | `"LOAD_CASE_COMB"` | Object | — | **Required** |
 | 14.2.1 | 하중 타입 (`"CBS"`=Steel Design Load Combination) | `"TYPE"` | String (oneOf) | — | **필수** |
-| 14.2.2 | 하중 이름 | `"NAME"` | String | — | **필수** |
+| 14.2.2 | [General] Load Name | `"NAME"` | String | — | **Required** |
 | 14.3 | 표시 성분 (`COMP`: Axial/Shear-y/Shear-z/Bend-y/Bend-z/Combined) | `"COMPONENTS"` | Object | — | 선택 |
 | 14.4 | 표시 타입 (CONTOUR / VALUES / LEGEND / CODE_CHECKING_RATIO) | `"TYPE_OF_DISPLAY"` | Object | — | 선택 |
 | 14.4.1 | Contour (OPT_CHECK, NUM_OF_COLOR 2~20, COLOR_TYPE vrgb/rgb/rbg/gray scaled, OPTIONS.GRADIENT_FILL·CONTOUR_FILL) | `"CONTOUR"` | Object | — | 선택 |
@@ -6126,14 +6126,14 @@ print(res.json())
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
 | 1 | Argument 래퍼 | `"Argument"` | Object | — | **필수** |
-| 2 | 응답 표 제목 | `"TABLE_NAME"` | String | `""` | 선택 |
-| 3 | 표 타입 (`"STEELMEMBERDESIGNFORCES"` 고정) | `"TABLE_TYPE"` | String (enum) | — | **필수** |
-| 4 | 결과 파일 저장 경로 | `"EXPORT_PATH"` | String | — | 선택 |
-| 5 | 단위 설정 (FORCE/DIST/HEAT/TEMP) | `"UNIT"` | Object | `"System"` | 선택 |
-| 6 | 숫자 포맷 (FORMAT: Default/Fixed/Scientific/General, PLACE 0~15) | `"STYLES"` | Object | `"System"` | 선택 |
-| 7 | 결과 표 성분 (`Index`,`Memb`,`Part`,`LComName`,`Type`,`Fx`,`Fy`,`Fz`,`Mx`,`My`,`Mz`) | `"COMPONENTS"` | Array[String] | — | 선택 |
-| 8 | 노드/요소 선택 (`KEYS`/`TO`/`STRUCTURE_GROUP_NAME` 중 하나) | `"NODE_ELEMS"` | Object | — | 선택 |
-| 9 | 요소 파트 (`PartI`,`Part1/4`,`Part2/4`,`Part3/4`,`PartJ`) | `"PARTS"` | Array[String] | `["All"]` | 선택 |
+| 2 | Table Name · Response Table Title | `"TABLE_NAME"` | String | `""` | Optional |
+| 3 | Result Table Type · "STEELMEMBERDESIGNFORCES" | `"TABLE_TYPE"` | String (enum) | — | **Required** |
+| 4 | Result Table Save Path | `"EXPORT_PATH"` | String | — | Optional |
+| 5 | Response Unit Setting | `"UNIT"` | Object | `"System"` | Optional |
+| 6 | Response Number Format | `"STYLES"` | Object | `"System"` | Optional |
+| 7 | Components of Result Table | `"COMPONENTS"` | Array[String] | — | Optional |
+| 8 | Node / Element No. Input · Use Only One of the Three Methods | `"NODE_ELEMS"` | Object | — | Optional |
+| 9 | Element Part Number · "Part I" · "Part 1/4" · "Part 2/4" · "Part 3/4" · "Part J" | `"PARTS"` | Array[String] | `["All"]` | Optional |
 
 ### Request / Response JSON
 
