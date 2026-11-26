@@ -798,22 +798,6 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `ALPHA`
 <!-- /om-fields -->
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
 ## 2. /db/SPLC – Response Spectrum Load Cases

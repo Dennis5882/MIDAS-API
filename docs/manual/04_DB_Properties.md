@@ -1958,36 +1958,6 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `AREA`,
 <!-- /om-fields -->
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
 ## 13. `/db/THIK`
@@ -2141,10 +2111,6 @@ midas_api("POST", "/db/THIK", thik_data)
 | - | v) Hl: Distance from the neutral axis to the extreme fiber of the rib | `"HL"` | Number | - | Optional |
 
 <!-- /om-fields -->
-
-
-
-
 
 
 ---
@@ -3656,6 +3622,8 @@ midas_api("PUT", "/db/MATD/1", matd_data)
 - **Source**: [Section Properties - Virtual Section for Design ↗](https://support.midasuser.com/hc/en-us/articles/64608751935897-Section-Properties-Virtual-Section-for-Design)
 
 > ⚠️ 공식 아티클은 `SECTTYPE`을 `"COMPOSITE"` 한 가지로만 허용하며, `SHAPE`는 `GI`/`CI`/`CT` 3종입니다. `SECT_AFTER.SLAB`은 공식 Specifications 표에 `Array [any]`로 표기되나 JSON Schema는 `[Bc, tc, Hh[, Sg]]` 3~4개 number로 정의하여 스키마 기준으로 적었습니다. `/db/SECT`의 `COMPOSITE`와 필드 구성이 유사하지만 별도 엔드포인트입니다.
+>
+> ⚠️ 2026-11-26 공식 개정: JSON Schema에서 "`SECT_BEFORE.SHAPE`가 `CI`/`CT`이면 `SECT_AFTER.SLAB`(3~4개)이 필요"하다는 조건(`allOf` / `if`·`then`)이 삭제되었습니다. `SLAB` 자체의 `minItems: 3`·`maxItems: 4`는 그대로이고, Specifications 표는 여전히 `SLAB`을 Required(CI/CT)로 표기하므로 아래 표는 표 기준으로 유지합니다.
 
 ### Specifications
 

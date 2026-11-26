@@ -8,6 +8,10 @@ __pycache__/
 # 로컬 전용 설정
 .mcp.json
 
+# 비밀값 (MAPI-Key 등)
+.env
+.env.*
+
 
 # 로컬 전용 권한 승인 기록 — 팀 공용 allowlist(.claude/settings.json)와 별개, 커밋 안 함
 .claude/settings.local.json

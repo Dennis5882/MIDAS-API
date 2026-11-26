@@ -173,12 +173,17 @@ def main():
             continue
         keys = sorted(cf.article_keys(art.get("body")))
         methods = METHODS_RE.search(text)
+        # several articles can share an endpoint (one per country code etc.): merge what each adds
+        doc = {f"{s['file']}#{slug(s['heading'])}" for s in found if not generic(s["heading"])}
+        meths = set(re.findall(r"GET|POST|PUT|DELETE", methods.group(1))) if methods else set()
         for uri in uris:
             rec = records.setdefault(uri, {
-                "endpoint": uri, "methods": sorted(set(re.findall(r"GET|POST|PUT|DELETE", methods.group(1)))) if methods else [],
-                "jp_only": uri in jp_endpoints, "toc_name": toc_ids.get(aid), "articles": [], "keys": set(),
-                "doc": sorted({f"{s['file']}#{slug(s['heading'])}" for s in found if not generic(s["heading"])})[:6],
+                "endpoint": uri, "methods": set(), "jp_only": uri in jp_endpoints, "toc_name": None,
+                "articles": [], "keys": set(), "doc": set(),
             })
+            rec["methods"] |= meths
+            rec["doc"] |= doc
+            rec["toc_name"] = rec["toc_name"] or toc_ids.get(aid)
             rec["articles"].append({
                 "id": aid, "title": art["title"], "url": art["html_url"],
                 "updated_at": manifest.get(aid, {}).get("updated_at", ""),
@@ -237,6 +242,8 @@ def main():
     # an endpoint is documented when docs/manual has a section for it (PSC is listed but on hold)
     tagged = {e for c in chunks if c["source"] != "repo-example" for e in c["endpoints"]}
     for rec in records.values():
+        rec["methods"] = sorted(rec["methods"])
+        rec["doc"] = sorted(rec["doc"])[:6]
         rec["keys"] = sorted(rec["keys"])
         rec["key_count"] = len(rec["keys"])
         rec["documented"] = bool(rec["doc"]) or rec["endpoint"] in tagged

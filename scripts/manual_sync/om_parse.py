@@ -28,7 +28,9 @@ def spec_rows(body):
     if not starts:
         return []
     out, group = [], ""
-    for tr in re.findall(r"<tr[^>]*>(.*?)</tr>", body[starts[-1]:], re.S):
+    # from the first Specifications heading on, so an article with two tables (e.g. Static Earth
+    # Pressure) yields the rows of both
+    for tr in re.findall(r"<tr[^>]*>(.*?)</tr>", body[starts[0]:], re.S):
         cells = [[x for x in cell_text(c).split("\n")] for c in re.findall(r"<t[dh][^>]*>(.*?)</t[dh]>", tr, re.S)]
         if len(cells) < 5:
             text = _one_line([x for c in cells for x in c])

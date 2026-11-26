@@ -27,7 +27,7 @@
 
 | 섹션 이름(`--section`) | Zendesk 대상 | 추적 방식 | 로컬 문서 |
 | --- | --- | --- | --- |
-| `manual` | JSON Manual 섹션(651개 아티클, `section_id=30087500371097`) | 섹션 목록 API 그대로 사용 | `docs/manual/*.md` |
+| `manual` | JSON Manual 섹션(667개 아티클 = en-us 651 + ko 전용 16, `section_id=30087500371097`) | 섹션 목록 API를 en-us·ko 두 로케일로 읽어 합침 (`common.LISTING_LOCALES`) | `docs/manual/*.md` |
 | `plugin` | Plug-in 섹션(`section_id=35681419399961`) | ⚠️ 섹션 목록 API가 랜딩 페이지 1건만 반환하므로, `common.py`의 `PLUGIN_ARTICLE_IDS`(78개 고정 목록)를 1건씩 개별 조회 | `docs/plugin/**/*.md` |
 
 ```bash
@@ -50,7 +50,8 @@ python eval_retrieval.py                  # 색인 검색 시험 (BM25)
    화장빨 변경(cosmetic bump)과 실제 내용 변경을 반드시 구분한다. 타임스탬프 diff만 보고
    변경됐다고 가정하지 않는다.
    - **`locale_note`를 먼저 본다.** 아티클 레벨 `updated_at`은 ko/en-us/**ja** 번역본
-     타임스탬프의 최댓값인데 이 저장소는 en-us 본문만 받아온다. 그래서 ko/ja만 편집된 경우
+     타임스탬프의 최댓값인데 이 저장소는 en-us 본문만 받아온다(en-us판이 없는 ko 전용 글만 ko
+     본문을 받는다). 그래서 ko/ja만 편집된 경우
      "changed로 잡혔는데 받아온 본문은 그대로"인 상태가 되고, 이걸 화장빨로 넘기면 실제 변경을
      통째로 놓친다. `check_diff.py`가 changed마다 판정해 주므로 `en-us did NOT`이 뜨면 해당
      로케일 페이지를 직접 열어 대조할 것.

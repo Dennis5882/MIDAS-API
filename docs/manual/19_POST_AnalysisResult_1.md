@@ -307,6 +307,21 @@ for row in table.get("DATA", []):
     print(f"  Node {d['Node']} ({d['Load']}): FZ={d['FZ']}")
 ```
 
+<!-- om-fields:50694365571993 -->
+**OM 원문 추가 필드 — Concurrent Reaction - Analysis Result Table ([50694365571993](https://support.midasuser.com/hc/ko/articles/50694365571993))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 9 | [Method 3: Specify Structure Group Name] Additional Input | `"ADDITIONAL"` | Object | - | **Required** |
+| (1) | Set Concurrent Reation Group | `"SET_REACTION_PARAMS"` | Array [Integer] | - | **Required** |
+| - | Concurrent Reation Group Name | `"GROUP_NAME"` | String | - | **Required** |
+| - | Components of Result Table · [FX,FY,FZ,MX,MY,MZ] / Active : 1 / Inactive : 0 | `"COMPONENT"` | String | - | **Required** |
+
+<!-- /om-fields -->
+
+
 ---
 
 ## 2. Displacements

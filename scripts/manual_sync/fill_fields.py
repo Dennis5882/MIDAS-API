@@ -24,9 +24,11 @@ import sys
 
 import check_fields as cf
 from check_coverage import EXCEPTIONS_PATH, fetch_bodies
+from common import SYNC_LOCALE
 from om_parse import md_escape, spec_rows
 
-BLOCK_RE = re.compile(r"\n*<!-- om-fields:\d+ -->.*?<!-- /om-fields -->\n*", re.S)
+# a run of adjacent generated blocks is removed as one, so re-runs do not pile up blank lines
+BLOCK_RE = re.compile(r"\n*(?:<!-- om-fields:\d+ -->.*?<!-- /om-fields -->\n*)+", re.S)
 SKIP_HEAD = re.compile(r"End-to-End|워크플로|Workflow|공통 설정|Table of Contents|목차")
 HC = "https://support.midasuser.com/hc/en-us/articles/"
 
@@ -53,8 +55,9 @@ def host_section(finding):
     return min(cands, key=lambda s: (s["level"], s["start"]))
 
 
-def block(aid, title, missing, rows):
-    lines = [f"<!-- om-fields:{aid} -->", f"**OM 원문 추가 필드 — {title} ([{aid}]({HC}{aid}))**", "",
+def block(aid, title, url, missing, rows):
+    url = re.sub(r"(/articles/\d+).*$", r"\1", url)  # drop the title slug, keep the locale
+    lines = [f"<!-- om-fields:{aid} -->", f"**OM 원문 추가 필드 — {title} ([{aid}]({url}))**", "",
              "공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.", ""]
     wanted, seen, used = set(missing), set(), set()
     body = []
@@ -89,20 +92,36 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
+    # fetch before touching docs: a network failure must not leave the generated blocks stripped
+    articles = fetch_bodies()
     if not args.dry_run:
         strip_blocks()
-    articles = fetch_bodies()
     sections, shared = cf.load_sections()
     mapping = cf.mapped_headings()
     skipped = set(json.load(open(EXCEPTIONS_PATH, encoding="utf-8")).get("article_without_section", {}))
     findings, unmatched, _, _ = cf.analyze(articles, sections, shared, mapping, skipped)
 
     inserts = collections.defaultdict(list)  # (path, line) -> [(article id, text)]
+    added = collections.defaultdict(set)  # host section -> keys already given a row there
     n_rows = n_rest = 0
-    for f in sorted(findings, key=lambda x: x["id"]):
+    # en-us articles first: a ko-only twin of an en-us article (same endpoint, another id) then only
+    # adds the keys its twin did not
+    order = sorted(findings, key=lambda x: (articles[x["id"]].get("locale") != SYNC_LOCALE, x["id"]))
+    for f in order:
         host = host_section(f)
-        rows = spec_rows(articles[f["id"]].get("body"))
-        text, rows_used, rest = block(f["id"], f["title"], f["missing"], rows)
+        art = articles[f["id"]]
+        place = (host["path"], host["end"])
+        if art.get("locale") == SYNC_LOCALE:
+            # different en-us articles may share a section and give the same key another meaning
+            # (e.g. TYPE of Tapered DB/User vs Tapered Value): every one keeps its own rows
+            missing = f["missing"]
+            added[place] |= set(missing)
+        else:
+            missing = [k for k in f["missing"] if k not in added[place]]
+            if not missing:
+                continue
+        rows = spec_rows(art.get("body"))
+        text, rows_used, rest = block(f["id"], f["title"], art.get("html_url") or HC + f["id"], missing, rows)
         n_rows += rows_used
         n_rest += rest
         inserts[(host["path"], host["end"])].append(text)

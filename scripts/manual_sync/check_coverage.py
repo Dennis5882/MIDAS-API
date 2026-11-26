@@ -50,16 +50,8 @@ def plain_text(body):
 
 
 def fetch_bodies():
-    articles, page = {}, 1
-    while True:
-        data = common._get_json(
-            f"{common.BASE}/sections/{common.SECTION_ID}/articles.json?per_page=100&page={page}"
-        )
-        for a in data.get("articles", []):
-            articles[str(a["id"])] = a
-        if not data.get("next_page"):
-            return articles
-        page += 1
+    """Every manual article with its body: en-us, plus articles that exist in ko only."""
+    return common.fetch_section_bodies(common.SECTION_ID)
 
 
 def parse_toc(body):

@@ -68,8 +68,9 @@ jobs:
           4. changed 목록의 나머지 article(가이드 4건 또는 개별 툴)은 docs/plugin/INDEX.md에서 해당 파일을 찾아 — guide/*는 원문 재대조해서 바로 갱신, tools/*는 INDEX 상태가 "⬜ 미작성"이면 그대로 두고 "✅ 작성됨"인 것만 재대조해서 갱신해줘.
 
           [공통]
-          5. 끝나면 scripts/manual_sync/validate_manual.py로 검증하고, 변경이 있었으면 scripts/manual_sync/fetch_manifest.py로 해당 섹션 매니페스트를 갱신해줘(예: --section plugin).
-          6. 마지막에 커밋·푸시는 나에게 확인 받고 진행해.
+          5. 끝나면 CLAUDE.md의 "정기 업데이트 체크" 절차대로 validate_manual.py → check_coverage.py → check_fields.py(빠진 Key는 fill_fields.py) → build_index.py를 돌려줘. 그다음 fetch_manifest.py로 매니페스트를 갱신하고 check_diff.py로 diff가 없는지 확인해. fetch_manifest.py를 check_diff.py보다 먼저 돌리지 마.
+          6. 공식 매뉴얼에 없는 내용은 저장소에 올리지 마.
+          7. 마지막에 커밋·푸시는 나에게 확인 받고 진행해.
           \`\`\`
 
           ---

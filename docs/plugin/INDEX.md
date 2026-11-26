@@ -22,7 +22,7 @@ Manual과 같지만, 문서 성격은 다르다:
 | 대상 독자 | REST API를 직접 호출하는 개발자 | GUI에서 완성된 도구를 쓰는 엔지니어(+직접 Plug-in을 만들려는 개발자) |
 | 원문 성격 | 엔드포인트별 Key/Value 스키마 표 | 스크린샷 기반 GUI 사용법 워크스루 |
 | 문서 단위 | 챕터(엔드포인트 그룹) | 개별 Plug-in 툴 1개 = 파일 1개 |
-| Zendesk 섹션 | JSON Manual (650개 아티클) | Plug-in (Introduction 4건 + Plug-in Item 73건) |
+| Zendesk 섹션 | JSON Manual (667개 아티클) | Plug-in (Introduction 4건 + Plug-in Item 73건) |
 
 **따라서 `docs/manual`의 "TABLE_TYPE 표 → Response HEAD → Request/Response JSON → Python 예제"
 관례를 그대로 적용하지 않는다.** 대신 [아래 템플릿](#toolsmd-개별-문서-템플릿)을 따른다.

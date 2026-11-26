@@ -18,6 +18,6 @@
 | `python/basic_example.py` | 이 저장소에서 작성 |
 | `vba/README.md`, `python/README.md` | 이 저장소에서 작성 |
 | `curl/README.md` | 이 저장소에서 작성 |
-| `javascript/README.md`, `javascript/auto-save-before-analysis.html` | 이 저장소에서 작성 |
+| `javascript/README.md` | 이 저장소에서 작성 |
 
 "이 저장소에서 작성"한 코드는 공식 매뉴얼의 원문이 아닙니다.

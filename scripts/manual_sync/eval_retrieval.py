@@ -26,7 +26,6 @@ from om_parse import spec_rows
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..")
 INDEX = os.path.join(ROOT, "docs", "index")
 QUESTIONS = os.path.join(INDEX, "eval_questions.json")
-TOKEN = re.compile(r"[A-Za-z0-9가-힣]+")
 
 
 def tokens(text):

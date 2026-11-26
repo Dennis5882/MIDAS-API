@@ -136,25 +136,41 @@ def locales_changed_since(article_id, old_updated_at):
     return changed, locales
 
 
+# Locales whose section listing is read. A listing only returns articles that have a translation in
+# that locale, and some manual articles exist in ko only (16 on 2026-11-26, e.g. "Concurrent
+# Reaction - Analysis Result Table"). Reading en-us alone made them invisible to every check.
+LISTING_LOCALES = (SYNC_LOCALE, "ko")
+
+
+def fetch_section_bodies(section_id=SECTION_ID, locales=LISTING_LOCALES):
+    """{id: full article dict incl. body} for a section, merged over ``locales``. The first locale
+    that has an article wins, so an article in en-us keeps its en-us body and only articles
+    missing there are taken from the next locale (their ``locale`` field says which)."""
+    articles = {}
+    for locale in locales:
+        page = 1
+        while True:
+            data = _get_json(
+                f"https://support.midasuser.com/api/v2/help_center/{locale}/sections/{section_id}"
+                f"/articles.json?per_page=100&page={page}"
+            )
+            for a in data.get("articles", []):
+                articles.setdefault(str(a["id"]), a)
+            if not data.get("next_page"):
+                break
+            page += 1
+    return articles
+
+
 def fetch_all_articles(section_id=SECTION_ID):
     """Fetch {id: {title, updated_at, html_url}} for every article in the given section
     (via sections/{id}/articles.json listing — only works for sections that actually list
     their member articles through the API; see PLUGIN_ARTICLE_IDS for the "plugin" exception).
     """
-    articles = {}
-    page = 1
-    while True:
-        data = _get_json(f"{BASE}/sections/{section_id}/articles.json?per_page=100&page={page}")
-        for a in data.get("articles", []):
-            articles[str(a["id"])] = {
-                "title": a["title"],
-                "updated_at": a["updated_at"],
-                "html_url": a["html_url"],
-            }
-        if not data.get("next_page"):
-            break
-        page += 1
-    return articles
+    return {
+        aid: {"title": a["title"], "updated_at": a["updated_at"], "html_url": a["html_url"]}
+        for aid, a in fetch_section_bodies(section_id).items()
+    }
 
 
 def fetch_articles_by_ids(ids):

@@ -35,7 +35,17 @@
   "58381619465241": "RATING/PSC/AASHTO-LRFR19/RPSC-ANAL : Perform Rating — PSC 설계/평가(AASHTO) 및 그 부속 코드표. 해당 챕터가 없음, 보류",
   "58381704142105": "RATING/PSC/AASHTO-LRFR19/PFRO-VBEAM : Position for Rating Output — PSC 설계/평가(AASHTO) 및 그 부속 코드표. 해당 챕터가 없음, 보류",
   "58381791502873": "RATING/PSC/AASHTO-LRFR19/PFRO : Position for Rating Output — PSC 설계/평가(AASHTO) 및 그 부속 코드표. 해당 챕터가 없음, 보류",
-  "58412610890137": "RATING/PSC/AASHTO-LRFR19/DFRC : Define Rating Case — PSC 설계/평가(AASHTO) 및 그 부속 코드표. 해당 챕터가 없음, 보류"
+  "58412610890137": "RATING/PSC/AASHTO-LRFR19/DFRC : Define Rating Case — PSC 설계/평가(AASHTO) 및 그 부속 코드표. 해당 챕터가 없음, 보류",
+  "57945475575321": "DESIGN/PSC/AASHTO-LRFD24/DPSC : Design Code Option — PSC 설계/평가(AASHTO)의 ko 전용 글 (en-us판과 별도 id). 해당 챕터가 없음, 보류",
+  "57945478412697": "DESIGN/PSC/AASHTO-LRFD24/DSPSC : Design Code — PSC 설계/평가(AASHTO)의 ko 전용 글 (en-us판과 별도 id). 해당 챕터가 없음, 보류",
+  "57945514821529": "DESIGN/PSC/AASHTO-LRFD24/MEMB : PSC Segment Assignment — PSC 설계/평가(AASHTO)의 ko 전용 글 (en-us판과 별도 id). 해당 챕터가 없음, 보류",
+  "57945562325273": "DESIGN/PSC/AASHTO-LRFD24/MEMB-VBEAM : PSC Segment Assignment — PSC 설계/평가(AASHTO)의 ko 전용 글 (en-us판과 별도 id). 해당 챕터가 없음, 보류",
+  "57945592046233": "DESIGN/PSC/AASHTO-LRFD24/INFS : Interface shear — PSC 설계/평가(AASHTO)의 ko 전용 글 (en-us판과 별도 id). 해당 챕터가 없음, 보류",
+  "57945593541657": "DESIGN/PSC/AASHTO-LRFD24/SLCT : Serviceability Load Combination Type — PSC 설계/평가(AASHTO)의 ko 전용 글 (en-us판과 별도 id). 해당 챕터가 없음, 보류",
+  "57945623305113": "DESIGN/PSC/AASHTO-LRFD24/INFS-VBEAM : Interface shear — PSC 설계/평가(AASHTO)의 ko 전용 글 (en-us판과 별도 id). 해당 챕터가 없음, 보류",
+  "57946914266905": "DESIGN/PSC/AASHTO-LRFD24/RPSC : Logitudinal Rebar-Reinforcements — PSC 설계/평가(AASHTO)의 ko 전용 글 (en-us판과 별도 id). 해당 챕터가 없음, 보류",
+  "57946974912921": "DESIGN/PSC/AASHTO-LRFD24/SECF : Logitudinal Rebar-Stiffness — PSC 설계/평가(AASHTO)의 ko 전용 글 (en-us판과 별도 id). 해당 챕터가 없음, 보류",
+  "57947082529945": "DESIGN/PSC/AASHTO-LRFD24/PSC-ANAL : Perform Design — PSC 설계/평가(AASHTO)의 ko 전용 글 (en-us판과 별도 id). 해당 챕터가 없음, 보류"
  },
  "toc_only": {
   "OPE/STORPROP": "로케일 분기: en-us·ja·목차는 STORPROP, ko 본문은 STORYPROP. 15장은 STORYPROP (12절 주석)",

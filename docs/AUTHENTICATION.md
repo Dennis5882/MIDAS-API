@@ -229,5 +229,5 @@ curl -X GET "https://moa-engineers.midasit.com:443/mapikey/verify" \
 
 ## 📝 다음 단계
 
-1. [README 빠른 시작](../README.md#-빠른-시작-python) - 첫 모델 생성
+1. [README 빠른 시작](../README.md#빠른-시작-python) - 첫 모델 생성
 2. [MIDAS API JSON Manual 목차](./manual/INDEX.md) - 전체 엔드포인트·JSON 스키마

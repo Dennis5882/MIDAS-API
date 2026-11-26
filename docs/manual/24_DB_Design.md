@@ -1795,8 +1795,6 @@ print(requests.get(f"{BASE_URL}/db/REBW", headers=HEADERS).json())
 <!-- /om-fields -->
 
 
-
-
 ---
 
 ## 13. `/db/REBR` — Modify Brace Rebar Data (가새 철근 데이터 수정)
