@@ -603,6 +603,217 @@ resp = requests.delete(f"{BASE_URL}/db/SPFC/1", headers=HEADERS)
 print("SPFC DELETE/1:", resp.status_code)
 ```
 
+<!-- om-fields:35963686253593 -->
+**OM 원문 추가 필드 — Response Spectrum Functions - User Type ([35963686253593](https://support.midasuser.com/hc/en-us/articles/35963686253593))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `AG`, `AGR`, `ALPHA`, `BT`, `BYCODE`, `CDISTANCE`, `DEPTH`, `DIV`, `DP2`, `ETA1`, `ETA2`, `FO`, `GAMMA`, `IMPORTANT_BRIDGE`, `I_`, `K1`, `K2`, `K3`, `K4`, `KD`, `KH`, `KP`, `KPSI`, `KR`, `KW`, `LARGEBRIDEGE`, `METHOD`, `MU`, `PARATYPE`, `PGA`, `PHI`, `Q`, `Q0`, `REGION`, `RESIONTYPE`, `RESION_SEISMICITY`, `RISK_CATEGORY`, `RMF`, `SCCOPT`, `SI`, `SMAX`, `SOILFACTOR`, `SOIL_CATEGORY`, `ST`, `TB`, `TC`, `TCSTAR`, `TD`, `TL`, `TS`, `XI`, `ZM`, `aEP`, `aIF`, `aMSRACC`, `aSC`, `bE2_005`, `bRELIEVE`, `bVACC`, `iGROUTYPE`, `iSEISSOURCETYPE`, `iSPTYPE`, `iVACC`
+
+<!-- /om-fields -->
+
+<!-- om-fields:39235144118297 -->
+**OM 원문 추가 필드 — Response Spectrum Functions - Korea ([39235144118297](https://support.midasuser.com/hc/en-us/articles/39235144118297))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (7) | [KBC(2016)] Depth to MR | `"DEPTH"` | Number | - | **Required** |
+| (4) | [KBC(2005)] Relieve Design Spectrum Acceleration | `"bRELIEVE"` | Boolean | false | Optional |
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `AG`, `AGR`, `ALPHA`, `BT`, `BYCODE`, `CDISTANCE`, `DIV`, `DP2`, `ETA1`, `ETA2`, `FO`, `GAMMA`, `IMPORTANT_BRIDGE`, `I_`, `K1`, `K2`, `K3`, `K4`, `KD`, `KH`, `KP`, `KPSI`, `KR`, `KW`, `LARGEBRIDEGE`, `METHOD`, `MU`, `PARATYPE`, `PGA`, `PHI`, `Q`, `Q0`, `REGION`, `RESIONTYPE`, `RESION_SEISMICITY`, `RISK_CATEGORY`, `SCCOPT`, `SI`, `SMAX`, `SOILFACTOR`, `SOIL_CATEGORY`, `ST`, `TB`, `TC`, `TCSTAR`, `TD`, `TL`, `TS`, `XI`, `ZM`, `aEP`, `aIF`, `aMSRACC`, `aSC`, `bE2_005`, `bVACC`, `iGROUTYPE`, `iSEISSOURCETYPE`, `iSPTYPE`, `iVACC`
+
+<!-- /om-fields -->
+
+<!-- om-fields:39235469691033 -->
+**OM 원문 추가 필드 — Response Spectrum Functions - US ([39235469691033](https://support.midasuser.com/hc/en-us/articles/39235469691033))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (4) | [AASHTO-LRFD6th(2012)] Peak Ground Acceleration Coefficient(PGA) ¹⁾ · Preset Value: 0.1, 0.2, 0.3, 0.4, 0.5 | `"PGA"` | Number | - | **Required** |
+| (2) | [IBC2012(ASCE7-10)] Mapped Spectral Response Acceleration ¹⁾ · [Ss, S1] · Preset Value | `"aMSRACC"` | Array [Number,2] | - | **Required** |
+| (4) | Long Transition Period(TL) | `"TL"` | Number | - | **Required** |
+| (1) | [IBC2000(ASCE7-98)] Mapped Spectral Response Acceleration ¹⁾ · [Ss, S1] · Preset Value | `"aMSRACC"` | Array [Number,2] | - | **Required** |
+| (1) | [UBC(1997)] Seismic Coefficients Calculation Option · Automatic: 0 · User Defined: 1 | `"SCCOPT"` | Integer | 0 | Optional |
+| (2) | Soil Profile Type(S) · Sa: 0 · Sb: 1 · Sc: 2 · Sd: 3 · Se: 4 | `"iSPTYPE"` | Integer | 0 | Optional |
+| (4) | Seismic Source Type · When Seismic Zone Factor is Zone4 · A: 0 · B: 1 · C: 2 | `"iSEISSOURCETYPE"` | Integer | 0 | Optional |
+| (1) | Seismic Coefficients ²⁾ · [Ca, Cv] · Automatic: Value calculated · User Defined: Value input required | `"aSC"` | Array [Number,2] | - | **Required** |
+| (3) | Closest Distance to Known Seismic Source(km) · When Seismic Zone Factor is Zone4 | `"CDISTANCE"` | Number | - | **Required** |
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `AG`, `AGR`, `ALPHA`, `BT`, `BYCODE`, `DEPTH`, `DIV`, `DP2`, `ETA1`, `ETA2`, `FO`, `GAMMA`, `IMPORTANT_BRIDGE`, `I_`, `K1`, `K2`, `K3`, `K4`, `KD`, `KH`, `KP`, `KPSI`, `KR`, `KW`, `LARGEBRIDEGE`, `METHOD`, `MU`, `PARATYPE`, `PHI`, `Q`, `Q0`, `REGION`, `RESIONTYPE`, `RESION_SEISMICITY`, `RISK_CATEGORY`, `SI`, `SMAX`, `SOILFACTOR`, `SOIL_CATEGORY`, `ST`, `TB`, `TC`, `TCSTAR`, `TD`, `TS`, `XI`, `ZM`, `aEP`, `aIF`, `bE2_005`, `bRELIEVE`, `bVACC`, `iGROUTYPE`, `iVACC`
+
+<!-- /om-fields -->
+
+<!-- om-fields:39235490544281 -->
+**OM 원문 추가 필드 — Response Spectrum Functions - Eurocode ([39235490544281](https://support.midasuser.com/hc/en-us/articles/39235490544281))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (4) | [Eurocode-8(2004)] Spectrum Parameters · When National Annex is Recommended / Type1: "TYPE_1" / Type2: "TYPE_2" / User Defined: "USER" | `"PARATYPE"` | String | "TYPE_1" | Optional |
+| (5) | Region · When National Annex is Malaysia / Peninsular: "RG1" / Sabah: "RG2" / Sarawak: "RG3" | `"RESIONTYPE"` | String | "RG1" | Optional |
+| (2) | Soil Factor(S) ²⁾ | `"SOILFACTOR"` | Number | - | **Required** |
+| (3) | Tb ²⁾ · "TYPE_1", "TYPE2": Value calculated · User Defined: Value input required | `"TB"` | Number | - | **Required** |
+| (4) | Tc ²⁾ · "TYPE_1", "TYPE2": Value calculated · User Defined: Value input required | `"TC"` | Number | - | **Required** |
+| (5) | Td ²⁾ · "TYPE_1", "TYPE2": Value calculated · User Defined: Value input required | `"TD"` | Number | - | **Required** |
+| (6) | Ref. Peak Ground Acceleration(AgR) | `"AGR"` | Number | - | **Required** |
+| (7) | Importance Factor(I) ¹⁾ · Preset Value: 0.8, 1.0, 1.2, 1.4 | `"I_"` | Number | - | **Required** |
+| (8) | Viscous Damping Ratio(xi) · When Spectrum Type is Horizontal(Vertical) Elastic Spectrum | `"XI"` | Number | - | **Required** |
+| (9) | Behavior Factor(q) · When Spectrum Type is Horizontal(Vertical) Design Spectrum | `"Q"` | Number | - | **Required** |
+| (2) | [Eurocode-8(1996) Design] Ductility Class(Kd) · High(1.0): 0 · Medium(0.75): 1 · Low(0.5): 2 | `"KD"` | Integer | 0 | Optional |
+| (3) | Structural Regularity in Elevation(Kr) · Regular(1.0): 1 · Irregular(0.8): 1 | `"KR"` | Integer | 0 | Optional |
+| (2) | Basic Behavior Factor(qo) ¹⁾ · Preset Value: 5.0, 4.5, 4.0, 3.5, 2.0 | `"Q0"` | Number | - | **Required** |
+| (3) | Failure Mode Factor(Kw) | `"KW"` | Number | - | **Required** |
+| (4) | Ratio of design ground acceleration to gravity acceleration(alpha) | `"ALPHA"` | Number | - | **Required** |
+| (3) | [Eurocode-8(1996) Elastic] Design Ground Acceleration(g) | `"AG"` | Number | - | **Required** |
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `BT`, `BYCODE`, `CDISTANCE`, `DEPTH`, `DIV`, `DP2`, `ETA1`, `ETA2`, `FO`, `GAMMA`, `IMPORTANT_BRIDGE`, `K1`, `K2`, `K3`, `K4`, `KH`, `KP`, `KPSI`, `LARGEBRIDEGE`, `METHOD`, `MU`, `PGA`, `PHI`, `REGION`, `RESION_SEISMICITY`, `RISK_CATEGORY`, `SCCOPT`, `SI`, `SMAX`, `SOIL_CATEGORY`, `ST`, `TCSTAR`, `TL`, `TS`, `TYPE2`, `ZM`, `aEP`, `aIF`, `aMSRACC`, `aSC`, `bE2_005`, `bRELIEVE`, `bVACC`, `iGROUTYPE`, `iSEISSOURCETYPE`, `iSPTYPE`, `iVACC`
+
+<!-- /om-fields -->
+
+<!-- om-fields:39473334759065 -->
+**OM 원문 추가 필드 — Response Spectrum Functions - China ([39473334759065](https://support.midasuser.com/hc/en-us/articles/39473334759065))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (5) | [China(GB50111-2006)] Division of Characteristic period · 1: "1" · 2: "2" · 3: "3" | `"DIV"` | String | "1" | Optional |
+| (1) | Important Bridge | `"IMPORTANT_BRIDGE"` | Boolean | false | Optional |
+| (2) | [China(JTJ004-89)] Importance Factor(Ci) ¹⁾ · [Ci, Cs, Cd] · In China(JTJ004-89) only Ci is needed. · Preset Value: 0.6, 1.0, 1.3, 1.7 | `"aIF"` | Array [Number,3] | - | **Required** |
+| (4) | Horizontal Seismic Coefficient(Kh) | `"KH"` | Number | - | **Required** |
+| (3) | [China(JTG/T 2231-01-2020)] Bridge Type · A: "A" · B: "B" · C: "C" · D: "D" | `"BT"` | String | "A" | Optional |
+| (4) | Characteristic period of zoning map · 0.35: "0.35" · 0.4: "0.4" · 0.45: "0.45" | `"ZM"` | String | "0.35" | Optional |
+| (5) | Site Type · I0: "1" · I1: "2" · II: "3" · III: "4" · IV: "5" | `"ST"` | String | "1" | Optional |
+| (6) | Seismic intensity · VI(0.05g): "6(0.05g)" · VII(0.1g): "7(0.1g)" · VII(0.15g): "7(0.15g)" · VIII(0.2g): "8(0.2g)" · VIII(0.3g): "8(0.3g)" · IX(0.4g): "9(0.4g)" | `"SI"` | String | "6(0.05g)" | Optional |
+| (1) | Large or super large bridge(Express or first class highway) | `"LARGEBRIDEGE"` | Boolean | false | Optional |
+| (2) | Vertical Response Spectrum | `"bVACC"` | Boolean | false | Optional |
+| (2) | Important Coefficient(Ci) Site Coefficient(Cs) Damping Modify Coefficient(Cd) · [Ci, Cs, Cd] | `"aIF"` | Array [Number,3] | - | **Required** |
+| (4) | Smax(=2.5*Ci*Cs*Cd*A) | `"SMAX"` | Number | - | **Required** |
+| (5) | Site Type · I: "1" · II: "2" · III: "3" · IV: "4" | `"ST"` | String | "1" | Optional |
+| (6) | Seismic intensity · 6(0.05g): "6(0.05g)" · 7(0.1g): "7(0.1g)" · 7(0.15g): "7(0.15g)" · 8(0.2g): "8(0.2g)" · 8(0.3g): "8(0.3g)" · 9(0.4g): "9(0.4g)" | `"SI"` | String | "6(0.05g)" | Optional |
+| (2) | Vertical Spectrum Ratio(R) | `"bVACC"` | Boolean | false | Optional |
+| (3) | When "bVACC" is True · BedRock: 0 · Soil: 1 | `"iVACC"` | Integer | 0 | Optional |
+| (4) | Smax(=2.25*Ci*Cs*Cd*EPA) | `"SMAX"` | Number | - | **Required** |
+| (6) | Damping Ratio | `"DP2"` | Number | - | **Required** |
+| (3) | [China(GBJ11-87)] Horizontal Seismic Coefficient(Kh) | `"KH"` | Number | - | **Required** |
+| (3) | [China(CJJ 166-2011)] Seismic Classification · b: "A" · c: "B" · d: "C" | `"BT"` | String | "A" | Optional |
+| (4) | Design Characteristic Period · 0.35: "0.35" · 0.4: "0.4" · 0.45: "0.45" | `"ZM"` | String | "0.35" | Optional |
+| (5) | Site Class · I: "1" · II: "2" · III: "3" · IV: "4" | `"ST"` | String | "1" | Optional |
+| (1) | Vertical Response Spectrum | `"bVACC"` | Boolean | false | Optional |
+| (2) | Increase 0.05s of characteristic period for Design Criteria E2 with Intensity 8 or 9 | `"bE2_005"` | Boolean | false | Optional |
+| (2) | Seismic Wave Adjustment Factor(Ci) · [Ci, Cs, Cd] · In China(CJJ 166-2011) only Ci is needed | `"aIF"` | Array [Number,3] | - | **Required** |
+| (3) | Smax(=2.25*A) | `"SMAX"` | Number | - | **Required** |
+| (5) | Damping Ratio | `"DP2"` | Number | - | **Required** |
+| (6) | Slope Adjustment Factor(eta1) | `"ETA1"` | Number | - | **Required** |
+| (7) | Damping Adjustment Factor(eta2) | `"ETA2"` | Number | - | **Required** |
+| (8) | Curve Decaying Exponential(gamma) | `"GAMMA"` | Number | - | **Required** |
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `AG`, `AGR`, `ALPHA`, `BYCODE`, `CDISTANCE`, `DEPTH`, `FO`, `I_`, `K1`, `K2`, `K3`, `K4`, `KD`, `KP`, `KPSI`, `KR`, `KW`, `METHOD`, `MU`, `PARATYPE`, `PGA`, `PHI`, `Q`, `Q0`, `REGION`, `RESIONTYPE`, `RESION_SEISMICITY`, `RISK_CATEGORY`, `SCCOPT`, `SOILFACTOR`, `SOIL_CATEGORY`, `TB`, `TC`, `TCSTAR`, `TD`, `TL`, `TS`, `XI`, `aEP`, `aMSRACC`, `aSC`, `bRELIEVE`, `iGROUTYPE`, `iSEISSOURCETYPE`, `iSPTYPE`
+
+<!-- /om-fields -->
+
+<!-- om-fields:39473375938969 -->
+**OM 원문 추가 필드 — Response Spectrum Functions - Japan ([39473375938969](https://support.midasuser.com/hc/en-us/articles/39473375938969))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `AG`, `AGR`, `ALPHA`, `BT`, `BYCODE`, `CDISTANCE`, `DEPTH`, `DIV`, `DP2`, `ETA1`, `ETA2`, `FO`, `GAMMA`, `IMPORTANT_BRIDGE`, `I_`, `K1`, `K2`, `K3`, `K4`, `KD`, `KH`, `KP`, `KPSI`, `KR`, `KW`, `LARGEBRIDEGE`, `METHOD`, `MU`, `PARATYPE`, `PGA`, `PHI`, `Q`, `Q0`, `REGION`, `RESIONTYPE`, `RESION_SEISMICITY`, `RISK_CATEGORY`, `SCCOPT`, `SI`, `SMAX`, `SOILFACTOR`, `SOIL_CATEGORY`, `ST`, `TB`, `TC`, `TCSTAR`, `TD`, `TL`, `TS`, `XI`, `ZM`, `aEP`, `aIF`, `aMSRACC`, `aSC`, `bE2_005`, `bRELIEVE`, `bVACC`, `iGROUTYPE`, `iSEISSOURCETYPE`, `iSPTYPE`, `iVACC`
+
+<!-- /om-fields -->
+
+<!-- om-fields:39473471043737 -->
+**OM 원문 추가 필드 — Response Spectrum Functions - Taiwan ([39473471043737](https://support.midasuser.com/hc/en-us/articles/39473471043737))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (5) | [Taiwan(1999) Horizontal] Seismic Magnify Factor(ay) ¹⁾ · Preset Value: 1.2, 1.5 | `"ALPHA"` | Number | - | **Required** |
+| (5) | [TaiwanBrg(89) Horizontal] Seismic Magnify Factor(ay) ¹⁾ · Preset Value: 1.65, 1.70, 1.90 | `"ALPHA"` | Number | - | **Required** |
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `AG`, `AGR`, `BT`, `BYCODE`, `CDISTANCE`, `DEPTH`, `DIV`, `DP2`, `ETA1`, `ETA2`, `FO`, `GAMMA`, `IMPORTANT_BRIDGE`, `I_`, `K1`, `K2`, `K3`, `K4`, `KD`, `KH`, `KP`, `KPSI`, `KR`, `KW`, `LARGEBRIDEGE`, `METHOD`, `MU`, `PARATYPE`, `PGA`, `PHI`, `Q`, `Q0`, `REGION`, `RESIONTYPE`, `RESION_SEISMICITY`, `RISK_CATEGORY`, `SCCOPT`, `SI`, `SMAX`, `SOILFACTOR`, `SOIL_CATEGORY`, `ST`, `TB`, `TC`, `TCSTAR`, `TD`, `TL`, `TS`, `XI`, `ZM`, `aEP`, `aIF`, `aMSRACC`, `aSC`, `bE2_005`, `bRELIEVE`, `bVACC`, `iGROUTYPE`, `iSEISSOURCETYPE`, `iSPTYPE`, `iVACC`
+
+<!-- /om-fields -->
+
+<!-- om-fields:39508760179097 -->
+**OM 원문 추가 필드 — Response Spectrum Functions - India ([39508760179097](https://support.midasuser.com/hc/en-us/articles/39508760179097))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `AG`, `AGR`, `ALPHA`, `BT`, `BYCODE`, `CDISTANCE`, `DEPTH`, `DIV`, `DP2`, `ETA1`, `ETA2`, `FO`, `GAMMA`, `IMPORTANT_BRIDGE`, `I_`, `K1`, `K2`, `K3`, `K4`, `KD`, `KH`, `KP`, `KPSI`, `KR`, `KW`, `LARGEBRIDEGE`, `METHOD`, `MU`, `PARATYPE`, `PGA`, `PHI`, `Q`, `Q0`, `REGION`, `RESIONTYPE`, `RESION_SEISMICITY`, `RISK_CATEGORY`, `SCCOPT`, `SI`, `SMAX`, `SOILFACTOR`, `SOIL_CATEGORY`, `ST`, `TB`, `TC`, `TCSTAR`, `TD`, `TL`, `TS`, `XI`, `ZM`, `aEP`, `aIF`, `aMSRACC`, `aSC`, `bE2_005`, `bRELIEVE`, `bVACC`, `iGROUTYPE`, `iSEISSOURCETYPE`, `iSPTYPE`, `iVACC`
+
+<!-- /om-fields -->
+
+<!-- om-fields:39508838720153 -->
+**OM 원문 추가 필드 — Response Spectrum Functions - Other Countries ([39508838720153](https://support.midasuser.com/hc/en-us/articles/39508838720153))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (4) | [Italy_NTC2018 H-ELASTIC] Spectrum Parameters · Standard Parameters: "T1", "T2", "T3", "T4" · User Defined: "USER" | `"PARATYPE"` | String | - | **Required** |
+| (2) | Maximum Horizontal Acc. (ag) | `"AG"` | Number | - | **Required** |
+| (3) | Amplification Factor (Fo) | `"FO"` | Number | - | **Required** |
+| (4) | Period of Constant Hor.Acc. (Tc*) | `"TCSTAR"` | Number | - | **Required** |
+| (5) | [Elastic Spectrum Type] Behavior Factor (q) | `"Q"` | Number | - | **Required** |
+| (5) | [Design Spectrum Type] Viscous Damping Ratio (q) | `"XI"` | Number | - | **Required** |
+| (7) | [User Define of Spectrum Parameter] Period of Constant Acceleration | `"TB"` | Number | - | **Required** |
+| (8) | Period of Constant Velocity | `"TC"` | Number | - | **Required** |
+| (9) | Period of Constant Displacement | `"TD"` | Number | - | **Required** |
+| (1) | [Philippines_DPWH-LRFD BSDS(2013)] Ground Type · I: 0 · II: 1 · III: 2 | `"iGROUTYPE"` | Integer | 0 | Optional |
+| (1) | Spectral Acceleration Coefficient at Period · [Ss, S1] | `"aMSRACC"` | Array [Number,2] | - | **Required** |
+| (4) | Peak Ground Acceleration Coefficient(PGA) | `"PGA"` | Number | - | **Required** |
+| (2) | [Australia_AS 5100.2(2017)] Probability Factor(kp) | `"KP"` | Number | - | **Required** |
+| (4) | Design Ductility Factor(μ) | `"MU"` | Number | - | **Required** |
+| (2) | [Colombia_NSR-10] Effective Peak Acc./Vel. ¹⁾ · [Aa, Av] · Preset Value | `"aEP"` | Array [Number,2] | - | **Required** |
+| (6) | Phi | `"PHI"` | Number | - | **Required** |
+| (3) | [Romania_P100-1(2013)] Spectrum Parameters · Tc=0.7s: "Tc=0.7s" · Tc=1.0s: "Tc=1.0s" · Tc=1.6s: "Tc=1.6s" · User Defined: "USER" | `"PARATYPE"` | String | - | **Required** |
+| (2) | Tb ²⁾ · "Tc=0.7s", "Tc=1.0s", "Tc=1.6s": Value calculated · User Defined: Value input required | `"TB"` | Number | - | **Required** |
+| (3) | Tc ²⁾ · "Tc=0.7s", "Tc=1.0s", "Tc=1.6s": Value calculated · User Defined: Value input required | `"TC"` | Number | - | **Required** |
+| (4) | Td ²⁾ · "Tc=0.7s", "Tc=1.0s", "Tc=1.6s": Value calculated · User Defined: Value input required | `"TD"` | Number | - | **Required** |
+| (5) | Design Ground Acceleration | `"AGR"` | Number | - | **Required** |
+| (6) | Importance Factor ¹⁾ · Preset Value: 0.8, 1.0, 1.2, 1.4 | `"I_"` | Number | - | **Required** |
+| (7) | Viscous Damping Ratio(xi) · When Spectrum Type is Horizontal(Vertical) Elastic Spectrum | `"XI"` | Number | - | **Required** |
+| (8) | Behavior Factor(q) · When Spectrum Type is Horizontal(Vertical) Design Spectrum | `"Q"` | Number | - | **Required** |
+| (1) | [Russia_SP 268.1325800.2016] Region Seismicity · 7: 0 · 8: 1 · 9: 2 · 10: 3 | `"RESION_SEISMICITY"` | Integer | 0 | Optional |
+| (2) | Soil Category · I: 0 · II: 1 · III: 2 | `"SOIL_CATEGORY"` | Integer | 0 | Optional |
+| (2) | K1 Factor | `"K1"` | Number | - | **Required** |
+| (3) | K2 Factor | `"K2"` | Number | - | **Required** |
+| (4) | K3 Factor | `"K3"` | Number | - | **Required** |
+| (5) | K4 Factor | `"K4"` | Number | - | **Required** |
+| (6) | KPsi Factor | `"KPSI"` | Number | - | **Required** |
+| (3) | [Thailand_DPT.1301/1302-61:2018] Region · Bangkok: "Bangkok" · Region except Bangkok: "Region except Bangkok" | `"REGION"` | String | - | **Required** |
+| (4) | Method · "By Table 1.4-4-5" | `"METHOD"` | String | - | **Required** |
+| (2) | By Code · When Region is Region except Bangkok | `"BYCODE"` | Boolean | false | Optional |
+| (3) | Risk Category · I: 0 · II: 1 · III: 2 · IV: 3 | `"RISK_CATEGORY"` | Integer | 0 | Optional |
+| (2) | [Ss, S1] ¹⁾ · When Region is Region except Bangkok <strong> · </strong>Preset Value / Ss: 0.25, 0.50, 0.75, 1.00, 1.25 / S1: 0.10, 0.20, 0.30, 0.40, 0.50 | `"aMSRACC"` | Array [Number,2] | - | **Required** |
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `ALPHA`, `BT`, `CDISTANCE`, `DEPTH`, `DIV`, `DP2`, `ETA1`, `ETA2`, `GAMMA`, `IMPORTANT_BRIDGE`, `KD`, `KH`, `KR`, `KW`, `LARGEBRIDEGE`, `Q0`, `RESIONTYPE`, `SCCOPT`, `SI`, `SMAX`, `SOILFACTOR`, `ST`, `TL`, `TS`, `ZM`, `aIF`, `aSC`, `bE2_005`, `bRELIEVE`, `bVACC`, `iSEISSOURCETYPE`, `iSPTYPE`, `iVACC`
+
+<!-- /om-fields -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ---
 
 ## 2. /db/SPLC – Response Spectrum Load Cases
@@ -880,6 +1091,16 @@ payload["Assign"]["1"]["SCALE"] = 1.2
 resp = requests.put(f"{BASE_URL}/db/SPLC/1", json=payload, headers=HEADERS)
 print("SPLC PUT/1:", resp.status_code)
 ```
+
+<!-- om-fields:35963719599641 -->
+**OM 원문 추가 필드 — Response Spectrum Load Cases ([35963719599641](https://support.midasuser.com/hc/en-us/articles/35963719599641))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `bAUTO`, `iAUTOTYPE`
+
+<!-- /om-fields -->
+
 
 ---
 
@@ -1944,6 +2165,19 @@ print("THIS-M1 POST:", resp.status_code)
 resp = requests.get(f"{BASE_URL}/db/THIS-M1", headers=HEADERS)
 print("THIS-M1 GET:", resp.status_code)
 ```
+
+<!-- om-fields:56538335819673 -->
+**OM 원문 추가 필드 — Time History Load Cases ([56538335819673](https://support.midasuser.com/hc/en-us/articles/56538335819673))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| b | [When DISP.OPT_USE = true] Force Norm | `"FORCE"` | object | - | Optional |
+| c | [When FORCE.OPT_USE = true] Energy Norm | `"ENERGY"` | object | - | Optional |
+
+<!-- /om-fields -->
+
 
 ---
 

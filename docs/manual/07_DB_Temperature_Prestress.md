@@ -734,6 +734,16 @@ midas_api("GET", "/db/TDNT")
 midas_api("DELETE", "/db/TDNT", {"Assign": {"1": {}}})
 ```
 
+<!-- om-fields:35954451663513 -->
+**OM 원문 추가 필드 — Tendon Property ([35954451663513](https://support.midasuser.com/hc/en-us/articles/35954451663513))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `bRELAX`
+
+<!-- /om-fields -->
+
+
 ---
 
 ## 7. /db/TDNA — Tendon Profile

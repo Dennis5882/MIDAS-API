@@ -1,0 +1,1157 @@
+{
+ "seed": 20261126,
+ "key": [
+  {
+   "article": "35963288573849",
+   "key": "FACTOR",
+   "query": "Dynamic Load Allowance Impact Factor (%)"
+  },
+  {
+   "article": "36018150905881",
+   "key": "FORMAT",
+   "query": "Tendon Loss - Analysis Result Table Number Format · \"Default\" · \"Fixed\" · \"Scientific\" · \"General\""
+  },
+  {
+   "article": "35996812786841",
+   "key": "ELEMENT_CENTER",
+   "query": "Type of Display Place Contour in Element Center · Show Element Center: true · Hide Element Center: false"
+  },
+  {
+   "article": "57567874715289",
+   "key": "END_REBAR",
+   "query": "DESIGN/RC/KDS-41-20-2022/DCRM-WALL : Design Criteria for Rebars by Wall Member End Rebar From · D4: \"D4\" · D5: \"D5\" · D6: \"D6\" · D7: \"D7\" · D8: \"D8\" · D10: \"D10\" · D13: \"D13\" · D16: \"D16\" · D19: \"D19\" · D22: \"D22\" · D25: \"D25\" · D29: \"D29\" · D32: \"D32\" · D35: \"D35\" · D38: \"D38\" · D41: \"D41\" · D43: \"D43\" · D51: \"D51\" · D57: \"D57\""
+  },
+  {
+   "article": "35996157533977",
+   "key": "REACTION_POSITION",
+   "query": "Display Reaction Position"
+  },
+  {
+   "article": "35957522468889",
+   "key": "LANE_FACTOR_ARRAY",
+   "query": "Vehicles - BS User Defined Lane Factor · Only for User-Defined"
+  },
+  {
+   "article": "35958066812057",
+   "key": "POINT_ITEMS",
+   "query": "Vehicles - South Africa Axle Load · Insert the data as an object"
+  },
+  {
+   "article": "49512116327065",
+   "key": "EXPORT_PATH",
+   "query": "Story Axial Force Sum - Story Result Table Result Table Save Path"
+  },
+  {
+   "article": "36015348343833",
+   "key": "STRUCTURE_GROUP_NAME",
+   "query": "Solid Stress (Global) - Analysis Result Table \"STRUCTURE_GROUP_NAME\": \"SG1\""
+  },
+  {
+   "article": "49514609393049",
+   "key": "KEYS",
+   "query": "SRC Design - SRC Column Design Forces \"KEYS\": [101, 102, 103]"
+  },
+  {
+   "article": "36020391511961",
+   "key": "TABLE_TYPE",
+   "query": "Inelastic Hinge General Link Summary - TH Result Table Result Table Type · GL-Link Summary - Dx: \"IEHG_GL_LINK_SUM_DX\" · GL-Link Summary - Dy: \"IEHG_GL_LINK_SUM_DY\" · GL-Link Summary - Dz: \"IEHG_GL_LINK_SUM_DZ\" · GL-Link Summary - Rx: \"IEHG_GL_LINK_SUM_RX\" · GL-Link Summary - Ry: \"IEHG_GL_LINK_SUM_RY\" · GL-Link Summary - Rz: \"IEHG_GL_LINK_SUM_RZ\""
+  },
+  {
+   "article": "36705962238873",
+   "key": "KEYS",
+   "query": "Pushover Text - Displacement Result \"KEYS\": [101, 102, 103]"
+  },
+  {
+   "article": "35988560566425",
+   "key": "MIN",
+   "query": "Settlement Load Cases Settlement - Min. Group Nos."
+  },
+  {
+   "article": "36012822385817",
+   "key": "STRUCTURE_GROUP_NAME",
+   "query": "Plate Force (Unit Length) - Analysis Result Table \"STRUCTURE_GROUP_NAME\": \"SG1\""
+  },
+  {
+   "article": "35944335180569",
+   "key": "OPT_KE",
+   "query": "Inelastic Material Properties Confinement Effectiveness Coefficient - User Input Option"
+  },
+  {
+   "article": "56823620531865",
+   "key": "OUTPUT_SECT_LOCATION",
+   "query": "Steel Design Result Output Section Location"
+  },
+  {
+   "article": "35808245801881",
+   "key": "TYPE",
+   "query": "Change Property Change Property Method · Notional Size of Member: \"NSM\" · Volume Surface Ratio: \"VSR\""
+  },
+  {
+   "article": "57430243603225",
+   "key": "FORMAT",
+   "query": "DESIGN/RC/KDS-41-20-2022/CD-TABLE : RC Column Design Table STYLES.FORMAT · Default: \"Default\" · Fixed: \"Fixed\" · Scientific: \"Scientific\" · General: \"General\""
+  },
+  {
+   "article": "57390686440345",
+   "key": "G",
+   "query": "DESIGN/STEEL/KDS-41-30-2022/DREULT : Steel Design Result Green Constraints: · Value Range: >= 0, <= 255"
+  },
+  {
+   "article": "57945623457561",
+   "key": "FY",
+   "query": "DESIGN/PSC/AASHTO-LRFD24/INFS-VBEAM : Interface shear Fy Constraints: · Value Range: >= 0"
+  },
+  {
+   "article": "35806934300825",
+   "key": "STYPE",
+   "query": "Element Element Subtype · with Drilling DOF Inactive: 1 · with Drilling DOF Active: 2"
+  },
+  {
+   "article": "35957725805977",
+   "key": "ECCEN_VERT_LOAD",
+   "query": "Vehicles - Eurocode Eccentricity of Lateral Displacement of Vertical Loads Option"
+  },
+  {
+   "article": "35944759597337",
+   "key": "CONSTRAINT",
+   "query": "Constraint Support Constraint · [DX, DY, DZ, RX, RY, RZ, RW] / Constraint: 1 / Unconstraint: 0 / RW: Warping Torsion"
+  },
+  {
+   "article": "35808006330009",
+   "key": "STR",
+   "query": "Time Dependent Material Properties - Creep/Shrinkage Compression Strength"
+  },
+  {
+   "article": "35946764618905",
+   "key": "DAMPING_EXP",
+   "query": "General Link Properties Damping Exponent"
+  },
+  {
+   "article": "59057595762329",
+   "key": "OPT_USE",
+   "query": "Load Combination (General) - KDS : 2022 for Vertical Seismic Forces"
+  },
+  {
+   "article": "36020023438361",
+   "key": "TABLE_NAME",
+   "query": "Beam Force - TH Result Table Table Name · Response Table Title"
+  },
+  {
+   "article": "56511008007705",
+   "key": "INIT_LOAD_LIST",
+   "query": "Pushover Global Control Initial Load Case List"
+  },
+  {
+   "article": "57442429841561",
+   "key": "OUTPUT_NAME",
+   "query": "DESIGN/RC/KDS-41-20-2022/WD-REPORT : RC Wall Design Report Output File Name"
+  },
+  {
+   "article": "39508838720153",
+   "key": "VAL",
+   "query": "Response Spectrum Functions - Other Countries Factor or Value Data By Code"
+  },
+  {
+   "article": "58043328695705",
+   "key": "GRADE",
+   "query": "Modify Material - concrete Grade · Grade C2500: \"Grade C2500\" · Grade C3000: \"Grade C3000\" · Grade C3500: \"Grade C3500\" · Grade C4000: \"Grade C4000\" · Grade C4500: \"Grade C4500\" · Grade C5000: \"Grade C5000\" · Grade C6000: \"Grade C6000\" · Grade C7000: \"Grade C7000\" · Grade C8000: \"Grade C8000\" · Grade C9000: \"Grade C9000\" · Grade C10000: \"Grade C10000\""
+  },
+  {
+   "article": "36020436094105",
+   "key": "COMPONENTS",
+   "query": "Inelastic Hinge Force - TH Result Table Components of Result Table"
+  },
+  {
+   "article": "35944335180569",
+   "key": "dGeneralAsy",
+   "query": "Inelastic Material Properties Total Area of Confinement Rebars in z-dir (Asz)"
+  },
+  {
+   "article": "59057595762329",
+   "key": "UNDERGROUND_LOAD",
+   "query": "Load Combination (General) - KDS : 2022 UNDERGROUND_LOAD"
+  },
+  {
+   "article": "57945615379609",
+   "key": "SURFACE_CLASSIFICATION",
+   "query": "DESIGN/PSC/AASHTO-LRFD24/INFS : Interface shear Surface Classification · Roughened (CIP slab): \"0\" · Monolithically: \"1\" · Intentionally roughened (LWC): \"2\" · Intentionally roughened (NWC): \"3\" · Not intentionally roughened: \"4\" · Anchored: \"5\""
+  },
+  {
+   "article": "56823620531865",
+   "key": "CODE_CHECKING_RATIO",
+   "query": "Steel Design Result Code Checking Ratio"
+  },
+  {
+   "article": "43835398107801",
+   "key": "TABLE_TYPE",
+   "query": "Section Table Result Table Type · \"SECTIONALL\" · \"SECTIONCOMBINED\" · \"SECTIONCOMPOSITE\" · \"SECTIONCONSTRUCTION\" · \"SECTIONDB/USER\" · \"SECTIONPSC\" · \"SECTIONSRC\" · \"SECTIONSTEELGIRDER\" · \"SECTIONTAPERED\" · \"SECTIONVALUE\""
+  },
+  {
+   "article": "36011013418905",
+   "key": "TO",
+   "query": "Cable Configuration - Analysis Result Table \"TO\": \"101 to 105\""
+  },
+  {
+   "article": "49513466793113",
+   "key": "WIND_FLOOR_WIDTH_X",
+   "query": "Story Data Effective width of the building in X-axis, subjected to GCS Y-direction wind load"
+  },
+  {
+   "article": "36020215503257",
+   "key": "COMPONENTS",
+   "query": "Inelastic Hinge Event Time - TH Result Table Components of Result Table"
+  },
+  {
+   "article": "36020688077209",
+   "key": "TABLE_TYPE",
+   "query": "Inelastic Hinge Element Rotation - TH Result Table Result Table Type · Element Rotation - Beam: \"IEHG_ELEM_ROT_BEAM\" · Element Rotation - Wall: \"IEHG_ELEM_ROT_WALL\""
+  },
+  {
+   "article": "36006239859225",
+   "key": "VALUES",
+   "query": "Displacements - Heat of Hydration Display Values Output Details"
+  },
+  {
+   "article": "56538335819673",
+   "key": "ALL_DAMPING_RATIO",
+   "query": "Time History Load Cases Damping Ratio for All Modes"
+  },
+  {
+   "article": "57471932075033",
+   "key": "TABLE_TYPE",
+   "query": "DESIGN/SRC/AIK-SRC2K/CC-TABLE : SRC Column Checking Table Table Type · MEMB: \"MEMB\" · PROP: \"PROP\""
+  },
+  {
+   "article": "39473375938969",
+   "key": "iMETHOD",
+   "query": "Response Spectrum Functions - Japan Scaling Method · Scale Factor: 0 · Maximum Value: 1"
+  },
+  {
+   "article": "59236057502873",
+   "key": "NUM",
+   "query": "DESIGN/RC/KDS-41-20-2022/REBB : Modify Beam Rebar Data Top 2 Rebar Number"
+  },
+  {
+   "article": "59236057502873",
+   "key": "NUM",
+   "query": "DESIGN/RC/KDS-41-20-2022/REBB : Modify Beam Rebar Data Bottom 1 Rebar Number"
+  },
+  {
+   "article": "57402389191065",
+   "key": "CALC_METHOD",
+   "query": "DESIGN/RC/KDS-41-20-2022/PMDM : P-M Curve Calculation Method Calculation Method · P: \"P\" · M/P: \"M/P\""
+  },
+  {
+   "article": "35993850335897",
+   "key": "SECTOR",
+   "query": "Rebar Input for Checking - Beam/Column Sector · I-End: \"I\" · J-End: \"J\" · Mid: \"M\""
+  },
+  {
+   "article": "57053813627673",
+   "key": "bSDLE",
+   "query": "Construction Stage Analysis Control Data Secondary Dead Load Effect for Grid Model"
+  },
+  {
+   "article": "35989317531417",
+   "key": "OPT_INCL_SELF_WEIGHT",
+   "query": "Heat of Hydration Analysis Control Include Self-weight Load"
+  },
+  {
+   "article": "35943227821465",
+   "key": "SBAR_ITEMS",
+   "query": "Section Manager - Reinforcements Shear Reinforcement Items Constraints: · Items: 1 ~ 2 Index 0: i-section, Index 1: j-section (when OPT_SBAR_J is false)"
+  },
+  {
+   "article": "57457268302233",
+   "key": "END_I",
+   "query": "DESIGN/RC/KDS-41-20-2022/BC-REPORT : RC Beam Check Report Include End I position"
+  },
+  {
+   "article": "36018150905881",
+   "key": "SET_TENDON_PARAMS",
+   "query": "Tendon Loss - Analysis Result Table Set Tendon Group and Stage"
+  },
+  {
+   "article": "36013633381913",
+   "key": "OPT_CS",
+   "query": "Plane Force (Global) - Analysis Result Table Activation - Construction Stage Step"
+  },
+  {
+   "article": "39237854424601",
+   "key": "PLACE",
+   "query": "Fiber Section Average Compression Strain - TH Result Table Digit Place · 0 to 15"
+  },
+  {
+   "article": "35939506348697",
+   "key": "SHAPE",
+   "query": "Section Properties - Steel Girder Stiffener Shape · Insert the data as an object"
+  },
+  {
+   "article": "56511008007705",
+   "key": "PSPRING_SUP",
+   "query": "Pushover Global Control Point Spring Support Apply Type · Apply Nonlinear: 0 · Linear: 1"
+  },
+  {
+   "article": "56538335819673",
+   "key": "INC_CTRL",
+   "query": "Time History Load Cases Static Loading Control"
+  },
+  {
+   "article": "58337212919321",
+   "key": "COMP_TENS",
+   "query": "DESIGN/PSC/AASHTO-LRFD24/TABLE : Check crack width at service loads Compression/Tension · Top: \"Top\" · Bottom: \"Bottom\""
+  },
+  {
+   "article": "35989644995609",
+   "key": "MUR2",
+   "query": "Moving Load Analysis Control - China Value 2 to Calculate mu Reduction"
+  },
+  {
+   "article": "59057595762329",
+   "key": "UNDERGROUND_LOAD",
+   "query": "Load Combination (General) - KDS : 2022 UNDERGROUND_LOAD"
+  },
+  {
+   "article": "35957522468889",
+   "key": "UNIT_NUM",
+   "query": "Vehicles - BS Number of Units"
+  },
+  {
+   "article": "58908922148249",
+   "key": "ADDITIONAL_LOAD",
+   "query": "Static Wind Load - User Type Additional story-level wind load list."
+  },
+  {
+   "article": "58329524570905",
+   "key": "TO",
+   "query": "DESIGN/PSC/AASHTO-LRFD24/TABLE : Check Flexure Strength Specify ID Range (e.g., '1to160')"
+  },
+  {
+   "article": "35957725805977",
+   "key": "AMP",
+   "query": "Vehicles - Eurocode Factor Value for One Vehicle · Only for User Defined"
+  },
+  {
+   "article": "36015113863449",
+   "key": "TO",
+   "query": "Solid Force (Local) - Analysis Result Table \"TO\": \"101 to 105\""
+  },
+  {
+   "article": "35990229420441",
+   "key": "DISPCT_ITEMS",
+   "query": "Nonlinear Analysis Control Data Load Case Specific Nonlinear Analysis Control Data - Displacement-Control · Insert the data as an object"
+  },
+  {
+   "article": "35989644995609",
+   "key": "BTYPE",
+   "query": "Moving Load Analysis Control - China Bridge Type · Passenger-Freight Mixed Line or Heavy Haul Railway Bridge: \"RAILWAY\" · High Speed or Intercity Railway Bridge: \"RAILBRG\" · High Speed or Intercity Railway Culvert: \"RAILCUL\""
+  },
+  {
+   "article": "36013026785433",
+   "key": "EXPORT_PATH",
+   "query": "Plate Stress (Local) - Analysis Result Table Result Table Save Path"
+  },
+  {
+   "article": "35839753881497",
+   "key": "Z",
+   "query": "Section Properties - Value Distance from the section's neutral axis to the Location 1, 2, 3, 4 · [z1, z2, z3, z4]"
+  },
+  {
+   "article": "59236057502873",
+   "key": "NAME",
+   "query": "DESIGN/RC/KDS-41-20-2022/REBB : Modify Beam Rebar Data Top 1 Rebar Size · D4: \"D4\" · D5: \"D5\" · D6: \"D6\" · D7: \"D7\" · D8: \"D8\" · D10: \"D10\" · D13: \"D13\" · D16: \"D16\" · D19: \"D19\" · D22: \"D22\" · D25: \"D25\" · D29: \"D29\" · D32: \"D32\" · D35: \"D35\" · D38: \"D38\" · D41: \"D41\" · D43: \"D43\" · D51: \"D51\" · D57: \"D57\""
+  },
+  {
+   "article": "57458710549913",
+   "key": "SELECTIONS",
+   "query": "DESIGN/RC/KDS-41-20-2022/WC-REPORT : RC Wall Check Report Selections Constraints: · Items: min 0"
+  },
+  {
+   "article": "56538335819673",
+   "key": "ITER_CTRL",
+   "query": "Time History Load Cases Iteration Controls"
+  },
+  {
+   "article": "36010315199001",
+   "key": "TABLE_NAME",
+   "query": "Cable Force - Analysis Result Table Table Name · Response Table Title"
+  },
+  {
+   "article": "35946764618905",
+   "key": "HOOK",
+   "query": "General Link Properties Hook - Nonlinear Properties"
+  },
+  {
+   "article": "35946764618905",
+   "key": "LOOP_PARAM_A",
+   "query": "General Link Properties Hysteretic Loop Parameter Alpha"
+  },
+  {
+   "article": "35989924517401",
+   "key": "OPT_COMBINED_STR",
+   "query": "Moving Load Analysis Control - Transverse Combined Stress · Active/Inactive"
+  },
+  {
+   "article": "58043403493785",
+   "key": "GRADE_SUB_REBAR",
+   "query": "Modify Material - Rebar Grade of Sub-Rebar · B450C: \"B450C\""
+  },
+  {
+   "article": "49513466793113",
+   "key": "bFLOOR_DIAPHRAGM",
+   "query": "Story Data whether a floor at a given story level is assumed to act as a rigid diaphragm in lateral load distribution."
+  },
+  {
+   "article": "36018411935129",
+   "key": "DIST",
+   "query": "Tendon Approximate Loss - Analysis Result Table Length/Distance unit"
+  },
+  {
+   "article": "35989644995609",
+   "key": "MU3",
+   "query": "Moving Load Analysis Control - China Value 3 to Calculate mu"
+  },
+  {
+   "article": "58043403493785",
+   "key": "GRADE_SUB_REBAR",
+   "query": "Modify Material - Rebar Grade of Sub-Rebar · FeB22k: \"FeB22k\" · FeB32k: \"FeB32k\" · FeB38k: \"FeB38k\" · FeB44k: \"FeB44k\" · B450C: \"B450C\""
+  },
+  {
+   "article": "35944335180569",
+   "key": "dHoopsSpaceS1",
+   "query": "Inelastic Material Properties Hoops Space (s)"
+  },
+  {
+   "article": "58334269624601",
+   "key": "PARTS",
+   "query": "DESIGN/PSC/AASHTO-LRFD24/TABLE : Check stress for cross section at service loads Element Parts · PartI: \"PartI\" · PartJ: \"PartJ\""
+  },
+  {
+   "article": "35961579883929",
+   "key": "MINVHLDIST",
+   "query": "Moving Load Cases - Eurocode Min. Vehicle Distance"
+  },
+  {
+   "article": "36009739012249",
+   "key": "STYLES",
+   "query": "Truss Force - Analysis Result Table Response Number Format"
+  },
+  {
+   "article": "36003113196441",
+   "key": "DEFORM",
+   "query": "Plane Strain Stresses - Result Display Deformation Details"
+  },
+  {
+   "article": "39772649347865",
+   "key": "PARAMETER",
+   "query": "Change Property Parameter Value(a)"
+  },
+  {
+   "article": "35957522468889",
+   "key": "LM1_CASE",
+   "query": "Vehicles - BS Loading Case · Single: 0 · Convoy: 1"
+  },
+  {
+   "article": "35961579883929",
+   "key": "OPTIMIZE_LANE_NAME",
+   "query": "Moving Load Cases - Eurocode Assignement Lane"
+  },
+  {
+   "article": "39235490544281",
+   "key": "SOILFACTOR",
+   "query": "Response Spectrum Functions - Eurocode Soil Factor(S) ²⁾"
+  },
+  {
+   "article": "35957725805977",
+   "key": "USE_POINT_LOAD3_0",
+   "query": "Vehicles - Eurocode Factor Type for One Vehicle · Auto: false · User Defined: True"
+  },
+  {
+   "article": "59472130238873",
+   "key": "DT",
+   "query": "DESIGN/SRC/AIK-SRC2K/MRBD : Modify SRC Beam Section Data Top Cover Thickness Constraints: · Value Range: > 0"
+  },
+  {
+   "article": "35963903917593",
+   "key": "INITMETHOD",
+   "query": "Time History Load Cases Dynamic Load Type · Order in Sequential Loading ²⁾: \"ORDER\""
+  },
+  {
+   "article": "35941360898713",
+   "key": "JOINT",
+   "query": "Section Properties - Tapered - PSC Joint On/Off ¹⁾"
+  },
+  {
+   "article": "49513005384089",
+   "key": "TABLE_TYPE",
+   "query": "Torsional Amplification Factor - Story Result Table Result Table Type · X-Direction : \"TORSIONAL_AMPLIFICATION_FACTOR_X\" · Y-Direction : \"TORSIONAL_AMPLIFICATION_FACTOR_Y\""
+  },
+  {
+   "article": "35991960319897",
+   "key": "OtherObject",
+   "query": "Cable Control - Unknown Load Factor Constraints Other Object · When \"bValue\" is False"
+  },
+  {
+   "article": "49512818237849",
+   "key": "NAME",
+   "query": "Story Stability Coefficient - Story Result Table Vertical Load Case Name"
+  },
+  {
+   "article": "57389596454553",
+   "key": "PRI_SORT",
+   "query": "DESIGN/STEEL/KDS-41-30-2022/CODE-TABLE : Steel Code Check Table Primary Sorting Option · SECT: \"0\" · MEMB: \"1\""
+  },
+  {
+   "article": "35957725805977",
+   "key": "PHI_DYN_EFF2",
+   "query": "Vehicles - Eurocode Dynamic Effect (φ'')"
+  },
+  {
+   "article": "36013761320601",
+   "key": "NODE_ELEMS",
+   "query": "Plane Stress (Local) - Analysis Result Table Node / Element No. Input · Use Only One of the Three Methods"
+  },
+  {
+   "article": "36006173505433",
+   "key": "TYPE_OF_DISPLAY",
+   "query": "Temperature - Heat of Hydration Display Type of Display ¹⁾"
+  },
+  {
+   "article": "35943227821465",
+   "key": "OPT_SBAR_J",
+   "query": "Section Manager - Reinforcements Same Shear Rebar at I/J"
+  },
+  {
+   "article": "56823620531865",
+   "key": "R",
+   "query": "Steel Design Result Red Constraints: · Value Range: >= 0, <= 255"
+  },
+  {
+   "article": "35958016039577",
+   "key": "SAME_LOADED_L",
+   "query": "Vehicles - Russia Apply same Loaded Length between Bogie and UDL Option"
+  },
+  {
+   "article": "35957725805977",
+   "key": "ECCEN_VERT_LOAD",
+   "query": "Vehicles - Eurocode Eccentricity of Lateral Displacement of Vertical Loads Option"
+  },
+  {
+   "article": "35992838417049",
+   "key": "HINGE_TYPE",
+   "query": "Assign Pushover Hinge Properties Pushover Hinge Type"
+  },
+  {
+   "article": "35988728179097",
+   "key": "DRAG_COEF_Y",
+   "query": "Wave Loads Drag Coefficient Y"
+  },
+  {
+   "article": "58908676674585",
+   "key": "PERIOD_APPR_X",
+   "query": "Static Seismic Load - KDS(41-17-00:2019) Approximate period for X direction."
+  },
+  {
+   "article": "35808006330009",
+   "key": "MSIZE",
+   "query": "Time Dependent Material Properties - Creep/Shrinkage Notional Size of Member"
+  },
+  {
+   "article": "39508838720153",
+   "key": "MU",
+   "query": "Response Spectrum Functions - Other Countries Design Ductility Factor(μ)"
+  },
+  {
+   "article": "35958016039577",
+   "key": "LOAD_FACTOR_VALUE",
+   "query": "Vehicles - Russia Load Reliability Factor for Bogie · For User Input"
+  },
+  {
+   "article": "56511025581337",
+   "key": "HARDENING_COEF",
+   "query": "Plastic Material Hardening Coefficient"
+  },
+  {
+   "article": "57053813627673",
+   "key": "ADVANCED",
+   "query": "Construction Stage Analysis Control Data Advanced Nonlinear Parameters"
+  },
+  {
+   "article": "36012742430873",
+   "key": "TABLE_TYPE",
+   "query": "Plate Force (Global) - Analysis Result Table Result Table Type · Plate Force - Global: \"PLATEFORCEG\""
+  },
+  {
+   "article": "35963520535577",
+   "key": "MAINTAIN_TYPE",
+   "query": "Railway Dynamic Factor by Element Quality of Track Maintenance · Carefully maintained: 0 · Standard maintenance: 1"
+  },
+  {
+   "article": "35806934300825",
+   "key": "STYPE",
+   "query": "Element Element Subtype · Thick: 1 · Thin: 2 · Thick with Drilling DOF: 3 · Thin with Drilling DOF: 4"
+  },
+  {
+   "article": "36705822943257",
+   "key": "EXPORT_PATH",
+   "query": "Time History Text - General Link Result Result Table Save Path"
+  },
+  {
+   "article": "36013319302809",
+   "key": "OPT_CS",
+   "query": "Plate Strain (Global) - Analysis Result Table Activation - Construction Stage Step"
+  },
+  {
+   "article": "35997247818393",
+   "key": "CURRENT_MODE",
+   "query": "Soil Pressure - Result Display Result Graphic Mode · \"Soil Pressure\""
+  },
+  {
+   "article": "35957522468889",
+   "key": "W3",
+   "query": "Vehicles - BS Uniform Distribution Load · Minimum"
+  },
+  {
+   "article": "56823620531865",
+   "key": "STAGE_NAME",
+   "query": "Steel Design Result Construction Stage Name"
+  },
+  {
+   "article": "35996157533977",
+   "key": "INELASTIC_HINGE_SYMBOL",
+   "query": "Display Inelastic Hing Symbol ˢ²⁾"
+  },
+  {
+   "article": "58337159836441",
+   "key": "NODE_ELEMS",
+   "query": "DESIGN/PSC/AASHTO-LRFD24/TABLE : Principal stress at service loads Node/Element Selection Use only ONE of the three methods: KEYS, TO, or STRUCTURE_GROUP_NAME"
+  },
+  {
+   "article": "35958016039577",
+   "key": "EPSILON_FACTOR",
+   "query": "Vehicles - Russia Epsilon Factor <strong> · </strong>Only for \"SK\" / To the second and third tracks: 0 / To the all the loaded tracks: 1"
+  },
+  {
+   "article": "57401028854553",
+   "key": "POS_TYPE",
+   "query": "DESIGN/RC/KDS-41-20-2022/HCBM : Haunched Beam Assignment Design Position Type · Part 1/2: \"0\" · User: \"1\""
+  },
+  {
+   "article": "35954163821593",
+   "key": "TYPE",
+   "query": "Temperature Gradient Element Type · Beam: 1 · Plate: 2"
+  },
+  {
+   "article": "36017264069017",
+   "key": "TABLE_NAME",
+   "query": "Solid Strain (Local) - Analysis Result Table Table Name · Response Table Title"
+  },
+  {
+   "article": "35988210740761",
+   "key": "ETFC_NAME",
+   "query": "Element Convection Boundary Ambient Temperature Function"
+  },
+  {
+   "article": "35957522468889",
+   "key": "LANE_FACTOR",
+   "query": "Vehicles - BS HA Lane Factor · BD 37/01: 0"
+  },
+  {
+   "article": "58332500765849",
+   "key": "COMP_TENS",
+   "query": "DESIGN/PSC/AASHTO-LRFD24/TABLE : Principal stress at a construction stage Compression/Tension · Tension: \"Tension\""
+  },
+  {
+   "article": "35959068573209",
+   "key": "SUB_LOAD_DATAS",
+   "query": "Moving Load Cases Sub Load Cases · Insert data as object"
+  },
+  {
+   "article": "35992664632601",
+   "key": "INITLOADMETHOD",
+   "query": "Pushover Analysis Control Data Initial Load · Perform Nonlinear Static Analysis: \"PERFORM_ANAL\" · Import Static/Construction Stage Analysis: \"IMPORT_RESULT\""
+  },
+  {
+   "article": "35990281053465",
+   "key": "iBSC",
+   "query": "Construction Stage Analysis Control Data Beam Section Property Option · Constant: 0 · Change with Tendon: 1"
+  },
+  {
+   "article": "57945497373465",
+   "key": "STRESS_PT",
+   "query": "DESIGN/PSC/AASHTO-LRFD24/DPSC : Design Code Option Stress in Prestressing Tendons"
+  },
+  {
+   "article": "35991862460697",
+   "key": "SUPP_GROUP_NAME",
+   "query": "FCM Camber Control Support Node Group"
+  },
+  {
+   "article": "36003113196441",
+   "key": "TYPE",
+   "query": "Plane Strain Stresses - Result Display Coordinate System · User Coord System: \"UCS\" · Local Coord System: \"Local\""
+  },
+  {
+   "article": "39233752695321",
+   "key": "USE_AUTO_QY",
+   "query": "Section Properties - Tapered - PSC Value Qy Check for Shear of I, J · [[Qi1, Qi2, Qi3], [Qj1, Qj2, Qj3]]"
+  },
+  {
+   "article": "35938998724377",
+   "key": "vSIZE_PSC_A",
+   "query": "Section Properties - Composite - PSC Outer-Height ¹⁾"
+  },
+  {
+   "article": "36021119165081",
+   "key": "NODE_ELEMS",
+   "query": "Tensile Stress - HY Result Table Node / Element No. Input · Use Only One of the Three Methods"
+  },
+  {
+   "article": "35957725805977",
+   "key": "W1",
+   "query": "Vehicles - Eurocode Uniform Distribution Load"
+  },
+  {
+   "article": "59057584761369",
+   "key": "DGNCODE",
+   "query": "Load Combination (General) - AIK-SRC2K DGNCODE · AIK-SRC2K"
+  },
+  {
+   "article": "35990281053465",
+   "key": "bINC_TDE",
+   "query": "Construction Stage Analysis Control Data Include Time Dependent Effect ³⁾"
+  },
+  {
+   "article": "57458599023897",
+   "key": "FORMAT",
+   "query": "DESIGN/RC/KDS-41-20-2022/WC-TABLE : RC Wall Check Table Number format. · Default: \"Default\" · Fixed: \"Fixed\" · Scientific: \"Scientific\" · General: \"General\""
+  },
+  {
+   "article": "35957522468889",
+   "key": "ADD_DATA_AL",
+   "query": "Vehicles - BS Adjustment Factor (aL)"
+  },
+  {
+   "article": "35944335180569",
+   "key": "FCR",
+   "query": "Inelastic Material Properties Peak Concrete Compressive Strength (fc,r)"
+  },
+  {
+   "article": "36018955537177",
+   "key": "FORMAT",
+   "query": "Equilibrium Element Nodal Force - Analysis Result Table Number Format · \"Default\" · \"Fixed\" · \"Scientific\" · \"General\""
+  },
+  {
+   "article": "36020436094105",
+   "key": "UNIT",
+   "query": "Inelastic Hinge Force - TH Result Table Response Unit Setting"
+  },
+  {
+   "article": "35808006330009",
+   "key": "CTYPE",
+   "query": "Time Dependent Material Properties - Creep/Shrinkage Type of Cement ²⁾"
+  }
+ ],
+ "endpoint": [
+  {
+   "article": "39237582598937",
+   "query": "Fiber Section Estimate Yield Strength - TH Result Table"
+  },
+  {
+   "article": "36000934415257",
+   "query": "Plate Cutting Line Diagram - Result Display"
+  },
+  {
+   "article": "35997813329177",
+   "query": "Plate Forces/Moments - Result Display"
+  },
+  {
+   "article": "57442429841561",
+   "query": "DESIGN/RC/KDS-41-20-2022/WD-REPORT : RC Wall Design Report"
+  },
+  {
+   "article": "35961164029593",
+   "query": "Moving Load Cases - India"
+  },
+  {
+   "article": "57466235159577",
+   "query": "DESIGN/SRC/AIK-SRC2K/LTSR : Limiting Slenderness Ratio"
+  },
+  {
+   "article": "58332864321305",
+   "query": "DESIGN/PSC/AASHTO-LRFD24/TABLE : Check Combined Shear and Torsion Strength"
+  },
+  {
+   "article": "56397306107545",
+   "query": "Main Control Data"
+  },
+  {
+   "article": "35943174833177",
+   "query": "Section Manager - Stiffness"
+  },
+  {
+   "article": "35987625234201",
+   "query": "Composite Section for Construction Stage"
+  },
+  {
+   "article": "36004497508505",
+   "query": "Plate Forces/Moments - Moving Tracer Display"
+  },
+  {
+   "article": "39772649347865",
+   "query": "Change Property"
+  },
+  {
+   "article": "58908673370521",
+   "query": "Static Wind Load - KDS(41-12:2022)"
+  },
+  {
+   "article": "57457268302233",
+   "query": "DESIGN/RC/KDS-41-20-2022/BC-REPORT : RC Beam Check Report"
+  },
+  {
+   "article": "36020391511961",
+   "query": "Inelastic Hinge General Link Summary - TH Result Table"
+  },
+  {
+   "article": "35963288573849",
+   "query": "Dynamic Load Allowance"
+  },
+  {
+   "article": "36705822943257",
+   "query": "Time History Text - General Link Result"
+  },
+  {
+   "article": "57471905977241",
+   "query": "DESIGN/SRC/AIK-SRC2K/CC-ANAL : SRC Column Checking Perform"
+  },
+  {
+   "article": "58908676674585",
+   "query": "Static Seismic Load - KDS(41-17-00:2019)"
+  },
+  {
+   "article": "35948150053529",
+   "query": "Seismic Device - Steel Damper"
+  },
+  {
+   "article": "35991960319897",
+   "query": "Cable Control - Unknown Load Factor Constraints"
+  },
+  {
+   "article": "36705962238873",
+   "query": "Pushover Text - Displacement Result"
+  },
+  {
+   "article": "35957229130521",
+   "query": "Vehicles - AASHTO LRFD"
+  },
+  {
+   "article": "59050520760473",
+   "query": "Gust Factor Calculator"
+  },
+  {
+   "article": "35954702397209",
+   "query": "Tendon Prestress"
+  },
+  {
+   "article": "35992797619097",
+   "query": "Ignore Elements for Pushover Intial Load"
+  },
+  {
+   "article": "58381791502873",
+   "query": "RATING/PSC/AASHTO-LRFR19/PFRO : Position for Rating Output"
+  },
+  {
+   "article": "59398794726041",
+   "query": "DESIGN/RC/KDS-41-20-2022/MATD : Modify Concrete Material"
+  },
+  {
+   "article": "39237785220505",
+   "query": "Fiber Section Event Step - TH Result Table"
+  },
+  {
+   "article": "35958578983065",
+   "query": "Vehicles - India"
+  },
+  {
+   "article": "57458140117657",
+   "query": "DESIGN/RC/KDS-41-20-2022/CC-TABLE : RC Column Check Table"
+  },
+  {
+   "article": "35993850335897",
+   "query": "Rebar Input for Checking - Beam/Column"
+  },
+  {
+   "article": "57473614628889",
+   "query": "DESIGN/SRC/AIK-SRC2K/TABLE : SRC Column Design Forces"
+  },
+  {
+   "article": "57402250238617",
+   "query": "DESIGN/RC/KDS-41-20-2022/TRFT : Torsion Reduction Factor"
+  },
+  {
+   "article": "57365599209497",
+   "query": "DESIGN/STEEL/KDS-41-30-2022/DCTL : Definition of Frame"
+  },
+  {
+   "article": "57459768200217",
+   "query": "DESIGN/RC/KDS-41-20-2022/TABLE : Brace Design Forces"
+  },
+  {
+   "article": "49514496461593",
+   "query": "Steel Design - Steel Member Design Forces"
+  },
+  {
+   "article": "43835398107801",
+   "query": "Section Table"
+  },
+  {
+   "article": "35523395368985",
+   "query": "Active"
+  },
+  {
+   "article": "36014348032409",
+   "query": "Axisymmetric Force (Local) - Analysis Result Table"
+  },
+  {
+   "article": "36002496760217",
+   "query": "Beam Stresses Diagram (Equivalent) - Result Display"
+  },
+  {
+   "article": "57430428520601",
+   "query": "DESIGN/RC/KDS-41-20-2022/BRD-TABLE : RC Brace Design Table"
+  },
+  {
+   "article": "57466533347993",
+   "query": "DESIGN/SRC/AIK-SRC2K/MLLR : Modify Live Load Reduction Factor"
+  },
+  {
+   "article": "57389695353241",
+   "query": "Steel Optimal Design"
+  },
+  {
+   "article": "57400611535513",
+   "query": "DESIGN/STEEL/KDS-41-30-2022/MLLR : Modify Live Load Reduction Factor"
+  },
+  {
+   "article": "57465303138329",
+   "query": "DESIGN/SRC/AIK-SRC2K/DCO : Design Code Option"
+  },
+  {
+   "article": "35957725805977",
+   "query": "Vehicles - Eurocode"
+  },
+  {
+   "article": "35994162529305",
+   "query": "Close Project"
+  },
+  {
+   "article": "35946584247193",
+   "query": "Rigid Link"
+  },
+  {
+   "article": "58337271509017",
+   "query": "DESIGN/PSC/AASHTO-LRFD24/TABLE : Check tensile stress for Prestressing tendons"
+  },
+  {
+   "article": "35807178748569",
+   "query": "Node Local Axis"
+  },
+  {
+   "article": "57389316545177",
+   "query": "DESIGN/STEEL/KDS-41-30-2022/SMODI : Modify Steel Material"
+  },
+  {
+   "article": "58908922148249",
+   "query": "Static Wind Load - User Type"
+  },
+  {
+   "article": "35939122737689",
+   "query": "Section Properties - Composite - Steel"
+  },
+  {
+   "article": "35953653792665",
+   "query": "Assign Floor Loads"
+  },
+  {
+   "article": "57670595775641",
+   "query": "DESIGN/STEEL/KDS-41-30-2022/MEMB : Member Assignment"
+  },
+  {
+   "article": "36001119330969",
+   "query": "Beam Stresses - Result Display"
+  },
+  {
+   "article": "57053813627673",
+   "query": "Construction Stage Analysis Control Data"
+  },
+  {
+   "article": "39473471043737",
+   "query": "Response Spectrum Functions - Taiwan"
+  },
+  {
+   "article": "36002326176665",
+   "query": "Beam Stresses (Equivalent) - Result Display"
+  },
+  {
+   "article": "36020688077209",
+   "query": "Inelastic Hinge Element Rotation - TH Result Table"
+  },
+  {
+   "article": "57365469935257",
+   "query": "DESIGN/STEEL/KDS-41-30-2022/DCO : Design Code Option"
+  },
+  {
+   "article": "57403194027033",
+   "query": "DESIGN/RC/KDS-41-20-2022/DCRM-BRACE : Design Criteria for Rebars by Brace Member"
+  },
+  {
+   "article": "57945572333849",
+   "query": "DESIGN/PSC/AASHTO-LRFD24/SLCT : Serviceability Load Combination Type"
+  },
+  {
+   "article": "57369321629081",
+   "query": "DESIGN/STEEL/KDS-41-30-2022/SUEQ : Scale up Factor for Earthquake"
+  },
+  {
+   "article": "59398810145817",
+   "query": "DESIGN/RC/KDS-41-20-2022/MEMB : Member Assignment"
+  },
+  {
+   "article": "35839753881497",
+   "query": "Section Properties - Value"
+  },
+  {
+   "article": "35997611572505",
+   "query": "Displacement Contour - Result Display"
+  },
+  {
+   "article": "57475390140313",
+   "query": "DESIGN/RC/KDS-41-20-2022/LMRR : Limiting Maximum Rebar Ratio"
+  },
+  {
+   "article": "57459388328601",
+   "query": "DESIGN/RC/KDS-41-20-2022/TABLE : Column Design Forces"
+  },
+  {
+   "article": "35944093809689",
+   "query": "Inelastic Hinge Control Data"
+  },
+  {
+   "article": "57403168622873",
+   "query": "DESIGN/RC/KDS-41-20-2022/DCRM-COLUMN : Design Criteria for Rebars by Column Member"
+  },
+  {
+   "article": "35993633394969",
+   "query": "RC Design Code"
+  },
+  {
+   "article": "36020311969305",
+   "query": "Inelastic Hinge Truss Summary - TH Result Table"
+  },
+  {
+   "article": "56396523438873",
+   "query": "Material Properties"
+  },
+  {
+   "article": "57466103707801",
+   "query": "DESIGN/SRC/AIK-SRC2K/KFAC : Effective Length Factor (K)"
+  },
+  {
+   "article": "36018582743705",
+   "query": "Composite Section for C.S. (Self-Constraint Force and Stress) - Analysis Result Table"
+  },
+  {
+   "article": "57401130563353",
+   "query": "DESIGN/RC/KDS-41-20-2022/LENG : Unbraced Length (L, Lb)"
+  },
+  {
+   "article": "49514395318041",
+   "query": "Concrete Design - Brace Design Forces"
+  },
+  {
+   "article": "49511531295257",
+   "query": "post/TABLE : Story Drift(X,Y,Combine) - Story Result Table"
+  },
+  {
+   "article": "57471918632857",
+   "query": "DESIGN/SRC/AIK-SRC2K/CC-REPORT : SRC Column Checking Report"
+  },
+  {
+   "article": "35989483364633",
+   "query": "Moving Load Analysis Control"
+  },
+  {
+   "article": "35961950207129",
+   "query": "Moving Load Cases - Transverse"
+  },
+  {
+   "article": "36017614482201",
+   "query": "Resultant Forces - Analysis Result Table"
+  },
+  {
+   "article": "39772183634329",
+   "query": "Surface Spring"
+  },
+  {
+   "article": "57656799110937",
+   "query": "Assign Inelastic Hinges - General Link"
+  },
+  {
+   "article": "44613910309401",
+   "query": "Element Stiffness Scale Factor"
+  },
+  {
+   "article": "39233752695321",
+   "query": "Section Properties - Tapered - PSC Value"
+  },
+  {
+   "article": "35996023805337",
+   "query": "Capture"
+  },
+  {
+   "article": "36017837129241",
+   "query": "Nodal Results of RS - Analysis Result Table"
+  },
+  {
+   "article": "49512411760665",
+   "query": "Story Shear Force Ratio - Story Result Table"
+  },
+  {
+   "article": "39233604772633",
+   "query": "Section Properties - PSC Value"
+  },
+  {
+   "article": "36013633381913",
+   "query": "Plane Force (Global) - Analysis Result Table"
+  },
+  {
+   "article": "36020136483353",
+   "query": "General Link - TH Result Table"
+  },
+  {
+   "article": "35989317531417",
+   "query": "Heat of Hydration Analysis Control"
+  },
+  {
+   "article": "36704969941913",
+   "query": "Time History Text - Node Results"
+  },
+  {
+   "article": "36706383777817",
+   "query": "Pushover Text - Elastic Link Result"
+  },
+  {
+   "article": "57401739847065",
+   "query": "DESIGN/RC/KDS-41-20-2022/EQCT : Seismic Load Combination Type"
+  },
+  {
+   "article": "35941514067225",
+   "query": "Section Properties - Tapered - Composite PSC"
+  },
+  {
+   "article": "57457223050521",
+   "query": "DESIGN/RC/KDS-41-20-2022/BC-TABLE : RC Beam Check Table"
+  }
+ ]
+}

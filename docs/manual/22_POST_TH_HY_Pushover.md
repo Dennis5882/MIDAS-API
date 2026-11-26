@@ -1783,6 +1783,18 @@ key = next(iter(res))
 print("table:", key, "/ rows:", len(res[key]["DATA"]))
 ```
 
+<!-- om-fields:36020548520601 -->
+**OM 원문 추가 필드 — Inelastic Hinge Deformation - TH Result Table ([36020548520601](https://support.midasuser.com/hc/en-us/articles/36020548520601))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 7 | Time History Load Case Name · NAME · NAME + "(TH:all)" · NAME + "(TH:max)" · NAME + "(TH:min)" | `"STAGE_STEP"` | Array [String] | All | Optional |
+
+<!-- /om-fields -->
+
+
 ---
 
 ## 그룹 C. 수화열 해석 결과 표시 (`view/RESULTGRAPHIC`)
@@ -2170,6 +2182,71 @@ payload = {
 res = requests.post(f"{BASE_URL}/view/RESULTGRAPHIC", json=payload, headers=HEADERS)
 print(res.json())
 ```
+
+<!-- om-fields:36006059687449 -->
+**OM 원문 추가 필드 — Stress - Heat of Hydration Display ([36006059687449](https://support.midasuser.com/hc/en-us/articles/36006059687449))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| ii. | Avg.Nodal Active Only · When "TYPE" is Avg.Nodal | `"OPT_ACTIVE_ONLY"` | Object | - | **Required** |
+| (5) | Display Undeformed Shape | `"UNDEFORMED"` | Boolean | false | Optional |
+
+<!-- /om-fields -->
+
+<!-- om-fields:36006173505433 -->
+**OM 원문 추가 필드 — Temperature - Heat of Hydration Display ([36006173505433](https://support.midasuser.com/hc/en-us/articles/36006173505433))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (5) | Display Undeformed Shape | `"UNDEFORMED"` | Boolean | false | Optional |
+
+<!-- /om-fields -->
+
+<!-- om-fields:36006239859225 -->
+**OM 원문 추가 필드 — Displacements - Heat of Hydration Display ([36006239859225](https://support.midasuser.com/hc/en-us/articles/36006239859225))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (5) | Display Undeformed Shape | `"UNDEFORMED"` | Boolean | false | Optional |
+
+<!-- /om-fields -->
+
+<!-- om-fields:36006326138521 -->
+**OM 원문 추가 필드 — Allowable Tensile Stress - Heat of Hydration Display ([36006326138521](https://support.midasuser.com/hc/en-us/articles/36006326138521))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (5) | Display Undeformed Shape | `"UNDEFORMED"` | Boolean | false | Optional |
+
+<!-- /om-fields -->
+
+<!-- om-fields:36006358418713 -->
+**OM 원문 추가 필드 — Crack Ratio - Heat of Hydration Display ([36006358418713](https://support.midasuser.com/hc/en-us/articles/36006358418713))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (5) | Display Undeformed Shape | `"UNDEFORMED"` | Boolean | false | Optional |
+
+<!-- /om-fields -->
+
+
+
+
+
+
+
+
+
 
 ---
 
@@ -2606,6 +2683,18 @@ res = requests.get(f"{BASE_URL}/db/THRS", headers=HEADERS).json()
 print("정의된 장치 그래프:", list(res.get("THRS", {}).keys()))
 requests.delete(f"{BASE_URL}/db/THRS/3", headers=HEADERS)
 ```
+
+<!-- om-fields:39236753314073 -->
+**OM 원문 추가 필드 — Time History Graph - Element Force Smart Graph ([39236753314073](https://support.midasuser.com/hc/en-us/articles/39236753314073))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 2 | Type of Element · Beam: 0 · Truss: 1 · Wall: 2 | `"THIS_ELEMENT"` | Integer | - | **Required** |
+
+<!-- /om-fields -->
+
 
 ---
 

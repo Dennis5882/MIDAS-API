@@ -7914,6 +7914,19 @@ for row in table["DATA"]:
     print(row[0], row[chk_idx], mark)
 ```
 
+<!-- om-fields:57430243603225 -->
+**OM 원문 추가 필드 — DESIGN/RC/KDS-41-20-2022/CD-TABLE : RC Column Design Table ([57430243603225](https://support.midasuser.com/hc/en-us/articles/57430243603225))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 6.1 | [General] STYLES.FORMAT · Default: "Default" · Fixed: "Fixed" · Scientific: "Scientific" · General: "General" | `"FORMAT"` | string | - | Optional |
+| 6.2 | STYLES.PLACE Constraints: · Value Range: >= 0, <= 15 | `"PLACE"` | integer | - | Optional |
+
+<!-- /om-fields -->
+
+
 ---
 
 ## 44. `DESIGN/RC/KDS-41-20-2022/CD-REPORT` — RC Column Design Report (RC 기둥 설계 리포트)
@@ -8304,6 +8317,21 @@ for row in table["DATA"]:
     print(dict(zip(head, row)))
 ```
 
+<!-- om-fields:57430428520601 -->
+**OM 원문 추가 필드 — DESIGN/RC/KDS-41-20-2022/BRD-TABLE : RC Brace Design Table ([57430428520601](https://support.midasuser.com/hc/en-us/articles/57430428520601))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 8.3 | [oneOf Choose exactly one of the following keys: "KEYS", "TO", or "STRUCTURE_GROUP_NAME".] Heat unit | `"HEAT"` | string | - | Optional |
+| 8.4 | Temperature unit | `"TEMP"` | string | - | Optional |
+| 9.1 | Number format · Default: "Default" · Fixed: "Fixed" · Scientific: "Scientific" · General: "General" | `"FORMAT"` | string | - | Optional |
+| 9.2 | Digit place Constraints: · Value Range: >= 0, <= 15 | `"PLACE"` | integer | - | Optional |
+
+<!-- /om-fields -->
+
+
 ---
 
 ## 47. `DESIGN/RC/KDS-41-20-2022/BRD-REPORT` — RC Brace Design Report (RC 가새 설계 리포트)
@@ -8535,6 +8563,16 @@ res = rc_post("WD-ANAL", {
 print("POST:", res.status_code, res.json())   # {"message": "success"}
 ```
 
+<!-- om-fields:58037812666521 -->
+**OM 원문 추가 필드 — DESIGN/RC/KDS-41-20-2022/WD-ANAL : RC Wall Design Perform ([58037812666521](https://support.midasuser.com/hc/en-us/articles/58037812666521))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `label`, `order`, `placeholder`
+
+<!-- /om-fields -->
+
+
 ---
 
 ## 49. `DESIGN/RC/KDS-41-20-2022/WD-TABLE` — RC Wall Design Table (RC 벽체 설계 테이블)
@@ -8758,6 +8796,19 @@ data = res.json()["data"]
 for row in data["ROWS"]:
     print(row["WID"], row["Story"], row["Wall Mark"], row["CHK"])
 ```
+
+<!-- om-fields:57442273865625 -->
+**OM 원문 추가 필드 — DESIGN/RC/KDS-41-20-2022/WD-TABLE : RC Wall Design Table ([57442273865625](https://support.midasuser.com/hc/en-us/articles/57442273865625))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 6.3 | [oneOf Choose exactly one of the following keys: "KEYS" or "TO".] Heat unit | `"HEAT"` | string | - | Optional |
+| 6.4 | Temperature unit | `"TEMP"` | string | - | Optional |
+
+<!-- /om-fields -->
+
 
 ---
 
@@ -9205,6 +9256,21 @@ for row in table["DATA"]:
     # 헌치보는 구간(Section)·위치(POS)별로 여러 행이 출력됨
     print(dict(zip(head, row)))
 ```
+
+<!-- om-fields:57457041716889 -->
+**OM 원문 추가 필드 — DESIGN/RC/KDS-41-20-2022/HCD-TABLE : RC Haunched Beam Design Table ([57457041716889](https://support.midasuser.com/hc/en-us/articles/57457041716889))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 5.3 | [oneOf Choose exactly one of the following keys: "KEYS", "TO", or "STRUCTURE_GROUP_NAME".] Heat unit | `"HEAT"` | string | - | Optional |
+| 5.4 | Temperature unit | `"TEMP"` | string | - | Optional |
+| 6.1 | Number format · Default: "Default" · Fixed: "Fixed" · Scientific: "Scientific" · General: "General" | `"FORMAT"` | string | - | Optional |
+| 6.2 | Digit place Constraints: · Value Range: >= 0, <= 15 | `"PLACE"` | integer | - | Optional |
+
+<!-- /om-fields -->
+
 
 ---
 
@@ -12865,6 +12931,38 @@ payload = {
 res = requests.post(URI, headers=HEADERS, json=payload)
 print(res.json())   # 성공 시 지정 경로에 이미지 파일 생성
 ```
+
+<!-- om-fields:57458836502553 -->
+**OM 원문 추가 필드 — DESIGN/RC/KDS-41-20-2022/CDESIGN : RC Concrete Design Result ([57458836502553](https://support.midasuser.com/hc/en-us/articles/57458836502553))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 14.1 | [General] Current Mode · Infill Design RC: "INFLL_DESIGN_RC" | `"CURRENT_MODE"` | string | - | **Required** |
+| 14.3.1 | Ratio by Components · Axial: "Axial" · Shear-y: "Shear-y" · Shear-z: "Shear-z" · Bend-y: "Bend-y" · Bend-z: "Bend-z" · Combined: "Combined" · SHEAR-Z: "SHEAR-Z" | `"COMP"` | string | "Combined" | Optional |
+| 14.4.1.1 | Check | `"OPT_CHECK"` | boolean | false | Optional |
+| 14.4.1.2 | Number of Color Constraints: · Value Range: >= 2, <= 20 | `"NUM_OF_COLOR"` | integer | 12 | Optional |
+| 14.4.1.3 | Color Type · V->R->G->B: "vrgb" · >R->G->B: "rgb" · R->B->G: "rbg" · Gray Scaled: "gray scaled" | `"COLOR_TYPE"` | string | "vrgb" | Optional |
+| 14.4.1.4 | Options | `"OPTIONS"` | object | - | Optional |
+| 14.4.1.4.1 | Gradient Fill | `"GRADIENT_FILL"` | boolean | false | Optional |
+| 14.4.1.4.2 | Contour Fill | `"CONTOUR_FILL"` | boolean | true | Optional |
+| 14.4.2.1 | Check | `"OPT_CHECK"` | boolean | false | Optional |
+| 14.4.2.2 | Decimal Pt. Constraints: · Value Range: >= 0, <= 15 | `"DECIMAL_PT"` | integer | 0 | Optional |
+| 14.4.2.3 | Exponential | `"VALUE_EXP"` | boolean | false | Optional |
+| 14.4.2.4 | Min/Max Only | `"MINMAX_ONLY"` | object | - | Optional |
+| 14.4.2.4.1 | MinMax Type of Values · Min. & Max: "Min & Max" · Absolut Max: "Abs Max" · Maximum: "max" · MMinimumin: "min" | `"MAXMIN"` | string | "Min & Max" | Optional |
+| 14.4.2.4.2 | Limit Scale | `"LIMIT_SCALE"` | integer | 0 | Optional |
+| 14.4.2.5 | Orientation | `"SET_ORIENT"` | integer | 0 | Optional |
+| 14.4.3.1 | Check | `"OPT_CHECK"` | boolean | false | Optional |
+| 14.4.3.2 | Position · Right: "right" · Left: "left" · Top: "top" · Bottom: "bottom" | `"POSITION"` | string | "left" | Optional |
+| 14.4.3.3 | Exponential | `"VALUE_EXP"` | boolean | true | Optional |
+| 14.4.3.4 | Decimal Pt. Constraints: · Value Range: >= 0, <= 15 | `"DECIMAL_PT"` | integer | 0 | Optional |
+| 14.4.4.1 | [When "COMPONENTS.COMP" is Combined] Reinforcement | `"CHECK"` | boolean | true | Optional |
+| 14.5.1 | [When "VALUES" is true] Ratio by Components · MAX: "MAX" · ALL: "ALL" | `"OPT_MAX_ALL"` | string | "MAX" | Optional |
+
+<!-- /om-fields -->
+
 
 ---
 

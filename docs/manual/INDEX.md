@@ -1,7 +1,7 @@
 # MIDAS NX Open API — JSON Manual Index
 
 > **출처:** [MIDAS API Online Manual](https://support.midasuser.com/hc/ko/articles/33016922742937-MIDAS-API-Online-Manual)  
-> **최초 생성:** 2024.05.28 · **공식 최종 편집:** 2026.07.30 · **이 파일 동기화:** 2026-07-30  
+> **최초 생성:** 2024.05.28 · **공식 목차 최종 갱신:** 2026.11.25 · **이 파일 동기화:** 2026-11-26  
 > **대상 제품:** MIDAS Civil NX · MIDAS Gen NX
 
 ---
@@ -493,7 +493,7 @@ GUI 또는 사전처리 계산값 제어 함수. DB에 저장되지 않는 데�
 
 ### Analysis Result Table (주요)
 
-반력·변위·트러스·케이블·보·판·솔리드·Elastic Link·General Link·진동모드·좌굴모드·텐던 등 24종
+반력·변위·트러스·케이블·보·판·솔리드·Elastic Link·General Link·진동모드·좌굴모드·텐던 등 ([19장](./19_POST_AnalysisResult_1.md) · [20장](./20_POST_AnalysisResult_2.md), 합력·Lack of Fit 등 포함). 시간이력·수화열·Fiber Section 테이블은 [22장](./22_POST_TH_HY_Pushover.md)
 
 ### Analysis Story Table
 

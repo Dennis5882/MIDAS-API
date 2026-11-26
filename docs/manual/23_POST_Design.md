@@ -599,6 +599,19 @@ for row in wall["DATA"]:
     print(row)
 ```
 
+<!-- om-fields:49514433321881 -->
+**OM 원문 추가 필드 — Concrete Design - Wall Design Forces ([49514433321881](https://support.midasuser.com/hc/en-us/articles/49514433321881))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (3) | Heat | `"HEAT"` | String | - | Optional |
+| (4) | Temperature | `"TEMP"` | String | - | Optional |
+
+<!-- /om-fields -->
+
+
 ---
 
 ## 7. Steel Design – Steel Member Design Forces
@@ -863,6 +876,19 @@ print("HEAD:", cf["HEAD"])
 for row in cf["DATA"]:
     print(row)
 ```
+
+<!-- om-fields:49514621265305 -->
+**OM 원문 추가 필드 — Cold Formed Design - Cold Formed Steel Member Design Forces ([49514621265305](https://support.midasuser.com/hc/en-us/articles/49514621265305))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (3) | Heat | `"HEAT"` | String | - | Optional |
+| (4) | Temperature | `"TEMP"` | String | - | Optional |
+
+<!-- /om-fields -->
+
 
 ---
 

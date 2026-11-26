@@ -7,7 +7,8 @@
 **MIDAS NX Open API**(MIDAS Gen NX / Civil NX)에 대한 사람이 직접 큐레이션한 **JSON 스키마 매뉴얼**
 저장소입니다. 코드 라이브러리가 아니라 문서 저장소입니다.
 
-- `docs/manual/01_DOC.md` ~ `27_Design_SRC_AIKSRC2K.md` — 27개 챕터, 총 ~270개 엔드포인트를
+- `docs/manual/01_DOC.md` ~ `27_Design_SRC_AIKSRC2K.md` + `16_2_VIEW_ResultGraphic.md` — 28개 파일.
+  공식 목차의 276개 경로와 설계코드 엔드포인트를
   MIDAS 공식 Zendesk 온라인 매뉴얼 기준으로 문서화. `docs/manual/INDEX.md`가 전체 목차/개수 색인.
 - `docs/plugin/` — MIDAS Plug-in(MIDAS API + Python으로 만든, GUI에 내장된 완성형 자동화 도구)
   문서. `docs/manual/`과 별개 폴더인 이유와 문서 성격 차이는 `docs/plugin/INDEX.md` 상단 참고.
@@ -26,8 +27,8 @@
 
 | 섹션 이름(`--section`) | Zendesk 대상 | 추적 방식 | 로컬 문서 |
 | --- | --- | --- | --- |
-| `manual` | JSON Manual 섹션(650개 아티클, `section_id=30087500371097`) | 섹션 목록 API 그대로 사용 | `docs/manual/*.md` |
-| `plugin` | Plug-in 섹션(`section_id=35681419399961`) | ⚠️ 섹션 목록 API가 랜딩 페이지 1건만 반환하므로, `common.py`의 `PLUGIN_ARTICLE_IDS`(70개 고정 목록)를 1건씩 개별 조회 | `docs/plugin/**/*.md` |
+| `manual` | JSON Manual 섹션(651개 아티클, `section_id=30087500371097`) | 섹션 목록 API 그대로 사용 | `docs/manual/*.md` |
+| `plugin` | Plug-in 섹션(`section_id=35681419399961`) | ⚠️ 섹션 목록 API가 랜딩 페이지 1건만 반환하므로, `common.py`의 `PLUGIN_ARTICLE_IDS`(78개 고정 목록)를 1건씩 개별 조회 | `docs/plugin/**/*.md` |
 
 ```bash
 cd scripts/manual_sync
@@ -36,6 +37,10 @@ python fetch_manifest.py --section plugin # 특정 섹션만
 python check_diff.py                      # 변경 여부 확인 (exit 0=둘 다 없음, 1=하나라도 있음)
 python validate_manual.py                 # 패치 후 항상 실행 — docs/manual+docs/plugin 모두 검증
 python check_coverage.py                  # 누락 점검 (변경 여부와 무관, exit 1=미검토 항목 있음)
+python check_fields.py                    # 필드(Key) 단위 누락 점검 (exit 1=빠진 Key 있음)
+python fill_fields.py                     # 빠진 Key를 공식 표에서 그대로 옮겨 섹션 끝에 추가 (추가만, 재실행 안전)
+python build_index.py                     # docs/index/ (endpoints.json, chunks.jsonl) 자동 생성
+python eval_retrieval.py                  # 색인 검색 시험 (BM25)
 ```
 
 **"정기 업데이트 체크" 요청을 받으면:**
@@ -66,7 +71,13 @@ python check_coverage.py                  # 누락 점검 (변경 여부와 무�
    대조)를 함께 수행한다. 출력의 `NEW` 항목은 문서화하거나, 검토 후
    `coverage_exceptions.json`에 **사유와 함께** 등록한다. 아직 문서화하지 않은 실제 누락은 예외에
    넣지 않는다.
-7. 커밋·푸시는 사용자가 명시적으로 지시할 때만 진행한다 (자동 push 없음 — 아래 참고).
+7. **`check_fields.py`로 필드 단위 누락을 본다.** 섹션이 있어도 대표 예시만 실은 곳은 점검 A·B를
+   통과하므로, 이 점검의 `unique gaps` 수치가 늘지 않았는지 확인한다. "Key가 문서에 언급되는가"만
+   보므로 설명의 정확성은 보증하지 않는다. 늘었으면 해당 섹션을 보강하고, README의 "현재 상태"
+   수치와 기준일도 함께 갱신한다. 빠진 Key는 `fill_fields.py`로 채우고(생성 블록은 `<!-- om-fields -->`
+   마커로 감싸며 공식 글 기준으로 매번 다시 만들어진다), 반영 후 `build_index.py`로 `docs/index/`를
+   다시 만든다. `docs/index/`는 자동 생성물이므로 손으로 고치지 않는다.
+8. 커밋·푸시는 사용자가 명시적으로 지시할 때만 진행한다 (자동 push 없음 — 아래 참고).
 
 규모가 크면(예: 20~30개 아티클 동시 플래그) 병렬 서브에이전트로 나눠서: 1차는 리서치/대조
 전담(원문 vs 매뉴얼 비교, 실제 변경 여부만 판정), 2차는 1차에서 확정된 사실만 가지고 실제 패치를

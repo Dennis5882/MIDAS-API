@@ -841,6 +841,16 @@ def set_hydration_control():
 set_hydration_control()
 ```
 
+<!-- om-fields:35989317531417 -->
+**OM 원문 추가 필드 — Heat of Hydration Analysis Control ([35989317531417](https://support.midasuser.com/hc/en-us/articles/35989317531417))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `OPT_USE_CREEP_SHRINKAGE`
+
+<!-- /om-fields -->
+
+
 ---
 
 ## 8. /db/HHCT-M1 — Heat of Hydration Analysis Control (Hyper-S)
@@ -1469,6 +1479,18 @@ def set_moving_load_bs():
 
 set_moving_load_bs()
 ```
+
+<!-- om-fields:35989838706969 -->
+**OM 원문 추가 필드 — Moving Load Analysis Control - BS ([35989838706969](https://support.midasuser.com/hc/en-us/articles/35989838706969))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 13 | [Calculation Fiters - Displacements] Option · All: false · Structure Group: true | `"bDP"` | Boolean | false | Optional |
+
+<!-- /om-fields -->
+
 
 ---
 

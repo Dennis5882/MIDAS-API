@@ -16,6 +16,16 @@
 > 요청 예제와 JSON Schema는 대부분 `"PlateForces/Moments"`처럼 공백 없이 적습니다. 이 문서는 **예제
 > 표기**를 씁니다. 파라미터 설명은 공식 원문(영문) 그대로입니다.
 
+<!-- om-fields:35997813329177 -->
+**OM 원문 추가 필드 — Plate Forces/Moments - Result Display ([35997813329177](https://support.midasuser.com/hc/en-us/articles/35997813329177))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `OPT_CUR_STEP_FORCE`, `OPT_MAXMIN_DIAGRAM`
+
+<!-- /om-fields -->
+
+
 ## 결과 모드 목록 (28개)
 
 | No. | 결과 | `CURRENT_MODE` | 예제 수 |
@@ -48,6 +58,98 @@
 | 26 | [Beam Stresses (Moving Tracer Display)](#26-beam-stresses-moving-tracer-display) | `"MVLTRC_BeamStresses"` | 1 |
 | 27 | [Vibration Mode Shapes (Mode Shapes Display)](#27-vibration-mode-shapes-mode-shapes-display) | `"VibrationModeShapes"` | 1 |
 | 28 | [Buckling Mode Shapes (Mode Shapes Display)](#28-buckling-mode-shapes-mode-shapes-display) | `"Buckling Mode Shapes"` | 1 |
+
+<!-- om-fields:35996812786841 -->
+**OM 원문 추가 필드 — Type of Display ([35996812786841](https://support.midasuser.com/hc/en-us/articles/35996812786841))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (4) | Contour Line Color | `"CONTOUR_LINE_COLOR"` | Object | - | Optional |
+| (5) | Element Edge Color | `"ELEMENT_EDGE_COLOR"` | Object | - | Optional |
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `OPT_INCLUDE_IMPFACT_FACTOR`
+
+<!-- /om-fields -->
+
+<!-- om-fields:35997661413785 -->
+**OM 원문 추가 필드 — Truss Forces - Result Display ([35997661413785](https://support.midasuser.com/hc/en-us/articles/35997661413785))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `OPT_IJ_MAX_ALL`
+
+<!-- /om-fields -->
+
+<!-- om-fields:35997711810969 -->
+**OM 원문 추가 필드 — Beam Forces/Moments - Result Display ([35997711810969](https://support.midasuser.com/hc/en-us/articles/35997711810969))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `OPT_MAX_MIN_MAX_ALL`
+
+<!-- /om-fields -->
+
+<!-- om-fields:36001119330969 -->
+**OM 원문 추가 필드 — Beam Stresses - Result Display ([36001119330969](https://support.midasuser.com/hc/en-us/articles/36001119330969))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `OPT_MAX_MIN_MAX_ALL`
+
+<!-- /om-fields -->
+
+<!-- om-fields:36001679829785 -->
+**OM 원문 추가 필드 — Beam Stresses Diagram - Result Display ([36001679829785](https://support.midasuser.com/hc/en-us/articles/36001679829785))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `OPT_MAX_MIN_MAX_ALL`
+
+<!-- /om-fields -->
+
+<!-- om-fields:36002326176665 -->
+**OM 원문 추가 필드 — Beam Stresses (Equivalent) - Result Display ([36002326176665](https://support.midasuser.com/hc/en-us/articles/36002326176665))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `OPT_MAX_MIN_MAX_ALL`
+
+<!-- /om-fields -->
+
+<!-- om-fields:36002496760217 -->
+**OM 원문 추가 필드 — Beam Stresses Diagram (Equivalent) - Result Display ([36002496760217](https://support.midasuser.com/hc/en-us/articles/36002496760217))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `OPT_MAX_MIN_MAX_ALL`
+
+<!-- /om-fields -->
+
+<!-- om-fields:36002716977817 -->
+**OM 원문 추가 필드 — Beam Stresses (PSC) - Result Display ([36002716977817](https://support.midasuser.com/hc/en-us/articles/36002716977817))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `OPT_MAX_MIN_MAX_ALL`
+
+<!-- /om-fields -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ---
 

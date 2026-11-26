@@ -610,6 +610,16 @@ print("POST:", res.status_code)
 print(requests.get(f"{BASE_URL}/db/RCHK", headers=HEADERS).json())
 ```
 
+<!-- om-fields:35993850335897 -->
+**OM 원문 추가 필드 — Rebar Input for Checking - Beam/Column ([35993850335897](https://support.midasuser.com/hc/en-us/articles/35993850335897))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `OPTION_IMJSAME`
+
+<!-- /om-fields -->
+
+
 ---
 
 ## 4. `/db/LENG` — Unbraced Length (비지지 길이)
@@ -1381,6 +1391,26 @@ print(requests.get(f"{BASE_URL}/db/REBB", headers=HEADERS).json())
 # requests.delete(f"{BASE_URL}/db/REBB", headers=HEADERS)
 ```
 
+<!-- om-fields:59358984494233 -->
+**OM 원문 추가 필드 — Modify Beam Rebar Data ([59358984494233](https://support.midasuser.com/hc/en-us/articles/59358984494233))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1.2.1 | [General] Top Rebar | `"MAIN_BAR_TOP"` | object | - | **Required** |
+| 1.2.2 | Bottom Rebar | `"MAIN_BAR_BOT"` | object | - | **Required** |
+| 1.3.1 | Top Rebar | `"MAIN_BAR_TOP"` | object | - | **Required** |
+| 1.3.2 | Bottom Rebar | `"MAIN_BAR_BOT"` | object | - | **Required** |
+| 1.4.1 | Top Rebar | `"MAIN_BAR_TOP"` | object | - | **Required** |
+| 1.4.2 | Bottom Rebar | `"MAIN_BAR_BOT"` | object | - | **Required** |
+| 1.8.1 | [oneOf Choose exactly one of the following keys: "KEYS", "TO", or "STRUCTURE_GROUP_NAME".] Specify Each ID | `"KEYS"` | Array [integer] | - | Optional |
+| 1.8.2 | Specify ID Range | `"TO"` | string | - | Optional |
+| 1.8.3 | Structure Group Name | `"STRUCTURE_GROUP_NAME"` | string | - | Optional |
+
+<!-- /om-fields -->
+
+
 ---
 
 ## 11. `/db/REBC` — Modify Column Rebar Data (기둥 철근 데이터 수정)
@@ -1560,6 +1590,24 @@ print(requests.get(f"{BASE_URL}/db/REBC", headers=HEADERS).json())
 # requests.delete(f"{BASE_URL}/db/REBC", headers=HEADERS)
 ```
 
+<!-- om-fields:59359088215065 -->
+**OM 원문 추가 필드 — Modify Column Rebar Data ([59359088215065](https://support.midasuser.com/hc/en-us/articles/59359088215065))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1.1 | [General] Create Sub Section | `"CREATE_SUB_SECTION"` | boolean | false | Optional |
+| 1.2 | Main Rebar | `"MAIN_BAR"` | object | - | **Required** |
+| 1.2.4 | Corner | `"USE_CORNER"` | boolean | - | **Required** |
+| 1.8 | [When "CREATE_SUB_SECTION" is true] Element List | `"ELEMS"` | object | - | **Required** |
+| 1.8.1 | [oneOf Choose exactly one of the following keys: "KEYS", "TO", or "STRUCTURE_GROUP_NAME".] Specify Each ID | `"KEYS"` | Array [integer] | - | Optional |
+| 1.8.2 | Specify ID Range | `"TO"` | string | - | Optional |
+| 1.8.3 | Structure Group Name | `"STRUCTURE_GROUP_NAME"` | string | - | Optional |
+
+<!-- /om-fields -->
+
+
 ---
 
 ## 12. `/db/REBW` — Modify Wall Rebar Data (벽체 철근 데이터 수정)
@@ -1715,6 +1763,39 @@ print("POST:", res.status_code)
 print(requests.get(f"{BASE_URL}/db/REBW", headers=HEADERS).json())
 # requests.delete(f"{BASE_URL}/db/REBW", headers=HEADERS)
 ```
+
+<!-- om-fields:49514033006745 -->
+**OM 원문 추가 필드 — Modify Wall Rebar Data ([49514033006745](https://support.midasuser.com/hc/en-us/articles/49514033006745))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Section No. | `"KEY"` | Integer | - | **Required** |
+
+<!-- /om-fields -->
+
+<!-- om-fields:59359110968345 -->
+**OM 원문 추가 필드 — Modify Wall Rebar Data ([59359110968345](https://support.midasuser.com/hc/en-us/articles/59359110968345))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1.4 | [General] End Rebar | `"USE_END_REBAR"` | boolean | false | Optional |
+| 1.5 | BE Horizontal Rebar | `"BE_HORIZONTAL_REBAR"` | object | - | Optional |
+| 1.6 | Boundary Element Length | `"BOUNDARY_ELEMENT_LENGTH"` | number | 0 | Optional |
+| 1.7 | Concrete Face to Center of Rebar (dw, de) | `"CONCRETE_FACE_TO_CENTER_OF_REBAR"` | object | - | **Required** |
+| 1.8 | Use Model Thickness | `"USE_MODEL_THICKNESS"` | boolean | true | Optional |
+| 1.9 | [When "CREATE_SUB_WALL_ID" is true] Sub Wall ID Read Only | `"SUB_WALL_ID"` | integer | - | **Required** |
+| 1.10.1 | Story From | `"FROM"` | string | - | **Required** |
+| 1.10.2 | Story To | `"TO"` | string | - | **Required** |
+| 1.12 | [When "USE_MODEL_THICKNESS" is false] Thickness | `"THICKNESS"` | number | - | **Required** |
+
+<!-- /om-fields -->
+
+
+
 
 ---
 

@@ -349,6 +349,16 @@ resp = requests.post(f"{BASE_URL}/view/PRECAPTURE", json=payload, headers=HEADER
 print("POST:", resp.status_code, resp.json())
 ```
 
+<!-- om-fields:39236964850329 -->
+**OM 원문 추가 필드 — Dialog Capture ([39236964850329](https://support.midasuser.com/hc/en-us/articles/39236964850329))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `Properties`
+
+<!-- /om-fields -->
+
+
 ---
 
 ## 4. `/view/ANGLE` — Viewpoint
@@ -1190,6 +1200,16 @@ payload = {
 resp = requests.post(f"{BASE_URL}/view/DISPLAY", json=payload, headers=HEADERS)
 print("POST:", resp.status_code, resp.json())
 ```
+
+<!-- om-fields:35996157533977 -->
+**OM 원문 추가 필드 — Display ([35996157533977](https://support.midasuser.com/hc/en-us/articles/35996157533977))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `STATIC_EARTH_PRESSRUE`
+
+<!-- /om-fields -->
+
 
 ---
 

@@ -5879,6 +5879,30 @@ print("POST:", res.status_code)
 print(res.json())
 ```
 
+<!-- om-fields:56823620531865 -->
+**OM 원문 추가 필드 — Steel Design Result ([56823620531865](https://support.midasuser.com/hc/en-us/articles/56823620531865))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 13 | [General] Background Color Bottom | `"BGCOLOR_BOTTOM"` | object | - | Optional |
+| 14.4.5 | [When "CURRENT_MODE" is INFLL_DESIGN_RC,INFLL_DESIGN_SRC] Reinforcement | `"REINFORCEMENT"` | object | - | Optional |
+| 14.4.5.2 | Reinforcement Type · Rebar: "REBAR" | `"REINFORCEMENT_TYPE"` | string | "REBAR" | Optional |
+| 14.4.5.3.4 | Wall | `"WALL"` | boolean | true | Optional |
+| 14.4.5.4 | Output Component | `"OUTPUT_COMPONENT"` | object | - | Optional |
+| 14.4.5.4.1 | Ratio Axial Stress | `"RATIO_AXIAL_STRESS"` | boolean | true | Optional |
+| 14.4.5.4.2 | Main Rebar | `"MAIN_REBAR"` | boolean | true | Optional |
+| 14.4.5.4.3 | Shear Reinforcement | `"SHEAR_REINFORCEMENT"` | boolean | true | Optional |
+| 14.5 | Output Section Location | `"OUTPUT_SECT_LOCATION"` | object | - | Optional |
+| 14.5.1 | I End | `"OPT_I"` | boolean | false | Optional |
+| 14.5.2 | Center/Mid | `"OPT_CENTER_MID"` | boolean | false | Optional |
+| 14.5.3 | J End | `"OPT_J"` | boolean | false | Optional |
+| 14.5.4 | Max/All · Max: "Max" · All: "All" | `"OPT_MAX_ALL"` | string | "Max" | Optional |
+
+<!-- /om-fields -->
+
+
 ---
 
 ## 27. `DESIGN/STEEL/KDS-41-30-2022/TABLE` — Steel Member Design Forces (강재 부재 설계 부재력)

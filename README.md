@@ -1,311 +1,160 @@
 # MIDAS-API
 
-**MIDAS NX Open API**를 사용하여 구조 설계 모델을 프로그래밍 방식으로 생성·제어·자동화합니다.
-노드·요소·단면·하중을 코드로 생성할 수 있어, **스토리(층) 기반 자동 모델링**처럼
-반복적인 모델링 작업을 자동화하기에 적합합니다.
+**MIDAS NX Open API**(MIDAS Gen NX · Civil NX) 공식 온라인 매뉴얼을 **빠짐없이, 원문에 충실하게,
+개발자와 AI가 읽기 좋게** 옮긴 참조본입니다.
 
-> 대상 제품: **MIDAS Gen NX / Civil NX** · 데이터 포맷: **JSON** · 프로토콜: **REST + WebSocket**
-
----
-
-## 🏗️ API 동작 구조
-
-MIDAS NX는 애플리케이션과 직접 통신하지 않습니다. **클라우드 서버(AWS)** 가 중계자 역할을 합니다.
-
-```
-[내 코드/앱]  ──REST(HTTP)──▶  [MIDAS 서버(AWS)]  ──WebSocket──▶  [로컬 MIDAS Gen NX]
-     ▲                                                                   │
-     └───────────────────────  결과(JSON)  ◀──────────────────────────────┘
-```
-
-- 서버는 **`MAPI-Key`** 로 어떤 제품(실행 중인 Gen NX)인지 식별합니다.
-- 따라서 **MIDAS Gen NX(또는 Civil NX)가 실행 중**이어야 API가 동작합니다.
-- 하나의 클라이언트가 여러 `MAPI-Key`를 가지면 여러 제품을 한 곳에서 제어할 수 있습니다.
+> **이 저장소는 공식 문서가 아닙니다.** 정본은
+> [MIDAS API Online Manual](https://support.midasuser.com/hc/en-us/articles/33016922742937-MIDAS-API-Online-Manual)이며,
+> 원문의 권리는 원 저작자(MIDASIT)에 있습니다. 내용이 다르면 공식 매뉴얼이 우선합니다.
 
 ---
 
-## 🔑 인증 & 기본 정보
+## 범위
 
-### Base URL
-```
-https://moa-engineers.midasit.com:443/gen      # MIDAS Gen NX
-https://moa-engineers.midasit.com:443/civil    # MIDAS Civil NX
-```
-> 지역별 대체 서버가 제공됩니다.
+| 맡는 것 | 맡지 않는 것 |
+| --- | --- |
+| 공식 온라인 매뉴얼에 공개된 내용 | 공식 매뉴얼에 없는 내용 |
+| 원문 충실성 — 원문과 다르게 적은 곳은 그 자리에 ⚠️와 근거 | 실제 API 동작의 보증 |
+| 공식 글 번호(article id)로 출처 추적 | 코드 라이브러리 제공 |
+| 원문 안의 누락·오탈자·자기모순 표시 | |
 
-### 인증 헤더
-```
-Content-Type: application/json
-MAPI-Key: <Gen NX 앱에서 발급받은 키>
-```
-> `MAPI-Key`는 임시 키이며 언제든 재발급할 수 있습니다. `.env`로 분리해 관리하세요.
+## 현재 상태 (2026-11-26 기준)
 
-### HTTP 메서드
-| 메서드 | 역할 |
-|--------|------|
-| `POST`   | 데이터 생성 |
-| `PUT`    | 데이터 수정 (신규 파일의 필수 데이터는 GET/PUT만 동작) |
-| `GET`    | 데이터 조회 |
-| `DELETE` | 데이터 삭제 |
+| 항목 | 상태 |
+| --- | --- |
+| 공식 목차의 경로 276개 (`db` 229 · `ope` 19 · `doc` 11 · `post` 10 · `view` 7) | 모두 해당 섹션 있음 (표기가 목차와 다른 9건 포함) |
+| 설계코드 챕터 | STEEL KDS 41 30:2022 · RC KDS 41 20:2022 · SRC AIK-SRC2K |
+| 결과 표시 모드 (`view/RESULTGRAPHIC`) | [16-2장](./docs/manual/16_2_VIEW_ResultGraphic.md)에 개별 글 28건 |
+| Plug-in 문서 | 73건 중 63건 작성 ([목록](./docs/plugin/INDEX.md)) |
+| PSC 설계·평가 (AASHTO) 글 33건 | **미반영** (보류) |
+| 필드 단위 완전성 | 공식 글 602건의 요청 Key 11,004개가 모두 문서에 있음. 2026-11-26에 빠져 있던 744개를 해당 섹션 끝의 **"OM 원문 추가 필드"** 블록으로 원문 그대로 추가함 (설명은 영문 원문, 정리·번역 없음) |
+| AI 검색용 색인 | `docs/index/` 에 엔드포인트 413개 색인(문서화 397, 보류 중인 PSC 16)과 청크 1,623개. 검색 시험(BM25): 엔드포인트 찾기 hit@5 92%, Key 찾기 hit@5 78% (아래 "AI·RAG용 데이터") |
 
-### 공통 요청 바디 형식
-모든 DB 엔드포인트는 `Assign` 래퍼 안에 **항목 ID → 데이터** 형태로 보냅니다.
-```json
-{ "Assign": { "1": { "X": 0, "Y": 0, "Z": 0 } } }
-```
+## 문서 읽는 법
+
+- [docs/manual/INDEX.md](./docs/manual/INDEX.md)가 전체 목차입니다.
+- **파라미터 설명**은 원문 언어 그대로 옮기는 것이 원칙입니다. 먼저 작성한 챕터에는 한글 번역이 섞여 있습니다.
+- **⚠️ 표시**는 원문의 오탈자·모순, 또는 원문과 다르게 적은 이유입니다.
+- **`ᴶ⁾` 표시**는 MIDAS Civil NX JP 버전 전용입니다. 목록은 [jp_only.json](./docs/manual/jp_only.json)에 있습니다.
+- **예제의 출처:** JSON 예제는 원문을 옮긴 것이며 일부는 발췌·재구성했습니다. 매뉴얼 챕터의 **Python 예제는 원문에 없는 것으로, 원문 스키마를 바탕으로 이 저장소에서 작성**했습니다.
 
 ---
 
-## 🚀 빠른 시작 (Python)
+## 빠른 시작 (Python)
+
+아래 함수는 공식 [Python 예제](https://support.midasuser.com/hc/en-us/articles/30230181806361-Example-Python)의 것입니다.
 
 ```python
 import requests
 
-BASE_URL = "https://moa-engineers.midasit.com:443/gen"
-MAPI_KEY = "your-mapi-key-here"   # Gen NX 앱에서 발급
-
+# function for MIDAS Open API
 def MidasAPI(method, command, body=None):
-    url = BASE_URL + command
-    headers = {"Content-Type": "application/json", "MAPI-Key": MAPI_KEY}
-    res = getattr(requests, method.lower())(url, headers=headers, json=body)
-    print(method, command, res.status_code)
-    return res.json()
+    base_url = "base_url_here"
+    mapi_key = "your_api_key_here"
 
-# 1) 새 문서 생성
-MidasAPI("POST", "/doc/new", {})
-
-# 2) 단위 설정 (대만 RC: m, tonf 권장)
-MidasAPI("PUT", "/db/unit", {"Assign": {"1": {"DIST": "M", "FORCE": "TONF"}}})
-
-# 3) 재료 (RC)
-MidasAPI("POST", "/db/matl", {"Assign": {1: {
-    "TYPE": "CONC", "NAME": "C32",
-    "PARAM": [{"P_TYPE": 1, "STANDARD": "AS17(RC)", "DB": "C32"}]
-}}})
-
-# 4) 노드 2개
-MidasAPI("POST", "/db/node", {"Assign": {
-    1: {"X": 0, "Y": 0, "Z": 0},
-    2: {"X": 0, "Y": 0, "Z": 3.2},
-}})
-
-# 5) 기둥 요소 (BEAM 타입)
-MidasAPI("POST", "/db/elem", {"Assign": {1: {
-    "TYPE": "BEAM", "MATL": 1, "SECT": 1, "NODE": [1, 2], "ANGLE": 0
-}}})
-
-# 6) 저장
-MidasAPI("POST", "/doc/save")
-```
-
-더 많은 예제는 [examples/](./examples/) 디렉토리를 참고하세요.
-
----
-
-## 📚 주요 엔드포인트
-
-### 문서 관리 (`/doc/*`)
-| 엔드포인트 | 메서드 | 기능 |
-|-----------|--------|------|
-| `/doc/new`    | POST | 새 문서 생성 (빈 바디 `{}`) |
-| `/doc/open`   | POST | 문서 열기 |
-| `/doc/save`   | POST | 문서 저장 |
-| `/doc/close`  | POST | 문서 닫기 |
-
-### 모델 생성 (`/db/*`)
-| 엔드포인트 | 기능 | 핵심 필드 |
-|-----------|------|----------|
-| `/db/unit` | 단위계 | `DIST`, `FORCE` |
-| `/db/matl` | 재료 | `TYPE:"CONC"`, `NAME`, `PARAM:[{P_TYPE, STANDARD, DB}]` |
-| `/db/sect` | 단면 | `SECTTYPE:"DBUSER"`, `SECT_BEFORE:{SHAPE, SECT_I:{vSIZE:[h,w]}}}` |
-| `/db/thik` | 판/벽 두께 | `NAME`, `TYPE:"VALUE"`, `T_IN`, `T_OUT` |
-| `/db/node` | 노드 | `X`, `Y`, `Z` |
-| `/db/elem` | 요소 | `TYPE`, `MATL`, `SECT`, `NODE:[…]`, `ANGLE`, `STYPE` |
-
-### 하중 & 경계조건
-| 엔드포인트 | 기능 | 핵심 필드 |
-|-----------|------|----------|
-| `/db/stld` | 정적하중케이스 | `NAME`, `TYPE`(`D`/`L`/`LR`/`S`/`W`/`E`…), `DESC` |
-| `/db/bodf` | 자중 | `LCNAME`, `FV:[0,0,-1]` |
-| `/db/bmld` | 보 하중 | `ITEMS:[{LCNAME, CMD:"BEAM", TYPE:"UNILOAD", DIRECTION, D, P}]` |
-| `/db/fbld` | **바닥하중 타입 정의** | `NAME`, `ITEM:[{LCNAME, FLOOR_LOAD, OPT_SUB_BEAM_WEIGHT}]` |
-| `/db/fbla` | **바닥하중 면 지정** | `FLOOR_LOAD_TYPE_NAME`, `FLOOR_DIST_TYPE`(1~4), `DIR`, `NODES:[…]` |
-| `/db/pres` | **압력(풍압) 하중** | `LCNAME`, `CMD:"PRES"`, `ELEM_TYPE`, `FACE_EDGE_TYPE`, `DIRECTION`, `FORCES:[...]` |
-| `/db/cons` | 지지(경계) | `ITEMS:[{ID, CONSTRAINT:"1111000"}]` (Dx Dy Dz Rx Ry Rz) |
-| `/db/lcom-gen` | 하중조합 | `NAME`, `vCOMB:[{ANAL:"ST", LCNAME, FACTOR}]` |
-
-### 요소 타입 (`ELEM.TYPE`)
-| 구조부재 | `TYPE` | 비고 |
-|---------|--------|------|
-| 기둥 · 보 (Frame) | `"BEAM"` | `NODE=[i, j]`, `ANGLE`=Beta각 |
-| 슬래브 | `"PLATE"` | `NODE`=3/4점, `STYPE` 1=Thick·2=Thin·3/4=+Drilling DOF |
-| 벽체 | `"WALL"` | `NODE`=4점, `STYPE` 1=Membrane·2=Plate, `WALL`(ID), `W_TYPE` |
-| 기타 | `TRUSS` / `TENSTR` / `COMPTR` / `PLSTRS` / `PLSTRN` / `AXISYM` / `SOLID` | |
-
-> 전체 키·필드 스키마는 [NX Open API JSON Manual](https://support.midasuser.com/hc/en-us/sections/30087500371097-JSON-Manual)을 참고하세요.
-
----
-
-## 🌬️ 풍하중 (KDS 41 12:2022)
-
-MIDAS NX는 **KDS 41 12:2022 (한국 풍하중 기준)** 및 다양한 국제 코드를 지원합니다.
-
-### 풍하중 관련 엔드포인트
-
-| 엔드포인트 | 기능 | 핵심 필드 |
-|-----------|------|----------|
-| `/db/stld` | 풍하중 케이스 생성 | `NAME`, `TYPE:"W"` (Wind) |
-| `/db/pres` | 압력(풍압) 재하 | `LCNAME`, `ELEM_TYPE:"PLATE"/"SOLID"`, `DIRECTION`, `FORCES` |
-| `/db/wprs` | 절점(Nodal) 풍압 | `LCNAME`, `DIRECTION`, `NODES:[...]`, `PRESSURE` |
-| `/db/aprs` | 면적(Area) 풍압 | `LCNAME`, `DIRECTION`, `NODES:[...]`, `PRESSURE` |
-
-### Python 예제: KDS 풍하중 적용
-
-```python
-import requests
-
-BASE_URL = "https://moa-engineers.midasit.com:443/gen"
-MAPI_KEY = "your-mapi-key-here"
-
-def MidasAPI(method, command, body=None):
-    url = BASE_URL + command
-    headers = {"Content-Type": "application/json", "MAPI-Key": MAPI_KEY}
-    res = getattr(requests, method.lower())(url, headers=headers, json=body)
-    print(f"{method} {command} → {res.status_code}")
-    return res.json() if res.text else None
-
-# 1) 새 문서
-MidasAPI("POST", "/doc/new", {})
-
-# 2) 단위 설정
-MidasAPI("PUT", "/db/unit", {"Assign": {"1": {"DIST": "M", "FORCE": "KN"}}})
-
-# 3) 풍하중 케이스 생성 (KDS 41 12:2022)
-MidasAPI("POST", "/db/stld", {"Assign": {1: {
-    "NAME": "WIND_X_KDS",
-    "TYPE": "W",           # W = Wind Load
-    "CODE": "KDS41122022", # KDS 41 12:2022 기준
-    "DESC": "KDS 풍하중 X방향"
-}}})
-
-# 4) 슬래브 요소 생성 (예: 3×3m 판)
-MidasAPI("POST", "/db/node", {"Assign": {
-    1: {"X": 0, "Y": 0, "Z": 5},
-    2: {"X": 3, "Y": 0, "Z": 5},
-    3: {"X": 3, "Y": 3, "Z": 5},
-    4: {"X": 0, "Y": 3, "Z": 5},
-}})
-
-MidasAPI("POST", "/db/elem", {"Assign": {1: {
-    "TYPE": "PLATE", "NODE": [1, 2, 3, 4], "THIK": 1, "STYPE": 1
-}}})
-
-# 5) 압력 하중 적용 (풍압 1.5 kN/m², X 방향)
-MidasAPI("POST", "/db/pres", {"Assign": {1: {
-    "ITEMS": [{
-        "LCNAME": "WIND_X_KDS",
-        "CMD": "PRES",
-        "ELEM_TYPE": "PLATE",
-        "FACE_EDGE_TYPE": "FACE",
-        "DIRECTION": "GX",        # Global X 방향
-        "EDGE_FACE": 1,           # 면 1 (위쪽)
-        "FORCES": [-1.5, 0, 0, 0, 0]  # -1.5 kN/m² (음수 = 흡입)
-    }]
-}})
-
-# 6) 저장 & 해석
-MidasAPI("POST", "/doc/save", {})
-MidasAPI("POST", "/doc/anal", {})
-```
-
-### 풍하중 계산 (KDS 기준)
-
-```python
-def calculate_kds_wind_pressure(height, wind_speed=28, exposure_category="C"):
-    """
-    KDS 41 12:2022 정적 등가풍하중 계산
-    
-    Parameters:
-    - height: 구조물 높이 (m)
-    - wind_speed: 기본 설계풍속 (m/s, 기본값 28)
-    - exposure_category: 노출범주 ("B", "C", "D" 등)
-    
-    Returns:
-    - 풍압 (kN/m²)
-    """
-    # 노출범주별 풍속계수 (KDS 기준 근사값)
-    kz_table = {
-        "B": {10: 1.0, 20: 1.1, 30: 1.2},
-        "C": {10: 0.9, 20: 1.0, 30: 1.1},
-        "D": {10: 0.8, 20: 0.9, 30: 1.0}
+    url = base_url + command
+    headers = {
+        "Content-Type": "application/json",
+        "MAPI-Key": mapi_key
     }
-    
-    # 선형 보간
-    kz_values = kz_table.get(exposure_category, kz_table["C"])
-    if height <= 10:
-        Kz = kz_values[10]
-    elif height <= 20:
-        Kz = kz_values[20]
-    else:
-        Kz = kz_values[30]
-    
-    # 구조계수 (직사각형 구조물 기준)
-    Cp = 0.8
-    # 중요도 계수
-    Iw = 1.0
-    
-    # 동압 q = 0.613 * Kz * V² * Iw (단위: kN/m²)
-    q = 0.613 * Kz * (wind_speed ** 2) * Iw
-    
-    # 풍압 = q * Cp
-    wind_pressure = q * Cp
-    
-    return round(wind_pressure, 3)
 
-# 예제: 높이 30m, 설계풍속 28m/s, 노출범주 C
-pressure = calculate_kds_wind_pressure(30, 28, "C")
-print(f"풍압: {pressure} kN/m²")  # 약 1.58 kN/m²
+    if method == "POST":
+        response = requests.post(url=url, headers=headers, json=body)
+    elif method == "PUT":
+        response = requests.put(url=url, headers=headers, json=body)
+    elif method == "GET":
+        response = requests.get(url=url, headers=headers)
+    elif method == "DELETE":
+        response = requests.delete(url=url, headers=headers)
+
+    print(method, command, response.status_code)
+    return response.json()
 ```
 
-### 참고 문서
-- [MIDAS Support - Wind Loads (KDS 41 12:2022)](https://support.midasuser.com/hc/ko/articles/29238911763353-Wind-Loads)
-- [MIDAS Support - Nodal Wind Pressure](https://support.midasuser.com/hc/ko/articles/29270162256281-Nodal-Wind-Pressure)
-- [MIDAS Support - Area Wind Pressure](https://support.midasuser.com/hc/ko/articles/29270183516057-Area-Wind-Pressure)
-- [MIDAS Support - Static Wind Load (KDS 41 12:2022)](https://support.midasuser.com/hc/ko/articles/58908673370521-Static-Wind-Load-KDS-41-12-2022)
+절점 생성 요청은 공식 [Node](https://support.midasuser.com/hc/en-us/articles/35806845654169) 글의 예제입니다.
+
+```python
+node_json = {
+    "Assign": {
+        "1": {"X": -1, "Y": -1, "Z": -1},
+        "2": {"X": -2, "Y": -2, "Z": -2},
+        "3": {"X": -3, "Y": -3, "Z": -3}
+    }
+}
+MidasAPI("POST", "/db/node", node_json)
+```
+
+| 항목 | 값 |
+| --- | --- |
+| Base URL | `https://moa-engineers.midasit.com:443/gen` (Gen NX) · `/civil` (Civil NX) |
+| 인증 헤더 | `MAPI-Key: <제품에서 발급받은 키>` |
+| 자세한 설정 | [docs/AUTHENTICATION.md](./docs/AUTHENTICATION.md) |
+
+`MAPI-Key`는 `.env`로 분리해 관리하고 저장소에 커밋하지 마세요.
 
 ---
 
-## 🔗 공식 문서
+## AI·RAG용 데이터
 
-- [docs/manual/INDEX.md](./docs/manual/INDEX.md) — 이 저장소에 정리된 전체 엔드포인트·JSON 스키마 한글 매뉴얼 (27개 파일)
-- [docs/AUTHENTICATION.md](./docs/AUTHENTICATION.md) — MAPI-Key 인증 설정, 언어별 예제, 보안 팁
-- [MIDAS API 온라인 매뉴얼](https://support.midasuser.com/hc/en-us/articles/33016922742937-MIDAS-API-Online-Manual)
-- [MIDAS API JSON Manual (원문, 전체 엔드포인트 스키마)](https://support.midasuser.com/hc/en-us/sections/30087500371097-JSON-Manual)
-- [MIDAS CIVIL NX Open API 동작 원리](https://support.midasuser.com/hc/en-us/articles/30212837484441-How-to-work-MIDAS-CIVIL-NX-Open-API)
-- [Python 예제](https://support.midasuser.com/hc/en-us/articles/30230181806361-Example-Python)
-- [Excel VBA 예제](https://support.midasuser.com/hc/en-us/articles/30506684736665-Example-Excel-VBA)
-- [기타 언어 예제 (C#·Java·Dart·C·Node.js)](https://support.midasuser.com/hc/en-us/articles/30506872725017-Example-Various-Programming-Languages)
+`docs/index/`는 `docs/manual`에서 **자동 생성**한 파일입니다. 직접 고치지 마세요.
 
-## 📖 저장소 구조
+| 파일 | 내용 |
+| --- | --- |
+| `endpoints.json` | 엔드포인트별 메서드, 공식 글 번호·URL·갱신일, 문서 위치, Key 목록, JP 전용 여부, 문서화 여부(`documented`) |
+| `chunks.jsonl` | 엔드포인트 섹션 단위 청크(URI·메서드·표·요청 예제를 함께 묶음, 최대 약 3,500자, 큰 표·코드블록은 분할). 각 청크에 파일, 제목 경로, 엔드포인트, 공식 글 번호, 출처(`source`) 포함 |
+| `eval_questions.json` | 검색 시험 질문 250개 (공식 글에서만 생성, 고정 시드) |
 
-```
+청크의 `source` 값으로 무엇을 근거로 삼을지 고르세요.
+
+| `source` | 청크 수 | 내용 |
+| --- | --- | --- |
+| `om` | 904 | 공식 글을 정리한 본문. 먼저 쓴 챕터는 설명이 한글 번역이며, ⚠️ 주석이 붙을 수 있음 |
+| `om-verbatim` | 125 | "OM 원문 추가 필드" 블록. 공식 표를 그대로 옮긴 것 |
+| `repo-example` | 594 | 이 저장소가 작성한 Python 예제·워크플로. **공식 내용이 아니므로 근거로 인용하지 말 것** |
+
+검색 시험 결과는 `python scripts/manual_sync/eval_retrieval.py`로 다시 잴 수 있습니다 (2026-11-26, BM25 기준):
+
+| 질문 | 건수 | hit@1 | hit@5 | hit@10 |
+| --- | --- | --- | --- | --- |
+| 엔드포인트 찾기 (글 제목 → 해당 청크) | 100 | 77% | 92% | 94% |
+| Key 찾기 (글 제목 + 설명 → 그 Key가 든 청크) | 150 | 51% | 78% | 82% |
+
+시험의 한계:
+
+- BM25는 일부러 단순한 기준선입니다. 벡터 검색을 쓰면 같은 청크로 더 나을 수 있습니다.
+- 청크가 클수록 맞히기 쉬워집니다. 청크 중앙값은 약 1,200자입니다.
+- 질문은 공식 글의 영문 설명이라, 같은 문구를 담은 `om-verbatim` 청크가 유리합니다. 한글로 번역된 설명은 상대적으로 덜 잡힙니다.
+- `KEYS`·`EXPORT_PATH`처럼 여러 글이 공유하는 항목은 어느 글의 것인지 가리기 어렵습니다.
+- "찾았는가"만 봅니다. 설명이 맞는지는 보지 않습니다.
+
+## 저장소 구조
+
+```text
 docs/
-├── AUTHENTICATION.md    # Base URL, MAPI-Key 설정, 언어별 인증 예제, 보안 팁
-└── manual/              # MIDAS API JSON Manual 전체 번역·정리 (INDEX.md부터 시작, 01~27)
-
-examples/
-├── python/              # Python 예제
-├── javascript/          # JavaScript 예제
-├── curl/                # cURL 예제
-├── vba/                 # Excel VBA 예제
-└── OTHER_LANGUAGES.md   # C# · Java · Dart · C · Node.js 스니펫
+├── manual/              # JSON Manual 참조본 (INDEX.md부터, 01~27장 + 16-2장)
+├── plugin/              # Plug-in 문서
+├── index/               # AI·RAG용 자동 생성 색인과 청크
+└── AUTHENTICATION.md    # Base URL, MAPI-Key, 언어별 인증 예제
+examples/                # 예제 코드 (출처는 examples/README.md)
+scripts/manual_sync/     # 공식 매뉴얼과의 동기화·점검 도구
 ```
 
-## ❓ 도움말
+## 동기화·점검 도구
 
-- Issues 탭에서 질문하기
-- [공식 지원 사이트](https://support.midasuser.com) 방문
+모두 AI 호출 없이 동작합니다. 자세한 사용법은 [scripts/manual_sync/README.md](./scripts/manual_sync/README.md).
 
-## 📝 참고
+| 스크립트 | 확인하는 것 |
+| --- | --- |
+| `check_diff.py` | 공식 글의 추가·삭제·변경 (GitHub Actions가 매주 실행) |
+| `check_coverage.py` | 모든 글에 섹션이 있는지, 공식 목차와 어긋나지 않는지 |
+| `check_fields.py` | 공식 글의 요청 Key가 문서에 있는지 |
+| `fill_fields.py` | 빠진 Key를 공식 표에서 그대로 옮겨 섹션 끝에 추가 (추가만 함) |
+| `build_index.py` · `eval_retrieval.py` | AI용 색인·청크 생성, 검색 시험 |
+| `validate_manual.py` | JSON 코드블록과 목차 앵커 |
 
-본 문서의 엔드포인트·JSON 스키마는 MIDAS 공식 NX Open API 매뉴얼(2026-06 기준) 및 KDS 41 12:2022 풍하중 기준을 근거로 작성되었습니다.
+## 공식 문서
+
+- [MIDAS API Online Manual](https://support.midasuser.com/hc/en-us/articles/33016922742937-MIDAS-API-Online-Manual)
+- [JSON Manual 섹션](https://support.midasuser.com/hc/en-us/sections/30087500371097-JSON-Manual)
+- [MIDAS CIVIL NX Open API 동작 원리](https://support.midasuser.com/hc/en-us/articles/30212837484441-How-to-work-MIDAS-CIVIL-NX-Open-API)
+- 예제: [Python](https://support.midasuser.com/hc/en-us/articles/30230181806361-Example-Python) · [Excel VBA](https://support.midasuser.com/hc/en-us/articles/30506684736665-Example-Excel-VBA) · [기타 언어](https://support.midasuser.com/hc/en-us/articles/30506872725017-Example-Various-Programming-Languages)

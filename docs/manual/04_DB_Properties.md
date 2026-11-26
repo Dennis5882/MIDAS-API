@@ -245,6 +245,40 @@ midas_api("DELETE", "/db/MATL", {"Assign": {"3": None}})
 result = midas_api("GET", "/db/MATL-M1")
 ```
 
+<!-- om-fields:56396523438873 -->
+**OM 원문 추가 필드 — Material Properties ([56396523438873](https://support.midasuser.com/hc/en-us/articles/56396523438873))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Name | `"MATL_NAME"` | string | - | **Required** |
+| 2 | Type of Design · Steel: STEEL · Concrete: CONC · SRC: SRC · User: USER | `"MATL_TYPE"` | string (enum) | - | **Required** |
+| 3 | PARAM When MATL_TYPE is "SRC", enter both Concrete and Steel inputs. | `"PARAM"` | array [object] | - | **Required** |
+| (1) | Isotropic / Orthotropic · Standard: 0 · Isotropic User Defined: 1 · Orthotropic User Defined: 2 When MATL_TYPE is "SRC", "2" is not available. | `"P_TYPE"` | integer (enum) | - | **Required** |
+| (2) | [When P_TYPE = 0] Standard | `"STANDARD"` | string | - | **Required** |
+| a | [When P_TYPE = 1] Modulus of Elasticity | `"bELAST"` | number | - | Optional |
+| b | Poisson's Ratio | `"POISN"` | number | - | Optional |
+| c | Thermal Coefficient | `"THERMAL"` | number | - | Optional |
+| d | Weight Density | `"DEN"` | number | - | Optional |
+| e | Use Mass Density | `"bMASS_DENS"` | boolean | false | Optional |
+| f | [When bMASS_DENS = true] Mass Density | `"MASS"` | number | - | **Required** |
+| a | [When P_TYPE = 2] Weight Density | `"DEN"` | number | - | Optional |
+| b | Modulus of Elasticity | `"ELAST_M"` | array | - | Optional |
+| c | Thermal Coefficient | `"THERMAL_M"` | array | - | Optional |
+| d | Shear Modulus | `"SHEAR_M"` | array | - | Optional |
+| e | Poisson's Ratio | `"POISN_M"` | array | - | Optional |
+| f | Use Mass Density | `"bMASS_DENS"` | boolean | false | Optional |
+| g | [When bMASS_DENS = true] Mass Density | `"MASS"` | number | - | **Required** |
+| (7) | Plastic Material Name | `"PLASTIC_MATL_NAME"` | string | - | Optional |
+| (8) | THERMAL_TRANS | `"THERMAL_TRANS"` | object | - | Optional |
+| a | Specific Heat | `"HE_SPEC"` | number | 0 | Optional |
+| b | Heat Conduction | `"HE_COND"` | number | 0 | Optional |
+| 5 | Damping Ratio | `"DAMP_RAT"` | number | 0 | Optional |
+
+<!-- /om-fields -->
+
+
 ---
 
 ## 3. `/db/IMFM`
@@ -335,6 +369,23 @@ midas_api("POST", "/db/IMFM", imfm_data)
 result = midas_api("GET", "/db/IMFM-M1")
 ```
 
+<!-- om-fields:56375076523929 -->
+**OM 원문 추가 필드 — Inelastic Material Link for Auto Generation ([56375076523929](https://support.midasuser.com/hc/en-us/articles/56375076523929))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Material Type - Concrete | `"CONCRETE"` | object | - | Optional |
+| (1) | Inelastic Material Property - Unconfined Concrete | `"UN_CONC_NAME"` | string | - | **Required** |
+| (2) | Inelastic Material Property - Confined Concrete | `"CONF_CONC_NAME"` | string | - | Optional |
+| (3) | Inelastic Material Property - Rebar | `"REBAR_NAME"` | string | - | **Required** |
+| 2 | Material Type - STEEL | `"STEEL"` | object | - | Optional |
+| (1) | Inelastic Material Property - Steel | `"STEEL_NAME"` | string | - | **Required** |
+
+<!-- /om-fields -->
+
+
 ---
 
 ## 5. `/db/TDMF`
@@ -422,6 +473,16 @@ tdmf_data = {
 }
 midas_api("POST", "/db/TDMF", tdmf_data)
 ```
+
+<!-- om-fields:35807665049369 -->
+**OM 원문 추가 필드 — Time Dependent Material Properties - User Defined ([35807665049369](https://support.midasuser.com/hc/en-us/articles/35807665049369))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `ELAST`
+
+<!-- /om-fields -->
+
 
 ---
 
@@ -556,6 +617,73 @@ tdmt_data = {
 }
 midas_api("POST", "/db/TDMT", tdmt_data)
 ```
+
+<!-- om-fields:35808006330009 -->
+**OM 원문 추가 필드 — Time Dependent Material Properties - Creep/Shrinkage ([35808006330009](https://support.midasuser.com/hc/en-us/articles/35808006330009))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 8 | [ACI] Concrete Compressive Strength Factor a · Range: 0.05 ~ 9.25 | `"CFACTA"` | Number | - | **Required** |
+| 9 | Concrete Compressive Strength Factor b · Range: 0.67 ~ 0.98 | `"CFACTB"` | Number | - | **Required** |
+| 10 | Material Factored Ultimate Value Type · ACI Code: "CODE" · User: "USER" | `"TYPE"` | String | "CODE" | Optional |
+| 11 | [- When the Ultimate Value Type is CODE] Slump | `"SLUMP"` | Number | - | **Required** |
+| 12 | Fine Aggregate Percentage | `"FAPERCENT"` | Number | - | **Required** |
+| 13 | Air Content | `"AIRCONTENT"` | Number | - | **Required** |
+| 14 | Cement Content | `"CEMCONTENT"` | Number | - | **Required** |
+| 11 | [- When the Ultimate Value Type is USER] Creep Coefficient · Range: 1.3 ~ 4.15 | `"CREEPCOEFF"` | Number | - | **Required** |
+| 12 | Shrinkage Strain · Range: 415 ~ 1070 (E-6) | `"SHRINKSTRAIN"` | Number | - | **Required** |
+| 4 | [PCA] Ultimate Shrinkage Strain · Range: 500 ~ 800 (E-6) | `"USS"` | Number | - | **Required** |
+| 5 | Ultimate Creep Strain · Range: 3 ~ 5 (1/fc*E-3) | `"UCS"` | Number | - | **Required** |
+| 8 | Reinforcement Ratio of Cross Section of Column Segment | `"RR"` | Number | - | **Required** |
+| 9 | Modulus of Elasticity of Steel | `"MOD"` | Number | - | **Required** |
+| 6 | [Combined (ACI & PCA)] Material Factored Ultimate Creep Strain (E-6) | `"UCS"` | Number | - | **Required** |
+| 7 | Volume-Surface Ratio for Creep Strain · ACI Code: "ACI" · PCA: "PCA" | `"VSR1"` | String | "ACI" | Optional |
+| 8 | Loading Aged Factor · moist cured ACI Code: "MOIST" · steam cured ACI Code: "STEAM" · PCA: "PCA" | `"LAF"` | String | "MOIST" | Optional |
+| 9 | Material Factored Ultimate Shrinkage Strain (E-6) | `"USS"` | Number | - | **Required** |
+| 10 | Volume-Surface Ratio for Shrinkage Strain · ACI Code: "ACI" · PCA: "PCA" | `"VSR"` | String | "ACI" | Optional |
+| 11 | Progress of Shrinkage with Time · moist cured ACI Code: "MOIST" · steam cured ACI Code: "STEAM" · PCA: "PCA" | `"PST"` | String | "MOIST" | Optional |
+| 12 | Reinforced Concrete Effect by PCA | `"bRCE"` | Boolean | false | Optional |
+| 13 | Reinforcement Ratio of Cross Section of Column Segment · When the "bRCE" is true | `"RR"` | Number | - | **Required** |
+| 14 | Modulus of Elasticity of Steel · When the "bRCE" is true | `"MOD"` | Number | - | **Required** |
+| 7 | [AASHTO] Expose to Drying before 5 Days of Curing | `"bEXPOSE"` | Boolean | False | Optional |
+| 5 | [JAPAN (JSCE 2012, JSCE 2007, JSCE)] Cement Content · Range: 260 kg/m3 ~ 500 kg/m3 | `"CEMCONTENT"` | Number | - | **Required** |
+| 6 | Water Content · Range: 130 kg/m3 ~ 230 kg/m3 | `"WATERCONTENT"` | Number | - | **Required** |
+| 9 | [- Only for JAPAN (JSCE 2012)] Impact Factor by Cement Type and Mixture | `"IPFACT"` | Number | - | **Required** |
+| 10 | Age of Concrete at the Beginning of Solidification | `"AGESOL"` | Number | - | **Required** |
+| 9 | [- Only for JAPAN (JSCE 2007)] Alpha-Factor according to Cement Type · 11 or 15 | `"ALPHAFACT"` | Number | - | **Required** |
+| 10 | Autogenous Shrinkage Option | `"bAUTO"` | Boolean | - | **Required** |
+| 11 | Gamma-Factor · When the "bAUTO" is true | `"GAMMAFACT"` | Number | - | **Required** |
+| 12 | a-Factor · When the "bAUTO" is true | `"AFACT"` | Number | - | **Required** |
+| 13 | b-Factor · When the "bAUTO" is true | `"BFACT"` | Number | - | **Required** |
+| 14 | General Shrinkage Option | `"bGEN"` | Boolean | - | **Required** |
+| 4 | [Japanese Standard] Calculation Method For E · JSCE: "JSCE" · AIJ: "AIJ" | `"CM"` | String | - | **Required** |
+| 5 | Relative Humidity Type · Curing Underwater: "CU" · Relative Humidity: "RH" | `"HTYPE"` | String | - | **Required** |
+| 7 | Environmental Coefficient | `"LAMBDA"` | Number | - | **Required** |
+| 7 | [European] Type of Code · EN 1992-1 (General Structure): 0 · EN 1992-2 (Concrete Bridge): 1 | `"TCODE"` | Integer | 0 | Optional |
+| 8 | Silica Fume · When the "TCODE" is 1 | `"bSILICA"` | Boolean | false | Optional |
+| 5 | [AS 5100.5-2017, AS 5100.5-2016, AS/RTA 5100.5-2011, AS 3600-2009, NZ Bridge(SP/M/022)] Type of Drying Basic Shrinkage Strain ³⁾ | `"iEPS_DRY"` | Integer | 0 | Optional |
+| 6 | Drying Basic Shrinkage Strain ³⁾ | `"EPS_DRY"` | Number | - | **Required** |
+| 8 | Relative Humidity Thickness · Only for NZ Bridge (SP/M/022) · Range: 0.20 ~ 0.72 | `"FS"` | Number | - | **Required** |
+| 7 | [Russian] Curing Method · Natural cure: 0 · Steam cure: 1 | `"CMETH"` | Integer | 0 | Optional |
+| 8 | Fast-Accumulating Creep | `"CREEP"` | Boolean | False | Optional |
+| 9 | Concrete Type · Heavy concrete: 0 · Fine-grained concrete: 1 | `"CONCT"` | Integer | 0 | Optional |
+| 10 | Water Content | `"W"` | Number | - | **Required** |
+| 11 | Maximum Aggregate Size | `"MAXS"` | Number | - | **Required** |
+| 12 | Air Content | `"A"` | Number | - | **Required** |
+| 13 | Specific Content of the Cement Paste | `"PZ"` | Number | - | **Required** |
+| 7 | [- Chinese Standard] Type of Relative Humidity · Curing Underwater: "CU" · Relative Humidity: "RH" | `"HTYPE"` | String | "CU" | Optional |
+| 7 | [- China (JTG D62-2004)] Cement Type Coefficient | `"BSC"` | Number | - | **Required** |
+| 8 | Amount of Added Fly Ash Alpha · Range : 0 ~ 30 | `"FLYASH"` | Number | - | **Required** |
+| 8 | [KDS-2016, KCI-USD12, KSCE 2010, Korea Standard] Weight Density · Only for KDS-2016 | `"DENSITY"` | Number | - | **Required** |
+| 3 | [User Defined] Shrinkage Strain Function Name | `"SSFNAME"` | String | - | **Required** |
+| 4 | Creep Function · Insert the data as an object | `"vCREEP_AGE"` | Array [Object] | - | **Required** |
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `EXPOSURE`, `US`, `iCTYPE`
+
+<!-- /om-fields -->
+
 
 ---
 
@@ -748,6 +876,16 @@ tdme_data = {
 }
 midas_api("POST", "/db/TDME", tdme_data)
 ```
+
+<!-- om-fields:35808102389401 -->
+**OM 원문 추가 필드 — Time Dependent Material Properties - Compressive Strength ([35808102389401](https://support.midasuser.com/hc/en-us/articles/35808102389401))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `aDATA`
+
+<!-- /om-fields -->
+
 
 ---
 
@@ -1005,6 +1143,16 @@ epmt_data = {
 midas_api("POST", "/db/EPMT", epmt_data)
 ```
 
+<!-- om-fields:35808376517913 -->
+**OM 원문 추가 필드 — Plastic Material ([35808376517913](https://support.midasuser.com/hc/en-us/articles/35808376517913))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `BOND_WRENCH_STRENGTH`, `COMP_STRENGTH`, `FRICTION_ANGLE`, `MICROPL`, `MU`, `PARAM_C`, `PARAM_K`, `V1`, `V2`, `V3`, `V4`, `V5`, `V6`, `V7`
+
+<!-- /om-fields -->
+
+
 ---
 
 ## 11. `/db/EPMT-M1`
@@ -1018,6 +1166,66 @@ midas_api("POST", "/db/EPMT", epmt_data)
 ```python
 result = midas_api("GET", "/db/EPMT-M1")
 ```
+
+<!-- om-fields:56511025581337 -->
+**OM 원문 추가 필드 — Plastic Material ([56511025581337](https://support.midasuser.com/hc/en-us/articles/56511025581337))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 2 | Model · Tresca: 0 · Von Mises: 1 · Mohr-Coulomb: 2 · Drucker-Prager: 3 · Masonry: 4 · Concrete-Damage: 5 | `"MODEL_TYPE"` | integer (enum) | - | **Required** |
+| 3 | [When MODEL_TYPE = 0] Tresca parameters | `"TRESCA"` | object | - | **Required** |
+| (1) | Initial Uniaxial Yield Stress | `"INIT_YIELD_STRESS"` | number | - | **Required** |
+| (2) | Hardening | `"OPT_HARDENING"` | boolean | false | Optional |
+| (3) | [When OPT_HARDENING = true] Isotropic / Kinematic / Mixed · Isotropic: 0 · Kinematic: 1 · Mixed: 2 | `"HARDENING_TYPE"` | integer (enum) | - | **Required** |
+| (4) | Hardening Coefficient | `"HARDENING_COEF"` | number | - | **Required** |
+| (5) | Back Stress Coefficient When HARDENING_TYPE = 2 | `"BACK_STRESS_COEF"` | number | - | **Required** |
+| 4 | [When MODEL_TYPE = 1] Von Mises parameters | `"VMISES"` | object | - | **Required** |
+| 5 | [When MODEL_TYPE = 2] Mohr-Coulomb parameters | `"MOHRCL"` | object | - | **Required** |
+| (1) | Initial Cohesion | `"INIT_COHESION"` | number | - | **Required** |
+| (2) | Initial Friction Angle | `"INIT_FRIC_ANGLE"` | number | - | **Required** |
+| (3) | Hardening | `"OPT_HARDENING"` | boolean | false | Optional |
+| (4) | Back Stress Coefficient When OPT_HARDENING = true, HARDENING_TYPE = 2 | `"BACK_STRESS_COEF"` | number | - | Optional |
+| (5) | [When OPT_HARDENING = true] Isotropic / Kinematic / Mixed · Isotropic: 0 | `"HARDENING_TYPE"` | integer (enum) | - | **Required** |
+| (6) | Hardening Coefficient | `"HARDENING_COEF"` | number | - | **Required** |
+| 6 | [When MODEL_TYPE = 3] Drucker-Prager parameters | `"DRUCKER"` | object | - | **Required** |
+| 7 | [When MODEL_TYPE = 4] Masonry parameters | `"MASONRY"` | object | - | **Required** |
+| (1) | Brick Material / Properties | `"BM"` | object | - | **Required** |
+| (2) | Bed Joint / Properties | `"BED_JOINT"` | object | - | **Required** |
+| (3) | Head Joint / Properties | `"HEAD_JOINT"` | object | - | **Required** |
+| (4) | Geometry / Properties | `"GEOM"` | object | - | **Required** |
+| (5) | Material Coordinate System | `"MAT_COORD"` | object | - | **Required** |
+| a | Material Coordinate System / Vertical : Horizontal · Global: 0 · Element Local: 1 · Global-Z : Angle: 2 | `"COORD_TYPE"` | integer (enum) | - | **Required** |
+| b | Angle from Global X When COORD_TYPE = 2 | `"COORD_ANGLE"` | number | - | **Required** |
+| 8 | [When MODEL_TYPE = 5] Concrete Damage parameters | `"CONCDMG"` | object | - | **Required** |
+| (1) | Diliation Angle | `"DILIATION_ANGLE"` | number | - | **Required** |
+| (2) | Eccentricity | `"ECCEN"` | number | - | **Required** |
+| (3) | fbo/fco | `"FBO_FCO"` | number | - | **Required** |
+| (4) | K | `"K"` | number | - | **Required** |
+| (5) | Viscosity Parameter | `"VISCOSITY_PARAM"` | number | - | **Required** |
+| (6) | Compressive Behavior / Strain-Yield Stress... | `"COMP_ITEMS"` | array [object] | - | **Required** |
+| a | Inelastic Strain | `"INELASTIC_STRAIN"` | number | - | **Required** |
+| b | Yield Stress | `"YIELD_STRESS"` | number | - | **Required** |
+| c | Damage | `"DAMAGE"` | number | - | **Required** |
+| (7) | Tensile Behavior / Strain-Yield Stress... | `"TENSILE_ITEMS"` | array [object] | - | **Required** |
+| (1) | Brick Material / Properties... | `"BM"` | object | - | **Required** |
+| a | Young's Modulus | `"YOUNG_S_MODULUS"` | number | - | **Required** |
+| b | Poisson's Ratio | `"POSSIONS_S_RATIO"` | number | - | **Required** |
+| c | Stiffness Reduction Factor | `"TENSION_STRENGTH"` | number | - | **Required** |
+| d | Comp. Strength, fc | `"STIFF_REDUCTION"` | number | - | **Required** |
+| (2) | Bed Joint / Properties... | `"BED_JOINT"` | object | - | **Required** |
+| c | Tensile Strength, ft | `"TENSION_STRENGTH"` | number | - | **Required** |
+| d | Stiffness Reduction Factor | `"STIFF_REDUCTION"` | number | - | **Required** |
+| (3) | Head Joint / Properties... | `"HEAD_JOINT"` | object | - | **Required** |
+| (4) | Geometry / Properties... | `"GEOM"` | object | - | **Required** |
+| a | Brick Length | `"BRICK_LENGTH"` | number | - | **Required** |
+| b | Brick Height | `"BRICK_HEIGHT"` | number | - | **Required** |
+| c | Thickness of Bed Joint | `"THICKNESS_BED"` | number | - | **Required** |
+| d | Thickness of Head Joint | `"THICKNESS_HEAD"` | number | - | **Required** |
+
+<!-- /om-fields -->
+
 
 ---
 
@@ -1351,6 +1559,435 @@ sect_data = {
 midas_api("POST", "/db/SECT", sect_data)
 ```
 
+<!-- om-fields:35808653964185 -->
+**OM 원문 추가 필드 — Section Properties - Common ([35808653964185](https://support.midasuser.com/hc/en-us/articles/35808653964185))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `TYPE`, `Y_VAR`, `Z_VAR`
+
+<!-- /om-fields -->
+
+<!-- om-fields:35809067039513 -->
+**OM 원문 추가 필드 — Section Properties - DB/User ([35809067039513](https://support.midasuser.com/hc/en-us/articles/35809067039513))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| iii. | [GEN Design Feature] Stiffness for Design ²⁾ | `"CF_STIFF_ULS"` | Object | - | Optional |
+| (3) | Number of Stiffeners 1 · Box with Stiffener: N1 · Pipe with Stiffener: N | `"CELL_SHAPE"` | Integer | - | **Required** |
+| (4) | Number of Stiffeners 2 · Box with Stiffener: N2 | `"CELL_TYPE"` | Integer | - | **Required** |
+| 3 | Coating Thickness for Design ²⁾ | `"COAT_THIK"` | Number | 0 | Optional |
+| 4 | Type of Forming for Design ²⁾ · Roll Forming: 0 · Other Methods of Forming: 1 | `"FORM_TYPE"` | Integer | 0 | Optional |
+| 1 | Stiffness for Design | `"CF_STIFF_ULS"` | Object | - | Optional |
+| (1) | Effective Area | `"A_EFF"` | Number | DB | Optional |
+| (2) | Net Area | `"A_NET"` | Number | DB | Optional |
+| (3) | Moment of Inertia; y-axis | `"LY_EFF"` | Number | DB | Optional |
+| (4) | Moment of Inertia; z-axis | `"LZ_EFF"` | Number | DB | Optional |
+| (5) | Section modulus; y-axis | `"WY_EFF"` | Number | DB | Optional |
+| (6) | Section modulus; z-axis | `"WZ_EFF"` | Number | DB | Optional |
+| (7) | Torsional Moment of Inertia | `"LT_EFF"` | Number | DB | Optional |
+| (8) | Warping Moment of inertia | `"LW_EFF"` | Number | DB | Optional |
+| (9) | Radius of Gyration; y-axis | `"RY_EFF"` | Number | DB | Optional |
+| (10) | Radius of Gyration; z-axis | `"RZ_EFF"` | Number | DB | Optional |
+
+<!-- /om-fields -->
+
+<!-- om-fields:35839753881497 -->
+**OM 원문 추가 필드 — Section Properties - Value ([35839753881497](https://support.midasuser.com/hc/en-us/articles/35839753881497))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| ii. | Built-Up Section Check · Not Build-Up: 0 · Build-Up: 1 | `"BUILT_FLAG"` | Integer | 1 | Optional |
+| iii. | Inside perimeter length of a hollow section ¹⁾ | `"PERIIN"` | Number | 0 | Optional |
+| iv. | Total perimeter of the section ¹⁾ | `"PERIOUT"` | Number | 0 | Optional |
+| v. | Section Stiffness ¹⁾ ²⁾ | `"STIFF"` | Object | - | Optional |
+| (2) | Number of Cell · Only for R-Octagon | `"CELL_SHAPE"` | Integer |  | **Required** |
+| 1 | Section Stiffness | `"STIFF"` | Object | - | Optional |
+| (1) | Cross section area | `"AREA"` | Number | 0 | Optional |
+| (2) | Effective shear area for shear force in the element's local y-direction | `"ASY"` | Number | 0 | Optional |
+| (3) | Effective shear area for shear force in the element's local z-direction | `"ASZ"` | Number | 0 | Optional |
+| (4) | Torsional constant about the element's local x-axis | `"RXX"` | Number | 0 | Optional |
+| (5) | Moment of Inertia about the element's local y-direction | `"RYY"` | Number | 0 | Optional |
+| (6) | Moment of Inertia about the element's local z-direction | `"RZZ"` | Number | 0 | Optional |
+| (7) | Distance from the section's neutral axis to the extreme fiber of the element in the local (+)y-direction | `"CYP"` | Number | 0 | Optional |
+| (8) | Distance from the section's neutral axis to the extreme fiber of the element in the local (-)y-direction | `"CYM"` | Number | 0 | Optional |
+| (9) | Distance from the section's neutral axis to the extreme fiber of the element in the local (+)z-direction | `"CZP"` | Number | 0 | Optional |
+| (10) | Distance from the section's neutral axis to the extreme fiber of the element in the local (-)z-direction | `"CZM"` | Number | 0 | Optional |
+| (11) | Shear coefficient for the shear force applied in the element's local z-direction | `"QYB"` | Number | 0 | Optional |
+| (12) | Shear coefficient for the shear force applied in the element's local y-direction | `"QZB"` | Number | 0 | Optional |
+| (13) | Distance from the section's neutral axis to the Location 1, 2, 3, 4 · [y1, y2, y3, y4] | `"Y"` | Array [Number] | 0 | Optional |
+| (14) | Distance from the section's neutral axis to the Location 1, 2, 3, 4 · [z1, z2, z3, z4] | `"Z"` | Array [Number] | 0 | Optional |
+| (15) | Warping Constant | `"Iw"` | Number | 0 | Optional |
+| (16) | Warping function · [w1, w2, w3, w4] | `"W"` | Array [Number] | 0 | Optional |
+| (17) | Coefficients to be used to calculate twisting and warping moment · [Cxy1, Cxy2, Cxy3, Cxy4] | `"CXY"` | Array [Number] | 0 | Optional |
+| (18) | Coefficients to be used to calculate twisting and warping moment · [Cxz1, Cxz2, Cxz3, Cxz4] | `"CXZ"` | Array [Number] | 0 | Optional |
+| (19) | Distance between centroid and shear center in the local y directions | `"YS_YC"` | Number | 0 | Optional |
+| (20) | Distance between centroid and shear center in the local z directions | `"ZS_ZC"` | Number | 0 | Optional |
+| (21) | Polar moment of inertia | `"IP"` | Number | 0 | Optional |
+| (1) | Centroidal distance in ECS y-axis | `"YBAR"` | Number | 0 | Optional |
+| (2) | Centroidal distance in ECS z-axis | `"ZBAR"` | Number | 0 | Optional |
+| (3) | Plastic section modulus about the element local y-direction | `"ZYY"` | Number | 0 | Optional |
+| (4) | Plastic section modulus about the element local z-direction | `"ZZZ"` | Number | 0 | Optional |
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `IW`
+
+<!-- /om-fields -->
+
+<!-- om-fields:35845378225689 -->
+**OM 원문 추가 필드 — Section Properties - SRC ([35845378225689](https://support.midasuser.com/hc/en-us/articles/35845378225689))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (8) | Assign Steel to be the Reference When Calculating Stiffness of a Composite Section | `"MATL_THERMAL"` | Integer | - | Read Only |
+| iii. | [DB Section] Section Name of DB · Only for Rect-Cross H and Rec-Combined T | `"SECT_NAME2"` | String | - | **Required** |
+| (11) | [User Section] Number of Stiffeners 1 · SRC-Box/Pipe-Stiffener (N1) | `"CELL_SHAPE"` | Integer | - | **Required** |
+| (12) | Number of Stiffeners 2 · SRC-Box-Stiffener (N2) | `"CELL_TYPE"` | Integer | - | **Required** |
+
+<!-- /om-fields -->
+
+<!-- om-fields:35851688190105 -->
+**OM 원문 추가 필드 — Section Properties - PSC ([35851688190105](https://support.midasuser.com/hc/en-us/articles/35851688190105))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| v. | PSC-nCELL2 · Slab Width v. Others · Index 0 of "vSIZE_PSC_A" | `"SWIDTH"` | Number | - | Optional |
+| (2) | Warping Check for I · Auto: true · User: false | `"WARPING_CHK_AUTO_I"` | Boolean | true | Optional |
+| (3) | Warping Check for J · Auto: true · User: false | `"WARPING_CHK_AUTO_J"` | Boolean | true | Optional |
+| (4) | Warping Check Position for I · [[ y1, y2, y3, y4, y5, y6 ],[ z1, z2, z3, z4, z5, z6 ]] | `"WARPING_CHK_POS_I"` | Array [Array [Number]] | 0 | Optional |
+| (5) | Warping Check Position for J · [[ y1, y2, y3, y4, y5, y6 ],[ z1, z2, z3, z4, z5, z6 ]] | `"WARPING_CHK_POS_J"` | Array [Array [Number]] | 0 | Optional |
+| (7) | Web Thickness Value for Torsion of I, J · [i, j] | `"WEB_THICK"` | Array [Number] | 0 | Optional |
+| (8) | Web Thickness Check for Shear of I, J · [[ti1, ti2, ti3], [tj1, tj2, tj3]] | `"USE_WEB_THICK_SHEAR"` | Array [Array [Boolean] | false | **Required** |
+| (9) | Web Thickness Value for Shear of I, J · [[ti1, ti2, ti3], [tj1, tj2, tj3]] | `"WEB_THICK_SHEAR"` | Array [Array [Number]] | 0 | Optional |
+| (10) | Symmetry Option | `"USE_SYMMETRIC"` | Boolean | false | Optional |
+| (11) | Side Hole Option · Only nCELL2 | `"USE_SMALL_HOLE"` | Boolean | false | Optional |
+| (12) | Mesh Size Calculation Option | `"USE_USER_DEF_MESHSIZE"` | Boolean | false | Optional |
+| (14) | Stiffness Calculation Option | `"USE_USER_INTPUT_STIFF"` | Boolean | - | Optional |
+| (15) | Shape Option 1 ²⁾ | `"PSC_OPT1"` | String | - | **Required** |
+| (16) | Shape Option 2 ²⁾ | `"PSC_OPT2"` | Integer | - | **Required** |
+| (17) | Joint On/Off ³⁾ | `"JOINT"` | Array [Boolean] | - | **Required** |
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `AUTO_SHEAR_CHK_POS`, `SHEAR_CHK`, `USE_AUTO_SHEAR_CHK_POS`
+
+<!-- /om-fields -->
+
+<!-- om-fields:35852806893593 -->
+**OM 원문 추가 필드 — Section Properties - Tapered - DB/User ([35852806893593](https://support.midasuser.com/hc/en-us/articles/35852806893593))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (1) | Tapered Type · DB: 1 · User: 2 | `"TYPE"` | Integer | - | **Required** |
+| (2) | Y Axis Variations · Linear: 1 · Parabolic: 2 · Cubic: 3 | `"Y_VAR"` | Integer | - | **Required** |
+| (3) | Z Axis Variations · Linear: 1 · Parabolic: 2 · Cubic: 3 | `"Z_VAR"` | Integer | - | **Required** |
+
+<!-- /om-fields -->
+
+<!-- om-fields:35938685208089 -->
+**OM 원문 추가 필드 — Section Properties - Tapered - Value ([35938685208089](https://support.midasuser.com/hc/en-us/articles/35938685208089))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (1) | Tapered Type · Value: 3 | `"TYPE"` | Integer | - | **Required** |
+| (2) | Y Axis Variations · Linear: 1 · Parabolic: 2 · Cubic: 3 | `"Y_VAR"` | Integer | - | **Required** |
+| (3) | Z Axis Variations · Linear: 1 · Parabolic: 2 · Cubic: 3 | `"Z_VAR"` | Integer | - | **Required** |
+| ii. | Inside perimeter length of a hollow section ¹⁾ | `"PERIIN"` | Number | 0 | Optional |
+| iii. | Total perimeter of the section ¹⁾ | `"PERIOUT"` | Number | 0 | Optional |
+| iv. | Section Stiffness ¹⁾ | `"STIFF"` | Object | - | Optional |
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `AREA`, `ASY`, `ASZ`, `CYM`, `CYP`, `CZM`, `CZP`, `QYB`, `QZB`, `RXX`, `RYY`, `RZZ`, `Y`, `YBAR`, `Z`, `ZBAR`, `ZYY`, `ZZZ`
+
+<!-- /om-fields -->
+
+<!-- om-fields:35938998724377 -->
+**OM 원문 추가 필드 — Section Properties - Composite - PSC ([35938998724377](https://support.midasuser.com/hc/en-us/articles/35938998724377))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (6) | Ratio of Thermal Expansion Coefficient of Steel and Concrete | `"MATL_THERMAL"` | Number | - | **Required** |
+| (7) | Multiple Modulus of Elasticity Options | `"USE_MULTI_ELAST"` | Boolean | false | Optional |
+| (8) | Long-term Es/Ec | `"LONGTERM_ESEC"` | Number | 0 | Optional |
+| (9) | Shrinkage Es/Ec | `"SHRINK_ESEC"` | Number | 0 | Optional |
+| (10) | Shape Option 1 ¹⁾ | `"PSC_OPT1"` | String | - | **Required** |
+| (11) | Shape Option 2 ¹⁾ | `"PSC_OPT2"` | Integer | - | **Required** |
+| (12) | Joint On/Off ¹⁾ | `"JOINT"` | Array [Boolean] | - | **Required** |
+| (1) | Slab Dimensions · [Bc, tc, Hh] | `"SLAB"` | Array [Number] | - | **Required** |
+
+<!-- /om-fields -->
+
+<!-- om-fields:35939122737689 -->
+**OM 원문 추가 필드 — Section Properties - Composite - Steel ([35939122737689](https://support.midasuser.com/hc/en-us/articles/35939122737689))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (5) | Ratio of Thermal Expansion Coefficient of Steel and Concrete | `"MATL_THERMAL"` | Number | - | **Required** |
+| (6) | Multiple Modulus of Elasticity Options | `"USE_MULTI_ELAST"` | Boolean | false | Optional |
+| (7) | Long-term Es/Ec | `"LONGTERM_ESEC"` | Number | 0 | Optional |
+| (8) | Shrinkage Es/Ec | `"SHRINK_ESEC"` | Number | 0 | Optional |
+| ii. | [Type 1 (Symmetric Section)] Stiffener ²⁾ | `"STIFFENER"` | Object | - | Optional |
+| ii. | [Type 2 (Asymmetric Section)] Symmetric Section Auto Calculation | `"USE_SYM_CALC"` | Boolean | false | Optional |
+| iii. | Stiffener ³⁾ | `"SODSTIFF"` | Object | - | Optional |
+| (1) | [Type 1 (Symmetric Section)] Slab Dimensions · [Bc, tc, Hh] | `"SLAB"` | Array [Number] | - | **Required** |
+| 1 | Stiffener | `"STIFFENER"` | Object | - | Optional |
+| (1) | Position of Stiffener · Both: 0 · Left: 1 · Right: 2 | `"POSITION"` | Integer | - | - |
+| (2) | Reference of d · Top: 0 · Bottom: 1 | `"REFERENCE_OF_D"` | Integer | - | - |
+| (3) | Stiffener Array Count · [N Left, N Right, N Bottom, N Top] | `"STIFF_CNT"` | Array [Integer] | - | - |
+| (4) | Stiffener Shape · Insert the data as an object | `"STIFF_SHAPE"` | Array [Object] | - | - |
+| ii. | Stiffener Shape Type · Flat: 0 · Tee: 1 · U-Rib: 2 | `"SHAPE_TYPE"` | Integer | - | - |
+| iii. | Stiffener Size · Flat: [H, B] · Tee: [H, B, tw, tf] · U-Rib: [H, B1, B2, t, R] | `"SIZE"` | Array [Number] | - | - |
+| (5) | Stiffener Top/Bottom/Left/Right · Insert the data as an object | `"STIFF_TOP"` / `"STIFF_BOT"` / `"STIFF_LEFT"` / `"STIFF_RIGHT"` | Array [Object] | - | - |
+| i. | Stiffener Spacing | `"SPACING"` | Number | - | - |
+| iii. | Considering for the Section Property Calculations | `"USE_CALC"` | Boolean | - | - |
+| 1 | Stiffener | `"SODSTIFF"` | Object | - | Optional |
+| (1) | Number of defined Stiffeners Shape | `"TOSTIFNOS"` | Integer | - | - |
+| (2) | Number of defined Stiffeners Positions | `"DECKSTIFFNO"` | Integer | - | - |
+| (4) | Stiffener Positions · Insert the data as an object | `"SUB"` | Array [Object] | - | - |
+| i. | Deck Positions <strong> · </strong>Steel-Box / Top flange: 0 / Left web: 1 / Right web: 2 / Bottom flange: 3 | `"DECK_POS"` | Integer | - | - |
+| ii. | Deck Part · Deck1, Web: 0 · Deck2: 1 · Deck3: 2 | `"DECK_PART"` | Integer | - | - |
+| iii. | Reference Positions · Left, Top: 0 · Right, Bottom: 1 | `"REF_POS"` | Integer | - | - |
+| iv. | Number of Stiffeners | `"NUM"` | Integer | - | - |
+| v. | Deck Name · DECK_POS/DECK_PART: "Deck Name" · Steel Box · Steel-I · Steel-Tub | `"DECK_NAME"` | String | - | - |
+| vi. | Number of Stiffeners in a Deck Positions | `"EACHSTIFFNOS"` | Integer | - | - |
+| vii. | Stiffeners Data at Positions · Insert the data as an object | `"DATA"` | Array [Object] | - | - |
+| - | vii-1. Considering for the section property calculations | `"USE_CALC"` | Boolean | - | - |
+| - | vii-2. Stiffener Spacing | `"SPACING"` | Number | - | - |
+| - | vii-3. Stiffener Positions · Top flange/Bottom: 1 · Web/Left: 0 · Web/Right: 1 · Web/Both: 2 · Bottom flange/Top: 0 | `"STIF_POS"` | Number | - | - |
+| - | vii-4. Stiffener Shape Name | `"SHAPE_NAME"` | String | - | - |
+| - | vii-5. Stiffener Name | `"STIF_NAME"` | String | - | - |
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `STIFF`
+
+<!-- /om-fields -->
+
+<!-- om-fields:35939506348697 -->
+**OM 원문 추가 필드 — Section Properties - Steel Girder ([35939506348697](https://support.midasuser.com/hc/en-us/articles/35939506348697))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| - | Symmetric Section Auto Calculation | `"USE_SYM_CALC"` | Boolean | false | Optional |
+| - | Stiffener ²⁾ | `"SODSTIFF"` | Object | - | Optional |
+| 1 | Stiffener | `"SODSTIFF"` | Object | - | Optional |
+| (1) | Number of defined Stiffeners Shape | `"TOSTIFNOS"` | Integer | - | - |
+| (2) | Number of defined Stiffeners Positions | `"DECKSTIFFNO"` | Integer | - | - |
+| ii. | Stiffener Shape Type · Flat: 0 · Tee: 1 · U-Rib: 2 | `"SHAPE_TYPE"` | Integer | - | - |
+| iii. | Stiffener Size · Flat: [H, B] · Tee: [H, B, tw, tf] · U-Rib: [H, B1, B2, t, R] | `"SIZE"` | Array [Number] | - | - |
+| (4) | Stiffener Positions · Insert the data as an object | `"SUB"` | Array [Object] | - | - |
+| i. | Deck Positions <strong> · </strong>Steel-Box / Top flange: 0 / Left web: 1 / Right web: 2 / Bottom flange: 3 | `"DECK_POS"` | Integer | - | - |
+| ii. | Deck Part · Deck1, Web: 0 · Deck2: 1 · Deck3: 2 | `"DECK_PART"` | Integer | - | - |
+| iii. | Reference Positions · Left, Top: 0 · Right, Bottom: 1 | `"REF_POS"` | Integer | - | - |
+| iv. | Number of Stiffeners | `"NUM"` | Integer | - | - |
+| v. | Deck Name · DECK_POS/DECK_PART: "Deck Name" · Steel Box · Steel-I · Steel-Tub | `"DECK_NAME"` | String | - | - |
+| vi. | Number of Stiffeners in a Deck Positions | `"EACHSTIFFNOS"` | Integer | - | - |
+| vii. | Stiffeners Data at Positions · Insert the data as an object | `"DATA"` | Array [Object] | - | - |
+| - | vii-1. Considering for the section property calculations | `"USE_CALC"` | Boolean | - | - |
+| - | vii-2. Stiffener Spacing | `"SPACING"` | Number | - | - |
+| - | vii-3. Stiffener Positions · Top flange/Bottom: 1 · Web/Left: 0 · Web/Right: 1 · Web/Both: 2 · Bottom flange/Top: 0 | `"STIF_POS"` | Number | - | - |
+| - | vii-4. Stiffener Shape Name | `"SHAPE_NAME"` | String | - | - |
+| - | vii-5. Stiffener Name | `"STIF_NAME"` | String | - | - |
+
+<!-- /om-fields -->
+
+<!-- om-fields:35941360898713 -->
+**OM 원문 추가 필드 — Section Properties - Tapered - PSC ([35941360898713](https://support.midasuser.com/hc/en-us/articles/35941360898713))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (1) | Tapered Type · PSC: 11 | `"TYPE"` | Integer | - | **Required** |
+| (2) | Y Axis Variations · Linear: 1 · Parabolic: 2 · Cubic: 3 | `"Y_VAR"` | Integer | - | **Required** |
+| (3) | Z Axis Variations · Linear: 1 · Parabolic: 2 · Cubic: 3 | `"Z_VAR"` | Integer | - | **Required** |
+| v. | PSC-nCELL2 · Slab Width v. Others · Index 0 of "vSIZE_PSC_A" | `"SWIDTH"` | Number | - | Optional |
+| (6) | Warping Check for I · Auto: true · User: false | `"WARPING_CHK_AUTO_I"` | Boolean | true | Optional |
+| (7) | Warping Check for J · Auto: true · User: false | `"WARPING_CHK_AUTO_J"` | Boolean | true | Optional |
+| (8) | Warping Check Position for I · [[ y1, y2, y3, y4, y5, y6 ],[ z1, z2, z3, z4, z5, z6 ]] | `"WARPING_CHK_POS_I"` | Array [Array [Number]] | 0 | Optional |
+| (9) | Warping Check Position for J · [[ y1, y2, y3, y4, y5, y6 ],[ z1, z2, z3, z4, z5, z6 ]] | `"WARPING_CHK_POS_J"` | Array [Array [Number]] | 0 | Optional |
+| (11) | Web Thickness Value for Torsion of I, J · [i, j] | `"WEB_THICK"` | Array [Number] | 0 | Optional |
+| (12) | Web Thickness Check for Shear of I, J · [[ti1, ti2, ti3], [tj1, tj2, tj3]] | `"USE_WEB_THICK_SHEAR"` | Array [Array [Boolean]] | false | **Required** |
+| (13) | Web Thickness Value for Shear of I, J · [[ti1, ti2, ti3], [tj1, tj2, tj3]] | `"WEB_THICK_SHEAR"` | Array [Array [Number]] | 0 | Optional |
+| (14) | Symmetry Option | `"USE_SYMMETRIC"` | Boolean | false | Optional |
+| (15) | Side Hole Option · Only nCELL2 | `"USE_SMALL_HOLE"` | Boolean | false | Optional |
+| (16) | Mesh Size Calculation Option | `"USE_USER_DEF_MESHSIZE"` | Boolean | false | Optional |
+| (18) | Stiffness Calculation Option | `"USE_USER_INTPUT_STIFF"` | Boolean | - | Optional |
+| (19) | Shape Option 1 ¹⁾ | `"PSC_OPT1"` | String | - | **Required** |
+| (20) | Shape Option 2 ¹⁾ | `"PSC_OPT2"` | Integer | - | **Required** |
+| (21) | Joint On/Off ¹⁾ | `"JOINT"` | Array [Boolean] | - | **Required** |
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `AUTO_SHEAR_CHK_POS`, `MESHSIZE`, `SHEAR_CHK`, `USE_AUTO_SHEAR_CHK_POS`
+
+<!-- /om-fields -->
+
+<!-- om-fields:35941514067225 -->
+**OM 원문 추가 필드 — Section Properties - Tapered - Composite PSC ([35941514067225](https://support.midasuser.com/hc/en-us/articles/35941514067225))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (1) | Tapered Type · PSC-I: 12 · PSC-T: 13 | `"TYPE"` | Integer | - | **Required** |
+| (2) | Y Axis Variations · Linear: 1 · Parabolic: 2 · Cubic: 3 | `"Y_VAR"` | Integer | - | **Required** |
+| (3) | Z Axis Variations · Linear: 1 · Parabolic: 2 · Cubic: 3 | `"Z_VAR"` | Integer | - | **Required** |
+| (9) | Ratio of Thermal Expansion Coefficient of Steel and Concrete | `"MATL_THERMAL"` | Number | - | **Required** |
+| (10) | Multiple Modulus of Elasticity Options | `"USE_MULTI_ELAST"` | Boolean | false | Optional |
+| (11) | Long-term Es/Ec | `"LONGTERM_ESEC"` | Number | 0 | Optional |
+| (12) | Shrinkage Es/Ec | `"SHRINK_ESEC"` | Number | 0 | Optional |
+| (13) | Shape Option 1 ¹⁾ | `"PSC_OPT1"` | String | - | **Required** |
+| (14) | Shape Option 2 ¹⁾ | `"PSC_OPT2"` | Integer | - | **Required** |
+| (15) | Joint On/Off ¹⁾ | `"JOINT"` | Array [Boolean] | - | **Required** |
+| (1) | Slab Dimensions · [Bc, tc, Hh] | `"SLAB"` | Array [Number] | - | **Required** |
+| i. | Built-Up Section · 1 | `"BUILT_FLAG"` | Integer | - | **Required** |
+| 4 | Section Specifications - J | `"COMPOSITE_J"` | Object | - | **Required** |
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `USE_SYMMETRIC`
+
+<!-- /om-fields -->
+
+<!-- om-fields:35941644806553 -->
+**OM 원문 추가 필드 — Section Properties - Tapered - Composite Steel ([35941644806553](https://support.midasuser.com/hc/en-us/articles/35941644806553))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (1) | Tapered Type · Steel-Box: 9 · Steel-I: 10 · Steel-Tub: 16 · Steel-Box: 19 · Steel-I: 20 · Steel-Tub: 21 | `"TYPE"` | Integer | - | **Required** |
+| (2) | Y Axis Variations · Linear: 1 · Parabolic: 2 · Cubic: 3 | `"Y_VAR"` | Integer | - | **Required** |
+| (3) | Z Axis Variations · Linear: 1 · Parabolic: 2 · Cubic: 3 | `"Z_VAR"` | Integer | - | **Required** |
+| (8) | Ratio of Thermal Expansion Coefficient of Steel and Concrete | `"MATL_THERMAL"` | Number | - | **Required** |
+| (9) | Multiple Modulus of Elasticity Options | `"USE_MULTI_ELAST"` | Boolean | false | Optional |
+| (10) | Long-term Es/Ec | `"LONGTERM_ESEC"` | Number | 0 | Optional |
+| (11) | Shrinkage Es/Ec | `"SHRINK_ESEC"` | Number | 0 | Optional |
+| ii. | [Type 1 (Symmetric Section)] Stiffener ¹⁾ | `"STIFFENER"` | Object | - | Optional |
+| ii. | [Type 2 (Asymmetric Section)] Symmetric Section Auto Calculation | `"USE_SYM_CALC"` | Boolean | false | Optional |
+| iii. | Stiffener ¹⁾ | `"SODSTIFF"` | Object | - | Optional |
+| (1) | [Type 1 (Symmetric Section)] Slab Dimensions · [Bc, tc, Hh] | `"SLAB"` | Array [Number] | - | **Required** |
+| i. | Built-Up Section · 1 | `"BUILT_FLAG"` | Integer | - | **Required** |
+| ii. | Built-Up Section · 1 | `"BUILT_FLAG"` | Integer | - | **Required** |
+| 4 | Section Specifications - J | `"COMPOSITE_J"` | Object | - | **Required** |
+| (2) | Symmetric Section Auto Calculation | `"USE_SYM_CALC"` | Boolean | false | Optional |
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `DATA`, `DECKSTIFFNO`, `DECK_NAME`, `DECK_PART`, `DECK_POS`, `EACHSTIFFNOS`, `NUM`, `POSITION`, `REFERENCE_OF_D`, `REF_POS`, `SHAPE_NAME`, `SHAPE_TYPE`, `SIZE`, `SPACING`, `STIFF`, `STIFF_BOT`, `STIFF_CNT`, `STIFF_LEFT`, `STIFF_RIGHT`, `STIFF_SHAPE`, `STIFF_TOP`, `STIF_NAME`, `STIF_POS`, `SUB`, `TOSTIFNOS`, `USE_CALC`
+
+<!-- /om-fields -->
+
+<!-- om-fields:35941809011225 -->
+**OM 원문 추가 필드 — Section Properties - Tapered - Steel Girder ([35941809011225](https://support.midasuser.com/hc/en-us/articles/35941809011225))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (1) | Tapered Type · Steel Box: 17 · Steel I: 18 | `"TYPE"` | Integer | - | **Required** |
+| (2) | Y Axis Variations · Linear: 1 · Parabolic: 2 · Cubic: 3 | `"Y_VAR"` | Integer | - | **Required** |
+| (3) | Z Axis Variations · Linear: 1 · Parabolic: 2 · Cubic: 3 | `"Z_VAR"` | Integer | - | **Required** |
+| - | Symmetric Section Auto Calculation | `"USE_SYM_CALC"` | Boolean | false | Optional |
+| - | Stiffener ¹⁾ | `"SODSTIFF"` | Object | - | Optional |
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `DATA`, `DECKSTIFFNO`, `DECK_NAME`, `DECK_PART`, `DECK_POS`, `EACHSTIFFNOS`, `NUM`, `REF_POS`, `SHAPE_NAME`, `SHAPE_TYPE`, `SIZE`, `SPACING`, `STIF_NAME`, `STIF_POS`, `SUB`, `TOSTIFNOS`, `USE_CALC`
+
+<!-- /om-fields -->
+
+<!-- om-fields:39233604772633 -->
+**OM 원문 추가 필드 — Section Properties - PSC Value ([39233604772633](https://support.midasuser.com/hc/en-us/articles/39233604772633))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| ii. | Inside perimeter length of a hollow section ¹⁾ | `"PERIIN"` | Number | 0 | Optional |
+| iii. | Total perimeter of the section ¹⁾ | `"PERIOUT"` | Number | 0 | Optional |
+| iv. | Section Stiffness ¹⁾ | `"STIFF"` | Object | - | Optional |
+| vi. | Outer Polygon ²⁾ | `"OUTER_POLYGON"` | Array [Object] | - | **Required** |
+| vii. | Inner Polygon ²⁾ · for inner hole | `"INNER_POLYGON"` | Array [Object] | - | Optional |
+| (2) | Shear Check | `"SHEAR_CHK"` | Boolean | false | Optional |
+| (3) | Position Value for Shear check of I, J · [[Zi1, Zi2, Zi3], [Zj1, Zj2, Zj3]] | `"SHEAR_CHK_POS"` | Array [Array [Number]] | 0 | Optional |
+| (4) | Qy Check for Shear of I, J · [[Qi1, Qi2, Qi3], [Qj1, Qj2, Qj3]] | `"USE_AUTO_QY"` | Array [Array [Boolean]] | false | Optional |
+| (5) | Qy Value for Shear of I, J · [[Qi1, Qi2, Qi3], [Qj1, Qj2, Qj3]] | `"AUTO_QY"` | Array [Array [Number]] | 0 | Optional |
+| (6) | Web Thickness Value for Torsion of I, J · [i, j] | `"WEB_THICK"` | Array [number] | 0 | Optional |
+| (7) | Web Thickness Check for Shear of I, J · [[ti1, ti2, ti3], [tj1, tj2, tj3]] | `"USE_WEB_THICK_SHEAR"` | Array [Array [Boolean]] | false | Optional |
+| (8) | Web Thickness Value for Shear of I, J · [[ti1, ti2, ti3], [tj1, tj2, tj3]] | `"WEB_THICK_SHEAR"` | Array [Array [Number]] | 0 | Optional |
+| 1 | Outer Polygon | `"OUTER_POLYGON"` | Array [Object] | - | **Required** |
+| (1) | Vertex Data | `"Vertex"` | Array [Object] | - | **Required** |
+| i. | X-Coordinate | `"X"` | Number | - | **Required** |
+| ii. | Y-Coordinate | `"Y"` | Number | - | **Required** |
+| 2 | Inner Polygon | `"INNER_POLYGON"` | Array [Object] | - | Optional |
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `AREA`, `ASY`, `ASZ`, `BUILT_FLAG`, `CXY`, `CXZ`, `CYM`, `CYP`, `CZM`, `CZP`, `IP`, `IW`, `QYB`, `QZB`, `RXX`, `RYY`, `RZZ`, `VERTEX`, `W`, `YBAR`, `YS_YC`, `Z`, `ZBAR`, `ZS_ZC`, `ZYY`, `ZZZ`
+
+<!-- /om-fields -->
+
+<!-- om-fields:39233752695321 -->
+**OM 원문 추가 필드 — Section Properties - Tapered - PSC Value ([39233752695321](https://support.midasuser.com/hc/en-us/articles/39233752695321))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (1) | Y Axis Variations · Linear: 1 · Parabolic: 2 · Cubic: 3 | `"Y_VAR"` | Integer | - | **Required** |
+| (2) | Z Axis Variations · Linear: 1 · Parabolic: 2 · Cubic: 3 | `"Z_VAR"` | Integer | - | **Required** |
+| ii. | Inside perimeter length of a hollow section ¹⁾ | `"PERIIN"` | Number | 0 | Optional |
+| iii. | Total perimeter of the section ¹⁾ | `"PERIOUT"` | Number | 0 | Optional |
+| iv. | Section Stiffness ¹⁾ | `"STIFF"` | Object | - | Optional |
+| vi. | Outer Polygon ²⁾ | `"OUTER_POLYGON"` | Array [Object] | - | **Required** |
+| vii. | Inner Polygon ²⁾ · for inner hole | `"INNER_POLYGON"` | Array [Object] | - | Optional |
+| (5) | Shear Check | `"SHEAR_CHK"` | Boolean | false | Optional |
+| (6) | Position Value for Shear check of I, J · [[Zi1, Zi2, Zi3], [Zj1, Zj2, Zj3]] | `"SHEAR_CHK_POS"` | Array [Array [Number]] | 0 | Optional |
+| (7) | Qy Check for Shear of I, J · [[Qi1, Qi2, Qi3], [Qj1, Qj2, Qj3]] | `"USE_AUTO_QY"` | Array [Array [Boolean]] | false | Optional |
+| (8) | Qy Value for Shear of I, J · [[Qi1, Qi2, Qi3], [Qj1, Qj2, Qj3]] | `"AUTO_QY"` | Array [Array [Number]] | 0 | Optional |
+| (9) | Web Thickness Value for Torsion of I, J · [i, j] | `"WEB_THICK"` | Array [number] | 0 | Optional |
+| (10) | Web Thickness Check for Shear of I, J · [[ti1, ti2, ti3], [tj1, tj2, tj3]] | `"USE_WEB_THICK_SHEAR"` | Array [Array [Boolean]] | false | Optional |
+| (11) | Web Thickness Value for Shear of I, J · [[ti1, ti2, ti3], [tj1, tj2, tj3]] | `"WEB_THICK_SHEAR"` | Array [Array [Number]] | 0 | Optional |
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `AREA`, `ASY`, `ASZ`, `BUILT_FLAG`, `CXY`, `CXZ`, `CYM`, `CYP`, `CZM`, `CZP`, `Calc_OPT`, `IP`, `IW`, `QYB`, `QZB`, `RXX`, `RYY`, `RZZ`, `VERTEX`, `W`, `X`, `Y`, `YBAR`, `YS_YC`, `Z`, `ZBAR`, `ZS_ZC`, `ZYY`, `ZZZ`
+
+<!-- /om-fields -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ---
 
 ## 13. `/db/THIK`
@@ -1467,6 +2104,48 @@ thik_data = {
 }
 midas_api("POST", "/db/THIK", thik_data)
 ```
+
+<!-- om-fields:35942342783769 -->
+**OM 원문 추가 필드 — Thickness - Stiffened DB ([35942342783769](https://support.midasuser.com/hc/en-us/articles/35942342783769))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (4) | YZ Section | `"YZ"` | Object | - | **Required** |
+
+<!-- /om-fields -->
+
+<!-- om-fields:35942603029401 -->
+**OM 원문 추가 필드 — Thickness - Stiffened User ([35942603029401](https://support.midasuser.com/hc/en-us/articles/35942603029401))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| - | iv) Size | `"SIZE"` | Array [Number] | - | **Required** |
+| (3) | YZ Section | `"YZ"` | Object | - | **Required** |
+
+<!-- /om-fields -->
+
+<!-- om-fields:35942739673369 -->
+**OM 원문 추가 필드 — Thickness - Stiffened Value ([35942739673369](https://support.midasuser.com/hc/en-us/articles/35942739673369))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (1) | Thickness weight data of plate element | `"WEIGHT"` | Number | - | **Required** |
+| v. | Distance from the neutral axis to the extreme fiber of the rib | `"HL"` | Number | - | Optional |
+| (3) | YZ SECT | `"YZ"` | Object | - | Optional |
+| - | v) Hl: Distance from the neutral axis to the extreme fiber of the rib | `"HL"` | Number | - | Optional |
+
+<!-- /om-fields -->
+
+
+
+
+
 
 ---
 
@@ -2028,6 +2707,16 @@ midas_api("POST", "/db/STRPSSM", strpssm_data)
 }
 ```
 
+<!-- om-fields:35943859944729 -->
+**OM 원문 추가 필드 — Section Manager - Section for Resultant Forces - Virtual Section ([35943859944729](https://support.midasuser.com/hc/en-us/articles/35943859944729))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `__DESC__`, `__TYPE__`
+
+<!-- /om-fields -->
+
+
 ---
 
 ## 21. `/db/EWSF`
@@ -2188,6 +2877,18 @@ midas_api("POST", "/db/STRPSSM", strpssm_data)
 result = midas_api("GET", "/db/IEHG-BEAM-M1")
 ```
 
+<!-- om-fields:57656773423385 -->
+**OM 원문 추가 필드 — Assign Inelastic Hinges - Beam ([57656773423385](https://support.midasuser.com/hc/en-us/articles/57656773423385))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Inelastic Hinge Property | `"INEL_PROP_NAME"` | string | - | **Required** |
+
+<!-- /om-fields -->
+
+
 ---
 
 ## 25. `/db/IEHG-TRUSS-M1`
@@ -2201,6 +2902,18 @@ result = midas_api("GET", "/db/IEHG-BEAM-M1")
 ```python
 result = midas_api("GET", "/db/IEHG-TRUSS-M1")
 ```
+
+<!-- om-fields:57656796689177 -->
+**OM 원문 추가 필드 — Assign Inelastic Hinges - Truss ([57656796689177](https://support.midasuser.com/hc/en-us/articles/57656796689177))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Inelastic Hinge Property | `"INEL_PROP_NAME"` | string | - | **Required** |
+
+<!-- /om-fields -->
+
 
 ---
 
@@ -2216,6 +2929,18 @@ result = midas_api("GET", "/db/IEHG-TRUSS-M1")
 result = midas_api("GET", "/db/IEHG-GL-M1")
 ```
 
+<!-- om-fields:57656799110937 -->
+**OM 원문 추가 필드 — Assign Inelastic Hinges - General Link ([57656799110937](https://support.midasuser.com/hc/en-us/articles/57656799110937))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Inelastic Hinge Property | `"INEL_PROP_NAME"` | string | - | **Required** |
+
+<!-- /om-fields -->
+
+
 ---
 
 ## 27. `/db/IEHG-PSS-M1`
@@ -2229,6 +2954,18 @@ result = midas_api("GET", "/db/IEHG-GL-M1")
 ```python
 result = midas_api("GET", "/db/IEHG-PSS-M1")
 ```
+
+<!-- om-fields:57656826629657 -->
+**OM 원문 추가 필드 — Assign Inelastic Hinges - Point Spring Support ([57656826629657](https://support.midasuser.com/hc/en-us/articles/57656826629657))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Inelastic Hinge Property | `"INEL_PROP_NAME"` | string | - | **Required** |
+
+<!-- /om-fields -->
+
 
 ---
 
@@ -2339,6 +3076,180 @@ fimp_data = {
 }
 midas_api("POST", "/db/FIMP", fimp_data)
 ```
+
+<!-- om-fields:35944335180569 -->
+**OM 원문 추가 필드 — Inelastic Material Properties ([35944335180569](https://support.midasuser.com/hc/en-us/articles/35944335180569))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (1) | Japanese Concrete Standard Specification Model | `"JPSTND"` | Object | - | **Required** |
+| iii. | Peak Strain (e’peak) | `"EPEAK"` | Number | - | **Required** |
+| (1) | Japan Roadway Specification (H.24) Model | `"JP_H24"` | Object | - | **Required** |
+| i. | Concrete Elastic Modulus (Ec) | `"EC"` | Number | - | **Required** |
+| ii. | Concrete Strength (σck) | `"SIGMA_CK"` | Number | - | **Required** |
+| iii. | Rebar Strength (σsy) | `"SIGMA_SY"` | Number | - | **Required** |
+| iv. | Strength Factor (α) | `"ALPHA"` | Number | - | **Required** |
+| v. | Tensile Strength (σbt) | `"SIGMA_BT"` | Number | - | **Required** |
+| vi. | Horizontal Rebar Area (Ah) | `"AH"` | Number | - | **Required** |
+| vii. | Spacing (s) | `"S"` | Number | - | **Required** |
+| viii. | Depth (d) | `"D"` | Number | - | **Required** |
+| ix. | Strain Factor (β) | `"BETA"` | Number | - | **Required** |
+| x. | Stiffness After Critical Strain Property · Keep the Stiffness Down: 0 · Assume Stiffness as Zero: 1 | `"STRENGTH_LIMIT"` | Integer | - | **Required** |
+| (1) | Japan Roadway Specification (H.14) Model | `"JP_H14"` | Object | - | **Required** |
+| i. | Earthquake Type · Type I: 0 · Type II: 1 | `"EARTHQUAKE_TYPE"` | Integer | - | **Required** |
+| ii. | Concrete Elastic Modulus (Ec) | `"EC"` | Number | - | **Required** |
+| iii. | Concrete Strength (σck) | `"SIGMA_CK"` | Number | - | **Required** |
+| iv. | Rebar Strength (σsy) | `"SIGMA_SY"` | Number | - | **Required** |
+| v. | Strength Factor (α) | `"ALPHA"` | Number | - | **Required** |
+| vi. | Tensile Strength (σbt) | `"SIGMA_BT"` | Number | - | **Required** |
+| vii. | Horizontal Rebar Area (Ah) | `"AH"` | Number | - | **Required** |
+| viii. | Spacing (s) | `"S"` | Number | - | **Required** |
+| ix. | Depth (d) | `"D"` | Number | - | **Required** |
+| x. | Strain Factor (β) | `"BETA"` | Number | - | **Required** |
+| xi. | Stiffness After Critical Strain Property · Keep the Stiffness Down: 0 · Assume Stiffness as Zero: 1 | `"STRENGTH_LIMIT"` | Integer | - | **Required** |
+| (1) | Nagoya Highway Corporation Model | `"NAGOYA"` | Object | - | **Required** |
+| i. | Concrete Strength (σck) | `"SIGMA_CK"` | Number | - | **Required** |
+| ii. | Peak Compressive Strain (εcc) | `"EPSILON_CC"` | Number | - | **Required** |
+| iv. | Ultimate Compressive Strain (εcu) | `"EPSILON_CU"` | Number | - | **Required** |
+| v. | Peak Tensile Strain (εt0) | `"EPSILON_T0"` | Number | - | **Required** |
+| vi. | Ultimate Tensile Strain (εtu) | `"EPSILON_TU"` | Number | - | **Required** |
+| vii. | Zero Tensile Strength Strain (εt1) | `"EPSILON_T1"` | Number | - | **Required** |
+| (1) | Trilinear Concrete Model | `"TRILIN"` | Object | - | **Required** |
+| i. | Input Method · σ-ε Method: 0 · σ-α Method: 1 | `"INPUT_METHOD"` | Integer | - | **Required** |
+| ii. | Concrete Strength · Index 0: σc1 · Index 1: σc2 · Index 2: σc3 | `"SIGMA_Y_ITEMS"` | Array [Number,3] | - | **Required** |
+| iii. | Concrete Compressive Strain for σ-ε Method · Index 0: εc1 · Index 1: εc2 · Index 2: εc3 | `"EPSILON_Y_ITEMS"` | Array [Number,3] | - | **Required** |
+| iii. | Concrete Compressive Strain for σ-α Method · Index 0: K1 · Index 1: K2/K1 · Index 2: K3/K1 | `"K_ITEMS"` | Array [Number,3] | - | **Required** |
+| iv. | Concrete Tensile Strain · Index 0: ε · Index 1: εt1 · Index 2: εtu | `"EPSILON_T_ITEMS"` | Array [Number,3] | - | **Required** |
+| v. | Ultimate Compressive Strain | `"EPSILON_CU"` | Number | - | **Required** |
+| (1) | China Concrete Code (GB50010-10) | `"CHGB10"` | Object | - | **Required** |
+| i. | Peak Concrete Compressive Strength (fc,r) | `"FCR"` | Number | - | **Required** |
+| ii. | Peak Concrete Tensile Strength (ft,r) | `"FTR"` | Number | - | **Required** |
+| iii. | Peak Concrete Compressive Strain (εc,r) | `"ECR"` | Number | - | Read Only |
+| iv. | Peak Concrete Tensile Strain (εt,r) | `"ETR"` | Number | - | Read Only |
+| v. | Concrete Modulus | `"EC"` | Number | - | **Required** |
+| (1) | China Concrete Code (GB50010-02) | `"CHGB02"` | Object | - | **Required** |
+| i. | Peak Concrete Compressive Strength (fc*) | `"FCK"` | Number | - | **Required** |
+| ii. | Peak Concrete Tensile Strength (ft*) | `"FTK"` | Number | - | **Required** |
+| iii. | Peak Concrete Compressive Strain (εc) | `"EC"` | Number | - | Read Only |
+| iv. | Peak Concrete Tensile Strain (εt) | `"ET"` | Number | - | Read Only |
+| (1) | Mander Model | `"MANDER"` | Object | - | **Required** |
+| i. | Concrete Type · Unconfined Concrete: 0 · Confined Concrete: 1 | `"CONC_TYPE"` | Integer | - | **Required** |
+| ii. | Unconfined Concrete Data ²⁾ | `"UCD"` | Object | - | **Required** |
+| iii. | Confinement Effectiveness Coefficient ²⁾ | `"KE"` | Object | - | **Required** |
+| iv. | Confined Concrete Strength & Strain ²⁾ | `"CCS"` | Object | - | **Required** |
+| v. | Section & Rebar Data Input ²⁾ | `"FIELD_2"` | Object | - | **Required** |
+| (1) | Menegotto-Pinto Model | `"MENEGO"` | Object | - | **Required** |
+| i. | Steel Strength (fy) | `"FY"` | Number | - | **Required** |
+| ii. | Steel Elastic Modulus (E) | `"E"` | Number | - | **Required** |
+| iii. | Factor (b) | `"B"` | Number | - | **Required** |
+| (1) | Bilinear Model | `"BILINE"` | Object | - | **Required** |
+| ii. | Steel Elastic Modulus (E1) | `"E1"` | Number | - | **Required** |
+| iii. | Elastic Modulus Ratio (E2/E1) | `"E2E1"` | Number | - | **Required** |
+| (1) | Asymmetrical Bilinear Steel Model | `"GENBIL"` | Object | - | **Required** |
+| i. | Steel Tensile Strength (σy) | `"SIGMA_Y"` | Number | - | **Required** |
+| ii. | Steel Compressive Strength (σcy) | `"SIGMA_CY"` | Number | - | **Required** |
+| iii. | Compressive Strain | `"EPSILON_1"` | Number | - | **Required** |
+| iv. | Tensile Strain | `"EPSILON_2"` | Number | - | **Required** |
+| v. | Elastic Modulus · [E1, E2, E3, E4, E5] | `"E_ITEMS"` | Array [Number,5] | - | **Required** |
+| (1) | [Trilinear Steel Model] Asymmetrical Bilinear Steel Model | `"TRILIN"` | Object | - | **Required** |
+| ii. | Steel Strength · Index 0: σ1y · Index 1: σ2y · Index 2: σ3y · Index 3: σ'1y · Index 4: σ'2y · Index 5: σ'3y | `"SIGMA_Y_ITEMS"` | Array [Number, 6] | - | **Required** |
+| iii. | Steel Strain for σ-ε Method · Index 0: ε1y · Index 1: ε2y · Index 2: ε3y | `"EPSILON_Y_ITEMS"` | Array [Number, 3] | - | **Required** |
+| iv. | Steel Modulus for σ-α Method · Index 0: K1 · Index 1: K2/K1 · Index 2: K3/K1 | `"K_ITEMS"` | Array [Number, 3] | - | **Required** |
+| (1) | Park Model | `"PARKMD"` | Object | - | **Required** |
+| i. | Yield Stress of Steel (fy) | `"FY"` | Number | - | **Required** |
+| ii. | Ultimate Stress of Steel (fu) | `"FU"` | Number | - | **Required** |
+| iii. | Elastic Modulus of Steel (Es) | `"ES"` | Number | - | **Required** |
+| iv. | Strain at the Onset of Strain Hardening (σsh) | `"EPSILON_SH"` | Number | - | **Required** |
+| v. | Strain at the Steel Rupture (σsu) | `"EPSILON_SU"` | Number | - | **Required** |
+| i. | [Japan Roadway Specification Model] Yield Stress of Steel (ρsy) | `"SIGMA_Y"` | Number | - | **Required** |
+| ii. | Elastic Modulus of Steel (Es) | `"ES"` | Number | - | **Required** |
+| iii. | Permissible Tensile Strain of Reinforcement (εst) | `"EPSILON_ST"` | Number | - | **Required** |
+| 1 | Unconfined Concrete Data | `"UCD"` | Object | - | **Required** |
+| (1) | Unconfined Concrete Strength - User Input Option | `"OPT_FCO"` | Boolean | false | Optional |
+| (2) | Unconfined Concrete Strength (fco') | `"FCO"` | Number | - | **Required** |
+| (3) | Unconfined Concrete Strain - User Input Option | `"OPT_EPSILON_CO"` | Boolean | false | Optional |
+| (4) | Unconfined Concrete Strain (fco') | `"EPSILON_CO"` | Number | - | **Required** |
+| (5) | Yield Strain for Unconfined Concrete - User Input Option | `"OPT_EPSILON_CY"` | Boolean | false | Optional |
+| (6) | Yield Strain for Unconfined Concrete (εcy) | `"EPSILON_CY"` | Number | - | **Required** |
+| (7) | Spalling Strain for Unconfined Concrete - User Input Option | `"OPT_EPSILON_SP"` | Boolean | false | Optional |
+| (8) | Spalling Strain for Unconfined Concrete (εsp) | `"EPSILON_SP"` | Number | - | **Required** |
+| (9) | Elastic Modulus of Concrete Type · Mander et al.: 0 · User Input: 1 | `"IDX_EC"` | Integer | - | **Required** |
+| (10) | Elastic Modulus of Concrete (Ec) | `"EC"` | Number | - | **Required** |
+| (11) | Tensile Strength of Concrete Type · Mander et al.: 0 · User Input: 1 · Neglect Tensile Strength: 2 | `"IDX_FT"` | Integer | - | **Required** |
+| (12) | Tensile Strength of Concrete (ft’) | `"FT"` | Number | - | **Required** |
+| (13) | Tensile Strain of Concrete (εt) | `"EPSILON_T"` | Number | - | Read Only |
+| 2 | Confinement Effectiveness Coefficient | `"KE"` | Object | - | **Required** |
+| (1) | Section & Confinement Rebar Type · Rectangular: 0 · Circular-Hoop Confinement Steel: 1 · User Defined: 2 · Circular-Spiral Confinement Steel: 3 | `"SC_REBAR_TYPE"` | Number | - | **Required** |
+| (2) | Area of Effective Concrete Core - User Input Option | `"OPT_ACC"` | Boolean | false | Optional |
+| (3) | Area of Effective Concrete Core (Acc) | `"ACC"` | Number | - | **Required** |
+| (4) | Total Area of Effectively Confined Core Concrete - User Input Option | `"OPT_AE"` | Boolean | false | Optional |
+| (5) | Total Area of Effectively Confined Core Concrete (Ae) | `"AE"` | Number | - | **Required** |
+| (6) | Confinement Effectiveness Coefficient - User Input Option | `"OPT_KE"` | Boolean | false | Optional |
+| (7) | Confinement Effectiveness Coefficient (ke) | `"KE"` | Number | - | **Required** |
+| (8) | Effective Lateral Confining Stress on the Concrete - User Input Option | `"OPT_FL"` | Boolean | false | Optional |
+| (9) | Effective Lateral Confining Stress on the Concrete (f’l) | `"FL"` | Number | - | **Required** |
+| 3 | Confined Concrete Strength & Strain | `"CCS"` | Object | - | **Required** |
+| (1) | Strength of Confined Concrete - User Input Option | `"OPT_FCC"` | Boolean | false | Optional |
+| (2) | Strength of Confined Concrete (fcc) | `"FCC"` | Number | - | **Required** |
+| (3) | Strain for Confined Concrete - User Input Option | `"OPT_EPSILON_CC"` | Boolean | false | Optional |
+| (4) | Strain for Confined Concrete (εcc) | `"EPSILON_CC"` | Number | - | **Required** |
+| (5) | Yield Strain for Confined Concrete - User Input Option | `"OPT_EPSILON_CY"` | Boolean | false | Optional |
+| (6) | Yield Strain for Confined Concrete (εcy) | `"EPSILON_CY"` | Number | - | **Required** |
+| (7) | Ultimate Strain for Confined Concrete - Activation Option | `"OPT_ENABLE_EPSILON_CU"` | Boolean | false | Optional |
+| (8) | Ratio of the Volume of Transverse Confining - User Input Option | `"USE_RHO_S"` | Boolean | false | Optional |
+| (9) | Ratio of the Volume of Transverse Confining (ρs) | `"RHO_S"` | Number | - | **Required** |
+| (10) | Steel Material Type · Not Selected: 0 · Inelastic Steel: 2 | `"IDX_STEEL_MATERIAL"` | Integer | - | **Required** |
+| (11) | Ultimate Strain for Confined Concretes - User Input Option | `"USE_EPSILON_CU"` | Boolean | false | Optional |
+| (12) | Ultimate Strain for Confined Concretes (εcu) | `"EPSILON_CU"` | Number | - | **Required** |
+| 4 | Confined Concrete Strength & Strain | `"FIELD_2"` | Object | - | **Required** |
+| (1) | Rectangular Section Data - Input Type · User Input: 1 | `"nRectSectAutoorUser"` | Integer | - | **Required** |
+| (2) | Concrete Core Dimension to Center Lines of Perimeter Hoop in y-dir (bc) | `"dXdirectionbc"` | Number | - | **Required** |
+| (3) | i-th Clear Transverse Spacing Between Adjacent Longitudinal Rebars in y-dir (w’yi) | `"dXdirectionwxi"` | Number | - | **Required** |
+| (4) | Number of Transverse Rebar in y-dir(n) | `"nXdirectionn"` | Integer | - | **Required** |
+| (5) | Concrete Core Dimension to Center Lines of Perimeter Hoop in z-dir (dc) | `"dYdirectiondc"` | Number | - | **Required** |
+| (6) | i-th Clear Transverse Spacing Between Adjacent Longitudinal Rebars in z-dir (w’zj) | `"dYdirectionwyj"` | Number | - | **Required** |
+| (7) | Number of Transverse Rebar in z-dir (m) | `"nYdirectionm"` | Integer | - | **Required** |
+| (8) | [Rebar Data] Longitudinal Rebar Type · Rebar Number: 0 · Total Area of Rebars: 1 | `"nLongiRebarType"` | Integer | - | **Required** |
+| (9) | Number of Longitudinal Rebar | `"nLongiRebarNum"` | Integer | - | **Required** |
+| (10) | Rebar Size of Longitudinal Rebar | `"strLongiRebarSize"` | String | - | **Required** |
+| (11) | Total Area of Rebars | `"dLongiRebarArea"` | Number | - | **Required** |
+| (12) | Longitudinal Reinforcement Ratio - User Input Option | `"bLongiRebarRatio"` | Boolean | false | Optional |
+| (13) | Longitudinal Reinforcement Ratio (ρcc) | `"dLongiRebarRatio"` | Number | - | **Required** |
+| (14) | General Confinement Rebar Type · Rebar Size: 0 · Rebar Area: 1 | `"nGeneralRebarType"` | Integer | - | **Required** |
+| (15) | Rebar Size of Confinement Rebar | `"strGeneralRebarSize"` | String | - | **Required** |
+| (16) | Confinement Rebar Area | `"dGeneralRebarArea"` | Number | - | **Required** |
+| (17) | Hoops Space (s) | `"dHoopsSpaceS1"` | Number | - | **Required** |
+| (18) | Clear Hoops Space (s') | `"dClearHoopsSpaceS2"` | Number | - | **Required** |
+| (19) | Confinement Rebar Number y-dir (ny) | `"nGeneralRebarNumX"` | Integer | - | **Required** |
+| (20) | Confinement Rebar Number z-dir (nz) | `"nGeneralRebarNumY"` | Integer | - | **Required** |
+| (21) | [Rectangular Section - Effective Lateral Confining Stress] Confinement Rebar Yield Strength - User Input Option | `"bRectStrengthfyh"` | Boolean | false | Optional |
+| (22) | Confinement Rebar Yield Strength | `"dRectStrengthfyh"` | Number | - | **Required** |
+| (23) | Total Area of Confinement Rebars in y-dir - User Input Option | `"bGeneralAsx"` | Boolean | false | Optional |
+| (24) | Total Area of Confinement Rebars in y-dir (Asy) | `"dGeneralAsx"` | Number | - | **Required** |
+| (25) | Total Area of Confinement Rebars in z-dir - User Input Option | `"bGeneralAsy"` | Boolean | false | Optional |
+| (26) | Total Area of Confinement Rebars in z-dir (Asz) | `"dGeneralAsy"` | Number | - | **Required** |
+| (27) | Ratio of the Volume of Transverse Confining Steel to the Volume of Confined Concrete Core in y-dir - User Input Option | `"bRectRatiopx"` | Boolean | false | Optional |
+| (28) | Ratio of the Volume of Transverse Confining Steel to the Volume of Confined Concrete Core in y-dir (ρy) | `"dRectRatiopx"` | Number | - | **Required** |
+| (29) | Ratio of the Volume of Transverse Confining Steel to the Volume of Confined Concrete Core in z-dir - User Input Option | `"bRectRatiopy"` | Boolean | false | Optional |
+| (30) | Ratio of the Volume of Transverse Confining Steel to the Volume of Confined Concrete Core in z-dir (ρz) | `"dRectRatiopy"` | Number | - | **Required** |
+| (31) | Effective Lateral Confining Stress on the Concrete in the y-dir - User Input Option | `"bRectStressflx"` | Boolean | false | Optional |
+| (32) | Effective Lateral Confining Stress on the Concrete in the y-dir (f’ly) | `"dRectStressflx"` | Number | - | **Required** |
+| (33) | Effective Lateral Confining Stress on the Concrete in the z-dir - User Input Option | `"bRectStressfly"` | Boolean | false | Optional |
+| (34) | Effective Lateral Confining Stress on the Concrete in the z-dir (f’lz) | `"dRectStressfly"` | Number | - | **Required** |
+| (35) | Circular Section Data - Input Type · User Input: 1 | `"nCircSectAutoorUser"` | Integer | - | **Required** |
+| (36) | Diameter of Spiral | `"dds"` | Number | - | **Required** |
+| (35) | [Circular Section - Effective Lateral Confining Stress] Confinement Rebar Yield Strength - User Input Option | `"bCircularStrengthfyh"` | Boolean | false | Optional |
+| (36) | Confinement Rebar Yield Strength (fyh) | `"dCircularStrengthfyh"` | Number | - | **Required** |
+| (37) | Area of Confinement Rebar - User Input Option | `"bGeneralRebarArea"` | Boolean | false | Optional |
+| (38) | Ratio of Volume of Transverse Confining Steel - User Input Option | `"bCircularRatiops"` | Boolean | false | Optional |
+| (39) | Ratio of Volume of Transverse Confining Steel (ρs) | `"dCircularRatiops"` | Number | - | **Required** |
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `ASSIGN_TYPE`, `A_B_M`, `A_B_P`, `C_M`, `C_P`, `D_M`, `D_P`, `ELASTIC_MODULUS`, `ENRGDS`, `EPSILON_C`, `EU`, `EUY`, `E_M`, `E_P`, `FMR_ITEMS`, `FSTR`, `FYR`, `INPUT_TYPE`, `ITEMS`, `JPROAD`, `OPT_CYCLIC_DEGRATION`, `OPT_STRENGTH_LOSS`, `OPT_SYMMETRIC`, `OPT_TOTAL_STR_LOSS_AT_E`, `OPT_UNLOADING_STIFF_FACTOR`, `OPT_USE_STRENGTH_LOSS`, `OPT_USE_TOTAL_STR_LOSS_AT_E`, `OPT_USE_YIELD_STRAIN`, `SHAPE_OF_CURVE`, `UNLOADING_STIFF_FACTOR`, `YIELD_STRAINS`, `YIELD_STRENGTHS`
+
+<!-- /om-fields -->
+
 
 ---
 
@@ -2912,6 +3823,16 @@ midas_api("POST", "/db/SECV", secv_data)
 # 설계용 단면 조회
 midas_api("GET", "/DESIGN/SECT")
 ```
+
+<!-- om-fields:59471991932441 -->
+**OM 원문 추가 필드 — DESIGN/SECT : Section for Design ([59471991932441](https://support.midasuser.com/hc/en-us/articles/59471991932441))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `article`, `label`, `order`, `vSIZE`
+
+<!-- /om-fields -->
+
 
 ---
 

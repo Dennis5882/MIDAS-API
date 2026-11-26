@@ -8,8 +8,8 @@
 
 | 이름 | mode | 대상 문서 | 매니페스트 |
 | --- | --- | --- | --- |
-| `manual` | `section` — `sections/{id}/articles.json`로 650개 아티클을 한 번에 나열 (JSON Manual, `section_id=30087500371097`) | `docs/manual/*.md` — REST 엔드포인트 스키마 표 | `docs/manual/.sync_manifest.json` |
-| `plugin` | `id_list` — `common.PLUGIN_ARTICLE_IDS`(57개, 명시적 목록)를 `articles/{id}.json`로 1건씩 조회 | `docs/plugin/**/*.md` — GUI 내장 Plug-in 툴 사용법 | `docs/plugin/.sync_manifest.json` |
+| `manual` | `section` — `sections/{id}/articles.json`로 651개 아티클을 한 번에 나열 (JSON Manual, `section_id=30087500371097`) | `docs/manual/*.md` — REST 엔드포인트 스키마 표 | `docs/manual/.sync_manifest.json` |
+| `plugin` | `id_list` — `common.PLUGIN_ARTICLE_IDS`(78개, 명시적 목록)를 `articles/{id}.json`로 1건씩 조회 | `docs/plugin/**/*.md` — GUI 내장 Plug-in 툴 사용법 | `docs/plugin/.sync_manifest.json` |
 
 `plugin`이 `id_list`인 이유: Plug-in Zendesk 섹션(`section_id=35681419399961`)은 `sections/{id}/articles.json`을 호출해도 "Plug-in Online Manual" 랜딩 페이지 **1건만** 돌아옵니다. 나머지 56개(가이드 4 + 개별 툴 52)는 그 랜딩 페이지 본문 HTML 안에 있는 `<a href>` 링크일 뿐이고, 각각 API로는 찾을 수 없는 별도 `section_id`에 흩어져 있습니다. 그래서 `docs/plugin/INDEX.md`를 만들 때 추출한 57개 article id를 `common.py`에 고정 목록으로 박아두고 개별 조회합니다. **신규 Plug-in이 추가되면 랜딩 페이지 자체의 `updated_at`이 바뀌므로 `changed` 목록에 랜딩 article(`35639730101529`)이 잡히고**, 이를 신호로 랜딩 페이지를 재스크래핑해 `PLUGIN_ARTICLE_IDS`와 `INDEX.md`를 갱신해야 합니다(코드 수정이 필요하므로 자동 반영되지 않음).
 
@@ -22,6 +22,11 @@
 | `check_diff.py` | 매니페스트와 현재 홈페이지 상태를 섹션별로 비교해 added/removed/changed article만 추출 (`--section` 생략 시 전체). changed 항목마다 **어느 로케일이 바뀌었는지** 판정해 `locale_note`로 표시 (`--no-locales`로 생략 가능) | ✗ |
 | `validate_manual.py` | `docs/manual/*.md` + `docs/plugin/**/*.md`의 JSON 코드블록 유효성 + TOC 앵커 정합성 검증 | ✗ |
 | `check_coverage.py` | 변경 여부와 무관한 누락 점검 — (A) manual 섹션의 모든 글이 `docs/manual`에 섹션을 갖는지, (B) 공식 목차 표와 `docs/manual`의 양방향 대조 및 목차↔글 본문 Input URI 대조 | ✗ |
+| `check_fields.py` | 필드 단위 누락 점검 — 공식 글의 Specifications 표 Key와 Schema·요청 예제의 JSON Key가 해당 문서 섹션(챕터 공통 표 포함)에 있는지 대조 | ✗ |
+| `fill_fields.py` | 빠진 Key를 공식 Specifications 표에서 원문 그대로 옮겨 해당 섹션 끝에 `<!-- om-fields -->` 블록으로 추가. 기존 텍스트는 수정하지 않고, 재실행하면 블록만 다시 만듦 | ✗ |
+| `build_index.py` | `docs/index/endpoints.json`·`chunks.jsonl` 생성 (AI·RAG용) | ✗ |
+| `eval_retrieval.py` | 청크 색인의 검색 시험 (BM25, 질문은 공식 글에서만 생성) | ✗ |
+| `om_parse.py` | 공식 글 HTML의 Specifications 표 파서 (공용) | ✗ |
 | `coverage_exceptions.json` | 검토를 마친 `check_coverage.py` 항목과 그 사유 | — |
 | `prompt_sample.md` | 최초 매뉴얼 문서(01~27)를 사람이 손으로 생성할 때 썼던 프롬프트 예시 (참고용, 실행 스크립트 아님) | — |
 
@@ -61,7 +66,20 @@ python3 validate_manual.py
 
 # 누락 점검 — 정기 점검마다 실행 (exit 0 = 미검토 항목 없음)
 python3 check_coverage.py
+
+# 필드 단위 누락 점검 (--out 으로 글별 상세 JSON 저장)
+python3 check_fields.py --out fields.json
 ```
+
+## 필드 점검 읽는 법 (`check_fields.py`)
+
+- `unique gaps (endpoint, key)`가 대표 수치입니다. 국가별 글처럼 여러 글이 같은 스키마를 공유하므로
+  글 단위 합계(`missing keys`)는 같은 누락을 여러 번 셉니다.
+- Key 이름이 섹션에 **언급되는지**만 봅니다. 설명·타입이 맞는지는 확인하지 않습니다.
+- Schema나 예제에만 있는 Key도 포함합니다. 원문 Schema의 오탈자가 Key로 잡힐 수 있습니다.
+- 2026-11-26 첫 측정: unique gaps 744개(이 중 Specifications 표에 있는 것 611개), 65개 엔드포인트.
+  같은 날 `fill_fields.py`로 모두 추가해 0이 됐다. 이후 0이 아니면 공식 글이 바뀌었거나 문서가 달라진 것이다.
+- `fill_fields.py`가 넣은 행은 원문 그대로라 중첩 필드의 상위 Key가 표에 보이지 않을 수 있다(`No.`만 남음).
 
 ## 누락 점검 메모 (`check_coverage.py`)
 

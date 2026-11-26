@@ -253,6 +253,16 @@ result = mv_post("LLAN", {
 print(result)
 ```
 
+<!-- om-fields:35955170613273 -->
+**OM 원문 추가 필드 — Traffic Line Lanes ([35955170613273](https://support.midasuser.com/hc/en-us/articles/35955170613273))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `ELEMS`, `SPAN_START_NO_LIST`, `SPECIAL_LANE_ITEMS`
+
+<!-- /om-fields -->
+
+
 ---
 
 ## 3. /db/LLANch – Traffic Line Lanes – China
@@ -330,6 +340,16 @@ result = mv_post("LLANch", {
 print(result)
 ```
 
+<!-- om-fields:35955208713241 -->
+**OM 원문 추가 필드 — Traffic Line Lanes - China ([35955208713241](https://support.midasuser.com/hc/en-us/articles/35955208713241))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `ELEMS`, `SPAN_START_NO_LIST`, `SPECIAL_LANE_ITEMS`
+
+<!-- /om-fields -->
+
+
 ---
 
 ## 4. /db/LLANid – Traffic Line Lanes – India
@@ -402,6 +422,16 @@ result = mv_post("LLANid", {
 print(result)
 ```
 
+<!-- om-fields:35955251576089 -->
+**OM 원문 추가 필드 — Traffic Line Lanes - India ([35955251576089](https://support.midasuser.com/hc/en-us/articles/35955251576089))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `ELEMS`, `SPECIAL_LANE_ITEMS`
+
+<!-- /om-fields -->
+
+
 ---
 
 ## 5. /db/LLANtr – Traffic Line Lanes – Transverse
@@ -453,6 +483,16 @@ result = mv_post("LLANtr", {
 })
 print(result)
 ```
+
+<!-- om-fields:35955355080217 -->
+**OM 원문 추가 필드 — Traffic Line Lanes - Transverse ([35955355080217](https://support.midasuser.com/hc/en-us/articles/35955355080217))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `ELEMS`, `SPECIAL_LANE_ITEMS`
+
+<!-- /om-fields -->
+
 
 ---
 
@@ -538,6 +578,22 @@ result = mv_post("LLANop", {
 })
 print(result)
 ```
+
+<!-- om-fields:35955410961689 -->
+**OM 원문 추가 필드 — Traffic Line Lanes - Moving Load Optimizaion ([35955410961689](https://support.midasuser.com/hc/en-us/articles/35955410961689))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 9 | Use Straddling Lane Type ¹⁾ | `"OPT_STRADD"` | Boolean | false | Optional |
+| (3) | [China] Span length | `"SPAN"` | Number | 0 | Optional |
+| (5) | Scale Factor | `"SCALE_FACTOR"` | Number | 0 | Optional |
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `ELEMS`, `SPAN_START_NO_LIST`, `SPECIAL_LANE_ITEMS`
+
+<!-- /om-fields -->
+
 
 ---
 
@@ -690,6 +746,18 @@ result = mv_post("SLANch", {
 print(result)
 ```
 
+<!-- om-fields:35956917206425 -->
+**OM 원문 추가 필드 — Traffic Surface Lanes - China ([35956917206425](https://support.midasuser.com/hc/en-us/articles/35956917206425))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 9 | Sequence Number (Unique) | `"SEQ"` | Integer | 1 | Optional |
+
+<!-- /om-fields -->
+
+
 ---
 
 ## 9. /db/SLANop – Traffic Surface Lanes – Moving Load Optimization
@@ -769,6 +837,22 @@ result = mv_post("SLANop", {
 })
 print(result)
 ```
+
+<!-- om-fields:35956982840473 -->
+**OM 원문 추가 필드 — Traffic Surface Lanes - Moving Load Optimization ([35956982840473](https://support.midasuser.com/hc/en-us/articles/35956982840473))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 9 | Use Straddling Lane Type ¹⁾ | `"OPT_STRADD"` | Boolean | false | Optional |
+| 13 | [China] Lane Items · Insert the data as an object | `"CHINA_ITEMS"` | Array [Object] | - | **Required** |
+| (3) | Span Length | `"SPAN_LENGTH"` | Number | 0 | Optional |
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `LANE_ID`
+
+<!-- /om-fields -->
+
 
 ---
 
@@ -1249,6 +1333,230 @@ result = mv_post("MVHL", {
 print(result)
 ```
 
+<!-- om-fields:35957125531545 -->
+**OM 원문 추가 필드 — Vehicles - AASHTO Standard ([35957125531545](https://support.midasuser.com/hc/en-us/articles/35957125531545))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `S1600`
+
+<!-- /om-fields -->
+
+<!-- om-fields:35957229130521 -->
+**OM 원문 추가 필드 — Vehicles - AASHTO LRFD ([35957229130521](https://support.midasuser.com/hc/en-us/articles/35957229130521))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (1) | [For User Defined Vehicle - Legal/Permit Load] Load Type · Legal Type: 0 · Permit Type: 1 | `"LEGAL_PERMIT_TYPE"` | Integer | - | **Required** |
+| (3) | Distance · Only for Legal Type | `"COMBINED_TRUCK_SPACE"` | Number | 0 | Optional |
+| (4) | Uniform Distribution Load | `"COMBINED_UNIFORM_LOAD"` | Number | 0 | Optional |
+| (5) | Reduction Factor (%) · Only for Legal Type | `"LEGAL_R"` | Number | 0 | Optional |
+
+<!-- /om-fields -->
+
+<!-- om-fields:35957369367321 -->
+**OM 원문 추가 필드 — Vehicles - PENNDOT ([35957369367321](https://support.midasuser.com/hc/en-us/articles/35957369367321))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `S1600`
+
+<!-- /om-fields -->
+
+<!-- om-fields:35957522468889 -->
+**OM 원문 추가 필드 — Vehicles - BS ([35957522468889](https://support.midasuser.com/hc/en-us/articles/35957522468889))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (2) | [For Standard Vehicle - CS 454 Assessment: ALL MODEL 1] Loading Case · Single: 0 · Convoy: 1 | `"LM1_CASE"` | Integer | 0 | Optional |
+| (3) | Road Surface · Good: 0 · Poor: 1 | `"LM1_SURFACE"` | Integer | 0 | Optional |
+| (4) | Traffic Flow Category · High: 0 · Medium: 1 · Low: 2 | `"LM1_CATEGORY"` | Integer | 0 | Optional |
+| (1) | [For Standard Vehicle - CS 458 (BD86/11) Special Load] Dynamic Amplification Factor Option | `"USE_DYNAMIC_FACTOR"` | Boolean | false | Optional |
+| (2) | Factor Type · Auto: false · User Input: true | `"AMP_USER_INPUT"` | Boolean | false | Optional |
+| (4) | Overload Factor Option | `"OVERLOAD_USER_INPUT"` | Boolean | false | Optional |
+| (5) | Factor Type · Auto: 0 · User Input: 1 | `"OVERLOAD_VALUE"` | Integer | 0 | Optional |
+| (6) | Critical Axle | `"CRITICAL_AXLE"` | Number | 0 | Optional |
+| (7) | All Other Axles | `"OTHER_AXLE"` | Number | 0 | Optional |
+| (8) | Distance to Front and Rear Vehicles · 25 or 5 | `"DIST_FRONT_TO_REAR_VEHICLE"` | Integer | 5 | Optional |
+| (5) | [For User Defined Vehicle - HA Loading] Exponent (W2) | `"EXP2"` | Number | 0 | Optional |
+| (6) | Loaded Length (W2) | `"LOADED_LENGTH2"` | Number | 0 | Optional |
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `VEHICLE_SPEED`
+
+<!-- /om-fields -->
+
+<!-- om-fields:35957725805977 -->
+**OM 원문 추가 필드 — Vehicles - Eurocode ([35957725805977](https://support.midasuser.com/hc/en-us/articles/35957725805977))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (2) | [For Standard Vehicle - EN 1991-2:2003 - Road Bridge (Load Model 2 & Load Model 4)] Adjustment Factor · Only for Load Model 2 | `"ADJUSTMENT2"` | Number | - | Optional |
+| (3) | ψ factor | `"ADJUSTMENT"` | Number | - | Optional |
+| (3) | [For Standard Vehicle - EN 1991-2:2003 - Road Bridge (Load Model 3 & UK NA)] Load Case 1 Option · Not Used for Select Vehicle Name of "600/150", "900/150" and UK NA | `"LM3_LOADCASE1"` | Boolean | - | **Required** |
+| (4) | Load Case 2 Option · Not Used for Select Vehicle Name of "600/150", "900/150" and UK NA | `"LM3_LOADCASE2"` | Boolean | - | **Required** |
+| (5) | Dynamic Amplification Factor Option | `"DYNAMIC_FACTOR"` | Boolean | false | Optional |
+| (2) | [For Standard Vehicle - EN 1991-2:2003 - Footway and Footbridge] ψ factor · Not Used for Concentrated Load | `"ADJUSTMENT"` | Number | - | Optional |
+| (5) | [Only for Fatigue Model 3 (Two Vehicle)] Two Vehicle Interval | `"INTERVAL"` | Number | - | Optional |
+| (3) | [For Standard Vehicle - EN 1991-2:2003 - Rail Traffic Load (Load Model 71, Load Model SW/0, Load Model SW/2, Unloaded Train)] Loaded Length (W1) | `"DD1"` | Number | - | Read Only |
+| (6) | Loaded Length (W2) | `"DD2"` | Number | - | Read Only |
+| (8) | Adjustment Factor · Only for LM 71 and SW/0 | `"V_LOAD_FACTOR"` | Number | 0 | Optional |
+| (9) | Consider Longitudinal Distribution of Point Loads Option · Only for LM 71 | `"LONGI_DIST"` | Boolean | false | Optional |
+| (10) | Distance between Rail Support Points · Only for LM 71 | `"DIST_RAIL_SUPPORT"` | Number | 0 | Optional |
+| (11) | Eccentricity of Lateral Displacement of Vertical Loads Option | `"ECCEN_VERT_LOAD"` | Boolean | false | Optional |
+| (12) | Eccentricity Value | `"ECCEN_VERT_LOAD_VALUE"` | Number | 0 | Optional |
+| (3) | [For Standard Vehicle - EN 1991-2:2003 - Rail Traffic Load (HSLM A1 ~ HSLM A10)] Number of Intermediate Coaches (N) | `"HSLMA_NUM"` | Number | - | Read Only |
+| (4) | Coach Length (D) | `"HSLMA_LENGTH"` | Number | - | Read Only |
+| (5) | Bogle Axle Spacing (d) | `"HSLMA_SPACING"` | Number | - | Read Only |
+| (6) | Point Force (P) | `"HSLMA_FORCE"` | Number | - | Read Only |
+| (7) | Adjustment Factor | `"V_LOAD_FACTOR"` | Number | - | Read Only |
+| (8) | Dynamic Effect (φ'(dyn)) | `"PHI_DYN_EFF1"` | Number | 0 | Optional |
+| (9) | Dynamic Effect (φ'') | `"PHI_DYN_EFF2"` | Number | 0 | Optional |
+| (10) | Consider Longitudinal Distribution of Point Loads Option | `"LONGI_DIST"` | Boolean | false | Optional |
+| (11) | Distance between Rail Support Points | `"DIST_RAIL_SUPPORT"` | Number | 0 | Optional |
+| (12) | Eccentricity of Lateral Displacement of Vertical Loads Option | `"ECCEN_VERT_LOAD"` | Boolean | false | Optional |
+| (13) | Eccentricity Value | `"ECCEN_VERT_LOAD_VALUE"` | Number | 0 | Optional |
+| (2) | [For Standard Vehicle - EN 1991-2:2003 - Rail Traffic Load (HSLM B)] Number of Point Forces (N) | `"HSLMB_NUM"` | Number | 0 | Optional |
+| (3) | Distance between the Loads (D) | `"HSLMB_DIST"` | Number | 0 | Optional |
+| (4) | Point Force (P) | `"HSLMB_FORCE"` | Number | - | Read Only |
+| (5) | Adjustment Factor | `"V_LOAD_FACTOR"` | Number | - | Read Only |
+| (6) | Dynamic Effect (φ'(dyn)) | `"PHI_DYN_EFF1"` | Number | 0 | Optional |
+| (7) | Dynamic Effect (φ'') | `"PHI_DYN_EFF2"` | Number | 0 | Optional |
+| (8) | Eccentricity of Lateral Displacement of Vertical Loads Option | `"ECCEN_VERT_LOAD"` | Boolean | false | Optional |
+| (9) | Eccentricity Value | `"ECCEN_VERT_LOAD_VALUE"` | Number | 0 | Optional |
+| (2) | [For User Defined Vehicle - EN 1991-2:2003 - Road Bridge/Footway and Footbridge (Load Model 1 / Fatigue Load Model 1)] Axle Loads for Tandem System | `"TANDEM_LOADS"` | Array [Number, 3] | - | Optional |
+| (4) | Uniformly Distribution Loads for UDL System | `"UDL_LOADS"` | Array [Number,4] | - | Optional |
+| (1) | [For User Defined Vehicle - EN 1991-2:2003 - Road Bridge/Footway and Footbridge (Load Model 2,4 / Fatigue Load Model 2,4)] Adjustment Factor α | `"ADJUSTMENT"` | Number | - | Optional |
+| (2) | Adjustment Factor β | `"ADJUSTMENT2"` | Number | - | Optional |
+| (1) | [For User Defined Vehicle - EN 1991-2:2003 - Road Bridge/Footway and Footbridge (Load Model 3)] Load Cases · Insert the data as an object | `"LOADCASES"` | Array [Object,3] | - | Optional |
+| i. | Load Case Option | `"USE_POINT_LOAD"` | Boolean | - | **Required** |
+| ii. | Number of Axle Loads | `"NUM_LOAD"` | Integer | - | **Required** |
+| iii. | Dynamic Amplification Factor | `"DYNAMIC_FACTOR"` | Boolean | false | Optional |
+| vi. | Define Axle Loads · Insert the data as an object | `"POINT_SET"` | Array [Object, NUM_LOAD] | - | **Required** |
+| (3) | [For User Defined Vehicle - EN 1991-2:2003 - Road Bridge/Footway and Footbridge (Load Model 3 (Straddling))] Number of Axle | `"AXLE_NUM"` | Integer | - | Optional |
+| (4) | Mininum Spacing | `"MIN_SPACING"` | Number | - | Optional |
+| (5) | Maximum Spacing | `"MAX_SPACING"` | Number | - | Optional |
+| (6) | Dynamic Amplification Factor | `"DYNAMIC_FACTOR"` | Boolean | false | Optional |
+| (1) | [For User Defined Vehicle - EN 1991-2:2003 - Road Bridge/Footway and Footbridge (Fatigue Load Model 3)] Dynamic Amplification Factor for One Vehicle | `"USE_DYNAMIC_FACTOR2_0"` | Boolean | false | Optional |
+| (2) | Factor Type for One Vehicle · Auto: false · User Defined: True | `"USE_POINT_LOAD3_0"` | Boolean | false | Optional |
+| (4) | Dynamic Amplification Factor for Two Vehicle | `"USE_DYNAMIC_FACTOR2_1"` | Boolean | false | Optional |
+| (5) | Factor Type for Two Vehicle · Auto: false · User Defined: True | `"USE_POINT_LOAD3_1"` | Boolean | false | Optional |
+| (6) | Factor Value for Two Vehicle · Only for User Defined | `"AMP2"` | Number | 0 | Optional |
+| (7) | Distance between Two Vehicles | `"INTERVAL"` | Number | 0 | Optional |
+| (8) | Load Cases · Insert the data as an object | `"VEHICLES"` | Array [Object,2] | - | Optional |
+| iii. | Axle Loads · Insert the data as an object | `"POINT_SET"` | Array [Object, NUM_LOAD] | - | **Required** |
+| (6) | Consider Longitudinal Distribution of Point Loads Option | `"LONGI_DIST"` | Boolean | false | Optional |
+| (7) | Distance between Rail Support Points | `"DIST_RAIL_SUPPORT"` | Number | 0 | Optional |
+| (2) | [For User Defined Vehicle - EN 1991-2:2003 - Rail Traffic Load (Load Model SW/0, Load Model SW/2)] Loaded Length (W1) | `"DD1"` | Number | 0 | Optional |
+| (5) | Loaded Length (W2) | `"DD2"` | Number | 0 | Optional |
+| (6) | Adjustment Factor · Only for SW/0 | `"V_LOAD_FACTOR"` | Number | 0 | Optional |
+| (7) | Eccentricity of Lateral Displacement of Vertical Loads Option | `"ECCEN_VERT_LOAD"` | Boolean | false | Optional |
+| (8) | Eccentricity Value | `"ECCEN_VERT_LOAD_VALUE"` | Number | 0 | Optional |
+| (2) | [For User Defined Vehicle - EN 1991-2:2003 - Rail Traffic Load (Unloaded Train)] Eccentricity of Lateral Displacement of Vertical Loads Option | `"ECCEN_VERT_LOAD"` | Boolean | false | Optional |
+| (3) | Eccentricity Value | `"ECCEN_VERT_LOAD_VALUE"` | Number | 0 | Optional |
+| (1) | [For User Defined Vehicle - EN 1991-2:2003 - Rail Traffic Load (HSLM A)] Number of Intermediate Coaches (N) | `"HSLMA_NUM"` | Number | 0 | Optional |
+| (2) | Coach Length (D) | `"HSLMA_LENGTH"` | Number | 0 | Optional |
+| (3) | Bogle Axle Spacing (d) | `"HSLMA_SPACING"` | Number | 0 | Optional |
+| (4) | Point Force (P) | `"HSLMA_FORCE"` | Number | 0 | Optional |
+| (5) | Dynamic Effect (φ'(dyn)) | `"PHI_DYN_EFF1"` | Number | 0 | Optional |
+| (6) | Dynamic Effect (φ'') | `"PHI_DYN_EFF2"` | Number | 0 | Optional |
+| (7) | Consider Longitudinal Distribution of Point Loads Option | `"LONGI_DIST"` | Boolean | false | Optional |
+| (8) | Distance between Rail Support Points | `"DIST_RAIL_SUPPORT"` | Number | 0 | Optional |
+| (9) | Eccentricity of Lateral Displacement of Vertical Loads Option | `"ECCEN_VERT_LOAD"` | Boolean | false | Optional |
+| (10) | Eccentricity Value | `"ECCEN_VERT_LOAD_VALUE"` | Number | 0 | Optional |
+| (1) | [For User Defined Vehicle - EN 1991-2:2003 - Rail Traffic Load (HSLM B)] Number of Point Forces (N) | `"HSLMB_NUM"` | Number | 0 | Optional |
+| (2) | Distance between the Loads (D) | `"HSLMB_DIST"` | Number | 0 | Optional |
+| (3) | Point Force (P) | `"HSLMB_FORCE"` | Number | - | Read Only |
+| (4) | Dynamic Effect (φ'(dyn)) | `"PHI_DYN_EFF1"` | Number | 0 | Optional |
+| (5) | Dynamic Effect (φ'') | `"PHI_DYN_EFF2"` | Number | 0 | Optional |
+| (6) | Eccentricity of Lateral Displacement of Vertical Loads Option | `"ECCEN_VERT_LOAD"` | Boolean | false | Optional |
+| (7) | Eccentricity Value | `"ECCEN_VERT_LOAD_VALUE"` | Number | 0 | Optional |
+
+<!-- /om-fields -->
+
+<!-- om-fields:35958016039577 -->
+**OM 원문 추가 필드 — Vehicles - Russia ([35958016039577](https://support.midasuser.com/hc/en-us/articles/35958016039577))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (7) | [For Standard Vehicle - Russia - Road Bridge and Railway Bridge (SK, SK Fatigue)] Epsilon Factor <strong> · </strong>Only for "SK" / To the second and third tracks: 0 / To the all the loaded tracks: 1 | `"EPSILON_FACTOR"` | Integer | 0 | Optional |
+| (7) | [For Standard Vehicle - Russia - Road Bridge and Railway Bridge (N14, N11, N11(2nd edition))] Consider the Effect of Two Vehicles as well as One Vehicle Option | `"TWO_VEHICLE"` | Boolean | false | Optional |
+| (8) | Reduction Factor | `"TWO_VEHICLE_FACTOR"` | Number | - | **Required** |
+| (9) | Reduction for Limit State 2nd Group | `"_2ND_GROUP_REDUCT"` | Boolean | false | Optional |
+| (10) | Reduction Factor | `"_2ND_GROUP_REDUCT_FACTOR"` | Number | - | **Required** |
+| (3) | [For Standard Vehicle - Russia - Road Bridge and Railway Bridge (Subway Trains, Tramcars, NK-80)] Ratio of Empty Car to Loaded Car | `"RATIO_EMPTY_CAR"` | Number | - | Read Only |
+| (4) | Min. D5 (Variable) | `"MIN_D5_VARIABLE"` | Number | - | Read Only |
+| (2) | [For Standard Vehicle - Russia - Walkway and Pedestrian Bridge (Uniform Load, Uniform Load(w/o Other Loads))] Vehicular Load Type ¹⁾ | `"BRIDGE_TYPE"` | String | - | **Required** |
+| (1) | [For User Defined Vehicle - AK] Lane Load | `"RUSSIA_W"` | Number | 0 | Optional |
+| (1) | [For User Defined Vehicle - Subway Trains, Tramcars] Ratio of Empty Car to Loaded Car | `"RATIO_EMPTY_CAR"` | Number | 0 | Optional |
+| (2) | Min. D5 (Variable) · Only for "Tramcars" | `"MIN_D5_VARIABLE"` | Number | 0 | Optional |
+| (5) | [For User Defined Vehicle - N14, N11] Consider the Effect of Two Vehicles as well as One Vehicle Option | `"TWO_VEHICLE"` | Boolean | false | Optional |
+| (6) | Reduction Factor | `"TWO_VEHICLE_FACTOR"` | Number | - | **Required** |
+| (7) | Reduction for Limit State 2nd Group | `"_2ND_GROUP_REDUCT"` | Boolean | false | Optional |
+| (8) | Reduction Factor | `"_2ND_GROUP_REDUCT_FACTOR"` | Number | - | **Required** |
+| (2) | [For User Defined Vehicle - NG-60] Lane Load | `"RUSSIA_W"` | Number | 0 | Optional |
+| (3) | Loaded Length | `"RUSSIA_D"` | Number | 0 | Optional |
+| (2) | [For User Defined Vehicle - Walkway and Pedestrian Bridge] Lane Load | `"RUSSIA_W2"` | Number | 0 | Optional |
+| (3) | Truck Load | `"RUSSIA_P"` | Number | 0 | Optional |
+
+<!-- /om-fields -->
+
+<!-- om-fields:35958302958745 -->
+**OM 원문 추가 필드 — Vehicles - Korea ([35958302958745](https://support.midasuser.com/hc/en-us/articles/35958302958745))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `UNIFORM_LOAD_LENGTH_L`
+
+<!-- /om-fields -->
+
+<!-- om-fields:35958578983065 -->
+**OM 원문 추가 필드 — Vehicles - India ([35958578983065](https://support.midasuser.com/hc/en-us/articles/35958578983065))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (2) | [For Standard Vehicle - IRS: Bridge Rules (Broad Gauge-1676mm, Metre Gauge-1000mm & Narrow Gauge-762mm)] Tractive | `"TRACTIVE"` | Number | 0 | Optional |
+| (3) | Braking for LOCO | `"BRAKE_LOCO_RATIO"` | Number | 0 | Optional |
+| (4) | Braking for Train | `"BRAKE_TRAIN_RATIO"` | Number | 0 | Optional |
+| (3) | Braking for LOCO | `"BRAKE_LOCO"` | Number | 0 | Optional |
+| (3) | [For Standard Vehicle - IRS: Bridge Rules (Footbridge & Footpath)] Span Length (L) | `"SPAN_LENGTH"` | Number | - | **Required** |
+| (8) | [For User Defined Vehicle - IRC:6 Standard Load (Wheeled/Tracked/Bogie)] Minimum Nose to Tail Distance (Tracked) | `"NOSE_TAIL_DIST2"` | Number | 0 | Optional |
+| (4) | [For User Defined Vehicle - IRC: Bridge Rules (Broad Guage & Heavy Mineral Loading)] Tractive | `"TRACTIVE"` | Number | 0 | Optional |
+| (5) | Braking for LOCO | `"BRAKE_LOCO_RATIO"` | Number | 0 | Optional |
+| (6) | Braking for Train | `"BRAKE_TRAIN_RATIO"` | Number | 0 | Optional |
+| (7) | Axle Load · Insert the data as an object | `"POINT_SET"` | Array [Object] | - | Optional |
+| (9) | [Only for Gondola Wagon] Position of Gondola Wagon · Front: 0 · Back: 1 · Both: 2 | `"POINT_LOAD_POS"` | Integer | 0 | Optional |
+| (10) | Gondola Wagon Load · Insert the data as an object | `"POINT_SET3"` | Array [Object] | - | Optional |
+| (9) | [Only for Train Load] Postion of Train Load · Front: 0 · Back: 1 · Both: 2 | `"DIST_LOAD_POS"` | Integer | 0 | Optional |
+| (8) | Position of Train Load · Front: 0 · Back: 1 · Both: 2 | `"DIST_LOAD_POS"` | Integer | 0 | Optional |
+| (9) | Axle Load · Insert the data as an object | `"POINT_SET"` | Array [Object] | - | Optional |
+
+<!-- /om-fields -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ---
 
 ## 11. /db/MVHLtr – Vehicles – Transverse
@@ -1552,6 +1860,21 @@ result = mv_post("MVLD", {
 print(result)
 ```
 
+<!-- om-fields:35959068573209 -->
+**OM 원문 추가 필드 — Moving Load Cases ([35959068573209](https://support.midasuser.com/hc/en-us/articles/35959068573209))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (5) | [General Load - Korea] Multi Lane Factor in KS Rail Load · Above 3 Lane - Lane 2 | `"_3_LANE_FACTOR_2"` | Number | - | **Required** |
+| (6) | Multi Lane Factor in KS Rail Load · Above 3 Lane - Lane 3 | `"_3_LANE_FACTOR_3"` | Number | - | **Required** |
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `ECC`, `NUM_LOADED_LANES`
+
+<!-- /om-fields -->
+
+
 ---
 
 ## 13. /db/MVLDch – Moving Load Cases – China
@@ -1674,6 +1997,16 @@ mv_post("MVLDch", {
     }
 })
 ```
+
+<!-- om-fields:35960417354649 -->
+**OM 원문 추가 필드 — Moving Load Cases - China ([35960417354649](https://support.midasuser.com/hc/en-us/articles/35960417354649))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `AUTO_OPTIMIZE`
+
+<!-- /om-fields -->
+
 
 ---
 
@@ -2800,6 +3133,18 @@ result = mv_post("IMPF", {
 })
 print(result)
 ```
+
+<!-- om-fields:35963359844889 -->
+**OM 원문 추가 필드 — Additional Impact Factor ([35963359844889](https://support.midasuser.com/hc/en-us/articles/35963359844889))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Additional Impact Factor · Insert the data as an object | `"ITEM"` | Array [Object] | - | **Required** |
+
+<!-- /om-fields -->
+
 
 ---
 

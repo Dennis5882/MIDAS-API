@@ -700,6 +700,16 @@ resp = requests.post(f"{BASE_URL}/ope/GSBG", json=payload, headers=HEADERS)
 print("POST:", resp.status_code, resp.json())
 ```
 
+<!-- om-fields:59870138081177 -->
+**OM 원문 추가 필드 — Bridge Girder Diagrams ([59870138081177](https://support.midasuser.com/hc/en-us/articles/59870138081177))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `groupId`
+
+<!-- /om-fields -->
+
+
 ---
 
 ## End-to-End Workflow

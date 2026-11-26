@@ -400,6 +400,16 @@ resp = requests.get(f"{BASE_URL}/db/CSCS", headers=HEADERS)
 print("CSCS GET:", resp.status_code)
 ```
 
+<!-- om-fields:35987625234201 -->
+**OM 원문 추가 필드 — Composite Section for Construction Stage ([35987625234201](https://support.midasuser.com/hc/en-us/articles/35987625234201))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `X2`, `X3`, `Y2`, `Y3`
+
+<!-- /om-fields -->
+
+
 ---
 
 ## 3. /db/TMLD – Time Loads for Construction Stage

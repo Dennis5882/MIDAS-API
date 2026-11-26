@@ -770,6 +770,54 @@ nllp_data = {
 midas_api("POST", "/db/NLLP", nllp_data)
 ```
 
+<!-- om-fields:35946764618905 -->
+**OM 원문 추가 필드 — General Link Properties ([35946764618905](https://support.midasuser.com/hc/en-us/articles/35946764618905))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 13 | [Element Type 1] Coupled Matrix for Stiffness ²⁾ · Except Linear Dashpot | `"LDP_EFF_STIFF_COUPLED_ITEMS"` | Array [Number, 15] | - | - |
+| 14 | Coupled Matrix for Damping ²⁾ · Except Spring | `"LDP_EFF_DAMPING_COUPLED_ITEMS"` | Array [Number, 15] | - | - |
+| 15 | Linear/Nonlinear Properties · Insert the data as an object / [Dx, Dy, Dz, Rx, Ry, Rz] | `"ITEMS"` | Array [Object, 6] | - | - |
+| (1) | Activation Option - Linear Properties | `"LINEAR_PROP"` | Boolean | - | - |
+| (2) | Stiffness · Except Linear Dashpot | `"EFF_STIFF"` | Number |  |  |
+| (3) | Damping · Except Spring | `"EFF_DAMPING"` | Number |  |  |
+| 13 | [Element Type 2: Seismic Control Devices] Seismic Control Devices Type ¹⁾ | `"SEIS_TYPE"` | String | - | - |
+| 14 | Seismic Control Devices Properties | `"SEIS_PROP"` | String | - | - |
+| 15 | Linear/Nonlinear Properties <strong> · </strong>Insert the data as an object / [Dx, Dy, Dz, Rx, Ry, Rz] | `"ITEMS"` | Array [Object, 6] | - | - |
+| (2) | Stiffness | `"EFF_STIFF"` | Number |  |  |
+| 13 | [Force Type: Boundary Nonlinear Analysis] Coupled Matrix for Stiffness ²⁾ | `"LDP_EFF_STIFF_COUPLED_ITEMS"` | Array [Number, 15] | - | - |
+| 14 | Coupled Matrix for Damping ²⁾ | `"LDP_EFF_DAMPING_COUPLED_ITEMS"` | Array [Number, 15] | - | - |
+| (3) | Damping | `"EFF_DAMPING"` | Number | - | - |
+| (4) | Activation Option for Nonlinear Properties | `"NONLINEAR_PROP"` | Boolean | - | - |
+| i. | [Viscoelastic Damper] Damper Type · Maxwell Model: 0 · Kelvin (Voigt) Model: 1 · Damper-Brace Assembly Model (Maxwell+Kelvin): 2 | `"DAMPER_TYPE"` | Integer | - | - |
+| ii. | Damper Stiffness · Not use for Maxwell Model | `"DAMPER_STIFFNESS"` | Number | - | - |
+| iii. | Reference Damping Force | `"DAMPING"` | Number | - | - |
+| iv. | Damping Exponent | `"DAMPING_EXP"` | Number | - | - |
+| v. | Bracing Stiffness · Not use for Kelvin Model | `"BRACING_STIFFNESS"` | Number | - | - |
+| vi. | Reference Velocity | `"REF_VELOCITY"` | Number | - | - |
+| i. | [Gap] Stiffness | `"STIFFNESS"` | Number | - | - |
+| ii. | Open | `"OPN"` | Number | - | - |
+| ii. | Yield Strength | `"YIELD_STRENGTH"` | Number | - | - |
+| iii. | Post Yield Stiffness Ratio | `"POST_YIELD_STIFF_RATIO"` | Number | - | - |
+| iv. | Yielding Exponent | `"YIELD_EXP"` | Number | - | - |
+| v. | Hysteretic Loop Parameter Alpha | `"LOOP_PARAM_A"` | Number | - | - |
+| vi. | Hysteretic Loop Parameter Beta | `"LOOP_PARAM_B"` | Number | - | - |
+| iv. | Hysteretic Loop Parameter Alpha | `"LOOP_PARAM_A"` | Number | - | - |
+| v. | Hysteretic Loop Parameter Beta | `"LOOP_PARAM_B"` | Number | - | - |
+| ii. | Frictional Coefficient, Slow | `"FRIC_COEFF_SLOW"` | Number | - | - |
+| iii. | Frictional Coefficient, Fast | `"FRIC_COEFF_FAST"` | Number | - | - |
+| iv. | Rate Parameter | `"RATE_PARAMETER"` | Number | - | - |
+| v. | Radius of Sliding Surface | `"RADIUS_OF_SLIDING_SURFACE"` | Number | - | - |
+| vi. | Hysteretic Loop Parameter Alpha | `"LOOP_PARAM_A"` | Number | - | - |
+| vii. | Hysteretic Loop Parameter Beta | `"LOOP_PARAM_B"` | Number | - | - |
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `AREA_PRESSURE`, `COEFF_UREF_ITEMS`, `DFPSI`, `FRIC_COEFF_FAST_ITEMS`, `FRIC_COEFF_SLOW_ITEMS`, `HEIGHT_IN`, `HEIGHT_OUT`, `INDEX`, `OPT_SYM_OUT`, `PARAM_COEFF_AP_ITEMS`, `PARAM_COEFF_HP_ITEMS`, `RADIUS_ITEMS`, `RADIUS_OF_SLIDING_SURFACE_ITEMS`, `RATE_PARAMETER_ITEMS`, `RATIO_COEFF_UP_ITEMS`, `RATIO_COEFF_UV_ITEMS`, `REF_AXIAL_PRESSURE`, `STIFFNESS_ITEMS`, `STOP_DISTANCE_ITEMS`
+
+<!-- /om-fields -->
+
+
 ---
 
 ## 9. `/db/NLNK` — General Link
@@ -1501,6 +1549,18 @@ sdve_data = {
 midas_api("POST", "/db/SDVE", sdve_data)
 ```
 
+<!-- om-fields:35948062417049 -->
+**OM 원문 추가 필드 — Seismic Device - Viscoelastic Damper ([35948062417049](https://support.midasuser.com/hc/en-us/articles/35948062417049))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (4) | Company | `"COMPANY"` | String | - | **Required** |
+
+<!-- /om-fields -->
+
+
 ---
 
 ## 18. `/db/SDST` — Seismic Device – Steel Damper
@@ -1589,6 +1649,18 @@ sdst_data = {
 midas_api("POST", "/db/SDST", sdst_data)
 ```
 
+<!-- om-fields:35948150053529 -->
+**OM 원문 추가 필드 — Seismic Device - Steel Damper ([35948150053529](https://support.midasuser.com/hc/en-us/articles/35948150053529))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (4) | Company | `"COMPANY"` | String | - | **Required** |
+
+<!-- /om-fields -->
+
+
 ---
 
 ## 19. `/db/SDHY` — Seismic Device – Hysteretic Isolator (MSS)
@@ -1676,6 +1748,18 @@ sdhy_data = {
 
 midas_api("POST", "/db/SDHY", sdhy_data)
 ```
+
+<!-- om-fields:35948292269977 -->
+**OM 원문 추가 필드 — Seismic Device - Hysteretic Isolator(MSS) ([35948292269977](https://support.midasuser.com/hc/en-us/articles/35948292269977))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (4) | Company | `"COMPANY"` | String | - | **Required** |
+
+<!-- /om-fields -->
+
 
 ---
 
@@ -1829,6 +1913,18 @@ sdis_lrb_data = {
 
 midas_api("POST", "/db/SDIS", sdis_lrb_data)
 ```
+
+<!-- om-fields:35948330042649 -->
+**OM 원문 추가 필드 — Seismic Device - Isolator(MSS) ([35948330042649](https://support.midasuser.com/hc/en-us/articles/35948330042649))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (4) | Company | `"COMPANY"` | String | - | **Required** |
+
+<!-- /om-fields -->
+
 
 ---
 
@@ -2102,6 +2198,16 @@ current_drls = midas_api("GET", "/db/DRLS")
 # 특정 절점(ID=5) 해제 취소
 midas_api("DELETE", "/db/DRLS", {"Assign": {"5": {}}})
 ```
+
+<!-- om-fields:51740138178969 -->
+**OM 원문 추가 필드 — Diaphragm Disconnect ([51740138178969](https://support.midasuser.com/hc/en-us/articles/51740138178969))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `DUMMY`
+
+<!-- /om-fields -->
+
 
 ---
 

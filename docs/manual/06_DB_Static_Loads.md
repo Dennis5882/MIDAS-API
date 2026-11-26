@@ -421,6 +421,16 @@ all_bmld = midas_api("GET", "/db/BMLD")
 midas_api("DELETE", "/db/BMLD", {"Assign": {"115": {}}})
 ```
 
+<!-- om-fields:35952826746521 -->
+**OM 원문 추가 필드 — Beam Loads ([35952826746521](https://support.midasuser.com/hc/en-us/articles/35952826746521))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `VX`, `VY`, `VZ`
+
+<!-- /om-fields -->
+
+
 ---
 
 ## 5. /db/SDSP — Specified Displacements of Support
@@ -830,6 +840,18 @@ all_pslt = midas_api("GET", "/db/PSLT")
 midas_api("DELETE", "/db/PSLT", {"Assign": {"2": {}}})
 ```
 
+<!-- om-fields:35953165879833 -->
+**OM 원문 추가 필드 — Define Pressure Load Type ([35953165879833](https://support.midasuser.com/hc/en-us/articles/35953165879833))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| (1) | Load Case Name | `"CMD"` | String | 0 | **Required** |
+
+<!-- /om-fields -->
+
+
 ---
 
 ## 10. /db/PRES — Assign Pressure Loads
@@ -937,6 +959,16 @@ all_pres = midas_api("GET", "/db/PRES")
 # 삭제
 midas_api("DELETE", "/db/PRES", {"Assign": {"116": {}}})
 ```
+
+<!-- om-fields:35953322434457 -->
+**OM 원문 추가 필드 — Assign Pressure Loads ([35953322434457](https://support.midasuser.com/hc/en-us/articles/35953322434457))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `PSLT_KEY`
+
+<!-- /om-fields -->
+
 
 ---
 
@@ -1299,6 +1331,18 @@ all_fbla = midas_api("GET", "/db/FBLA")
 # 삭제
 midas_api("DELETE", "/db/FBLA", {"Assign": {"2": {}}})
 ```
+
+<!-- om-fields:35953653792665 -->
+**OM 원문 추가 필드 — Assign Floor Loads ([35953653792665](https://support.midasuser.com/hc/en-us/articles/35953653792665))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 12 | [When Distribution Type, "FLOOR_DIST_TYPE" is 1 or 2] Unit Self Weight | `"UNIT_SELF_WIEGHT"` | Number | 0 | Optional |
+
+<!-- /om-fields -->
+
 
 ---
 
@@ -1734,6 +1778,16 @@ all_posl = midas_api("GET", "/db/POSL")
 midas_api("DELETE", "/db/POSL", {"Assign": {"1": {}}})
 ```
 
+<!-- om-fields:49511410691609 -->
+**OM 원문 추가 필드 — Parameter of Seismic Loads ([49511410691609](https://support.midasuser.com/hc/en-us/articles/49511410691609))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `CALC_OPT`
+
+<!-- /om-fields -->
+
+
 ---
 
 ## 20. /db/SWIND — Static Wind Load
@@ -1915,6 +1969,16 @@ midas_api("DELETE", "/db/SWIND", {"Assign": {"1": {}}})
   }
 }
 ```
+
+<!-- om-fields:58908673370521 -->
+**OM 원문 추가 필드 — Static Wind Load - KDS(41-12:2022) ([58908673370521](https://support.midasuser.com/hc/en-us/articles/58908673370521))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `$comment`
+
+<!-- /om-fields -->
+
 
 ---
 
@@ -2108,6 +2172,16 @@ midas_api("DELETE", "/db/SSEIS", {"Assign": {"2": {}}})
   }
 }
 ```
+
+<!-- om-fields:58908676674585 -->
+**OM 원문 추가 필드 — Static Seismic Load - KDS(41-17-00:2019) ([58908676674585](https://support.midasuser.com/hc/en-us/articles/58908676674585))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `$comment`
+
+<!-- /om-fields -->
+
 
 ---
 

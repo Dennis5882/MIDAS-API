@@ -1278,6 +1278,20 @@ result = midas_api("PUT", "/db/co_f", {
 print(result)
 ```
 
+<!-- om-fields:35805846236441 -->
+**OM 원문 추가 필드 — Floor Load Color ([35805846236441](https://support.midasuser.com/hc/en-us/articles/35805846236441))**
+
+공식 글의 Specifications 표 중 위 섹션에 없던 행을 원문 그대로 옮겼습니다.
+
+| No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
+| --- | --- | --- | --- | --- | --- |
+| 2 | Wire Frame Red | `"W_R"` | Integer | - | Optional |
+| 3 | Wire Frame Green | `"W_G"` | Integer | - | Optional |
+| 4 | Wire Frame Blue | `"W_B"` | Integer | - | Optional |
+
+<!-- /om-fields -->
+
+
 ---
 
 ## 14. `/db/SPAN` — Span Information
