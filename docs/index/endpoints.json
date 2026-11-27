@@ -16638,7 +16638,7 @@
     "PUT"
    ],
    "jp_only": false,
-   "toc_name": null,
+   "toc_name": "DESIGN/PSC/AASHTO-LRFD24/DSPSC",
    "articles": [
     {
      "id": "57945465173145",
@@ -16669,7 +16669,7 @@
     "PUT"
    ],
    "jp_only": false,
-   "toc_name": null,
+   "toc_name": "DESIGN/PSC/AASHTO-LRFD24/DPSC",
    "articles": [
     {
      "id": "57945475575321",
@@ -16687,6 +16687,7 @@
    "keys": [
     "CONSTRUCTION_TYPE",
     "CORROSIVE_CONDITION",
+    "CRACK_CHECK",
     "DGNCODE",
     "EXPOSURE_FACTOR",
     "FLEXURAL_CHECK",
@@ -16703,7 +16704,7 @@
     "USER_FACTOR"
    ],
    "doc": [],
-   "key_count": 16,
+   "key_count": 17,
    "documented": false
   },
   {
@@ -16715,7 +16716,7 @@
     "PUT"
    ],
    "jp_only": false,
-   "toc_name": null,
+   "toc_name": "DESIGN/PSC/AASHTO-LRFD24/MEMB",
    "articles": [
     {
      "id": "57945514821529",
@@ -16749,12 +16750,12 @@
     "PUT"
    ],
    "jp_only": false,
-   "toc_name": null,
+   "toc_name": "DESIGN/PSC/AASHTO-LRFD24/MEMB-VBEAM",
    "articles": [
     {
      "id": "57945521269145",
-     "title": "DESIGN/PSC/AASHTO-LRFD24/MEMB-VBEAM : PSC Segment Assignment",
-     "url": "https://support.midasuser.com/hc/en-us/articles/57945521269145-DESIGN-PSC-AASHTO-LRFD24-MEMB-VBEAM-PSC-Segment-Assignment",
+     "title": "DESIGN/PSC/AASHTO-LRFD24/MEMB-VBEAM : PSC Segment Assignment - Virtual Beam",
+     "url": "https://support.midasuser.com/hc/en-us/articles/57945521269145-DESIGN-PSC-AASHTO-LRFD24-MEMB-VBEAM-PSC-Segment-Assignment-Virtual-Beam",
      "updated_at": "2026-05-15T07:00:37Z"
     },
     {
@@ -16783,7 +16784,7 @@
     "PUT"
    ],
    "jp_only": false,
-   "toc_name": null,
+   "toc_name": "DESIGN/PSC/AASHTO-LRFD24/SLCT",
    "articles": [
     {
      "id": "57945572333849",
@@ -16815,7 +16816,7 @@
     "PUT"
    ],
    "jp_only": false,
-   "toc_name": null,
+   "toc_name": "DESIGN/PSC/AASHTO-LRFD24/INFS",
    "articles": [
     {
      "id": "57945592046233",
@@ -16854,7 +16855,7 @@
     "PUT"
    ],
    "jp_only": false,
-   "toc_name": null,
+   "toc_name": "DESIGN/PSC/AASHTO-LRFD24/INFS-VBEAM",
    "articles": [
     {
      "id": "57945623305113",
@@ -16864,8 +16865,8 @@
     },
     {
      "id": "57945623457561",
-     "title": "DESIGN/PSC/AASHTO-LRFD24/INFS-VBEAM : Interface shear",
-     "url": "https://support.midasuser.com/hc/en-us/articles/57945623457561-DESIGN-PSC-AASHTO-LRFD24-INFS-VBEAM-Interface-shear",
+     "title": "DESIGN/PSC/AASHTO-LRFD24/INFS-VBEAM : Interface shear - Virtual Beam",
+     "url": "https://support.midasuser.com/hc/en-us/articles/57945623457561-DESIGN-PSC-AASHTO-LRFD24-INFS-VBEAM-Interface-shear-Virtual-Beam",
      "updated_at": "2026-05-15T07:02:40Z"
     }
    ],
@@ -16893,12 +16894,12 @@
     "PUT"
    ],
    "jp_only": false,
-   "toc_name": null,
+   "toc_name": "DESIGN/PSC/AASHTO-LRFD24/RPSC",
    "articles": [
     {
      "id": "57946907749017",
-     "title": "DESIGN/PSC/AASHTO-LRFD24/RPSC : Logitudinal Rebar-Reinforcements",
-     "url": "https://support.midasuser.com/hc/en-us/articles/57946907749017-DESIGN-PSC-AASHTO-LRFD24-RPSC-Logitudinal-Rebar-Reinforcements",
+     "title": "DESIGN/PSC/AASHTO-LRFD24/RPSC : Longitudinal Rebar-Reinforcements",
+     "url": "https://support.midasuser.com/hc/en-us/articles/57946907749017-DESIGN-PSC-AASHTO-LRFD24-RPSC-Longitudinal-Rebar-Reinforcements",
      "updated_at": "2026-05-15T07:35:34Z"
     },
     {
@@ -16965,7 +16966,7 @@
     "PUT"
    ],
    "jp_only": false,
-   "toc_name": null,
+   "toc_name": "DESIGN/PSC/AASHTO-LRFD24/SECF",
    "articles": [
     {
      "id": "57946974912921",
@@ -16975,8 +16976,8 @@
     },
     {
      "id": "57946987740569",
-     "title": "DESIGN/PSC/AASHTO-LRFD24/SECF : Logitudinal Rebar-Stiffness",
-     "url": "https://support.midasuser.com/hc/en-us/articles/57946987740569-DESIGN-PSC-AASHTO-LRFD24-SECF-Logitudinal-Rebar-Stiffness",
+     "title": "DESIGN/PSC/AASHTO-LRFD24/SECF : Longitudinal Rebar-Stiffness",
+     "url": "https://support.midasuser.com/hc/en-us/articles/57946987740569-DESIGN-PSC-AASHTO-LRFD24-SECF-Longitudinal-Rebar-Stiffness",
      "updated_at": "2026-05-15T07:37:25Z"
     }
    ],
@@ -17014,7 +17015,7 @@
     "POST"
    ],
    "jp_only": false,
-   "toc_name": null,
+   "toc_name": "DESIGN/PSC/AASHTO-LRFD24/PSC-ANAL",
    "articles": [
     {
      "id": "57947082529945",
@@ -17041,11 +17042,10 @@
    "methods": [
     "DELETE",
     "GET",
-    "POST",
     "PUT"
    ],
    "jp_only": false,
-   "toc_name": null,
+   "toc_name": "DESIGN/PSC/AASHTO-LRFD24/MATD",
    "articles": [
     {
      "id": "58043488354969",
@@ -17055,13 +17055,27 @@
     }
    ],
    "keys": [
+    "CODE",
+    "COMP_STRENGTH",
+    "FACTOR_VALUE",
+    "Fy",
+    "Fys",
     "GIRDER_MATL_PROP",
     "GIRDER_REBAR_PROP",
+    "GRADE",
+    "GRADE_MAIN_REBAR",
+    "GRADE_SUB_REBAR",
+    "LIGHT_WEIGHT_FACTOR",
+    "NAME",
+    "NAME_MAIN_REBAR",
+    "NAME_SUB_REBAR",
     "SLAB_MATL_PROP",
-    "SLAB_REBAR_PROP"
+    "SLAB_PROP",
+    "SLAB_REBAR_PROP",
+    "visibleWhen"
    ],
    "doc": [],
-   "key_count": 4,
+   "key_count": 18,
    "documented": false
   },
   {
@@ -17073,7 +17087,7 @@
     "PUT"
    ],
    "jp_only": false,
-   "toc_name": null,
+   "toc_name": "DESIGN/PSC/AASHTO-LRFD24/DIDP",
    "articles": [
     {
      "id": "58078143157785",
@@ -17099,12 +17113,12 @@
     "PUT"
    ],
    "jp_only": false,
-   "toc_name": null,
+   "toc_name": "DESIGN/PSC/AASHTO-LRFD24/DIDP-VBEAM",
    "articles": [
     {
      "id": "58078226966169",
-     "title": "DESIGN/PSC/AASHTO-LRFD24/DIDP-VBEAM : Design Position for Virtual Beam",
-     "url": "https://support.midasuser.com/hc/en-us/articles/58078226966169-DESIGN-PSC-AASHTO-LRFD24-DIDP-VBEAM-Design-Position-for-Virtual-Beam",
+     "title": "DESIGN/PSC/AASHTO-LRFD24/DIDP-VBEAM : Design Position - Virtual Beam",
+     "url": "https://support.midasuser.com/hc/en-us/articles/58078226966169-DESIGN-PSC-AASHTO-LRFD24-DIDP-VBEAM-Design-Position-Virtual-Beam",
      "updated_at": "2026-11-16T23:46:20Z"
     }
    ],
@@ -17125,7 +17139,7 @@
     "PUT"
    ],
    "jp_only": false,
-   "toc_name": null,
+   "toc_name": "DESIGN/PSC/AASHTO-LRFD24/DIOP",
    "articles": [
     {
      "id": "58078690517017",
@@ -17154,12 +17168,12 @@
     "PUT"
    ],
    "jp_only": false,
-   "toc_name": null,
+   "toc_name": "DESIGN/PSC/AASHTO-LRFD24/DIOP-VBEAM",
    "articles": [
     {
      "id": "58094307410457",
-     "title": "DESIGN/PSC/AASHTO-LRFD24/DIOP-VBEAM : Output Position for Virtual Beam",
-     "url": "https://support.midasuser.com/hc/en-us/articles/58094307410457-DESIGN-PSC-AASHTO-LRFD24-DIOP-VBEAM-Output-Position-for-Virtual-Beam",
+     "title": "DESIGN/PSC/AASHTO-LRFD24/DIOP-VBEAM : Output Position - Virtual Beam",
+     "url": "https://support.midasuser.com/hc/en-us/articles/58094307410457-DESIGN-PSC-AASHTO-LRFD24-DIOP-VBEAM-Output-Position-Virtual-Beam",
      "updated_at": "2026-05-19T23:55:28Z"
     }
    ],
@@ -17183,7 +17197,7 @@
     "PUT"
    ],
    "jp_only": false,
-   "toc_name": null,
+   "toc_name": "DESIGN/PSC/AASHTO-LRFD24/TABLE",
    "articles": [
     {
      "id": "58329524570905",
@@ -17265,6 +17279,7 @@
     "EXPORT_PATH",
     "FORCE",
     "FORMAT",
+    "GIRDER_SLAB",
     "HEAT",
     "KEYS",
     "MAX_MIN",
@@ -17278,12 +17293,12 @@
     "TABLE_TYPE",
     "TEMP",
     "TENDON",
-    "TENDON_NO",
     "TO",
+    "TOP_BOT",
     "UNIT"
    ],
    "doc": [],
-   "key_count": 22,
+   "key_count": 23,
    "documented": false
   },
   {
@@ -17292,7 +17307,7 @@
     "POST"
    ],
    "jp_only": false,
-   "toc_name": null,
+   "toc_name": "RATING/PSC/AASHTO-LRFR19/RPSC-ANAL",
    "articles": [
     {
      "id": "58381619465241",
@@ -17317,12 +17332,12 @@
     "PUT"
    ],
    "jp_only": false,
-   "toc_name": null,
+   "toc_name": "RATING/PSC/AASHTO-LRFR19/PFRO-VBEAM",
    "articles": [
     {
      "id": "58381704142105",
-     "title": "RATING/PSC/AASHTO-LRFR19/PFRO-VBEAM : Position for Rating Output",
-     "url": "https://support.midasuser.com/hc/en-us/articles/58381704142105-RATING-PSC-AASHTO-LRFR19-PFRO-VBEAM-Position-for-Rating-Output",
+     "title": "RATING/PSC/AASHTO-LRFR19/PFRO-VBEAM : Position for Rating Output - Virtual Beam",
+     "url": "https://support.midasuser.com/hc/en-us/articles/58381704142105-RATING-PSC-AASHTO-LRFR19-PFRO-VBEAM-Position-for-Rating-Output-Virtual-Beam",
      "updated_at": "2026-05-28T08:10:59Z"
     }
    ],
@@ -17342,7 +17357,7 @@
     "PUT"
    ],
    "jp_only": false,
-   "toc_name": null,
+   "toc_name": "RATING/PSC/AASHTO-LRFR19/PFRO",
    "articles": [
     {
      "id": "58381791502873",
@@ -17367,7 +17382,7 @@
     "PUT"
    ],
    "jp_only": false,
-   "toc_name": null,
+   "toc_name": "RATING/PSC/AASHTO-LRFR19/DFRC",
    "articles": [
     {
      "id": "58412610890137",
@@ -17386,7 +17401,8 @@
     "LIMIT_STATE",
     "LOAD_CASES",
     "LOAD_CASE_NAME",
-    "LOAD_FACTOR",
+    "LOAD_ITEMS_SER",
+    "LOAD_ITEMS_STR",
     "MAX",
     "MIN",
     "NAME",
@@ -17395,7 +17411,6 @@
     "SECONDARY",
     "TEMP",
     "TGRADIENT",
-    "TYPE",
     "USER_DEFINED"
    ],
    "doc": [],
@@ -17847,20 +17862,49 @@
     "PUT"
    ],
    "jp_only": false,
-   "toc_name": null,
+   "toc_name": "DESIGN/RC/DRC",
    "articles": [
     {
      "id": "59120800558361",
      "title": "DESIGN/RC/DRC : RC Design Code",
      "url": "https://support.midasuser.com/hc/en-us/articles/59120800558361-DESIGN-RC-DRC-RC-Design-Code",
-     "updated_at": "2026-08-06T04:56:08Z"
+     "updated_at": "2026-08-06T04:56:08Z",
+     "doc": [
+      "26_Design_RC_KDS41202022.md#0-designrcdrc--rc-design-code-rc-설계-코드-선택"
+     ]
+    },
+    {
+     "id": "64738171212185",
+     "title": "DESIGN/RC/DRC : Design Code (AASHTO-LRFD24)",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738171212185-DESIGN-RC-DRC-Design-Code-AASHTO-LRFD24",
+     "updated_at": "",
+     "doc": [
+      "28_Design_RC_AASHTO_LRFD.md#0-designrcdrc--design-code-aashto-lrfd2420"
+     ]
+    },
+    {
+     "id": "64738214699289",
+     "title": "DESIGN/RC/DRC : Design Code (AASHTO-LRFD20)",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738214699289-DESIGN-RC-DRC-Design-Code-AASHTO-LRFD20",
+     "updated_at": "",
+     "doc": [
+      "28_Design_RC_AASHTO_LRFD.md#0-designrcdrc--design-code-aashto-lrfd2420"
+     ]
+    },
+    {
+     "id": "64738309723033",
+     "title": "DESIGN/RC/DRC : Design Code (KDS 24 14 21 : 2021)",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738309723033-DESIGN-RC-DRC-Design-Code-KDS-24-14-21-2021",
+     "updated_at": "",
+     "doc": []
     }
    ],
    "keys": [
     "DGNCODE"
    ],
    "doc": [
-    "26_Design_RC_KDS41202022.md#0-designrcdrc--rc-design-code-rc-설계-코드-선택"
+    "26_Design_RC_KDS41202022.md#0-designrcdrc--rc-design-code-rc-설계-코드-선택",
+    "28_Design_RC_AASHTO_LRFD.md#0-designrcdrc--design-code-aashto-lrfd2420"
    ],
    "key_count": 1,
    "documented": true
@@ -18542,6 +18586,5259 @@
    ],
    "key_count": 49,
    "documented": true
+  },
+  {
+   "endpoint": "DESIGN/PSC/AASHTO-LRFD24/STRPSSM",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/PSC/AASHTO-LRFD24/STRPSSM",
+   "articles": [
+    {
+     "id": "64738109002649",
+     "title": "DESIGN/PSC/AASHTO-LRFD24/STRPSSM : Longitudinal Rebar-Stress Points",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738109002649-DESIGN-PSC-AASHTO-LRFD24-STRPSSM-Longitudinal-Rebar-Stress-Points",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "OPT_SAME_J",
+    "POINT1",
+    "POINT2",
+    "POINT_SIZE_1",
+    "POINT_SIZE_2",
+    "Y",
+    "Z"
+   ],
+   "doc": [],
+   "key_count": 7,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/PSC/AASHTO-LRFD24/REPORT",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/PSC/AASHTO-LRFD24/REPORT",
+   "articles": [
+    {
+     "id": "64738145948953",
+     "title": "DESIGN/PSC/AASHTO-LRFD24/REPORT : Excel Report",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738145948953-DESIGN-PSC-AASHTO-LRFD24-REPORT-Excel-Report",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "EXPORT_PATH",
+    "OUTPUT_NAME"
+   ],
+   "doc": [],
+   "key_count": 2,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/PSC/KDS-24-14-21-2021/DIOP",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/PSC/KDS-24-14-21-2021/DIOP",
+   "articles": [
+    {
+     "id": "64738147909657",
+     "title": "DESIGN/PSC/KDS-24-14-21-2021/DIOP : Output Position",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738147909657-DESIGN-PSC-KDS-24-14-21-2021-DIOP-Output-Position",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "MOMENT_STRENGTH",
+    "NEGATIVE_MOMENT",
+    "POSITIVE_MOMENT",
+    "SHEAR_TYPE",
+    "TORSION_TYPE"
+   ],
+   "doc": [],
+   "key_count": 5,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/PSC/KDS-24-14-21-2021/TABLE",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/PSC/KDS-24-14-21-2021/TABLE",
+   "articles": [
+    {
+     "id": "64738148517657",
+     "title": "DESIGN/PSC/KDS-24-14-21-2021/TABLE : Check Flexure Strength",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738148517657-DESIGN-PSC-KDS-24-14-21-2021-TABLE-Check-Flexure-Strength",
+     "updated_at": ""
+    },
+    {
+     "id": "64738149275545",
+     "title": "DESIGN/PSC/KDS-24-14-21-2021/TABLE : Principal stress at a construction stage",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738149275545-DESIGN-PSC-KDS-24-14-21-2021-TABLE-Principal-stress-at-a-construction-stage",
+     "updated_at": ""
+    },
+    {
+     "id": "64738150120729",
+     "title": "DESIGN/PSC/KDS-24-14-21-2021/TABLE : Check Shear Strength - Virtual Beam",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738150120729-DESIGN-PSC-KDS-24-14-21-2021-TABLE-Check-Shear-Strength-Virtual-Beam",
+     "updated_at": ""
+    },
+    {
+     "id": "64738150381977",
+     "title": "DESIGN/PSC/KDS-24-14-21-2021/TABLE : Principal stress at a construction stage - Virtual Beam",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738150381977-DESIGN-PSC-KDS-24-14-21-2021-TABLE-Principal-stress-at-a-construction-stage-Virtual-Beam",
+     "updated_at": ""
+    },
+    {
+     "id": "64738156595097",
+     "title": "DESIGN/PSC/KDS-24-14-21-2021/TABLE : Check stress for cross section at service loads",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738156595097-DESIGN-PSC-KDS-24-14-21-2021-TABLE-Check-stress-for-cross-section-at-service-loads",
+     "updated_at": ""
+    },
+    {
+     "id": "64738156696729",
+     "title": "DESIGN/PSC/KDS-24-14-21-2021/TABLE : Check tensile stress for Prestressing tendons",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738156696729-DESIGN-PSC-KDS-24-14-21-2021-TABLE-Check-tensile-stress-for-Prestressing-tendons",
+     "updated_at": ""
+    },
+    {
+     "id": "64738157757465",
+     "title": "DESIGN/PSC/KDS-24-14-21-2021/TABLE : Check stress for cross section at service loads - Virtual Beam",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738157757465-DESIGN-PSC-KDS-24-14-21-2021-TABLE-Check-stress-for-cross-section-at-service-loads-Virtual-Beam",
+     "updated_at": ""
+    },
+    {
+     "id": "64738160708633",
+     "title": "DESIGN/PSC/KDS-24-14-21-2021/TABLE : Check Combined Shear and Torsion Strength",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738160708633-DESIGN-PSC-KDS-24-14-21-2021-TABLE-Check-Combined-Shear-and-Torsion-Strength",
+     "updated_at": ""
+    },
+    {
+     "id": "64738162892825",
+     "title": "DESIGN/PSC/KDS-24-14-21-2021/TABLE : Principal stress at service loads - Virtual Beam",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738162892825-DESIGN-PSC-KDS-24-14-21-2021-TABLE-Principal-stress-at-service-loads-Virtual-Beam",
+     "updated_at": ""
+    },
+    {
+     "id": "64738170061209",
+     "title": "DESIGN/PSC/KDS-24-14-21-2021/TABLE : Principal stress at service loads",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738170061209-DESIGN-PSC-KDS-24-14-21-2021-TABLE-Principal-stress-at-service-loads",
+     "updated_at": ""
+    },
+    {
+     "id": "64738170871577",
+     "title": "DESIGN/PSC/KDS-24-14-21-2021/TABLE : Check tensile stress for Prestressing tendons - Virtual Beam",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738170871577-DESIGN-PSC-KDS-24-14-21-2021-TABLE-Check-tensile-stress-for-Prestressing-tendons-Virtual-Beam",
+     "updated_at": ""
+    },
+    {
+     "id": "64738178557849",
+     "title": "DESIGN/PSC/KDS-24-14-21-2021/TABLE : Check Combined Shear and Torsion Strength - Virtual Beam",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738178557849-DESIGN-PSC-KDS-24-14-21-2021-TABLE-Check-Combined-Shear-and-Torsion-Strength-Virtual-Beam",
+     "updated_at": ""
+    },
+    {
+     "id": "64738185602457",
+     "title": "DESIGN/PSC/KDS-24-14-21-2021/TABLE : Check crack width at service loads",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738185602457-DESIGN-PSC-KDS-24-14-21-2021-TABLE-Check-crack-width-at-service-loads",
+     "updated_at": ""
+    },
+    {
+     "id": "64738185885081",
+     "title": "DESIGN/PSC/KDS-24-14-21-2021/TABLE : Check Shear Strength",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738185885081-DESIGN-PSC-KDS-24-14-21-2021-TABLE-Check-Shear-Strength",
+     "updated_at": ""
+    },
+    {
+     "id": "64738186026905",
+     "title": "DESIGN/PSC/KDS-24-14-21-2021/TABLE : Check stress for cross section at a construction stage",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738186026905-DESIGN-PSC-KDS-24-14-21-2021-TABLE-Check-stress-for-cross-section-at-a-construction-stage",
+     "updated_at": ""
+    },
+    {
+     "id": "64738186294169",
+     "title": "DESIGN/PSC/KDS-24-14-21-2021/TABLE : Design Forces",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738186294169-DESIGN-PSC-KDS-24-14-21-2021-TABLE-Design-Forces",
+     "updated_at": ""
+    },
+    {
+     "id": "64738187199001",
+     "title": "DESIGN/PSC/KDS-24-14-21-2021/TABLE : Check crack width at service loads - Virtual Beam",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738187199001-DESIGN-PSC-KDS-24-14-21-2021-TABLE-Check-crack-width-at-service-loads-Virtual-Beam",
+     "updated_at": ""
+    },
+    {
+     "id": "64738187255065",
+     "title": "DESIGN/PSC/KDS-24-14-21-2021/TABLE : Check Flexure Strength - Virtual Beam",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738187255065-DESIGN-PSC-KDS-24-14-21-2021-TABLE-Check-Flexure-Strength-Virtual-Beam",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "COMPONENTS",
+    "COMP_TENS",
+    "DIST",
+    "EXPORT_PATH",
+    "FORCE",
+    "FORMAT",
+    "HEAT",
+    "KEYS",
+    "MAX_MIN",
+    "NODE_ELEMS",
+    "PARTS",
+    "PLACE",
+    "POS_NEG",
+    "SELECTION_TYPE",
+    "STRUCTURE_GROUP_NAME",
+    "STYLES",
+    "TABLE_NAME",
+    "TABLE_TYPE",
+    "TEMP",
+    "TENDON",
+    "TO",
+    "TOP_BOT",
+    "UNIT"
+   ],
+   "doc": [],
+   "key_count": 23,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/PSC/AASHTO-LRFD24/RPSC-VBEAM",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/PSC/AASHTO-LRFD24/RPSC-VBEAM",
+   "articles": [
+    {
+     "id": "64738154715545",
+     "title": "DESIGN/PSC/AASHTO-LRFD24/RPSC-VBEAM : Longitudinal Rebar-Reinforcements - Virtual Beam",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738154715545-DESIGN-PSC-AASHTO-LRFD24-RPSC-VBEAM-Longitudinal-Rebar-Reinforcements-Virtual-Beam",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "DR_AW",
+    "DR_PITCH",
+    "DR_THETA",
+    "IJ",
+    "LBAR_INC_FC",
+    "LBAR_THICK",
+    "MBARS",
+    "MBAR_ITEMS",
+    "NAME",
+    "NUM",
+    "OPT_CRACKED",
+    "OPT_DR",
+    "OPT_LBAR_FLG",
+    "OPT_MBAR_J",
+    "OPT_SBAR_J",
+    "OPT_SBW",
+    "OPT_SR",
+    "OPT_TR",
+    "PART",
+    "REF_Y",
+    "REF_Z",
+    "SBAR_ITEMS",
+    "SBW_ANGLE",
+    "SBW_AP",
+    "SBW_FACTOR",
+    "SBW_PITCH",
+    "SBW_PS",
+    "SPACING",
+    "SR_AW",
+    "SR_PITCH",
+    "TR_ALT",
+    "TR_AWT",
+    "TR_PITCH",
+    "Y",
+    "Z"
+   ],
+   "doc": [],
+   "key_count": 35,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/PSC/DSPSC",
+   "methods": [
+    "DELETE",
+    "GET",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/PSC/DSPSC",
+   "articles": [
+    {
+     "id": "64738155393433",
+     "title": "DESIGN/PSC/DSPSC : Design Code (KDS 24 14 21 : 2021)",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738155393433-DESIGN-PSC-DSPSC-Design-Code-KDS-24-14-21-2021",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "DGNCODE"
+   ],
+   "doc": [],
+   "key_count": 1,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/PSC/KDS-24-14-21-2021/DPSC",
+   "methods": [
+    "DELETE",
+    "GET",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/PSC/KDS-24-14-21-2021/DPSC",
+   "articles": [
+    {
+     "id": "64738155455769",
+     "title": "DESIGN/PSC/KDS-24-14-21-2021/DPSC : Design Code Option",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738155455769-DESIGN-PSC-KDS-24-14-21-2021-DPSC-Design-Code-Option",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "CEMENT_CLASSIFICATION",
+    "COMPRESSION",
+    "CONCRETE",
+    "CONCRETE_STRESS_CALCULATION",
+    "CRACK",
+    "CS",
+    "DESIGN_INPUT",
+    "DGNCODE",
+    "FLEXURE",
+    "INTERFACE_SHEAR_BETA",
+    "K1",
+    "K2",
+    "K5",
+    "K6",
+    "K7",
+    "K8",
+    "MATERIAL_RESISTANCE_FACTORS",
+    "MODIFY_DESIGN_PARAMETERS",
+    "OUTPUT",
+    "PRINCIPAL_STRESS_CS",
+    "PRINCIPAL_STRESS_REDUCTION",
+    "PRINCIPAL_STRESS_SERVICE",
+    "REINFORCEMENT",
+    "SERVICE",
+    "SHEAR",
+    "SHEAR_STRENGTH",
+    "SLS",
+    "STRESS_CS",
+    "STRESS_LIMITS",
+    "STRESS_SERVICE",
+    "STRUT_ANGLE",
+    "TENDON",
+    "TENDON_MAX_STRESS",
+    "TENDON_TYPE",
+    "TENSION",
+    "TORSION",
+    "ULS",
+    "ULTIMATE",
+    "UPDATE_BY_CODE",
+    "USER_DEFINED_INPUT"
+   ],
+   "doc": [],
+   "key_count": 40,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/PSC/KDS-24-14-21-2021/SLCT",
+   "methods": [
+    "DELETE",
+    "GET",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/PSC/KDS-24-14-21-2021/SLCT",
+   "articles": [
+    {
+     "id": "64738155883673",
+     "title": "DESIGN/PSC/KDS-24-14-21-2021/SLCT : Serviceability Load Combination Type",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738155883673-DESIGN-PSC-KDS-24-14-21-2021-SLCT-Serviceability-Load-Combination-Type",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "LC_NAME",
+    "SL_TYPE"
+   ],
+   "doc": [],
+   "key_count": 2,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/DCTL",
+   "methods": [
+    "DELETE",
+    "GET",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/DCTL",
+   "articles": [
+    {
+     "id": "64738159008665",
+     "title": "DESIGN/RC/AASHTO-LRFD24/DCTL : Definition of Frame",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738159008665-DESIGN-RC-AASHTO-LRFD24-DCTL-Definition-of-Frame",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "DT",
+    "FRAMEX",
+    "FRAMEY",
+    "bAUTOKF"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#2-dctl--definition-of-frame"
+   ],
+   "key_count": 4,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/PSC/KDS-24-14-21-2021/MATD",
+   "methods": [
+    "DELETE",
+    "GET",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/PSC/KDS-24-14-21-2021/MATD",
+   "articles": [
+    {
+     "id": "64738160285721",
+     "title": "DESIGN/PSC/KDS-24-14-21-2021/MATD : Modify Material",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738160285721-DESIGN-PSC-KDS-24-14-21-2021-MATD-Modify-Material",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "CODE",
+    "COMP_STRENGTH",
+    "FACTOR_VALUE",
+    "Fy",
+    "Fys",
+    "GIRDER_MATL_PROP",
+    "GIRDER_REBAR_PROP",
+    "GRADE",
+    "GRADE_MAIN_REBAR",
+    "GRADE_SUB_REBAR",
+    "LIGHT_WEIGHT_FACTOR",
+    "NAME",
+    "NAME_MAIN_REBAR",
+    "NAME_SUB_REBAR",
+    "SLAB_MATL_PROP",
+    "SLAB_PROP",
+    "SLAB_REBAR_PROP"
+   ],
+   "doc": [],
+   "key_count": 17,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/PSC/KDS-24-14-21-2021/DIDP-VBEAM",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/PSC/KDS-24-14-21-2021/DIDP-VBEAM",
+   "articles": [
+    {
+     "id": "64738161973017",
+     "title": "DESIGN/PSC/KDS-24-14-21-2021/DIDP-VBEAM : Design Position - Virtual Beam",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738161973017-DESIGN-PSC-KDS-24-14-21-2021-DIDP-VBEAM-Design-Position-Virtual-Beam",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "MOMENT_TYPE",
+    "SHEAR_TYPE"
+   ],
+   "doc": [],
+   "key_count": 2,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/DCO",
+   "methods": [
+    "DELETE",
+    "GET",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/DCO",
+   "articles": [
+    {
+     "id": "64738163367193",
+     "title": "DESIGN/RC/AASHTO-LRFD24/DCO : Design Code Option",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738163367193-DESIGN-RC-AASHTO-LRFD24-DCO-Design-Code-Option",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "DGNCODE",
+    "MOM_REDIST_FACT",
+    "PLATE_COLUMN_PM",
+    "SEISMIC_PROV",
+    "SEISMIC_ZONE"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#1-dco--design-code-option"
+   ],
+   "key_count": 5,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/LCTB",
+   "methods": [
+    "DELETE",
+    "GET"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/LCTB",
+   "articles": [
+    {
+     "id": "64738163908633",
+     "title": "DESIGN/RC/AASHTO-LRFD24/LCTB : Load Contribution for Nonlinear Load Case",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738163908633-DESIGN-RC-AASHTO-LRFD24-LCTB-Load-Contribution-for-Nonlinear-Load-Case",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "BASE_ITEM",
+    "DESC",
+    "FACTOR",
+    "LOAD_CASE_NAME",
+    "NAME"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#3-lctb--load-contribution-for-nonlinear-load-case"
+   ],
+   "key_count": 5,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/MBTP",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/MBTP",
+   "articles": [
+    {
+     "id": "64738165226777",
+     "title": "DESIGN/RC/AASHTO-LRFD24/MBTP : Modify Member Type",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738165226777-DESIGN-RC-AASHTO-LRFD24-MBTP-Modify-Member-Type",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "TYPE"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#8-mbtp--modify-member-type"
+   ],
+   "key_count": 1,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/RDGN",
+   "methods": [
+    "DELETE",
+    "GET",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/RDGN",
+   "articles": [
+    {
+     "id": "64738166471577",
+     "title": "DESIGN/RC/AASHTO-LRFD24/RDGN : Rebar Input for Design (Beam, Column Section)",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738166471577-DESIGN-RC-AASHTO-LRFD24-RDGN-Rebar-Input-for-Design-Beam-Column-Section",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "BEAM",
+    "COLM",
+    "DB",
+    "DC",
+    "DT",
+    "MEMBTYPE",
+    "NUMBER",
+    "SIZE",
+    "STIRRUP",
+    "TIE_SPIRAL"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#18-rdgn--rebar-input-for-design-beam-column-section"
+   ],
+   "key_count": 10,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/RCHK",
+   "methods": [
+    "DELETE",
+    "GET",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/RCHK",
+   "articles": [
+    {
+     "id": "64738166640537",
+     "title": "DESIGN/RC/AASHTO-LRFD24/RCHK : Rebar Input for Checking (Beam, Column Section)",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738166640537-DESIGN-RC-AASHTO-LRFD24-RCHK-Rebar-Input-for-Checking-Beam-Column-Section",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "BAR_NAME1",
+    "BAR_NAME2",
+    "BAR_NUM",
+    "BEAM",
+    "COLM",
+    "ENVTYPE",
+    "INDEX",
+    "LAYER",
+    "MEMBTYPE",
+    "OPTION_IMJSAME",
+    "POSITION",
+    "POS_BOT_LAYERS",
+    "POS_TOP_LAYERS",
+    "SECTOR",
+    "SUBBAR_DIST",
+    "SUBBAR_NAME",
+    "SUBBAR_NUM",
+    "SUBBAR_NUM_Y",
+    "SUBBAR_NUM_Z",
+    "SUB_BAR",
+    "SUB_BARNAME",
+    "dD",
+    "dDc",
+    "dSUB_BARANGLE",
+    "dSUB_BARDIST",
+    "dSUB_BARNUM",
+    "vLAYER",
+    "vMAIN",
+    "vPOSITION",
+    "vSUB_BAR"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#19-rchk--rebar-input-for-checking-beam-column-section"
+   ],
+   "key_count": 30,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/REBT",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/REBT",
+   "articles": [
+    {
+     "id": "64738166885529",
+     "title": "DESIGN/RC/AASHTO-LRFD24/REBT : Column General Section Rebar",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738166885529-DESIGN-RC-AASHTO-LRFD24-REBT-Column-General-Section-Rebar",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "DIST",
+    "HOOP_BAR",
+    "LEG_Y",
+    "LEG_Z",
+    "MAIN_BAR",
+    "NAME",
+    "NUM",
+    "ORIGIN_TYPE",
+    "Y",
+    "Z"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#20-rebt--column-general-section-rebar"
+   ],
+   "key_count": 10,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/PSC/KDS-24-14-21-2021/DIDP",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/PSC/KDS-24-14-21-2021/DIDP",
+   "articles": [
+    {
+     "id": "64738168449433",
+     "title": "DESIGN/PSC/KDS-24-14-21-2021/DIDP : Design Position",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738168449433-DESIGN-PSC-KDS-24-14-21-2021-DIDP-Design-Position",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "MOMENT_TYPE",
+    "SHEAR_TYPE"
+   ],
+   "doc": [],
+   "key_count": 2,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/PSC/KDS-24-14-21-2021/DRESULT",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/PSC/KDS-24-14-21-2021/DRESULT",
+   "articles": [
+    {
+     "id": "64738170139545",
+     "title": "DESIGN/PSC/KDS-24-14-21-2021/DRESULT : PSC Result Diagram",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738170139545-DESIGN-PSC-KDS-24-14-21-2021-DRESULT-PSC-Result-Diagram",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "ACTIVE",
+    "ANGLE",
+    "AXIS",
+    "B",
+    "BGCOLOR_BOTTOM",
+    "BGCOLOR_TOP",
+    "COLOR",
+    "COMP",
+    "COMPONENTS",
+    "CONTOUR",
+    "CRITERIA",
+    "CRITERIA_LINE",
+    "CURRENT_MODE",
+    "DECIMAL_PT",
+    "DIAGRAM",
+    "DIRECTION",
+    "DISPLAY",
+    "EXPORT_PATH",
+    "FIGURE_NAME",
+    "FILL",
+    "G",
+    "HEIGHT",
+    "LEGEND",
+    "MAX",
+    "MIN",
+    "OPT_CENTER_MID",
+    "OPT_CHECK",
+    "OPT_I",
+    "OPT_J",
+    "OPT_MAX_MINMAX_ALL",
+    "OUTPUT_SECT_LOCATION",
+    "PERSPECTIVE",
+    "R",
+    "RESISTANCE_LINE",
+    "RESULT_GRAPHIC",
+    "SCALE_FACTOR",
+    "SET_HIDDEN",
+    "SET_MODE",
+    "SIGN",
+    "STAGE_NAME",
+    "THICKNESS",
+    "TYPE",
+    "TYPE_OF_DISPLAY",
+    "URL_NAME",
+    "VALUES",
+    "VALUE_EXP",
+    "WIDTH",
+    "ZOOM_LEVEL"
+   ],
+   "doc": [],
+   "key_count": 48,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/PSC/KDS-24-14-21-2021/PESC-VBEAM",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/PSC/KDS-24-14-21-2021/PESC-VBEAM",
+   "articles": [
+    {
+     "id": "64738170322969",
+     "title": "DESIGN/PSC/KDS-24-14-21-2021/PESC-VBEAM : Exposure Class - Virtual Beam",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738170322969-DESIGN-PSC-KDS-24-14-21-2021-PESC-VBEAM-Exposure-Class-Virtual-Beam",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "BOTH_ENDS",
+    "BOTTOM",
+    "I",
+    "J",
+    "TOP"
+   ],
+   "doc": [],
+   "key_count": 5,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/PSC/KDS-24-14-21-2021/DIOP-VBEAM",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/PSC/KDS-24-14-21-2021/DIOP-VBEAM",
+   "articles": [
+    {
+     "id": "64738170410649",
+     "title": "DESIGN/PSC/KDS-24-14-21-2021/DIOP-VBEAM : Output Position - Virtual Beam",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738170410649-DESIGN-PSC-KDS-24-14-21-2021-DIOP-VBEAM-Output-Position-Virtual-Beam",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "MOMENT_STRENGTH",
+    "NEGATIVE_MOMENT",
+    "POSITIVE_MOMENT",
+    "SHEAR_TYPE",
+    "TORSION_TYPE"
+   ],
+   "doc": [],
+   "key_count": 5,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/PSC/KDS-24-14-21-2021/PSCN-VBEAM",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/PSC/KDS-24-14-21-2021/PSCN-VBEAM",
+   "articles": [
+    {
+     "id": "64738170475289",
+     "title": "DESIGN/PSC/KDS-24-14-21-2021/PSCN-VBEAM : Shear Connector - Virtual Beam",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738170475289-DESIGN-PSC-KDS-24-14-21-2021-PSCN-VBEAM-Shear-Connector-Virtual-Beam",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "ANGLE",
+    "AREA",
+    "BOTH_ENDS",
+    "FY",
+    "I",
+    "J",
+    "SURFACE_CLASS"
+   ],
+   "doc": [],
+   "key_count": 7,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/SLTC",
+   "methods": [
+    "DELETE",
+    "GET",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/SLTC",
+   "articles": [
+    {
+     "id": "64738171817625",
+     "title": "DESIGN/RC/AASHTO-LRFD24/SLTC : Short/Long term Load Case",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738171817625-DESIGN-RC-AASHTO-LRFD24-SLTC-Short-Long-term-Load-Case",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "LOAD_CASE_NAME",
+    "LONG_TERM_LOADS",
+    "SHORT_TERM_LOADS"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#5-sltc--shortlong-term-load-case"
+   ],
+   "key_count": 3,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/LMRR",
+   "methods": [
+    "DELETE",
+    "GET",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/LMRR",
+   "articles": [
+    {
+     "id": "64738173921177",
+     "title": "DESIGN/RC/AASHTO-LRFD24/LMRR : Limiting Maximum Rebar Ratio",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738173921177-DESIGN-RC-AASHTO-LRFD24-LMRR-Limiting-Maximum-Rebar-Ratio",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "RHOC"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#6-lmrr--limiting-maximum-rebar-ratio"
+   ],
+   "key_count": 1,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/PSC/KDS-24-14-21-2021/REPORT",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/PSC/KDS-24-14-21-2021/REPORT",
+   "articles": [
+    {
+     "id": "64738177779609",
+     "title": "DESIGN/PSC/KDS-24-14-21-2021/REPORT : Excel Report",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738177779609-DESIGN-PSC-KDS-24-14-21-2021-REPORT-Excel-Report",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "EXPORT_PATH",
+    "OUTPUT_NAME"
+   ],
+   "doc": [],
+   "key_count": 2,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/LENG",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/LENG",
+   "articles": [
+    {
+     "id": "64738180983961",
+     "title": "DESIGN/RC/AASHTO-LRFD24/LENG : Unbraced Length (L, Lb)",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738180983961-DESIGN-RC-AASHTO-LRFD24-LENG-Unbraced-Length-L-Lb",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "LB",
+    "LY",
+    "LZ",
+    "bNOTUSE"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#11-leng--unbraced-length-l-lb"
+   ],
+   "key_count": 4,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/PSC/KDS-24-14-21-2021/PESC",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/PSC/KDS-24-14-21-2021/PESC",
+   "articles": [
+    {
+     "id": "64738184902809",
+     "title": "DESIGN/PSC/KDS-24-14-21-2021/PESC : Exposure Class",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738184902809-DESIGN-PSC-KDS-24-14-21-2021-PESC-Exposure-Class",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "BOTH_ENDS",
+    "BOTTOM",
+    "I",
+    "J",
+    "TOP"
+   ],
+   "doc": [],
+   "key_count": 5,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/PSC/KDS-24-14-21-2021/PSCN",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/PSC/KDS-24-14-21-2021/PSCN",
+   "articles": [
+    {
+     "id": "64738185313305",
+     "title": "DESIGN/PSC/KDS-24-14-21-2021/PSCN : Shear Connector",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738185313305-DESIGN-PSC-KDS-24-14-21-2021-PSCN-Shear-Connector",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "ANGLE",
+    "AREA",
+    "BOTH_ENDS",
+    "FY",
+    "I",
+    "J",
+    "SURFACE_CLASS"
+   ],
+   "doc": [],
+   "key_count": 7,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/PSC/KDS-24-14-21-2021/PSC-ANAL",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/PSC/KDS-24-14-21-2021/PSC-ANAL",
+   "articles": [
+    {
+     "id": "64738185410457",
+     "title": "DESIGN/PSC/KDS-24-14-21-2021/PSC-ANAL : Perform Design",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738185410457-DESIGN-PSC-KDS-24-14-21-2021-PSC-ANAL-Perform-Design",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "TYPE"
+   ],
+   "doc": [],
+   "key_count": 1,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/OPE_MEMB",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/OPE_MEMB",
+   "articles": [
+    {
+     "id": "64738188059673",
+     "title": "DESIGN/RC/AASHTO-LRFD24/OPE_MEMB : Auto Member Assignment",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738188059673-DESIGN-RC-AASHTO-LRFD24-OPE-MEMB-Auto-Member-Assignment",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "ALLOW_SINGLE",
+    "ASSIGN_TYPE",
+    "ELEM_LIST",
+    "SELECTION_TYPE"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#10-ope_memb--auto-member-assignment"
+   ],
+   "key_count": 4,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/SUFC",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/SUFC",
+   "articles": [
+    {
+     "id": "64738191026841",
+     "title": "DESIGN/RC/AASHTO-LRFD24/SUFC : Scale-up Factor for Column",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738191026841-DESIGN-RC-AASHTO-LRFD24-SUFC-Scale-up-Factor-for-Column",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "FACTOR"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#17-sufc--scale-up-factor-for-column"
+   ],
+   "key_count": 1,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/LTSR",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/LTSR",
+   "articles": [
+    {
+     "id": "64738193630361",
+     "title": "DESIGN/RC/AASHTO-LRFD24/LTSR : Limiting Slenderness Ratio",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738193630361-DESIGN-RC-AASHTO-LRFD24-LTSR-Limiting-Slenderness-Ratio",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "COMP",
+    "TENS",
+    "bNOTCHECK"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#15-ltsr--limiting-slenderness-ratio"
+   ],
+   "key_count": 3,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/FMAG",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/FMAG",
+   "articles": [
+    {
+     "id": "64738194020505",
+     "title": "DESIGN/RC/AASHTO-LRFD24/FMAG : Moment Magnifier (B1/Delta_b, B2/Delta_s)",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738194020505-DESIGN-RC-AASHTO-LRFD24-FMAG-Moment-Magnifier-B1-Delta-b-B2-Delta-s",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "B1Y_DELTA_BY",
+    "B1Z_DELTA_BZ",
+    "B2Y_DELTA_SY",
+    "B2Z_DELTA_SZ"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#14-fmag--moment-magnifier-b1delta_b-b2delta_s"
+   ],
+   "key_count": 4,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/RMFR",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/RMFR",
+   "articles": [
+    {
+     "id": "64738195017113",
+     "title": "DESIGN/RC/AASHTO-LRFD24/RMFR : Response Modification Factor (R)",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738195017113-DESIGN-RC-AASHTO-LRFD24-RMFR-Response-Modification-Factor-R",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "FX",
+    "FY",
+    "FZ",
+    "MX",
+    "MY",
+    "MZ"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#16-rmfr--response-modification-factor-r"
+   ],
+   "key_count": 6,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/MATD",
+   "methods": [
+    "DELETE",
+    "GET",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/MATD",
+   "articles": [
+    {
+     "id": "64738195166233",
+     "title": "DESIGN/RC/AASHTO-LRFD24/MATD : Modify RC Materials",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738195166233-DESIGN-RC-AASHTO-LRFD24-MATD-Modify-RC-Materials",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "CODE",
+    "CONCRETE",
+    "FC",
+    "FY",
+    "FYS",
+    "GRADE",
+    "LAMBDA",
+    "LIGHTWEIGHT",
+    "MAIN_REBAR",
+    "NAME",
+    "REBAR",
+    "SUB_REBAR"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#7-matd--modify-rc-materials"
+   ],
+   "key_count": 12,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/PBDD",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/PBDD",
+   "articles": [
+    {
+     "id": "64738195863065",
+     "title": "DESIGN/RC/AASHTO-LRFD24/PBDD : Plate Beam Data for Design",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738195863065-DESIGN-RC-AASHTO-LRFD24-PBDD-Plate-Beam-Data-for-Design",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "DB",
+    "DIRECTION",
+    "DT",
+    "FORCE_OPTION",
+    "NUMBER",
+    "SIZE",
+    "STIRRUP",
+    "SUB_DOMAIN"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#23-pbdd--plate-beam-data-for-design"
+   ],
+   "key_count": 8,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/BD-ANAL",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/BD-ANAL",
+   "articles": [
+    {
+     "id": "64738197210521",
+     "title": "DESIGN/RC/AASHTO-LRFD24/BD-ANAL : Beam Design Perform",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738197210521-DESIGN-RC-AASHTO-LRFD24-BD-ANAL-Beam-Design-Perform",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "ELEMS",
+    "KEYS",
+    "PERFORM_TYPE",
+    "SECTIONS",
+    "TO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#27-bd-anal--beam-design-perform"
+   ],
+   "key_count": 5,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/PCC-REPORT",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/PCC-REPORT",
+   "articles": [
+    {
+     "id": "64738199945625",
+     "title": "DESIGN/RC/AASHTO-LRFD24/PCC-REPORT : Plate Column Checking Report",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738199945625-DESIGN-RC-AASHTO-LRFD24-PCC-REPORT-Plate-Column-Checking-Report",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "CURRENT_MODE",
+    "ELEMS",
+    "EXPORT_PATH",
+    "KEYS",
+    "OUTPUT_NAME",
+    "SUB_DOMAINS",
+    "TO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#50-pcc-report--plate-column-checking-report"
+   ],
+   "key_count": 7,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/MEMB",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/MEMB",
+   "articles": [
+    {
+     "id": "64738202041497",
+     "title": "DESIGN/RC/AASHTO-LRFD24/MEMB : Member Assignment",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738202041497-DESIGN-RC-AASHTO-LRFD24-MEMB-Member-Assignment",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "AELEM",
+    "bREVERSE"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#9-memb--member-assignment"
+   ],
+   "key_count": 2,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/KFAC",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/KFAC",
+   "articles": [
+    {
+     "id": "64738202531865",
+     "title": "DESIGN/RC/AASHTO-LRFD24/KFAC : Effective Length Factor (K)",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738202531865-DESIGN-RC-AASHTO-LRFD24-KFAC-Effective-Length-Factor-K",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "Ky",
+    "Kz"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#12-kfac--effective-length-factor-k"
+   ],
+   "key_count": 2,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/CMFT",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/CMFT",
+   "articles": [
+    {
+     "id": "64738202837273",
+     "title": "DESIGN/RC/AASHTO-LRFD24/CMFT : Moment Factor (Cm)",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738202837273-DESIGN-RC-AASHTO-LRFD24-CMFT-Moment-Factor-Cm",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "CMY",
+    "CMZ",
+    "OPT_AUTO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#13-cmft--moment-factor-cm"
+   ],
+   "key_count": 3,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/SRDF",
+   "methods": [
+    "DELETE",
+    "GET",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/SRDF",
+   "articles": [
+    {
+     "id": "64738203377305",
+     "title": "DESIGN/RC/AASHTO-LRFD24/SRDF : Strength Reduction Factors",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738203377305-DESIGN-RC-AASHTO-LRFD24-SRDF-Strength-Reduction-Factors",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "PHI_C1",
+    "PHI_C2",
+    "PHI_T",
+    "PHI_V"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#4-srdf--strength-reduction-factors"
+   ],
+   "key_count": 4,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/RIPB",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/RIPB",
+   "articles": [
+    {
+     "id": "64738205329049",
+     "title": "DESIGN/RC/AASHTO-LRFD24/RIPB : Rebar Input for Plate Beam",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738205329049-DESIGN-RC-AASHTO-LRFD24-RIPB-Rebar-Input-for-Plate-Beam",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "BOTTOM",
+    "CTC",
+    "DB",
+    "DISTRIBUTION",
+    "DT",
+    "LAYER",
+    "LAYERS",
+    "MAIN",
+    "NAME",
+    "NUMBER",
+    "SIZE",
+    "SIZE1",
+    "SIZE2",
+    "SPACING",
+    "STIRRUP",
+    "TOP",
+    "USE_STIRRUP"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#21-ripb--rebar-input-for-plate-beam"
+   ],
+   "key_count": 17,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/PBDC",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/PBDC",
+   "articles": [
+    {
+     "id": "64738205576857",
+     "title": "DESIGN/RC/AASHTO-LRFD24/PBDC : Plate Beam Data for Checking",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738205576857-DESIGN-RC-AASHTO-LRFD24-PBDC-Plate-Beam-Data-for-Checking",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "DIRECTION",
+    "FORCE_OPTION",
+    "REINFORCEMENT",
+    "SUB_DOMAIN"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#24-pbdc--plate-beam-data-for-checking"
+   ],
+   "key_count": 4,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/PCDD",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/PCDD",
+   "articles": [
+    {
+     "id": "64738205789081",
+     "title": "DESIGN/RC/AASHTO-LRFD24/PCDD : Plate Column Data for Design",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738205789081-DESIGN-RC-AASHTO-LRFD24-PCDD-Plate-Column-Data-for-Design",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "DB",
+    "DIRECTION",
+    "DT",
+    "FORCE_OPTION",
+    "NUMBER",
+    "SIZE",
+    "STIRRUP",
+    "SUB_DOMAIN"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#25-pcdd--plate-column-data-for-design"
+   ],
+   "key_count": 8,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/RIPC",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/RIPC",
+   "articles": [
+    {
+     "id": "64738206001433",
+     "title": "DESIGN/RC/AASHTO-LRFD24/RIPC : Rebar Input for Plate Column",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738206001433-DESIGN-RC-AASHTO-LRFD24-RIPC-Rebar-Input-for-Plate-Column",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "BOTTOM",
+    "CTC",
+    "DB",
+    "DISTRIBUTION",
+    "DT",
+    "LAYER",
+    "LAYERS",
+    "MAIN",
+    "NAME",
+    "NUMBER",
+    "SIZE",
+    "SIZE1",
+    "SIZE2",
+    "SPACING",
+    "STIRRUP",
+    "TOP",
+    "USE_STIRRUP"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#22-ripc--rebar-input-for-plate-column"
+   ],
+   "key_count": 17,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/PBC-REPORT",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/PBC-REPORT",
+   "articles": [
+    {
+     "id": "64738209117081",
+     "title": "DESIGN/RC/AASHTO-LRFD24/PBC-REPORT : Plate Beam Checking Report",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738209117081-DESIGN-RC-AASHTO-LRFD24-PBC-REPORT-Plate-Beam-Checking-Report",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "CURRENT_MODE",
+    "ELEMS",
+    "EXPORT_PATH",
+    "KEYS",
+    "OUTPUT_NAME",
+    "SUB_DOMAINS",
+    "TO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#44-pbc-report--plate-beam-checking-report"
+   ],
+   "key_count": 7,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/PCDC",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/PCDC",
+   "articles": [
+    {
+     "id": "64738209928473",
+     "title": "DESIGN/RC/AASHTO-LRFD24/PCDC : Plate Column Data for Checking",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738209928473-DESIGN-RC-AASHTO-LRFD24-PCDC-Plate-Column-Data-for-Checking",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "DIRECTION",
+    "FORCE_OPTION",
+    "REINFORCEMENT",
+    "SUB_DOMAIN"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#26-pcdc--plate-column-data-for-checking"
+   ],
+   "key_count": 4,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/BD-REPORT",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/BD-REPORT",
+   "articles": [
+    {
+     "id": "64738210302361",
+     "title": "DESIGN/RC/AASHTO-LRFD24/BD-REPORT : Beam Design Report",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738210302361-DESIGN-RC-AASHTO-LRFD24-BD-REPORT-Beam-Design-Report",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "CURRENT_MODE",
+    "CURRENT_MODE_MEMB",
+    "CURRENT_MODE_PROP",
+    "DETAIL_POSITIONS",
+    "ELEMS",
+    "END_I",
+    "END_J",
+    "EXPORT_PATH",
+    "KEYS",
+    "MID",
+    "OUTPUT_NAME",
+    "REPORT_TYPE",
+    "SECTIONS",
+    "TO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#29-bd-report--beam-design-report"
+   ],
+   "key_count": 14,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/CC-ANAL",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/CC-ANAL",
+   "articles": [
+    {
+     "id": "64738211981849",
+     "title": "DESIGN/RC/AASHTO-LRFD24/CC-ANAL : Column Checking Perform",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738211981849-DESIGN-RC-AASHTO-LRFD24-CC-ANAL-Column-Checking-Perform",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "ELEMS",
+    "KEYS",
+    "PERFORM_TYPE",
+    "SECTIONS",
+    "TO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#36-cc-anal--column-checking-perform"
+   ],
+   "key_count": 5,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/BD-TABLE",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/BD-TABLE",
+   "articles": [
+    {
+     "id": "64738212961433",
+     "title": "DESIGN/RC/AASHTO-LRFD24/BD-TABLE : Beam Design Table",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738212961433-DESIGN-RC-AASHTO-LRFD24-BD-TABLE-Beam-Design-Table",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "COMPONENTS",
+    "DIST",
+    "ELEMS",
+    "EXPORT_PATH",
+    "FORCE",
+    "FORMAT",
+    "HEAT",
+    "KEYS",
+    "PLACE",
+    "PRI_SORT",
+    "RESULT",
+    "SECTIONS",
+    "STYLES",
+    "TABLE_NAME",
+    "TABLE_TYPE",
+    "TEMP",
+    "TO",
+    "UNIT"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#28-bd-table--beam-design-table"
+   ],
+   "key_count": 18,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/CC-TABLE",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/CC-TABLE",
+   "articles": [
+    {
+     "id": "64738213884953",
+     "title": "DESIGN/RC/AASHTO-LRFD24/CC-TABLE : Column Checking Table",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738213884953-DESIGN-RC-AASHTO-LRFD24-CC-TABLE-Column-Checking-Table",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "COMPONENTS",
+    "DIST",
+    "ELEMS",
+    "EXPORT_PATH",
+    "FORCE",
+    "FORMAT",
+    "HEAT",
+    "KEYS",
+    "PLACE",
+    "PRI_SORT",
+    "RESULT",
+    "SECTIONS",
+    "STYLES",
+    "TABLE_NAME",
+    "TABLE_TYPE",
+    "TEMP",
+    "TO",
+    "UNIT"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#37-cc-table--column-checking-table"
+   ],
+   "key_count": 18,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/SLTC",
+   "methods": [
+    "DELETE",
+    "GET",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/SLTC",
+   "articles": [
+    {
+     "id": "64738215365913",
+     "title": "DESIGN/RC/AASHTO-LRFD20/SLTC : Short/Long term Load Case",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738215365913-DESIGN-RC-AASHTO-LRFD20-SLTC-Short-Long-term-Load-Case",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "LOAD_CASE_NAME",
+    "LONG_TERM_LOADS",
+    "SHORT_TERM_LOADS"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#5-sltc--shortlong-term-load-case"
+   ],
+   "key_count": 3,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/LENG",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/LENG",
+   "articles": [
+    {
+     "id": "64738216197273",
+     "title": "DESIGN/RC/AASHTO-LRFD20/LENG : Unbraced Length (L, Lb)",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738216197273-DESIGN-RC-AASHTO-LRFD20-LENG-Unbraced-Length-L-Lb",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "LB",
+    "LY",
+    "LZ",
+    "bNOTUSE"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#11-leng--unbraced-length-l-lb"
+   ],
+   "key_count": 4,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/CMFT",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/CMFT",
+   "articles": [
+    {
+     "id": "64738216948121",
+     "title": "DESIGN/RC/AASHTO-LRFD20/CMFT : Moment Factor (Cm)",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738216948121-DESIGN-RC-AASHTO-LRFD20-CMFT-Moment-Factor-Cm",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "CMY",
+    "CMZ",
+    "OPT_AUTO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#13-cmft--moment-factor-cm"
+   ],
+   "key_count": 3,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/BC-TABLE",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/BC-TABLE",
+   "articles": [
+    {
+     "id": "64738222854937",
+     "title": "DESIGN/RC/AASHTO-LRFD24/BC-TABLE : Beam Checking Table",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738222854937-DESIGN-RC-AASHTO-LRFD24-BC-TABLE-Beam-Checking-Table",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "COMPONENTS",
+    "DIST",
+    "ELEMS",
+    "EXPORT_PATH",
+    "FORCE",
+    "FORMAT",
+    "HEAT",
+    "KEYS",
+    "LIMIT_STATE",
+    "PLACE",
+    "PRI_SORT",
+    "RESULT",
+    "SECTIONS",
+    "STYLES",
+    "TABLE_NAME",
+    "TABLE_TYPE",
+    "TEMP",
+    "TO",
+    "UNIT"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#31-bc-table--beam-checking-table"
+   ],
+   "key_count": 19,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/FMAG",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/FMAG",
+   "articles": [
+    {
+     "id": "64738226311193",
+     "title": "DESIGN/RC/AASHTO-LRFD20/FMAG : Moment Magnifier (B1/Delta_b, B2/Delta_s)",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738226311193-DESIGN-RC-AASHTO-LRFD20-FMAG-Moment-Magnifier-B1-Delta-b-B2-Delta-s",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "B1Y_DELTA_BY",
+    "B1Z_DELTA_BZ",
+    "B2Y_DELTA_SY",
+    "B2Z_DELTA_SZ"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#14-fmag--moment-magnifier-b1delta_b-b2delta_s"
+   ],
+   "key_count": 4,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/CD-REPORT",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/CD-REPORT",
+   "articles": [
+    {
+     "id": "64738227830297",
+     "title": "DESIGN/RC/AASHTO-LRFD24/CD-REPORT : Column Design Report",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738227830297-DESIGN-RC-AASHTO-LRFD24-CD-REPORT-Column-Design-Report",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "CURRENT_MODE",
+    "CURRENT_MODE_MEMB",
+    "CURRENT_MODE_PROP",
+    "ELEMS",
+    "EXPORT_PATH",
+    "KEYS",
+    "OUTPUT_NAME",
+    "REPORT_TYPE",
+    "SECTIONS",
+    "TO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#35-cd-report--column-design-report"
+   ],
+   "key_count": 10,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/PBD-REPORT",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/PBD-REPORT",
+   "articles": [
+    {
+     "id": "64738228204825",
+     "title": "DESIGN/RC/AASHTO-LRFD24/PBD-REPORT : Plate Beam Design Report",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738228204825-DESIGN-RC-AASHTO-LRFD24-PBD-REPORT-Plate-Beam-Design-Report",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "CURRENT_MODE",
+    "ELEMS",
+    "EXPORT_PATH",
+    "KEYS",
+    "OUTPUT_NAME",
+    "SUB_DOMAINS",
+    "TO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#41-pbd-report--plate-beam-design-report"
+   ],
+   "key_count": 7,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/PCD-REPORT",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/PCD-REPORT",
+   "articles": [
+    {
+     "id": "64738228543385",
+     "title": "DESIGN/RC/AASHTO-LRFD24/PCD-REPORT : Plate Column Design Report",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738228543385-DESIGN-RC-AASHTO-LRFD24-PCD-REPORT-Plate-Column-Design-Report",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "CURRENT_MODE",
+    "ELEMS",
+    "EXPORT_PATH",
+    "KEYS",
+    "OUTPUT_NAME",
+    "SUB_DOMAINS",
+    "TO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#47-pcd-report--plate-column-design-report"
+   ],
+   "key_count": 7,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/CC-REPORT",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/CC-REPORT",
+   "articles": [
+    {
+     "id": "64738229302169",
+     "title": "DESIGN/RC/AASHTO-LRFD24/CC-REPORT : Column Checking Report",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738229302169-DESIGN-RC-AASHTO-LRFD24-CC-REPORT-Column-Checking-Report",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "CURRENT_MODE",
+    "CURRENT_MODE_MEMB",
+    "CURRENT_MODE_PROP",
+    "ELEMS",
+    "EXPORT_PATH",
+    "KEYS",
+    "OUTPUT_NAME",
+    "REPORT_TYPE",
+    "SECTIONS",
+    "TO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#38-cc-report--column-checking-report"
+   ],
+   "key_count": 10,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/PBC-ANAL",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/PBC-ANAL",
+   "articles": [
+    {
+     "id": "64738229428889",
+     "title": "DESIGN/RC/AASHTO-LRFD24/PBC-ANAL : Plate Beam Checking Perform",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738229428889-DESIGN-RC-AASHTO-LRFD24-PBC-ANAL-Plate-Beam-Checking-Perform",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "ELEMS",
+    "KEYS",
+    "PERFORM_TYPE",
+    "SUB_DOMAINS",
+    "TO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#42-pbc-anal--plate-beam-checking-perform"
+   ],
+   "key_count": 5,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/PCC-ANAL",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/PCC-ANAL",
+   "articles": [
+    {
+     "id": "64738229803801",
+     "title": "DESIGN/RC/AASHTO-LRFD24/PCC-ANAL : Plate Column Checking Perform",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738229803801-DESIGN-RC-AASHTO-LRFD24-PCC-ANAL-Plate-Column-Checking-Perform",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "ELEMS",
+    "KEYS",
+    "PERFORM_TYPE",
+    "SUB_DOMAINS",
+    "TO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#48-pcc-anal--plate-column-checking-perform"
+   ],
+   "key_count": 5,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/CD-TABLE",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/CD-TABLE",
+   "articles": [
+    {
+     "id": "64738230363929",
+     "title": "DESIGN/RC/AASHTO-LRFD24/CD-TABLE : Column Design Table",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738230363929-DESIGN-RC-AASHTO-LRFD24-CD-TABLE-Column-Design-Table",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "COMPONENTS",
+    "DIST",
+    "ELEMS",
+    "EXPORT_PATH",
+    "FORCE",
+    "FORMAT",
+    "HEAT",
+    "KEYS",
+    "PLACE",
+    "PRI_SORT",
+    "RESULT",
+    "SECTIONS",
+    "STYLES",
+    "TABLE_NAME",
+    "TABLE_TYPE",
+    "TEMP",
+    "TO",
+    "UNIT"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#34-cd-table--column-design-table"
+   ],
+   "key_count": 18,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/PBD-TABLE",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/PBD-TABLE",
+   "articles": [
+    {
+     "id": "64738230566041",
+     "title": "DESIGN/RC/AASHTO-LRFD24/PBD-TABLE : Plate Beam Design Table",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738230566041-DESIGN-RC-AASHTO-LRFD24-PBD-TABLE-Plate-Beam-Design-Table",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "COMPONENTS",
+    "DIST",
+    "ELEMS",
+    "EXPORT_PATH",
+    "FORCE",
+    "FORMAT",
+    "HEAT",
+    "KEYS",
+    "PLACE",
+    "RESULT",
+    "STYLES",
+    "SUB_DOMAINS",
+    "TABLE_NAME",
+    "TEMP",
+    "TO",
+    "UNIT"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#40-pbd-table--plate-beam-design-table"
+   ],
+   "key_count": 16,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/PCD-TABLE",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/PCD-TABLE",
+   "articles": [
+    {
+     "id": "64738230818969",
+     "title": "DESIGN/RC/AASHTO-LRFD24/PCD-TABLE : Plate Column Design Table",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738230818969-DESIGN-RC-AASHTO-LRFD24-PCD-TABLE-Plate-Column-Design-Table",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "COMPONENTS",
+    "DIST",
+    "ELEMS",
+    "EXPORT_PATH",
+    "FORCE",
+    "FORMAT",
+    "HEAT",
+    "KEYS",
+    "PLACE",
+    "RESULT",
+    "STYLES",
+    "SUB_DOMAINS",
+    "TABLE_NAME",
+    "TEMP",
+    "TO",
+    "UNIT"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#46-pcd-table--plate-column-design-table"
+   ],
+   "key_count": 16,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/MEMB",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/MEMB",
+   "articles": [
+    {
+     "id": "64738233234201",
+     "title": "DESIGN/RC/AASHTO-LRFD20/MEMB : Member Assignment",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738233234201-DESIGN-RC-AASHTO-LRFD20-MEMB-Member-Assignment",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "AELEM",
+    "bREVERSE"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#9-memb--member-assignment"
+   ],
+   "key_count": 2,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/KFAC",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/KFAC",
+   "articles": [
+    {
+     "id": "64738233665561",
+     "title": "DESIGN/RC/AASHTO-LRFD20/KFAC : Effective Length Factor (K)",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738233665561-DESIGN-RC-AASHTO-LRFD20-KFAC-Effective-Length-Factor-K",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "Ky",
+    "Kz"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#12-kfac--effective-length-factor-k"
+   ],
+   "key_count": 2,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/LTSR",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/LTSR",
+   "articles": [
+    {
+     "id": "64738233898521",
+     "title": "DESIGN/RC/AASHTO-LRFD20/LTSR : Limiting Slenderness Ratio",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738233898521-DESIGN-RC-AASHTO-LRFD20-LTSR-Limiting-Slenderness-Ratio",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "COMP",
+    "TENS",
+    "bNOTCHECK"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#15-ltsr--limiting-slenderness-ratio"
+   ],
+   "key_count": 3,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/CD-ANAL",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/CD-ANAL",
+   "articles": [
+    {
+     "id": "64738236128793",
+     "title": "DESIGN/RC/AASHTO-LRFD24/CD-ANAL : Column Design Perform",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738236128793-DESIGN-RC-AASHTO-LRFD24-CD-ANAL-Column-Design-Perform",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "ELEMS",
+    "KEYS",
+    "PERFORM_TYPE",
+    "SECTIONS",
+    "TO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#33-cd-anal--column-design-perform"
+   ],
+   "key_count": 5,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/PBD-ANAL",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/PBD-ANAL",
+   "articles": [
+    {
+     "id": "64738236498585",
+     "title": "DESIGN/RC/AASHTO-LRFD24/PBD-ANAL : Plate Beam Design Perform",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738236498585-DESIGN-RC-AASHTO-LRFD24-PBD-ANAL-Plate-Beam-Design-Perform",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "ELEMS",
+    "KEYS",
+    "PERFORM_TYPE",
+    "SUB_DOMAINS",
+    "TO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#39-pbd-anal--plate-beam-design-perform"
+   ],
+   "key_count": 5,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/PCD-ANAL",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/PCD-ANAL",
+   "articles": [
+    {
+     "id": "64738236921881",
+     "title": "DESIGN/RC/AASHTO-LRFD24/PCD-ANAL : Plate Column Design Perform",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738236921881-DESIGN-RC-AASHTO-LRFD24-PCD-ANAL-Plate-Column-Design-Perform",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "ELEMS",
+    "KEYS",
+    "PERFORM_TYPE",
+    "SUB_DOMAINS",
+    "TO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#45-pcd-anal--plate-column-design-perform"
+   ],
+   "key_count": 5,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/BC-ANAL",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/BC-ANAL",
+   "articles": [
+    {
+     "id": "64738237317657",
+     "title": "DESIGN/RC/AASHTO-LRFD24/BC-ANAL : Beam Checking Perform",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738237317657-DESIGN-RC-AASHTO-LRFD24-BC-ANAL-Beam-Checking-Perform",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "ELEMS",
+    "KEYS",
+    "PERFORM_TYPE",
+    "SECTIONS",
+    "TO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#30-bc-anal--beam-checking-perform"
+   ],
+   "key_count": 5,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/BC-REPORT",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/BC-REPORT",
+   "articles": [
+    {
+     "id": "64738237510809",
+     "title": "DESIGN/RC/AASHTO-LRFD24/BC-REPORT : Beam Checking Report",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738237510809-DESIGN-RC-AASHTO-LRFD24-BC-REPORT-Beam-Checking-Report",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "CURRENT_MODE",
+    "CURRENT_MODE_MEMB",
+    "CURRENT_MODE_PROP",
+    "DETAIL_POSITIONS",
+    "ELEMS",
+    "END_I",
+    "END_J",
+    "EXPORT_PATH",
+    "KEYS",
+    "MID",
+    "OUTPUT_NAME",
+    "REPORT_TYPE",
+    "SECTIONS",
+    "TO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#32-bc-report--beam-checking-report"
+   ],
+   "key_count": 14,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/PBC-TABLE",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/PBC-TABLE",
+   "articles": [
+    {
+     "id": "64738240093849",
+     "title": "DESIGN/RC/AASHTO-LRFD24/PBC-TABLE : Plate Beam Checking Table",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738240093849-DESIGN-RC-AASHTO-LRFD24-PBC-TABLE-Plate-Beam-Checking-Table",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "COMPONENTS",
+    "DIST",
+    "ELEMS",
+    "EXPORT_PATH",
+    "FORCE",
+    "FORMAT",
+    "HEAT",
+    "KEYS",
+    "LIMIT_STATE",
+    "PLACE",
+    "RESULT",
+    "STYLES",
+    "SUB_DOMAINS",
+    "TABLE_NAME",
+    "TEMP",
+    "TO",
+    "UNIT"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#43-pbc-table--plate-beam-checking-table"
+   ],
+   "key_count": 17,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD24/PCC-TABLE",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD24/PCC-TABLE",
+   "articles": [
+    {
+     "id": "64738240305945",
+     "title": "DESIGN/RC/AASHTO-LRFD24/PCC-TABLE : Plate Column Checking Table",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738240305945-DESIGN-RC-AASHTO-LRFD24-PCC-TABLE-Plate-Column-Checking-Table",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "COMPONENTS",
+    "DIST",
+    "ELEMS",
+    "EXPORT_PATH",
+    "FORCE",
+    "FORMAT",
+    "HEAT",
+    "KEYS",
+    "LIMIT_STATE",
+    "PLACE",
+    "RESULT",
+    "STYLES",
+    "SUB_DOMAINS",
+    "TABLE_NAME",
+    "TEMP",
+    "TO",
+    "UNIT"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#49-pcc-table--plate-column-checking-table"
+   ],
+   "key_count": 17,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/DCTL",
+   "methods": [
+    "DELETE",
+    "GET",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/DCTL",
+   "articles": [
+    {
+     "id": "64738241525017",
+     "title": "DESIGN/RC/AASHTO-LRFD20/DCTL : Definition of Frame",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738241525017-DESIGN-RC-AASHTO-LRFD20-DCTL-Definition-of-Frame",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "DT",
+    "FRAMEX",
+    "FRAMEY",
+    "bAUTOKF"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#2-dctl--definition-of-frame"
+   ],
+   "key_count": 4,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/LCTB",
+   "methods": [
+    "DELETE",
+    "GET"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/LCTB",
+   "articles": [
+    {
+     "id": "64738246033049",
+     "title": "DESIGN/RC/AASHTO-LRFD20/LCTB : Load Contribution for Nonlinear Load Case",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738246033049-DESIGN-RC-AASHTO-LRFD20-LCTB-Load-Contribution-for-Nonlinear-Load-Case",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "BASE_ITEM",
+    "DESC",
+    "FACTOR",
+    "LOAD_CASE_NAME",
+    "NAME"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#3-lctb--load-contribution-for-nonlinear-load-case"
+   ],
+   "key_count": 5,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/BD-ANAL",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/BD-ANAL",
+   "articles": [
+    {
+     "id": "64738251141273",
+     "title": "DESIGN/RC/AASHTO-LRFD20/BD-ANAL : Beam Design Perform",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738251141273-DESIGN-RC-AASHTO-LRFD20-BD-ANAL-Beam-Design-Perform",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "ELEMS",
+    "KEYS",
+    "PERFORM_TYPE",
+    "SECTIONS",
+    "TO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#27-bd-anal--beam-design-perform"
+   ],
+   "key_count": 5,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/BD-REPORT",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/BD-REPORT",
+   "articles": [
+    {
+     "id": "64738251423129",
+     "title": "DESIGN/RC/AASHTO-LRFD20/BD-REPORT : Beam Design Report",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738251423129-DESIGN-RC-AASHTO-LRFD20-BD-REPORT-Beam-Design-Report",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "CURRENT_MODE",
+    "CURRENT_MODE_MEMB",
+    "CURRENT_MODE_PROP",
+    "DETAIL_POSITIONS",
+    "ELEMS",
+    "END_I",
+    "END_J",
+    "EXPORT_PATH",
+    "KEYS",
+    "MID",
+    "OUTPUT_NAME",
+    "REPORT_TYPE",
+    "SECTIONS",
+    "TO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#29-bd-report--beam-design-report"
+   ],
+   "key_count": 14,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/CD-ANAL",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/CD-ANAL",
+   "articles": [
+    {
+     "id": "64738251691033",
+     "title": "DESIGN/RC/AASHTO-LRFD20/CD-ANAL : Column Design Perform",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738251691033-DESIGN-RC-AASHTO-LRFD20-CD-ANAL-Column-Design-Perform",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "ELEMS",
+    "KEYS",
+    "PERFORM_TYPE",
+    "SECTIONS",
+    "TO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#33-cd-anal--column-design-perform"
+   ],
+   "key_count": 5,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/OPE_MEMB",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/OPE_MEMB",
+   "articles": [
+    {
+     "id": "64738252454809",
+     "title": "DESIGN/RC/AASHTO-LRFD20/OPE_MEMB : Auto Member Assignment",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738252454809-DESIGN-RC-AASHTO-LRFD20-OPE-MEMB-Auto-Member-Assignment",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "ALLOW_SINGLE",
+    "ASSIGN_TYPE",
+    "ELEM_LIST",
+    "SELECTION_TYPE"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#10-ope_memb--auto-member-assignment"
+   ],
+   "key_count": 4,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/DCO",
+   "methods": [
+    "DELETE",
+    "GET",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/DCO",
+   "articles": [
+    {
+     "id": "64738252667417",
+     "title": "DESIGN/RC/AASHTO-LRFD20/DCO : Design Code Option",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738252667417-DESIGN-RC-AASHTO-LRFD20-DCO-Design-Code-Option",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "DGNCODE",
+    "MOM_REDIST_FACT",
+    "PLATE_COLUMN_PM",
+    "SEISMIC_PROV",
+    "SEISMIC_ZONE"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#1-dco--design-code-option"
+   ],
+   "key_count": 5,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/MBTP",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/MBTP",
+   "articles": [
+    {
+     "id": "64738254934041",
+     "title": "DESIGN/RC/AASHTO-LRFD20/MBTP : Modify Member Type",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738254934041-DESIGN-RC-AASHTO-LRFD20-MBTP-Modify-Member-Type",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "TYPE"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#8-mbtp--modify-member-type"
+   ],
+   "key_count": 1,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/RMFR",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/RMFR",
+   "articles": [
+    {
+     "id": "64738255664409",
+     "title": "DESIGN/RC/AASHTO-LRFD20/RMFR : Response Modification Factor (R)",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738255664409-DESIGN-RC-AASHTO-LRFD20-RMFR-Response-Modification-Factor-R",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "FX",
+    "FY",
+    "FZ",
+    "MX",
+    "MY",
+    "MZ"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#16-rmfr--response-modification-factor-r"
+   ],
+   "key_count": 6,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/MATD",
+   "methods": [
+    "DELETE",
+    "GET",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/MATD",
+   "articles": [
+    {
+     "id": "64738255824921",
+     "title": "DESIGN/RC/AASHTO-LRFD20/MATD : Modify RC Materials",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738255824921-DESIGN-RC-AASHTO-LRFD20-MATD-Modify-RC-Materials",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "CODE",
+    "CONCRETE",
+    "FC",
+    "FY",
+    "FYS",
+    "GRADE",
+    "LAMBDA",
+    "LIGHTWEIGHT",
+    "MAIN_REBAR",
+    "NAME",
+    "REBAR",
+    "SUB_REBAR"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#7-matd--modify-rc-materials"
+   ],
+   "key_count": 12,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/PBDD",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/PBDD",
+   "articles": [
+    {
+     "id": "64738256740633",
+     "title": "DESIGN/RC/AASHTO-LRFD20/PBDD : Plate Beam Data for Design",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738256740633-DESIGN-RC-AASHTO-LRFD20-PBDD-Plate-Beam-Data-for-Design",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "DB",
+    "DIRECTION",
+    "DT",
+    "FORCE_OPTION",
+    "NUMBER",
+    "SIZE",
+    "STIRRUP",
+    "SUB_DOMAIN"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#23-pbdd--plate-beam-data-for-design"
+   ],
+   "key_count": 8,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/RIPC",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/RIPC",
+   "articles": [
+    {
+     "id": "64738257757081",
+     "title": "DESIGN/RC/AASHTO-LRFD20/RIPC : Rebar Input for Plate Column",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738257757081-DESIGN-RC-AASHTO-LRFD20-RIPC-Rebar-Input-for-Plate-Column",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "BOTTOM",
+    "CTC",
+    "DB",
+    "DISTRIBUTION",
+    "DT",
+    "LAYER",
+    "LAYERS",
+    "MAIN",
+    "NAME",
+    "NUMBER",
+    "SIZE",
+    "SIZE1",
+    "SIZE2",
+    "SPACING",
+    "STIRRUP",
+    "TOP",
+    "USE_STIRRUP"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#22-ripc--rebar-input-for-plate-column"
+   ],
+   "key_count": 17,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/PCDC",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/PCDC",
+   "articles": [
+    {
+     "id": "64738258023577",
+     "title": "DESIGN/RC/AASHTO-LRFD20/PCDC : Plate Column Data for Checking",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738258023577-DESIGN-RC-AASHTO-LRFD20-PCDC-Plate-Column-Data-for-Checking",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "DIRECTION",
+    "FORCE_OPTION",
+    "REINFORCEMENT",
+    "SUB_DOMAIN"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#26-pcdc--plate-column-data-for-checking"
+   ],
+   "key_count": 4,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/SRDF",
+   "methods": [
+    "DELETE",
+    "GET",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/SRDF",
+   "articles": [
+    {
+     "id": "64738260337561",
+     "title": "DESIGN/RC/AASHTO-LRFD20/SRDF : Strength Reduction Factors",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738260337561-DESIGN-RC-AASHTO-LRFD20-SRDF-Strength-Reduction-Factors",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "PHI_C1",
+    "PHI_C2",
+    "PHI_T",
+    "PHI_V"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#4-srdf--strength-reduction-factors"
+   ],
+   "key_count": 4,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/LMRR",
+   "methods": [
+    "DELETE",
+    "GET",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/LMRR",
+   "articles": [
+    {
+     "id": "64738260540953",
+     "title": "DESIGN/RC/AASHTO-LRFD20/LMRR : Limiting Maximum Rebar Ratio",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738260540953-DESIGN-RC-AASHTO-LRFD20-LMRR-Limiting-Maximum-Rebar-Ratio",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "RHOC"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#6-lmrr--limiting-maximum-rebar-ratio"
+   ],
+   "key_count": 1,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/RCHK",
+   "methods": [
+    "DELETE",
+    "GET",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/RCHK",
+   "articles": [
+    {
+     "id": "64738261735833",
+     "title": "DESIGN/RC/AASHTO-LRFD20/RCHK : Rebar Input for Checking (Beam, Column Section)",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738261735833-DESIGN-RC-AASHTO-LRFD20-RCHK-Rebar-Input-for-Checking-Beam-Column-Section",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "BAR_NAME1",
+    "BAR_NAME2",
+    "BAR_NUM",
+    "BEAM",
+    "COLM",
+    "ENVTYPE",
+    "INDEX",
+    "LAYER",
+    "MEMBTYPE",
+    "OPTION_IMJSAME",
+    "POSITION",
+    "POS_BOT_LAYERS",
+    "POS_TOP_LAYERS",
+    "SECTOR",
+    "SUBBAR_DIST",
+    "SUBBAR_NAME",
+    "SUBBAR_NUM",
+    "SUBBAR_NUM_Y",
+    "SUBBAR_NUM_Z",
+    "SUB_BAR",
+    "SUB_BARNAME",
+    "dD",
+    "dDc",
+    "dSUB_BARANGLE",
+    "dSUB_BARDIST",
+    "dSUB_BARNUM",
+    "vLAYER",
+    "vMAIN",
+    "vPOSITION",
+    "vSUB_BAR"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#19-rchk--rebar-input-for-checking-beam-column-section"
+   ],
+   "key_count": 30,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/REBT",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/REBT",
+   "articles": [
+    {
+     "id": "64738261970201",
+     "title": "DESIGN/RC/AASHTO-LRFD20/REBT : Column General Section Rebar",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738261970201-DESIGN-RC-AASHTO-LRFD20-REBT-Column-General-Section-Rebar",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "DIST",
+    "HOOP_BAR",
+    "LEG_Y",
+    "LEG_Z",
+    "MAIN_BAR",
+    "NAME",
+    "NUM",
+    "ORIGIN_TYPE",
+    "Y",
+    "Z"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#20-rebt--column-general-section-rebar"
+   ],
+   "key_count": 10,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/PBDC",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/PBDC",
+   "articles": [
+    {
+     "id": "64738262829209",
+     "title": "DESIGN/RC/AASHTO-LRFD20/PBDC : Plate Beam Data for Checking",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738262829209-DESIGN-RC-AASHTO-LRFD20-PBDC-Plate-Beam-Data-for-Checking",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "DIRECTION",
+    "FORCE_OPTION",
+    "REINFORCEMENT",
+    "SUB_DOMAIN"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#24-pbdc--plate-beam-data-for-checking"
+   ],
+   "key_count": 4,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/PCDD",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/PCDD",
+   "articles": [
+    {
+     "id": "64738263039641",
+     "title": "DESIGN/RC/AASHTO-LRFD20/PCDD : Plate Column Data for Design",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738263039641-DESIGN-RC-AASHTO-LRFD20-PCDD-Plate-Column-Data-for-Design",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "DB",
+    "DIRECTION",
+    "DT",
+    "FORCE_OPTION",
+    "NUMBER",
+    "SIZE",
+    "STIRRUP",
+    "SUB_DOMAIN"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#25-pcdd--plate-column-data-for-design"
+   ],
+   "key_count": 8,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/PBD-REPORT",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/PBD-REPORT",
+   "articles": [
+    {
+     "id": "64738265135641",
+     "title": "DESIGN/RC/AASHTO-LRFD20/PBD-REPORT : Plate Beam Design Report",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738265135641-DESIGN-RC-AASHTO-LRFD20-PBD-REPORT-Plate-Beam-Design-Report",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "CURRENT_MODE",
+    "ELEMS",
+    "EXPORT_PATH",
+    "KEYS",
+    "OUTPUT_NAME",
+    "SUB_DOMAINS",
+    "TO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#41-pbd-report--plate-beam-design-report"
+   ],
+   "key_count": 7,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/PCD-REPORT",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/PCD-REPORT",
+   "articles": [
+    {
+     "id": "64738265747993",
+     "title": "DESIGN/RC/AASHTO-LRFD20/PCD-REPORT : Plate Column Design Report",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738265747993-DESIGN-RC-AASHTO-LRFD20-PCD-REPORT-Plate-Column-Design-Report",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "CURRENT_MODE",
+    "ELEMS",
+    "EXPORT_PATH",
+    "KEYS",
+    "OUTPUT_NAME",
+    "SUB_DOMAINS",
+    "TO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#47-pcd-report--plate-column-design-report"
+   ],
+   "key_count": 7,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/RIPB",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/RIPB",
+   "articles": [
+    {
+     "id": "64738270545945",
+     "title": "DESIGN/RC/AASHTO-LRFD20/RIPB : Rebar Input for Plate Beam",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738270545945-DESIGN-RC-AASHTO-LRFD20-RIPB-Rebar-Input-for-Plate-Beam",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "BOTTOM",
+    "CTC",
+    "DB",
+    "DISTRIBUTION",
+    "DT",
+    "LAYER",
+    "LAYERS",
+    "MAIN",
+    "NAME",
+    "NUMBER",
+    "SIZE",
+    "SIZE1",
+    "SIZE2",
+    "SPACING",
+    "STIRRUP",
+    "TOP",
+    "USE_STIRRUP"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#21-ripb--rebar-input-for-plate-beam"
+   ],
+   "key_count": 17,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/BC-ANAL",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/BC-ANAL",
+   "articles": [
+    {
+     "id": "64738274149657",
+     "title": "DESIGN/RC/AASHTO-LRFD20/BC-ANAL : Beam Checking Perform",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738274149657-DESIGN-RC-AASHTO-LRFD20-BC-ANAL-Beam-Checking-Perform",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "ELEMS",
+    "KEYS",
+    "PERFORM_TYPE",
+    "SECTIONS",
+    "TO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#30-bc-anal--beam-checking-perform"
+   ],
+   "key_count": 5,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/BC-REPORT",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/BC-REPORT",
+   "articles": [
+    {
+     "id": "64738274509337",
+     "title": "DESIGN/RC/AASHTO-LRFD20/BC-REPORT : Beam Checking Report",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738274509337-DESIGN-RC-AASHTO-LRFD20-BC-REPORT-Beam-Checking-Report",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "CURRENT_MODE",
+    "CURRENT_MODE_MEMB",
+    "CURRENT_MODE_PROP",
+    "DETAIL_POSITIONS",
+    "ELEMS",
+    "END_I",
+    "END_J",
+    "EXPORT_PATH",
+    "KEYS",
+    "MID",
+    "OUTPUT_NAME",
+    "REPORT_TYPE",
+    "SECTIONS",
+    "TO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#32-bc-report--beam-checking-report"
+   ],
+   "key_count": 14,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/CC-REPORT",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/CC-REPORT",
+   "articles": [
+    {
+     "id": "64738275205657",
+     "title": "DESIGN/RC/AASHTO-LRFD20/CC-REPORT : Column Checking Report",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738275205657-DESIGN-RC-AASHTO-LRFD20-CC-REPORT-Column-Checking-Report",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "CURRENT_MODE",
+    "CURRENT_MODE_MEMB",
+    "CURRENT_MODE_PROP",
+    "ELEMS",
+    "EXPORT_PATH",
+    "KEYS",
+    "OUTPUT_NAME",
+    "REPORT_TYPE",
+    "SECTIONS",
+    "TO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#38-cc-report--column-checking-report"
+   ],
+   "key_count": 10,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/PBC-REPORT",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/PBC-REPORT",
+   "articles": [
+    {
+     "id": "64738275892761",
+     "title": "DESIGN/RC/AASHTO-LRFD20/PBC-REPORT : Plate Beam Checking Report",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738275892761-DESIGN-RC-AASHTO-LRFD20-PBC-REPORT-Plate-Beam-Checking-Report",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "CURRENT_MODE",
+    "ELEMS",
+    "EXPORT_PATH",
+    "KEYS",
+    "OUTPUT_NAME",
+    "SUB_DOMAINS",
+    "TO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#44-pbc-report--plate-beam-checking-report"
+   ],
+   "key_count": 7,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/PCC-REPORT",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/PCC-REPORT",
+   "articles": [
+    {
+     "id": "64738276563225",
+     "title": "DESIGN/RC/AASHTO-LRFD20/PCC-REPORT : Plate Column Checking Report",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738276563225-DESIGN-RC-AASHTO-LRFD20-PCC-REPORT-Plate-Column-Checking-Report",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "CURRENT_MODE",
+    "ELEMS",
+    "EXPORT_PATH",
+    "KEYS",
+    "OUTPUT_NAME",
+    "SUB_DOMAINS",
+    "TO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#50-pcc-report--plate-column-checking-report"
+   ],
+   "key_count": 7,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/SUFC",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/SUFC",
+   "articles": [
+    {
+     "id": "64738277463961",
+     "title": "DESIGN/RC/AASHTO-LRFD20/SUFC : Scale-up Factor for Column",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738277463961-DESIGN-RC-AASHTO-LRFD20-SUFC-Scale-up-Factor-for-Column",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "FACTOR"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#17-sufc--scale-up-factor-for-column"
+   ],
+   "key_count": 1,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/RDGN",
+   "methods": [
+    "DELETE",
+    "GET",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/RDGN",
+   "articles": [
+    {
+     "id": "64738277948569",
+     "title": "DESIGN/RC/AASHTO-LRFD20/RDGN : Rebar Input for Design (Beam, Column Section)",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738277948569-DESIGN-RC-AASHTO-LRFD20-RDGN-Rebar-Input-for-Design-Beam-Column-Section",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "BEAM",
+    "COLM",
+    "DB",
+    "DC",
+    "DT",
+    "MEMBTYPE",
+    "NUMBER",
+    "SIZE",
+    "STIRRUP",
+    "TIE_SPIRAL"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#18-rdgn--rebar-input-for-design-beam-column-section"
+   ],
+   "key_count": 10,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/CD-REPORT",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/CD-REPORT",
+   "articles": [
+    {
+     "id": "64738280917785",
+     "title": "DESIGN/RC/AASHTO-LRFD20/CD-REPORT : Column Design Report",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738280917785-DESIGN-RC-AASHTO-LRFD20-CD-REPORT-Column-Design-Report",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "CURRENT_MODE",
+    "CURRENT_MODE_MEMB",
+    "CURRENT_MODE_PROP",
+    "ELEMS",
+    "EXPORT_PATH",
+    "KEYS",
+    "OUTPUT_NAME",
+    "REPORT_TYPE",
+    "SECTIONS",
+    "TO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#35-cd-report--column-design-report"
+   ],
+   "key_count": 10,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/CC-ANAL",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/CC-ANAL",
+   "articles": [
+    {
+     "id": "64738283304089",
+     "title": "DESIGN/RC/AASHTO-LRFD20/CC-ANAL : Column Checking Perform",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738283304089-DESIGN-RC-AASHTO-LRFD20-CC-ANAL-Column-Checking-Perform",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "ELEMS",
+    "KEYS",
+    "PERFORM_TYPE",
+    "SECTIONS",
+    "TO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#36-cc-anal--column-checking-perform"
+   ],
+   "key_count": 5,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/PBC-ANAL",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/PBC-ANAL",
+   "articles": [
+    {
+     "id": "64738284070809",
+     "title": "DESIGN/RC/AASHTO-LRFD20/PBC-ANAL : Plate Beam Checking Perform",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738284070809-DESIGN-RC-AASHTO-LRFD20-PBC-ANAL-Plate-Beam-Checking-Perform",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "ELEMS",
+    "KEYS",
+    "PERFORM_TYPE",
+    "SUB_DOMAINS",
+    "TO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#42-pbc-anal--plate-beam-checking-perform"
+   ],
+   "key_count": 5,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/PBD-ANAL",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/PBD-ANAL",
+   "articles": [
+    {
+     "id": "64738288802201",
+     "title": "DESIGN/RC/AASHTO-LRFD20/PBD-ANAL : Plate Beam Design Perform",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738288802201-DESIGN-RC-AASHTO-LRFD20-PBD-ANAL-Plate-Beam-Design-Perform",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "ELEMS",
+    "KEYS",
+    "PERFORM_TYPE",
+    "SUB_DOMAINS",
+    "TO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#39-pbd-anal--plate-beam-design-perform"
+   ],
+   "key_count": 5,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/PCC-ANAL",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/PCC-ANAL",
+   "articles": [
+    {
+     "id": "64738291830681",
+     "title": "DESIGN/RC/AASHTO-LRFD20/PCC-ANAL : Plate Column Checking Perform",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738291830681-DESIGN-RC-AASHTO-LRFD20-PCC-ANAL-Plate-Column-Checking-Perform",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "ELEMS",
+    "KEYS",
+    "PERFORM_TYPE",
+    "SUB_DOMAINS",
+    "TO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#48-pcc-anal--plate-column-checking-perform"
+   ],
+   "key_count": 5,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/CD-TABLE",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/CD-TABLE",
+   "articles": [
+    {
+     "id": "64738292710681",
+     "title": "DESIGN/RC/AASHTO-LRFD20/CD-TABLE : Column Design Table",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738292710681-DESIGN-RC-AASHTO-LRFD20-CD-TABLE-Column-Design-Table",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "COMPONENTS",
+    "DIST",
+    "ELEMS",
+    "EXPORT_PATH",
+    "FORCE",
+    "FORMAT",
+    "HEAT",
+    "KEYS",
+    "PLACE",
+    "PRI_SORT",
+    "RESULT",
+    "SECTIONS",
+    "STYLES",
+    "TABLE_NAME",
+    "TABLE_TYPE",
+    "TEMP",
+    "TO",
+    "UNIT"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#34-cd-table--column-design-table"
+   ],
+   "key_count": 18,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/PBD-TABLE",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/PBD-TABLE",
+   "articles": [
+    {
+     "id": "64738293137433",
+     "title": "DESIGN/RC/AASHTO-LRFD20/PBD-TABLE : Plate Beam Design Table",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738293137433-DESIGN-RC-AASHTO-LRFD20-PBD-TABLE-Plate-Beam-Design-Table",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "COMPONENTS",
+    "DIST",
+    "ELEMS",
+    "EXPORT_PATH",
+    "FORCE",
+    "FORMAT",
+    "HEAT",
+    "KEYS",
+    "PLACE",
+    "RESULT",
+    "STYLES",
+    "SUB_DOMAINS",
+    "TABLE_NAME",
+    "TEMP",
+    "TO",
+    "UNIT"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#40-pbd-table--plate-beam-design-table"
+   ],
+   "key_count": 16,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/BD-TABLE",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/BD-TABLE",
+   "articles": [
+    {
+     "id": "64738296500505",
+     "title": "DESIGN/RC/AASHTO-LRFD20/BD-TABLE : Beam Design Table",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738296500505-DESIGN-RC-AASHTO-LRFD20-BD-TABLE-Beam-Design-Table",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "COMPONENTS",
+    "DIST",
+    "ELEMS",
+    "EXPORT_PATH",
+    "FORCE",
+    "FORMAT",
+    "HEAT",
+    "KEYS",
+    "PLACE",
+    "PRI_SORT",
+    "RESULT",
+    "SECTIONS",
+    "STYLES",
+    "TABLE_NAME",
+    "TABLE_TYPE",
+    "TEMP",
+    "TO",
+    "UNIT"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#28-bd-table--beam-design-table"
+   ],
+   "key_count": 18,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/PBC-TABLE",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/PBC-TABLE",
+   "articles": [
+    {
+     "id": "64738298647833",
+     "title": "DESIGN/RC/AASHTO-LRFD20/PBC-TABLE : Plate Beam Checking Table",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738298647833-DESIGN-RC-AASHTO-LRFD20-PBC-TABLE-Plate-Beam-Checking-Table",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "COMPONENTS",
+    "DIST",
+    "ELEMS",
+    "EXPORT_PATH",
+    "FORCE",
+    "FORMAT",
+    "HEAT",
+    "KEYS",
+    "LIMIT_STATE",
+    "PLACE",
+    "RESULT",
+    "STYLES",
+    "SUB_DOMAINS",
+    "TABLE_NAME",
+    "TEMP",
+    "TO",
+    "UNIT"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#43-pbc-table--plate-beam-checking-table"
+   ],
+   "key_count": 17,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/KDS-24-14-21-2021/DCO",
+   "methods": [
+    "DELETE",
+    "GET",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/KDS-24-14-21-2021/DCO",
+   "articles": [
+    {
+     "id": "64738299867033",
+     "title": "DESIGN/RC/KDS-24-14-21-2021/DCO : Design Code Option",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738299867033-DESIGN-RC-KDS-24-14-21-2021-DCO-Design-Code-Option",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "DGNCODE"
+   ],
+   "doc": [],
+   "key_count": 1,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/RC/KDS-24-14-21-2021/LCTB",
+   "methods": [
+    "DELETE",
+    "GET"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/KDS-24-14-21-2021/LCTB",
+   "articles": [
+    {
+     "id": "64738300405657",
+     "title": "DESIGN/RC/KDS-24-14-21-2021/LCTB : Load Contribution for Nonlinear Load Case",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738300405657-DESIGN-RC-KDS-24-14-21-2021-LCTB-Load-Contribution-for-Nonlinear-Load-Case",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "BASE_ITEM",
+    "DESC",
+    "FACTOR",
+    "LOAD_CASE_NAME",
+    "NAME"
+   ],
+   "doc": [],
+   "key_count": 5,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/RC/KDS-24-14-21-2021/MBTP",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/KDS-24-14-21-2021/MBTP",
+   "articles": [
+    {
+     "id": "64738300815385",
+     "title": "DESIGN/RC/KDS-24-14-21-2021/MBTP : Modify Member Type",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738300815385-DESIGN-RC-KDS-24-14-21-2021-MBTP-Modify-Member-Type",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "TYPE"
+   ],
+   "doc": [],
+   "key_count": 1,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/RC/KDS-24-14-21-2021/MATD",
+   "methods": [
+    "DELETE",
+    "GET",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/KDS-24-14-21-2021/MATD",
+   "articles": [
+    {
+     "id": "64738300984857",
+     "title": "DESIGN/RC/KDS-24-14-21-2021/MATD : Modify RC Materials",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738300984857-DESIGN-RC-KDS-24-14-21-2021-MATD-Modify-RC-Materials",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "CODE",
+    "CONCRETE",
+    "FC",
+    "FY",
+    "FYS",
+    "GRADE",
+    "MAIN_REBAR_GRADE",
+    "MAIN_REBAR_NAME",
+    "NAME",
+    "REBAR",
+    "STANDARD_CODE",
+    "SUB_REBAR_GRADE",
+    "SUB_REBAR_NAME"
+   ],
+   "doc": [],
+   "key_count": 13,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/RC/KDS-24-14-21-2021/FMAG",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/KDS-24-14-21-2021/FMAG",
+   "articles": [
+    {
+     "id": "64738301246745",
+     "title": "DESIGN/RC/KDS-24-14-21-2021/FMAG : Moment Magnifier (B1/Delta_b, B2/Delta_s)",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738301246745-DESIGN-RC-KDS-24-14-21-2021-FMAG-Moment-Magnifier-B1-Delta-b-B2-Delta-s",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "B1Y_DELTA_BY",
+    "B1Z_DELTA_BZ",
+    "B2Y_DELTA_SY",
+    "B2Z_DELTA_SZ"
+   ],
+   "doc": [],
+   "key_count": 4,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/RC/KDS-24-14-21-2021/SLTC",
+   "methods": [
+    "DELETE",
+    "GET",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/KDS-24-14-21-2021/SLTC",
+   "articles": [
+    {
+     "id": "64738301388313",
+     "title": "DESIGN/RC/KDS-24-14-21-2021/SLTC : Short/Long term Load Case",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738301388313-DESIGN-RC-KDS-24-14-21-2021-SLTC-Short-Long-term-Load-Case",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "LOAD_CASE_NAME",
+    "LONG_TERM_LOADS",
+    "SHORT_TERM_LOADS"
+   ],
+   "doc": [],
+   "key_count": 3,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/PCD-ANAL",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/PCD-ANAL",
+   "articles": [
+    {
+     "id": "64738303295641",
+     "title": "DESIGN/RC/AASHTO-LRFD20/PCD-ANAL : Plate Column Design Perform",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738303295641-DESIGN-RC-AASHTO-LRFD20-PCD-ANAL-Plate-Column-Design-Perform",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "ELEMS",
+    "KEYS",
+    "PERFORM_TYPE",
+    "SUB_DOMAINS",
+    "TO"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#45-pcd-anal--plate-column-design-perform"
+   ],
+   "key_count": 5,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/BC-TABLE",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/BC-TABLE",
+   "articles": [
+    {
+     "id": "64738311943577",
+     "title": "DESIGN/RC/AASHTO-LRFD20/BC-TABLE : Beam Checking Table",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738311943577-DESIGN-RC-AASHTO-LRFD20-BC-TABLE-Beam-Checking-Table",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "COMPONENTS",
+    "DIST",
+    "ELEMS",
+    "EXPORT_PATH",
+    "FORCE",
+    "FORMAT",
+    "HEAT",
+    "KEYS",
+    "LIMIT_STATE",
+    "PLACE",
+    "PRI_SORT",
+    "RESULT",
+    "SECTIONS",
+    "STYLES",
+    "TABLE_NAME",
+    "TABLE_TYPE",
+    "TEMP",
+    "TO",
+    "UNIT"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#31-bc-table--beam-checking-table"
+   ],
+   "key_count": 19,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/PCC-TABLE",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/PCC-TABLE",
+   "articles": [
+    {
+     "id": "64738313020697",
+     "title": "DESIGN/RC/AASHTO-LRFD20/PCC-TABLE : Plate Column Checking Table",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738313020697-DESIGN-RC-AASHTO-LRFD20-PCC-TABLE-Plate-Column-Checking-Table",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "COMPONENTS",
+    "DIST",
+    "ELEMS",
+    "EXPORT_PATH",
+    "FORCE",
+    "FORMAT",
+    "HEAT",
+    "KEYS",
+    "LIMIT_STATE",
+    "PLACE",
+    "RESULT",
+    "STYLES",
+    "SUB_DOMAINS",
+    "TABLE_NAME",
+    "TEMP",
+    "TO",
+    "UNIT"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#49-pcc-table--plate-column-checking-table"
+   ],
+   "key_count": 17,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/KDS-24-14-21-2021/KFAC",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/KDS-24-14-21-2021/KFAC",
+   "articles": [
+    {
+     "id": "64738314048281",
+     "title": "DESIGN/RC/KDS-24-14-21-2021/KFAC : Effective Length Factor (K)",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738314048281-DESIGN-RC-KDS-24-14-21-2021-KFAC-Effective-Length-Factor-K",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "Ky",
+    "Kz"
+   ],
+   "doc": [],
+   "key_count": 2,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/RC/KDS-24-14-21-2021/LTSR",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/KDS-24-14-21-2021/LTSR",
+   "articles": [
+    {
+     "id": "64738314188057",
+     "title": "DESIGN/RC/KDS-24-14-21-2021/LTSR : Limiting Slenderness Ratio",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738314188057-DESIGN-RC-KDS-24-14-21-2021-LTSR-Limiting-Slenderness-Ratio",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "COMP",
+    "TENS",
+    "bNOTCHECK"
+   ],
+   "doc": [],
+   "key_count": 3,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/RC/KDS-24-14-21-2021/MEMB",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/KDS-24-14-21-2021/MEMB",
+   "articles": [
+    {
+     "id": "64738314609689",
+     "title": "DESIGN/RC/KDS-24-14-21-2021/MEMB : Member Assignment",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738314609689-DESIGN-RC-KDS-24-14-21-2021-MEMB-Member-Assignment",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "AELEM",
+    "bREVERSE"
+   ],
+   "doc": [],
+   "key_count": 2,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/RC/KDS-24-14-21-2021/RIBC",
+   "methods": [
+    "DELETE",
+    "GET",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/KDS-24-14-21-2021/RIBC",
+   "articles": [
+    {
+     "id": "64738316031641",
+     "title": "DESIGN/RC/KDS-24-14-21-2021/RIBC : Rebar Input (Beam, Column Section)",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738316031641-DESIGN-RC-KDS-24-14-21-2021-RIBC-Rebar-Input-Beam-Column-Section",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "BAR_NAME1",
+    "BAR_NAME2",
+    "BAR_NUM",
+    "BEAM",
+    "COLM",
+    "ENVTYPE",
+    "INDEX",
+    "LAYER",
+    "MEMBTYPE",
+    "OPTION_IMJSAME",
+    "POSITION",
+    "POS_BOT_LAYERS",
+    "POS_TOP_LAYERS",
+    "SECTOR",
+    "SUBBAR_DIST",
+    "SUBBAR_NAME",
+    "SUBBAR_NUM",
+    "SUBBAR_NUM_Y",
+    "SUBBAR_NUM_Z",
+    "SUB_BAR",
+    "SUB_BARNAME",
+    "dD",
+    "dDc",
+    "dSUB_BARANGLE",
+    "dSUB_BARDIST",
+    "dSUB_BARNUM",
+    "vLAYER",
+    "vMAIN",
+    "vPOSITION",
+    "vSUB_BAR"
+   ],
+   "doc": [],
+   "key_count": 30,
+   "documented": false
+  },
+  {
+   "endpoint": "RATING/PSC/DSRPSC",
+   "methods": [
+    "DELETE",
+    "GET",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "RATING/PSC/DSRPSC",
+   "articles": [
+    {
+     "id": "64738316306713",
+     "title": "RATING/PSC/DSRPSC : Rating Code",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738316306713-RATING-PSC-DSRPSC-Rating-Code",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "DGNCODE"
+   ],
+   "doc": [],
+   "key_count": 1,
+   "documented": false
+  },
+  {
+   "endpoint": "RATING/PSC/AASHTO-LRFR19/LENG",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "RATING/PSC/AASHTO-LRFR19/LENG",
+   "articles": [
+    {
+     "id": "64738317990681",
+     "title": "RATING/PSC/AASHTO-LRFR19/LENG : Unbraced Length(L,Lb)",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738317990681-RATING-PSC-AASHTO-LRFR19-LENG-Unbraced-Length-L-Lb",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "LB",
+    "LY",
+    "LZ",
+    "bNOTUSE"
+   ],
+   "doc": [],
+   "key_count": 4,
+   "documented": false
+  },
+  {
+   "endpoint": "RATING/PSC/AASHTO-LRFR19/SPLT",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "RATING/PSC/AASHTO-LRFR19/SPLT",
+   "articles": [
+    {
+     "id": "64738318269209",
+     "title": "RATING/PSC/AASHTO-LRFR19/SPLT : Span Length",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738318269209-RATING-PSC-AASHTO-LRFR19-SPLT-Span-Length",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "SPAN_LENGTH"
+   ],
+   "doc": [],
+   "key_count": 1,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/RC/KDS-24-14-21-2021/LCMT",
+   "methods": [
+    "DELETE",
+    "GET",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/KDS-24-14-21-2021/LCMT",
+   "articles": [
+    {
+     "id": "64738323036057",
+     "title": "DESIGN/RC/KDS-24-14-21-2021/LCMT : Load Combination Type",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738323036057-DESIGN-RC-KDS-24-14-21-2021-LCMT-Load-Combination-Type",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "LIMIT_STATE",
+    "LOAD_COMBINATIONS",
+    "NAME"
+   ],
+   "doc": [],
+   "key_count": 3,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/RC/KDS-24-14-21-2021/RCPL",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/KDS-24-14-21-2021/RCPL",
+   "articles": [
+    {
+     "id": "64738323461145",
+     "title": "DESIGN/RC/KDS-24-14-21-2021/RCPL : Member Assignment (Plate)",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738323461145-DESIGN-RC-KDS-24-14-21-2021-RCPL-Member-Assignment-Plate",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "ACTIVE_ONLY",
+    "ANA_TYPE",
+    "AXIS_TYPE",
+    "DIR",
+    "ELEM_LIST",
+    "NAME",
+    "PLATE_MEMB",
+    "UCS_NAME"
+   ],
+   "doc": [],
+   "key_count": 8,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/RC/KDS-24-14-21-2021/CMFT",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/KDS-24-14-21-2021/CMFT",
+   "articles": [
+    {
+     "id": "64738323971737",
+     "title": "DESIGN/RC/KDS-24-14-21-2021/CMFT : Moment Factor (Cm)",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738323971737-DESIGN-RC-KDS-24-14-21-2021-CMFT-Moment-Factor-Cm",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "CMY",
+    "CMZ",
+    "OPT_AUTO"
+   ],
+   "doc": [],
+   "key_count": 3,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/RC/KDS-24-14-21-2021/REBT",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/KDS-24-14-21-2021/REBT",
+   "articles": [
+    {
+     "id": "64738324659225",
+     "title": "DESIGN/RC/KDS-24-14-21-2021/REBT : Column General Section Rebar",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738324659225-DESIGN-RC-KDS-24-14-21-2021-REBT-Column-General-Section-Rebar",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "DIST",
+    "LEG_Y",
+    "LEG_Z",
+    "MAIN_BAR_I",
+    "MAIN_BAR_J",
+    "NAME",
+    "NUM",
+    "ORIGIN_TYPE",
+    "SAME_IJ_MAIN",
+    "SAME_IJ_SHEAR",
+    "SHEAR_BAR_I",
+    "SHEAR_BAR_J",
+    "Y",
+    "Z"
+   ],
+   "doc": [],
+   "key_count": 14,
+   "documented": false
+  },
+  {
+   "endpoint": "RATING/PSC/AASHTO-LRFR19/MEMB",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "RATING/PSC/AASHTO-LRFR19/MEMB",
+   "articles": [
+    {
+     "id": "64738326098585",
+     "title": "RATING/PSC/AASHTO-LRFR19/MEMB : Member Assignment",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738326098585-RATING-PSC-AASHTO-LRFR19-MEMB-Member-Assignment",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "AELEM",
+    "bREVERSE"
+   ],
+   "doc": [],
+   "key_count": 2,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/CC-TABLE",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/CC-TABLE",
+   "articles": [
+    {
+     "id": "64738327706777",
+     "title": "DESIGN/RC/AASHTO-LRFD20/CC-TABLE : Column Checking Table",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738327706777-DESIGN-RC-AASHTO-LRFD20-CC-TABLE-Column-Checking-Table",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "COMPONENTS",
+    "DIST",
+    "ELEMS",
+    "EXPORT_PATH",
+    "FORCE",
+    "FORMAT",
+    "HEAT",
+    "KEYS",
+    "PLACE",
+    "PRI_SORT",
+    "RESULT",
+    "SECTIONS",
+    "STYLES",
+    "TABLE_NAME",
+    "TABLE_TYPE",
+    "TEMP",
+    "TO",
+    "UNIT"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#37-cc-table--column-checking-table"
+   ],
+   "key_count": 18,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/KDS-24-14-21-2021/DCTL",
+   "methods": [
+    "DELETE",
+    "GET",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/KDS-24-14-21-2021/DCTL",
+   "articles": [
+    {
+     "id": "64738329174425",
+     "title": "DESIGN/RC/KDS-24-14-21-2021/DCTL : Definition of Frame",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738329174425-DESIGN-RC-KDS-24-14-21-2021-DCTL-Definition-of-Frame",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "DT",
+    "FRAMEX",
+    "FRAMEY",
+    "bAUTOKF"
+   ],
+   "doc": [],
+   "key_count": 4,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/RC/KDS-24-14-21-2021/LENG",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/KDS-24-14-21-2021/LENG",
+   "articles": [
+    {
+     "id": "64738331110681",
+     "title": "DESIGN/RC/KDS-24-14-21-2021/LENG : Unbraced Length (L, Lb)",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738331110681-DESIGN-RC-KDS-24-14-21-2021-LENG-Unbraced-Length-L-Lb",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "LB",
+    "LY",
+    "LZ",
+    "bNOTUSE"
+   ],
+   "doc": [],
+   "key_count": 4,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/RC/KDS-24-14-21-2021/PERFORM-DESIGN",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/KDS-24-14-21-2021/PERFORM-DESIGN",
+   "articles": [
+    {
+     "id": "64738331596057",
+     "title": "DESIGN/RC/KDS-24-14-21-2021/PERFORM-DESIGN : Perform Design",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738331596057-DESIGN-RC-KDS-24-14-21-2021-PERFORM-DESIGN-Perform-Design",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "ELEMS",
+    "KEYS",
+    "POS_I",
+    "POS_J",
+    "POS_M",
+    "RC_AUTO",
+    "RC_TYPE",
+    "SEISMIC",
+    "TO",
+    "UMD_MODE"
+   ],
+   "doc": [],
+   "key_count": 10,
+   "documented": false
+  },
+  {
+   "endpoint": "RATING/PSC/AASHTO-LRFR19/OPE_MEMB",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "RATING/PSC/AASHTO-LRFR19/OPE_MEMB",
+   "articles": [
+    {
+     "id": "64738333001241",
+     "title": "RATING/PSC/AASHTO-LRFR19/OPE_MEMB : Auto Member Assignment",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738333001241-RATING-PSC-AASHTO-LRFR19-OPE-MEMB-Auto-Member-Assignment",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "ALLOW_SINGLE",
+    "ASSIGN_TYPE",
+    "ELEM_LIST",
+    "SELECTION_TYPE"
+   ],
+   "doc": [],
+   "key_count": 4,
+   "documented": false
+  },
+  {
+   "endpoint": "RATING/PSC/AASHTO-LRFR19/KFAC",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "RATING/PSC/AASHTO-LRFR19/KFAC",
+   "articles": [
+    {
+     "id": "64738333862297",
+     "title": "RATING/PSC/AASHTO-LRFR19/KFAC : Effective Length Factor (K)",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738333862297-RATING-PSC-AASHTO-LRFR19-KFAC-Effective-Length-Factor-K",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "Ky",
+    "Kz"
+   ],
+   "doc": [],
+   "key_count": 2,
+   "documented": false
+  },
+  {
+   "endpoint": "RATING/PSC/AASHTO-LRFR19/DATR",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "RATING/PSC/AASHTO-LRFR19/DATR",
+   "articles": [
+    {
+     "id": "64738334701593",
+     "title": "RATING/PSC/AASHTO-LRFR19/DATR : Diagnostic Test Result",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738334701593-RATING-PSC-AASHTO-LRFR19-DATR-Diagnostic-Test-Result",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "K",
+    "KB",
+    "LTM_TYPE",
+    "POSITION",
+    "STRAIN_I",
+    "STRAIN_J"
+   ],
+   "doc": [],
+   "key_count": 6,
+   "documented": false
+  },
+  {
+   "endpoint": "DESIGN/RC/AASHTO-LRFD20/PCD-TABLE",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/AASHTO-LRFD20/PCD-TABLE",
+   "articles": [
+    {
+     "id": "64738336880153",
+     "title": "DESIGN/RC/AASHTO-LRFD20/PCD-TABLE : Plate Column Design Table",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738336880153-DESIGN-RC-AASHTO-LRFD20-PCD-TABLE-Plate-Column-Design-Table",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "COMPONENTS",
+    "DIST",
+    "ELEMS",
+    "EXPORT_PATH",
+    "FORCE",
+    "FORMAT",
+    "HEAT",
+    "KEYS",
+    "PLACE",
+    "RESULT",
+    "STYLES",
+    "SUB_DOMAINS",
+    "TABLE_NAME",
+    "TEMP",
+    "TO",
+    "UNIT"
+   ],
+   "doc": [
+    "28_Design_RC_AASHTO_LRFD.md#46-pcd-table--plate-column-design-table"
+   ],
+   "key_count": 16,
+   "documented": true
+  },
+  {
+   "endpoint": "DESIGN/RC/KDS-24-14-21-2021/OPE_MEMB",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "DESIGN/RC/KDS-24-14-21-2021/OPE_MEMB",
+   "articles": [
+    {
+     "id": "64738338914329",
+     "title": "DESIGN/RC/KDS-24-14-21-2021/OPE_MEMB : Auto Member Assignment",
+     "url": "https://support.midasuser.com/hc/ko/articles/64738338914329-DESIGN-RC-KDS-24-14-21-2021-OPE-MEMB-Auto-Member-Assignment",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "ALLOW_SINGLE",
+    "ASSIGN_TYPE",
+    "ELEM_LIST",
+    "SELECTION_TYPE"
+   ],
+   "doc": [],
+   "key_count": 4,
+   "documented": false
+  },
+  {
+   "endpoint": "RATING/PSC/AASHTO-LRFR19/DCTL",
+   "methods": [
+    "DELETE",
+    "GET",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "RATING/PSC/AASHTO-LRFR19/DCTL",
+   "articles": [
+    {
+     "id": "64738342143513",
+     "title": "RATING/PSC/AASHTO-LRFR19/DCTL : Definition of Frame",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738342143513-RATING-PSC-AASHTO-LRFR19-DCTL-Definition-of-Frame",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "DT",
+    "FRAMEX",
+    "FRAMEY",
+    "bAUTOKF"
+   ],
+   "doc": [],
+   "key_count": 4,
+   "documented": false
+  },
+  {
+   "endpoint": "RATING/PSC/AASHTO-LRFR19/RCO",
+   "methods": [
+    "DELETE",
+    "GET",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "RATING/PSC/AASHTO-LRFR19/RCO",
+   "articles": [
+    {
+     "id": "64738346390041",
+     "title": "RATING/PSC/AASHTO-LRFR19/RCO : Rating Code Option",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738346390041-RATING-PSC-AASHTO-LRFR19-RCO-Rating-Code-Option",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "COMP_STRESS_DESIGN",
+    "COMP_STRESS_LEGAL",
+    "COMP_STRESS_SLAB_DESIGN",
+    "COMP_STRESS_SLAB_LEGAL",
+    "DESIGN_LOAD_STRESS",
+    "LEGAL_LOAD_STRESS",
+    "LOAD_TEST_MEASUREMENT",
+    "NOMINAL_FLEX_RESIST",
+    "PERMIT_LOAD_STRESS",
+    "PRESTRESSING_STEEL",
+    "REINFORCEMENT",
+    "SLS_FLEX",
+    "SLS_SHEAR",
+    "SLS_SHEAR_TYPE",
+    "STRESS_COMPSITE_SECTION_DESIGN",
+    "STRESS_COMPSITE_SECTION_LEGAL",
+    "SYSTEM_FACTOR",
+    "TENSILE_STRESS_DESIGN",
+    "TENSILE_STRESS_LEGAL",
+    "TENSILE_STRESS_SLAB_DESIGN",
+    "TENSILE_STRESS_SLAB_LEGAL"
+   ],
+   "doc": [],
+   "key_count": 21,
+   "documented": false
+  },
+  {
+   "endpoint": "RATING/PSC/AASHTO-LRFR19/TABLE",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "RATING/PSC/AASHTO-LRFR19/TABLE",
+   "articles": [
+    {
+     "id": "64738351943449",
+     "title": "RATING/PSC/AASHTO-LRFR19/TABLE : Strength Limit State Summary (Shear)",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738351943449-RATING-PSC-AASHTO-LRFR19-TABLE-Strength-Limit-State-Summary-Shear",
+     "updated_at": ""
+    },
+    {
+     "id": "64738357949721",
+     "title": "RATING/PSC/AASHTO-LRFR19/TABLE : Service Limit State Summary (Permit)",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738357949721-RATING-PSC-AASHTO-LRFR19-TABLE-Service-Limit-State-Summary-Permit",
+     "updated_at": ""
+    },
+    {
+     "id": "64738372749721",
+     "title": "RATING/PSC/AASHTO-LRFR19/TABLE : Stress Rating Factor(Design Live, Legal)",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738372749721-RATING-PSC-AASHTO-LRFR19-TABLE-Stress-Rating-Factor-Design-Live-Legal",
+     "updated_at": ""
+    },
+    {
+     "id": "64738373247513",
+     "title": "RATING/PSC/AASHTO-LRFR19/TABLE : Flexural Strength Rating Factor",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738373247513-RATING-PSC-AASHTO-LRFR19-TABLE-Flexural-Strength-Rating-Factor",
+     "updated_at": ""
+    },
+    {
+     "id": "64738373579929",
+     "title": "RATING/PSC/AASHTO-LRFR19/TABLE : Shear Strength Rating Factor",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738373579929-RATING-PSC-AASHTO-LRFR19-TABLE-Shear-Strength-Rating-Factor",
+     "updated_at": ""
+    },
+    {
+     "id": "64738373950617",
+     "title": "RATING/PSC/AASHTO-LRFR19/TABLE : Stress Rating Detail(Permit)",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738373950617-RATING-PSC-AASHTO-LRFR19-TABLE-Stress-Rating-Detail-Permit",
+     "updated_at": ""
+    },
+    {
+     "id": "64738379883033",
+     "title": "RATING/PSC/AASHTO-LRFR19/TABLE : Service Limit State Summary (Design Live, Legal)",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738379883033-RATING-PSC-AASHTO-LRFR19-TABLE-Service-Limit-State-Summary-Design-Live-Legal",
+     "updated_at": ""
+    },
+    {
+     "id": "64738380475929",
+     "title": "RATING/PSC/AASHTO-LRFR19/TABLE : Strength Limit State Summary (Flexural)",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738380475929-RATING-PSC-AASHTO-LRFR19-TABLE-Strength-Limit-State-Summary-Flexural",
+     "updated_at": ""
+    },
+    {
+     "id": "64738388181529",
+     "title": "RATING/PSC/AASHTO-LRFR19/TABLE : Stress Rating Factor(Permit)",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738388181529-RATING-PSC-AASHTO-LRFR19-TABLE-Stress-Rating-Factor-Permit",
+     "updated_at": ""
+    },
+    {
+     "id": "64738404144537",
+     "title": "RATING/PSC/AASHTO-LRFR19/TABLE : Shear Strength Rating Detail",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738404144537-RATING-PSC-AASHTO-LRFR19-TABLE-Shear-Strength-Rating-Detail",
+     "updated_at": ""
+    },
+    {
+     "id": "64738521745945",
+     "title": "RATING/PSC/AASHTO-LRFR19/TABLE : Stress Rating Detail(Design Live, Legal)",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738521745945-RATING-PSC-AASHTO-LRFR19-TABLE-Stress-Rating-Detail-Design-Live-Legal",
+     "updated_at": ""
+    },
+    {
+     "id": "64738538376345",
+     "title": "RATING/PSC/AASHTO-LRFR19/TABLE : Flexural Strength Rating Detail",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738538376345-RATING-PSC-AASHTO-LRFR19-TABLE-Flexural-Strength-Rating-Detail",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "COMPONENTS",
+    "COMP_TENS",
+    "DIST",
+    "EXPORT_PATH",
+    "FORCE",
+    "FORMAT",
+    "GIRDER_SLAB",
+    "HEAT",
+    "KEYS",
+    "NODE_ELEMS",
+    "PARTS",
+    "PLACE",
+    "POS_NEG",
+    "RATING_CASE",
+    "STYLES",
+    "TABLE_NAME",
+    "TABLE_TYPE",
+    "TEMP",
+    "TO",
+    "UNIT"
+   ],
+   "doc": [],
+   "key_count": 20,
+   "documented": false
+  },
+  {
+   "endpoint": "RATING/PSC/AASHTO-LRFR19/RTGS",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "RATING/PSC/AASHTO-LRFR19/RTGS",
+   "articles": [
+    {
+     "id": "64738356812057",
+     "title": "RATING/PSC/AASHTO-LRFR19/RTGS : Rating Group Setting",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738356812057-RATING-PSC-AASHTO-LRFR19-RTGS-Rating-Group-Setting",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "FACTOR",
+    "GROUP",
+    "POSITION"
+   ],
+   "doc": [],
+   "key_count": 3,
+   "documented": false
+  },
+  {
+   "endpoint": "RATING/PSC/AASHTO-LRFR19/RPSC",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "RATING/PSC/AASHTO-LRFR19/RPSC",
+   "articles": [
+    {
+     "id": "64738361256985",
+     "title": "RATING/PSC/AASHTO-LRFR19/RPSC : Reinforcement Information",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738361256985-RATING-PSC-AASHTO-LRFR19-RPSC-Reinforcement-Information",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "DR_AW",
+    "DR_PITCH",
+    "DR_THETA",
+    "IJ",
+    "LBAR_INC_FC",
+    "LBAR_THICK",
+    "MBARS",
+    "MBAR_ITEMS",
+    "NAME",
+    "NUM",
+    "OPT_CRACKED",
+    "OPT_DR",
+    "OPT_LBAR_FLG",
+    "OPT_MBAR_J",
+    "OPT_SBAR_J",
+    "OPT_SBW",
+    "OPT_SR",
+    "OPT_TR",
+    "PART",
+    "REF_Y",
+    "REF_Z",
+    "SBAR_ITEMS",
+    "SBW_ANGLE",
+    "SBW_AP",
+    "SBW_FACTOR",
+    "SBW_PITCH",
+    "SBW_PS",
+    "SPACING",
+    "SR_AW",
+    "SR_PITCH",
+    "TR_ALT",
+    "TR_AWT",
+    "TR_PITCH",
+    "Y",
+    "Z"
+   ],
+   "doc": [],
+   "key_count": 35,
+   "documented": false
+  },
+  {
+   "endpoint": "RATING/PSC/AASHTO-LRFR19/LENG-VBEAM",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "RATING/PSC/AASHTO-LRFR19/LENG-VBEAM",
+   "articles": [
+    {
+     "id": "64738366579993",
+     "title": "RATING/PSC/AASHTO-LRFR19/LENG-VBEAM : Unbraced Length(L,Lb) - Virtual Beam",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738366579993-RATING-PSC-AASHTO-LRFR19-LENG-VBEAM-Unbraced-Length-L-Lb-Virtual-Beam",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "LB",
+    "LY",
+    "LZ",
+    "bNOTUSE"
+   ],
+   "doc": [],
+   "key_count": 4,
+   "documented": false
+  },
+  {
+   "endpoint": "RATING/PSC/AASHTO-LRFR19/SPLT-VBEAM",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "RATING/PSC/AASHTO-LRFR19/SPLT-VBEAM",
+   "articles": [
+    {
+     "id": "64738366802329",
+     "title": "RATING/PSC/AASHTO-LRFR19/SPLT-VBEAM : Span Length - Virtual Beam",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738366802329-RATING-PSC-AASHTO-LRFR19-SPLT-VBEAM-Span-Length-Virtual-Beam",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "SPAN_LENGTH"
+   ],
+   "doc": [],
+   "key_count": 1,
+   "documented": false
+  },
+  {
+   "endpoint": "RATING/PSC/AASHTO-LRFR19/LTSR",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "RATING/PSC/AASHTO-LRFR19/LTSR",
+   "articles": [
+    {
+     "id": "64738369226009",
+     "title": "RATING/PSC/AASHTO-LRFR19/LTSR : Limiting Slenderness Ratio",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738369226009-RATING-PSC-AASHTO-LRFR19-LTSR-Limiting-Slenderness-Ratio",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "COMP",
+    "TENS",
+    "bNOTCHECK"
+   ],
+   "doc": [],
+   "key_count": 3,
+   "documented": false
+  },
+  {
+   "endpoint": "RATING/PSC/AASHTO-LRFR19/MATD",
+   "methods": [
+    "DELETE",
+    "GET",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "RATING/PSC/AASHTO-LRFR19/MATD",
+   "articles": [
+    {
+     "id": "64738369976729",
+     "title": "RATING/PSC/AASHTO-LRFR19/MATD : Modify Material",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738369976729-RATING-PSC-AASHTO-LRFR19-MATD-Modify-Material",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "CODE",
+    "COMP_STRENGTH",
+    "FACTOR_VALUE",
+    "Fy",
+    "Fys",
+    "GIRDER_MATL_PROP",
+    "GIRDER_REBAR_PROP",
+    "GRADE",
+    "GRADE_MAIN_REBAR",
+    "GRADE_SUB_REBAR",
+    "LIGHT_WEIGHT_FACTOR",
+    "NAME",
+    "NAME_MAIN_REBAR",
+    "NAME_SUB_REBAR",
+    "SLAB_MATL_PROP",
+    "SLAB_PROP",
+    "SLAB_REBAR_PROP",
+    "visibleWhen"
+   ],
+   "doc": [],
+   "key_count": 18,
+   "documented": false
+  },
+  {
+   "endpoint": "RATING/PSC/AASHTO-LRFR19/REPORT",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": "RATING/PSC/AASHTO-LRFR19/REPORT",
+   "articles": [
+    {
+     "id": "64738374621849",
+     "title": "RATING/PSC/AASHTO-LRFR19/REPORT : Rating Result Report",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738374621849-RATING-PSC-AASHTO-LRFR19-REPORT-Rating-Result-Report",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "EXPORT_PATH",
+    "OUTPUT_NAME",
+    "SAVE_IMAGE_OPTION"
+   ],
+   "doc": [],
+   "key_count": 3,
+   "documented": false
+  },
+  {
+   "endpoint": "RATING/PSC/AASHTO-LRFR19/RPSC-VBEAM",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "RATING/PSC/AASHTO-LRFR19/RPSC-VBEAM",
+   "articles": [
+    {
+     "id": "64738375226521",
+     "title": "RATING/PSC/AASHTO-LRFR19/RPSC-VBEAM : Reinforcement Information - Virtual Beam",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738375226521-RATING-PSC-AASHTO-LRFR19-RPSC-VBEAM-Reinforcement-Information-Virtual-Beam",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "DR_AW",
+    "DR_PITCH",
+    "DR_THETA",
+    "IJ",
+    "LBAR_INC_FC",
+    "LBAR_THICK",
+    "MBARS",
+    "MBAR_ITEMS",
+    "NAME",
+    "NUM",
+    "OPT_CRACKED",
+    "OPT_DR",
+    "OPT_LBAR_FLG",
+    "OPT_MBAR_J",
+    "OPT_SBAR_J",
+    "OPT_SBW",
+    "OPT_SR",
+    "OPT_TR",
+    "PART",
+    "REF_Y",
+    "REF_Z",
+    "SBAR_ITEMS",
+    "SBW_ANGLE",
+    "SBW_AP",
+    "SBW_FACTOR",
+    "SBW_PITCH",
+    "SBW_PS",
+    "SPACING",
+    "SR_AW",
+    "SR_PITCH",
+    "TR_ALT",
+    "TR_AWT",
+    "TR_PITCH",
+    "Y",
+    "Z"
+   ],
+   "doc": [],
+   "key_count": 35,
+   "documented": false
+  },
+  {
+   "endpoint": "RATING/PSC/AASHTO-LRFR19/DATR-VBEAM",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": "RATING/PSC/AASHTO-LRFR19/DATR-VBEAM",
+   "articles": [
+    {
+     "id": "64738390613657",
+     "title": "RATING/PSC/AASHTO-LRFR19/DATR-VBEAM : Diagnostic Test Result - Virtual Beam",
+     "url": "https://support.midasuser.com/hc/en-us/articles/64738390613657-RATING-PSC-AASHTO-LRFR19-DATR-VBEAM-Diagnostic-Test-Result-Virtual-Beam",
+     "updated_at": ""
+    }
+   ],
+   "keys": [
+    "K",
+    "KB",
+    "LTM_TYPE",
+    "POSITION",
+    "STRAIN_I",
+    "STRAIN_J"
+   ],
+   "doc": [],
+   "key_count": 6,
+   "documented": false
   }
  ]
 }
