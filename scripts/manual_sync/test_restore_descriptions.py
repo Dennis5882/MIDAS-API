@@ -237,6 +237,12 @@ class RestoreSafetyTests(unittest.TestCase):
         item = dict(type="endpoint", article_id="a")
         self.assertTrue(rd.protected([], ["NAME"], host, {"a"}, [item]))
 
+    def test_jp_table_type_on_shared_uri_needs_its_own_article(self):
+        host = dict(text="", endpoints={"POST/TABLE"})
+        item = dict(type="table_type", uri="/post/TABLE", values=["JP_ONLY"], article_id="jp")
+        self.assertFalse(rd.protected([], ["TABLE_TYPE"], host, {"other"}, [item]))
+        self.assertTrue(rd.protected([], ["TABLE_TYPE"], host, {"jp", "other"}, [item]))
+
     def test_loss_hints_cover_numbers_and_enum(self):
         self.assertTrue(rd.loss_signals("빨강 (0–255)", "Line Color Red"))
         self.assertIn("원문에 없는 값: PLANE", rd.loss_signals('방향 `"PLANE"`', 'Direction "DIR"'))

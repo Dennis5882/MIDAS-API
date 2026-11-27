@@ -3788,7 +3788,7 @@ for row in table.get("DATA", []):
 | (1) | └ [Method 3: Specify Structure Group Name] "STRUCTURE_GROUP_NAME": "SG1" | `"STRUCTURE_GROUP_NAME"` | String | - | Optional |
 | 8 | Load Name & Type · Static Load Cases / NAME + "(ST)" · Load Combinations / NAME + "(CB)" / NAME + "(CB:all)" / NAME + "(CB:max)" / NAME + "(CB:min)" · Construction Stage / NAME + "(CS)" · Response Spectrum / NAME + "(RS)" · Moving Load / NAME + "(MV:all)" / NAME + "(MV:max)" / NAME + "(MV:min)" · Settlement Load / NAME + "(SM:all)" / NAME + "(SM:max)" / NAME + "(SM:min)" | `"LOAD_CASE_NAMES"` | Array[String] | All | Optional |
 | 9 | Element Part Number · "Part I" · "Part J" | `"PARTS"` | Array[String] | ALL | Optional |
-| 10 | [Construction Stage] Activation - Construction Stage Step | `"OPT_CS"` | Boolean | false | Optional |
+| 10 | Activation - Construction Stage Step | `"OPT_CS"` | Boolean | false | Optional |
 | 11 | Stage Step Name | `"STAGE_STEP"` | Array[String] | All | Optional |
 | 12 | [View By Max Value Items] Select Component · Resultant Force / "Axial" / "Shear-y" / "Shear-z" / "Torsion" / "Moment-y" / "Moment-z" | `"ITEM_TO_DISPLAY"` | Array[String] | All | Optional |
 

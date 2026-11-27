@@ -83,12 +83,19 @@ def article_keys(body):
     return keys
 
 
-def load_sections():
-    """Every ## / ### block, plus per file the preamble and the shared ("공통") blocks."""
+def load_sections(texts=None):
+    """Every ## / ### block, plus per file the preamble and the shared ("공통") blocks.
+
+    ``texts`` (path -> text) replaces the files on disk, so a caller can analyse an edited copy
+    without writing it first.
+    """
     sections, shared = [], {}
     for path in sorted(glob.glob(os.path.join(_DOCS, "[0-9]*.md"))):
-        with open(path, encoding="utf-8") as f:
-            lines = f.read().splitlines()
+        if texts is not None and path in texts:
+            lines = texts[path].splitlines()
+        else:
+            with open(path, encoding="utf-8") as f:
+                lines = f.read().splitlines()
         fenced, heads = False, []
         for n, line in enumerate(lines):
             if line.startswith("```"):

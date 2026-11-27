@@ -15,7 +15,7 @@ import re
 import sys
 
 import check_fields as cf
-from check_coverage import fetch_bodies, plain_text
+from check_coverage import fetch_bodies, plain_text, shared_uri
 from fill_fields import read, write
 from om_parse import md_escape, spec_rows
 
@@ -108,8 +108,11 @@ def protected(cells, keys, host, aids, exclusions, section_text=None):
             return "같은 섹션의 ⚠️ 주석에서 Key 언급"
     for item in exclusions:
         uri = item.get("uri", "").lstrip("/").upper()
+        # A JP-only TABLE_TYPE lives on a shared URI (post/TABLE): only its own article counts,
+        # otherwise every other table on that URI would be excluded as well.
+        by_uri = item.get("type") != "table_type" and not shared_uri(uri)
         same = str(item.get("article_id", "")) in aids or (
-            host and uri and uri in host["endpoints"]
+            by_uri and host and uri and uri in host["endpoints"]
         )
         if same and (item.get("type") != "field" or any(
             k == field or k == field.split(".")[-1]

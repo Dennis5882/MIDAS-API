@@ -45,11 +45,13 @@ def write(path, text, crlf):
 
 
 def strip_blocks():
+    """{path: (original text, text without generated blocks, crlf)}; nothing is written."""
+    out = {}
     for path in sorted(__import__("glob").glob(os.path.join(cf._DOCS, "[0-9]*.md"))):
         text, crlf = read(path)
         new = BLOCK_RE.sub("\n\n", text)
-        if new != text:
-            write(path, new.rstrip("\n") + "\n", crlf)
+        out[path] = (text, new.rstrip("\n") + "\n" if new != text else text, crlf)
+    return out
 
 
 def host_section(finding):
@@ -94,13 +96,14 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
-    # fetch before touching docs: a network failure must not leave the generated blocks stripped
     articles = fetch_bodies()
-    if not args.dry_run:
-        strip_blocks()
-    sections, shared = cf.load_sections()
+    # Strip and rebuild in memory and write once at the end, so a failure leaves docs untouched
+    # and --dry-run reports the rows a real run would write.
+    docs = strip_blocks()
+    sections, shared = cf.load_sections({path: stripped for path, (_, stripped, _) in docs.items()})
     mapping = cf.mapped_headings()
-    skipped = set(json.load(open(EXCEPTIONS_PATH, encoding="utf-8")).get("article_without_section", {}))
+    with open(EXCEPTIONS_PATH, encoding="utf-8") as stream:
+        skipped = set(json.load(stream).get("article_without_section", {}))
     findings, unmatched, _, _ = cf.analyze(articles, sections, shared, mapping, skipped)
 
     inserts = collections.defaultdict(list)  # (path, line) -> [(article id, text)]
@@ -122,6 +125,8 @@ def main():
             missing = [k for k in f["missing"] if k not in added[place]]
             if not missing:
                 continue
+            # a second ko-only twin of the same section must not repeat these rows
+            added[place] |= set(missing)
         rows = spec_rows(art.get("body"))
         text, rows_used, rest = block(f["id"], f["title"], art.get("html_url") or HC + f["id"], missing, rows)
         n_rows += rows_used
@@ -133,16 +138,19 @@ def main():
     by_file = collections.defaultdict(list)
     for (path, end), texts in inserts.items():
         by_file[path].append((end, texts))
-    for path, items in by_file.items():
-        text, crlf = read(path)
-        lines = text.split("\n")
-        for end, texts in sorted(items, reverse=True):
+    results = {}
+    for path, (original, stripped, crlf) in docs.items():
+        lines = stripped.split("\n")
+        for end, texts in sorted(by_file.get(path, []), reverse=True):
             pos = min(end, len(lines))
             while pos > 0 and lines[pos - 1].strip() in ("", "---"):
                 pos -= 1
             lines[pos:pos] = [""] + "\n\n".join(texts).split("\n") + [""]
-        write(path, "\n".join(lines), crlf)
-    print("files changed:", len(by_file))
+        results[path] = "\n".join(lines) if path in by_file else stripped
+    changed = [path for path, text in results.items() if text != docs[path][0]]
+    for path in changed:
+        write(path, results[path], docs[path][2])
+    print("files changed:", len(changed))
 
 
 if __name__ == "__main__":

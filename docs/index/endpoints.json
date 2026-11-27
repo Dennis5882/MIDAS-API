@@ -86,7 +86,7 @@
    ],
    "doc": [
     "01_DOC.md#11-docanal--perform-analysis",
-    "01_DOC.md#기본-정보"
+    "01_DOC.md#기본-정보-10"
    ],
    "key_count": 1,
    "documented": true
@@ -282,7 +282,7 @@
    ],
    "doc": [
     "02_DB_Project_Structure.md#2-dbunit--unit-system",
-    "02_DB_Project_Structure.md#기본-정보"
+    "02_DB_Project_Structure.md#기본-정보-1"
    ],
    "key_count": 5,
    "documented": true
@@ -317,7 +317,7 @@
    ],
    "doc": [
     "02_DB_Project_Structure.md#3-dbstyp--structure-type",
-    "02_DB_Project_Structure.md#기본-정보"
+    "02_DB_Project_Structure.md#기본-정보-2"
    ],
    "key_count": 10,
    "documented": true
@@ -348,7 +348,7 @@
    ],
    "doc": [
     "02_DB_Project_Structure.md#5-dbgrup--structure-group",
-    "02_DB_Project_Structure.md#기본-정보"
+    "02_DB_Project_Structure.md#기본-정보-4"
    ],
    "key_count": 5,
    "documented": true
@@ -377,7 +377,7 @@
    ],
    "doc": [
     "02_DB_Project_Structure.md#6-dbbngr--boundary-group",
-    "02_DB_Project_Structure.md#기본-정보"
+    "02_DB_Project_Structure.md#기본-정보-5"
    ],
    "key_count": 3,
    "documented": true
@@ -406,7 +406,7 @@
    ],
    "doc": [
     "02_DB_Project_Structure.md#7-dbldgr--load-group",
-    "02_DB_Project_Structure.md#기본-정보"
+    "02_DB_Project_Structure.md#기본-정보-6"
    ],
    "key_count": 2,
    "documented": true
@@ -435,7 +435,7 @@
    ],
    "doc": [
     "02_DB_Project_Structure.md#8-dbtdgr--tendon-group",
-    "02_DB_Project_Structure.md#기본-정보"
+    "02_DB_Project_Structure.md#기본-정보-7"
    ],
    "key_count": 2,
    "documented": true
@@ -469,7 +469,7 @@
    ],
    "doc": [
     "02_DB_Project_Structure.md#9-dbnpln--named-plane",
-    "02_DB_Project_Structure.md#기본-정보"
+    "02_DB_Project_Structure.md#기본-정보-8"
    ],
    "key_count": 7,
    "documented": true
@@ -506,7 +506,7 @@
    ],
    "doc": [
     "02_DB_Project_Structure.md#10-dbco_m--material-color",
-    "02_DB_Project_Structure.md#기본-정보"
+    "02_DB_Project_Structure.md#기본-정보-9"
    ],
    "key_count": 12,
    "documented": true
@@ -543,7 +543,7 @@
    ],
    "doc": [
     "02_DB_Project_Structure.md#11-dbco_s--section-color",
-    "02_DB_Project_Structure.md#기본-정보"
+    "02_DB_Project_Structure.md#기본-정보-10"
    ],
    "key_count": 12,
    "documented": true
@@ -580,7 +580,7 @@
    ],
    "doc": [
     "02_DB_Project_Structure.md#12-dbco_t--thickness-color",
-    "02_DB_Project_Structure.md#기본-정보"
+    "02_DB_Project_Structure.md#기본-정보-11"
    ],
    "key_count": 12,
    "documented": true
@@ -621,7 +621,7 @@
    ],
    "doc": [
     "02_DB_Project_Structure.md#13-dbco_f--floor-load-color",
-    "02_DB_Project_Structure.md#기본-정보"
+    "02_DB_Project_Structure.md#기본-정보-12"
    ],
    "key_count": 16,
    "documented": true
@@ -657,7 +657,7 @@
    ],
    "doc": [
     "02_DB_Project_Structure.md#14-dbspan--span-information",
-    "02_DB_Project_Structure.md#기본-정보"
+    "02_DB_Project_Structure.md#기본-정보-13"
    ],
    "key_count": 9,
    "documented": true
@@ -8832,7 +8832,7 @@
    "keys": [],
    "doc": [
     "01_DOC.md#2-docopen--open-project",
-    "01_DOC.md#기본-정보"
+    "01_DOC.md#기본-정보-1"
    ],
    "key_count": 0,
    "documented": true
@@ -8855,7 +8855,7 @@
    "keys": [],
    "doc": [
     "01_DOC.md#3-docclose--close-project",
-    "01_DOC.md#기본-정보"
+    "01_DOC.md#기본-정보-2"
    ],
    "key_count": 0,
    "documented": true
@@ -8878,7 +8878,7 @@
    "keys": [],
    "doc": [
     "01_DOC.md#4-docsave--save",
-    "01_DOC.md#기본-정보"
+    "01_DOC.md#기본-정보-3"
    ],
    "key_count": 0,
    "documented": true
@@ -8901,7 +8901,7 @@
    "keys": [],
    "doc": [
     "01_DOC.md#5-docsaveas--save-as",
-    "01_DOC.md#기본-정보"
+    "01_DOC.md#기본-정보-4"
    ],
    "key_count": 0,
    "documented": true
@@ -8924,7 +8924,7 @@
    "keys": [],
    "doc": [
     "01_DOC.md#7-docimport--import-to-json",
-    "01_DOC.md#기본-정보"
+    "01_DOC.md#기본-정보-6"
    ],
    "key_count": 0,
    "documented": true
@@ -8947,7 +8947,7 @@
    "keys": [],
    "doc": [
     "01_DOC.md#8-docimportmxt--import-to-mctmgt",
-    "01_DOC.md#기본-정보"
+    "01_DOC.md#기본-정보-7"
    ],
    "key_count": 0,
    "documented": true
@@ -8970,7 +8970,7 @@
    "keys": [],
    "doc": [
     "01_DOC.md#9-docexport--export-to-json",
-    "01_DOC.md#기본-정보"
+    "01_DOC.md#기본-정보-8"
    ],
    "key_count": 0,
    "documented": true
@@ -8993,7 +8993,7 @@
    "keys": [],
    "doc": [
     "01_DOC.md#10-docexportmxt--export-to-mctmgt",
-    "01_DOC.md#기본-정보"
+    "01_DOC.md#기본-정보-9"
    ],
    "key_count": 0,
    "documented": true
@@ -11220,7 +11220,7 @@
    ],
    "doc": [
     "02_DB_Project_Structure.md#15-dbstor--story-data",
-    "02_DB_Project_Structure.md#기본-정보"
+    "02_DB_Project_Structure.md#기본-정보-14"
    ],
    "key_count": 15,
    "documented": true
@@ -11789,7 +11789,7 @@
    ],
    "doc": [
     "01_DOC.md#6-docstagas--save-current-stage-as",
-    "01_DOC.md#기본-정보"
+    "01_DOC.md#기본-정보-5"
    ],
    "key_count": 2,
    "documented": true
@@ -12008,7 +12008,7 @@
    ],
    "doc": [
     "02_DB_Project_Structure.md#4-dbstyp-m1--structure-type-hyper-s",
-    "02_DB_Project_Structure.md#기본-정보"
+    "02_DB_Project_Structure.md#기본-정보-3"
    ],
    "key_count": 10,
    "documented": true
@@ -16708,7 +16708,7 @@
    ],
    "doc": [
     "29_Design_PSC_AASHTO_LRFD24.md#1-dpsc--design-code-option",
-    "29_Design_PSC_AASHTO_LRFD24.md#이전-한국어-원문"
+    "29_Design_PSC_AASHTO_LRFD24.md#이전-한국어-원문-1"
    ],
    "key_count": 17,
    "documented": true
@@ -16745,7 +16745,7 @@
    ],
    "doc": [
     "29_Design_PSC_AASHTO_LRFD24.md#2-memb--psc-segment-assignment",
-    "29_Design_PSC_AASHTO_LRFD24.md#이전-한국어-원문"
+    "29_Design_PSC_AASHTO_LRFD24.md#이전-한국어-원문-2"
    ],
    "key_count": 4,
    "documented": true
@@ -16782,7 +16782,7 @@
    ],
    "doc": [
     "29_Design_PSC_AASHTO_LRFD24.md#24-memb-vbeam--psc-segment-assignment---virtual-beam",
-    "29_Design_PSC_AASHTO_LRFD24.md#이전-한국어-원문"
+    "29_Design_PSC_AASHTO_LRFD24.md#이전-한국어-원문-8"
    ],
    "key_count": 4,
    "documented": true
@@ -16817,7 +16817,7 @@
    ],
    "doc": [
     "29_Design_PSC_AASHTO_LRFD24.md#3-slct--serviceability-load-combination-type",
-    "29_Design_PSC_AASHTO_LRFD24.md#이전-한국어-원문"
+    "29_Design_PSC_AASHTO_LRFD24.md#이전-한국어-원문-3"
    ],
    "key_count": 2,
    "documented": true
@@ -16859,7 +16859,7 @@
    ],
    "doc": [
     "29_Design_PSC_AASHTO_LRFD24.md#4-infs--interface-shear",
-    "29_Design_PSC_AASHTO_LRFD24.md#이전-한국어-원문"
+    "29_Design_PSC_AASHTO_LRFD24.md#이전-한국어-원문-4"
    ],
    "key_count": 9,
    "documented": true
@@ -16901,7 +16901,7 @@
    ],
    "doc": [
     "29_Design_PSC_AASHTO_LRFD24.md#25-infs-vbeam--interface-shear---virtual-beam",
-    "29_Design_PSC_AASHTO_LRFD24.md#이전-한국어-원문"
+    "29_Design_PSC_AASHTO_LRFD24.md#이전-한국어-원문-9"
    ],
    "key_count": 9,
    "documented": true
@@ -16976,7 +16976,7 @@
    ],
    "doc": [
     "29_Design_PSC_AASHTO_LRFD24.md#6-rpsc--longitudinal-rebar-reinforcements",
-    "29_Design_PSC_AASHTO_LRFD24.md#이전-한국어-원문"
+    "29_Design_PSC_AASHTO_LRFD24.md#이전-한국어-원문-5"
    ],
    "key_count": 42,
    "documented": true
@@ -17031,7 +17031,7 @@
    ],
    "doc": [
     "29_Design_PSC_AASHTO_LRFD24.md#7-secf--longitudinal-rebar-stiffness",
-    "29_Design_PSC_AASHTO_LRFD24.md#이전-한국어-원문"
+    "29_Design_PSC_AASHTO_LRFD24.md#이전-한국어-원문-6"
    ],
    "key_count": 22,
    "documented": true
@@ -17062,7 +17062,7 @@
    ],
    "doc": [
     "29_Design_PSC_AASHTO_LRFD24.md#11-psc-anal--perform-design",
-    "29_Design_PSC_AASHTO_LRFD24.md#이전-한국어-원문"
+    "29_Design_PSC_AASHTO_LRFD24.md#이전-한국어-원문-7"
    ],
    "key_count": 1,
    "documented": true

@@ -8,6 +8,9 @@ __pycache__/
 # 로컬 전용 설정
 .mcp.json
 
+# 작업 보고서 (restore_descriptions.py 등의 기본 출력 위치)
+work_orders/
+
 # 비밀값 (MAPI-Key 등)
 .env
 .env.*

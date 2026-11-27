@@ -37,15 +37,17 @@ def annotate_locales(changed):
         except Exception as exc:  # network hiccup must not break the cheap gate
             entry["locale_note"] = f"lookup failed ({type(exc).__name__}); inspect manually"
             continue
+        # ko-only articles (no en-us translation) are mirrored from their ko body
+        mirrored = "ko" if "/hc/ko/" in entry.get("html_url", "") else SYNC_LOCALE
         entry["locales_changed"] = moved
         entry["locales_seen"] = sorted(locales)
         if not moved:
             entry["locale_note"] = "metadata only — no translation body is newer"
-        elif SYNC_LOCALE in moved:
-            entry["locale_note"] = f"{SYNC_LOCALE} changed — normal review"
+        elif mirrored in moved:
+            entry["locale_note"] = f"{mirrored} changed — normal review"
         else:
             entry["locale_note"] = (
-                f"{'/'.join(moved)} changed but {SYNC_LOCALE} did NOT — our fetched "
+                f"{'/'.join(moved)} changed but {mirrored} did NOT — our fetched "
                 f"body looks identical; open the {'/'.join(moved)} page(s) to compare"
             )
     return changed

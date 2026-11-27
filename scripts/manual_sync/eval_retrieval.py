@@ -89,8 +89,10 @@ def main():
     parser.add_argument("--rebuild", action="store_true")
     args = parser.parse_args()
     if args.rebuild or not os.path.exists(QUESTIONS):
+        # build (network) before opening the file, so a failed fetch keeps the old questions
+        built = build_questions()
         with open(QUESTIONS, "w", encoding="utf-8", newline="\n") as f:
-            json.dump(build_questions(), f, ensure_ascii=False, indent=1)
+            json.dump(built, f, ensure_ascii=False, indent=1)
             f.write("\n")
     questions = json.load(open(QUESTIONS, encoding="utf-8"))
     chunks = [json.loads(line) for line in open(os.path.join(INDEX, "chunks.jsonl"), encoding="utf-8")]

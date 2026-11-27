@@ -120,8 +120,9 @@ def design_catalogs(articles, ko_body=None):
     """Collect the deduplicated catalogs, fetching only the missing top-level locale."""
     root = articles[TOC_ARTICLE_ID].get("body")
     ids = design_catalog_ids(root)
-    # An archived snapshot predating the Design section has no bridge catalogs to follow.
-    if ko_body is None and ids:
+    # Always read the ko top page: a catalog may be linked there only (the en-us heading could be
+    # renamed or dropped). Pass ko_body="" for an archived snapshot that predates the catalogs.
+    if ko_body is None:
         ko_body = fetch_top_toc_ko()
     ids |= design_catalog_ids(ko_body)
     ids -= LEGACY_DESIGN_CATALOGS

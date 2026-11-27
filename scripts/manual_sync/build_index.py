@@ -32,6 +32,30 @@ def slug(heading):
     return re.sub(r"\s", "-", re.sub(r"[^\w\- ]", "", text))
 
 
+_ANCHORS = {}
+
+
+def anchor(section):
+    """GitHub anchor of a section heading, with the -1, -2 suffix of repeated headings."""
+    path = section.get("path", "")
+    if path not in _ANCHORS:
+        out, seen, fenced = {}, {}, False
+        try:
+            with open(path, encoding="utf-8") as f:
+                lines = f.read().splitlines()
+        except OSError:
+            lines = []
+        for n, line in enumerate(lines):
+            if line.startswith("```"):
+                fenced = not fenced
+            elif not fenced and re.match(r"#{1,6} ", line):
+                base = slug(line)
+                seen[base] = seen.get(base, -1) + 1
+                out[n] = f"{base}-{seen[base]}" if seen[base] else base
+        _ANCHORS[path] = out
+    return _ANCHORS[path].get(section.get("start"), slug(section["heading"]))
+
+
 TABLE_SEP = re.compile(r"^\|\s*:?-{3,}")
 
 
@@ -177,7 +201,7 @@ def main():
         keys = sorted(cf.article_keys(art.get("body")))
         methods = METHODS_RE.search(text)
         # several articles can share an endpoint (one per country code etc.): merge what each adds
-        doc = {f"{s['file']}#{slug(s['heading'])}" for s in found if not generic(s["heading"])}
+        doc = {f"{s['file']}#{anchor(s)}" for s in found if not generic(s["heading"])}
         meths = set(re.findall(r"GET|POST|PUT|DELETE", methods.group(1))) if methods else set()
         for uri in uris:
             rec = records.setdefault(uri, {
@@ -236,7 +260,7 @@ def main():
                     continue
                 raw.append({
                     "_slug": pslug, "_group": (s["file"], pslug), "_host_trail": htrail,
-                    "file": s["file"], "heading": ptrail, "anchor": slug(host["heading"]), "source": psource,
+                    "file": s["file"], "heading": ptrail, "anchor": anchor(host), "source": psource,
                     "endpoints": eps, "articles": pids, "jp_only": any(e in jp_endpoints for e in eps), "text": part,
                 })
     chunks = pack(raw)

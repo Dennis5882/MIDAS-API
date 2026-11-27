@@ -56,8 +56,16 @@ class CoverageTests(unittest.TestCase):
     def test_archived_top_without_catalog_does_not_fetch_newer_locale(self):
         articles = {coverage.TOC_ARTICLE_ID: {"body": table("/db/X", "900")}}
         with patch.object(coverage, "fetch_top_toc_ko") as fetch:
-            self.assertEqual(coverage.design_catalogs(articles), {})
+            self.assertEqual(coverage.design_catalogs(articles, ko_body=""), {})
         fetch.assert_not_called()
+
+    def test_catalog_linked_only_from_ko_top_is_found(self):
+        articles = {coverage.TOC_ARTICLE_ID: {"body": "<h2>DB</h2>"},
+                    "801": {"body": table("DESIGN/RC/DRC", "901")}}
+        ko = '<h2>Design</h2><p><a href="/hc/ko/articles/801">KDS</a></p>'
+        with patch.object(coverage, "fetch_top_toc_ko", return_value=ko) as fetch:
+            self.assertEqual(coverage.design_catalogs(articles), {"801": [("DESIGN/RC/DRC", ["901"])]})
+        fetch.assert_called_once_with()
 
     def test_catalog_duplicate_uris_preserve_ids_and_find_invalid_links(self):
         uri = "RATING/PSC/AASHTO-LRFR19/TABLE"
@@ -151,6 +159,7 @@ class CoverageTests(unittest.TestCase):
              patch.object(build_index, "OUT", folder), \
              patch.object(build_index, "fetch_bodies", return_value=articles), \
              patch.object(build_index, "load_manifest", return_value={}), \
+             patch.object(coverage, "fetch_top_toc_ko", return_value=""), \
              patch.object(fields, "load_sections", return_value=([kds, lrfd], {})), \
              patch.object(fields, "mapped_headings", return_value={}), \
              patch.object(sys, "argv", ["build_index.py"]), \
