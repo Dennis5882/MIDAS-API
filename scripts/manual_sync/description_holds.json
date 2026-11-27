@@ -46,6 +46,17 @@
       "article_id": "35993732216985"
     },
     {
+      "file": "04_DB_Properties.md",
+      "no": "18",
+      "keys": [
+        "DAMPING_MODE_2_DEFAULT"
+      ],
+      "om_desc": "Damping Ratio Mode 2 value6",
+      "om_required": "Required",
+      "reason": "공식 설명 끝에 숫자 6이 붙음 (같은 표 17번은 Damping Ratio Mode 1 value)",
+      "article_id": "35944577940633"
+    },
+    {
       "file": "05_DB_Boundary.md",
       "no": "3",
       "keys": [

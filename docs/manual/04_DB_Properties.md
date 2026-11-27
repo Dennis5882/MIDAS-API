@@ -3333,8 +3333,8 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `ASSIGN
 | (2) | Damping Ratio Name(재료는 ID, 구조군/경계군은 이름) | `"GROUP_NAME"` | String | - | **Required** |
 | (3) | Damping Ratio | `"DAMPING_RATIO"` | Number | - | **Required** |
 | 3 | Calculate Only When Used | `"OPT_CALC_WHEN_USED"` | Boolean | - | **Required** |
-| 4 | Priority: Material Data vs Structure Group · Material: `0` / Structure Group: `1` | `"STRAIN_GROUP_PRIORITY"` | Integer | - | **Required** |
-| 5 | Priority between Structure Groups · Smallest: `0` / Largest: `1` | `"STRAIN_VALUE_PRIORITY"` | Integer | - | **Required** |
+| 4 | Priority between Material Data and Structure Group · Material Data: 0 · Structure Group: 1 | `"STRAIN_GROUP_PRIORITY"` | Integer | - | **Required** |
+| 5 | Priority between Structure Groups · Smallest Damping Ratio: 0 · Largest Damping Ratio: 1 | `"STRAIN_VALUE_PRIORITY"` | Integer | - | **Required** |
 
 #### Element Mass & Stiffness Proportional
 
@@ -3347,15 +3347,18 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `ASSIGN
 | 10 | Mass Proportional 값 | `"MASS_COEF_DEFAULT"` | Number | - | **Required** |
 | 11 | Stiffness Proportional 값 | `"STIFF_COEF_DEFAULT"` | Number | - | **Required** |
 | 12 | 계수 산정 기준 · Frequency: `0` / Period: `1` | `"FREQ_PERIOD_MODE_DEFAULT"` | Integer | - | **Required** |
-| 13 | Frequency Mode 1 | `"FREQ_MODE_1_DEFAULT"` | Number | - | **Required** |
-| 14 | Frequency Mode 2 | `"FREQ_MODE_2_DEFAULT"` | Number | - | **Required** |
-| 15 | Period Mode 1 | `"PERIOD_MODE_1_DEFAULT"` | Number | - | **Required** |
-| 16 | Period Mode 2 | `"PERIOD_MODE_2_DEFAULT"` | Number | - | **Required** |
-| 17 | Damping Ratio Mode 1 | `"DAMPING_MODE_1_DEFAULT"` | Number | - | **Required** |
+| 13 | Frequency Mode 1 Value | `"FREQ_MODE_1_DEFAULT"` | Number | - | **Required** |
+| 14 | Frequency Mode 2 Value | `"FREQ_MODE_2_DEFAULT"` | Number | - | **Required** |
+| 15 | Period Mode 1 Value | `"PERIOD_MODE_1_DEFAULT"` | Number | - | **Required** |
+| 16 | Period Mode 2 Value | `"PERIOD_MODE_2_DEFAULT"` | Number | - | **Required** |
+| 17 | Damping Ratio Mode 1 value | `"DAMPING_MODE_1_DEFAULT"` | Number | - | **Required** |
 | 18 | Damping Ratio Mode 2 | `"DAMPING_MODE_2_DEFAULT"` | Number | - | **Required** |
 | 19 | 그룹별 Rayleigh 감쇠 오버라이드 | `"GROUP_DAMPING_ITEMS"` | Array[Object] | - | **Required** |
 | 20 | Priority: Material Data vs Structure Group(요소 쪽) | `"ELEM_GROUP_PRIORITY"` | Integer | - | **Required** |
 | 21 | Priority between Structure Groups(요소 쪽) | `"ELEM_VALUE_PRIORITY"` | Integer | - | **Required** |
+
+> ⚠️ **18번 `DAMPING_MODE_2_DEFAULT` 설명:** 공식 Specifications 표 원문은 `Damping Ratio Mode 2 value6`으로,
+> 끝에 숫자 `6`이 붙어 있다. 오타로 보고 저장소 표기를 유지한다.
 
 `GROUP_DAMPING_ITEMS[]`는 위 7~18번과 동일한 의미의 필드를 그룹 단위로 오버라이드하며,
 `"_DEFAULT"` 접미사만 빠진 이름을 쓴다: `GROUP_TYPE`/`GROUP_NAME`(위 `STRAIN_GROUP_ITEMS`와

@@ -17,7 +17,7 @@ import re
 import sys
 
 import check_fields as cf
-from check_coverage import TOC_ARTICLE_ID, fetch_bodies, parse_toc, plain_text
+from check_coverage import CODE_SELECTORS, TOC_ARTICLE_ID, design_catalogs, fetch_bodies, parse_toc, plain_text
 from common import load_manifest
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..")
@@ -153,15 +153,18 @@ def main():
     os.makedirs(OUT, exist_ok=True)
     articles = fetch_bodies()
     manifest = load_manifest()
-    jp = json.load(open(os.path.join(ROOT, "docs", "manual", "jp_only.json"), encoding="utf-8"))
+    with open(os.path.join(ROOT, "docs", "manual", "jp_only.json"), encoding="utf-8") as stream:
+        jp = json.load(stream)
     jp_endpoints = {x["uri"].lstrip("/").upper() for x in jp["exclude"] if x["type"] == "endpoint"}
     sections, _ = cf.load_sections()
     mapping = cf.mapped_headings()
     toc_rows = parse_toc(articles[TOC_ARTICLE_ID]["body"])
+    toc_rows += [row for rows in design_catalogs(articles).values() for row in rows or []]
     toc_ids = {i: ep for ep, ids in toc_rows for i in ids}
 
     records = collections.OrderedDict()
     linked = collections.defaultdict(set)  # section -> articles that cover it (links, article_map, URI match)
+    selector_docs = {}
     for aid, art in sorted(articles.items()):
         if aid == TOC_ARTICLE_ID:
             continue
@@ -184,6 +187,8 @@ def main():
             rec["methods"] |= meths
             rec["doc"] |= doc
             rec["toc_name"] = rec["toc_name"] or toc_ids.get(aid)
+            if uri in CODE_SELECTORS:
+                selector_docs[uri, aid] = sorted(doc)
             rec["articles"].append({
                 "id": aid, "title": art["title"], "url": art["html_url"],
                 "updated_at": manifest.get(aid, {}).get("updated_at", ""),
@@ -244,6 +249,11 @@ def main():
     for rec in records.values():
         rec["methods"] = sorted(rec["methods"])
         rec["doc"] = sorted(rec["doc"])[:6]
+        if rec["endpoint"] in CODE_SELECTORS and len(rec["articles"]) > 1:
+            # A selector can have several design-code articles, each with its own
+            # documentation (or none yet). Keep those locations separate.
+            for article in rec["articles"]:
+                article["doc"] = selector_docs[rec["endpoint"], article["id"]]
         rec["keys"] = sorted(rec["keys"])
         rec["key_count"] = len(rec["keys"])
         rec["documented"] = bool(rec["doc"]) or rec["endpoint"] in tagged

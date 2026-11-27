@@ -10611,12 +10611,12 @@
     "Y_DIR"
    ],
    "doc": [
-    "04_DB_Properties.md#30-dbgrdp",
-    "15_OPE.md#6-opeautomesh--auto-mesh-planar-area",
     "18_POST_PreProcess.md#1-element-weight-table",
     "18_POST_PreProcess.md#10-story-weight-table",
     "18_POST_PreProcess.md#2-nodal-body-force-table",
-    "18_POST_PreProcess.md#3-mass-summary-table"
+    "18_POST_PreProcess.md#3-mass-summary-table",
+    "18_POST_PreProcess.md#4-load-summary-table",
+    "18_POST_PreProcess.md#5-material-table"
    ],
    "key_count": 92,
    "documented": true
@@ -17284,6 +17284,122 @@
    ],
    "doc": [],
    "key_count": 22,
+   "documented": false
+  },
+  {
+   "endpoint": "RATING/PSC/AASHTO-LRFR19/RPSC-ANAL",
+   "methods": [
+    "POST"
+   ],
+   "jp_only": false,
+   "toc_name": null,
+   "articles": [
+    {
+     "id": "58381619465241",
+     "title": "RATING/PSC/AASHTO-LRFR19/RPSC-ANAL : Perform Rating",
+     "url": "https://support.midasuser.com/hc/en-us/articles/58381619465241-RATING-PSC-AASHTO-LRFR19-RPSC-ANAL-Perform-Rating",
+     "updated_at": "2026-05-28T08:08:47Z"
+    }
+   ],
+   "keys": [
+    "TYPE"
+   ],
+   "doc": [],
+   "key_count": 1,
+   "documented": false
+  },
+  {
+   "endpoint": "RATING/PSC/AASHTO-LRFR19/PFRO-VBEAM",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": null,
+   "articles": [
+    {
+     "id": "58381704142105",
+     "title": "RATING/PSC/AASHTO-LRFR19/PFRO-VBEAM : Position for Rating Output",
+     "url": "https://support.midasuser.com/hc/en-us/articles/58381704142105-RATING-PSC-AASHTO-LRFR19-PFRO-VBEAM-Position-for-Rating-Output",
+     "updated_at": "2026-05-28T08:10:59Z"
+    }
+   ],
+   "keys": [
+    "PART"
+   ],
+   "doc": [],
+   "key_count": 1,
+   "documented": false
+  },
+  {
+   "endpoint": "RATING/PSC/AASHTO-LRFR19/PFRO",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": null,
+   "articles": [
+    {
+     "id": "58381791502873",
+     "title": "RATING/PSC/AASHTO-LRFR19/PFRO : Position for Rating Output",
+     "url": "https://support.midasuser.com/hc/en-us/articles/58381791502873-RATING-PSC-AASHTO-LRFR19-PFRO-Position-for-Rating-Output",
+     "updated_at": "2026-05-28T08:14:33Z"
+    }
+   ],
+   "keys": [
+    "PART"
+   ],
+   "doc": [],
+   "key_count": 1,
+   "documented": false
+  },
+  {
+   "endpoint": "RATING/PSC/AASHTO-LRFR19/DFRC",
+   "methods": [
+    "DELETE",
+    "GET",
+    "POST",
+    "PUT"
+   ],
+   "jp_only": false,
+   "toc_name": null,
+   "articles": [
+    {
+     "id": "58412610890137",
+     "title": "RATING/PSC/AASHTO-LRFR19/DFRC : Define Rating Case",
+     "url": "https://support.midasuser.com/hc/en-us/articles/58412610890137-RATING-PSC-AASHTO-LRFR19-DFRC-Define-Rating-Case",
+     "updated_at": "2026-05-29T05:32:12Z"
+    }
+   ],
+   "keys": [
+    "ADJACENT_VEH",
+    "DC",
+    "DESC",
+    "DW",
+    "EVAL_TYPE",
+    "FACTOR",
+    "LIMIT_STATE",
+    "LOAD_CASES",
+    "LOAD_CASE_NAME",
+    "LOAD_FACTOR",
+    "MAX",
+    "MIN",
+    "NAME",
+    "PERMANENT",
+    "PRIMARY_VEH",
+    "SECONDARY",
+    "TEMP",
+    "TGRADIENT",
+    "TYPE",
+    "USER_DEFINED"
+   ],
+   "doc": [],
+   "key_count": 20,
    "documented": false
   },
   {

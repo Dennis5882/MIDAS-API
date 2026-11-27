@@ -7,8 +7,7 @@ For each article in the "manual" section listing:
   keys      = quoted keys of the specification tables, plus JSON keys of the schema and the request
               examples (response examples are excluded).
   sections  = the docs/manual sections that cover the article: sections linking its id or listed in
-              article_map.json; otherwise sections for its Input URI (for shared URIs such as
-              post/TABLE, sections containing one of its TABLE_TYPE / CURRENT_MODE values).
+              article_map.json, or sections for its Input URI and associated discriminator.
   missing   = keys that appear nowhere in those sections.
 
 A key counts as present when its exact name appears as a token, so this measures "mentioned",
@@ -35,6 +34,8 @@ from check_coverage import (
     TOC_ARTICLE_ID,
     fetch_bodies,
     plain_text,
+    shared_uri,
+    variant_values,
 )
 
 _DOCS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "docs", "manual")
@@ -44,11 +45,20 @@ SCHEMA_WORDS = {
     "if", "then", "else", "not", "format", "pattern", "patternProperties", "minItems", "maxItems",
     "minLength", "maxLength", "exclusiveMinimum", "exclusiveMaximum", "minProperties",
     "maxProperties", "definitions", "$defs", "examples", "uniqueItems", "additionalItems",
-    "readOnly", "contains", "multipleOf", "dependencies", "unevaluatedProperties", "Argument",
+    "readOnly", "contains", "multipleOf", "dependencies", "unevaluatedProperties", "propertyNames", "Argument",
     "Assign",
 }
 JSON_KEY_RE = re.compile(r'"([A-Za-z_$][A-Za-z0-9_\-]*)"\s*:')
 CELL_KEY_RE = re.compile(r'"\s*([A-Za-z_][A-Za-z0-9_\-]*)\s*"')
+LEGACY_RESULT_TABLES = {
+    "DESIGN/RC/KDS-41-20-2022/TABLE": {"BEAMDESIGNFORCES", "BRACEDESIGNFORCES", "COLUMNDESIGNFORCES"},
+    "DESIGN/STEEL/KDS-41-30-2022/TABLE": {"STEELMEMBERDESIGNFORCES"},
+    "DESIGN/SRC/AIK-SRC2K/TABLE": {"SRCBEAMDESIGNFORCES", "SRCCOLUMNDESIGNFORCES"},
+}
+CHAPTER_SHARED_URI = {
+    "16_2_VIEW_ResultGraphic.md": "VIEW/RESULTGRAPHIC",
+    "23_POST_Design.md": "POST/TABLE",
+}
 
 
 def article_keys(body):
@@ -94,6 +104,7 @@ def load_sections():
                 end = next((m for m, lv in heads[i + 1:] if lv <= level), len(lines))
                 common.append("\n".join(lines[n:end]))
         shared[os.path.basename(path)] = "\n".join(common)
+        ancestors = []
         for i, (n, level) in enumerate(heads):
             if level == 1:
                 continue
@@ -104,11 +115,20 @@ def load_sections():
                 if SECTION_LINE_RE.search(line):
                     endpoints |= {re.sub(r"(/\d+)+$", "", e.upper()) for e in ENDPOINT_RE.findall(line)}
             text = "\n".join(block)
-            sections.append({
+            while ancestors and ancestors[-1]["level"] >= level:
+                ancestors.pop()
+            source_ids = set(re.findall(r"/articles/(\d+)", text))
+            section = {
                 "file": os.path.basename(path), "path": path, "start": n, "end": end,
                 "heading": lines[n], "level": level, "text": text,
-                "endpoints": endpoints, "ids": set(re.findall(r"/articles/(\d+)", text)),
-            })
+                "endpoints": endpoints, "ids": source_ids,
+                "scope": (endpoints or (ancestors[-1]["scope"] if ancestors else set()) or
+                          ({CHAPTER_SHARED_URI[os.path.basename(path)]}
+                           if os.path.basename(path) in CHAPTER_SHARED_URI else set())),
+                "scope_ids": source_ids or (ancestors[-1]["scope_ids"] if ancestors else set()),
+            }
+            sections.append(section)
+            ancestors.append(section)
     return sections, shared
 
 
@@ -126,6 +146,16 @@ def mapped_headings():
     return out
 
 
+def variant_scope(section, uri, value):
+    scope = section.get("scope", section["endpoints"])
+    if uri in scope:
+        return True
+    if uri == "POST/TABLE":
+        # The documented legacy Design Forces tables share these POST/TABLE modes.
+        return any(value in LEGACY_RESULT_TABLES.get(endpoint, ()) for endpoint in scope)
+    return False
+
+
 def covering(aid, text, sections, mapping):
     hit = [s for s in sections if aid in s["ids"]]
     uris = {u.upper() for u in ARTICLE_URI_RE.findall(text)}
@@ -134,14 +164,20 @@ def covering(aid, text, sections, mapping):
         if number:
             pattern = re.compile(r"#{2,3} " + re.escape(number.group(1)) + r"[.\s]")
             hit += [s for s in sections if s["file"] == name and pattern.match(s["heading"])]
-    own = uris - SHARED_URIS
-    by_uri = [s for s in sections if own & s["endpoints"]]
-    # the narrowest level that names the endpoint avoids pulling in whole chapter groups
-    hit += by_uri
-    if uris & SHARED_URIS:
-        values = set(re.findall(r'"(?:TABLE_TYPE|CURRENT_MODE|TEXT_TYPE)"\s*:\s*"([^"]+)"', text))
-        values -= {"string"}
-        hit += [s for s in sections if any(f'"{v}"' in s["text"] for v in values)]
+    shared = {u for u in uris if shared_uri(u)}
+    own = uris - shared
+    linked = bool(hit)
+    hit += [s for s in sections if own & s["endpoints"]]
+    # For code selectors and design/rating tables, source links are authoritative.
+    # An identical URI or a generic value like MEMB may belong to another article.
+    for uri in sorted(shared):
+        attributed = uri not in SHARED_URIS and uri not in LEGACY_RESULT_TABLES
+        if linked and uri not in SHARED_URIS:
+            continue
+        values = variant_values(text, uri)
+        hit += [s for s in sections if
+                (not attributed or not (s.get("scope_ids", s["ids"]) - {TOC_ARTICLE_ID}))
+                and any(variant_scope(s, uri, v) and f'"{v}"' in s["text"] for v in values)]
     unique = {(s["file"], s["heading"]): s for s in hit}
     return list(unique.values()), sorted(uris)
 
