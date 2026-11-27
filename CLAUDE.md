@@ -16,6 +16,8 @@
   중이니 상태를 먼저 확인할 것.
 - `docs/AUTHENTICATION.md` — 인증, GET/PUT 워크플로, 방화벽 가이드 등 Quick Tips.
 - `examples/` — Python/VBA/JavaScript/curl/기타 언어 예제.
+- `llms.txt` — 이 저장소를 가져다 쓰는 AI용 진입점(찾는 순서, 인용 가능한 출처, 챕터 지도).
+  `build_index.py`가 `scripts/manual_sync/build_llms.py`로 자동 생성하므로 손으로 고치지 않는다.
 - `scripts/manual_sync/` — 공식 사이트와의 정기 동기화 도구, `docs/manual`·`docs/plugin` 둘 다
   대상 (아래 참고).
 
@@ -40,7 +42,7 @@ python check_coverage.py                  # 누락 점검 (변경 여부와 무�
 python check_fields.py                    # 필드(Key) 단위 누락 점검 (exit 1=빠진 Key 있음)
 python fill_fields.py                     # 빠진 Key를 공식 표에서 그대로 옮겨 섹션 끝에 추가 (추가만, 재실행 안전)
 python restore_descriptions.py --dry-run  # 지원하는 파라미터 표의 설명·필수 표기 원문 대조
-python build_index.py                     # docs/index/ (endpoints.json, chunks.jsonl) 자동 생성
+python build_index.py                     # docs/index/ (endpoints.json, chunks.jsonl)와 llms.txt 자동 생성
 python eval_retrieval.py                  # 색인 검색 시험 (BM25)
 ```
 
@@ -77,8 +79,8 @@ python eval_retrieval.py                  # 색인 검색 시험 (BM25)
    통과하므로, 이 점검의 `unique gaps` 수치가 늘지 않았는지 확인한다. "Key가 문서에 언급되는가"만
    보므로 설명의 정확성은 보증하지 않는다. 늘었으면 해당 섹션을 보강하고, README의 "현재 상태"
    수치와 기준일도 함께 갱신한다. 빠진 Key는 `fill_fields.py`로 채우고(생성 블록은 `<!-- om-fields -->`
-   마커로 감싸며 공식 글 기준으로 매번 다시 만들어진다), 반영 후 `build_index.py`로 `docs/index/`를
-   다시 만든다. `docs/index/`는 자동 생성물이므로 손으로 고치지 않는다.
+   마커로 감싸며 공식 글 기준으로 매번 다시 만들어진다), 반영 후 `build_index.py`로 `docs/index/`와
+   루트 `llms.txt`를 다시 만든다. 둘 다 자동 생성물이므로 손으로 고치지 않는다.
 8. **`restore_descriptions.py --dry-run`으로 설명과 필수 표기의 차이를 확인한다.** 영어 행에서
    보는 숫자는 `변경` + `보류 — 원문 변경`이다. 보류 목록은
    [description_holds.json](scripts/manual_sync/description_holds.json)에 있다.

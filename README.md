@@ -98,6 +98,8 @@ MidasAPI("POST", "/db/node", node_json)
 
 ## AI·RAG용 데이터
 
+AI 에이전트는 루트의 [llms.txt](./llms.txt)부터 읽으면 됩니다. 찾는 순서, 인용해도 되는 출처, 챕터별 URI 지도가 한 파일에 있습니다 (`build_index.py`가 자동 생성).
+
 `docs/index/`는 `docs/manual`에서 **자동 생성**한 파일입니다. 직접 고치지 마세요.
 
 | 파일 | 내용 |

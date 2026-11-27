@@ -16,6 +16,7 @@ import os
 import re
 import sys
 
+import build_llms
 import check_fields as cf
 from check_coverage import CODE_SELECTORS, TOC_ARTICLE_ID, design_catalogs, fetch_bodies, parse_toc, plain_text
 from common import load_manifest
@@ -289,6 +290,10 @@ def main():
     by_source = collections.Counter(c["source"] for c in chunks)
     print(f"endpoints: {len(records)} (documented {sum(r['documented'] for r in records.values())})  "
           f"chunks: {len(chunks)} {dict(by_source)}  chunk chars median {sizes[len(sizes)//2]} max {sizes[-1]}")
+    # llms.txt reads the files just written, so its figures match the index. A run into another
+    # folder (tests) keeps its llms.txt there instead of touching the repository root.
+    default = os.path.abspath(OUT) == os.path.abspath(build_llms.INDEX_DIR)
+    build_llms.main(index_dir=OUT, out=build_llms.OUT if default else os.path.join(OUT, "llms.txt"))
 
 
 if __name__ == "__main__":

@@ -26,7 +26,8 @@
 | `fill_fields.py` | 빠진 Key를 공식 Specifications 표에서 원문 그대로 옮겨 해당 섹션 끝에 `<!-- om-fields -->` 블록으로 추가. 기존 텍스트는 수정하지 않고, 재실행하면 블록만 다시 만듦 | ✗ |
 | `restore_descriptions.py` | 설명·필수 표기를 공식 Specifications와 대조. 기본 적용은 한글 설명, `--english` 적용은 영어 설명 대상 | ✗ |
 | `description_holds.json` | 원문과 다르게 보존한 설명·필수 값 및 대조 기준 | — |
-| `build_index.py` | `docs/index/endpoints.json`·`chunks.jsonl` 생성 (AI·RAG용) | ✗ |
+| `build_index.py` | `docs/index/endpoints.json`·`chunks.jsonl` 생성 (AI·RAG용). 끝에 `build_llms.py`를 불러 루트 `llms.txt`도 다시 만듦 | ✗ |
+| `build_llms.py` | 루트 `llms.txt`(AI 에이전트용 진입점) 생성. 네트워크 없이 `docs/index/`와 `docs/manual/INDEX.md`만 읽음 | ✗ |
 | `eval_retrieval.py` | 청크 색인의 검색 시험 (BM25, 질문은 공식 글에서만 생성) | ✗ |
 | `om_parse.py` | 공식 글 HTML의 Specifications 표 파서 (공용) | ✗ |
 | `coverage_exceptions.json` | 검토를 마친 `check_coverage.py` 항목과 그 사유 | — |

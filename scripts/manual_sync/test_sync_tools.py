@@ -10,6 +10,7 @@ import unittest
 from unittest.mock import patch
 
 import build_index
+import build_llms
 import check_diff
 import check_fields as cf
 import eval_retrieval
@@ -126,6 +127,28 @@ class AnchorTests(unittest.TestCase):
                        for n, line in enumerate(lines) if line.startswith("##") and n != 5]
             build_index._ANCHORS.clear()
         self.assertEqual(anchors, ["input", "input-1", "input-2"])
+
+
+class LlmsTests(unittest.TestCase):
+    def test_llms_reports_index_figures_and_chapter_map(self):
+        endpoints = [dict(endpoint="DESIGN/RC/KDS-41-20-2022/DCO", documented=True,
+                          doc=["26_Design_RC_KDS41202022.md#1-dco"]),
+                     dict(endpoint="DB/NODE", documented=False, doc=[])]
+        chunks = [dict(source="om"), dict(source="om"), dict(source="repo-example")]
+        with tempfile.TemporaryDirectory() as folder:
+            with open(os.path.join(folder, "endpoints.json"), "w", encoding="utf-8") as f:
+                json.dump({"endpoints": endpoints}, f)
+            with open(os.path.join(folder, "chunks.jsonl"), "w", encoding="utf-8") as f:
+                f.write("\n".join(json.dumps(c) for c in chunks) + "\n")
+            out = os.path.join(folder, "llms.txt")
+            with contextlib.redirect_stdout(io.StringIO()):
+                build_llms.main(index_dir=folder, out=out)
+            with open(out, encoding="utf-8") as f:
+                text = f.read()
+        self.assertIn("2 endpoints indexed (1 documented), 3 retrieval chunks", text)
+        self.assertIn("| `om` | 2 |", text)
+        self.assertRegex(text, r"\| \[26_Design_RC_KDS41202022\.md\]\(.*\) \|.*`DESIGN/RC/KDS-41-20-2022/` \|")
+        self.assertIn("[01_DOC.md]", text)
 
 
 if __name__ == "__main__":
