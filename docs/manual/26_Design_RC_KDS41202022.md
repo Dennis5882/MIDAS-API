@@ -112,7 +112,7 @@
 > **기능:** 현재 프로젝트에 적용할 **RC 설계 코드**를 선택합니다. 이 챕터의 나머지 69개
 > 엔드포인트(`KDS-41-20-2022/<CODE>`)와 달리 URI가 `KDS-41-20-2022` 접두사를 쓰지 않는
 > 별도의 상위 선택 엔드포인트입니다.
-> AASHTO-LRFD24 및 LRFD20의 DRC는 [28장 DRC](./28_Design_RC_AASHTO_LRFD.md#0-designrcdrc--design-code-aashto-lrfd2420)를 참고하세요.
+> 다른 설계 기준의 DRC는 [28장 AASHTO LRFD](./28_Design_RC_AASHTO_LRFD.md#0-designrcdrc--design-code-aashto-lrfd2420)와 [31장 KDS 24](./31_Design_RC_KDS241421.md#0-drc--design-code-kds-24-14-21--2021)를 참고하세요.
 
 ### Input URI
 

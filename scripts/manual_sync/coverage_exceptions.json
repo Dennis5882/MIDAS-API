@@ -2,14 +2,7 @@
  "article_without_section": {
   "57678093825049": "KDS 41 30 : 2022 — 설계코드별 목차 글 (자체 엔드포인트 없음)",
   "57711427405209": "KDS 41 20 : 2022 — 설계코드별 목차 글 (자체 엔드포인트 없음)",
-  "57711471216537": "AIK-SRC2K — 설계코드별 목차 글 (자체 엔드포인트 없음)",
-  "64738444883737": "AASHTO-LRFR19 PSC 평가 — 설계기준 하위 목차 글 (자체 엔드포인트 없음)",
-  "64738439500697": "KDS 24 14 21 : 2021 PSC — 설계기준 하위 목차 글 (자체 엔드포인트 없음)",
-  "64738414827033": "KDS 24 14 21 : 2021 RC — 설계기준 하위 목차 글 (자체 엔드포인트 없음)",
-  "58381619465241": "RATING/PSC/AASHTO-LRFR19/RPSC-ANAL : Perform Rating — PSC 설계/평가(AASHTO) 및 그 부속 코드표. 해당 챕터가 없음, 보류",
-  "58381704142105": "RATING/PSC/AASHTO-LRFR19/PFRO-VBEAM : Position for Rating Output — PSC 설계/평가(AASHTO) 및 그 부속 코드표. 해당 챕터가 없음, 보류",
-  "58381791502873": "RATING/PSC/AASHTO-LRFR19/PFRO : Position for Rating Output — PSC 설계/평가(AASHTO) 및 그 부속 코드표. 해당 챕터가 없음, 보류",
-  "58412610890137": "RATING/PSC/AASHTO-LRFR19/DFRC : Define Rating Case — PSC 설계/평가(AASHTO) 및 그 부속 코드표. 해당 챕터가 없음, 보류"
+  "57711471216537": "AIK-SRC2K — 설계코드별 목차 글 (자체 엔드포인트 없음)"
  },
  "toc_only": {
   "OPE/STORPROP": "로케일 분기: en-us·ja·목차는 STORPROP, ko 본문은 STORYPROP. 15장은 STORYPROP (12절 주석)",

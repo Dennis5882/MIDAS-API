@@ -1,12 +1,14 @@
 # MIDAS NX Open API — JSON Manual Index
 
 > **출처:** [MIDAS API Online Manual](https://support.midasuser.com/hc/ko/articles/33016922742937-MIDAS-API-Online-Manual)  
-> **최초 생성:** 2024.05.28 · **공식 목차 최종 갱신:** 2026.11.25 · **이 파일 동기화:** 2026-11-26  
+> **최초 생성:** 2024.05.28 · **공식 목차 최종 갱신:** 2026.11.26 · **이 파일 동기화:** 2026-11-27\
 > **대상 제품:** MIDAS Civil NX · MIDAS Gen NX
 
 ---
 
 ## 목차 구조
+
+공식 글 860건(en-us 790 + ko 전용 70)을 기준으로 관리하는 참조 챕터는 33개입니다.
 
 | 파일 | 섹션 | 설명 |
 |------|------|------|
@@ -40,6 +42,9 @@
 | [27_Design_SRC_AIKSRC2K.md](./27_Design_SRC_AIKSRC2K.md) | Design Code – SRC AIK-SRC2K | SRC 합성부재 설계 코드 설정·보·기둥 설계 (27개) |
 | [28_Design_RC_AASHTO_LRFD.md](./28_Design_RC_AASHTO_LRFD.md) | Design Code – RC AASHTO-LRFD24 / LRFD20 | 교량 RC 설계·검토 (50개 코드 + 공용 DRC 1개) |
 | [29_Design_PSC_AASHTO_LRFD24.md](./29_Design_PSC_AASHTO_LRFD24.md) | Design Code – PSC AASHTO-LRFD24 | 교량 PSC 설계·결과 표·Excel 보고서 (URI 19개, 29절) |
+| [30_Rating_PSC_AASHTO_LRFR19.md](./30_Rating_PSC_AASHTO_LRFR19.md) | Rating – PSC AASHTO-LRFR19 | PSC 교량 내하력 평가·결과 표·보고서 (URI 23개, 34절) |
+| [31_Design_RC_KDS241421.md](./31_Design_RC_KDS241421.md) | Design Code – RC KDS 24 14 21:2021 | 교량 RC 설계 설정·실행 (URI 19개, 19절) |
+| [32_Design_PSC_KDS241421.md](./32_Design_PSC_KDS241421.md) | Design Code – PSC KDS 24 14 21:2021 | 교량 PSC 설계 설정·실행·결과 표 (URI 16개, 33절) |
 
 ---
 
@@ -537,11 +542,26 @@ GUI 또는 사전처리 계산값 제어 함수. DB에 저장되지 않는 데�
 | Code | 상세 |
 |------|------|
 | `KDS-41-20-2022` | KDS 41 20 : 2022 |
+| `AASHTO-LRFD24` · `AASHTO-LRFD20` | [28장 RC 교량 설계](./28_Design_RC_AASHTO_LRFD.md) |
+| `KDS-24-14-21-2021` | [31장 RC 교량 설계](./31_Design_RC_KDS241421.md) |
+
+### PSC
+
+| Code | 상세 |
+| --- | --- |
+| `AASHTO-LRFD24` | [29장 PSC 교량 설계](./29_Design_PSC_AASHTO_LRFD24.md) |
+| `KDS-24-14-21-2021` | [32장 PSC 교량 설계](./32_Design_PSC_KDS241421.md) |
 
 ### SRC
 | Code | 상세 |
 |------|------|
 | `AIK-SRC2K` | AIK-SRC2K |
+
+## Rating
+
+| Code | 상세 |
+| --- | --- |
+| `AASHTO-LRFR19` | [30장 PSC 교량 내하력 평가](./30_Rating_PSC_AASHTO_LRFR19.md) |
 
 ---
 

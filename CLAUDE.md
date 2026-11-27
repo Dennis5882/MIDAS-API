@@ -7,8 +7,8 @@
 **MIDAS NX Open API**(MIDAS Gen NX / Civil NX)에 대한 사람이 직접 큐레이션한 **JSON 스키마 매뉴얼**
 저장소입니다. 코드 라이브러리가 아니라 문서 저장소입니다.
 
-- `docs/manual/01_DOC.md` ~ `29_Design_PSC_AASHTO_LRFD24.md` + `16_2_VIEW_ResultGraphic.md` — 30개 파일.
-  공식 목차의 276개 경로와 설계코드 엔드포인트를
+- `docs/manual/01_DOC.md` ~ `32_Design_PSC_KDS241421.md` + `16_2_VIEW_ResultGraphic.md` — 33개 파일.
+  공식 상위 목차의 276개 경로와 교량 설계·평가 하위 목차의 고유 URI 177개 등을
   MIDAS 공식 Zendesk 온라인 매뉴얼 기준으로 문서화. `docs/manual/INDEX.md`가 전체 목차/개수 색인.
 - `docs/plugin/` — MIDAS Plug-in(MIDAS API + Python으로 만든, GUI에 내장된 완성형 자동화 도구)
   문서. `docs/manual/`과 별개 폴더인 이유와 문서 성격 차이는 `docs/plugin/INDEX.md` 상단 참고.
@@ -27,7 +27,7 @@
 
 | 섹션 이름(`--section`) | Zendesk 대상 | 추적 방식 | 로컬 문서 |
 | --- | --- | --- | --- |
-| `manual` | JSON Manual 섹션(667개 아티클 = en-us 651 + ko 전용 16, `section_id=30087500371097`) | 섹션 목록 API를 en-us·ko 두 로케일로 읽어 합침 (`common.LISTING_LOCALES`) | `docs/manual/*.md` |
+| `manual` | JSON Manual 섹션(860개 아티클 = en-us 790 + ko 전용 70, `section_id=30087500371097`) | 섹션 목록 API를 en-us·ko 두 로케일로 읽어 합침 (`common.LISTING_LOCALES`) | `docs/manual/*.md` |
 | `plugin` | Plug-in 섹션(`section_id=35681419399961`) | ⚠️ 섹션 목록 API가 랜딩 페이지 1건만 반환하므로, `common.py`의 `PLUGIN_ARTICLE_IDS`(78개 고정 목록)를 1건씩 개별 조회 | `docs/plugin/**/*.md` |
 
 ```bash

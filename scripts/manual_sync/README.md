@@ -8,7 +8,7 @@
 
 | 이름 | mode | 대상 문서 | 매니페스트 |
 | --- | --- | --- | --- |
-| `manual` | `section` — `sections/{id}/articles.json`로 667개 아티클을 나열 (en-us 651 + ko 전용 16, 두 로케일 목록을 합침) (JSON Manual, `section_id=30087500371097`) | `docs/manual/*.md` — REST 엔드포인트 스키마 표 | `docs/manual/.sync_manifest.json` |
+| `manual` | `section` — `sections/{id}/articles.json`로 860개 아티클을 나열 (en-us 790 + ko 전용 70, 두 로케일 목록을 합침) (JSON Manual, `section_id=30087500371097`) | `docs/manual/*.md` — REST 엔드포인트 스키마 표 | `docs/manual/.sync_manifest.json` |
 | `plugin` | `id_list` — `common.PLUGIN_ARTICLE_IDS`(78개, 명시적 목록)를 `articles/{id}.json`로 1건씩 조회 | `docs/plugin/**/*.md` — GUI 내장 Plug-in 툴 사용법 | `docs/plugin/.sync_manifest.json` |
 
 `plugin`이 `id_list`인 이유: Plug-in Zendesk 섹션(`section_id=35681419399961`)은 `sections/{id}/articles.json`을 호출해도 "Plug-in Online Manual" 랜딩 페이지 **1건만** 돌아옵니다. 나머지 56개(가이드 4 + 개별 툴 52)는 그 랜딩 페이지 본문 HTML 안에 있는 `<a href>` 링크일 뿐이고, 각각 API로는 찾을 수 없는 별도 `section_id`에 흩어져 있습니다. 그래서 `docs/plugin/INDEX.md`를 만들 때 추출한 57개 article id를 `common.py`에 고정 목록으로 박아두고 개별 조회합니다. **신규 Plug-in이 추가되면 랜딩 페이지 자체의 `updated_at`이 바뀌므로 `changed` 목록에 랜딩 article(`35639730101529`)이 잡히고**, 이를 신호로 랜딩 페이지를 재스크래핑해 `PLUGIN_ARTICLE_IDS`와 `INDEX.md`를 갱신해야 합니다(코드 수정이 필요하므로 자동 반영되지 않음).
@@ -85,9 +85,9 @@ python -X utf8 restore_descriptions.py --file 02_DB_Project_Structure.md --dry-r
 등록된 행의 공식 설명이나 필수 값이 [description_holds.json](description_holds.json)에 기록된 값과
 달라지면 `보류 — 원문 변경`으로 표시됩니다. 보류 목록에는 범위·단위와 필수 조건을 보존한 사유도 있습니다.
 `--dry-run` 없이 실행하면 짝이 확인된 한글 설명을 복원합니다. 영어 행은 `--english`로 지정합니다.
-JP·⚠️ 보호, 보류, 모호, 짝 없음 행은 보고서에서 확인할 수 있습니다.
+JP·⚠️ 보호 행도 원문과 대조하며 실제 차이는 의도적 차이로 분류합니다. 보류, 모호, 짝 없음 행은 보고서에서 확인할 수 있습니다.
 
-2026-11-27 기준(공식 글 667건)으로 대조한 영어 행은 3,697개입니다. 변경 0행, 보류 — 원문 변경 0행, 보류 17행입니다.
+2026-11-27 기준(공식 글 860건)으로 대조한 영어 행은 6,582개입니다. 변경 0행, 보류 — 원문 변경 0행, 보류 17행입니다.
 보류 17행 중 16행은 공식 표가 같은 글의 예제·Schema와 어긋나 기존 표기를 유지한 행이며, 문서의 해당 표 아래 ⚠️ 주석에 원문 표기를 적었습니다.
 
 ## 필드 점검 읽는 법 (`check_fields.py`)
@@ -101,6 +101,9 @@ JP·⚠️ 보호, 보류, 모호, 짝 없음 행은 보고서에서 확인할 �
 - `fill_fields.py`가 넣은 행은 원문 그대로라 중첩 필드의 상위 Key가 표에 보이지 않을 수 있다(`No.`만 남음).
 
 ## 누락 점검 메모 (`check_coverage.py`)
+
+2026-11-27 기준 매뉴얼 33개 파일에 교량 설계·평가 28~32장을 포함합니다.
+공식 글 838건의 요청 Key 13,359개에서 누락 0건이며, coverage의 NEW와 stale은 모두 0건입니다.
 
 - `check_diff.py`만으로는 **처음부터 빠진 글**을 찾지 못합니다. `/db/HHND`·`/db/GALD`·`/db/ULCT`는
   매니페스트에 등록돼 있었지만 섹션이 없었고, 글이 수정되지 않아 계속 통과했습니다(2026-11-26 추가).

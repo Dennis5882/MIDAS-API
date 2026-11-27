@@ -22,13 +22,15 @@
 
 | 항목 | 상태 |
 | --- | --- |
+| 공식 JSON Manual | 공식 글 860건(en-us 790 + ko 전용 70), 참조 챕터 33개 |
 | 공식 목차의 경로 276개 (`db` 229 · `ope` 19 · `doc` 11 · `post` 10 · `view` 7) | 모두 해당 섹션 있음 (표기가 목차와 다른 9건 포함) |
-| 설계코드 챕터 | STEEL KDS 41 30:2022 · RC KDS 41 20:2022 · SRC AIK-SRC2K · RC AASHTO-LRFD24/20 · PSC AASHTO-LRFD24 (교량) |
+| 교량 설계·평가 하위 목차 | 6개 목차의 고유 URI 177개를 28~32장에 반영 |
+| 설계·평가 챕터 | STEEL KDS 41 30:2022 · RC KDS 41 20:2022 · SRC AIK-SRC2K · 교량 설계·평가 28~32장 |
 | 결과 표시 모드 (`view/RESULTGRAPHIC`) | [16-2장](./docs/manual/16_2_VIEW_ResultGraphic.md)에 개별 글 28건 |
 | Plug-in 문서 | 73건 중 63건 작성 ([목록](./docs/plugin/INDEX.md)) |
-| 교량 설계·평가 신규 글 (2026-11-26 공식 공개) | RC AASHTO-LRFD24/20 102건([28장](./docs/manual/28_Design_RC_AASHTO_LRFD.md)), PSC AASHTO-LRFD24 설계 42건([29장](./docs/manual/29_Design_PSC_AASHTO_LRFD24.md)) 반영. PSC AASHTO-LRFR19 평가, RC·PSC KDS 24 14 21 글은 작성 중 |
-| 필드 단위 완전성 | 공식 글 608건(ko 전용 글 포함)의 요청 Key 11,062개가 모두 문서에 있음. 2026-11-26에 빠져 있던 744개를 해당 섹션 끝의 **"OM 원문 추가 필드"** 블록으로 원문 그대로 추가함 (설명은 영문 원문, 정리·번역 없음) |
-| AI 검색용 색인 | `docs/index/`에 엔드포인트 573개 색인(문서화 516, 작성 중인 교량 설계·평가 57)과 청크 2,028개. 검색 시험(BM25)에서 엔드포인트 찾기 hit@5 94%, Key 찾기 hit@5 82.7% (아래 "AI·RAG용 데이터") |
+| 교량 설계·평가 (2026-11-26 공식 목차 갱신) | [RC AASHTO-LRFD24/20 102건](./docs/manual/28_Design_RC_AASHTO_LRFD.md) · [PSC AASHTO-LRFD24 설계 42건](./docs/manual/29_Design_PSC_AASHTO_LRFD24.md) · [PSC AASHTO-LRFR19 평가 34건](./docs/manual/30_Rating_PSC_AASHTO_LRFR19.md) · [RC KDS 24 14 21:2021 설계 19건](./docs/manual/31_Design_RC_KDS241421.md) · [PSC KDS 24 14 21:2021 설계 33건](./docs/manual/32_Design_PSC_KDS241421.md) |
+| 필드 단위 완전성 | 문서화된 공식 글 838건의 요청 Key 13,359개에서 누락 0건 |
+| AI 검색용 색인 | `docs/index/`의 엔드포인트 573개 모두 문서화. 청크 2,446개. 검색 시험(BM25) hit@5는 엔드포인트 95%, Key 84% |
 
 ## 문서 읽는 법
 
@@ -108,21 +110,21 @@ MidasAPI("POST", "/db/node", node_json)
 
 | `source` | 청크 수 | 내용 |
 | --- | --- | --- |
-| `om` | 1,228 | 공식 글을 정리한 본문. 파라미터 설명은 공식 원문을 따르며, 보존한 번역이나 ⚠️ 주석을 포함할 수 있음 |
+| `om` | 1,560 | 공식 글을 정리한 본문. 파라미터 설명은 공식 원문을 따르며, 보존한 번역이나 ⚠️ 주석을 포함할 수 있음 |
 | `om-verbatim` | 126 | "OM 원문 추가 필드" 블록. 공식 표를 그대로 옮긴 것 |
-| `repo-example` | 674 | 이 저장소가 작성한 Python 예제·워크플로. **공식 내용이 아니므로 근거로 인용하지 말 것** |
+| `repo-example` | 760 | 이 저장소가 작성한 Python 예제·워크플로. **공식 내용이 아니므로 근거로 인용하지 말 것** |
 
-검색 시험 결과는 `python scripts/manual_sync/eval_retrieval.py`로 다시 잴 수 있습니다 (2026-11-27 29장 추가 후 재측정, BM25 기준).
+검색 시험 결과는 `python scripts/manual_sync/eval_retrieval.py`로 다시 잴 수 있습니다 (2026-11-27 교량 설계·평가 28~32장 반영 후 재측정, BM25 기준).
 
 | 질문 | 건수 | hit@1 | hit@5 | hit@10 |
 | --- | --- | --- | --- | --- |
-| 엔드포인트 찾기 (글 제목 → 해당 청크) | 100 | 81% | 94% | 96% |
-| Key 찾기 (글 제목 + 설명 → 그 Key가 든 청크) | 150 | 58.7% | 82.7% | 88.7% |
+| 엔드포인트 찾기 (글 제목 → 해당 청크) | 100 | 81% | 95% | 97% |
+| Key 찾기 (글 제목 + 설명 → 그 Key가 든 청크) | 150 | 58% | 84% | 88% |
 
 시험의 한계:
 
 - BM25는 일부러 단순한 기준선입니다. 벡터 검색을 쓰면 같은 청크로 더 나을 수 있습니다.
-- 청크가 클수록 맞히기 쉬워집니다. 청크 중앙값은 약 1,200자입니다.
+- 청크가 클수록 맞히기 쉬워집니다. 청크 중앙값은 약 1,500자입니다.
 - 질문은 공식 글의 영문 설명이라, 같은 문구를 담은 `om-verbatim` 청크가 유리합니다. 한글로 번역된 설명은 상대적으로 덜 잡힙니다.
 - `KEYS`·`EXPORT_PATH`처럼 여러 글이 공유하는 항목은 어느 글의 것인지 가리기 어렵습니다.
 - "찾았는가"만 봅니다. 설명이 맞는지는 보지 않습니다.
@@ -131,7 +133,7 @@ MidasAPI("POST", "/db/node", node_json)
 
 ```text
 docs/
-├── manual/              # JSON Manual 참조본 (INDEX.md부터, 01~27장 + 16-2장)
+├── manual/              # JSON Manual 참조본 (INDEX.md부터, 01~32장 + 16-2장)
 ├── plugin/              # Plug-in 문서
 ├── index/               # AI·RAG용 자동 생성 색인과 청크
 └── AUTHENTICATION.md    # Base URL, MAPI-Key, 언어별 인증 예제
