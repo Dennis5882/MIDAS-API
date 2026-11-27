@@ -814,6 +814,8 @@ print(result)
 | (3) | Impact Factor / Centrifugal Force | `"FACTOR"` / `"CENT_F"` | Number | 0 | Optional |
 | (4) | Span Start | `"SPAN_START"` | Boolean | false | Optional |
 
+> ⚠️ 공식 Specifications 표는 `MARGIN`의 필수 칸을 `Optional9`로 적습니다. 오타로 보고 `Optional`로 적었습니다.
+
 ### Python 예제
 
 ```python
@@ -967,7 +969,7 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `LANE_I
 
 | No. | Description | Key | Value 타입 | 기본값 | 필수 |
 | --- | --- | --- | --- | --- | --- |
-| 1 | Load Type ¹⁾ — `0`=75% of Design Load / `1`=25% of Design Load | `"LOAD_TYPE"` | Integer | `0` | Optional |
+| 1 | [For Standard Vehicle] Load Type · Only for "KL-510LNE" / 75% of Design Load: 0 / 25% of Design Load: 1 ¹⁾ | `"LOAD_TYPE"` | Integer | `0` | Optional |
 | 2 | Lane Loaded Length (User Defined Truck/Lane 전용) | `"LOADED_LENGTH"` | Number | `60` | Optional |
 | 3 | Distribution Load Not Exceeding Loaded Length | `"W1"` | Number | `12.7` | Optional |
 | 4 | Distribution Load Exceeding Loaded Length | `"W2"` | Number | `12.7` | Optional |
@@ -1600,9 +1602,9 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `UNIFOR
 | 7 | Min. Distance between Vehicle (Dv) | `"DV"` | Number | – | Required |
 | 8 | Edge Distance of Wheel Loads (De) | `"DE"` | Number | 0 | Optional |
 | 9 | Median Strip Option | `"OPT_MEDIAN_STRIP"` | Boolean | false | Optional |
-| 10 | Location (Ml) | `"ML"` | Number | – | Required (if OPT_MEDIAN_STRIP=true) |
-| 11 | Width (Mw) | `"MW"` | Number | – | Required (if OPT_MEDIAN_STRIP=true) |
-| 12 | Max. Number of Left Lanes (n1) | `"LEFT_LANES"` | Integer | – | Required (if OPT_MEDIAN_STRIP=true) |
+| 10 | Location (Ml) | `"ML"` | Number | – | **Required** |
+| 11 | Width (Mw) | `"MW"` | Number | – | **Required** |
+| 12 | Max. Number of Left Lanes (n1) | `"LEFT_LANES"` | Integer | – | **Required** |
 
 ### Python 예제
 
@@ -1913,7 +1915,7 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `ECC`, 
 | 7 | Scale factor for JTG B01-2014 · [1, 2, 3, 4, 5, 7, >= 8] | `"SCALE_FACTOR_JTG"` | Array[Number, 8] | – | **Required** |
 | 8 | Combination Option · Combined: 0 · Independent: 1 | `"LOADING_EFFECT"` | Integer | – | **Required** |
 | General Load(`OPT_AUTO_OPTIMIZE`=false) | | | | | |
-| 9 | Sub-Load Cases | `"SUB_LOAD_ITEMS"` | Array[Object] | – | Required |
+| 9 | [General Load] Sub-Load Cases · Insert the data as an object | `"SUB_LOAD_ITEMS"` | Array[Object] | – | Required |
 | (i) | Vehicle Type (`"VL"` / `"VC"`) | `"VEHICLE_TYPE"` | String | – | Required |
 | (ii) | [General Load] Name of Vehicle Class | `"VEHICLE_CLASS"` | String | – | **Required** |
 | (iii) | Scale Factor | `"SCALE_FACTOR"` | Number | – | Required |
@@ -1929,6 +1931,8 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `ECC`, 
 | (i) | Vehicle Type (`"VL"` / `"VC"`) | `"VEHICLE_TYPE"` | String | – | Required |
 | (ii) | [Moving Load Optimization] Name of Vehicle Class | `"VEHICLE_NAME"` | String | – | **Required** |
 | (iii) | Scale Factor | `"SCALE_FACTOR"` | Number | – | Required |
+
+> ⚠️ 공식 Specifications 표는 `SUB_LOAD_ITEMS`의 필수 칸을 비워 둡니다. 기존 표기를 유지했습니다.
 
 > ⚠️ 2026-08-25 확인: 이전 문서는 `OPT_AUTO_OPTIMIZE` 필드만 소개하고 실제 `true`일 때 쓰이는
 > Moving Load Optimization 필드 5개(`MIN_VEHICLE_DIST`~`AUTO_OPTIMIZE_ITEMS`)가 누락돼 있었음
@@ -2394,15 +2398,15 @@ print(result)
 |-----|-------------|-----|-----------|---------|----------|
 | 1 | Load Case Name | `"LCNAME"` | String | – | Required |
 | 2 | Description | `"DESC"` | String | `""` | Optional |
-| 3 | Load Model Type ¹⁾ | `"TYPE_LOADMODEL"` | Integer | – | Required |
+| 3 | Select Load Model · LM 1, FLM 1 / Footbridge: 1 · LM 2,3,4 / FLM 2,3,4 / Footbridge / Permit Truck : 2 · LM 1 & 3 Multi: 3 · LM 1 & 3 Multi (Straddling): 4 · Railway Bridge: 5 ¹⁾ | `"TYPE_LOADMODEL"` | Integer | – | **Required** |
 | 4 | Moving Load Optimization · General Load: false · Moving Load Optimization: true | `"OPT_AUTO_OPTIMIZE"` | Boolean | false | Optional |
 | 5 | Ignore ψ(1) factor | `"OPT_LEADING"` | Boolean | – | Required (LM1/3/4, General·Optimization) |
 | 6 | Load Case – Vehicle | `"VHLNAME1"` | String | – | Required (LM1/3/4) |
 | 7 | Load Case – Footway | `"VHLNAME2"` | String | – | Optional (LM1) / Required (LM3/4, Optimization) |
-| 8 | Selected Lanes | `"SLN_LIST"` | Array[String] | – | Required (LM1/3/4) |
-| 9 | Remaining Area | `"SRA_LIST"` | Array[String] | – | Required (LM1/3/4) |
-| 10 | Footway Lanes (LM1) | `"FLN_LIST"` | Array[String] | – | Required (LM1) |
-| 11 | Straddling Lanes — `(1)` Start Lane `"NAME1"`, `(2)` End Lane `"NAME2"` | `"STL_LIST"` | Array[Object] | – | Required (LM4) |
+| 8 | [General Load - (LM 1, FLM 1/Footbridge), (LM 1 & 3 Multi), (LM 1 & 3 Multi (Straddling))] Selected Lanes | `"SLN_LIST"` | Array[String] | – | **Required** |
+| 9 | [General Load - (LM 1, FLM 1/Footbridge), (LM 1 & 3 Multi), (LM 1 & 3 Multi (Straddling))] Remaining Area | `"SRA_LIST"` | Array[String] | – | **Required** |
+| 10 | [General Load - (LM 1, FLM 1/Footbridge), (LM 1 & 3 Multi), (LM 1 & 3 Multi (Straddling))] Footway Lanes · For LM 1, FLM 1 / Footbridge | `"FLN_LIST"` | Array[String] | – | **Required** |
+| 11 | [General Load - (LM 1, FLM 1/Footbridge), (LM 1 & 3 Multi), (LM 1 & 3 Multi (Straddling))] Straddling Lanes · For LM 1 & 3 Multi (Straddling) · Insert the data as an object | `"STL_LIST"` | Array[Object] | – | **Required** |
 | 12 | Loading Effect (Combined: `0` / Independent: `1`) | `"OPT_COMB"` | String | – | Required (LM2/5) |
 | 13 | Sub-Load Cases — `(1)` Vehicle Load Type ²⁾ `"TYPE"`, `(2)` Name `"NAME"`, `(3)` Scale Factor `"SCALE_FACTOR"`, `(4)` Min. Loaded Lanes `"MIN_LOAD_LANE_TYPE"`, `(5)` Max. Loaded Lanes `"MAX_LOAD_LANE_TYPE"`, `(6)` Selected Lanes `"SLN_LIST"` | `"SUB_LOAD_LIST"` | Array[Object] | – | Required (LM2/5, General) |
 | 14 | Ignore ψ1 factor | `"OPT_PSI_FACTOR"` | Boolean | – | Required (LM5) |
@@ -2410,9 +2414,9 @@ print(result)
 | 16 | Multi Presence Factor for Lane 1/2/3+ | `"MULTI_FACTOR1"/"MULTI_FACTOR2"/"MULTI_FACTOR3"` | Number | – | Required (LM5) |
 | 17 | Min. Vehicle Distance | `"MINVHLDIST"` | Number | – | Required (Optimization) |
 | 18 | Assignment Lane | `"OPTIMIZE_LANE_NAME"` | String | – | Required (Optimization) |
-| 19 | Number of Loaded Lane | `"LOADEDLANE"` | Integer | – | Required (Optimization, LM1/3/4) |
+| 19 | [Moving Load Optimization - (LM 1, FLM 1 / Footbridge), (LM 1 & 3 Multi), (LM 1 & 3 Multi (Straddling))] Number of Loaded Lane | `"LOADEDLANE"` | Integer | – | **Required** |
 | 20 | Min./Max. Number of Vehicle | `"MIN_NUM_VHL"/"MAX_NUM_VHL"` | Integer | – | Required (Optimization, LM2/5) |
-| 21 | Sub-Load Cases for Optimization — `(1)` Type `"TYPE"`, `(2)` Name `"NAME"`, `(3)` Scale Factor `"SCALE_FACTOR"` | `"OPTIMIZE_LIST"` | Array[Object] | – | Required (Optimization, LM2/5) |
+| 21 | [Moving Load Optimization - (LM 2,3,4 / FLM 2,3,4 / Footbridge / Permit Truck)] Sub-Load Cases · Insert the data as an object | `"OPTIMIZE_LIST"` | Array[Object] | – | **Required** |
 
 > ¹⁾ TYPE_LOADMODEL:  
 > 1 = LM 1, FLM 1 / Footbridge  
@@ -2876,9 +2880,11 @@ print(result)
 |-----|-------------|-----|-----------|---------|----------|
 | 1 | Input Type (`"AutoInput"` / `"UserInput"`) ¹⁾ | `"TYPE"` | String | – | Required |
 | 2 | Structure Group Name · Only for "Auto Input" | `"GROUP_NAME"` | String | – | **Required** |
-| 3 | Element ID | `"ELEMENT_NO"` | Integer | – | Required (UserInput) |
-| 4 | Element Type (`"BEAM"` / `"PLATE"`) | `"ELEMENT_TYPE"` | String | – | Required (UserInput) |
+| 3 | Element ID | `"ELEMENT_NO"` | Integer | – | **Required** |
+| 4 | Element Type · Beam: "BEAM" · Plate: "PLATE" | `"ELEMENT_TYPE"` | String | – | **Required** |
 | 5 | Support Position · Only for "BEAM" / Both: "Both" / End-i: "End-I" / End-j: "End-J" | `"POSITION"` | String | – | **Required** |
+
+> ⚠️ 공식 Specifications 표는 `TYPE`의 값을 `"Auto Input"`으로 적지만, 같은 글의 요청 예제는 `"AutoInput"`·`"UserInput"`입니다. 예제를 따랐습니다.
 
 > ¹⁾ AutoInput은 AASHTO LRFD에서만 사용 가능
 
@@ -3178,8 +3184,8 @@ print(result)
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
 | 1 | Input Type · Auto Input: 0 · User Input: 1 | `"INPUT_TYPE"` | Integer | – | **Required** |
-| 2 | Determinant Length (Lφ) | `"LENGTH"` | Number | – | Required (Auto) |
-| 3 | Quality of Track Maintenance (0=Carefully, 1=Standard) | `"MAINTAIN_TYPE"` | Integer | – | Required (Auto) |
+| 2 | Determinant Length (Lφ) | `"LENGTH"` | Number | – | **Required** |
+| 3 | Quality of Track Maintenance · Carefully maintained: 0 · Standard maintenance: 1 | `"MAINTAIN_TYPE"` | Integer | – | **Required** |
 | 4 | Consider Reduced Dynamic Effect | `"OPT_REDUCE_EFF"` | Boolean | false | Optional |
 | 5 | Height of Cover (h) · if "OPT_REDUCE_EFF": true | `"HEIGHT_COVER"` | Number | – | **Required** |
 | 6 | Dynamic Factor (φ) · if "INPUT_TYPE": 1 | `"DYN_FACTOR"` | Number | – | **Required** |
@@ -3249,11 +3255,11 @@ DYFG와 동일한 파라미터 구조. `"Assign"` 키 값이 개별 요소 ID.
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
 | 1 | Input Type · Auto Input: 0 · User Input: 1 | `"INPUT_TYPE"` | Integer | – | **Required** |
-| 2 | Determinant Length (Lφ) | `"LENGTH"` | Number | – | Required (Auto) |
-| 3 | Quality of Track Maintenance (0=Carefully, 1=Standard) | `"MAINTAIN_TYPE"` | Integer | – | Required (Auto) |
+| 2 | Determinant Length (Lφ) | `"LENGTH"` | Number | – | **Required** |
+| 3 | Quality of Track Maintenance · Carefully maintained: 0 · Standard maintenance: 1 | `"MAINTAIN_TYPE"` | Integer | – | **Required** |
 | 4 | Consider Reduced Dynamic Effect | `"OPT_REDUCE_EFF"` | Boolean | false | Optional |
 | 5 | Height of Cover (h) · if "OPT_REDUCE_EFF": true | `"HEIGHT_COVER"` | Number | – | **Required** |
-| 6 | Dynamic Factor (φ) | `"DYN_FACTOR"` | Number | – | Required (User) |
+| 6 | Dynamic Factor (φ) · if "INPUT_TYPE": 1 | `"DYN_FACTOR"` | Number | – | **Required** |
 
 ### Python 예제
 

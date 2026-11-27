@@ -5740,7 +5740,7 @@ print(res.json())
 | 14.2.2 | [General] Load Name | `"NAME"` | String | — | **Required** |
 | 14.3 | 표시 성분 (`COMP`: Axial/Shear-y/Shear-z/Bend-y/Bend-z/Combined) | `"COMPONENTS"` | Object | — | 선택 |
 | 14.4 | 표시 타입 (CONTOUR / VALUES / LEGEND / CODE_CHECKING_RATIO) | `"TYPE_OF_DISPLAY"` | Object | — | 선택 |
-| 14.4.1 | Contour (OPT_CHECK, NUM_OF_COLOR 2~20, COLOR_TYPE vrgb/rgb/rbg/gray scaled, OPTIONS.GRADIENT_FILL·CONTOUR_FILL) | `"CONTOUR"` | Object | — | 선택 |
+| 14.4.1 | [General] Contour | `"CONTOUR"` | Object | — | Optional |
 | 14.4.2 | [General] Values | `"VALUES"` | Object | — | Optional |
 | 14.4.3 | [General] Legend | `"LEGEND"` | Object | — | Optional |
 | 14.4.4 | Code Checking Ratio (COMP=Combined일 때; CHECK, DISPLAY_MEMBERS.BEAM·COLUMN·BRACE, COLUMN_SECTION_SIZE.SCALE_FACTOR, VALUE_OPTION) | `"CODE_CHECKING_RATIO"` | Object | — | 선택 |

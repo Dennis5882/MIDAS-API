@@ -20,6 +20,7 @@ class RestoreSafetyTests(unittest.TestCase):
     def test_description_markup_and_missing_group_compare_equal(self):
         cases = [
             ("　　└ Name ᴶ⁾", "Name", ""),
+            ("Load Type · A: 0 ¹⁾", "Load Type · A: 0", ""),
             ("Type • DB: 1 ◦ USER: 2", "Type · DB: 1 · USER: 2", ""),
             (r"**Name**   `A` \| B", "Name A | B", ""),
             ("Name", "Name", 'When "iTYPE" is 1'),

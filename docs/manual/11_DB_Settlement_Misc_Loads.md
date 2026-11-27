@@ -366,14 +366,14 @@ create_load_sequence()
 |-----|-------------|-----|------------|---------|----------|
 | 1 | Wave Load Name | `"NAME"` | String | - | Required |
 | 2 | Description | `"DESC"` | String | Blank | Optional |
-| 3 | Use Static Load Generation | `"bSTLD"` | Boolean | false | Optional |
-| 4 | Use Time History Load Generation | `"bTHIS"` | Boolean | false | Optional |
-| 5 | Time History Load Case Name | `"NAME_THIS"` | String | - | Optional |
+| 3 | Use Static Load Generation | `"bSTLD"` | Boolean | false | - |
+| 4 | Use Time History Load Generation | `"bTHIS"` | Boolean | false | - |
+| 5 | Time History Load Case Name | `"NAME_THIS"` | String | - | - |
 | 6 | Vertical Coordinate (`"GLOBAL_X"`(⚠️ 미확인) / `"GLOBAL_Y"` / `"GLOBAL_Z"`) | `"VERT_COORD"` | String | `"GLOBAL_Z"` | Required |
-| 7 | Water Weight Density | `"DENSITY"` | Number | - | Required |
-| 8 | Water Depth | `"DEPTH"` | Number | - | Required |
-| 9 | Use Self Weight | `"bSELFW"` | Boolean | false | Optional |
-| 10 | Use Buoyancy Load | `"bBUOYANT"` | Boolean | false | Optional |
+| 7 | Water Weight Density | `"DENSITY"` | Number | - | - |
+| 8 | Water Depth | `"DEPTH"` | Number | - | - |
+| 9 | Use Self Weight | `"bSELFW"` | Boolean | false | - |
+| 10 | Use Buoyancy Load | `"bBUOYANT"` | Boolean | false | - |
 
 > ⚠️ **2026-08-25 확인:** 원문 Specifications 표는 `VERT_COORD`의 옵션으로 `"GLOBAL_Y"`/`"GLOBAL_Z"`
 > 2개만 불릿으로 제시하며(JSON Schema·예제에도 enum 목록 없음), `"GLOBAL_X"`는 원문 어디에도
@@ -754,7 +754,7 @@ set_ignore_elements()
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 1 | Direction (`"GX"` / `"GY"` / `"GZ"` / `"AXIAL"`) | `"DIR"` | String | - | Required |
+| 1 | Direction | `"DIR"` | String | - | **Required** |
 | 2 | Initial Force | `"INIT_FORCE"` | Number | - | Required |
 
 > **참고**: Assign Key는 요소 번호(Element ID)입니다. `"DIR"`은 초기 힘의 작용 방향이며, `"AXIAL"`은 축방향을 의미합니다.

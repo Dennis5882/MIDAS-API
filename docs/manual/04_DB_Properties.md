@@ -110,6 +110,8 @@ def midas_api(method: str, endpoint: str, body=None):
 | 9 | Material Parameter | `"PARAM"` | Object | - | **Required** |
 | (1) | Material Type · Standard: 1 · Isotropic: 2 · Orthotropic: 3 | `"P_TYPE"` | Integer | - | **Required** |
 
+> ⚠️ 공식 Specifications 표는 `TYPE`의 User Defined 값을 `"User"`로 적지만, 같은 글의 요청 예제는 `"USER"`입니다. 예제를 따랐습니다.
+
 #### PARAM — P_TYPE = 1 (Standard / DB)
 
 | Sub-No. | Description | Key | Value Type | Default | Required |
@@ -2307,25 +2309,27 @@ midas_api("POST", "/db/SECF", secf_data)
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 | --- | --- | --- | --- | --- | --- |
 | (1) | Diagonal Reinforcement | `"OPT_DR"` | Boolean | `false` | Optional |
-| (2) | [DR] Pitch (> 0) | `"DR_PITCH"` | Number | - | **Required** (`OPT_DR`) |
+| (2) | [When "OPT_DR" is true] [DR] Pitch | `"DR_PITCH"` | Number | - | **Required** |
 | (3) | [When "OPT_DR" is true] [DR] Angle | `"DR_THETA"` | Number | `0` | Optional |
-| (4) | [DR] Area (> 0) | `"DR_AW"` | Number | - | **Required** (`OPT_DR`) |
+| (4) | [When "OPT_DR" is true] [DR] Area | `"DR_AW"` | Number | - | **Required** |
 | (5) | Steel Bar for Web | `"OPT_SBW"` | Boolean | `false` | Optional |
-| (6) | [SBW] Pitch (> 0) | `"SBW_PITCH"` | Number | - | **Required** (`OPT_SBW`) |
+| (6) | [When "OPT_SBW" is true] [SBW] Pitch | `"SBW_PITCH"` | Number | - | **Required** |
 | (7) | [When "OPT_SBW" is true] [SBW] Angle | `"SBW_ANGLE"` | Number | `90` | Optional |
-| (8) | [SBW] Area (> 0) | `"SBW_AP"` | Number | - | **Required** (`OPT_SBW`) |
-| (9) | [SBW] Pre-force (> 0) | `"SBW_PS"` | Number | - | **Required** (`OPT_SBW`) |
-| (10) | [SBW] Shear Reduction Factor (> 0) | `"SBW_FACTOR"` | Number | `1` | Optional |
+| (8) | [When "OPT_SBW" is true] [SBW] Area | `"SBW_AP"` | Number | - | **Required** |
+| (9) | [When "OPT_SBW" is true] [SBW] Pre-force | `"SBW_PS"` | Number | - | **Required** |
+| (10) | [When "OPT_SBW" is true] [SBW] Shear Reduction Factor | `"SBW_FACTOR"` | Number | `1` | Optional |
 | (11) | Torsional Reinforcement | `"OPT_TR"` | Boolean | `false` | Optional |
-| (12) | [TR] Pitch (> 0) | `"TR_PITCH"` | Number | - | **Required** (`OPT_TR`) |
-| (13) | [TR] Area (Web) (> 0) | `"TR_AWT"` | Number | - | **Required** (`OPT_TR`) |
-| (14) | [TR] Area (Long.) (> 0) | `"TR_ALT"` | Number | - | **Required** (`OPT_TR`) |
+| (12) | [When "OPT_TR" is true] [TR] Pitch | `"TR_PITCH"` | Number | - | **Required** |
+| (13) | [When "OPT_TR" is true] [TR] Area (Web) | `"TR_AWT"` | Number | - | **Required** |
+| (14) | [When "OPT_TR" is true] [TR] Area (Long.) | `"TR_ALT"` | Number | - | **Required** |
 | (15) | Stirrup | `"OPT_SR"` | Boolean | `false` | Optional |
-| (16) | [SR] Pitch (> 0) | `"SR_PITCH"` | Number | - | **Required** (`OPT_SR`) |
-| (17) | [SR] Area (> 0) | `"SR_AW"` | Number | - | **Required** (`OPT_SR`) |
+| (16) | [When "OPT_SR" is true] [SR] Pitch | `"SR_PITCH"` | Number | - | **Required** |
+| (17) | [When "OPT_SR" is true] [SR] Area | `"SR_AW"` | Number | - | **Required** |
 | (18) | Enclosing Stirrup | `"OPT_LBAR_FLG"` | Boolean | `false` | Optional |
-| (19) | Cover Thickness (> 0) | `"LBAR_THICK"` | Number | - | **Required** (`OPT_LBAR_FLG`) |
+| (19) | [When "OPT_LBAR_FLG" is true] Cover Thickness | `"LBAR_THICK"` | Number | - | **Required** |
 | (20) | Include Flange/Cantilever | `"LBAR_INC_FC"` | Boolean | `false` | Optional |
+
+> 공식 JSON Schema 제약: `DR_PITCH`·`DR_AW`·`SBW_PITCH`·`SBW_AP`·`SBW_PS`·`SBW_FACTOR`·`TR_PITCH`·`TR_AWT`·`TR_ALT`·`SR_PITCH`·`SR_AW`·`LBAR_THICK`는 Schema의 조건부(`if`/`then`) 블록에서 `"exclusiveMinimum": 0`(0보다 커야 함)입니다.
 
 #### `MBARS[].MBAR_ITEMS[]` — 종방향철근
 
@@ -2339,7 +2343,9 @@ midas_api("POST", "/db/SECF", secf_data)
 | (6) | [General] Distance from Reference in Z Direction | `"Z"` | Number | `0` | Optional |
 | (7) | [General] Number of Rebar Constraints: · Value Range: >= 0 | `"NUM"` | Integer | - | **Required** |
 | (8) | [General] Spacing Constraints: · Value Range: >= 0 | `"SPACING"` | Number | `0` | Optional |
-| (9) | 6.1.9 Part · 0: "0" · 1: "1" · 2: "2" — Allowed values depend on the section: non-composite 0, 1 or 2; concrete composite 1 or 2; steel composite 2. | `"PART"` | Integer | - | **Required** |
+| (9) | [General] Part · 0: "0" · 1: "1" · 2: "2" | `"PART"` | Integer | - | **Required** |
+
+> 공식 JSON Schema의 `PART` 설명: "Part. Allowed values depend on the section: non-composite 0, 1 or 2; concrete composite 1 or 2; steel composite 2."
 
 ### Request / Response JSON
 
@@ -3239,8 +3245,8 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `ASSIGN
 | 1 | Fiber Division Name | `"NAME"` | String | - | **Required** |
 | 2 | Assigned Section ID | `"SECT_KEY"` | Integer | - | **Required** |
 | 3 | Assign Type | `"ASSIGN_TYPE"` | Integer | - | **Required** |
-| 4 | Inelastic Material Properties Name (6 elements) | `"FIMP_NAME"` | Array[String, 6] | - | **Required** |
-| 5 | Inelastic Material Properties Color (6 elements) | `"FIMP_COLOR"` | Array[Object, 6] | - | Optional |
+| 4 | Inelastic Material Properties Name | `"FIMP_NAME"` | Array[String, 6] | - | **Required** |
+| 5 | Inelastic Material Properties Color | `"FIMP_COLOR"` | Array[Object, 6] | - | Optional |
 | (1) R/G/B | Color components | `"R"` `"G"` `"B"` | Integer | 0 | Optional |
 | 6 | Fiber Division Base Data | `"FIBR_BASE"` | Array[Object] | - | **Required** |
 | (1) | Fiber Base Key | `"FIBR_BASE_KEY"` | Integer | - | **Required** |
@@ -3558,6 +3564,8 @@ midas_api("POST", "/db/ESSF", essf_data)
 | 10 | Short-Term Ratio of Modulus of Elasticity | `"dSHORTTERM"` | Number | - | Optional |
 | 11 | Long-Term Ratio of Modulus of Elasticity | `"dLONGTERM"` | Number | - | Optional |
 
+> ⚠️ 공식 Specifications 표는 `MAINREBAR_B_FY`·`SUBREBAR_B_FY`의 필수 칸을 `"GET"only`로 적습니다. 표기가 깨진 것으로 보고 `GET only`로 적었습니다.
+
 > `C_FC`·`C_FCI`·`MAINREBAR_B_FY`·`SUBREBAR_B_FY`는 `CODENAME`/`CODEMATLNAME`/`REBAR_CODENAME`에 종속되는 계산값으로, GET 응답에서만 채워지며 PUT 요청 시에는 무시됩니다.
 >
 > 9~11번(`bSERVCHECK`/`dSHORTTERM`/`dLONGTERM`)은 2026-09-01 원문 갱신으로 JSON Schema 최상위에
@@ -3648,7 +3656,7 @@ midas_api("PUT", "/db/MATD/1", matd_data)
 | 3.14 | └ Section Data Type | `"DATATYPE"` | Integer | - | Optional |
 | 3.15 | └ Section Type | `"TYPE"` | Integer | - | Optional |
 | 3.16 | └ I-End Girder Section | `"SECT_I"` | Object | - | Optional |
-| 3.16.1 | 　　└ 3.16.1 I-End Section Dimensions — GI uses [B1, B2, B3, B4, H, t1, t2, tw]. | `"vSIZE"` | Array[Number] | - | Optional |
+| 3.16.1 | 　　└ [General] I-End Section Dimensions | `"vSIZE"` | Array[Number] | - | Optional |
 | 3.16.2 | 　　└ [General] PSC Dimensions A | `"vSIZE_PSC_A"` | Array[Number] | - | Optional |
 | 3.16.3 | 　　└ [General] PSC Dimensions B | `"vSIZE_PSC_B"` | Array[Number] | - | Optional |
 | 3.16.4 | 　　└ [General] PSC Dimensions C | `"vSIZE_PSC_C"` | Array[Number] | - | Optional |
@@ -3677,12 +3685,16 @@ midas_api("PUT", "/db/MATD/1", matd_data)
 | 3.33 | └ Shrinkage Es/Ec | `"SHRINK_ESEC"` | Number | - | Optional |
 | 4 | Section Data - After | `"SECT_AFTER"` | Object | - | Optional |
 | 4.1 | └ After-Composite Section | `"SECT_I"` | Object | - | Optional |
-| 4.1.1 | 　　└ 4.1.1 After-Composite I-End Dimensions — GI uses [Sg, Top, Bot]. | `"vSIZE"` | Array[Number] | - | Optional |
+| 4.1.1 | 　　└ [General] After-Composite I-End Dimensions | `"vSIZE"` | Array[Number] | - | Optional |
 | 4.2 | └ Slab Dimensions Constraints: · Items: 3 ~ 4 [Bc, tc, Hh[, Sg]]; CI/CT requires 3 or 4 values. | `"SLAB"` | Array[Number] | - | **Required** (`CI`/`CT`) |
 | 5 | Composite J-End | `"COMPOSITE_J"` | Object | - | Optional |
 | 5.1 | └ Base Section Name | `"DB_NAME"` | String | - | Optional |
 | 5.2 | └ J-End Section Name | `"SECT_NAME"` | String | - | Optional |
 | 5.3 | └ J-End Composite Dimensions | `"vSIZE"` | Array[Number] | - | Optional |
+
+> 공식 JSON Schema의 `vSIZE` 설명: "Primary section dimensions. GI uses [B1, B2, B3, B4, H, t1, t2, tw]."
+
+> 공식 JSON Schema의 `vSIZE` 설명: "After-composite dimensions. GI uses [Sg, Top, Bot]."
 
 ### Request / Response JSON
 

@@ -680,6 +680,8 @@ midas_api("DELETE", "/db/NTMP", {"Assign": {"190": {}}})
 | — | Characteristic Strength fpk (TB05/TB10092/Q-CR/JTJ/JTG 코드) | `"FPK"` | Number | - | Required |
 | — | [User Defined] Relaxation Function Name | `"TDMFNAME"` | String | - | **Required** |
 
+> ⚠️ 공식 Specifications 표는 `TYPE`의 Internal 값을 `"INTERAL"`로 적지만, 같은 글의 요청 예제는 모두 `"INTERNAL"`입니다. 예제를 따랐습니다.
+
 > ¹⁾ **이완 계수 코드(RM) 및 인수(RV/FT/TDMFK) 표**
 
 | Standard | RM | RV | FT | TDMFK |

@@ -70,7 +70,8 @@ def table_rows(text):
 
 def decorations(desc):
     prefix = re.match(r"^[ \u3000]*└\s*", desc)
-    suffix = re.search(r"\s*(?:[ᴶᴴˢ]+⁾\s*)+$", desc)
+    # product marks (ᴶ⁾, ᴴˢ⁾) and the repo's footnote marks (¹⁾, ²⁾ …) at the end of the cell
+    suffix = re.search(r"\s*(?:[ᴶᴴˢ¹²³⁴⁵⁶⁷⁸⁹⁰]+⁾\s*)+$", desc)
     return prefix.group() if prefix else "", suffix.group() if suffix else ""
 
 

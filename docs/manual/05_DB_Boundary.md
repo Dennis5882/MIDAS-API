@@ -514,7 +514,7 @@ midas_api("POST", "/db/SSPS", ssps_data)
 |-----|------|----|------|--------|------|
 | 1 | Assigned Node Number · [i Node, j Node] | `"NODE"` | Array[Integer,2] | — | **Required** |
 | 2 | Boundary Group Name | `"BNGR_NAME"` | String | Blank | Optional |
-| 3 | Beta Angle (°) | `"ANGLE"` | Number | 0 | Optional |
+| 3 | Beta Angle | `"ANGLE"` | Number | 0 | Optional |
 | 4 | Link Type | `"LINK"` | String | — | Required |
 
 ### LINK 타입별 추가 파라미터
@@ -838,7 +838,7 @@ NLLP에서 정의한 일반 링크 속성을 두 절점 사이에 배정합니�
 | 5 | Inelastic Hinge Property Name | `"IEHP_NAME"` | String | Blank | Optional |
 | 6 | Reference Coordinate System · Element: 0 · Global: 1 | `"REF_SYSTEM"` | Integer | — | **Required** |
 | — | **REF_SYSTEM=0 (요소계)** | | | | |
-| 7 | Beta Angle (°) | `"BETA_ANGLE"` | Number | 0 | Optional |
+| 7 | [Element] Beta Angle | `"BETA_ANGLE"` | Number | 0 | Optional |
 | — | **REF_SYSTEM=1 (전역계) – Angle 방식** | | | | |
 | 7 | Input Method · 0=Angle | `"INPUT_METHOD"` | Integer | — | Required |
 | 8 | [Global - Angle] Angle · Insert the data as an object | `"ANGLE_VALUES"` | Array[Object] | — | **Required** |
@@ -925,9 +925,11 @@ Hyper-S 솔버 전용 일반 링크 배정 엔드포인트입니다.
 | 5 (REF_SYSTEM=0) | Beta Angle | `"BETA_ANGLE"` | Number | 0 | Required |
 | 6 (REF_SYSTEM=1) | [When REF_SYSTEM = 1] Input Method · Angle: 0 · 3 Points: 1 · Vector: 2 | `"INPUT_METHOD"` | Integer | — | **Required** |
 | 7 (INPUT_METHOD=0) | [When INPUT_METHOD = 0] Angle Value | `"ANGLE_VALUES"` | Array[Object] | — | **Required** |
-| 8 (INPUT_METHOD=1) | Point Values `[P0[3], P1[3], P2[3]]` | `"POINT_VALUES"` | Array[Object] | — | Required |
-| 9 (INPUT_METHOD=2) | Vector Values `[V1[3], V2[3]]` | `"VECTOR_VALUES"` | Array[Object] | — | Required |
+| 8 (INPUT_METHOD=1) | [When INPUT_METHOD = 1] Points Value | `"POINT_VALUES"` | Array[Object] | — | **Required** |
+| 9 (INPUT_METHOD=2) | [When INPUT_METHOD = 2] Vector Value | `"VECTOR_VALUES"` | Array[Object] | — | **Required** |
 | 10 | Boundary Group Name | `"GROUP_NAME"` | String | — | Optional |
+
+> ⚠️ 공식 Specifications 표는 `NODE2`의 설명을 첫 번째 노드 행과 같은 `Node Number 1`로 적습니다. 두 번째 노드이므로 기존 설명을 유지했습니다.
 
 각 `ANGLE_VALUES`/`POINT_VALUES`/`VECTOR_VALUES` 배열 원소는 `{"VALUE": [x, y, z]}` 형태의
 object다(NLNK와 동일).
@@ -1265,7 +1267,7 @@ Elastic Link (MULTILINEAR) 또는 General Link (FORCE 타입)에서 참조하는
 | 4 | Function ID | `"FUNC_ID"` | Integer | 0 | Optional |
 | 5 | Function Data · Insert the data as an object | `"ITEMS"` | Array[Object] | — | **Required** |
 | (1) | X-Axis · Force: Displacement · Moment: Radian | `"X"` | Number | — | **Required** |
-| (2) | Y-Axis (Force kN / Moment kN·m) | `"Y"` | Number | — | Required |
+| (2) | Y-Axis | `"Y"` | Number | — | **Required** |
 
 ### 요청 바디 예시
 

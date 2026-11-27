@@ -380,7 +380,7 @@ print(result)
 | 3 | Consider Off-diagonal Masses | `"bMASSOFFSET"` | Boolean | `false` | Optional |
 | 4 | Convert Self-Weight to Mass | `"bSELFWEIGHT"` | Boolean | `false` | Optional |
 | 5 | Structure Mass Type (자중→질량 변환 시) · `1`=Convert to X,Y,Z / `2`=Convert to X,Y / `3`=Convert to Z | `"SMASS"` | Integer | `1` | Optional |
-| 6 | Gravity Acceleration (m/s²) | `"GRAV"` | Number | System | Optional |
+| 6 | Gravity Acceleration | `"GRAV"` | Number | System | Optional |
 | 7 | Initial Temperature | `"TEMP"` | Number | 0 | Optional |
 | 8 | Align Top of Beam Section | `"bALIGNBEAM"` | Boolean | `false` | Optional |
 | 9 | Align Top of Slab (Plate) | `"bALIGNSLAB"` | Boolean | `false` | Optional |
@@ -999,17 +999,17 @@ print(result)
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 1 | Wire Frame Red (0–255) | `"W_R"` | Integer | - | Optional |
-| 2 | Wire Frame Green (0–255) | `"W_G"` | Integer | - | Optional |
-| 3 | Wire Frame Blue (0–255) | `"W_B"` | Integer | - | Optional |
-| 4 | Hidden Fill Red (0–255) | `"HF_R"` | Integer | - | Optional |
-| 5 | Hidden Fill Green (0–255) | `"HF_G"` | Integer | - | Optional |
-| 6 | Hidden Fill Blue (0–255) | `"HF_B"` | Integer | - | Optional |
-| 7 | Hidden Edge Red (0–255) | `"HE_R"` | Integer | - | Optional |
-| 8 | Hidden Edge Green (0–255) | `"HE_G"` | Integer | - | Optional |
-| 9 | Hidden Edge Blue (0–255) | `"HE_B"` | Integer | - | Optional |
+| 1 | Wire Frame Red | `"W_R"` | Integer | - | Optional |
+| 2 | Wire Frame Green | `"W_G"` | Integer | - | Optional |
+| 3 | Wire Frame Blue | `"W_B"` | Integer | - | Optional |
+| 4 | Hidden Fill Red | `"HF_R"` | Integer | - | Optional |
+| 5 | Hidden Fill Green | `"HF_G"` | Integer | - | Optional |
+| 6 | Hidden Fill Blue | `"HF_B"` | Integer | - | Optional |
+| 7 | Hidden Edge Red | `"HE_R"` | Integer | - | Optional |
+| 8 | Hidden Edge Green | `"HE_G"` | Integer | - | Optional |
+| 9 | Hidden Edge Blue | `"HE_B"` | Integer | - | Optional |
 | 10 | Opacity Option | `"bBLEMD"` | Boolean | - | Optional |
-| 11 | Opacity Value (0.0–1.0) | `"FACT"` | Number | - | Optional |
+| 11 | Opacity Value · When Opacity Option, "bBLEMD" is True | `"FACT"` | Number | - | Optional |
 
 ### Python 예제
 
@@ -1089,7 +1089,7 @@ CO_M과 동일한 필드 구조 (키 이름 동일). Section ID별 색상 지정
 |-----|-------------|-----|------------|---------|----------|
 | 1–9 | Wire Frame / Hidden Fill / Hidden Edge RGB (0–255) | `"W_R"` ~ `"HE_B"` | Integer | - | Optional |
 | 10 | Opacity Option | `"bBLEMD"` | Boolean | - | Optional |
-| 11 | Opacity Value (0.0–1.0) | `"FACT"` | Number | - | Optional |
+| 11 | Opacity Value · When Opacity Option, "bBLEMD" is True | `"FACT"` | Number | - | Optional |
 
 ### Python 예제
 
@@ -1169,7 +1169,7 @@ CO_M, CO_S와 동일한 필드 구조.
 |-----|-------------|-----|------------|---------|----------|
 | 1–9 | Wire Frame / Hidden Fill / Hidden Edge RGB (0–255) | `"W_R"` ~ `"HE_B"` | Integer | - | Optional |
 | 10 | Opacity Option | `"bBLEMD"` | Boolean | - | Optional |
-| 11 | Opacity Value (0.0–1.0) | `"FACT"` | Number | - | Optional |
+| 11 | Opacity Value · When Opacity Option, "bBLEMD" is True | `"FACT"` | Number | - | Optional |
 
 ### Python 예제
 
@@ -1250,14 +1250,14 @@ print(result)
 | 2 | Wire Frame Red (0–255) | `"WF_R"` | Integer | - | Optional |
 | 3 | Wire Frame Green (0–255) | `"WF_G"` | Integer | - | Optional |
 | 4 | Wire Frame Blue (0–255) | `"WF_B"` | Integer | - | Optional |
-| 5 | Hidden Fill Red (0–255) | `"HF_R"` | Integer | - | Optional |
-| 6 | Hidden Fill Green (0–255) | `"HF_G"` | Integer | - | Optional |
-| 7 | Hidden Fill Blue (0–255) | `"HF_B"` | Integer | - | Optional |
-| 8 | Hidden Edge Red (0–255) | `"HE_R"` | Integer | - | Optional |
-| 9 | Hidden Edge Green (0–255) | `"HE_G"` | Integer | - | Optional |
-| 10 | Hidden Edge Blue (0–255) | `"HE_B"` | Integer | - | Optional |
+| 5 | Hidden Fill Red | `"HF_R"` | Integer | - | Optional |
+| 6 | Hidden Fill Green | `"HF_G"` | Integer | - | Optional |
+| 7 | Hidden Fill Blue | `"HF_B"` | Integer | - | Optional |
+| 8 | Hidden Edge Red | `"HE_R"` | Integer | - | Optional |
+| 9 | Hidden Edge Green | `"HE_G"` | Integer | - | Optional |
+| 10 | Hidden Edge Blue | `"HE_B"` | Integer | - | Optional |
 | 11 | Blending Option | `"OPT_BLEND"` | Boolean | - | Optional |
-| 12 | Blending Factor (0.0–1.0) | `"BLEND_FACTOR"` | Number | - | Optional |
+| 12 | Blending Factor · When Blending Option, "OPT_BLEND" is True | `"BLEND_FACTOR"` | Number | - | Optional |
 
 ### Python 예제
 

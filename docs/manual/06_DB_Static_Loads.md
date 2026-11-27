@@ -898,7 +898,7 @@ midas_api("DELETE", "/db/PSLT", {"Assign": {"2": {}}})
 | (7) | Direction ¹⁾ · Normal: "NORMAL" · Local x: "LX" · Local y: "LY" · Local z: "LZ" · Global X: "GX" · Global Y: "GY" · Global Z: "GZ" · Vector: "VECTOR" | `"DIRECTION"` | String | `"NORMAL"` | Optional |
 | (8) | Vector · if "DIRECTION" is "VECTOR" · [X, Y, Z] | `"VECTORS"` | Array \[Number, 3\] | - | Optional |
 | (9) | Projection Option · GX, GY, GZ only | `"OPT_PROJECTION"` | Boolean | false | Optional |
-| (10) | Face/Edge Number (Solid: 1~6, Plate/Plane: 1~4) | `"EDGE_FACE"` | Integer | - | Required |
+| (10) | Element Type: Solid · Face #1: 1 · Face #2: 2 · Face #3: 3 · Face #4: 4 · Face #5: 5 · Face #6: 6 Element Type: Plate/Plane · Edge #1: 1 · Edge #2: 2 · Edge #3: 3 · Edge #4: 4 | `"EDGE_FACE"` | Integer | - | **Required** |
 | **FACE_EDGE_TYPE = "FACE" or "PRES"** | | | | | |
 | (11) | [When Pressure Type, "FACE_EDGE_TYPE" is "FACE" or "PRES"] Uniform Load · [PU, 0, 0, 0, 0] Linear Load · [0, P1, P2, P3, P4] | `"FORCES"` | Array \[Number, 5\] | - | **Required** |
 | **FACE_EDGE_TYPE = "EDGE"** | | | | | |
@@ -1205,7 +1205,7 @@ midas_api("DELETE", "/db/PNLA", {"Assign": {"1": {}}})
 | 2 | Description | `"DESC"` | String | Blank | Optional |
 | 3 | Floor Loads · Insert the data as an object | `"ITEM"` | Array \[Object\] | - | **Required** |
 | (1) | Load Case Name | `"LCNAME"` | String | - | Required |
-| (2) | Floor Load (kN/m² or equivalent) | `"FLOOR_LOAD"` | Number | - | Required |
+| (2) | Floor Load | `"FLOOR_LOAD"` | Number | - | **Required** |
 | (3) | Consider Sub Beam Weight | `"OPT_SUB_BEAM_WEIGHT"` | Boolean | false | Optional |
 
 ### Python 예제
@@ -1740,11 +1740,13 @@ midas_api("DELETE", "/db/EPSE", {"Assign": {"1": {}}})
 | 6 | Site Class | `"SC"` | String | - | Required |
 | 7 | Short-period site coefficient | `"FA"` | Number | - | **Required** |
 | 8 | Long-period Site Coefficient | `"FV"` | Number | - | Required |
-| 9 | Design Spectral Acceleration at Short Period | `"SDS"` | Number | - | Required |
-| 10 | Design Spectral Acceleration at 1-sec Period | `"SD1"` | Number | - | Required |
+| 9 | Design spectral acceleration at short period | `"SDS"` | Number | - | Required |
+| 10 | Design spectral acceleration at 1-second period | `"SD1"` | Number | - | Required |
 | 11 | Seismic User Group | `"USER_GROUP"` | String | - | Optional |
 | 12 | Importance Factor | `"IF"` | Number | - | Required |
 | 13 | Response Modification Factor | `"RMF"` | Number | - | Required |
+
+> ⚠️ 공식 Specifications 표는 `FV`의 설명을 `Soil layer thickness`, 필수 칸을 `Requirel`로 적고, `SDS`·`SD1`·`IF`·`RMF`의 필수 칸을 `Require`로 적으며, `USER_GROUP`의 필수 칸은 비워 둡니다. 같은 글의 Schema는 `FV`를 `Fv`로 적고 바로 앞 행이 `Short-period site coefficient`(Fa)이므로 `FV`의 설명은 오기로 보고 기존 설명을 유지했습니다. 필수 칸은 오타로 보고 `Required`/`Optional`로 적었습니다.
 
 ### Python 예제
 

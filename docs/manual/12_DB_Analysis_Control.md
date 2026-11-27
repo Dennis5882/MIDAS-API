@@ -615,12 +615,14 @@ Hyper-S(MEC) 솔버용 고유치 해석 제어입니다. UI의 Subspace Iteratio
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 2 | Number of Frequencies (1~1000) | `"FREQ_NO"` | Integer | - | Required |
+| 2 | [When ANAL_TYPE = "LANCZOS"] Number of Frequencies | `"FREQ_NO"` | Integer | - | **Required** |
 | 3 | Frequency range of interest | `"FREQ_RANGE"` | Object | - | Optional |
 | (1) | Use Option | `"OPT_USE"` | Boolean | false | Required |
 | (2) | [When ANAL_TYPE = "LANCZOS"] Search From When OPT_USE = true | `"FREQ_MIN"` | Number | - | Optional |
 | (3) | [When ANAL_TYPE = "LANCZOS"] Search To When OPT_USE = true | `"FREQ_MAX"` | Number | - | Optional |
 | 4 | Sturm Sequence Check | `"STURM_SEQ"` | Boolean | false | Optional |
+
+> 공식 JSON Schema 제약: `FREQ_NO`는 `"minimum": 1`, `"maximum": 1000`입니다.
 
 ### Parameters — Ritz Vectors (`ANAL_TYPE = "RITZ"`)
 
@@ -740,10 +742,10 @@ update_eigenvalue_m1_ritz()
 | 7 | Creep & Shrinkage · Insert the data as an object | `"ITEM"` | Object | - | Optional |
 | (1) | Type · Creep: "CREEP" · Shrinkage: "SHRINK" · Creep & Shrinkage: "BOTH" | `"TYPE"` | String | "CREEP" | Optional |
 | (2) | Creep Calculation Method · General: 0 · Effective Modulus: 1 | `"CREEP_CALC_METHOD"` | Integer | 0 | Optional |
-| (3) | General Data (when method 0) | `"M_GENERAL"` | Object | - | Optional |
+| (3) | [Creep Calculation Method - General] General Data | `"M_GENERAL"` | Object | - | Optional |
 | i | Number of Iterations | `"ITER"` | Integer | 0 | Optional |
 | ii | Tolerance | `"TOL"` | Number | 0 | Optional |
-| (3) | Effective Modulus Data (when method 1) | `"M_EFF_MOD"` | Object | - | Required |
+| (3) | [Creep Calculation Method - Effective Modulus] Effective Modulus Data | `"M_EFF_MOD"` | Object | - | **Required** |
 | i | Phi1 | `"PHI1"` | Number | - | Required |
 | ii | Day1 | `"DAY1"` | Integer | - | Required |
 | iii | Phi2 | `"PHI2"` | Number | - | Required |
@@ -2332,7 +2334,7 @@ Hyper-S(MEC) 솔버용 시공단계 해석 제어입니다. 기능별로 중첩 
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 1 | Final Stage Option (Last: true / Other: false) | `"bLAST_FINAL"` | Boolean | - | Optional |
+| 1 | Final Stage | `"bLAST_FINAL"` | Boolean | - | **Required** |
 | 2 | Analysis Type Object | `"ANAL_TYPE"` | Object | - | Optional |
 | 3 | [When bLAST_FINAL = false] Restart Construction Stage Analysis | `"RESTART_CS_ANAL"` | Object | - | Optional |
 | 4 | Load Cases to be Distinguished from Dead Load for C.S. Output | `"ERECTION_LOAD"` | Array [Object] | - | Optional |

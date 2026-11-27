@@ -648,6 +648,8 @@ midas_api("POST", "/db/ELEM", elem_body)
 | 12 | Global Direction • Global X: 0 • Global Y: 1 • Global Z: 2 | `"G_DIR"` | Integer | - | **Required** |
 | 13 | Local Direction • Local x: 0 • Local y: 1 • Local z: 2 | `"L_DIR"` | Integer | - | **Required** |
 
+> ⚠️ 공식 Specifications 표의 `REFTYPE` 설명은 `Ref. Point: 1Required P0, P1 Point · Global Direction: 2Required P0 Point`처럼 단어가 붙어 있습니다. 기존 설명을 유지했습니다.
+
 ### Request Body 예제
 
 #### Method 1 — Angle
