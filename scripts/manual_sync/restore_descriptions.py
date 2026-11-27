@@ -318,44 +318,45 @@ def analyze(articles, files, *, korean_only=False, english_only=False):
             item = dict(file=path.name, line=number + 1, no=cells[0], keys=keys, old=cells[1],
                         old_required=cells[5], korean=korean,
                         aids=sorted(aids), status="", reason="", loss=[], differences=[])
-            reason = protected(cells, keys, host, aids, exclusions, parent["text"] if parent else None)
-            if reason:
-                item.update(status="의도적 차이", reason=reason)
-            else:
-                status, chosen, reason = pair(keys, cells[0], aids, parsed)
-                for aid, _ in chosen:
-                    retained = RETAINED_GROUPS.get((path.name, aid))
-                    if retained and retained[0].intersection(keys):
-                        status, reason = "의도적 차이", retained[1]
-                        break
-                item.update(status=status, reason=reason, aids=[a for a, _ in chosen] or sorted(aids))
-                if not status:
-                    source = chosen[0][1]
-                    desc, required = render(source, cells[1])
-                    item.update(new=desc, required=required, om_desc=source["desc"],
-                                om_required=source["required"])
-                    for aid, row in chosen:
-                        for column, local, official in [("Value 타입", cells[3], row["type"]),
-                                                         ("기본값", cells[4], row["default"])]:
-                            if comparable(local) != comparable(official):
-                                item["differences"].append((column, local, official, aid))
-                    matches = (description_matches(cells[1], desc, source["desc"]) and
-                               compare_text(cells[5]) == compare_text(required))
-                    if matches:
-                        item["status"] = "일치"
-                    else:
-                        item["loss"] = loss_signals(cells[1], desc + " " + required)
-                        if project_reviewer_renumbering(cells[1], source, item["aids"]):
-                            item["loss"] = [s for s in item["loss"] if not s.startswith("원문에 없는 숫자:")]
-                        reasons = [required_hold(cells[5], source)]
-                        if JOINED_REQUIRED.search(source["desc"]):
-                            reasons.append("공식 설명에서 Required/Optional 앞에 공백 없음")
-                        if not korean:
-                            reasons.extend(item["loss"])
-                        reasons = [reason for reason in reasons if reason]
-                        item.update(status="보류" if reasons else "변경", reason=" / ".join(reasons))
+            shield = protected(cells, keys, host, aids, exclusions, parent["text"] if parent else None)
+            # Protected rows are still compared, so a row that matches the source stays
+            # monitored as "일치"; only a real difference becomes "의도적 차이".
+            status, chosen, reason = pair(keys, cells[0], aids, parsed)
+            for aid, _ in chosen:
+                retained = RETAINED_GROUPS.get((path.name, aid))
+                if retained and retained[0].intersection(keys):
+                    status, reason = "의도적 차이", retained[1]
+                    break
+            item.update(status=status, reason=reason, aids=[a for a, _ in chosen] or sorted(aids))
+            if not status:
+                source = chosen[0][1]
+                desc, required = render(source, cells[1])
+                item.update(new=desc, required=required, om_desc=source["desc"],
+                            om_required=source["required"])
+                for aid, row in chosen:
+                    for column, local, official in [("Value 타입", cells[3], row["type"]),
+                                                     ("기본값", cells[4], row["default"])]:
+                        if comparable(local) != comparable(official):
+                            item["differences"].append((column, local, official, aid))
+                matches = (description_matches(cells[1], desc, source["desc"]) and
+                           compare_text(cells[5]) == compare_text(required))
+                if matches:
+                    item["status"] = "일치"
+                else:
+                    item["loss"] = loss_signals(cells[1], desc + " " + required)
+                    if project_reviewer_renumbering(cells[1], source, item["aids"]):
+                        item["loss"] = [s for s in item["loss"] if not s.startswith("원문에 없는 숫자:")]
+                    reasons = [required_hold(cells[5], source)]
+                    if JOINED_REQUIRED.search(source["desc"]):
+                        reasons.append("공식 설명에서 Required/Optional 앞에 공백 없음")
+                    if not korean:
+                        reasons.extend(item["loss"])
+                    reasons = [reason for reason in reasons if reason]
+                    item.update(status="보류" if reasons else "변경", reason=" / ".join(reasons))
             if item["status"] != "일치":
-                apply_registered_hold(item, aids, parsed, holds)
+                held = apply_registered_hold(item, aids, parsed, holds)
+                if shield and not held:
+                    item.update(status="의도적 차이", reason=shield)
             if item["status"] == "변경":
                 # Replace just the cell contents, preserving their surrounding padding.
                 for index, value in [(5, item["required"]), (1, item["new"])]:

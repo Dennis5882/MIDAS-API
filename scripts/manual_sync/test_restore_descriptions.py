@@ -63,6 +63,24 @@ class RestoreSafetyTests(unittest.TestCase):
             self.assertEqual(records[0]["status"], "일치")
             self.assertEqual(outputs[path][:2], (original, original))
 
+    def test_warning_protects_only_rows_that_differ_from_the_source(self):
+        body = ('<h3>Specifications</h3><table><tr><td>1</td><td>Name</td>'
+                '<td>"NAME"</td><td>String</td><td>-</td><td>Required</td></tr></table>')
+        note = "\n\n> ⚠️ `NAME` 주석\n"
+        for local, status in (("Name", "일치"), ("Local name", "의도적 차이")):
+            with self.subTest(local=local), tempfile.TemporaryDirectory() as directory:
+                path = Path(directory) / "02_test.md"
+                original = f'| 1 | {local} | `"NAME"` | String | - | Required |{note}'
+                path.write_bytes(original.encode("utf-8"))
+                host = dict(file=path.name, level=2, start=0, end=3, text=original, endpoints={"DB/X"})
+                with patch.object(rd.cf, "load_sections", return_value=([host], {})), \
+                     patch.object(rd.cf, "mapped_headings", return_value={}), \
+                     patch.object(rd.cf, "covering", return_value=([host], [])), \
+                     patch.object(rd, "load_holds", return_value={}):
+                    records, outputs = rd.analyze({"a": {"body": body}}, [path])
+                self.assertEqual(records[0]["status"], status)
+                self.assertEqual(outputs[path][1], original)
+
     def test_section_number_is_ignored_without_losing_following_values(self):
         self.assertEqual(rd.loss_signals("　　└ 3.16.7.2 Deck Stiffness Number", "Deck Stiffness Number"), [])
         self.assertTrue(rd.loss_signals("　　└ 3.16.1 Dimensions — GI uses [B1, B2]", "Dimensions"))

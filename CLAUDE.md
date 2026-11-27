@@ -7,7 +7,7 @@
 **MIDAS NX Open API**(MIDAS Gen NX / Civil NX)에 대한 사람이 직접 큐레이션한 **JSON 스키마 매뉴얼**
 저장소입니다. 코드 라이브러리가 아니라 문서 저장소입니다.
 
-- `docs/manual/01_DOC.md` ~ `28_Design_RC_AASHTO_LRFD.md` + `16_2_VIEW_ResultGraphic.md` — 29개 파일.
+- `docs/manual/01_DOC.md` ~ `29_Design_PSC_AASHTO_LRFD24.md` + `16_2_VIEW_ResultGraphic.md` — 30개 파일.
   공식 목차의 276개 경로와 설계코드 엔드포인트를
   MIDAS 공식 Zendesk 온라인 매뉴얼 기준으로 문서화. `docs/manual/INDEX.md`가 전체 목차/개수 색인.
 - `docs/plugin/` — MIDAS Plug-in(MIDAS API + Python으로 만든, GUI에 내장된 완성형 자동화 도구)

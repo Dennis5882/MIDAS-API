@@ -39,6 +39,7 @@
 | [26_Design_RC_KDS41202022.md](./26_Design_RC_KDS41202022.md) | Design Code – RC KDS 41 20:2022 | RC 설계 코드 설정·보·기둥·벽체·슬래브 설계 (70개) |
 | [27_Design_SRC_AIKSRC2K.md](./27_Design_SRC_AIKSRC2K.md) | Design Code – SRC AIK-SRC2K | SRC 합성부재 설계 코드 설정·보·기둥 설계 (27개) |
 | [28_Design_RC_AASHTO_LRFD.md](./28_Design_RC_AASHTO_LRFD.md) | Design Code – RC AASHTO-LRFD24 / LRFD20 | 교량 RC 설계·검토 (50개 코드 + 공용 DRC 1개) |
+| [29_Design_PSC_AASHTO_LRFD24.md](./29_Design_PSC_AASHTO_LRFD24.md) | Design Code – PSC AASHTO-LRFD24 | 교량 PSC 설계·결과 표·Excel 보고서 (URI 19개, 29절) |
 
 ---
 

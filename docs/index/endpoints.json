@@ -16656,9 +16656,12 @@
    "keys": [
     "DGNCODE"
    ],
-   "doc": [],
+   "doc": [
+    "29_Design_PSC_AASHTO_LRFD24.md#0-dspsc--design-code",
+    "29_Design_PSC_AASHTO_LRFD24.md#이전-한국어-원문"
+   ],
    "key_count": 1,
-   "documented": false
+   "documented": true
   },
   {
    "endpoint": "DESIGN/PSC/AASHTO-LRFD24/DPSC",
@@ -16703,9 +16706,12 @@
     "TENDON_TYPE",
     "USER_FACTOR"
    ],
-   "doc": [],
+   "doc": [
+    "29_Design_PSC_AASHTO_LRFD24.md#1-dpsc--design-code-option",
+    "29_Design_PSC_AASHTO_LRFD24.md#이전-한국어-원문"
+   ],
    "key_count": 17,
-   "documented": false
+   "documented": true
   },
   {
    "endpoint": "DESIGN/PSC/AASHTO-LRFD24/MEMB",
@@ -16737,9 +16743,12 @@
     "ELEM_TYPE",
     "JOINT_TYPE"
    ],
-   "doc": [],
+   "doc": [
+    "29_Design_PSC_AASHTO_LRFD24.md#2-memb--psc-segment-assignment",
+    "29_Design_PSC_AASHTO_LRFD24.md#이전-한국어-원문"
+   ],
    "key_count": 4,
-   "documented": false
+   "documented": true
   },
   {
    "endpoint": "DESIGN/PSC/AASHTO-LRFD24/MEMB-VBEAM",
@@ -16771,9 +16780,12 @@
     "ELEM_TYPE",
     "JOINT_TYPE"
    ],
-   "doc": [],
+   "doc": [
+    "29_Design_PSC_AASHTO_LRFD24.md#24-memb-vbeam--psc-segment-assignment---virtual-beam",
+    "29_Design_PSC_AASHTO_LRFD24.md#이전-한국어-원문"
+   ],
    "key_count": 4,
-   "documented": false
+   "documented": true
   },
   {
    "endpoint": "DESIGN/PSC/AASHTO-LRFD24/SLCT",
@@ -16803,9 +16815,12 @@
     "LC_NAME",
     "SL_TYPE"
    ],
-   "doc": [],
+   "doc": [
+    "29_Design_PSC_AASHTO_LRFD24.md#3-slct--serviceability-load-combination-type",
+    "29_Design_PSC_AASHTO_LRFD24.md#이전-한국어-원문"
+   ],
    "key_count": 2,
-   "documented": false
+   "documented": true
   },
   {
    "endpoint": "DESIGN/PSC/AASHTO-LRFD24/INFS",
@@ -16842,9 +16857,12 @@
     "label",
     "order"
    ],
-   "doc": [],
+   "doc": [
+    "29_Design_PSC_AASHTO_LRFD24.md#4-infs--interface-shear",
+    "29_Design_PSC_AASHTO_LRFD24.md#이전-한국어-원문"
+   ],
    "key_count": 9,
-   "documented": false
+   "documented": true
   },
   {
    "endpoint": "DESIGN/PSC/AASHTO-LRFD24/INFS-VBEAM",
@@ -16881,9 +16899,12 @@
     "label",
     "order"
    ],
-   "doc": [],
+   "doc": [
+    "29_Design_PSC_AASHTO_LRFD24.md#25-infs-vbeam--interface-shear---virtual-beam",
+    "29_Design_PSC_AASHTO_LRFD24.md#이전-한국어-원문"
+   ],
    "key_count": 9,
-   "documented": false
+   "documented": true
   },
   {
    "endpoint": "DESIGN/PSC/AASHTO-LRFD24/RPSC",
@@ -16953,9 +16974,12 @@
     "label",
     "order"
    ],
-   "doc": [],
+   "doc": [
+    "29_Design_PSC_AASHTO_LRFD24.md#6-rpsc--longitudinal-rebar-reinforcements",
+    "29_Design_PSC_AASHTO_LRFD24.md#이전-한국어-원문"
+   ],
    "key_count": 42,
-   "documented": false
+   "documented": true
   },
   {
    "endpoint": "DESIGN/PSC/AASHTO-LRFD24/SECF",
@@ -17005,9 +17029,12 @@
     "W_SF",
     "bDiffIJ"
    ],
-   "doc": [],
+   "doc": [
+    "29_Design_PSC_AASHTO_LRFD24.md#7-secf--longitudinal-rebar-stiffness",
+    "29_Design_PSC_AASHTO_LRFD24.md#이전-한국어-원문"
+   ],
    "key_count": 22,
-   "documented": false
+   "documented": true
   },
   {
    "endpoint": "DESIGN/PSC/AASHTO-LRFD24/PSC-ANAL",
@@ -17033,9 +17060,12 @@
    "keys": [
     "TYPE"
    ],
-   "doc": [],
+   "doc": [
+    "29_Design_PSC_AASHTO_LRFD24.md#11-psc-anal--perform-design",
+    "29_Design_PSC_AASHTO_LRFD24.md#이전-한국어-원문"
+   ],
    "key_count": 1,
-   "documented": false
+   "documented": true
   },
   {
    "endpoint": "DESIGN/PSC/AASHTO-LRFD24/MATD",
@@ -17074,9 +17104,11 @@
     "SLAB_REBAR_PROP",
     "visibleWhen"
    ],
-   "doc": [],
+   "doc": [
+    "29_Design_PSC_AASHTO_LRFD24.md#5-matd--modify-material"
+   ],
    "key_count": 18,
-   "documented": false
+   "documented": true
   },
   {
    "endpoint": "DESIGN/PSC/AASHTO-LRFD24/DIDP",
@@ -17100,9 +17132,11 @@
     "MOMENT_TYPE",
     "SHEAR_TYPE"
    ],
-   "doc": [],
+   "doc": [
+    "29_Design_PSC_AASHTO_LRFD24.md#9-didp--design-position"
+   ],
    "key_count": 2,
-   "documented": false
+   "documented": true
   },
   {
    "endpoint": "DESIGN/PSC/AASHTO-LRFD24/DIDP-VBEAM",
@@ -17126,9 +17160,11 @@
     "MOMENT_TYPE",
     "SHEAR_TYPE"
    ],
-   "doc": [],
+   "doc": [
+    "29_Design_PSC_AASHTO_LRFD24.md#27-didp-vbeam--design-position---virtual-beam"
+   ],
    "key_count": 2,
-   "documented": false
+   "documented": true
   },
   {
    "endpoint": "DESIGN/PSC/AASHTO-LRFD24/DIOP",
@@ -17155,9 +17191,11 @@
     "SHEAR_TYPE",
     "TORSION_TYPE"
    ],
-   "doc": [],
+   "doc": [
+    "29_Design_PSC_AASHTO_LRFD24.md#10-diop--output-position"
+   ],
    "key_count": 5,
-   "documented": false
+   "documented": true
   },
   {
    "endpoint": "DESIGN/PSC/AASHTO-LRFD24/DIOP-VBEAM",
@@ -17184,9 +17222,11 @@
     "SHEAR_TYPE",
     "TORSION_TYPE"
    ],
-   "doc": [],
+   "doc": [
+    "29_Design_PSC_AASHTO_LRFD24.md#28-diop-vbeam--output-position---virtual-beam"
+   ],
    "key_count": 5,
-   "documented": false
+   "documented": true
   },
   {
    "endpoint": "DESIGN/PSC/AASHTO-LRFD24/TABLE",
@@ -17297,9 +17337,16 @@
     "TOP_BOT",
     "UNIT"
    ],
-   "doc": [],
+   "doc": [
+    "29_Design_PSC_AASHTO_LRFD24.md#12-table--psc_dgn_force--design-forces",
+    "29_Design_PSC_AASHTO_LRFD24.md#13-table--psc_stress_cs--check-stress-for-cross-section-at-a-construction-stage",
+    "29_Design_PSC_AASHTO_LRFD24.md#14-table--psc_stress_tendon--check-tensile-stress-for-prestressing-tendons",
+    "29_Design_PSC_AASHTO_LRFD24.md#15-table--psc_stress_service--check-stress-for-cross-section-at-service-loads",
+    "29_Design_PSC_AASHTO_LRFD24.md#16-table--psc_principal_cs--principal-stress-at-a-construction-stage",
+    "29_Design_PSC_AASHTO_LRFD24.md#17-table--psc_principal_svc_e--principal-stress-at-service-loads-excluding-torsional-shear-stress"
+   ],
    "key_count": 23,
-   "documented": false
+   "documented": true
   },
   {
    "endpoint": "RATING/PSC/AASHTO-LRFR19/RPSC-ANAL",
@@ -18614,9 +18661,11 @@
     "Y",
     "Z"
    ],
-   "doc": [],
+   "doc": [
+    "29_Design_PSC_AASHTO_LRFD24.md#8-strpssm--longitudinal-rebar-stress-points"
+   ],
    "key_count": 7,
-   "documented": false
+   "documented": true
   },
   {
    "endpoint": "DESIGN/PSC/AASHTO-LRFD24/REPORT",
@@ -18637,9 +18686,11 @@
     "EXPORT_PATH",
     "OUTPUT_NAME"
    ],
-   "doc": [],
+   "doc": [
+    "29_Design_PSC_AASHTO_LRFD24.md#23-report--excel-report"
+   ],
    "key_count": 2,
-   "documented": false
+   "documented": true
   },
   {
    "endpoint": "DESIGN/PSC/KDS-24-14-21-2021/DIOP",
@@ -18871,9 +18922,11 @@
     "Y",
     "Z"
    ],
-   "doc": [],
+   "doc": [
+    "29_Design_PSC_AASHTO_LRFD24.md#26-rpsc-vbeam--longitudinal-rebar-reinforcements---virtual-beam"
+   ],
    "key_count": 35,
-   "documented": false
+   "documented": true
   },
   {
    "endpoint": "DESIGN/PSC/DSPSC",
