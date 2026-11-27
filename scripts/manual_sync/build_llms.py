@@ -113,6 +113,7 @@ def render(rows, index_text, endpoints, chunks):
         "## Other files",
         "",
         f"- [docs/manual/INDEX.md]({RAW}docs/manual/INDEX.md): full table of contents with design-code tables.",
+        f"- [AGENTS.md]({RAW}AGENTS.md): rules for agents that edit or maintain this repository (not needed to use it).",
         f"- [docs/index/endpoints.json]({RAW}docs/index/endpoints.json): endpoint → methods, official "
         "articles, documented sections, request keys, `jp_only`, `documented`.",
         f"- [docs/index/chunks.jsonl]({RAW}docs/index/chunks.jsonl): retrieval chunks (≈3,500 characters max).",

@@ -72,6 +72,7 @@ Every endpoint record and chunk carries official article ids (`articles`); the a
 ## Other files
 
 - [docs/manual/INDEX.md](https://raw.githubusercontent.com/Dennis5882/MIDAS-API/main/docs/manual/INDEX.md): full table of contents with design-code tables.
+- [AGENTS.md](https://raw.githubusercontent.com/Dennis5882/MIDAS-API/main/AGENTS.md): rules for agents that edit or maintain this repository (not needed to use it).
 - [docs/index/endpoints.json](https://raw.githubusercontent.com/Dennis5882/MIDAS-API/main/docs/index/endpoints.json): endpoint → methods, official articles, documented sections, request keys, `jp_only`, `documented`.
 - [docs/index/chunks.jsonl](https://raw.githubusercontent.com/Dennis5882/MIDAS-API/main/docs/index/chunks.jsonl): retrieval chunks (≈3,500 characters max).
 - [docs/plugin/INDEX.md](https://raw.githubusercontent.com/Dennis5882/MIDAS-API/main/docs/plugin/INDEX.md): MIDAS Plug-in tools built on this API (GUI walkthroughs, separate from the endpoint manual).

@@ -18,6 +18,8 @@
 - `examples/` — Python/VBA/JavaScript/curl/기타 언어 예제.
 - `llms.txt` — 이 저장소를 가져다 쓰는 AI용 진입점(찾는 순서, 인용 가능한 출처, 챕터 지도).
   `build_index.py`가 `scripts/manual_sync/build_llms.py`로 자동 생성하므로 손으로 고치지 않는다.
+- `AGENTS.md` — Codex 등 코딩 에이전트의 진입점. 이 파일의 규칙을 요약하고 이 파일을 가리킨다.
+  이 파일의 규칙(실행 환경, 점검 명령, 금지 사항)을 바꾸면 `AGENTS.md` 요약도 함께 맞춘다.
 - `scripts/manual_sync/` — 공식 사이트와의 정기 동기화 도구, `docs/manual`·`docs/plugin` 둘 다
   대상 (아래 참고).
 
