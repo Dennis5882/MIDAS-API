@@ -142,18 +142,18 @@ def midas_api(method: str, endpoint: str, body=None):
 | 5 | Address | `"ADDRESS"` | String | - | Optional |
 | 6 | Telephone Numbers | `"TEL"` | String | - | Optional |
 | 7 | Fax Numbers | `"FAX"` | String | - | Optional |
-| 8 | Client | `"CLIENT"` | String | - | Optional |
+| 8 | Client Information | `"CLIENT"` | String | - | Optional |
 | 9 | Title | `"TITLE"` | String | - | Optional |
-| 10 | Engineer (Review Name) | `"ENGINEER"` | String | - | Optional |
-| 11 | Engineer Review Date | `"EDATE"` | String | - | Optional |
-| 12 | Checker 1 Name | `"CHECK1"` | String | - | Optional |
-| 13 | Checker 1 Date | `"CDATE1"` | String | - | Optional |
-| 14 | Checker 2 Name | `"CHECK2"` | String | - | Optional |
-| 15 | Checker 2 Date | `"CDATE2"` | String | - | Optional |
-| 16 | Checker 3 Name | `"CHECK3"` | String | - | Optional |
-| 17 | Checker 3 Date | `"CDATE3"` | String | - | Optional |
-| 18 | Approver Name | `"APPROVE"` | String | - | Optional |
-| 19 | Approver Date | `"ADATE"` | String | - | Optional |
+| 10 | Reviewer Name 1 | `"ENGINEER"` | String | - | Optional |
+| 11 | Reviewed Date 1 | `"EDATE"` | String | - | Optional |
+| 12 | Reviewer Name 2 | `"CHECK1"` | String | - | Optional |
+| 13 | Reviewed Data 2 | `"CDATE1"` | String | - | Optional |
+| 14 | Reviewer Name 3 | `"CHECK2"` | String | - | Optional |
+| 15 | Reviewed Data 3 | `"CDATE2"` | String | - | Optional |
+| 16 | Reviewer Name 4 | `"CHECK3"` | String | - | Optional |
+| 17 | Reviewed Data 4 | `"CDATE3"` | String | - | Optional |
+| 18 | Reviewer Name 5 | `"APPROVE"` | String | - | Optional |
+| 19 | Reviewed Data 5 | `"ADATE"` | String | - | Optional |
 | 20 | Comments | `"COMMENT"` | String | - | Optional |
 
 > ✅ **2026-09-06 해결 확인:** 원문 Specifications 표 18번 Key가 `"APROVE"`(P 1개) 오타였던 것이
@@ -233,10 +233,10 @@ print(result)
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 1 | Force (Mass) · `"N"` / `"KN"` / `"KGF"` / `"TONF"` / `"LBF"` / `"KIPS"` | `"FORCE"` | String | - | Optional |
-| 2 | Length · `"M"` / `"CM"` / `"MM"` / `"FT"` / `"IN"` | `"DIST"` | String | - | Optional |
-| 3 | Heat · `"CAL"` / `"KCAL"` / `"J"` / `"KJ"` / `"BTU"` | `"HEAT"` | String | - | Optional |
-| 4 | Temperature · `"C"` (Celsius) / `"F"` (Fahrenheit) | `"TEMPER"` | String | - | Optional |
+| 1 | Force (Mass) · N (kg): "N" · kN (ton): "KN" · kgf (kg): "KGF" · tonf (ton): "TONF" · lbf (lb): "LBF" · kips (kips/g): "KIPS" | `"FORCE"` | String | - | Optional |
+| 2 | Length · m: "M" · cm: "CM" · mm: "MM" · ft: "FT" · in: "IN" | `"DIST"` | String | - | Optional |
+| 3 | Heat · cal: "CAL" · kcal: "KCAL" · J: "J" · kJ: "KJ" · Btu: "BTU" | `"HEAT"` | String | - | Optional |
+| 4 | Temperature Unit · Celsius: "C" · Fahrenheit: "F" | `"TEMPER"` | String | - | Optional |
 
 #### Force 단위 상세
 
@@ -375,8 +375,8 @@ print(result)
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 1 | Structure Type · `0`=3-D / `1`=X-Z Plane / `2`=Y-Z Plane / `3`=X-Y Plane / `4`=Constraint RZ | `"STYP"` | Integer | System | Optional |
-| 2 | Mass Type · `1`=Lumped Mass / `2`=Consistent Mass | `"MASS"` | Integer | - | Optional |
+| 1 | Structure Type · 3-D: 0 · X-Z Plane: 1 · Y-Z Plane: 2 · X-Y Plane: 3 · Constraint RZ: 4 | `"STYP"` | Integer | System | Optional |
+| 2 | Mass Type · Lumped Mass: 1 · Consistent Mass: 2 | `"MASS"` | Integer | - | Optional |
 | 3 | Consider Off-diagonal Masses | `"bMASSOFFSET"` | Boolean | `false` | Optional |
 | 4 | Convert Self-Weight to Mass | `"bSELFWEIGHT"` | Boolean | `false` | Optional |
 | 5 | Structure Mass Type (자중→질량 변환 시) · `1`=Convert to X,Y,Z / `2`=Convert to X,Y / `3`=Convert to Z | `"SMASS"` | Integer | `1` | Optional |
@@ -526,7 +526,7 @@ print(result)
 | --- | --- | --- | --- | --- | --- |
 | 1 | Structure Type · 3-D: `3D` / X-Z Plane: `XZ` / Y-Z Plane: `YZ` / X-Y Plane: `XY` / Constraint RZ: `RZ` | `"STYPE"` | String (enum) | `"3D"` | Optional |
 | 2 | Mass Control Parameter | `"MASS_CONTROL"` | Object | – | Required |
-| 2-(1) | └ Mass Type · Lumped Mass: `LUMPED` / Consistent Mass: `CONSISTENT` | `"MASS_TYPE"` | String (enum) | – | Required |
+| 2-(1) | └ Mass Type · Lumped Mass: LUMPED · Consistent Mass: CONSISTENT | `"MASS_TYPE"` | String (enum) | – | **Required** |
 | 2-(2) | └ [When MASS_TYPE = "LUMPED"] Mass Position · Consider Mass at the Centroid of Section: CENTROID · Consider Mass at the Offset Position: OFFSET | `"MASS_POS"` | String (enum) | – | **Required** |
 | 2-(3) | └ Convert Self-weight into Masses | `"SELFWEIGHT"` | Boolean | – | Required |
 | 2-(4) | └ [When SELFWEIGHT = true] Convert to X, Y, Z / Convert to X, Y / Convert to Z · X, Y, Z: XYZ · X, Y: XY · Z: Z When MASS_TYPE = "CONSISTENT", only XZY | `"MASS_AXIS"` | String (enum) | – | **Required** |
@@ -694,7 +694,7 @@ print(result)
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
 | 1 | Boundary Group Name | `"NAME"` | String | - | **Required** |
-| 2 | Auto-generated boundary groups for CR/SH in Composite Section ¹⁾ · `0`=Creep / `1`=Shrinkage | `"AUTOTYPE"` | Integer | Auto | Optional |
+| 2 | The Autogenerated boundary groups for CR/SH in a Composite Section ¹⁾ · Creep Boundary Group: 0 · Shrinkage Boundary Group: 1 | `"AUTOTYPE"` | Integer | Auto | Optional |
 
 > ¹⁾ 합성단면(Composite Section)의 크리프(Creep)/건조수축(Shrinkage) 자동 경계 그룹
 
@@ -1008,7 +1008,7 @@ print(result)
 | 7 | Hidden Edge Red (0–255) | `"HE_R"` | Integer | - | Optional |
 | 8 | Hidden Edge Green (0–255) | `"HE_G"` | Integer | - | Optional |
 | 9 | Hidden Edge Blue (0–255) | `"HE_B"` | Integer | - | Optional |
-| 10 | Opacity Boolean | `"bBLEMD"` | Boolean | - | Optional |
+| 10 | Opacity Option | `"bBLEMD"` | Boolean | - | Optional |
 | 11 | Opacity Value (0.0–1.0) | `"FACT"` | Number | - | Optional |
 
 ### Python 예제
@@ -1088,7 +1088,7 @@ CO_M과 동일한 필드 구조 (키 이름 동일). Section ID별 색상 지정
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
 | 1–9 | Wire Frame / Hidden Fill / Hidden Edge RGB (0–255) | `"W_R"` ~ `"HE_B"` | Integer | - | Optional |
-| 10 | Opacity Boolean | `"bBLEMD"` | Boolean | - | Optional |
+| 10 | Opacity Option | `"bBLEMD"` | Boolean | - | Optional |
 | 11 | Opacity Value (0.0–1.0) | `"FACT"` | Number | - | Optional |
 
 ### Python 예제
@@ -1168,7 +1168,7 @@ CO_M, CO_S와 동일한 필드 구조.
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
 | 1–9 | Wire Frame / Hidden Fill / Hidden Edge RGB (0–255) | `"W_R"` ~ `"HE_B"` | Integer | - | Optional |
-| 10 | Opacity Boolean | `"bBLEMD"` | Boolean | - | Optional |
+| 10 | Opacity Option | `"bBLEMD"` | Boolean | - | Optional |
 | 11 | Opacity Value (0.0–1.0) | `"FACT"` | Number | - | Optional |
 
 ### Python 예제
@@ -1256,7 +1256,7 @@ print(result)
 | 8 | Hidden Edge Red (0–255) | `"HE_R"` | Integer | - | Optional |
 | 9 | Hidden Edge Green (0–255) | `"HE_G"` | Integer | - | Optional |
 | 10 | Hidden Edge Blue (0–255) | `"HE_B"` | Integer | - | Optional |
-| 11 | Blending | `"OPT_BLEND"` | Boolean | - | Optional |
+| 11 | Blending Option | `"OPT_BLEND"` | Boolean | - | Optional |
 | 12 | Blending Factor (0.0–1.0) | `"BLEND_FACTOR"` | Number | - | Optional |
 
 ### Python 예제
@@ -1365,8 +1365,8 @@ print(result)
 |-----|-------------|-----|------------|---------|----------|
 | 1 | Span Name | `"NAME"` | String | - | **Required** |
 | 2 | Exact Span Option | `"bEXACTSPAN"` | Boolean | - | **Required** |
-| 3 | Inner Direction of Multiple Girders · `0`=(-) Local y / `1`=(+) Local y / `2`=Both / `3`=None | `"DIRECTION"` | Integer | - | **Required** |
-| 4 | Assign Elements · `0`=By Selection / `1`=Number | `"SECTTYPE"` | Integer | - | **Required** |
+| 3 | Inner Direction of Multiple Girders · (-) Local y: 0 · (+) Local y: 1 · Both: 2 · None: 3 | `"DIRECTION"` | Integer | - | **Required** |
+| 4 | Assign Elements · By Selection: 0 · Number: 1 | `"SECTTYPE"` | Integer | - | **Required** |
 | 5 | [When Exact Span Option, "bEXACTSPAN" is True] Span by Element Length | `"SPAN_LIST"` | Array [Number] | - | **Required** |
 | 6 | Span Base Items (bEXACTSPAN=true 시) · Element Key | `"SPAN_BASE_ITEMS"[].ELEM_KEY"` | Integer | - | Required (bEXACTSPAN=true) |
 | 7 | Span Base Items · Support type · `0`=None / `1`=Start / `2`=End | `"SPAN_BASE_ITEMS"[].SUPPORT"` | Integer | - | Required (bEXACTSPAN=true) |
@@ -1481,20 +1481,20 @@ print(result)
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
 | 1 | Story Name | `"STORY_NAME"` | String | - | **Required** |
-| 2 | Story Height (elevation) | `"STORY_LEVEL"` | Number | - | **Required** |
+| 2 | Story height (elevation) | `"STORY_LEVEL"` | Number | - | **Required** |
 | 3 | whether a floor at a given story level is assumed to act as a rigid diaphragm in lateral load distribution. | `"bFLOOR_DIAPHRAGM"` | Boolean | false | **Required** |
 | 4 | Effective width of the building in X-axis, subjected to GCS Y-direction wind load | `"WIND_FLOOR_WIDTH_X"` | Number | - | **Required** |
 | 5 | Effective width of the building in Y-axis, subjected to GCS X-direction wind load | `"WIND_FLOOR_WIDTH_Y"` | Number | - | **Required** |
-| 6 | Wind Floor Center Xc | `"WIND_CENTER_X"` | Number | - | Required |
-| 7 | Wind Floor Center Yc | `"WIND_CENTER_Y"` | Number | - | Required |
-| 8 | Wind Eccentricity X-Dir | `"WIND_ECCENT_X"` | Number | - | Required |
-| 9 | Wind Eccentricity Y-Dir | `"WIND_ECCENT_Y"` | Number | - | Required |
-| 10 | Seismic Accidental Eccentricity X-Dir | `"SEIS_ACC_ECCENT_X"` | Number | - | Required |
-| 11 | Seismic Accidental Eccentricity Y-Dir | `"SEIS_ACC_ECCENT_Y"` | Number | - | Required |
-| 12 | Seismic Inherent Eccentricity X-Dir | `"SEIS_INHERENT_ECCENT_X"` | Number | - | Required |
-| 13 | Seismic Inherent Eccentricity Y-Dir | `"SEIS_INHERENT_ECCENT_Y"` | Number | - | Required |
-| 14 | Seismic Torsional Amplification Factor X-Dir | `"SEIS_TORSIONAL_AMP_FACTOR_X"` | Number | - | Required |
-| 15 | Seismic Torsional Amplification Factor Y-Dir | `"SEIS_TORSIONAL_AMP_FACTOR_Y"` | Number | - | Required |
+| 6 | Coordinate of the position in GCS X-direction, to which the wind load is applied | `"WIND_CENTER_X"` | Number | - | **Required** |
+| 7 | Coordinate of the position in GCS Y-direction, to which the wind load is applied | `"WIND_CENTER_Y"` | Number | - | **Required** |
+| 8 | Eccentricity distance in X-direction at each story in GCS Y-direction wind load | `"WIND_ECCENT_X"` | Number | - | **Required** |
+| 9 | Eccentricity distance in Y-direction at each story in GCS X-direction wind load | `"WIND_ECCENT_Y"` | Number | - | **Required** |
+| 10 | Accidental eccentricity distance in X-direction due to the seismic loads at each story in GCS Y-direction | `"SEIS_ACC_ECCENT_X"` | Number | - | **Required** |
+| 11 | Accidental eccentricity distance in Y-direction due to the seismic loads at each story in GCS X-direction | `"SEIS_ACC_ECCENT_Y"` | Number | - | **Required** |
+| 12 | Inherent eccentricity distance in X-direction due to the seismic loads at each story in GCS Y-direction | `"SEIS_INHERENT_ECCENT_X"` | Number | - | **Required** |
+| 13 | Inherent eccentricity distance in Y-direction due to the seismic loads at each story in GCS X-direction | `"SEIS_INHERENT_ECCENT_Y"` | Number | - | **Required** |
+| 14 | Seismic Torsional Amplification Factor in X-direction | `"SEIS_TORSIONAL_AMP_FACTOR_X"` | Number | - | **Required** |
+| 15 | Seismic Torsional Amplification Factor in Y-direction | `"SEIS_TORSIONAL_AMP_FACTOR_Y"` | Number | - | **Required** |
 
 ### Python 예제 — 다층 건물 층 데이터 자동 생성
 

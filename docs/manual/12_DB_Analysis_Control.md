@@ -168,7 +168,7 @@ Hyper-S(MEC) 솔버용 메인 제어 데이터입니다. 인장/압축 트러스
 | 6 | Change Local Axis of Tapered Section | `"CLATS"` | Boolean | false | Optional |
 | 7 | Calculate Equivalent Beam Stresses | `"BMSTRESS"` | Boolean | false | Optional |
 | 8 | Classical Formula for Solid Element | `"CLFORM"` | Boolean | false | Optional |
-| 9 | Beam Section Property Changes (`"CONSTANT"` / `"CHANGE"`) | `"BSCHG"` | String (enum) | "CHANGE" | Optional |
+| 9 | Beam Section Property Changes · Constant: CONSTANT · Change: CHANGE | `"BSCHG"` | String (enum) | "CHANGE" | Optional |
 | 10 | Consider Initial Tension for Cable Element | `"CABINIT"` | Boolean | true | Optional |
 | 11 | Tension/Compression Truss Element | `"TCELEM"` | Object | - | Optional |
 
@@ -177,8 +177,8 @@ Hyper-S(MEC) 솔버용 메인 제어 데이터입니다. 인장/압축 트러스
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
 | 1 | Number of Increments | `"NUMINC"` | Integer | 1 | Optional |
-| 2 | Intermediate Output Request (`"EVERY"` / `"LAST"`) | `"INTOUT"` | String (enum) | "LAST" | Optional |
-| 3 | Convergence Criteria | `"CONVERGENCE"` | Object | - | Optional |
+| 2 | Intermediate Output Request · Every Increment: EVERY · Last Increment: LAST | `"INTOUT"` | String (enum) | "LAST" | Optional |
+| 3 | Displacement | `"CONVERGENCE"` | Object | - | Optional |
 
 **CONVERGENCE 객체** — `DISPL`(변위 U) / `LOAD`(하중 P) / `WORK`(일 W) 각각:
 
@@ -283,7 +283,7 @@ P-Delta(2차 효과) 해석 제어 데이터를 정의합니다. 반복 횟수, 
 |-----|-------------|-----|------------|---------|----------|
 | 1 | Number of Iterations | `"ITER"` | Number | - | Required |
 | 2 | Convergence Tolerance | `"TOL"` | Number | 0 | Optional |
-| 3 | Load Cases | `"PDEL_CASES"` | Array [Object] | - | Required |
+| 3 | Load Cases · Insert the data as an object | `"PDEL_CASES"` | Array [Object] | - | **Required** |
 | (1) | Load Case Name | `"LCNAME"` | String | - | Required |
 | (2) | Scale Factor | `"FACTOR"` | Number | - | Required |
 
@@ -355,15 +355,15 @@ set_pdelta_control()
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
 | 1 | Number of Modes | `"MODE_NUM"` | Integer | - | Required |
-| 2 | Load Factor Range Type (Positive Value Only: true / Search: false) | `"OPT_POSITIVE"` | Boolean | false | Optional |
-| 3 | Search From (when `OPT_POSITIVE` is false) | `"LOAD_FACTOR_FROM"` | Number | 0 | Optional |
-| 4 | Search To (when `OPT_POSITIVE` is false) | `"LOAD_FACTOR_TO"` | Number | 0 | Optional |
+| 2 | Load Factor Range Type · Positive Value Only: true · Search: false | `"OPT_POSITIVE"` | Boolean | false | Optional |
+| 3 | Search From · When the "OPT_POSITIVE" is false | `"LOAD_FACTOR_FROM"` | Number | 0 | Optional |
+| 4 | Search To · When the "OPT_POSITIVE" is false | `"LOAD_FACTOR_TO"` | Number | 0 | Optional |
 | 5 | Check Sturm Sequence | `"OPT_STURM_SEQ"` | Boolean | false | Optional |
-| 6 | Frame Geometric Stiffness Option (Consider Axial Only) | `"OPT_CONSIDER_AXIAL_ONLY"` | Boolean | false | Optional |
-| 7 | Load Cases (Buckling Combination) | `"ITEMS"` | Array [Object] | - | Required |
+| 6 | Frame Geometric Stiffness Option · Consider Axial Only | `"OPT_CONSIDER_AXIAL_ONLY"` | Boolean | false | Optional |
+| 7 | Load Cases · Insert the data as an object | `"ITEMS"` | Array [Object] | - | **Required** |
 | (1) | Load Case Name | `"LCNAME"` | String | - | Required |
 | (2) | Scale Factor | `"FACTOR"` | Number | 0 | Optional |
-| (3) | Load Type (Variable: 0 / Constant: 1) | `"LOAD_TYPE"` | Integer | 0 | Optional |
+| (3) | Load Type · Variable: 0 · Constant: 1 | `"LOAD_TYPE"` | Integer | 0 | Optional |
 
 ### Request Body (POST)
 
@@ -457,8 +457,8 @@ set_buckling_control()
 |-----|-------------|-----|------------|---------|----------|
 | 2 | Number of Frequencies | `"iFREQ"` | Integer | - | Required |
 | 3 | Frequency Range of Interest | `"bMINMAX"` | Boolean | false | Optional |
-| 4 | Search From [cps] (when `bMINMAX` is true, `FRMIN` < `FRMAX`) | `"FRMIN"` | Number | - | Required |
-| 5 | Search To [cps] (when `bMINMAX` is true) | `"FRMAX"` | Number | - | Required |
+| 4 | [Eigen Vectors - Lanczos] Seach From [cps] · When the "bMINMAX" is true · "FRMIN" < "FRMAX" | `"FRMIN"` | Number | - | **Required** |
+| 5 | [Eigen Vectors - Lanczos] Seach to [cps] · When the "bMINMAX" is true · "FRMIN" < "FRMAX" | `"FRMAX"` | Number | - | **Required** |
 | 6 | Sturm Sequence Check | `"bSTRUM"` | Boolean | false | Optional |
 
 ### Parameters — Ritz Vectors (`TYPE = "RITZ"`)
@@ -467,8 +467,8 @@ set_buckling_control()
 |-----|-------------|-----|------------|---------|----------|
 | 2 | Include GL-link Force Vectors | `"bINCNL"` | Boolean | false | Optional |
 | 3 | Number of Generations for Each GL-link Force | `"iGNUM"` | Integer | - | Required |
-| 4 | Load Cases | `"vRITZ"` | Array [Object] | - | Required |
-| (1) | Load Case Type (Ground Acc.: `"GROUND"` / General: `"CASE"`) | `"KIND"` | String | - | Required |
+| 4 | [Ritz Vectors] Load Cases · Insert the data as an object | `"vRITZ"` | Array [Object] | - | **Required** |
+| (1) | [Ritz Vectors] Load Case Type · Ground Acc.: "GROUND" · General: "CASE" | `"KIND"` | String | - | **Required** |
 | (2) | Load Case Name (`KIND="CASE"`일 때) | `"CASE"` | String | - | Required |
 | (3) | Ground Acc. 방향 (`KIND="GROUND"`일 때, `"ACCX"`/`"ACCY"`/`"ACCZ"`) | `"GROUND"` | String | - | Required |
 | (4) | Number of Generations | `"iNOG"` | Integer | Blank | Optional |
@@ -609,7 +609,7 @@ Hyper-S(MEC) 솔버용 고유치 해석 제어입니다. UI의 Subspace Iteratio
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 1 | Eigen Vectors (Lanczos: `"LANCZOS"` / Ritz Vectors: `"RITZ"`) | `"ANAL_TYPE"` | String (enum) | - | Required |
+| 1 | Eigen Vectors · Eigen Vectors (Lanczos): LANCZOS · Ritz Vectors: RITZ | `"ANAL_TYPE"` | String (enum) | - | **Required** |
 
 ### Parameters — Lanczos (`ANAL_TYPE = "LANCZOS"`)
 
@@ -618,8 +618,8 @@ Hyper-S(MEC) 솔버용 고유치 해석 제어입니다. UI의 Subspace Iteratio
 | 2 | Number of Frequencies (1~1000) | `"FREQ_NO"` | Integer | - | Required |
 | 3 | Frequency range of interest | `"FREQ_RANGE"` | Object | - | Optional |
 | (1) | Use Option | `"OPT_USE"` | Boolean | false | Required |
-| (2) | Search From (when `OPT_USE` true) | `"FREQ_MIN"` | Number | - | Required |
-| (3) | To (when `OPT_USE` true) | `"FREQ_MAX"` | Number | - | Required |
+| (2) | [When ANAL_TYPE = "LANCZOS"] Search From When OPT_USE = true | `"FREQ_MIN"` | Number | - | Optional |
+| (3) | [When ANAL_TYPE = "LANCZOS"] Search To When OPT_USE = true | `"FREQ_MAX"` | Number | - | Optional |
 | 4 | Sturm Sequence Check | `"STURM_SEQ"` | Boolean | false | Optional |
 
 ### Parameters — Ritz Vectors (`ANAL_TYPE = "RITZ"`)
@@ -628,9 +628,9 @@ Hyper-S(MEC) 솔버용 고유치 해석 제어입니다. UI의 Subspace Iteratio
 |-----|-------------|-----|------------|---------|----------|
 | 2 | Include GL-link Force Vectors | `"GLINK_VECTOR"` | Object | - | Optional |
 | (1) | Use Option | `"OPT_USE"` | Boolean | - | Required |
-| (2) | Number of Generations (when `OPT_USE` true) | `"GLINK_NUMBER"` | Integer | - | Required |
-| 3 | Ritz Load Cases | `"RITZ_LOAD"` | Array [Object] | - | Required |
-| (1) | Type (Ground Acc.: `"GROUND"` / Load: `"LOAD"`) | `"TYPE"` | String (enum) | - | Required |
+| (2) | Number of Generations for Each GL-link Force Vectors When OPT_USE = true | `"GLINK_NUMBER"` | Integer | - | Optional |
+| 3 | [When ANAL_TYPE = "RITZ"] Load Case / Number of Generations / Starting Load Vectors | `"RITZ_LOAD"` | Array [Object] | - | **Required** |
+| (1) | [When ANAL_TYPE = "RITZ"] Load Case Type · Static Load Case : LOAD · Ground Acceleration : GROUND | `"TYPE"` | String (enum) | - | **Required** |
 | (2) | [When ANAL_TYPE = "RITZ"] Load Case Name | `"LOAD_NAME"` | String | - | **Required** |
 | (3) | Number of Generations | `"NUM_OF_GEN"` | Integer | - | Required |
 
@@ -731,15 +731,15 @@ update_eigenvalue_m1_ritz()
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 1 | Final Stage (Last Stage: true / Other Stage: false) | `"FINAL_STAGE"` | Boolean | false | Optional |
-| 2 | Construction Stage for Hydration (when `FINAL_STAGE` false) | `"STAGE_NAME"` | String | - | Required |
+| 1 | Final Stage · Last Stage: true · Other Stage: false | `"FINAL_STAGE"` | Boolean | false | Optional |
+| 2 | Construction Stage for Hydration · When the "FINAL_STAGE" is false | `"STAGE_NAME"` | String | - | **Required** |
 | 3 | Integration Factor | `"THETA"` | Number | 0 | Optional |
 | 4 | Initial Temperature | `"INIT_TEMP"` | Number | 0 | Optional |
-| 5 | Element Stress Evaluation (`"CENTER"` / `"GAUSS"` / `"NODAL"`) | `"EVAL"` | String | "CENTER" | Optional |
+| 5 | Element Stress Evaluation · Center: "CENTER" · Gauss: "GAUSS" · Nodal Point: "NODAL" | `"EVAL"` | String | "CENTER" | Optional |
 | 6 | Creep & Shrinkage Option | `"OPT_IS_CREEP_SHRINKAGE"` | Boolean | false | Optional |
 | 7 | Creep & Shrinkage · Insert the data as an object | `"ITEM"` | Object | - | Optional |
-| (1) | Type (Creep: `"CREEP"` / Shrinkage: `"SHRINK"` / Both: `"BOTH"`) | `"TYPE"` | String | "CREEP" | Optional |
-| (2) | Creep Calculation Method (General: 0 / Effective Modulus: 1) | `"CREEP_CALC_METHOD"` | Integer | 0 | Optional |
+| (1) | Type · Creep: "CREEP" · Shrinkage: "SHRINK" · Creep & Shrinkage: "BOTH" | `"TYPE"` | String | "CREEP" | Optional |
+| (2) | Creep Calculation Method · General: 0 · Effective Modulus: 1 | `"CREEP_CALC_METHOD"` | Integer | 0 | Optional |
 | (3) | General Data (when method 0) | `"M_GENERAL"` | Object | - | Optional |
 | i | Number of Iterations | `"ITER"` | Integer | 0 | Optional |
 | ii | Tolerance | `"TOL"` | Number | 0 | Optional |
@@ -869,22 +869,22 @@ Hyper-S(MEC) 솔버용 수화열 해석 제어입니다. 반복 횟수(`ITER`)�
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 1 | Final Stage (Last: true / Other: false) | `"FINAL_STAGE"` | Boolean | true | Optional |
-| 2 | Stage Name (when `FINAL_STAGE` false) | `"STAGE_NAME"` | String | - | Required |
+| 1 | Final Stage · Last Stage: true · Other Stage: false | `"FINAL_STAGE"` | Boolean | true | Optional |
+| 2 | [When FINAL_STAGE = false] Stage Name | `"STAGE_NAME"` | String | - | **Required** |
 | 3 | Initial Temperature | `"INIT_TEMP"` | Number | 20 | Optional |
-| 4 | Element Stress Evaluation (`"CENTER"`/`"GAUSS"`/`"NODAL"`) | `"EVAL"` | String (enum) | "GAUSS" | Optional |
+| 4 | [When FINAL_STAGE = false] Element Stress Evaluation · Center: CENTER · Gauss: GAUSS · Nodal Point: NODAL | `"EVAL"` | String (enum) | "GAUSS" | Optional |
 | 5 | Creep & Shrinkage | `"OPT_IS_CREEP_SHRINKAGE"` | Boolean | true | Optional |
-| 6 | Creep & Shrinkage Settings (when option true) | `"ITEM"` | Object | - | Required |
-| (1) | Type (`"CREEP"`/`"SHRINKAGE"`/`"BOTH"`) | `"TYPE"` | String (enum) | "BOTH" | Optional |
-| (2) | Creep Calculation Method (General: 0 / Effective Modulus: 1) | `"CREEP_CALC_METHOD"` | Integer (enum) | 0 | Optional |
-| (3) | Effective Modulus Params (when method 1) | `"M_EFF_MOD"` | Object | - | Required |
+| 6 | [When OPT_IS_CREEP_SHRINKAGE = true] Creep & Shrinkage Settings | `"ITEM"` | Object | - | **Required** |
+| (1) | [When OPT_IS_CREEP_SHRINKAGE = true] Creep & Shrinkage Type · Creep: CREEP · Shrinkage: SHRINKAGE · Creep && Shrinkage: BOTH | `"TYPE"` | String (enum) | "BOTH" | Optional |
+| (2) | [When OPT_IS_CREEP_SHRINKAGE = true] Creep Calculation Method · General: 0 · Effective Modulus: 1 | `"CREEP_CALC_METHOD"` | Integer (enum) | 0 | Optional |
+| (3) | [When OPT_IS_CREEP_SHRINKAGE = true] Effective Modulus Input Parameters When CREEP_CALC_METHOD = 1 | `"M_EFF_MOD"` | Object | - | **Required** |
 | a | phi 1 | `"PHI1"` | Number | - | Required |
 | b | day 1 | `"DAY1"` | Integer | - | Required |
 | c | phi 2 | `"PHI2"` | Number | - | Required |
 | d | day 2 | `"DAY2"` | Integer | - | Required |
 | 7 | Use Equivalent Age by Time & Temperature | `"OPT_USE_EQUI_AGE"` | Boolean | true | Optional |
 | 8 | Include Selfweight Load | `"OPT_INCL_SELF_WEIGHT"` | Boolean | false | Optional |
-| 9 | Self Weight Factor (when option true) | `"SELF_WEIGHT_FACTOR"` | Number | - | Required |
+| 9 | [When OPT_INCL_SELF_WEIGHT = true] Self Weight Factor | `"SELF_WEIGHT_FACTOR"` | Number | - | **Required** |
 | 10 | Max. No. of Iterations per Increment | `"ITER"` | Integer | 50 | Optional |
 | 11 | [When OPT_INCL_SELF_WEIGHT = true] Convergence Criteria / Error Tolerance At least one of DISP, LOAD, or WORK is required. | `"CONVERGENCE"` | Object | - | Optional |
 | (1) | Displacement(U) | `"DISP"` | Object | - | Optional |
@@ -988,29 +988,29 @@ update_hydration_control_m1()
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 1 | Analysis Method ¹⁾ (Exact: `"EXACT"` / Pivot: `"PIVOT"` / Quick: `"QUICK"`) | `"METHOD"` | String | "EXACT" | Optional |
-| 2 | Load Point Selection (Influence Line Dependent: `"INF"` / All Points: `"ALL"`) | `"POINT"` | String | - | Required |
-| 3 | Influence Generating Points (Number/Line Element: 0 / Distance: 1) | `"iIGP"` | Integer | 0 | Optional |
-| 4 | Number/Line Element (when `iIGP`=0) | `"iIGPN"` | Integer | - | Required |
-| 5 | Distance between Points (when `iIGP`=1) | `"DIST"` | Number | - | Required |
-| 6 | Plate Options (Center: `"CENTER"` / Center+Nodal: `"NODAL"`) | `"PLATE"` | String | - | Required |
-| 7 | Plate – Stress | `"bSTRCALC"` | Boolean | false | Optional |
-| 8 | Plate – Concurrent Force | `"bCONCURRENT"` | Boolean | false | Optional |
-| 9 | Frame Options (Normal: `"NORMAL"` / Normal+Concurrent: `"AXIAL"`) | `"FRAME"` | String | - | Required |
-| 10 | Frame – Combined Stress | `"bCSTRCALC"` | Boolean | false | Optional |
-| 11 | Link – Concurrent Force of Elastic/General Links | `"bCONCLINK"` | Boolean | false | Optional |
-| 12 | Filter – Reactions | `"bREAC"` | Boolean | false | Optional |
-| 13 | Reactions Option (All: false / Structure Group: true) | `"bRG"` | Boolean | false | Optional |
-| 14 | Reactions Group Name (when `bRG` true) | `"RGN"` | String | - | Required |
-| 15 | Filter – Displacements | `"bDISP"` | Boolean | false | Optional |
-| 16 | Displacements Option (All: false / Structure Group: true) | `"bDG"` | Boolean | false | Optional |
-| 17 | Displacements Group Name (when `bDG` true) | `"DGN"` | String | - | Required |
-| 18 | Filter – Forces/Moments | `"bFM"` | Boolean | false | Optional |
-| 19 | Forces/Moments Option (All: false / Structure Group: true) | `"bFG"` | Boolean | false | Optional |
-| 20 | Forces/Moments Group Name (when `bFG` true) | `"FGN"` | String | - | Required |
-| 21 | Filter – Elastic/General Link | `"bL"` | Boolean | false | Optional |
-| 22 | Link Option (All: false / Boundary Group: true) | `"bLG"` | Boolean | false | Optional |
-| 23 | Link Group Name (when `bLG` true) | `"LGN"` | String | - | Required |
+| 1 | Analysis Method ¹⁾ · Exact: "EXACT" · Pivot: "PIVOT" · Quick: "QUICK" | `"METHOD"` | String | "EXACT" | Optional |
+| 2 | Load Point Selection ¹⁾ · Influence Line Dependent Point: "INF" · All Points: "ALL" | `"POINT"` | String | - | **Required** |
+| 3 | Influence Generating Points · Number/Line Element: 0 · Distance between Points: 1 | `"iIGP"` | Integer | 0 | Optional |
+| 4 | Number/Line Element · When "iIGP" is 0 | `"iIGPN"` | Integer | - | **Required** |
+| 5 | Distance between Points · When "iIGP" is 1 | `"DIST"` | Number | - | **Required** |
+| 6 | [Analysis Results - Plate] Options · Center: "CENTER" · Center + Nodal: "NODAL" | `"PLATE"` | String | - | **Required** |
+| 7 | [Analysis Results - Plate] Stress · Active/Inactive | `"bSTRCALC"` | Boolean | false | Optional |
+| 8 | [Analysis Results - Plate] Concurrent Force · Active/Inactive | `"bCONCURRENT"` | Boolean | false | Optional |
+| 9 | [Analysis Results - Frame] Options · Normal: "NORMAL" · Normal + Concurrent Force/Stress: "AXIAL" | `"FRAME"` | String | - | **Required** |
+| 10 | [Analysis Results - Frame] Combined Stress · Active/Inactive | `"bCSTRCALC"` | Boolean | false | Optional |
+| 11 | [Analysis Results - Link] Link Options · Concurrent Force of Elastic/General Links | `"bCONCLINK"` | Boolean | false | Optional |
+| 12 | [Calculation Filters - Reactions] Reactions · Active/Inactive | `"bREAC"` | Boolean | false | Optional |
+| 13 | [Calculation Filters - Reactions] Option · All: false · Structure Group: true | `"bRG"` | Boolean | false | Optional |
+| 14 | [Calculation Filters - Reactions] Structure Group Name · When the "bRG" is true | `"RGN"` | String | - | **Required** |
+| 15 | [Calculation Filters - Displacements] Displacements · Active/Inactive | `"bDISP"` | Boolean | false | Optional |
+| 16 | [Calculation Filters - Displacements] Option · All: false · Structure Group: true | `"bDG"` | Boolean | false | Optional |
+| 17 | [Calculation Filters - Displacements] Structure Group Name · When the "bDG" is true | `"DGN"` | String | - | **Required** |
+| 18 | [Calculation Filters - Forces/Moments] Forces/Moments · Active/Inactive | `"bFM"` | Boolean | false | Optional |
+| 19 | [Calculation Filters - Forces/Moments] Option · All: false · Structure Group: true | `"bFG"` | Boolean | false | Optional |
+| 20 | [Calculation Filters - Forces/Moments] Structure Group Name · When the "bFG" is true | `"FGN"` | String | - | **Required** |
+| 21 | [Calculation Filters - Elastic/General Links] Elastic/General Links · Active/Inactive | `"bL"` | Boolean | false | Optional |
+| 22 | [Calculation Filters - Elastic/General Links] Option · All: false · Boundary Group: true | `"bLG"` | Boolean | false | Optional |
+| 23 | [Calculation Filters - Elastic/General Links] Boundary Group Name · When the "bLG" is true | `"LGN"` | String | - | **Required** |
 
 > **Russia 코드** 적용 시 추가 파라미터: `MATTYPE`, `BRIDGETYPE`, `AKMATTYPE`, `AKBRIDGETYPE`(Integer), `MINFACTS2`(Number, 최소계수), `MAXV`(Integer, 최대 연속 차량), `INCV`(Integer, 차량 증분), `MAXSPACE`(Number, 열차 최대 간격).
 
@@ -1105,26 +1105,26 @@ set_moving_load_control()
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 1 | Load Point (`"INF"` / `"ALL"`) | `"POINT"` | String | - | Required |
-| 2 | Influence Generating Points (0/1) | `"iIGP"` | Integer | 0 | Optional |
-| 3 | Number/Line Element (when `iIGP`=0) | `"UNUMT"` | Integer | - | Required |
-| 4 | Distance between Points (when `iIGP`=1) | `"DIST"` | Number | - | Required |
-| 5 | Plate Options (`"CENTER"` / `"NODAL"`) | `"PLATE"` | String | - | Required |
-| 6 | Plate – Stress | `"bSTRCALC"` | Boolean | false | Optional |
-| 7 | Frame Options (`"NORMAL"` / `"AXIAL"`) | `"FRAME"` | String | - | Required |
-| 8 | Frame – Combined Stress | `"bCSTRCALC"` | Boolean | false | Optional |
-| 9 | Filter – Reactions | `"bREAC"` | Boolean | false | Optional |
-| 10 | Reactions Option (All/Group) | `"bRG"` | Boolean | false | Optional |
-| 11 | Reactions Group Name | `"RGN"` | String | - | Required |
-| 12 | Filter – Displacements | `"bDISP"` | Boolean | false | Optional |
-| 13 | Displacements Option (All/Group) | `"bDG"` | Boolean | false | Optional |
-| 14 | Displacements Group Name | `"DGN"` | String | - | Required |
-| 15 | Filter – Forces/Moments | `"bFM"` | Boolean | false | Optional |
-| 16 | Forces/Moments Option (All/Group) | `"bFG"` | Boolean | false | Optional |
-| 17 | Forces/Moments Group Name | `"FGN"` | String | - | Required |
-| 18 | Filter – Elastic/General Links | `"bL"` | Boolean | false | Optional |
-| 19 | Links Option (All/Group) | `"bLG"` | Boolean | false | Optional |
-| 20 | Links Group Name | `"LGN"` | String | - | Required |
+| 1 | Load Point Selection · Influence Line Dependent Point: "INF" · All Points: "ALL" | `"POINT"` | String | - | **Required** |
+| 2 | Influence Generating Points · Number/Line Element: 0 · Distance between Points: 1 | `"iIGP"` | Integer | 0 | Optional |
+| 3 | Number/Line Element · When "iIGP" is 0 | `"UNUMT"` | Integer | - | **Required** |
+| 4 | Distance between Points · When "iIGP" is 1 | `"DIST"` | Number | - | **Required** |
+| 5 | [Analysis Results - Plate] Options · Center: "CENTER" · Center + Nodal: "NODAL" | `"PLATE"` | String | - | **Required** |
+| 6 | [Analysis Results - Plate] Stress · Active/Inactive | `"bSTRCALC"` | Boolean | false | Optional |
+| 7 | [Analysis Results - Frame] Options · Normal: "NORMAL" · Normal + Concurrent Force/Stress: "AXIAL" | `"FRAME"` | String | - | **Required** |
+| 8 | [Analysis Results - Frame] Combined Stress · Active/Inactive | `"bCSTRCALC"` | Boolean | false | Optional |
+| 9 | [Calculation Filters - Reactions] Reactions · Active/Inactive | `"bREAC"` | Boolean | false | Optional |
+| 10 | [Calculation Filters - Reactions] Option · All: false · Structure Group: true | `"bRG"` | Boolean | false | Optional |
+| 11 | [Calculation Filters - Reactions] Structure Group Name · When the "bRG" is true | `"RGN"` | String | - | **Required** |
+| 12 | [Calculation Filters - Displacements] Displacements · Active/Inactive | `"bDISP"` | Boolean | false | Optional |
+| 13 | [Calculation Filters - Displacements] Option · All: false · Structure Group: true | `"bDG"` | Boolean | false | Optional |
+| 14 | [Calculation Filters - Displacements] Structure Group Name · When the "bDG" is true | `"DGN"` | String | - | **Required** |
+| 15 | [Calculation Filters - Forces/Moments] Elastic/General Links · Active/Inactive | `"bFM"` | Boolean | false | Optional |
+| 16 | [Calculation Filters - Forces/Moments] Option · All: false · Boundary Group: true | `"bFG"` | Boolean | false | Optional |
+| 17 | [Calculation Filters - Forces/Moments] Boundary Group Name · When the "bLG" is true | `"FGN"` | String | - | **Required** |
+| 18 | [Calculation Filters - Elastic/General Links] Elastic/General Links · Active/Inactive | `"bL"` | Boolean | false | Optional |
+| 19 | [Calculation Filters - Elastic/General Links] Option · All: false · Boundary Group: true | `"bLG"` | Boolean | false | Optional |
+| 20 | [Calculation Filters - Elastic/General Links] Boundary Group Name · When the "bLG" is true | `"LGN"` | String | - | **Required** |
 
 ### Parameters — 충격계수 (Impact Factor)
 
@@ -1292,28 +1292,28 @@ set_moving_load_china()
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 1 | Influence Generating Points (0/1) | `"iIGP"` | Integer | 0 | Optional |
-| 2 | Number/Line Element (when `iIGP`=0) | `"UNUMT"` | Integer | - | Required |
-| 3 | Distance between Points (when `iIGP`=1) | `"DIST"` | Number | - | Required |
-| 4 | Plate Options (`"CENTER"` / `"NODAL"`) | `"PLATE"` | String | - | Required |
-| 5 | Plate – Stress | `"bSTRCALC"` | Boolean | false | Optional |
-| 6 | Frame Options (`"NORMAL"` / `"AXIAL"`) | `"FRAME"` | String | - | Required |
-| 7 | Frame – Combined Stress | `"bCSTRCALC"` | Boolean | false | Optional |
-| 8 | Filter – Reactions | `"bREAC"` | Boolean | false | Optional |
+| 1 | Influence Generating Points · Number/Line Element: 0 · Distance between Points: 1 | `"iIGP"` | Integer | 0 | Optional |
+| 2 | Number/Line Element · When "iIGP" is 0 | `"UNUMT"` | Integer | - | **Required** |
+| 3 | Distance between Points · When "iIGP" is 1 | `"DIST"` | Number | - | **Required** |
+| 4 | [Analysis Results - Plate] Options · Center: "CENTER" · Center + Nodal: "NODAL" | `"PLATE"` | String | - | **Required** |
+| 5 | [Analysis Results - Plate] Stress · Active/Inactive | `"bSTRCALC"` | Boolean | false | Optional |
+| 6 | [Analysis Results - Frame] Options · Normal: "NORMAL" · Normal + Concurrent Force/Stress: "AXIAL" | `"FRAME"` | String | - | **Required** |
+| 7 | [Analysis Results - Frame] Combined Stress · Active/Inactive | `"bCSTRCALC"` | Boolean | false | Optional |
+| 8 | [Calculation Filters - Reactions] Reactions · Active/Inactive | `"bREAC"` | Boolean | false | Optional |
 | 9 | Reactions Option (All/Group) | `"bRGP"` | Boolean | false | Optional |
 | 10 | Reactions Group Name | `"RGP"` | String | - | Required |
-| 11 | Filter – Displacements | `"bDISP"` | Boolean | false | Optional |
+| 11 | [Calculation Filters - Displacements] Displacements · Active/Inactive | `"bDISP"` | Boolean | false | Optional |
 | 12 | Displacements Option (All/Group) | `"bDGP"` | Boolean | false | Optional |
 | 13 | Displacements Group Name | `"DGP"` | String | - | Required |
-| 14 | Filter – Forces/Moments | `"bFM"` | Boolean | false | Optional |
-| 15 | Forces/Moments Option (All/Group) | `"bFGP"` | Boolean | false | Optional |
-| 16 | Forces/Moments Group Name | `"FGP"` | String | - | Required |
-| 17 | Filter – Elastic/General Links | `"bL"` | Boolean | false | Optional |
-| 18 | Links Option (All/Group) | `"bLG"` | Boolean | false | Optional |
-| 19 | Links Group Name | `"LGP"` | String | - | Required |
-| 20 | Bridge Type for Impact/CDA (Steel: 0 / RC: 1) | `"BRIDGE"` | Integer | 0 | Optional |
-| 21 | Track (Single: 0 / Double: 1 / Multiple: 2) | `"TRACKS"` | Integer | 0 | Optional |
-| 22 | Sleeper Width Type (Type1: 0 / Type2: 1 / User: 2) | `"WIDTHTYPE"` | Integer | 0 | Optional |
+| 14 | [Calculation Filters - Forces/Moments] Forces/Moments · Active/Inactive | `"bFM"` | Boolean | false | Optional |
+| 15 | [Calculation Filters - Forces/Moments] Option · All: false · Structure Group: true | `"bFGP"` | Boolean | false | Optional |
+| 16 | [Calculation Filters - Forces/Moments] Structure Group Name · When the "bFG" is true | `"FGP"` | String | - | **Required** |
+| 17 | [Calculation Filters - Elastic/General Links] Elastic/General Links · Active/Inactive | `"bL"` | Boolean | false | Optional |
+| 18 | [Calculation Filters - Elastic/General Links] Option · All: false · Boundary Group: true | `"bLG"` | Boolean | false | Optional |
+| 19 | [Calculation Filters - Elastic/General Links] Boundary Group Name · When the "bLG" is true | `"LGP"` | String | - | **Required** |
+| 20 | [Impact/CDA Calculation] Bridge Type · Steel: 0 · RC: 1 | `"BRIDGE"` | Integer | 0 | Optional |
+| 21 | [Railway Bridge Information] Track · Single: 0 · Double: 1 · Multiple: 2 | `"TRACKS"` | Integer | 0 | Optional |
+| 22 | [Railway Bridge Information] Sleeper Width Type · Type 1: 0 · Type 2: 1 · User: 2 | `"WIDTHTYPE"` | Integer | 0 | Optional |
 | 23 | Sleeper Width for User | `"WIDTH"` | Number | 0 | Optional |
 | 24 | Depth of Fill | `"DEPTH"` | Number | 0 | Optional |
 | 25 | Maximum Successive Vehicles | `"VHMAX"` | Integer | - | Required |
@@ -1402,27 +1402,27 @@ set_moving_load_india()
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 1 | Influence Generating Points (0/1) | `"iIGP"` | Integer | 0 | Optional |
-| 2 | Number/Line Element (when `iIGP`=0) | `"UNUMT"` | Integer | - | Required |
-| 3 | Distance between Points (when `iIGP`=1) | `"DIST"` | Number | - | Required |
-| 4 | Plate Options (`"CENTER"` / `"NODAL"`) | `"PLATE"` | String | - | Required |
-| 5 | Plate – Stress | `"bSTRCALC"` | Boolean | false | Optional |
-| 6 | Plate – Concurrent Force | `"bCONCURRENT"` | Boolean | false | Optional |
-| 7 | Frame Options (`"NORMAL"` / `"AXIAL"`) | `"FRAME"` | String | - | Required |
-| 8 | Frame – Combined Stress | `"bCSTRCALC"` | Boolean | false | Optional |
-| 9 | Filter – Reactions | `"bREAC"` | Boolean | false | Optional |
-| 10 | Reactions Option (All/Group) | `"bRGP"` | Boolean | false | Optional |
-| 11 | Reactions Group Name | `"RGP"` | String | - | Required |
-| 12 | Filter – Displacements | `"bDISP"` | Boolean | false | Optional |
+| 1 | Influence Generating Points · Number/Line Element: 0 · Distance between Points: 1 | `"iIGP"` | Integer | 0 | Optional |
+| 2 | Number/Line Element · When "iIGP" is 0 | `"UNUMT"` | Integer | - | **Required** |
+| 3 | Distance between Points · When "iIGP" is 1 | `"DIST"` | Number | - | **Required** |
+| 4 | [Analysis Results - Plate] Options · Center: "CENTER" · Center + Nodal: "NODAL" | `"PLATE"` | String | - | **Required** |
+| 5 | [Analysis Results - Plate] Stress · Active/Inactive | `"bSTRCALC"` | Boolean | false | Optional |
+| 6 | [Analysis Results - Plate] Concurrent Force · Active/Inactive | `"bCONCURRENT"` | Boolean | false | Optional |
+| 7 | [Analysis Results - Frame] Options · Normal: "NORMAL" · Normal + Concurrent Force/Stress: "AXIAL" | `"FRAME"` | String | - | **Required** |
+| 8 | [Analysis Results - Frame] Combined Stress · Active/Inactive | `"bCSTRCALC"` | Boolean | false | Optional |
+| 9 | [Calculation Fiters - Reactions] Reactions · Active/Inactive | `"bREAC"` | Boolean | false | Optional |
+| 10 | [Calculation Fiters - Reactions] Option · All: false · Structure Group: true | `"bRGP"` | Boolean | false | Optional |
+| 11 | [Calculation Fiters - Reactions] Structure Group Name · When the "bRG" is true | `"RGP"` | String | - | **Required** |
+| 12 | [Calculation Fiters - Displacements] Displacements · Active/Inactive | `"bDISP"` | Boolean | false | Optional |
 | 13 | Displacements Option (All/Group) | `"bDGP"` | Boolean | false | Optional |
 | 14 | Displacements Group Name | `"DGP"` | String | - | Required |
-| 15 | Filter – Forces/Moments | `"bFM"` | Boolean | false | Optional |
-| 16 | Forces/Moments Option (All/Group) | `"bFGP"` | Boolean | false | Optional |
-| 17 | Forces/Moments Group Name | `"FGP"` | String | - | Required |
-| 18 | Filter – Elastic/General Links | `"bL"` | Boolean | false | Optional |
-| 19 | Links Option (All/Group) | `"bLG"` | Boolean | false | Optional |
-| 20 | Links Group Name | `"LGP"` | String | - | Required |
-| 21 | N for HA Lane Factor (BD/37/01) or ALL Model 2 (CS 454) — N < 6: 0 / N ≥ 6: 1 | `"NUMLANE"` | Integer | 0 | Optional |
+| 15 | [Calculation Fiters - Forces/Moments] Forces/Moments · Active/Inactive | `"bFM"` | Boolean | false | Optional |
+| 16 | [Calculation Fiters - Forces/Moments] Option · All: false · Structure Group: true | `"bFGP"` | Boolean | false | Optional |
+| 17 | [Calculation Fiters - Forces/Moments] Structure Group Name · When the "bFG" is true | `"FGP"` | String | - | **Required** |
+| 18 | [Calculation Fiters - Elastic/General Links] Elastic/General Links · Active/Inactive | `"bL"` | Boolean | false | Optional |
+| 19 | [Calculation Fiters - Elastic/General Links] Option · All: false · Boundary Group: true | `"bLG"` | Boolean | false | Optional |
+| 20 | [Calculation Fiters - Elastic/General Links] Boundary Group Name · When the "bLG" is true | `"LGP"` | String | - | **Required** |
+| 21 | [Number of Notional Lanes] N for HA Lane Factor (BD/37/01) or ALL Model 2 (CS 454) · N < 6: 0 · N >= 6: 1 | `"NUMLANE"` | Integer | 0 | Optional |
 
 ### Request Body (POST)
 
@@ -1511,15 +1511,15 @@ set_moving_load_bs()
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 1 | Load Point Selection (Influence Line Dependent: 1 / All Point: 2) | `"LOAD_POINT_SEL"` | Integer | - | Required |
-| 2 | Influence Generation Method (Number/Line: 0 / Distance: 1) | `"INFL_GEN_POINT"` | Integer | 0 | Optional |
-| 3 | Number/Line Element (when method 0) | `"NUM_UNIT_LOAD"` | Integer | - | Required |
-| 4 | Distance between Points (when method 1) | `"DISTANCE"` | Number | - | Required |
-| 5 | Analysis Results Type (Normal: 1 / Normal+Concurrent Force/Stress: 2) | `"ANALYSIS_RESULT"` | Integer | - | Required |
-| 6 | Combined Stress | `"OPT_COMBINED_STR"` | Boolean | false | Optional |
-| 7 | Reactions | `"OPT_REACTIONS"` | Boolean | false | Optional |
-| 8 | Displacement | `"OPT_DISPLACEMENTS"` | Boolean | false | Optional |
-| 9 | Forces/Moments | `"OPT_FORCE"` | Boolean | false | Optional |
+| 1 | Load Point Selection · Influence Line Dependent Point: 1 · All Point: 2 | `"LOAD_POINT_SEL"` | Integer | - | **Required** |
+| 2 | Influence Generation Method · Number/Line Element: 0 · Distance between Points: 1 | `"INFL_GEN_POINT"` | Integer | 0 | Optional |
+| 3 | Number/Line Element · When "INFL_GEN_POINT" is 0 | `"NUM_UNIT_LOAD"` | Integer | - | **Required** |
+| 4 | Distance between Points · When "INFL_GEN_POINT" is 1 | `"DISTANCE"` | Number | - | **Required** |
+| 5 | Analysis Results Type · Normal: 1 · Normal + Concurrent Force/Stress: 2 | `"ANALYSIS_RESULT"` | Integer | - | **Required** |
+| 6 | Combined Stress · Active/Inactive | `"OPT_COMBINED_STR"` | Boolean | false | Optional |
+| 7 | Reactions · Active/Inactive | `"OPT_REACTIONS"` | Boolean | false | Optional |
+| 8 | Displacement · Active/Inactive | `"OPT_DISPLACEMENTS"` | Boolean | false | Optional |
+| 9 | Forces/Moments · Active/Inactive | `"OPT_FORCE"` | Boolean | false | Optional |
 
 ### Request Body (POST)
 
@@ -1592,8 +1592,8 @@ set_moving_load_transverse()
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 1 | Plate Concurrent Force (Active: true / Inactive: false) | `"CONCURRENT_CALC"` | Boolean | false | Optional |
-| 2 | Elastic / General Links Concurrent Force (Active: true / Inactive: false) | `"CONCURRENT_LINK"` | Boolean | false | Optional |
+| 1 | Plate Concurrent Force · Active: true · Inactive: false | `"CONCURRENT_CALC"` | Boolean | false | Optional |
+| 2 | Elastic / General Links Concurrent Force · Active: true · Inactive: false | `"CONCURRENT_LINK"` | Boolean | false | Optional |
 
 ### Request Body (POST)
 
@@ -1654,8 +1654,8 @@ set_settlement_control()
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 1 | Nonlinear Type (Geometry: `"GEOM"` / Material: `"MATL"` / Both: `"GEOM+MATL"`) | `"NONLINEAR_TYPE"` | String | "GEOM" | Optional |
-| 2 | Iteration Method (Newton-Raphson: `"NEWTON"` / Arc-Length: `"ARC"` / Displacement-Control: `"DISP"`) | `"ITERATION_METHOD"` | String | "NEWTON" | Optional |
+| 1 | Nonlinear Type · Geometry Nonlinear: "GEOM" · Material Nonlinear: "MATL" · Geometry/Material Nonlinear: "GEOM+MATL" | `"NONLINEAR_TYPE"` | String | "GEOM" | Optional |
+| 2 | Iteration Method · Newton-Raphson: "NEWTON" · Arc-Length: "ARC" · Displacement-Control: "DISP" | `"ITERATION_METHOD"` | String | "NEWTON" | Optional |
 | 3 | Energy Norm · Active/Inactive | `"OPT_ENERGY_NORM"` | Boolean | false | Optional |
 | 4 | Energy Norm | `"ENERGY_NORM"` | Number | - | Required |
 | 5 | Displacement Norm · Active/Inactive | `"OPT_DISPLACEMENT_NORM"` | Boolean | false | Optional |
@@ -1669,7 +1669,7 @@ set_settlement_control()
 |-----|-------------|-----|------------|---------|----------|
 | 9 | Number of Load Steps | `"NUMBER_STEPS"` | Integer | - | Required |
 | 10 | Maximum Number of Iterations/Load Step | `"MAX_ITERATIONS"` | Integer | - | Required |
-| 11 | Load Case Specific Data | `"NEWTON_ITEMS"` | Array [Object] | - | Required |
+| 11 | [Iteration Method: Newton-Raphson] Load Case Specific Nonlinear Analysis Control Data - Newton-Raphson · Insert the data as an object | `"NEWTON_ITEMS"` | Array [Object] | - | **Required** |
 | (1) | Iteration Method (`"NEWTON"`) | `"ITERATION_METHOD"` | String | "NEWTON" | Optional |
 | (2) | Load Case Name | `"LCNAME"` | String | - | Required |
 | (3) | Number of Load Steps | `"NUMBER_STEPS"` | Number | - | Required |
@@ -1702,8 +1702,8 @@ set_settlement_control()
 |-----|-------------|-----|------------|---------|----------|
 | 9 | Number of Steps | `"NUMBER_STEPS"` | Integer | - | Required |
 | 10 | Max Iterations/Load Step | `"MAX_ITERATIONS"` | Integer | - | Required |
-| 11 | Master Node ID | `"MASTER_NODE"` | Integer | - | Required |
-| 12 | Direction (Dx: 0 / Dy: 1 / Dz: 2) | `"DIRECTION"` | Integer | 0 | Optional |
+| 11 | [Iteration Method: Displacement-Control] Master Node ID Number | `"MASTER_NODE"` | Integer | - | **Required** |
+| 12 | [Iteration Method: Displacement-Control] Direction · Dx: 0 · Dy: 1 · Dz: 2 | `"DIRECTION"` | Integer | 0 | Optional |
 | 13 | Maximum Displacement | `"MAXIMUM_DISPLACEMENT"` | Number | - | Required |
 | 14 | Load Case Specific Data | `"DISPCT_ITEMS"` | Array [Object] | - | Required |
 | (1) | Iteration Method (`"DISP"`) | `"ITERATION_METHOD"` | String | "DISP" | Optional |
@@ -1888,10 +1888,10 @@ Hyper-S(MEC) 솔버용 비선형 해석 제어입니다. `LC_SCOPE`로 적용 �
 |-----|-------------|-----|------------|---------|----------|
 | 1 | Load Case Scope (전체: `"ALL"` / 선택: `"SELECT"`, 기본 `"ALL"`) | `"LC_SCOPE"` | String (enum) | "ALL" | Optional |
 | 6 | Load Case Name (`LC_SCOPE="SELECT"`로 신규 생성 시 필수. 기존 항목 수정 시 미지정하면 기존 값 유지) | `"LOAD_CASE"` | String | - | Required (조건부) |
-| 2 | Nonlinear Type (`"GEOM"` / `"MATL"` / `"GEOM_MATL"`) | `"NONLINEAR_TYPE"` | String (enum) | - | Required |
-| 3 | Iteration Method (Force: `"FORCE"` / Arc Length: `"ARC"` / Displacement: `"DISP"`) | `"ITER_METHOD"` | String (enum) | - | Required |
+| 2 | [When LC_SCOPE = "SELECT"] Geometry Nonlinear · Geometry: GEOM · Material: MATL · Geometry + Material: GEOM_MATL | `"NONLINEAR_TYPE"` | String (enum) | - | **Required** |
+| 3 | [When LC_SCOPE = "SELECT"] Iteration Method · Force Control: FORCE · Arc-Length: ARC · Displacement Control: DISP | `"ITER_METHOD"` | String (enum) | - | **Required** |
 | 4 | Load Steps 설정 | `"LOAD_STEPS"` | Object | - | Required |
-| 5 | Convergence Criteria | `"CONV_CRITERIA"` | Object | - | Required |
+| 5 | Convergence criteria | `"CONV_CRITERIA"` | Object | - | **Required** |
 | 7 | 고급 설정 (미지정 시 서버 기본값 적용) | `"ADVANCED"` | Object | - | Optional |
 
 > ⚠️ **2026-08-25 확인:** `LOAD_CASE`(6번)가 이전 문서엔 전혀 없었다 — `LC_SCOPE="SELECT"`로
@@ -2074,10 +2074,10 @@ update_nonlinear_control_m1_arc()
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 1 | Final Stage Option (Last: true / Other: false) | `"bLAST_FINAL"` | Boolean | false | Optional |
-| 2 | Construction Stage Name (when `bLAST_FINAL` false) | `"FINAL_STAGE"` | String | - | Required |
-| 3 | Analysis Type (Linear: 0 / Nonlinear ¹⁾: 1 / Material Nonlinear ¹⁾: 2) | `"iINC_NLA"` | Integer | 0 | Optional |
-| 4 | Stage Option (Independent: 0 / Accumulative: 1) | `"iNLA_TYPE"` | Integer | 0 | Optional |
+| 1 | Final Stage Option · Last Stage: true · Other Stage: false | `"bLAST_FINAL"` | Boolean | false | Optional |
+| 2 | Construction Stage Name · When "bLAST_FINAL" is false | `"FINAL_STAGE"` | String | - | **Required** |
+| 3 | Analysis type · Linear Analysis: 0 · Nonlinear Analysis ¹⁾: 1 · Material Nonlinear Analysis ¹⁾: 2 | `"iINC_NLA"` | Integer | 0 | Optional |
+| 4 | Stage Option · Independent Stage: 0 · Accumulative Stage: 1 | `"iNLA_TYPE"` | Integer | 0 | Optional |
 
 > **¹⁾** 비선형/재료비선형 해석은 MIDAS Civil NX 전용입니다.
 
@@ -2107,7 +2107,7 @@ update_nonlinear_control_m1_arc()
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 7 | Cable-Pretension Force Type (Internal: `"INTERNAL"` / External: `"EXTERNAL"`) | `"CPFC"` | String | "INTERNAL" | Optional |
+| 7 | [- Cable-Pretension Force Control] Cable-Pretensions Force Type · Internal Force: "INTERNAL" · External Force: "EXTERNAL" | `"CPFC"` | String | "INTERNAL" | Optional |
 | - | External Force Type (대체 여부) | `"bEXT_REPL"` | Boolean | false | Optional |
 | 8 | Convert Final Stage Member Forces to Initial Forces for Post C.S | `"bCONV"` | Boolean | false | Optional |
 | 9 | Truss (when `bCONV` true) | `"bTRUSS"` | Boolean | false | Optional |
@@ -2143,15 +2143,15 @@ update_nonlinear_control_m1_arc()
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
 | 5 | Include P-Delta Effect ²⁾ | `"bINC_PDL"` | Boolean | false | Optional |
-| - | Number of Iterations | `"iITER"` | Integer | - | Optional |
-| - | Convergence Tolerance | `"TOL"` | Number | - | Optional |
+| - | Number of Iterations | `"iITER"` | Integer | - | **Required** |
+| - | Convergence Tolerance | `"TOL"` | Number | - | **Required** |
 
 ### Parameters — Nonlinear Analysis (`iINC_NLA` = 1 또는 2)
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| - | Number of Load Steps | `"iLSTEP"` | Integer | - | Optional |
-| - | Maximum Number of Iterations | `"iMAXITER"` | Integer | - | Optional |
+| - | Number of Load Steps | `"iLSTEP"` | Integer | - | **Required** |
+| - | Maximum Number of Iteration/Load Step | `"iMAXITER"` | Integer | - | **Required** |
 | - | Convergence Failure | `"CF"` | Boolean | false | - |
 | - | Max Bi-Section Level for a Load Step | `"BSSTEP"` | Integer | - | Optional |
 | - | Max Allowable Diverged Steps | `"ADSTEP"` | Integer | - | Optional |
@@ -2166,19 +2166,19 @@ update_nonlinear_control_m1_arc()
 |-----|-------------|-----|------------|---------|----------|
 | - | Include Time Dependent Effect | `"bINC_TDE"` | Boolean | false | Optional |
 | - | Creep & Shrinkage | `"bCNS"` | Boolean | false | Optional |
-| - | Creep & Shrinkage Type (`"CREEP"`/`"SHRINK"`/`"BOTH"`) | `"TYPE"` | String | - | Optional |
-| - | Number of Creep Iterations | `"iITER_CR"` | Integer | - | Optional |
+| - | Type · Creep: "CREEP" · Shrinkage: "SHRINK" · Creep & Shrinkage: "BOTH" | `"TYPE"` | String | - | **Required** |
+| - | Number of Iterations | `"iITER_CR"` | Integer | - | **Required** |
 | - | Creep Tolerance | `"TOL_CR"` | Number | 0 | Optional |
-| - | Only User's Creep Coefficient | `"bOUCC"` | Boolean | false | Optional |
+| - | Only User’s Creep Coefficient | `"bOUCC"` | Boolean | false | Optional |
 | - | Internal Time Step for Creep 사용 | `"bITS"` | Boolean | false | Optional |
 | - | Internal Time Step for Creep 값 | `"iITS"` | Integer | - | Required |
 | - | Auto Time Step Generation for Large Time Gap | `"bATS"` | Boolean | false | Optional |
 | - | Time Gap Steps (T>10 / >100 / >1000 / >5000 / >10000) | `"iT10"` / `"iT100"` / `"iT1K"` / `"iT5K"` / `"iT10K"` | Integer | - | Optional |
-| - | Tendon Tension Loss Effect (Creep&Shrinkage) | `"bTTLE_CS"` | Boolean | false | Optional |
-| - | Consider Re-bar Confinement Effect | `"bRCE"` | Boolean | false | Optional |
+| - | Tendon Tension Loss Effect (Creep & Shrinkage) | `"bTTLE_CS"` | Boolean | false | Optional |
+| - | Consider Re-Bar Confinement Effect | `"bRCE"` | Boolean | false | Optional |
 | - | Variation of Comp. Strength | `"bVAR"` | Boolean | false | Optional |
 | - | Tendon Tension Loss Effect (Elastic Shortening) 사용 / 타입 | `"bTTLE_ES"` / `"iTTLE_ES"` | Boolean / Integer | - | Optional |
-| - | Apply Time Dependent Elastic Modulus to Post C.S | `"bAPPLY_ELA"` | Boolean | false | Optional |
+| - | Apply Time Dependent Effect Elastic Modulus to Post C.S. | `"bAPPLY_ELA"` | Boolean | false | Optional |
 
 > ⚠️ **2026-08-25 확인:** `TOL_CR` 기본값 `-`→`0`, `iITS`는 원문 표에서 `bITS`와 분리된 별도
 > 행으로 Required 표기돼 있어(이전엔 `bITS`/`iITS`를 하나로 묶어 `-`/Optional로 잘못 기재) 정정
@@ -2338,10 +2338,10 @@ Hyper-S(MEC) 솔버용 시공단계 해석 제어입니다. 기능별로 중첩 
 | 4 | Load Cases to be Distinguished from Dead Load for C.S. Output | `"ERECTION_LOAD"` | Array [Object] | - | Optional |
 | 5 | Secondary Dead Load Effect for Grid Model / Load Case Name List | `"bSDLE"` / `"vSDLE"` | Boolean / Array [String] | false / - | Optional (`vSDLE`는 `bSDLE`가 true일 때 **Required**) |
 | 6 | Time Dependent Control | `"TIME_DEP_CONTROL"` | Object | - | Optional |
-| 7 | Cable Control | `"CABLE_CONTROL"` | Object | - | Optional |
+| 7 | Cable-Pretension Force Control | `"CABLE_CONTROL"` | Object | - | Optional |
 | 8 | Initial Force Control | `"INITIAL_CONTROL"` | Object | - | Optional |
-| 9 | Initial Displacement Control | `"INITIAL_DISP"` | Object | - | Optional |
-| 10 | Stress Decrease Control | `"STRESS_DECREASE"` | Object | - | Optional |
+| 9 | Initial Displacement for C.S. | `"INITIAL_DISP"` | Object | - | Optional |
+| 10 | Consider Stress Decrease at Transfer Length Zone by Post-tension | `"STRESS_DECREASE"` | Object | - | Optional |
 | 11 | Beam Section Property Option (Constant: 0 / Change with Tendon: 1) | `"iBSC"` | Integer | 1 | Optional |
 | 12 | Frame Output 설정 | `"FRAME_OUTPUT"` | Object | - | Optional |
 | 13 | Save Output of Current Stage (Beam/Truss) | `"bSAVE_OCS"` | Boolean | false | Optional |
@@ -2651,13 +2651,13 @@ update_construction_stage_control_m1()
 | 7 | Beam End Release | `"bRLS"` | Boolean | false | Optional |
 | 8 | Wall Stiffness Scale Factor | `"bWSSF"` | Boolean | false | Optional |
 | 9 | Element Stiffness Scale Factor | `"bESSF"` | Boolean | false | Optional |
-| 12 | Constrain DOF associated with specified displacements / settlements by boundary group combinations | `"bCDOF"` | Boolean | false | Optional |
+| 12 | Constrain DOF associated with specified displacements / Settlements by boundary group combinations | `"bCDOF"` | Boolean | false | Optional |
 
 ### Parameters — Boundary List (`vBOUNDARY`)
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 10 | Boundary List | `"vBOUNDARY"` | Array [Object] | - | Required |
+| 10 | Boundary List · Insert the data as an object | `"vBOUNDARY"` | Array [Object] | - | **Required** |
 | (1) | Boundary Group Combination Name | `"BGCNAME"` | String | - | Required |
 | (2) | Boundary Group List | `"vBG"` | Array [String] | - | Required |
 
@@ -2666,8 +2666,8 @@ update_construction_stage_control_m1()
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
 | 11 | Load Cases & Analysis List | `"vLOADANAL"` | Array [Object] | - | Optional |
-| (1) | Load Cases & Analysis Type | `"TYPE"` | String | - | Required |
-| (2) | Boundary Group Combination Name | `"BGCNAME"` | String | - | Required |
+| (1) | Load Cases & Analysis · Static load Case: "ST" · Unlisted Analysis Types: "ULAT" · TH/ RS Analysis/ Eigenvalue: "THRSEV" · TH Nonlinear Static Analysis: "THNS" · Pushover Analysis: "PO" · Moving Load Analysis: "MV" · Settlements Analysis: "SM" | `"TYPE"` | String | - | **Required** |
+| (2) | Boundary Group Combination name | `"BGCNAME"` | String | - | **Required** |
 | (3) | Static Load Case | `"LCNAME"` | String | - | Required |
 
 **`vLOADANAL.TYPE` 값:**
@@ -2840,10 +2840,10 @@ Hyper-S(MEC) 솔버용 경계 조합 할당 데이터입니다. 해석 타입·�
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
 | 1 | Assign Boundary Combination to Analyses & Load Cases | `"BC_ASSIGN"` | Array [Object] | - | Required |
-| (1) | Analysis Type | `"ANAL_TYPE"` | String (enum) | - | Required |
+| (1) | ANAL_TYPE · Static Load Case: ST · Moving Load (): MV · Static Modal (): SM · Eigenvalue (): EIGV · Response Spectrum (): RS · Linear Time History (): LTH · Nonlinear Time History (Load Case ): NLTH · Pushover (Load Case ): PO | `"ANAL_TYPE"` | String (enum) | - | **Required** |
 | (2) | Load Case Name | `"LCNAME"` | String | - | **Required** |
 | (3) | Boundary Combination Name | `"BGCNAME"` | String | "" | Optional |
-| 2 | Apply to Boundary Change | `"BC_SELECT"` | Array [String (enum)] | - | Required |
+| 2 | Select Boundary Conditions for Boundary Change | `"BC_SELECT"` | Array [String (enum)] | - | **Required** |
 
 **`BC_ASSIGN.ANAL_TYPE` 값 (enum):**
 

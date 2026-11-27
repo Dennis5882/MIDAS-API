@@ -3967,22 +3967,22 @@ print("POST (LCOM-SRC, AIK-SRC2K):", resp.status_code, resp.json())
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
-| 1 | Load Case/Combination Name | `"LC_NAME"` | String | – | Required |
-| 2 | Diagram Type (Stress: `0` / Force: `1`) | `"DGRM_TYPE"` | Integer | – | Required |
+| 1 | Load Case/Combination name | `"LC_NAME"` | String | – | **Required** |
+| 2 | Diagram Type · Stress: 0 · Force: 1 | `"DGRM_TYPE"` | Integer | – | **Required** |
 | 3 | Batch option When omitted, the default is treated as true. | `"BATCH"` | Boolean | true | Optional |
-| 4 | X-Axis Type (Distance: `0` / Node: `1`) | `"X_AXIS_TYPE"` | Integer | 0 | Optional |
+| 4 | X-Axis Type · Distance: 0 · Node: 1 | `"X_AXIS_TYPE"` | Integer | 0 | Optional |
 | 5 | [When BATCH = true or omitted] Batch output group-name list · Each item is entered directly as a non-empty string. · BRDG_GROUP, COMPONENTS, COMBINED_COMP, and 7TH_DOF_TYPE are not allowed at the top level in batch mode. | `"BATCH_LIST"` | Array[String] | – | **Required** |
 | 6 | [When BATCH = false] Bridge Girder Element Group | `"BRDG_GROUP"` | String | – | **Required** |
-| 7 | Component — Stress(`DGRM_TYPE=0`): Sax:0/+Sby:1/-Sby:2/+Sbz:3/-Sbz:4/Combined:5/7th DOF:6, Force(`DGRM_TYPE=1`): Fx:0/Fy:1/Fz:2/Mx:3/My:4/Mz:5/Mb:6/Mt:7/Mw:8 | `"COMPONENTS"` | Integer | 0 | Optional |
-| 8 | Location for Display of Stress (`BATCH=false`, `DGRM_TYPE=0`, `COMPONENTS=5`) — Max:0 / 1(-y,+z):1 / 2(+y,+z):2 / 3(+y,-z):3 / 4(-y,-z):4 | `"COMBINED_COMP"` | Integer | 0 | Optional |
-| 9 | 7th DOF Type (`BATCH=false`, `DGRM_TYPE=0`, `COMPONENTS=6`) — Sax(Warping):0 / Ssy(Mt):1 / Ssy(Mw):2 / Ssz(Mt):3 / Ssz(Mw):4 / Combined(Ssy):5 / Combined(Ssz):6 | `"7TH_DOF_TYPE"` | Integer | 0 | Optional |
+| 7 | [When BATCH = false] Component Stress (DGRM_TYPE = 0) · Sax: 0 · +Sby: 1 · -Sby: 2 · +Sbz: 3 · -Sbz: 4 · Combined: 5 · 7th DOF: 6 Force (DGRM_TYPE = 1) · Fx: 0 · Fy: 1 · Fz: 2 · Mx: 3 · My: 4 · Mz: 5 · Mb: 6 · Mt: 7 · Mw: 8 | `"COMPONENTS"` | Integer | 0 | Optional |
+| 8 | [When BATCH = false, DGRM_TYPE = 0 (Stress), and COMPONENTS = 5 (Combined)] Location for the Display of Stress · Maximum: 0 · 1(-y, +z): 1 · 2(+y, +z): 2 · 3(+y, -z): 3 · 4(-y, -z): 4 | `"COMBINED_COMP"` | Integer | 0 | Optional |
+| 9 | [When BATCH = false, DGRM_TYPE = 0 (Stress), and COMPONENTS = 6 (7th DOF)] 7th DOF Type · Sax(Warping): 0 · Ssy(Mt): 1 · Ssy(Mw): 2 · Ssz(Mt): 3 · Ssz(Mw): 4 · Combined(Ssy): 5 · Combined(Ssz): 6 | `"7TH_DOF_TYPE"` | Integer | 0 | Optional |
 | 10 | [When DGRM_TYPE = 0 (Stress)] Allowable Stress Line | `"STRESS_LINE"` | Object | – | Optional |
 | 10-(1) | Draw Allowable Stress Line | `"STRESS_LINE.OPT_USE"` | Boolean | false | Optional |
 | 10-(2) | Allowable Compression Stress (`OPT_USE=true`) | `"STRESS_LINE.COMP"` | Integer | – | Required |
 | 10-(3) | Allowable Tension Stress (`OPT_USE=true`) | `"STRESS_LINE.TENS"` | Integer | – | Required |
-| 11 | Stage List for Diagram Generation | `"STAGE_LIST"` | Array[String] | – | Required |
-| 12 | Export Path | `"EXPORT_PATH"` | String | – | Required |
-| 13 | Export Image File Extension (`"bmp"` / `"jpg"` / `"emf"`) | `"EXTENSION"` | String | – | Required |
+| 11 | Stage list for diagram generation | `"STAGE_LIST"` | Array[String] | – | **Required** |
+| 12 | Export path for the generated diagram image | `"EXPORT_PATH"` | String | – | **Required** |
+| 13 | Export image file extension · "bmp" · "jpg" · "emf" | `"EXTENSION"` | String | – | **Required** |
 
 ### Request Examples
 

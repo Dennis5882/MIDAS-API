@@ -185,11 +185,11 @@ print(result)
 | 3 | Wheel Spacing | `"WHEEL_SPACE"` | Number | 0 | Optional |
 | 4 | Transverse Lane Optimization ²⁾ | `"OPT_AUTO_LANE"` | Boolean | false | Optional |
 | 5 | Allow Width for Optimization ²⁾ | `"ALLOW_WIDTH"` | Number | – | Optional |
-| 6 | Load Distribution (`"LANE"` / `"CROSS"`) | `"LOAD_DIST"` | String | – | Required |
+| 6 | Load Distribution · Lane Element: "LANE" · Cross Beam: "CROSS" | `"LOAD_DIST"` | String | – | **Required** |
 | 7 | Name of Structure Group ³⁾ | `"GROUP_NAME"` | String | `""` | Optional |
 | 8 | Skew Start ³⁾ | `"SKEW_START"` | Number | 0 | Optional |
 | 9 | Skew End ³⁾ | `"SKEW_END"` | Number | 0 | Optional |
-| 10 | Moving Direction (`"FORWARD"` / `"BACKWARD"` / `"BOTH"`) | `"MOVING"` | String | – | Required |
+| 10 | Moving Direction · Forward: "FORWARD" · Backward: "BACKWARD" · Both: "BOTH" | `"MOVING"` | String | – | **Required** |
 
 > ¹⁾ Eurocode, Australia, Poland, BS, Russia, South Africa에서만 유효  
 > ²⁾ Taiwan에서는 사용 불가  
@@ -392,9 +392,9 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `ELEMS`
 |-----|-------------|-----|-----------|---------|----------|
 | 1 | Element No. | `"ELEM"` | Integer | – | Required |
 | 2 | Eccentricity | `"ECC"` | Number | 0 | Optional |
-| 3 | Option (0=IF/CDA, 1=Span Length) | `"IMPACT_SPAN"` | Integer | 0 | Optional |
-| 4 | Scale Factor (when IMPACT_SPAN=0) | `"IMPACT_FACTOR"` | Number | 0 | Optional |
-| 5 | Span Length (when IMPACT_SPAN=1) | `"SPAN"` | Number | 0 | Optional |
+| 3 | Option · IF/CDA: 0 · Span Length: 1 | `"IMPACT_SPAN"` | Integer | 0 | Optional |
+| 4 | Scale Factor · When "IMPACT_SPAN": 0 | `"IMPACT_FACTOR"` | Number | 0 | Optional |
+| 5 | Span Length · When "IMPACT_SPAN": 1 | `"SPAN"` | Number | 0 | Optional |
 
 ### Python 예제
 
@@ -464,7 +464,7 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `ELEMS`
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
 | 1 | Name of Line Lane | `"LL_NAME"` | String | – | Required |
-| 2 | Lane Items | `"LANE_ITEMS"` | Array[Object] | – | Required |
+| 2 | Lane Items · Insert the data as an object | `"LANE_ITEMS"` | Array[Object] | – | **Required** |
 | (1) | Element ID | `"ELEM"` | Integer | – | Required |
 | (2) | Factor | `"FACTOR"` | Number | – | Required |
 
@@ -538,16 +538,16 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `ELEMS`
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
 | 1 | Name of Line Lane | `"LL_NAME"` | String | – | Required |
-| 2 | Load Distribution (`"LANE"` / `"CROSS"`) | `"LOAD_DIST"` | String | – | Required |
-| 3 | Structure Group Name | `"GROUP_NAME"` | String | `""` | Optional |
-| 4 | Skew Start | `"SKEW_START"` | Number | 0 | Optional |
-| 5 | Skew End | `"SKEW_END"` | Number | 0 | Optional |
-| 6 | Moving Direction | `"MOVING"` | String | – | Required |
-| 7 | Optimization Width | `"OPTIM_WIDTH"` | Number | – | Required |
+| 2 | Load Distribution · Lane Element: "LANE" · Cross Beam: "CROSS" | `"LOAD_DIST"` | String | – | **Required** |
+| 3 | Name of Structure Group ²⁾ | `"GROUP_NAME"` | String | `""` | Optional |
+| 4 | Skew Start ²⁾ | `"SKEW_START"` | Number | 0 | Optional |
+| 5 | Skew End ²⁾ | `"SKEW_END"` | Number | 0 | Optional |
+| 6 | Moving Direction · Forward: "FORWARD" · Backward: "BACKWARD" · Both: "BOTH" | `"MOVING"` | String | – | **Required** |
+| 7 | Optimization Lane | `"OPTIM_WIDTH"` | Number | – | **Required** |
 | 8 | Lane Width | `"LANE_WIDTH"` | Number | – | Required |
-| 9 | Offset Type (0=Fixed, 1=Division) | `"OFFSET_TYPE"` | Integer | – | Required |
-| 10 | Number of Division | `"DIVIDE_NUM"` | Integer | – | Optional |
-| 11 | Analysis Lane Offset | `"ANAL_LANE_OFFSET"` | Number | – | Optional |
+| 9 | Offset Type (Generate Analysis Lanes) · Number of Lane: 0 · Offset from Centerline: 1 | `"OFFSET_TYPE"` | Integer | – | **Required** |
+| 10 | Divide Number (Number of Lanes) · if "OFFSET_TYPE": 0 | `"DIVIDE_NUM"` | Integer | – | Optional |
+| 11 | Analysis Lane Offset · if "OFFSET_TYPE": 1 | `"ANAL_LANE_OFFSET"` | Number | – | Optional |
 | 12 | Wheel Spacing | `"WHEEL_SPACE"` | Number | 0 | Optional |
 | 13 | Margin | `"MARGIN"` | Number | 0 | Optional |
 | 14 | Lane Items · Insert the data as an object | `"LANE_ITEMS"` | Array[Object] | – | **Required** |
@@ -641,9 +641,9 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `ELEMS`
 | 5 | Skew End | `"SKEW_END"` | Number | 0 | Optional |
 | 6 | Transverse Lane Optimization ¹⁾ | `"bOPTIMIZE"` | Boolean | false | Optional |
 | 7 | Allow Width for Optimization ¹⁾ | `"ALLOW_WIDTH"` | Number | 0 | Optional |
-| 8 | Moving Direction (`"FORWARD"` / `"BACKWARD"` / `"BOTH"`) | `"MV_DIR"` | String | – | Required |
+| 8 | Moving Direction · Forward: "FORWARD" · Backward: "BACKWARD" · Both: "BOTH" | `"MV_DIR"` | String | – | **Required** |
 | 9 | Sequence Number (Unique) | `"SEQ"` | Integer | 1 | Optional |
-| 10 | Lane Items | `"LANE_ITEMS"` | Array[Object] | – | Required |
+| 10 | Lane Items · Insert the data as an object | `"LANE_ITEMS"` | Array[Object] | – | **Required** |
 
 > ¹⁾ India, Taiwan에서는 사용 불가
 
@@ -797,18 +797,18 @@ print(result)
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
-| 1 | Lane Name | `"LANE_NAME"` | String | – | Required |
+| 1 | Name of Surface Lane | `"LANE_NAME"` | String | – | **Required** |
 | 2 | Skew Start | `"SKEW_START"` | Number | 0 | Optional |
 | 3 | Skew End | `"SKEW_END"` | Number | 0 | Optional |
-| 4 | Moving Direction | `"MOVING"` | String | – | Required |
-| 5 | Optimization Width | `"OPTIMIZE_WIDTH"` | Number | – | Required |
+| 4 | Moving Direction · Forward: "FORWARD" · Backward: "BACKWARD" · Both: "BOTH" | `"MOVING"` | String | – | **Required** |
+| 5 | Optimization Lane | `"OPTIMIZE_WIDTH"` | Number | – | **Required** |
 | 6 | Lane Width | `"LANE_WIDTH"` | Number | – | Required |
 | 7 | Wheel Spacing | `"WHEEL_SPACE"` | Number | 0 | Optional |
 | 8 | Margin | `"MARGIN"` | Number | 0 | Optional |
-| 9 | Offset Type (0=Fixed, 1=Division) | `"OFFSET_TYPE"` | Integer | – | Required |
-| 10 | Number of Division | `"DIVIDE_NUM"` | Integer | – | Optional |
-| 11 | Analysis Lane Offset | `"ANALYSIS_LANE_OFFSET"` | Number | – | Optional |
-| 12 | Items | `"ITEMS"` | Array[Object] | – | Required |
+| 9 | Offset Type (Generate Analysis Lanes) · Number of Lane: 0 · Offset from Centerline: 1 | `"OFFSET_TYPE"` | Integer | – | **Required** |
+| 10 | Divide Number (Number of Lanes) · if "OFFSET_TYPE": 0 | `"DIVIDE_NUM"` | Integer | – | Optional |
+| 11 | Analysis Lane Offset · if "OFFSET_TYPE": 1 | `"ANALYSIS_LANE_OFFSET"` | Number | – | Optional |
+| 12 | Lane Items · Insert the data as an object | `"ITEMS"` | Array[Object] | – | **Required** |
 | (1) | Node Key | `"NODE_KEY"` | Integer | – | Required |
 | (2) | Offset | `"OFFSET"` | Number | 0 | Optional |
 | (3) | Impact Factor / Centrifugal Force | `"FACTOR"` / `"CENT_F"` | Number | 0 | Optional |
@@ -949,9 +949,9 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `LANE_I
 | 4 | Width 2 (W2) | `"W2"` | Number | – | Optional |
 | 5 | Distance 1 (D1) | `"D1"` | Number | – | Optional |
 | 6 | Distance 2 (D2) | `"D2"` | Number | – | Optional |
-| 7 | Point Load (PL) | `"PL"` | Number | – | Optional |
-| 8 | PLM | `"PLM"` | Number | – | Optional |
-| 9 | PLV | `"PLV"` | Number | – | Optional |
+| 7 | [For User Defined Vehicle - Truck/Lane] Axle Load for Member Force | `"PL"` | Number | – | Optional |
+| 8 | [For User Defined Vehicle - Truck/Lane] Axle Load for Moment | `"PLM"` | Number | – | Optional |
+| 9 | [For User Defined Vehicle - Truck/Lane] Axle Load for Shear force | `"PLV"` | Number | – | Optional |
 | 10 | Add Centrifugal Force | `"CENT_F"` | Boolean | false | Optional |
 
 ### Parameters – LOAD_ITEMS (사용자 정의 차량)
@@ -1153,8 +1153,8 @@ result = mv_post("MVHL", {
 | 13 | Factor to Calculate D3~D6 | `"DELTA"` | Number | 0 | Optional |
 | User Defined - NC Type 추가 | | | | | |
 | 14 | Uniform Distribution Load | `"PRESSURE_LOAD"` | Number | - | Required |
-| 15 | Number of Load [a,b,c] | `"NUM_LOAD_ARRAY"` | Array [Integer, 3] | - | Required |
-| 16 | Different Discrete Lengths | `"POINT_DIST_ARRAY"` | Array [Object, 3] | - | Required |
+| 15 | [For User Defined Vehicle - NC Type] Number of Load · [a, b, c] | `"NUM_LOAD_ARRAY"` | Array [Integer, 3] | - | **Required** |
+| 16 | [For User Defined Vehicle - NC Type] Different Discreate Lengths | `"POINT_DIST_ARRAY"` | Array [Object, 3] | - | **Required** |
 | User Defined - Permit Truck 추가 | | | | | |
 | 17 | Permit Load(구조는 VEH_CA와 동일) | `"PERMIT_LOAD"` | Object | - | Required |
 
@@ -1178,7 +1178,7 @@ result = mv_post("MVHL", {
 | --- | --- | --- | --- | --- | --- |
 | 표준 차량 공통 | | | | | |
 | 1 | Impact Factor (z) | `"IMPACT_COEF"` | Number | 0 | Optional |
-| 2 | Width | `"CROWD_WIDTH"` | Number | 0 | Optional |
+| 2 | [For Standard Vehicle] Width ³⁾ | `"CROWD_WIDTH"` | Number | 0 | Optional |
 | 3 | Distance Between Center of Vehicles | `"DD"` | Number | 0 | Optional |
 | User Defined - Truck/Lane 공통 | | | | | |
 | 4 | Truck/Lane Type · Crawler:`1` · Lane1:`0` · GC:`2` · Lane2:`5` | `"TRUCK_TYPE"` | Integer | - | Required |
@@ -1203,8 +1203,8 @@ result = mv_post("MVHL", {
 | 22 | [For User Defined Vehicle - Train/Exceptional: Subway] Axle load for Negative Influence Line (Po) | `"P_OPPOSITE"` | Number | 0 | Optional |
 | 23 | [For User Defined Vehicle - Train/Exceptional: Type 2] Axle Load of Heavy Vehicles · Insert the data as an object | `"LOAD_ITEMS2"` | Array [Object] | - | Optional |
 | User Defined - Crowd | | | | | |
-| 24 | Crowd Load Type1 | `"VEHICLE_LOAD_USER_NUM"` | Integer | - | Required |
-| 25 | Uniform Distribution Load(Type1) | `"W_CROWD"` | Number | 0 | Optional |
+| 24 | [For User Defined Vehicle - Crowd: Type 1] Crowd Load Type · Type 1: 1 | `"VEHICLE_LOAD_USER_NUM"` | Integer | - | **Required** |
+| 25 | [For User Defined Vehicle - Crowd: Type 1] Uniform Distribution Load | `"W_CROWD"` | Number | 0 | Optional |
 | 26 | Distribution Load dW/Loaded Length(Type2) | `"W_PRES_1"`/`"D1"`, `"W_PRES_2"`/`"D2"` | Number | 0 | Optional |
 | 27 | Width(Type2) | `"DB"` | Number | 0 | Optional |
 
@@ -1592,7 +1592,7 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `UNIFOR
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
 | 1 | Vehicular Load Name | `"NAME"` | String | – | Required |
-| 2 | Wheel Load (P) | `"P"` | Number | – | Required |
+| 2 | Wheel Load(P) | `"P"` | Number | – | **Required** |
 | 3 | Distribution Width | `"W"` | Number | – | Required |
 | 4 | Longitudinal Width | `"LW"` | Number | – | Required |
 | 5 | Max. Number of Lanes (n) | `"NUM"` | Integer | – | Required |
@@ -1711,7 +1711,7 @@ print(result)
 |-----|-------------|-----|-----------|---------|----------|
 | 1 | Load Case Name | `"LCNAME"` | String | – | Required |
 | 2 | Description | `"DESC"` | String | `""` | Optional |
-| 3 | Load Type (0=General, 1=Permit, 2=Optimization) | `"TYPE"` | Integer | – | Required |
+| 3 | Load Type ¹⁾ · General Load: 0 · Load Case for Permit Vehicle: 1 · Moving Load Optimization : 2 | `"TYPE"` | Integer | – | **Required** |
 
 ### Parameters – DEFAULT (General Load, KSCE-LSD15 / AASHTO STD / LRFD / PENNDOT / Taiwan / Canada)
 
@@ -1907,19 +1907,19 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `ECC`, 
 | 1 | Load Case Name | `"LCNAME"` | String | – | Required |
 | 2 | Description | `"DESC"` | String | `""` | Optional |
 | 3 | Moving Load Optimization | `"OPT_AUTO_OPTIMIZE"` | Boolean | false | Optional |
-| 4 | Bridge Type (0=Old Urban, 1=Highway/New Urban, 2=JTG B01-2014) | `"BRIDGE_TYPE"` | Integer | – | Required |
-| 5 | Scale Factor for Old Urban Bridge [1~7, ≥8] | `"SCALE_FACTOR_O"` | Array[Number, 8] | – | Required |
-| 6 | Scale Factor for Highway/New Urban Bridge | `"SCALE_FACTOR_N"` | Array[Number, 8] | – | Required |
-| 7 | Scale Factor for JTG B01-2014 | `"SCALE_FACTOR_JTG"` | Array[Number, 8] | – | Required |
-| 8 | Combination Option (0=Combined, 1=Independent) | `"LOADING_EFFECT"` | Integer | – | Required |
+| 4 | Bridge Type · Old Urban Bridge: 0 · Highway Bridge/New Urban Bridge: 1 · JTG B01-2014: 2 | `"BRIDGE_TYPE"` | Integer | – | **Required** |
+| 5 | Scale factor for Old Urban Bridge · [1, 2, 3, 4, 5, 7, >= 8] | `"SCALE_FACTOR_O"` | Array[Number, 8] | – | **Required** |
+| 6 | Scale factor for Highway Bridge/New Urban Bridge · [1, 2, 3, 4, 5, 7, >= 8] | `"SCALE_FACTOR_N"` | Array[Number, 8] | – | **Required** |
+| 7 | Scale factor for JTG B01-2014 · [1, 2, 3, 4, 5, 7, >= 8] | `"SCALE_FACTOR_JTG"` | Array[Number, 8] | – | **Required** |
+| 8 | Combination Option · Combined: 0 · Independent: 1 | `"LOADING_EFFECT"` | Integer | – | **Required** |
 | General Load(`OPT_AUTO_OPTIMIZE`=false) | | | | | |
 | 9 | Sub-Load Cases | `"SUB_LOAD_ITEMS"` | Array[Object] | – | Required |
 | (i) | Vehicle Type (`"VL"` / `"VC"`) | `"VEHICLE_TYPE"` | String | – | Required |
-| (ii) | Vehicle Class Name | `"VEHICLE_CLASS"` | String | – | Required |
+| (ii) | [General Load] Name of Vehicle Class | `"VEHICLE_CLASS"` | String | – | **Required** |
 | (iii) | Scale Factor | `"SCALE_FACTOR"` | Number | – | Required |
-| (iv) | Min. Number of Loaded Lanes | `"MIN_NUM_LOADED_LANES"` | Integer | – | Required |
-| (v) | Max. Number of Loaded Lanes | `"MAX_NUM_LOADED_LANES"` | Integer | – | Required |
-| (vi) | Selected Lanes | `"SELECTED_LANES"` | Array[String] | – | Required |
+| (iv) | [General Load] Min. Number of Loaded Lane | `"MIN_NUM_LOADED_LANES"` | Integer | – | **Required** |
+| (v) | [General Load] Max. Number of Loaded Lane | `"MAX_NUM_LOADED_LANES"` | Integer | – | **Required** |
+| (vi) | [General Load] Selected Lane | `"SELECTED_LANES"` | Array[String] | – | **Required** |
 | Moving Load Optimization(`OPT_AUTO_OPTIMIZE`=true) | | | | | |
 | 9 | Min. Vehicle Distance | `"MIN_VEHICLE_DIST"` | Number | – | Required |
 | 10 | Loaded Lane Name | `"LOADED_LANE_NAME"` | String | – | Required |
@@ -1927,7 +1927,7 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `ECC`, 
 | 12 | Max. Number of Vehicle | `"MAX_NUM_VEHICLE"` | Integer | – | Required |
 | 13 | Assignment Vehicle | `"AUTO_OPTIMIZE_ITEMS"` | Array[Object] | – | Required |
 | (i) | Vehicle Type (`"VL"` / `"VC"`) | `"VEHICLE_TYPE"` | String | – | Required |
-| (ii) | Vehicle Class Name | `"VEHICLE_NAME"` | String | – | Required |
+| (ii) | [Moving Load Optimization] Name of Vehicle Class | `"VEHICLE_NAME"` | String | – | **Required** |
 | (iii) | Scale Factor | `"SCALE_FACTOR"` | Number | – | Required |
 
 > ⚠️ 2026-08-25 확인: 이전 문서는 `OPT_AUTO_OPTIMIZE` 필드만 소개하고 실제 `true`일 때 쓰이는
@@ -2034,9 +2034,9 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `AUTO_O
 |-----|-------------|-----|-----------|---------|----------|
 | 1 | Load Case Name | `"LCNAME"` | String | – | Required |
 | 2 | Description | `"DESC"` | String | `""` | Optional |
-| 3 | Multiple Presence Factor [1-2, 3, 4, ≥5] | `"SCALE_FACTOR"` | Array[Number, 4] | – | Required |
-| 4 | Auto Live Load Combinations | `"OPT_AUTO_LL"` | Boolean | false | Optional |
-| 5 | Load Cases for Permit Vehicle | `"OPT_LC_FOR_PERMIT_LOAD"` | Boolean | false | Optional |
+| 3 | Multiple Presence Factor · [1-2, 3, 4, >=5] | `"SCALE_FACTOR"` | Array[Number, 4] | – | **Required** |
+| 4 | Auto Live Load Combinations · General Load: false · Auto Live Load Combinations: true | `"OPT_AUTO_LL"` | Boolean | false | Optional |
+| 5 | Load Cases for Permit Vehicle · General Load: false · Load Cases for Permit Vehicle: true | `"OPT_LC_FOR_PERMIT_LOAD"` | Boolean | false | Optional |
 | **General Load** | | | | | |
 | 6 | Number of Loaded Lanes | `"NUM_LOADED_LANES"` | Integer | – | Required |
 | 7 | Sub-Load Cases | `"SUB_LOAD_ITEMS"` | Array[Object] | – | Required |
@@ -2161,9 +2161,9 @@ mv_post("MVLDid", {
 |-----|-------------|-----|-----------|---------|----------|
 | 1 | Load Case Name | `"LCNAME"` | String | – | Required |
 | 2 | Description | `"DESC"` | String | `""` | Optional |
-| 3 | Moving Load Optimization | `"bAUTOOPTIMIZE"` | Boolean | false | Optional |
+| 3 | Moving Load Optimization · General Load: false · Moving Load Optimization: true | `"bAUTOOPTIMIZE"` | Boolean | false | Optional |
 | 4 | Load Model · Standard(BD37/01,BS5400):`"STANDER"` · Special(BD86/11):`"SPECAIL"` · CS454 ALL Mode1:`"ALL_MODE_1"` · CS454 ALL Mode2:`"ALL_MODE_2"` | `"LOADMODEL"` | String | – | Required |
-| 5 | Auto Live Load Combination | `"bAUTOLIVELOADCOMB"` | Boolean | false | Optional |
+| 5 | Auto Live Load Combinations | `"bAUTOLIVELOADCOMB"` | Boolean | false | Optional |
 | 6 | Type of Design Combination Factor · if "bAUTOLIVELOADCOMB": true / Ultimate Limit State: "ULTIMATE" / Serviceability Limit State: "SERVICEABIL" | `"DGNCOMBFACTORTYPE"` | String | – | **Required** |
 | 7 | Combination of Loads · if "bAUTOLIVELOADCOMB": true / Combination 1: "COMB_1" / Combination 2 or 3: "COMB_2_3" | `"COMBMETHOD"` | String | – | **Required** |
 | 8 | Standard Load Case Data(General, `LOADMODEL`="STANDER") | `"LCDATA_STANDARD"` | Object | – | Required |
@@ -2395,7 +2395,7 @@ print(result)
 | 1 | Load Case Name | `"LCNAME"` | String | – | Required |
 | 2 | Description | `"DESC"` | String | `""` | Optional |
 | 3 | Load Model Type ¹⁾ | `"TYPE_LOADMODEL"` | Integer | – | Required |
-| 4 | Moving Load Optimization (General Load: `false` / Optimization: `true`) | `"OPT_AUTO_OPTIMIZE"` | Boolean | false | Optional |
+| 4 | Moving Load Optimization · General Load: false · Moving Load Optimization: true | `"OPT_AUTO_OPTIMIZE"` | Boolean | false | Optional |
 | 5 | Ignore ψ(1) factor | `"OPT_LEADING"` | Boolean | – | Required (LM1/3/4, General·Optimization) |
 | 6 | Load Case – Vehicle | `"VHLNAME1"` | String | – | Required (LM1/3/4) |
 | 7 | Load Case – Footway | `"VHLNAME2"` | String | – | Optional (LM1) / Required (LM3/4, Optimization) |
@@ -2487,8 +2487,8 @@ print(result)
 |-----|-------------|-----|-----------|---------|----------|
 | 1 | Load Case Name | `"LCNAME"` | String | – | Required |
 | 2 | Description | `"DESC"` | String | `""` | Optional |
-| 3 | Moving Load Optimization | `"bAUTO_OPTIMIZE"` | Boolean | false | Optional |
-| 4 | Load Case for Permit Vehicle | `"bPERMIT_LOAD"` | Boolean | false | Optional |
+| 3 | Moving Load Optimization · General Load: false · Moving Load Optimization: true | `"bAUTO_OPTIMIZE"` | Boolean | false | Optional |
+| 4 | Load Case for Permit Vehicle · General Load: false · Permit Vehicle: true | `"bPERMIT_LOAD"` | Boolean | false | Optional |
 | 5 | Load Model (1=Vehicle S/2S/Permit, 2=Vehicle K, 3=Military) | `"LOAD_MODEL"` | Integer | – | Required |
 | **General Load(`bAUTO_OPTIMIZE`=false, `bPERMIT_LOAD`=false)** | | | | | |
 | 6 | Sub-Load Cases | `"DEFAULT"` | Object | – | Required |
@@ -2633,7 +2633,7 @@ mv_post("MVLDpl", {
 | 4 | Scale Factor | `"SCALEFACTOR"` | Number | – | Required |
 | 5 | Line Lane | `"LLAN_NAME"` | String | – | Required |
 | 6 | Number of Loaded Lanes | `"NUM_LANE"` | Integer | – | Required |
-| 7 | Factors (Length: NUM_LANE + 1) | `"ITEMS"` | Array[Number] | – | Required |
+| 7 | Factors · Length: NUM_LANE + 1 | `"ITEMS"` | Array[Number] | – | **Required** |
 
 ### Python 예제
 
@@ -3177,7 +3177,7 @@ print(result)
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
-| 1 | Input Type (0=Auto, 1=User) | `"INPUT_TYPE"` | Integer | – | Required |
+| 1 | Input Type · Auto Input: 0 · User Input: 1 | `"INPUT_TYPE"` | Integer | – | **Required** |
 | 2 | Determinant Length (Lφ) | `"LENGTH"` | Number | – | Required (Auto) |
 | 3 | Quality of Track Maintenance (0=Carefully, 1=Standard) | `"MAINTAIN_TYPE"` | Integer | – | Required (Auto) |
 | 4 | Consider Reduced Dynamic Effect | `"OPT_REDUCE_EFF"` | Boolean | false | Optional |
@@ -3248,11 +3248,11 @@ DYFG와 동일한 파라미터 구조. `"Assign"` 키 값이 개별 요소 ID.
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
-| 1 | Input Type (0=Auto, 1=User) | `"INPUT_TYPE"` | Integer | – | Required |
+| 1 | Input Type · Auto Input: 0 · User Input: 1 | `"INPUT_TYPE"` | Integer | – | **Required** |
 | 2 | Determinant Length (Lφ) | `"LENGTH"` | Number | – | Required (Auto) |
 | 3 | Quality of Track Maintenance (0=Carefully, 1=Standard) | `"MAINTAIN_TYPE"` | Integer | – | Required (Auto) |
 | 4 | Consider Reduced Dynamic Effect | `"OPT_REDUCE_EFF"` | Boolean | false | Optional |
-| 5 | Height of Cover (h) | `"HEIGHT_COVER"` | Number | – | Required (OPT_REDUCE_EFF=true) |
+| 5 | Height of Cover (h) · if "OPT_REDUCE_EFF": true | `"HEIGHT_COVER"` | Number | – | **Required** |
 | 6 | Dynamic Factor (φ) | `"DYN_FACTOR"` | Number | – | Required (User) |
 
 ### Python 예제

@@ -2716,8 +2716,8 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 |-----|------|-----|------|--------|------|
 | 1 | [Root Object] Object keyed by ID strings (e.g., "1"), where each entry represents an element. | `"Assign"` | Object | — | **Required** |
 | 2 | [General] Auto Calculate | `"OPT_AUTO"` | Boolean | `false` | Optional |
-| 3 | CMy | `"CMY"` | Number | `0` | 선택 |
-| 4 | CMz | `"CMZ"` | Number | `0` | 선택 |
+| 3 | [General] CMy | `"CMY"` | Number | `0` | Optional |
+| 4 | [General] CMz | `"CMZ"` | Number | `0` | Optional |
 
 ### Request / Response JSON
 
@@ -5741,8 +5741,8 @@ print(res.json())
 | 14.3 | 표시 성분 (`COMP`: Axial/Shear-y/Shear-z/Bend-y/Bend-z/Combined) | `"COMPONENTS"` | Object | — | 선택 |
 | 14.4 | 표시 타입 (CONTOUR / VALUES / LEGEND / CODE_CHECKING_RATIO) | `"TYPE_OF_DISPLAY"` | Object | — | 선택 |
 | 14.4.1 | Contour (OPT_CHECK, NUM_OF_COLOR 2~20, COLOR_TYPE vrgb/rgb/rbg/gray scaled, OPTIONS.GRADIENT_FILL·CONTOUR_FILL) | `"CONTOUR"` | Object | — | 선택 |
-| 14.4.2 | Values (OPT_CHECK, DECIMAL_PT, VALUE_EXP, MINMAX_ONLY.MAXMIN, SET_ORIENT) | `"VALUES"` | Object | — | 선택 |
-| 14.4.3 | Legend (OPT_CHECK, POSITION right/left/top/bottom, VALUE_EXP, DECIMAL_PT) | `"LEGEND"` | Object | — | 선택 |
+| 14.4.2 | [General] Values | `"VALUES"` | Object | — | Optional |
+| 14.4.3 | [General] Legend | `"LEGEND"` | Object | — | Optional |
 | 14.4.4 | Code Checking Ratio (COMP=Combined일 때; CHECK, DISPLAY_MEMBERS.BEAM·COLUMN·BRACE, COLUMN_SECTION_SIZE.SCALE_FACTOR, VALUE_OPTION) | `"CODE_CHECKING_RATIO"` | Object | — | 선택 |
 
 > `RESULT_GRAPHIC` 하위는 위 표 외에도 스키마에 상세 중첩 필드가 정의되어 있습니다(각 색상/값/범례 옵션의 기본값·범위는 위의 **JSON Schema** 블록 참조).
@@ -6338,7 +6338,7 @@ print(res.json())
 | 4.7 | └ Model Update | `"MODEL_UPDATE"` | Boolean | `false` | Optional |
 | 4.8 | └ Export Path (folder or prefix) e.g. C:\MIDAS\Report\optimal_design | `"EXPORT_PATH"` | String | - | Optional |
 | 5 | Plate Thickness Data (only when SectDB=BUILT) | `"PLATE_THICKNESS"` | Array[Number] | - | Optional |
-| 6 | User-Defined Section DB (only when SectDB=USER) | `"USER_DEFINED_SECT"` | Array[Object] | - | **Required** (`USER`) |
+| 6 | [When "SECT_DB" is USER] User-Defined Section DB (only when SectDB=USER) | `"USER_DEFINED_SECT"` | Array[Object] | - | **Required** |
 | 6.1 | └ No | `"NO"` | Integer | - | **Required** |
 | 6.2 | └ Shape | `"SHAPE"` | String | - | **Required** |
 | 6.3 | └ D1 | `"D1"` | Number | `0` | Optional |

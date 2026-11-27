@@ -585,8 +585,8 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 | 14.4 | [When "SPEC_RC_WALL" is true, "BDRY_ELEM_MTHD" is Displacement] Shear for Design | `"SHEAR_DES"` | Object | — | Optional |
 | 14.4.1 | [When "SPEC_RC_WALL" is true, "BDRY_ELEM_MTHD" is Displacement] Method · MAX(Ve1,Ve2): "MAX" · MIN(Ve1,Ve2): "MIN" · Ve1: "Ve1" · Ve2: "Ve2" | `"MTHD"` | String (oneOf) | `"MIN"` | Optional |
 | 14.4.2 | [When "FRAME_TYPE" is Special] R*Vc(a1*Σ(Mpr)/L) ≥ max(Ve1,Ve2)/2 , R Constraints: · Value Range: >= 0 | `"R"` | Number | `0` | Optional |
-| 14.4.3 | a1: Ve1 = Vg + a1·Σ(Mn)/L | `"A1"` | Number | `1` | 선택 |
-| 14.4.4 | a2: Ve2 = Vg + a2·Veq | `"A2"` | Number | `2` | 선택 |
+| 14.4.3 | [When "MTHD" is MAX,MIN,Ve1] a1 Ve1 = Vg + a1*Σ(Mn)/L | `"A1"` | Number | `1` | Optional |
+| 14.4.4 | [When "MTHD" is MAX,MIN,Ve2] a2 Ve2 = Vg + a2*Veq | `"A2"` | Number | `2` | Optional |
 | 14.5 | [When "MTHD" is MAX,MIN,Ve2] Beam-Column Joint Design | `"BEAM_COL_JNT_DES"` | Boolean | `false` | Optional |
 | 14.6 | [When "FRAME_TYPE" is Special,Intermediate, "BEAM_COL_JNT_DES" is true] Beam-Column Joint configuration | `"JOINT"` | Object | — | Optional |
 | 14.6.1 | [When "FRAME_TYPE" is Special,Intermediate, "BEAM_COL_JNT_DES" is true] Member Types to be excluded in Seismic Design · Sub-Beam: "SUBBEAM" · Cantilever: "CANTIL" · Underground Beam/Column: "UGBEAMCOL" | `"EXCL_MEM_TYPES"` | Array[string] | `["SUBBEAM","CANTIL","UGBEAMCOL"]` | Optional |
@@ -3172,9 +3172,9 @@ print("GET :", requests.get(URI, headers=HEADERS).json())
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
 | 1 | [Root Object] Object keyed by ID strings (e.g., "1"), where each entry represents an element | `"Assign"` | Object | — | **Required** |
-| 2 | Ky | `"Ky"` | Number | `1` | 선택 |
-| 3 | Kz | `"Kz"` | Number | `1` | 선택 |
-| 4 | Kt | `"Kt"` | Number | `1` | 선택 |
+| 2 | [General] Ky | `"Ky"` | Number | `1` | Optional |
+| 3 | [General] Kz | `"Kz"` | Number | `1` | Optional |
+| 4 | [General] Kt | `"Kt"` | Number | `1` | Optional |
 
 ### Request / Response JSON
 
@@ -3305,8 +3305,8 @@ print("GET :", requests.get(URI, headers=HEADERS).json())
 |-----|------|-----|------|--------|------|
 | 1 | [Root Object] Object keyed by ID strings (e.g., "1"), where each entry represents an element. | `"Assign"` | Object | — | **Required** |
 | 2 | [General] Auto Calculate | `"OPT_AUTO"` | Boolean | `false` | Optional |
-| 3 | CMy | `"CMY"` | Number | `0` | 선택 |
-| 4 | CMz | `"CMZ"` | Number | `0` | 선택 |
+| 3 | [General] CMy | `"CMY"` | Number | `0` | Optional |
+| 4 | [General] CMz | `"CMZ"` | Number | `0` | Optional |
 
 ### Request / Response JSON
 

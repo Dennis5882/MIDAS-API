@@ -211,7 +211,7 @@ midas_api("POST", "/db/NODE", node_body)
 | 5 | Beta Angle | `"ANGLE"` | Number | 0 | Optional |
 | 6 | Element Subtype • Truss: 1 | `"STYPE"` | Integer | - | **Required** |
 | 7 | Allowable Compression (Negative Value Only) | `"TENS"` | Number | 0 | Optional |
-| 8 | Tension Limit Value (Positive Value Only) | `"T_LIMIT"` | Number | 0 | Optional |
+| 8 | [Tension only - Truss] Tension Limit Value · Positive Value Only | `"T_LIMIT"` | Number | 0 | Optional |
 | 9 | Tension Limit | `"T_bLMT"` | Boolean | false | Optional |
 
 #### Tension only — Hook (STYPE: 2)
@@ -230,7 +230,7 @@ midas_api("POST", "/db/NODE", node_body)
 | 6 | Element Subtype • Cable: 3 | `"STYPE"` | Integer | - | **Required** |
 | 7 | Cable Type • Pretension: 1 • Horizontal: 2 • Lu: 3 | `"CABLE"` | Integer | - | **Required** |
 | 8 | Pretension / Horizontal | `"TENS"` | Number | 0 | Optional |
-| 9 | Lu (Range: 0.5~1.5) | `"NON_LEN"` | Number | - | **Required** |
+| 9 | [Tension only - Cable] Lu · Range: 0.5~1.5 | `"NON_LEN"` | Number | - | **Required** |
 
 #### Compression only — Truss (STYPE: 1)
 
@@ -240,7 +240,7 @@ midas_api("POST", "/db/NODE", node_body)
 | 6 | Element Subtype • Truss: 1 | `"STYPE"` | Integer | - | **Required** |
 | 7 | Allowable Tension (Positive Value Only) | `"TENS"` | Number | 0 | Optional |
 | 8 | Compression Limit | `"T_bLMT"` | Boolean | false | Optional |
-| 9 | Compression Limit Value (Negative Value Only) | `"T_LIMIT"` | Number | - | Optional |
+| 9 | [Compression only - Truss] Compression Limit value · Negative Value Only | `"T_LIMIT"` | Number | - | Optional |
 
 #### Compression only — Gap (STYPE: 2)
 
@@ -257,8 +257,8 @@ midas_api("POST", "/db/NODE", node_body)
 | 5 | Beta Angle | `"ANGLE"` | Number | 0 | Optional |
 | 6 | Element Subtype • Membrane: 1 • Plate: 2 | `"STYPE"` | Integer | - | **Required** |
 | 7 | Wall ID | `"WALL"` | Integer | - | **Required** |
-| 8 | Orientation • Beta Angle: 0 • Ref Point: 1 • Ref Vector: 2 | `"W_CON"` | Integer | - | **Required** |
-| 9 | Wall Type • Plate base: 0 • CRB-Pin: 1 • CRB-Fixed: 2 | `"W_TYPE"` | Integer | 0 | Optional |
+| 8 | Orientation (Wall Beta Angle Only) · Beta Angle: 0 · Ref Point: 1 · Ref Vector: 2 | `"W_CON"` | Integer | - | **Required** |
+| 9 | Wall Type · Plate base: 0 · CRB - Pin: 1 · CRB - Fixed: 2 | `"W_TYPE"` | Integer | 0 | Optional |
 
 #### Plate
 
@@ -865,16 +865,16 @@ for did, d in domains.items():
 |-----|-------------|-----|------------|---------|----------|
 | 5 | Member Type • None: 0 • Slab: 1 • Mat: 2 | `"MEMBER_TYPE"` | Integer | - | **Required** |
 | 6 | Basic Rebar Option | `"OPT_BASIC_REBAR"` | Boolean | false | Optional |
-| 7 | Top Rebar Name (X-Dir) | `"TOP_REBAR_NAME_X"` | String | Blank | Optional |
-| 8 | Top Rebar Space (X-Dir) | `"TOP_REBAR_SPACE_X"` | Number | 0 | Optional |
-| 9 | Bottom Rebar Name (X-Dir) | `"BOTTOM_REBAR_NAME_X"` | String | Blank | Optional |
-| 10 | Bottom Rebar Space (X-Dir) | `"BOTTOM_REBAR_SPACE_X"` | Number | 0 | Optional |
-| 11 | Top Rebar Name (Y-Dir) | `"TOP_REBAR_NAME_Y"` | String | Blank | Optional |
-| 12 | Top Rebar Space (Y-Dir) | `"TOP_REBAR_SPACE_Y"` | Number | 0 | Optional |
-| 13 | Bottom Rebar Name (Y-Dir) | `"BOTTOM_REBAR_NAME_Y"` | String | Blank | Optional |
-| 14 | Bottom Rebar Space (Y-Dir) | `"BOTTOM_REBAR_SPACE_Y"` | Number | 0 | Optional |
+| 7 | [GEN NX Only] Top Rebar Name (X-Dir) · When the Basic Rebar is True | `"TOP_REBAR_NAME_X"` | String | Blank | Optional |
+| 8 | [GEN NX Only] Top Rebar Space (X-Dir) · When the Basic Rebar is True | `"TOP_REBAR_SPACE_X"` | Number | 0 | Optional |
+| 9 | [GEN NX Only] Bottom Rebar Name (X-Dir) · When the Basic Rebar is True | `"BOTTOM_REBAR_NAME_X"` | String | Blank | Optional |
+| 10 | [GEN NX Only] Bottom Rebar Space (X-Dir) · When the Basic Rebar is True | `"BOTTOM_REBAR_SPACE_X"` | Number | 0 | Optional |
+| 11 | [GEN NX Only] Top Rebar Name (Y-Dir) · When the Basic Rebar is True | `"TOP_REBAR_NAME_Y"` | String | Blank | Optional |
+| 12 | [GEN NX Only] Top Rebar Space (Y-Dir) · When the Basic Rebar is True | `"TOP_REBAR_SPACE_Y"` | Number | 0 | Optional |
+| 13 | [GEN NX Only] Bottom Rebar Name (Y-Dir) · When the Basic Rebar is True | `"BOTTOM_REBAR_NAME_Y"` | String | Blank | Optional |
+| 14 | [GEN NX Only] Bottom Rebar Space (Y-Dir) · When the Basic Rebar is True | `"BOTTOM_REBAR_SPACE_Y"` | Number | 0 | Optional |
 | 15 | Rebar Material Option | `"OPT_REBAR_MATL"` | Boolean | false | Optional |
-| 16 | Rebar Material Key | `"REBAR_MATL_KEY"` | Integer | 0 | Optional |
+| 16 | [GEN NX Only] Rebar Material Key · When the Rebar Material is True | `"REBAR_MATL_KEY"` | Integer | 0 | Optional |
 | 17 | Use Mt | `"bUseMt"` | Boolean | - | **Required** |
 | 18 | Thickness | `"THICKNESS"` | Number | - | **Required** |
 

@@ -159,7 +159,7 @@ midas_api("DELETE", "/db/CONS", {"Assign": {"10": {}}})
 | --- | --- | --- | --- | --- | --- |
 | 1 | Point Spring · Insert the data as an object | `"ITEMS"` | Array[Object] | — | **Required** |
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
-| (2) | Spring Type · `"LINEAR"` / `"COMP"` / `"TENS"` / `"MULTI"` | `"TYPE"` | String | — | Required |
+| (2) | Spring Type · Linear: "LINEAR" · Compression-Only: "COMP" · Tension-Only: "TENS" · Multi-Linear: "MULTI" | `"TYPE"` | String | — | **Required** |
 | (3) | Boundary Group Name | `"GROUP_NAME"` | String | Blank | Optional |
 | (4) | Create Function Type · by Point Spring Function: 0 · by Surface Spring Function: 1 | `"FormType"` | Integer | 0 | Optional |
 
@@ -295,7 +295,7 @@ all_nspr = midas_api("GET", "/db/NSPR")
 | No. | 설명 | 키 | 타입 | 기본값 | 필수 |
 | --- | --- | --- | --- | --- | --- |
 | 1 | General Spring Name | `"NAME"` | String | — | Required |
-| 2 | Stiffness Matrix Option | `"OPT_STIFFNESS"` | Boolean | false | Optional |
+| 2 | Stiffness Matrix Option · True | `"OPT_STIFFNESS"` | Boolean | false | Optional |
 | 3 | Stiffness Matrix ¹⁾ | `"SPRING"` | Array[Number,21] | 0 | Optional |
 | 4 | Mass Matrix Option | `"OPT_MASS"` | Boolean | false | Optional |
 | 5 | Mass Matrix¹⁾ | `"MASS"` | Array[Number,21] | 0 | Optional |
@@ -430,10 +430,10 @@ midas_api("POST", "/db/GSPR", gspr_data)
 | 1 | Surface Spring · Insert the data as an object | `"ITEMS"` | Array[Object] | — | **Required** |
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Boundary Group Name | `"GROUP_NAME"` | String | Blank | Optional |
-| (3) | Element Type · `"FRAME"` / `"PLANAR(FACE)"` / `"PLANAR(EDGE)"` / `"SOLID"` | `"ELEM_TYPE"` | String | — | Required |
+| (3) | Element Type · Frame: "FRAME" · Planar(Face): "PLANAR(FACE)" · Planar(Edge): "PLANAR(EDGE)" · Solid(Face): "SOLID" | `"ELEM_TYPE"` | String | — | **Required** |
 | (4) | Frame (Local Axis) · Local x: 2 · Local y: 0 · Local z: 1 Planar & Solid (Edge Face) · Edge#1: 0 · Edge#2: 1 · Edge#3: 2 · Edge#4: 3 | `"EDGE_FACE"` | Integer | 0 | Optional |
-| (5) | Spring Type · 0=Linear, 1=Comp.-Only, 2=Tens.-Only | `"SPRING_TYPE"` | Integer | 0 | Optional |
-| (6) | Modulus of Subgrade Reaction Ks | `"MODULUS"` | Number | — | Required |
+| (5) | Spring Type · Linear: 0 · Comp. -only: 1 · Tens. -only: 2 | `"SPRING_TYPE"` | Integer | 0 | Optional |
+| (6) | Modulus of Subgrade Reaction (Ks) | `"MODULUS"` | Number | — | **Required** |
 | (7) | Width · Only for Frame Type | `"WIDTH"` | Number | — | **Required** |
 
 ### 요청 바디 예시 (FRAME / PLANAR / SOLID)
@@ -512,7 +512,7 @@ midas_api("POST", "/db/SSPS", ssps_data)
 
 | No. | 설명 | 키 | 타입 | 기본값 | 필수 |
 |-----|------|----|------|--------|------|
-| 1 | Node Numbers `[i-node, j-node]` | `"NODE"` | Array[Integer,2] | — | Required |
+| 1 | Assigned Node Number · [i Node, j Node] | `"NODE"` | Array[Integer,2] | — | **Required** |
 | 2 | Boundary Group Name | `"BNGR_NAME"` | String | Blank | Optional |
 | 3 | Beta Angle (°) | `"ANGLE"` | Number | 0 | Optional |
 | 4 | Link Type | `"LINK"` | String | — | Required |
@@ -623,7 +623,7 @@ midas_api("POST", "/db/ELNK", elnk_data)
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Boundary Group Name | `"GROUP_NAME"` | String | Blank | Optional |
 | (3) | Degree of Freedom · Rigid: 1, Free: 0 / 6th decimal place: DX / 5th decimal place: DY / 4th decimal place: DZ / 3rd decimal place: RX / 2nd decimal place: RY / 1st decimal place: RZ | `"DOF"` | Integer | — | **Required** |
-| (4) | Slave Node ID Numbers | `"S_NODE"` | Array[Integer] | — | Required |
+| (4) | Slave Nodes ID Number | `"S_NODE"` | Array[Integer] | — | **Required** |
 
 **DOF 예시:**  
 `110001` → DX(=1), DY(=1), DZ(=0), RX(=0), RY(=0), RZ(=1) 구속
@@ -831,17 +831,17 @@ NLLP에서 정의한 일반 링크 속성을 두 절점 사이에 배정합니�
 
 | No. | 설명 | 키 | 타입 | 기본값 | 필수 |
 |-----|------|----|------|--------|------|
-| 1 | Node 1 ID | `"NODE1"` | Integer | — | Required |
-| 2 | Node 2 ID | `"NODE2"` | Integer | — | Required |
+| 1 | Node 1 ID Number | `"NODE1"` | Integer | — | **Required** |
+| 2 | Node 2 ID Number | `"NODE2"` | Integer | — | **Required** |
 | 3 | Boundary Group Name | `"GROUP_NAME"` | String | Blank | Optional |
 | 4 | General Link Property Name | `"PROP_NAME"` | String | — | Required |
 | 5 | Inelastic Hinge Property Name | `"IEHP_NAME"` | String | Blank | Optional |
-| 6 | Reference Coordinate System · 0=Element, 1=Global | `"REF_SYSTEM"` | Integer | — | Required |
+| 6 | Reference Coordinate System · Element: 0 · Global: 1 | `"REF_SYSTEM"` | Integer | — | **Required** |
 | — | **REF_SYSTEM=0 (요소계)** | | | | |
 | 7 | Beta Angle (°) | `"BETA_ANGLE"` | Number | 0 | Optional |
 | — | **REF_SYSTEM=1 (전역계) – Angle 방식** | | | | |
 | 7 | Input Method · 0=Angle | `"INPUT_METHOD"` | Integer | — | Required |
-| 8 | Angle Values `[about X, about y', about z'']` | `"ANGLE_VALUES"` | Array[Object] | — | Required |
+| 8 | [Global - Angle] Angle · Insert the data as an object | `"ANGLE_VALUES"` | Array[Object] | — | **Required** |
 | — | **REF_SYSTEM=1 (전역계) – 3Points 방식** | | | | |
 | 7 | Input Method · 1=3 Points | `"INPUT_METHOD"` | Integer | — | Required |
 | 8 | Point Values `[P0[3], P1[3], P2[3]]` | `"POINT_VALUES"` | Array[Object,3] | — | Required |
@@ -919,12 +919,12 @@ Hyper-S 솔버 전용 일반 링크 배정 엔드포인트입니다.
 | No. | 설명 | 키 | 타입 | 기본값 | 필수 |
 |-----|------|----|------|--------|------|
 | 1 | General Link Property Name | `"PROP_NAME"` | String | — | Required |
-| 2 | Node 1 ID | `"NODE1"` | Integer | — | Required |
+| 2 | Node Number 1 | `"NODE1"` | Integer | — | **Required** |
 | 3 | Node 2 ID | `"NODE2"` | Integer | — | Required |
-| 4 | Reference Coordinate System · 0=Element, 1=Global | `"REF_SYSTEM"` | Integer | — | Required |
+| 4 | Reference Coordinate System · Element: 0 · Global: 1 | `"REF_SYSTEM"` | Integer | — | **Required** |
 | 5 (REF_SYSTEM=0) | Beta Angle | `"BETA_ANGLE"` | Number | 0 | Required |
-| 6 (REF_SYSTEM=1) | Input Method · 0=Angle, 1=3 Points, 2=Vector | `"INPUT_METHOD"` | Integer | — | Required |
-| 7 (INPUT_METHOD=0) | Angle Values `[about X, about y', about z'']` | `"ANGLE_VALUES"` | Array[Object] | — | Required |
+| 6 (REF_SYSTEM=1) | [When REF_SYSTEM = 1] Input Method · Angle: 0 · 3 Points: 1 · Vector: 2 | `"INPUT_METHOD"` | Integer | — | **Required** |
+| 7 (INPUT_METHOD=0) | [When INPUT_METHOD = 0] Angle Value | `"ANGLE_VALUES"` | Array[Object] | — | **Required** |
 | 8 (INPUT_METHOD=1) | Point Values `[P0[3], P1[3], P2[3]]` | `"POINT_VALUES"` | Array[Object] | — | Required |
 | 9 (INPUT_METHOD=2) | Vector Values `[V1[3], V2[3]]` | `"VECTOR_VALUES"` | Array[Object] | — | Required |
 | 10 | Boundary Group Name | `"GROUP_NAME"` | String | — | Optional |
@@ -1041,11 +1041,11 @@ midas_api("POST", "/db/CGLP", cglp_data)
 | 1 | Beam End Release · Insert the data as an object | `"ITEMS"` | Array[Object] | — | **Required** |
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Load Group Name | `"GROUP_NAME"` | String | Blank | Optional |
-| (3) | Input Method · false=Relative, true=Value | `"bVALUE"` | Boolean | false | Optional |
-| (4) | Release i-Node `[Fx,Fy,Fz,Mx,My,Mz,Mb]` | `"FLAG_I"` | String(7) | — | Required |
-| (5) | Partial Fixity for i-Node `[Fx,Fy,Fz,Mx,My,Mz,Mb]` | `"VALUE_I"` | Array[Number,7] | 0 | Optional |
-| (6) | Release j-Node `[Fx,Fy,Fz,Mx,My,Mz,Mb]` | `"FLAG_J"` | String(7) | — | Required |
-| (7) | Partial Fixity for j-Node `[Fx,Fy,Fz,Mx,My,Mz,Mb]` | `"VALUE_J"` | Array[Number,7] | 0 | Optional |
+| (3) | Input Method · Relative: false · Value: true | `"bVALUE"` | Boolean | false | Optional |
+| (4) | Release i-Node | `"FLAG_I"` | String(7) | — | **Required** |
+| (5) | Partial Fixity for i-Node · [Fx, Fy, Fz, Mx, My, Mz, Mb ] | `"VALUE_I"` | Array[Number,7] | 0 | Optional |
+| (6) | Release j-Node | `"FLAG_J"` | String(7) | — | **Required** |
+| (7) | Partial Fixity for j-Node · [Fx, Fy, Fz, Mx, My, Mz, Mb ] | `"VALUE_J"` | Array[Number,7] | 0 | Optional |
 
 ### 요청 바디 예시
 
@@ -1119,7 +1119,7 @@ midas_api("POST", "/db/FRLS", frls_data)
 | 1 | Beam End Offsets · Insert the data as an object | `"ITEMS"` | Array[Object] | — | **Required** |
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Load Group Name | `"GROUP_NAME"` | String | Blank | Optional |
-| (3) | Reference CS · `"GLOBAL"` / `"ELEMENT"` | `"TYPE"` | String | — | Required |
+| (3) | Reference Coordinate System · Global : "GLOBAL" · Element : "ELEMENT" | `"TYPE"` | String | — | **Required** |
 | — | **GLOBAL 전용** | | | | |
 | (4) | [Global ¹⁾] Vector of the End Offset Distance at N1 end in GCS X-Direction | `"RGDXi"` | Number | 0 | Optional |
 | (5) | [Global ¹⁾] Vector of the End Offset Distance at N1 end in GCS Y-Direction | `"RGDYi"` | Number | 0 | Optional |
@@ -1199,9 +1199,9 @@ midas_api("POST", "/db/OFFS", offs_data)
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Load Group Name | `"GROUP_NAME"` | String | Blank | Optional |
 | (3) | Position - N1 · Release: 1 · Connect: 0 · [Fx, Fy, Fz, Mx, My] | `"N1"` | Array[Integer,5] | — | **Required** |
-| (4) | Position N2 `[Fx,Fy,Fz,Mx,My]` | `"N2"` | Array[Integer,5] | — | Required |
-| (5) | Position N3 `[Fx,Fy,Fz,Mx,My]` | `"N3"` | Array[Integer,5] | — | Required |
-| (6) | Position N4 `[Fx,Fy,Fz,Mx,My]` | `"N4"` | Array[Integer,5] | — | Required |
+| (4) | Position - N2 · Release: 1 · Connect: 0 · [Fx, Fy, Fz, Mx, My] | `"N2"` | Array[Integer,5] | — | **Required** |
+| (5) | Position - N3 · Release: 1 · Connect: 0 · [Fx, Fy, Fz, Mx, My] | `"N3"` | Array[Integer,5] | — | **Required** |
+| (6) | Position - N4 · Release: 1 · Connect: 0 · [Fx, Fy, Fz, Mx, My] | `"N4"` | Array[Integer,5] | — | **Required** |
 
 ### 요청 바디 예시
 
@@ -1264,7 +1264,7 @@ Elastic Link (MULTILINEAR) 또는 General Link (FORCE 타입)에서 참조하는
 | 3 | Symmetric Boolean · Symmetric: true · Unsymmetric: false | `"SYMM"` | Boolean | false | Optional |
 | 4 | Function ID | `"FUNC_ID"` | Integer | 0 | Optional |
 | 5 | Function Data · Insert the data as an object | `"ITEMS"` | Array[Object] | — | **Required** |
-| (1) | X-Axis (Displacement m / Radian) | `"X"` | Number | — | Required |
+| (1) | X-Axis · Force: Displacement · Moment: Radian | `"X"` | Number | — | **Required** |
 | (2) | Y-Axis (Force kN / Moment kN·m) | `"Y"` | Number | — | Required |
 
 ### 요청 바디 예시
@@ -2041,9 +2041,9 @@ midas_api("POST", "/db/MCON", mcon_data)
 
 | No. | 설명 | 키 | 타입 | 기본값 | 필수 |
 |-----|------|----|------|--------|------|
-| 1 | Auto Calculate Panel Zone Offset Distances | `"OPT_OFFSET"` | Boolean | — | Required |
+| 1 | Calculation Option · Auto Calculate Panel Zone Offset Distances: true · Do not Calculate: false | `"OPT_OFFSET"` | Boolean | — | **Required** |
 | 2 | Offset Factor | `"OFFS_FACTOR"` | Number | — | Required |
-| 3 | Output Position | `"OUTPUT_POSITION"` | Integer | — | Required |
+| 3 | Output Position · Panel Zone: 1 · Offset Position: 2 | `"OUTPUT_POSITION"` | Integer | — | **Required** |
 
 ### 요청 바디 예시
 
@@ -2100,7 +2100,7 @@ midas_api("PUT", "/db/PZEF", pzef_data)
 
 | No. | 설명 | 키 | 타입 | 기본값 | 필수 |
 |-----|------|----|------|--------|------|
-| 1 | Constraint Label Direction | `"DIR"` | Integer | — | Required |
+| 1 | Constraint Label Direction · Local x (+): 0 · Local x (-): 1 · Local y (+): 2 · Local y (-): 3 · Local z (+): 4 · Local z (-): 5 | `"DIR"` | Integer | — | **Required** |
 
 **DIR 값:**
 

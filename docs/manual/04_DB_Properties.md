@@ -101,14 +101,14 @@ def midas_api(method: str, endpoint: str, body=None):
 |-----|-------------|-----|------------|---------|----------|
 | 1 | Material Type • Concrete: `"CONC"` • Steel: `"STEEL"` • SRC: `"SRC"` • Aluminum: `"ALUMINUM"` • User Defined: `"USER"` | `"TYPE"` | String | - | **Required** |
 | 2 | Material Name | `"NAME"` | String | - | **Required** |
-| 3 | Specific Heat | `"HE_SPEC"` | Number | 0 | Optional |
+| 3 | Specific heat | `"HE_SPEC"` | Number | 0 | Optional |
 | 4 | Heat Conduction | `"HE_COND"` | Number | 0 | Optional |
 | 5 | Plastic Material No. | `"PLMT"` | Integer | 0 | Optional |
 | 6 | Plastic Material Name | `"P_NAME"` | String | Blank | Optional |
 | 7 | Use Mass Density | `"bMASS_DENS"` | Boolean | false | Optional |
 | 8 | Damping Ratio | `"DAMP_RAT"` | Number | 0 | Optional |
 | 9 | Material Parameter | `"PARAM"` | Object | - | **Required** |
-| (1) | Material Parameter Type • Standard: 1 • Isotropic: 2 • Orthotropic: 3 | `"P_TYPE"` | Integer | - | **Required** |
+| (1) | Material Type · Standard: 1 · Isotropic: 2 · Orthotropic: 3 | `"P_TYPE"` | Integer | - | **Required** |
 
 #### PARAM — P_TYPE = 1 (Standard / DB)
 
@@ -117,27 +117,27 @@ def midas_api(method: str, endpoint: str, body=None):
 | (2) | Standard Name | `"STANDARD"` | String | - | **Required** |
 | (3) | Code Name | `"CODE"` | String | Blank | Optional |
 | (4) | DB Name | `"DB"` | String | - | **Required** |
-| (5) | Use Young's Modulus (User Option) | `"bELAST"` | Boolean | false | Optional |
+| (5) | [When Material Type, "P_TYPE" is 1 (Standard)] Youngs Modulus for User Define Option · JTG3362-18(S) | `"bELAST"` | Boolean | false | Optional |
 
 #### PARAM — P_TYPE = 2 (Isotropic / User)
 
 | Sub-No. | Description | Key | Value Type | Default | Required |
 |---------|-------------|-----|------------|---------|----------|
 | (2) | Modulus of Elasticity | `"ELAST"` | Number | - | **Required** |
-| (3) | Poisson's Ratio | `"POISN"` | Number | - | **Required** |
+| (3) | [When Material Type, "P_TYPE" is 2 (Isotropic)] Poisson’s Ratio | `"POISN"` | Number | - | **Required** |
 | (4) | Thermal Coefficient | `"THERMAL"` | Number | - | **Required** |
-| (5) | Weight Density | `"DEN"` | Number | - | **Required** |
+| (5) | [When Material Type, "P_TYPE" is 2 (Isotropic)] Weight of Density | `"DEN"` | Number | - | **Required** |
 | (6) | Mass Density | `"MASS"` | Number | - | **Required** |
 
 #### PARAM — P_TYPE = 3 (Orthotropic / User)
 
 | Sub-No. | Description | Key | Value Type | Default | Required |
 |---------|-------------|-----|------------|---------|----------|
-| (2) | Modulus of Elasticity (3 values) | `"ELAST_M"` | Array[Number] | - | **Required** |
-| (3) | Poisson's Ratio (3 values) | `"POISN_M"` | Array[Number] | - | **Required** |
-| (4) | Thermal Coefficient (3 values) | `"THERMAL_M"` | Array[Number] | - | **Required** |
-| (5) | Shear Modulus (3 values) | `"SHEAR_M"` | Array[Number] | - | **Required** |
-| (6) | Weight Density | `"DEN"` | Number | - | **Required** |
+| (2) | [When Material Type, "P_TYPE" is 3 (Orthotropic)] Modulus of Elasticity | `"ELAST_M"` | Array[Number] | - | **Required** |
+| (3) | [When Material Type, "P_TYPE" is 3 (Orthotropic)] Poisson’s Ratio | `"POISN_M"` | Array[Number] | - | **Required** |
+| (4) | [When Material Type, "P_TYPE" is 3 (Orthotropic)] Thermal Coefficient | `"THERMAL_M"` | Array[Number] | - | **Required** |
+| (5) | [When Material Type, "P_TYPE" is 3 (Orthotropic)] Shear Modulus | `"SHEAR_M"` | Array[Number] | - | **Required** |
+| (6) | [When Material Type, "P_TYPE" is 3 (Orthotropic)] Weight of Density | `"DEN"` | Number | - | **Required** |
 | (7) | Mass Density | `"MASS"` | Number | - | **Required** |
 
 ### Request Body 예제
@@ -424,7 +424,7 @@ result = midas_api("GET", "/db/IMFM-M1")
 | 2 | Material Function Type • Creep: `"CREEP"` • Shrinkage Strain: `"SHRINK"` • Relaxation: `"RELAX"` | `"FTYPE"` | String | - | **Required** |
 | 3 | Scale Factor | `"SCALE"` | Number | - | **Required** |
 | 4 | Description | `"DESC"` | String | Blank | Optional |
-| 5 | Function Data (Array of `{DAY, VALUE}`) | `"vDAY"` | Array[Object] | - | **Required** |
+| 5 | Function Data · Insert the data as an object | `"vDAY"` | Array[Object] | - | **Required** |
 | (1) | Time | `"DAY"` | Number | - | **Required** |
 | (2) | Value | `"VALUE"` | Number | - | **Required** |
 | 6 (Creep only) | Creep Type • Specific Creep: `"SC"` • Creep Function: `"CF"` • Creep Coefficient: `"CC"` | `"CTYPE"` | String | - | **Required** |
@@ -528,9 +528,9 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `ELAST`
 | 5 (CEB-FIP) | Notional Size of Member | `"MSIZE"` | Number | - | **Required** |
 | 6 | Type of Cement ²⁾ | `"CTYPE"` | String | `"RS"` | Optional |
 | 7 | Concrete Age | `"AGE"` | Number | - | **Required** |
-| 8 (CEB-FIP 2010) | Type of Aggregate • 0: Basalt/dense limestone • 1: Quartzite • 2: Limestone • 3: Sandstone | `"TYPEOFAFFR"` | Integer | 0 | Optional |
+| 8 (CEB-FIP 2010) | [CEB-FIP 2010, 1990, 1978] Type of Aggregate <strong> · </strong>Only for CEB-FIP 2010 / Basalt, dense limestone aggregates: 0 / Quartzite aggregates: 1 / Limestone aggregates: 2 / Sandstone aggregates: 3 | `"TYPEOFAFFR"` | Integer | 0 | Optional |
 | 5 (ACI) | Volume/Surface Ratio | `"VOL"` | Number | - | **Required** |
-| 7 (ACI) | Curing Method • Moist: `"MOIST"` • Steam: `"STEAM"` | `"CMETHOD"` | String | `"MOIST"` | Optional |
+| 7 (ACI) | [ACI] Curing Method · Moist cured: "MOIST" · Steam cure: "STEAM" | `"CMETHOD"` | String | `"MOIST"` | Optional |
 
 #### ¹⁾ Code Name 코드표 (`TDMT.CODE`)
 
@@ -754,14 +754,14 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `EXPOSU
 | No. | Description | Key | Value Type | Default | Required |
 | --- | --- | --- | --- | --- | --- |
 | 5 | Cement Type ²⁾ | `"iCTYPE"` | Integer | - | **Required** |
-| 6 | Aggregate Type · Basalt/dense limestone: `0` / Quartzite: `1` / Limestone: `2` / Sandstone: `3` | `"nAGGRE"` | Integer | - | **Required** |
+| 6 | [CEB-FIP (2010), INDIA (IRC:112-2020)] Aggregate Type · Basalt, dense limestone aggregates (1.2): 0 · Quartzite aggregates: 1 · Limestone aggregates: 2 · Sandstone aggregates: 3 | `"nAGGRE"` | Integer | - | **Required** |
 
 #### `Russian` 전용 추가 필드
 
 | No. | Description | Key | Value Type | Default | Required |
 | --- | --- | --- | --- | --- | --- |
 | 5 | Cement Type ²⁾ | `"iCTYPE"` | Integer | - | **Required** |
-| 6 | Curing Method · Natural Cure: `0` / Steam Cure: `1` | `"CMETH"` | Integer | - | **Required** |
+| 6 | [Russian] Curing Method · Natural Cure: 0 · Steam Cure: 1 | `"CMETH"` | Integer | - | **Required** |
 | 7 | Concrete Type · Heavy Concrete: `0` / Fine-Grained Concrete: `1` | `"CTYPE"` | Integer | - | **Required** |
 | 8 | Maximum Aggregate Size | `"MAXS"` | Number | - | **Required** |
 | 9 | Specific Content of the Cement Paste | `"PZ"` | Number | - | **Required** |
@@ -791,7 +791,7 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `EXPOSU
 
 | No. | Description | Key | Value Type | Default | Required |
 | --- | --- | --- | --- | --- | --- |
-| 5 | Elastic Cement Type · Normal Type: `0` / Rapid Type: `1` | `"iECTYPE"` | Integer | - | **Required** |
+| 5 | [Japan (Elastic)] Elastic Cement Type · Normal Type: 0 · Rapid Type: 1 | `"iECTYPE"` | Integer | - | **Required** |
 
 #### `TYPE = "USER"` (User Defined) 전용 필드
 
@@ -916,8 +916,8 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `aDATA`
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 1 | Change Property Method • Notional Size: `"NSM"` • Volume/Surface Ratio: `"VSR"` | `"TYPE"` | String | - | **Required** |
-| 2 | Change Property Value (h for NSM, v/s for VSR) | `"H_VS"` | Number | - | **Required** |
+| 1 | Change Property Method · Notional Size of Member: "NSM" · Volume Surface Ratio: "VSR" | `"TYPE"` | String | - | **Required** |
+| 2 | Change Property Value · Notional Size of Member: h · Volume Surface Ratio: v/s | `"H_VS"` | Number | - | **Required** |
 
 ### Request Body
 
@@ -1282,19 +1282,19 @@ result = midas_api("GET", "/db/EPMT-M1")
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 1 | Section Data Type | `"SECTTYPE"` | String | - | **Required** |
+| 1 | Section Data Type ¹⁾ | `"SECTTYPE"` | String | - | **Required** |
 | 2 | Section Name | `"SECT_NAME"` | String | - | **Required** |
 | 3 | Section Data (Before Stage) | `"SECT_BEFORE"` | Object | - | **Required** |
 | (1) | Section Shape ²⁾ | `"SHAPE"` | String | - | **Required** |
 | (2) | Offset Direction | `"OFFSET_PT"` | String | `"CC"` | Optional |
-| (3) | Center Location (0: Centroid, 1: Center of Section) | `"OFFSET_CENTER"` | Integer | 0 | Optional |
-| (4) | Horizontal Offset Option (0: Extreme Fiber, 1: User) | `"HORZ_OFFSET_OPT"` | Integer | 0 | Optional |
-| (5) | Horizontal Offset Value (I-end) | `"USERDEF_OFFSET_YI"` | Number | 0 | Optional |
-| (6) | Horizontal Offset Value (J-end, Tapered only) | `"USERDEF_OFFSET_YJ"` | Number | 0 | Optional |
-| (7) | Vertical Offset Option | `"VERT_OFFSET_OPT"` | Integer | 0 | Optional |
-| (8) | Vertical Offset Value (I-end) | `"USERDEF_OFFSET_ZI"` | Number | 0 | Optional |
-| (9) | Vertical Offset Value (J-end, Tapered only) | `"USERDEF_OFFSET_ZJ"` | Number | 0 | Optional |
-| (10) | User Type Offset Reference (0: Centroid, 1: Extreme Fiber) | `"USER_OFFSET_REF"` | Integer | 0 | Optional |
+| (3) | [Offset Setting ³⁾] Center Location · Centroid: 0 · Center of Section: 1 | `"OFFSET_CENTER"` | Integer | 0 | Optional |
+| (4) | [Offset Setting ³⁾] Horizontal Offset Option · to Extreme Fiber: 0 · User: 1 | `"HORZ_OFFSET_OPT"` | Integer | 0 | Optional |
+| (5) | [Offset Setting ³⁾] Horizontal Offset Value for I · for User Type | `"USERDEF_OFFSET_YI"` | Number | 0 | Optional |
+| (6) | [Offset Setting ³⁾] Horizontal Offset Value for J · for User Type and Tapered Section | `"USERDEF_OFFSET_YJ"` | Number | 0 | Optional |
+| (7) | [Offset Setting ³⁾] Vertical Offset Option · to Extreme Fiber: 0 · User: 1 | `"VERT_OFFSET_OPT"` | Integer | 0 | Optional |
+| (8) | [Offset Setting ³⁾] Vertical Offset Value for I · for User Type | `"USERDEF_OFFSET_ZI"` | Number | 0 | Optional |
+| (9) | [Offset Setting ³⁾] Vertical Offset Value for J · for User Type and Tapered Section | `"USERDEF_OFFSET_ZJ"` | Number | 0 | Optional |
+| (10) | [Offset Setting ³⁾] User Type Offset Reference Position · Centroid: 0 · Extreme Fiber(s): 1 | `"USER_OFFSET_REF"` | Integer | 0 | Optional |
 | (11) | Consider Shear Deformation | `"USE_SHEAR_DEFORM"` | Boolean | false | Optional |
 | (12) | Consider Warping Effect | `"USE_WARPING_EFFECT"` | Boolean | false | Optional |
 
@@ -1324,7 +1324,7 @@ result = midas_api("GET", "/db/EPMT-M1")
 | (2) | Section Specifications | `"SECT_I"` | Object | - | **Required** |
 | DB | DB Name | `"DB_NAME"` | String | - | **Required** |
 | DB | Section Name of DB | `"SECT_NAME"` | String | - | **Required** |
-| User | Dimension of Section | `"vSIZE"` | Array[Number] | - | **Required** |
+| User | [User Section] Dimension of Section ¹⁾ | `"vSIZE"` | Array[Number] | - | **Required** |
 
 ```json
 {
@@ -1355,7 +1355,7 @@ result = midas_api("GET", "/db/EPMT-M1")
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 2 | Calculation Options | `"CALC_OPT"` | Boolean | true | Create Only |
+| 2 | Calculation options ¹⁾ | `"CALC_OPT"` | Boolean | true | Create Only |
 | (1) | Dimension of Section ³⁾ | `"vSIZE"` | Array[Number] | - | **Required** |
 
 ```json
@@ -1390,11 +1390,11 @@ result = midas_api("GET", "/db/EPMT-M1")
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
 | (1) | SRC Type • DB: 1 • User: 2 | `"SRC_TYPE"` | Integer | - | **Required** |
-| (3) | E Ratio (Steel/Concrete) | `"MATL_ELAST"` | Number | - | **Required** |
-| (4) | Density Ratio | `"MATL_DENS"` | Number | - | **Required** |
-| (5) | Poisson's Ratio (Steel) | `"MATL_POIS_S"` | Number | - | **Required** |
-| (6) | Poisson's Ratio (Concrete) | `"MATL_POIS_C"` | Number | - | **Required** |
-| (7) | Stiffness Reduction Factor (Concrete) | `"MATL_STIF_FACTOR"` | Number | - | **Required** |
+| (3) | Modulus of Elasticity Ratio of Steel Relative to Concrete | `"MATL_ELAST"` | Number | - | **Required** |
+| (4) | Specific Weight (Density) Ratio of Steel Relative to Concrete | `"MATL_DENS"` | Number | - | **Required** |
+| (5) | Poisson's Ratio for Steel | `"MATL_POIS_S"` | Number | - | **Required** |
+| (6) | Poisson's Ratio for Concrete | `"MATL_POIS_C"` | Number | - | **Required** |
+| (7) | Stiffness Reduction Factor of Concrete | `"MATL_STIF_FACTOR"` | Number | - | **Required** |
 | (9) DB | Steel Section (DB/User) | `"SECT_I"` | Object | - | **Required** |
 | (10) | Concrete Dimensions | `"SECT_J"` | Object | - | **Required** |
 
@@ -1431,11 +1431,11 @@ result = midas_api("GET", "/db/EPMT-M1")
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| i | Outer-Height array | `"vSIZE_PSC_A"` | Array[Number] | - | **Required** |
-| ii | Outer-Breadth array | `"vSIZE_PSC_B"` | Array[Number] | - | **Required** |
-| iii | Inner-Height array | `"vSIZE_PSC_C"` | Array[Number] | - | **Required** |
-| iv | Inner-Breadth array | `"vSIZE_PSC_D"` | Array[Number] | - | **Required** |
-| (6) | Web Thickness Check [i, j] | `"USE_WEB_THICK"` | Array[Boolean] | false | **Required** |
+| i | Outer-Height ¹⁾ | `"vSIZE_PSC_A"` | Array[Number] | - | **Required** |
+| ii | Outer-Breadth ¹⁾ | `"vSIZE_PSC_B"` | Array[Number] | - | **Required** |
+| iii | Inner-Height ¹⁾ | `"vSIZE_PSC_C"` | Array[Number] | - | **Required** |
+| iv | Inner-Breadth ¹⁾ | `"vSIZE_PSC_D"` | Array[Number] | - | **Required** |
+| (6) | Web Thickness Check for Torsion of I, J · [i, j] | `"USE_WEB_THICK"` | Array[Boolean] | false | **Required** |
 
 ```json
 {
@@ -1995,22 +1995,22 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `AREA`,
 |-----|-------------|-----|------------|---------|----------|
 | 1 | Thickness Name | `"NAME"` | String | - | **Required** |
 | 2 | Thickness Type • Value: `"VALUE"` • Stiffened: `"STIFFENED"` | `"TYPE"` | String | - | **Required** |
-| 3 | Plane • false: In-plane & Out-of-plane (same) • true: Different I/O values | `"bINOUT"` | Boolean | false | Optional |
+| 3 | Plane · In-plane & Out-of-plane: false · In-plane / Out-of-plane: true | `"bINOUT"` | Boolean | false | Optional |
 | 4 | In-plane Thickness | `"T_IN"` | Number | - | **Required** |
 | 5 | Out-of-plane Thickness (when `"bINOUT"` is true) | `"T_OUT"` | Number | - | Required |
 | 6 | Plate Offset Option • None: 0 • Thickness Ratio: 1 • Value: 2 | `"OFFSET"` | Integer | 0 | Optional |
-| 7 | Local z Direction Offset Value | `"O_VALUE"` | Number | 0 | Optional |
+| 7 | Local z Direction Offset Value · When "OFFSET" is 1 or 2 | `"O_VALUE"` | Number | 0 | Optional |
 
 ### Specifications — Stiffened DB (`"STYPE": "DB"`)
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 1 | Thickness Type | `"TYPE"` | String | - | **Required** |
+| 1 | Thickness Type · Value: "VALUE" · Stiffened: "STIFFENED" | `"TYPE"` | String | - | **Required** |
 | 2 | Stiffened Thickness Sub-Type • Value: `"VALUE"` • User: `"USER"` • DB: `"DB"` | `"STYPE"` | String | - | **Required** |
 | 3 | Rib Position • `"LOWER"` • `"UPPER"` | `"RIB_POS"` | String | - | **Required** |
 | 4 | Defined Stiffener | `"SECTION"` | Object | - | **Required** |
 | (1) | Thickness | `"THIKNESS"` | Number | - | **Required** |
-| (2) | DB Name | `"DBNAME"` | String | - | **Required** |
+| (2) | DB Name ²⁾ | `"DBNAME"` | String | - | **Required** |
 | (3) | XZ Section | `"XZ"` | Object | - | **Required** |
 | i | Use Rib Attached | `"bRIB"` | Boolean | false | Optional |
 | ii | Shape | `"SHAPE"` | String | - | **Required** |
@@ -2154,12 +2154,12 @@ midas_api("POST", "/db/THIK", thik_data)
 | No. | Description | Key | Value Type | Default | Required |
 | --- | --- | --- | --- | --- | --- |
 | 1 | Tapered Group Name | `"NAME"` | String | - | **Required** |
-| 2 | Element No. list | `"ELEMLIST"` | Array[Integer] | - | **Required** |
-| 3 | Z-axis Section Shape Variation · Linear: `"LINEAR"` / Polynomial: `"POLY"` | `"ZVAR"` | String | - | **Required** |
-| 4 | Y-axis Section Shape Variation · Linear: `"LINEAR"` / Polynomial: `"POLY"` | `"YVAR"` | String | - | **Required** |
-| 5 (ZVAR=POLY) | Z axis Exponent | `"ZEXP"` | Number | - | **Required** |
-| 6 (ZVAR=POLY) | Z axis Symmetric Plane from i or j | `"ZFROM"` | String | `"i"` | Optional |
-| 7 (ZVAR=POLY) | Z axis Symmetric Plane Distance (m) | `"ZDIST"` | Number | 0 | Optional |
+| 2 | Element No. | `"ELEMLIST"` | Array[Integer] | - | **Required** |
+| 3 | Section Shape Variation · Linear: "LINEAR" · Polynomial: "POLY" | `"ZVAR"` | String | - | **Required** |
+| 4 | Section Shape Variation · Linear: "LINEAR" · Polynomial: "POLY" | `"YVAR"` | String | - | **Required** |
+| 5 (ZVAR=POLY) | [When Section Shape Variation, "YVAR", "ZVAR" is "POLY" (Polynomial)] Z axis - Exponent | `"ZEXP"` | Number | - | **Required** |
+| 6 (ZVAR=POLY) | [When Section Shape Variation, "YVAR", "ZVAR" is "POLY" (Polynomial)] Z axis - Symmetric Plane from i or j · "i" or "j" | `"ZFROM"` | String | `"i"` | Optional |
+| 7 (ZVAR=POLY) | [When Section Shape Variation, "YVAR", "ZVAR" is "POLY" (Polynomial)] Z axis - Symmetric Plane Distance (m) | `"ZDIST"` | Number | 0 | Optional |
 | 8 (YVAR=POLY) | Y axis Exponent | `"YEXP"` | Number | - | **Required** |
 | 9 (YVAR=POLY) | Y axis Symmetric Plane from i or j | `"YFROM"` | String | `"i"` | Optional |
 | 10 (YVAR=POLY) | Y axis Symmetric Plane Distance (m) | `"YDIST"` | Number | 0 | Optional |
@@ -2210,26 +2210,26 @@ midas_api("POST", "/db/TSGR", tsgr_data)
 
 | No. | Description | Key | Value Type | Default | Required |
 | --- | --- | --- | --- | --- | --- |
-| 1 | Stiffness Items (Array of Objects) | `"ITEMS"` | Array[Object] | - | **Required** |
+| 1 | Stiffness · Insert the data as an object | `"ITEMS"` | Array[Object] | - | **Required** |
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Boundary Group Name | `"GROUP_NAME"` | String | Blank | Optional |
-| (3) | Area Scale Factor (I) | `"AREA_SF"` | Number | 1 | Optional |
-| (4) | Asy Scale Factor (I) | `"ASY_SF"` | Number | 1 | Optional |
-| (5) | Asz Scale Factor (I) | `"ASZ_SF"` | Number | 1 | Optional |
-| (6) | Ixx Scale Factor (I) | `"IXX_SF"` | Number | 1 | Optional |
-| (7) | Iyy Scale Factor (I) | `"IYY_SF"` | Number | 1 | Optional |
-| (8) | Izz Scale Factor (I) | `"IZZ_SF"` | Number | 1 | Optional |
-| (9) | Weight Scale Factor | `"WGT_SF"` | Number | 1 | Optional |
+| (3) | Area - part I | `"AREA_SF"` | Number | 1 | Optional |
+| (4) | Asy - part I | `"ASY_SF"` | Number | 1 | Optional |
+| (5) | Asz - part I | `"ASZ_SF"` | Number | 1 | Optional |
+| (6) | Ixx - part I | `"IXX_SF"` | Number | 1 | Optional |
+| (7) | Iyy - part I | `"IYY_SF"` | Number | 1 | Optional |
+| (8) | Izz - part I | `"IZZ_SF"` | Number | 1 | Optional |
+| (9) | Weight - part I | `"WGT_SF"` | Number | 1 | Optional |
 | (10) | Warping Scale Factor (I) | `"W_SF"` | Number | 1 | Optional |
 | (11) | Composite Section 적용 시점 · Before만: `1` / After만: `2` / Before+After: `3` | `"IPART"` | Integer | 1 | Optional |
 | (12) | Tapered Section — J단 별도 값 사용 여부 | `"bDiffIJ"` | Boolean | `true` | Optional |
 | (13) | Area Scale Factor (J, Tapered) | `"J1"` | Number | 1 | Optional |
-| (14) | Asy Scale Factor (J) | `"J2"` | Number | 1 | Optional |
-| (15) | Asz Scale Factor (J) | `"J3"` | Number | 1 | Optional |
-| (16) | Ixx Scale Factor (J) | `"J4"` | Number | 1 | Optional |
-| (17) | Iyy Scale Factor (J) | `"J5"` | Number | 1 | Optional |
-| (18) | Izz Scale Factor (J) | `"J6"` | Number | 1 | Optional |
-| (19) | Weight Scale Factor (J) | `"J7"` | Number | 1 | Optional |
+| (14) | [For Tapered Section] Asy - part J | `"J2"` | Number | 1 | Optional |
+| (15) | [For Tapered Section] Asz - part J | `"J3"` | Number | 1 | Optional |
+| (16) | [For Tapered Section] Ixx - part J | `"J4"` | Number | 1 | Optional |
+| (17) | [For Tapered Section] Iyy - part J | `"J5"` | Number | 1 | Optional |
+| (18) | [For Tapered Section] Izz - part J | `"J6"` | Number | 1 | Optional |
+| (19) | [For Tapered Section] Weight - part J | `"J7"` | Number | 1 | Optional |
 | (20) | Warping Scale Factor (J) | `"J8"` | Number | 1 | Optional |
 
 ### Request Body
@@ -2308,11 +2308,11 @@ midas_api("POST", "/db/SECF", secf_data)
 | --- | --- | --- | --- | --- | --- |
 | (1) | Diagonal Reinforcement | `"OPT_DR"` | Boolean | `false` | Optional |
 | (2) | [DR] Pitch (> 0) | `"DR_PITCH"` | Number | - | **Required** (`OPT_DR`) |
-| (3) | [DR] Angle | `"DR_THETA"` | Number | `0` | Optional |
+| (3) | [When "OPT_DR" is true] [DR] Angle | `"DR_THETA"` | Number | `0` | Optional |
 | (4) | [DR] Area (> 0) | `"DR_AW"` | Number | - | **Required** (`OPT_DR`) |
 | (5) | Steel Bar for Web | `"OPT_SBW"` | Boolean | `false` | Optional |
 | (6) | [SBW] Pitch (> 0) | `"SBW_PITCH"` | Number | - | **Required** (`OPT_SBW`) |
-| (7) | [SBW] Angle | `"SBW_ANGLE"` | Number | `90` | Optional |
+| (7) | [When "OPT_SBW" is true] [SBW] Angle | `"SBW_ANGLE"` | Number | `90` | Optional |
 | (8) | [SBW] Area (> 0) | `"SBW_AP"` | Number | - | **Required** (`OPT_SBW`) |
 | (9) | [SBW] Pre-force (> 0) | `"SBW_PS"` | Number | - | **Required** (`OPT_SBW`) |
 | (10) | [SBW] Shear Reduction Factor (> 0) | `"SBW_FACTOR"` | Number | `1` | Optional |
@@ -2331,14 +2331,14 @@ midas_api("POST", "/db/SECF", secf_data)
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 | --- | --- | --- | --- | --- | --- |
-| (1) | 6.1.1 Section Positions - I / J · I: "I" · J: "J" | `"IJ"` | String | - | **Required** |
-| (2) | 6.1.2 Bar Name Constraints: · Length: min 1 Must be a rebar name of the concrete rebar material code of the model (e.g. D16, #5). Otherwise the request is rejected. | `"NAME"` | String | - | **Required** |
-| (3) | 6.1.3 Reference Y · Centroid: "0" · Left: "1" | `"REF_Y"` | Integer | - | **Required** |
-| (4) | 6.1.4 Distance from Reference in Y direction | `"Y"` | Number | `0` | Optional |
-| (5) | 6.1.5 Reference Z · Top: "0" · Bottom: "1" | `"REF_Z"` | Integer | - | **Required** |
-| (6) | 6.1.6 Distance from Reference in Z Direction | `"Z"` | Number | `0` | Optional |
-| (7) | 6.1.7 Number of Rebar Constraints: · Value Range: >= 0 | `"NUM"` | Integer | - | **Required** |
-| (8) | 6.1.8 Spacing Constraints: · Value Range: >= 0 | `"SPACING"` | Number | `0` | Optional |
+| (1) | [General] Section Positions - I / J · I: "I" · J: "J" | `"IJ"` | String | - | **Required** |
+| (2) | [General] Bar Name Constraints: · Length: min 1 Must be a rebar name of the concrete rebar material code of the model (e.g. D16, #5). Otherwise the request is rejected. | `"NAME"` | String | - | **Required** |
+| (3) | [General] Reference Y · Centroid: "0" · Left: "1" | `"REF_Y"` | Integer | - | **Required** |
+| (4) | [General] Distance from Reference in Y direction | `"Y"` | Number | `0` | Optional |
+| (5) | [General] Reference Z · Top: "0" · Bottom: "1" | `"REF_Z"` | Integer | - | **Required** |
+| (6) | [General] Distance from Reference in Z Direction | `"Z"` | Number | `0` | Optional |
+| (7) | [General] Number of Rebar Constraints: · Value Range: >= 0 | `"NUM"` | Integer | - | **Required** |
+| (8) | [General] Spacing Constraints: · Value Range: >= 0 | `"SPACING"` | Number | `0` | Optional |
 | (9) | 6.1.9 Part · 0: "0" · 1: "1" · 2: "2" — Allowed values depend on the section: non-composite 0, 1 or 2; concrete composite 1 or 2; steel composite 2. | `"PART"` | Integer | - | **Required** |
 
 ### Request / Response JSON
@@ -2575,17 +2575,17 @@ midas_api("POST", "/db/STRPSSM", strpssm_data)
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 1 | Items (Array of Objects) | `"ITEMS"` | Array[Object] | - | **Required** |
+| 1 | Plate Stiffness Scale Factor · Insert the data as an object | `"ITEMS"` | Array[Object] | - | **Required** |
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Boundary Group Name | `"GROUP_NAME"` | String | Blank | Optional |
-| (3) | Axial Fxx Scale Factor | `"AXIAL_X"` | Number | 1 | Optional |
-| (4) | Axial Fyy Scale Factor | `"AXIAL_Y"` | Number | 1 | Optional |
-| (5) | Shear Fxy Scale Factor | `"SHEAR"` | Number | 1 | Optional |
-| (6) | Bending Mxx Scale Factor | `"OUT_BENDING_X"` | Number | 1 | Optional |
-| (7) | Bending Myy Scale Factor | `"OUT_BENDING_Y"` | Number | 1 | Optional |
-| (8) | Bending Mxy Scale Factor | `"OUT_TORSION"` | Number | 1 | Optional |
-| (9) | Shear Vxx Scale Factor | `"OUT_SHEAR_X"` | Number | 1 | Optional |
-| (10) | Shear Vyy Scale Factor | `"OUT_SHEAR_Y"` | Number | 1 | Optional |
+| (3) | Axial (Fxx) | `"AXIAL_X"` | Number | 1 | Optional |
+| (4) | Axial (Fyy) | `"AXIAL_Y"` | Number | 1 | Optional |
+| (5) | Shear (Fxy) | `"SHEAR"` | Number | 1 | Optional |
+| (6) | Bending (Mxx) | `"OUT_BENDING_X"` | Number | 1 | Optional |
+| (7) | Bending (Myy) | `"OUT_BENDING_Y"` | Number | 1 | Optional |
+| (8) | Bending (Mxy) | `"OUT_TORSION"` | Number | 1 | Optional |
+| (9) | Shear (Vxx) | `"OUT_SHEAR_X"` | Number | 1 | Optional |
+| (10) | Shear (Vyy) | `"OUT_SHEAR_Y"` | Number | 1 | Optional |
 
 ### Request Body
 
@@ -2646,7 +2646,7 @@ midas_api("POST", "/db/STRPSSM", strpssm_data)
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
 | 1 | Name | `"NAME"` | String | - | **Required** |
-| 2 | Centroid Calculation Type | `"CENT_CALC_TYPE"` | Integer | - | **Required** |
+| 2 | Centroid Calculation Type · 0 | `"CENT_CALC_TYPE"` | Integer | - | **Required** |
 | 3 | Centroid X (Global) | `"CEN_PT_X"` | Number | - | **Required** |
 | 4 | Centroid Y (Global) | `"CEN_PT_Y"` | Number | - | **Required** |
 | 5 | Centroid Z (Global) | `"CEN_PT_Z"` | Number | - | **Required** |
@@ -2697,14 +2697,14 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `__DESC
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 1 | Items (Array of Objects) | `"ITEMS"` | Array[Object] | - | **Required** |
+| 1 | Effective Width Scale Factor · Insert the data as an object | `"ITEMS"` | Array[Object] | - | **Required** |
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Boundary Group Name | `"GROUP_NAME"` | String | Blank | Optional |
 | (3) | ly Scale Factor for Sbz (I-End) | `"LYSCALE"` | Number | 1 | **Required** |
 | (4) | z_top Scale Factor (I-End) | `"ZTSCALE"` | Number | 1 | **Required** |
 | (5) | z_bot Scale Factor (I-End) | `"ZBSCALE"` | Number | 1 | **Required** |
 | (6) | J-End Option | `"bJ"` | Boolean | false | **Required** |
-| (7) | ly Scale Factor (J-End) | `"LYSCALE_J"` | Number | 1 | Optional |
+| (7) | [When J-End Option, "bJ" is True] ly Scale Factor for Sbz (J-End) | `"LYSCALE_J"` | Number | 1 | Optional |
 | (8) | z_top Scale Factor (J-End) | `"ZTSCALE_J"` | Number | 1 | Optional |
 | (9) | z_bot Scale Factor (J-End) | `"ZBSCALE_J"` | Number | 1 | Optional |
 
@@ -2744,12 +2744,12 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `__DESC
 
 | No. | Description | Key | Value Type | Default | Required |
 | --- | --- | --- | --- | --- | --- |
-| 1 | Reference Location for Distributed Hinges · I-End: `0` / Center: `1` / J-End: `2` | `"BEAM_LOC"` | Integer | - | **Required** |
+| 1 | Reference Location for Distributed Hinges · I-End: 0 · Center: 1 · J-End: 2 | `"BEAM_LOC"` | Integer | - | **Required** |
 | 2 | Consider Reinforcement Area | `"OPT_ConsiderRebarArea1D"` | Boolean | - | **Required** |
-| 3 | Fiber Beam Areas Core · Auto Size: `0` / Equal-Size: `1` | `"FAreaSizeCore"` | Integer | - | **Required** |
-| 4 | Number of Divisions(Beam-Column) — Ny (y-dir) | `"BeamDivNumNy"` | Integer | - | **Required** |
-| 5 | Number of Divisions(Beam-Column) — Nz (z-dir) | `"BeamDivNumNz"` | Integer | - | **Required** |
-| 6 | Fiber Beam Areas Cover · Auto Size: `0` / Equal-Size: `1` | `"FAreaSizeCover"` | Integer | - | **Required** |
+| 3 | Fiber Beam Areas Core · Auto Size: 0 · Equal-Size: 1 | `"FAreaSizeCore"` | Integer | - | **Required** |
+| 4 | Number of Divisions(Beam-Column) · Ny (y-dir) | `"BeamDivNumNy"` | Integer | - | **Required** |
+| 5 | Number of Divisions(Beam-Column) · Nz (z-dir) | `"BeamDivNumNz"` | Integer | - | **Required** |
+| 6 | Fiber Beam Areas Cover · Auto Size: 0 · Equal-Size: 1 | `"FAreaSizeCover"` | Integer | - | **Required** |
 | 7 | Number of divisions(Beam-Column, Cover) — Ny | `"BeamDivNumNyCover"` | Integer | - | **Required** |
 | 8 | Number of divisions(Beam-Column, Cover) — Nz | `"BeamDivNumNzCover"` | Integer | - | **Required** |
 
@@ -2759,11 +2759,11 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `__DESC
 | --- | --- | --- | --- | --- | --- |
 | 9 | Consider Out of Plane Nonlinearity of Plate Type | `"WallConsOut"` | Boolean | - | **Required** |
 | 10 | Fiber Wall Areas Core | `"WAreaSize"` | Integer | - | **Required** |
-| 11 | Number of divisions — z, Core | `"WallDivNumZ"` | Integer | - | **Required** |
-| 12 | Number of divisions — y, Core | `"WallDivNumY"` | Integer | - | **Required** |
+| 11 | [GEN Only] Number of divisions - z, Core | `"WallDivNumZ"` | Integer | - | **Required** |
+| 12 | [GEN Only] Number of divisions - y, Core | `"WallDivNumY"` | Integer | - | **Required** |
 | 13 | Fiber Wall Areas Cover | `"WAreaSizeCover"` | Integer | - | **Required** |
-| 14 | Number of divisions — z, Cover | `"WallDivNumZCover"` | Integer | - | **Required** |
-| 15 | Number of divisions — y, Cover | `"WallDivNumYCover"` | Integer | - | **Required** |
+| 14 | [GEN Only] Number of divisions - z, Cover | `"WallDivNumZCover"` | Integer | - | **Required** |
+| 15 | [GEN Only] Number of divisions - y, Cover | `"WallDivNumYCover"` | Integer | - | **Required** |
 | 16 | Wall, Consider Rebar Area | `"OPT_ConsiderRebarAreaWall"` | Boolean | - | **Required** |
 | 17 | Shear Spring Location | `"dR"` | Number | - | **Required** |
 
@@ -3250,7 +3250,7 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `ASSIGN
 | (5) | Center Z | `"CENTER_Z"` | Number | - | **Required** |
 | (6) | Fiber Material ID | `"FIBER_MATL_ID"` | Number | - | **Required** |
 | (7) | Area Consider Rebar | `"AREA_CONSIDER_REBAR"` | Number | - | **Required** |
-| (8) | Is Rebar | `"OPT_IS_REBAR"` | Boolean | - | **Required** |
+| (8) | Rebar Options | `"OPT_IS_REBAR"` | Boolean | - | **Required** |
 | (9) | Point Y | `"POINT_Y"` | Array[Number] | - | **Required** |
 | (10) | Point Z | `"POINT_Z"` | Array[Number] | - | **Required** |
 | 7 | Monitored Fiber Option | `"OPT_MONITORED_FIBER"` | Boolean | - | **Required** |
@@ -3452,15 +3452,15 @@ midas_api("POST", "/db/GRDP", grdp_data)
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
 | 1 | Items (Array of Objects) | `"ITEMS"` | Array[Object] | - | **Required** |
-| (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
-| (2) | Area (Cross-sectional area) | `"AREA_SF"` | Number | 1.0 | Optional |
-| (3) | Asy (Shear area, local y) | `"ASY_SF"` | Number | 1.0 | Optional |
-| (4) | Asz (Shear area, local z) | `"ASZ_SF"` | Number | 1.0 | Optional |
-| (5) | Ixx (Torsional resistance) | `"IXX_SF"` | Number | 1.0 | Optional |
-| (6) | Iyy (Moment of Inertia, y-axis) | `"IYY_SF"` | Number | 1.0 | Optional |
-| (7) | Izz (Moment of Inertia, z-axis) | `"IZZ_SF"` | Number | 1.0 | Optional |
-| (8) | Weight | `"WGT_SF"` | Number | 1.0 | Optional |
-| (9) | Boundary Group Name | `"GROUP_NAME"` | String | Blank | Optional |
+| (1) | Serial Number | `"ID"` | Integer | 0 | **Required** |
+| (2) | Area · Cross-sectional area | `"AREA_SF"` | Number | 1.0 | Optional |
+| (3) | Asy · Effective Shear Area resisting shear forces in the element local y-axis | `"ASY_SF"` | Number | 1.0 | Optional |
+| (4) | Asz · Effective shear Area resisting shear forces in the element local z-axis | `"ASZ_SF"` | Number | 1.0 | Optional |
+| (5) | Ixx · Torsional Resistance about the element local a-axis | `"IXX_SF"` | Number | 1.0 | Optional |
+| (6) | Iyy · Area Moment of Inertia about the element local y-axis | `"IYY_SF"` | Number | 1.0 | Optional |
+| (7) | Izz · Area Moment of Inertia about the element local z-axis | `"IZZ_SF"` | Number | 1.0 | Optional |
+| (8) | Weight · Cross-sectional area used for calculating self-weight | `"WGT_SF"` | Number | 1.0 | Optional |
+| (9) | Boundary Group | `"GROUP_NAME"` | String | Blank | Optional |
 | (10) | Part(합성단면 전용) · Before: `"Before"` / After: `"After"` / All: `"All"` | `"iPart"` | String | `"Before"` | Optional |
 
 ### Request Body
@@ -3537,7 +3537,7 @@ midas_api("POST", "/db/ESSF", essf_data)
 
 | No. | Description | Key | Value Type | Default | Required |
 | --- | --- | --- | --- | --- | --- |
-| 1 | Material Type (Concrete: `"CONC"`) | `"TYPE"` | String | - | **Required** |
+| 1 | Material Type · Concrete: "CONC" | `"TYPE"` | String | - | **Required** |
 | 2 | Material Name | `"NAME"` | String | - | **Required** |
 | 3 | Concrete Material Information | `"DATA1"` | Object | - | **Required** |
 | 3-(1) | Material Code Name | `"DATA1.CODENAME"` | String | - | **Required** |
@@ -3649,16 +3649,16 @@ midas_api("PUT", "/db/MATD/1", matd_data)
 | 3.15 | └ Section Type | `"TYPE"` | Integer | - | Optional |
 | 3.16 | └ I-End Girder Section | `"SECT_I"` | Object | - | Optional |
 | 3.16.1 | 　　└ 3.16.1 I-End Section Dimensions — GI uses [B1, B2, B3, B4, H, t1, t2, tw]. | `"vSIZE"` | Array[Number] | - | Optional |
-| 3.16.2 | 　　└ 3.16.2 PSC Dimensions A | `"vSIZE_PSC_A"` | Array[Number] | - | Optional |
-| 3.16.3 | 　　└ 3.16.3 PSC Dimensions B | `"vSIZE_PSC_B"` | Array[Number] | - | Optional |
-| 3.16.4 | 　　└ 3.16.4 PSC Dimensions C | `"vSIZE_PSC_C"` | Array[Number] | - | Optional |
-| 3.16.5 | 　　└ 3.16.5 PSC Dimensions D | `"vSIZE_PSC_D"` | Array[Number] | - | Optional |
-| 3.16.6 | 　　└ 3.16.6 Use Symmetric Calculation | `"USE_SYM_CALC"` | Boolean | - | Optional |
-| 3.16.7 | 　　└ 3.16.7 Section Stiffness | `"SODSTIFF"` | Object | - | Optional |
-| 3.16.7.1 | 　　　　└ 3.16.7.1 Torsional Stiffness Number | `"TOSTIFNOS"` | Integer | - | Optional |
-| 3.16.7.2 | 　　　　└ 3.16.7.2 Deck Stiffness Number | `"DECKSTIFFNO"` | Integer | - | Optional |
+| 3.16.2 | 　　└ [General] PSC Dimensions A | `"vSIZE_PSC_A"` | Array[Number] | - | Optional |
+| 3.16.3 | 　　└ [General] PSC Dimensions B | `"vSIZE_PSC_B"` | Array[Number] | - | Optional |
+| 3.16.4 | 　　└ [General] PSC Dimensions C | `"vSIZE_PSC_C"` | Array[Number] | - | Optional |
+| 3.16.5 | 　　└ [General] PSC Dimensions D | `"vSIZE_PSC_D"` | Array[Number] | - | Optional |
+| 3.16.6 | 　　└ [General] Use Symmetric Calculation | `"USE_SYM_CALC"` | Boolean | - | Optional |
+| 3.16.7 | 　　└ [General] Section Stiffness | `"SODSTIFF"` | Object | - | Optional |
+| 3.16.7.1 | 　　　　└ [General] Torsional Stiffness Number | `"TOSTIFNOS"` | Integer | - | Optional |
+| 3.16.7.2 | 　　　　└ [General] Deck Stiffness Number | `"DECKSTIFFNO"` | Integer | - | Optional |
 | 3.17 | └ J-End Girder Section | `"SECT_J"` | Object | - | Optional |
-| 3.17.1 | 　　└ 3.17.1 J-End Section Dimensions | `"vSIZE"` | Array[Number] | - | Optional |
+| 3.17.1 | 　　└ [General] J-End Section Dimensions | `"vSIZE"` | Array[Number] | - | Optional |
 | 3.18 | └ Y Variation | `"Y_VAR"` | Integer | - | Optional |
 | 3.19 | └ Z Variation | `"Z_VAR"` | Integer | - | Optional |
 | 3.20 | └ Source Section Type | `"SRC_TYPE"` | Integer | - | Optional |

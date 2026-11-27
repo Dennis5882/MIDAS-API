@@ -208,7 +208,7 @@ midas_api("DELETE", "/db/ETMP", {"Assign": {"1": {}}})
 | (2) | Load Case Name | `"LCNAME"` | String | - | Required |
 | (3) | Load Group Name | `"GROUP_NAME"` | String | Blank | Optional |
 | (4) | Element Type · Beam: `1` · Plate: `2` | `"TYPE"` | Integer | - | Required |
-| (5) | T2z − T1z | `"TZ"` | Number | - | Required |
+| (5) | T2z - T1z | `"TZ"` | Number | - | **Required** |
 | (6) | Use Section Hz | `"USE_HZ"` | Boolean | `false` | Optional |
 | (7) | Hz value | `"HZ"` | Number | - | Optional |
 | (8) | [When Element Type, "TYPE" is 1 (Beam)] T2y-T1y | `"TY"` | Number | - | **Required** |
@@ -384,9 +384,9 @@ midas_api("POST", "/db/GTMP", gtmp_plate)
 | (2) | Load Case Name | `"LCNAME"` | String | - | Required |
 | (3) | Load Group Name | `"GROUP_NAME"` | String | Blank | Optional |
 | (4) | Direction · Local-y: `"LY"` · Local-z: `"LZ"` | `"DIR"` | String | `"LZ"` | Optional |
-| (5) | Ref. Position · `"Centroid"` · `"+End(Top)"` → `"Top"` · `"-End(Bot)"` → `"Bot"` | `"REF"` | String | `"Centroid"` | Optional |
+| (5) | Ref. Position · Centroid: "Centroid" · +End(Top): "Top" · - End(Bot): "Bot" | `"REF"` | String | `"Centroid"` | Optional |
 | (6) | Number of Section Temperature ("vSECTTMP") | `"NUM"` | Integer | - | **Required** |
-| (7) | Section Type · General: `false` · PSC/Composite: `true` | `"bPSC"` | Boolean | `false` | Optional |
+| (7) | Section Type · General: false · PSC / Composite: true | `"bPSC"` | Boolean | `false` | Optional |
 | (8) | Section Temperature List | `"vSECTTMP"` | Array \[Object\] | - | Required |
 | i | Material Type · Element: `"ELEMENT"` · Input: `"INPUT"` | `"TYPE"` | String | `"ELEMENT"` | Optional |
 | ii | B Value | `"VAL_B"` | Number | 0 | Optional |
@@ -397,9 +397,9 @@ midas_api("POST", "/db/GTMP", gtmp_plate)
 | vii | [When Material Type, "TYPE" is "INPUT"] Modulus of Elasticity | `"ELAST"` | Number | - | Optional |
 | viii | [When Material Type, "TYPE" is "INPUT"] Thermal Coefficient | `"THERMAL"` | Number | - | Optional |
 | ix | Ref. (`bPSC` = true) · Top: `0` · Bottom: `1` | `"REF"` | Integer | 0 | Optional |
-| x | B-Type (`bPSC` = true) · Section: `0` · Value: `1` | `"OPT_B"` | Integer | 1 | Optional |
-| xi | H1-Type (`bPSC` = true) · Z1:`0` · Z2:`1` · Z3:`2` · Value:`3` | `"OPT_H1"` | Integer | 3 | Optional |
-| xii | H2-Type (`bPSC` = true) · Z1:`0` · Z2:`1` · Z3:`2` · Value:`3` | `"OPT_H2"` | Integer | 3 | Optional |
+| x | [When Section Type, "bPSC" is True (PSC/Composite)] B-Type · Section: 0 · Value: 1 | `"OPT_B"` | Integer | 1 | Optional |
+| xi | [When Section Type, "bPSC" is True (PSC/Composite)] H1-Type · Z1: 0 · Z2: 1 · Z3: 2 · Value: 3 | `"OPT_H1"` | Integer | 3 | Optional |
+| xii | [When Section Type, "bPSC" is True (PSC/Composite)] H2-Type · Z1: 0 · Z2: 1 · Z3: 2 · Value: 3 | `"OPT_H2"` | Integer | 3 | Optional |
 
 ### Python 예제
 
@@ -672,13 +672,13 @@ midas_api("DELETE", "/db/NTMP", {"Assign": {"190": {}}})
 | 16 | Wobble Friction Factor (Post 전용, Magura/IRC/KSCE/IRC112 코드) | `"WF"` | Number | 0 | Optional |
 | 16 | [CEB-FIP 1978, 1990, 2010, European] Wobble Type · Wobble Fraction Factor: 0 · Unintentional Angular Disp.: 1 | `"W_TYPE"` | Integer | 0 | Optional |
 | 17 | Wobble Fraction Factor (`W_TYPE`=0) | `"WF"` | Number | 0 | Optional |
-| 17 | Unintentional Angular Disp. (`W_TYPE`=1) | `"W_ANGLE"` | Number | 0 | Optional |
+| 17 | [CEB-FIP 1978, 1990, 2010, European] Unintentional Angular Disp. · "W_TYPE": 1 · Post-Tension/External: Use · Pre-Tension: Not use | `"W_ANGLE"` | Number | 0 | Optional |
 | 18 | [CEB-FIP 1978, 1990, 2010, European] Relaxation Coefficient Class ¹⁾ · Only for CEB-FIP 2010 | `"TDMFK"` | Integer | 1 | Optional |
 | — | Relaxation Factor ξ (TB05/TB10092/Q-CR/AS/JTJ/JTG 코드) | `"FT"` | Number | - | Required |
 | — | [TB05, TB10092-17, Q/CR 9300-18] Low Relaxation | `"LR"` | Boolean | `false` | Optional |
 | — | Overstress Reduction Factor 적용 (TB05/TB10092/Q-CR/JTG 코드) | `"bOSRF"` | Boolean | `false` | Optional |
 | — | Characteristic Strength fpk (TB05/TB10092/Q-CR/JTJ/JTG 코드) | `"FPK"` | Number | - | Required |
-| — | Relaxation Function Name (User Defined) | `"TDMFNAME"` | String | - | Required |
+| — | [User Defined] Relaxation Function Name | `"TDMFNAME"` | String | - | **Required** |
 
 > ¹⁾ **이완 계수 코드(RM) 및 인수(RV/FT/TDMFK) 표**
 
@@ -844,31 +844,31 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `bRELAX
 | 8 | Straight Length of Tendon - End · Only for Spline Type | `"ELENG"` | Number | 0 | Optional |
 | 9 | Typical Tendon | `"bTP"` | Boolean | `false` | Optional |
 | 10 | No. of Tendons · Required if "bTP" = true | `"CNT"` | Number | - | Optional |
-| 11 | Transfer Length Option · `"USER"` · `"AUTO1"` · `"AUTO2"` | `"LENG_OPT"` | String | - | Required |
-| 12 | Transfer Length – Begin | `"BLEN"` | Number | 0 | Optional |
-| 13 | Transfer Length – End | `"ELEN"` | Number | 0 | Optional |
+| 11 | Transfer Length Option · User defined Length: "USER" · Auto Calculation: "AUTO1" · Auto Calculation: "AUTO2" | `"LENG_OPT"` | String | - | **Required** |
+| 12 | Transfer Length - Begin | `"BLEN"` | Number | 0 | Optional |
+| 13 | Transfer Length - End | `"ELEN"` | Number | 0 | Optional |
 | 14 | Debonded Length - Begin · Only for Pre-tensioning | `"DeBondBLEN"` | Number | 0 | Optional |
 | 15 | Debonded Length - End · Only for Pre-tensioning | `"DeBondELEN"` | Number | 0 | Optional |
-| 16 | Reference Axis · `"ELEMENT"` · `"STRAIGHT"` · `"CURVE"` | `"SHAPE"` | String | - | Required |
+| 16 | Reference Axis · Element Type: "ELEMENT" · Straight Type: "STRAIGHT" · Curve Type: "CURVE" | `"SHAPE"` | String | - | **Required** |
 
 **SHAPE = "ELEMENT" 일 때 추가 파라미터:**
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
-| 17 | Profile Insertion Point · `"END-I"` · `"END-J"` | `"INS_PT"` | String | - | Required |
+| 17 | [When Reference Axis, "SHAPE" is "ELEMENT"] Profile Insertion Point Type · End-I: "END-I" · End-J: "END-J" | `"INS_PT"` | String | - | **Required** |
 | 18 | Profile Insertion Point Element No. | `"INS_ELEM"` | Integer | - | Required |
-| 19 | x Axis Direction · `"I-J"` · `"J-I"` | `"AXIS_IJ"` | String | `"I-J"` | Optional |
+| 19 | [When Reference Axis, "SHAPE" is "ELEMENT"] x Axis Direction Type · Direction for I to J: "I-J" · Direction for J to I: "J-I" | `"AXIS_IJ"` | String | `"I-J"` | Optional |
 | 20 | x Axis Rotation Angle | `"XAR_ANGLE"` | Number | 0 | Optional |
 | 21 | Projection | `"bPJ"` | Boolean | `false` | Optional |
-| 22 | Offset (y, z) | `"OFF_YZ"` | Array \[Number, 2\] | `[0,0]` | Optional |
+| 22 | [When Reference Axis, "SHAPE" is "ELEMENT"] Offset (y, z) · [y, z] | `"OFF_YZ"` | Array \[Number, 2\] | `[0,0]` | Optional |
 
 **SHAPE = "STRAIGHT" 일 때 추가 파라미터:**
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
 | 17 | Insertion Point \[x, y, z\] | `"IP"` | Array \[Number, 3\] | `[0,0,0]` | Optional |
-| 18 | x Axis Direction · `"X"` · `"Y"` · `"VECTOR"` | `"AXIS"` | String | `"X"` | Optional |
-| 19 | Vector \[x, y\] | `"VEC"` | Array \[Number, 2\] | `[0,0]` | Optional |
+| 18 | [When Reference Axis, "SHAPE" is "STRAIGHT"] x Axis Direction Type · x direction: "X" · y direction: "Y" · Vector direction: "VECTOR" | `"AXIS"` | String | `"X"` | Optional |
+| 19 | [When Reference Axis, "SHAPE" is "STRAIGHT"] Vector · [x, y] | `"VEC"` | Array \[Number, 2\] | `[0,0]` | Optional |
 | 20 | x Axis Rotation Angle | `"XAR_ANGLE"` | Number | 0 | Optional |
 | 21 | Projection | `"bPJ"` | Boolean | `false` | Optional |
 | 22 | Grad. Rot. Angle Type · `"X"` · `"Y"` | `"GR_AXIS"` | String | `"Y"` | Optional |
@@ -879,7 +879,7 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `bRELAX
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
 | 17 | Insertion Point \[x, y, z\] | `"IP"` | Array \[Number, 3\] | `[0,0,0]` | Optional |
-| 18 | Radius Center (X, Y) | `"RC"` | Array \[Number, 2\] | 0 | Optional |
+| 18 | [When Reference Axis, "SHAPE" is "CURVE"] Radius Center(X, Y) · [x, y] | `"RC"` | Array \[Number, 2\] | 0 | Optional |
 | 19 | Offset | `"OFFSET"` | Number | 0 | Optional |
 | 20 | Direction · CW: `"CW"` · CCW: `"CCW"` | `"DIR"` | String | `"CW"` | Optional |
 | 20 | x Axis Rotation Angle | `"XAR_ANGLE"` | Number | 0 | Optional |
@@ -1032,8 +1032,8 @@ midas_api("GET", "/db/TDNA")
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
-| 1 | Tendon Profile No. | `"TDNA"` | Integer | - | Required |
-| 2 | Composite Section for Construction Stage No. | `"CSCS"` | Integer | - | Required |
+| 1 | Tendon Profile | `"TDNA"` | Integer | - | **Required** |
+| 2 | Composite Section for Concstruction Stage | `"CSCS"` | Integer | - | **Required** |
 | 3 | Part Number | `"PART_NUM"` | Integer | - | Required |
 
 ### Python 예제
@@ -1102,8 +1102,8 @@ midas_api("DELETE", "/db/TDCS", {"Assign": {"1": {}}})
 | (4) | Tendon Profile Name | `"TENDON_NAME"` | String | - | Required |
 | (5) | Prestress Load Type · Stress: `"STRESS"` · Force: `"FORCE"` | `"TYPE"` | String | `"STRESS"` | Optional |
 | (6) | Jacking Step · Begin: `"BEGIN"` · End: `"END"` · Both: `"BOTH"` | `"ORDER"` | String | `"BEGIN"` | Optional |
-| (7) | Jacking Force / Stress at Begin | `"BEGIN"` | Number | - | Required |
-| (8) | Jacking Force / Stress at End | `"END"` | Number | - | Required |
+| (7) | Jaking Force at Begin | `"BEGIN"` | Number | - | **Required** |
+| (8) | Jaking Force at End | `"END"` | Number | - | **Required** |
 | (9) | Grouting Stage | `"GROUTING"` | Integer | 0 | Optional |
 
 ### Python 예제
@@ -1180,9 +1180,9 @@ midas_api("DELETE", "/db/TDPL", {"Assign": {"1": {}}})
 | (3) | Load Group Name | `"GROUP_NAME"` | String | Blank | Optional |
 | (4) | Direction · Local y: `0` · Local z: `1` | `"DIR"` | Integer | 0 | Optional |
 | (5) | Tension | `"TENSION"` | Number | - | Required |
-| (6) | Distance – I (Di) | `"DISTANCE_I"` | Number | 0 | Optional |
-| (7) | Distance – M (Dm) | `"DISTANCE_M"` | Number | 0 | Optional |
-| (8) | Distance – J (Dj) | `"DISTANCE_J"` | Number | 0 | Optional |
+| (6) | Distance - I (Di) | `"DISTANCE_I"` | Number | 0 | Optional |
+| (7) | Distance - M (Dm) | `"DISTANCE_M"` | Number | 0 | Optional |
+| (8) | Distance - J (Dj) | `"DISTANCE_J"` | Number | 0 | Optional |
 
 ### Python 예제
 

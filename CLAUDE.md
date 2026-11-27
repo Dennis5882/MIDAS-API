@@ -79,8 +79,10 @@ python eval_retrieval.py                  # 색인 검색 시험 (BM25)
    수치와 기준일도 함께 갱신한다. 빠진 Key는 `fill_fields.py`로 채우고(생성 블록은 `<!-- om-fields -->`
    마커로 감싸며 공식 글 기준으로 매번 다시 만들어진다), 반영 후 `build_index.py`로 `docs/index/`를
    다시 만든다. `docs/index/`는 자동 생성물이므로 손으로 고치지 않는다.
-8. **`restore_descriptions.py --dry-run`으로 설명과 필수 표기의 차이를 확인한다.** 보고서의
-   차이에는 기존 편집과 매칭 예외도 포함된다. 원문 변경 여부는 해당 공식 글을 열어 판단한다.
+8. **`restore_descriptions.py --dry-run`으로 설명과 필수 표기의 차이를 확인한다.** 영어 행에서
+   보는 숫자는 `변경` + `보류 — 원문 변경`이다. 보류 목록은
+   [description_holds.json](scripts/manual_sync/description_holds.json)에 있다.
+   해당 공식 글을 열어 원문 변경을 확인한다.
 9. 커밋·푸시는 사용자가 명시적으로 지시할 때만 진행한다 (자동 push 없음 — 아래 참고).
 
 규모가 크면(예: 20~30개 아티클 동시 플래그) 병렬 서브에이전트로 나눠서: 1차는 리서치/대조
@@ -150,8 +152,9 @@ python eval_retrieval.py                  # 색인 검색 시험 (BM25)
 **설명 언어:** 파라미터 표의 설명은 **원문 언어 그대로** 옮긴다 — 원문이 한글이면 한글, 영문이면
 영문. 번역하지 않는다(원문 그대로의 표현을 보존하고 토큰도 아낀다). 저장소 쪽에서 덧붙이는
 `기능` 요약·⚠️ 주석은 한글로 쓴다. 2026년 11월에는 기존 6열 파라미터 표도 공식
-Specifications 행과 일치하는 범위에서 원문으로 복원했다. `restore_descriptions.py --dry-run`은
-지원하는 표의 설명과 필수 표기를 대조한다. `--file <챕터 파일명>`으로 범위를 지정할 수 있다.
+Specifications 행과 짝이 확인된 한글·영어 설명을 원문으로 복원했다.
+`restore_descriptions.py --dry-run`은 지원하는 표의 설명과 필수 표기를 대조한다.
+`--file <챕터 파일명>`으로 범위를 지정하고, 영어 행에 적용할 때는 `--english`를 사용한다.
 
 **JP 제품 버전 전용 항목:** 공식 문서에 `ᴶ⁾`(MIDAS CIVIL NX JP Version only)가 붙은 엔드포인트·
 `TABLE_TYPE`·필드는 문서의 해당 행에 `ᴶ⁾`를 남기고 `docs/manual/jp_only.json`의 `exclude`에 등록한다

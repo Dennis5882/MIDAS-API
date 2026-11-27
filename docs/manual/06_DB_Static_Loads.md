@@ -254,16 +254,16 @@ midas_api("DELETE", "/db/BODF", {"Assign": {"1": {}}})
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
-| 1 | Nodal Load items | `"ITEMS"` | Array \[Object\] | - | Required |
+| 1 | Nodal Load · Insert the data as an object | `"ITEMS"` | Array \[Object\] | - | **Required** |
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Load Case Name | `"LCNAME"` | String | - | Required |
 | (3) | Load Group Name | `"GROUP_NAME"` | String | Blank | Optional |
-| (4) | Nodal Load – FX | `"FX"` | Number | 0 | Optional |
-| (5) | Nodal Load – FY | `"FY"` | Number | 0 | Optional |
-| (6) | Nodal Load – FZ | `"FZ"` | Number | 0 | Optional |
-| (7) | Nodal Load – MX | `"MX"` | Number | 0 | Optional |
-| (8) | Nodal Load – MY | `"MY"` | Number | 0 | Optional |
-| (9) | Nodal Load – MZ | `"MZ"` | Number | 0 | Optional |
+| (4) | Nodal Load - FX | `"FX"` | Number | 0 | Optional |
+| (5) | Nodal Load - FY | `"FY"` | Number | 0 | Optional |
+| (6) | Nodal Load - FZ | `"FZ"` | Number | 0 | Optional |
+| (7) | Nodal Load - MX | `"MX"` | Number | 0 | Optional |
+| (8) | Nodal Load - MY | `"MY"` | Number | 0 | Optional |
+| (9) | Nodal Load - MZ | `"MZ"` | Number | 0 | Optional |
 
 ### Python 예제
 
@@ -351,26 +351,26 @@ midas_api("DELETE", "/db/CNLD", {"Assign": {"8": {}}})
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
-| 1 | Beam Load items | `"ITEMS"` | Array \[Object\] | - | Required |
+| 1 | Beam Loads · Insert the data as an object | `"ITEMS"` | Array \[Object\] | - | **Required** |
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Load Case Name | `"LCNAME"` | String | - | Required |
 | (3) | Load Group Name | `"GROUP_NAME"` | String | Blank | Optional |
-| (4) | Load Classification (`"BEAM"` / `"LINE"` / `"TYPICAL"`) | `"CMD"` | String | - | Required |
-| (5) | Load Type (`"CONLOAD"` / `"CONMOMENT"` / `"UNILOAD"` / `"UNIMOMENT"` / `"PRESSURE"`) | `"TYPE"` | String | - | Required |
-| (6) | Direction (`"LX"` / `"LY"` / `"LZ"` / `"GX"` / `"GY"` / `"GZ"`) | `"DIRECTION"` | String | - | Required |
+| (4) | Load Classification · Element Beam Loads: "BEAM" · Line Beam Loads: "LINE" · Typical Beam Loads: "TYPICAL" | `"CMD"` | String | - | **Required** |
+| (5) | Load Type · Concentrated Forces: "CONLOAD" · Concentrated Moments / Torsions: "CONMOMENT" · Uniform Loads: "UNILOAD" · Uniform Moments / Torsions: "UNIMOMENT" · Trapezoidal Loads: "UNILOAD" · Trapezoidal Moments / Torsions: "UNIMOMENT" · Uniform Pressure: "PRESSURE" · Trapezoidal Pressure: "PRESSURE" | `"TYPE"` | String | - | **Required** |
+| (6) | Direction · Local x: "LX" · Local y: "LY" · Local z: "LZ" · Global X: "GX" · Global Y: "GY" · Global Z: "GZ" | `"DIRECTION"` | String | - | **Required** |
 | (7) | Projection | `"USE_PROJECTION"` | Boolean | false | Optional |
 | (8) | Distance [x1, x2, x3, x4] | `"D"` | Array \[Number, 4\] | 0 | Optional |
 | (9) | Load [v1, v2, v3, v4] | `"P"` | Array \[Number, 4\] | 0 | Optional |
 | (10) | Eccentricity | `"USE_ECCEN"` | Boolean | false | Optional |
-| (11) | Eccentricity Type (0=Centroid, 1=Offset) | `"ECCEN_TYPE"` | Integer | 0 | Optional |
-| (12) | Eccentricity Direction (`"LY"` / `"LZ"` / `"GX"` / `"GY"` / `"GZ"`) | `"ECCEN_DIR"` | String | - | Required |
+| (11) | Eccentricity Type · Centroid: 0 · Offset: 1 | `"ECCEN_TYPE"` | Integer | 0 | Optional |
+| (12) | Eccentricity Direction · Local y: "LY" · Local z: "LZ" · Global X: "GX" · Global Y: "GY" · Global Z: "GZ" | `"ECCEN_DIR"` | String | - | **Required** |
 | (13) | Distance I-End | `"I_END"` | Number | 0 | Optional |
 | (14) | J-End Option | `"USE_J_END"` | Boolean | false | Optional |
 | (15) | Distance J-End | `"J_END"` | Number | 0 | Optional |
 | (16) | Additional H from Top Option | `"USE_ADDITIONAL"` | Boolean | false | Optional |
-| (17) | Distance I-End (additional) | `"ADDITIONAL_I_END"` | Number | 0 | Optional |
-| (18) | J-End Option (additional) | `"USE_ADDITIONAL_J_END"` | Boolean | false | Optional |
-| (19) | Distance J-End (additional) | `"ADDITIONAL_J_END"` | Number | 0 | Optional |
+| (17) | Distance I-End | `"ADDITIONAL_I_END"` | Number | 0 | Optional |
+| (18) | J-End Option | `"USE_ADDITIONAL_J_END"` | Boolean | false | Optional |
+| (19) | Distance J-End | `"ADDITIONAL_J_END"` | Number | 0 | Optional |
 
 ### Python 예제
 
@@ -470,11 +470,11 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `VX`, `
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
-| 1 | Specified Displacement items | `"ITEMS"` | Array \[Object\] | - | Required |
+| 1 | Specified Displacement of Support · Insert the data as an object | `"ITEMS"` | Array \[Object\] | - | **Required** |
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Load Case Name | `"LCNAME"` | String | - | Required |
 | (3) | Load Group Name | `"GROUP_NAME"` | String | Blank | Optional |
-| (4) | Displacements (Local) [Dx, Dy, Dz, Rx, Ry, Rz] | `"VALUES"` | Array \[Object, 6\] | Blank | Optional |
+| (4) | Displacements (Local Direction) · [Dx, Dy, Dz, Rx, Ry, Rz] | `"VALUES"` | Array \[Object, 6\] | Blank | Optional |
 | i. | Usage Flag | `"OPT_FLAG"` | Boolean | false | Optional |
 | ii. | Displacement Value | `"DISPLACEMENT"` | Real | 0 | Optional |
 
@@ -543,12 +543,12 @@ midas_api("DELETE", "/db/SDSP", {"Assign": {"10": {}}})
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
-| 1 | Translational Mass – GCS X | `"mX"` | Number | - | Required |
-| 2 | Translational Mass – GCS Y | `"mY"` | Number | 0 | Optional |
-| 3 | Translational Mass – GCS Z | `"mZ"` | Number | 0 | Optional |
-| 4 | Rotational Mass Moment of Inertia – X-axis | `"rmX"` | Number | 0 | Optional |
-| 5 | Rotational Mass Moment of Inertia – Y-axis | `"rmY"` | Number | 0 | Optional |
-| 6 | Rotational Mass Moment of Inertia – Z-axis | `"rmZ"` | Number | 0 | Optional |
+| 1 | Translational Lumped Mass in GCS X-direction | `"mX"` | Number | - | **Required** |
+| 2 | Translational Lumped Mass in GCS Y-direction | `"mY"` | Number | 0 | Optional |
+| 3 | Translational Lumped Mass in GCS Z-direction | `"mZ"` | Number | 0 | Optional |
+| 4 | Rotational Mass Moment of Inertia about GCS X-axis | `"rmX"` | Number | 0 | Optional |
+| 5 | Rotational Mass Moment of Inertia about GCS Y-axis | `"rmY"` | Number | 0 | Optional |
+| 6 | Rotational Mass Moment of Inertia about GCS Z-axis | `"rmZ"` | Number | 0 | Optional |
 
 ### Python 예제
 
@@ -605,13 +605,13 @@ midas_api("DELETE", "/db/NMAS", {"Assign": {"5": {}}})
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
-| 1 | Mass Direction (`"X"` / `"Y"` / `"Z"` / `"XY"` / `"YZ"` / `"XZ"` / `"XYZ"`) | `"DIR"` | String | - | Required |
+| 1 | Mass Direction · X: "X" · Y: "Y" · Z: "Z" · X, Y: "XY" · Y, Z: "YZ" · X, Z: "XZ" · X, Y, Z: "XYZ" | `"DIR"` | String | - | **Required** |
 | 2 | Nodal Load | `"bNODAL"` | Boolean | false | Optional |
 | 3 | Beam Load | `"bBEAM"` | Boolean | false | Optional |
 | 4 | Floor Load | `"bFLOOR"` | Boolean | false | Optional |
 | 5 | Pressure (Hydrostatic) | `"bPRES"` | Boolean | false | Optional |
 | 6 | Gravity Acceleration | `"GRAV"` | Number | 0 | Optional |
-| 7 | Load Case List | `"vLC"` | Array \[Object\] | - | Required |
+| 7 | Load Case List · Insert the data as an object | `"vLC"` | Array \[Object\] | - | **Required** |
 | (1) | Load Case Name | `"LCNAME"` | String | - | Required |
 | (2) | Scale Factor | `"FACTOR"` | Number | - | Required |
 
@@ -772,14 +772,14 @@ midas_api("DELETE", "/db/NBOF", {"Assign": {"1": {}}})
 |-----|-------------|-----|-----------|---------|----------|
 | 1 | Pressure Load Type Name | `"NAME"` | String | - | Required |
 | 2 | Description | `"DESC"` | String | - | Required |
-| 3 | Element Type | `"ELEM_TYPE"` | String | - | Required |
-| 4 | Pressure Load items | `"PRESSURE_LOAD_ITEMS"` | Array \[Object\] | - | Required |
+| 3 | Element Type · "Plate/Plane Stress (Face)" · "Plate/Plane Stress (Edge)" · "Solid (Face)" · "Plane Strain (Edge)" · "Axisymmetric (Edge)" · "Wall (Edge)" | `"ELEM_TYPE"` | String | - | **Required** |
+| 4 | Pressure Load · Insert the data as an object | `"PRESSURE_LOAD_ITEMS"` | Array \[Object\] | - | **Required** |
 | (1) | Load Case Name | `"LOADCASENAME"` | String | - | Required |
-| (2) | Load Type (`"Uniform"` / `"Linear"`) | `"LOADTYPE"` | String | - | Required |
-| (3) | Load P1 ¹⁾ | `"LOAD_P1"` | Number | - | Required |
-| (4) | Load P2 ¹⁾ | `"LOAD_P2"` | Number | 0 | Optional |
-| (5) | Load P3 ¹⁾ | `"LOAD_P3"` | Number | 0 | Optional |
-| (6) | Load P4 ¹⁾ | `"LOAD_P4"` | Number | 0 | Optional |
+| (2) | Load Type · "Uniform" · "Linear" | `"LOADTYPE"` | String | - | **Required** |
+| (3) | Load: P1 ¹⁾ | `"LOAD_P1"` | Number | - | **Required** |
+| (4) | Load: P2 ¹⁾ | `"LOAD_P2"` | Number | 0 | Optional |
+| (5) | Load: P3 ¹⁾ | `"LOAD_P3"` | Number | 0 | Optional |
+| (6) | Load: P4 ¹⁾ | `"LOAD_P4"` | Number | 0 | Optional |
 
 > ¹⁾ Element Type별 P1~P4 사용 가능 여부 (O=사용, -=미사용):
 
@@ -888,21 +888,21 @@ midas_api("DELETE", "/db/PSLT", {"Assign": {"2": {}}})
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
-| 1 | Pressure Load items | `"ITEMS"` | Array \[Object\] | - | Required |
+| 1 | Pressure Loads · Insert the data as an object | `"ITEMS"` | Array \[Object\] | - | **Required** |
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Load Case Name | `"LCNAME"` | String | - | Required |
 | (3) | Load Group Name | `"GROUP_NAME"` | String | Blank | Optional |
-| (4) | Command Type (`"PRES"`) | `"CMD"` | String | `"PRES"` | Optional |
-| (5) | Element Type (`"PLATE"` / `"SOLID"` / `"PLANE"`) | `"ELEM_TYPE"` | String | `"PLATE"` | Optional |
-| (6) | Pressure Type (`"FACE"` / `"EDGE"` / `"PRES"`) | `"FACE_EDGE_TYPE"` | String | - | Required |
-| (7) | Direction (`"NORMAL"` / `"LX"` / `"LY"` / `"LZ"` / `"GX"` / `"GY"` / `"GZ"` / `"VECTOR"`) | `"DIRECTION"` | String | `"NORMAL"` | Optional |
-| (8) | Vector [X, Y, Z] (if DIRECTION="VECTOR") | `"VECTORS"` | Array \[Number, 3\] | - | Optional |
-| (9) | Projection (GX/GY/GZ only) | `"OPT_PROJECTION"` | Boolean | false | Optional |
+| (4) | Command Type · Pressure Loads: "PRES" | `"CMD"` | String | `"PRES"` | Optional |
+| (5) | Element Type · Plate/Plane Stress: "PLATE" · Solid: "SOLID" · Plane Strain: "PLANE" · Axisymmetric: "PLANE" · Wall: "PLATE" | `"ELEM_TYPE"` | String | `"PLATE"` | Optional |
+| (6) | Pressure Type · Pressure Face: "FACE" · Pressure Edge: "EDGE" · Solid: "PRES" | `"FACE_EDGE_TYPE"` | String | - | **Required** |
+| (7) | Direction ¹⁾ · Normal: "NORMAL" · Local x: "LX" · Local y: "LY" · Local z: "LZ" · Global X: "GX" · Global Y: "GY" · Global Z: "GZ" · Vector: "VECTOR" | `"DIRECTION"` | String | `"NORMAL"` | Optional |
+| (8) | Vector · if "DIRECTION" is "VECTOR" · [X, Y, Z] | `"VECTORS"` | Array \[Number, 3\] | - | Optional |
+| (9) | Projection Option · GX, GY, GZ only | `"OPT_PROJECTION"` | Boolean | false | Optional |
 | (10) | Face/Edge Number (Solid: 1~6, Plate/Plane: 1~4) | `"EDGE_FACE"` | Integer | - | Required |
 | **FACE_EDGE_TYPE = "FACE" or "PRES"** | | | | | |
-| (11) | Forces [PU,0,0,0,0] or [0,P1,P2,P3,P4] | `"FORCES"` | Array \[Number, 5\] | - | Required |
+| (11) | [When Pressure Type, "FACE_EDGE_TYPE" is "FACE" or "PRES"] Uniform Load · [PU, 0, 0, 0, 0] Linear Load · [0, P1, P2, P3, P4] | `"FORCES"` | Array \[Number, 5\] | - | **Required** |
 | **FACE_EDGE_TYPE = "EDGE"** | | | | | |
-| (11) | Edge Loads [EPU,0,0] or [0,EP1,EP2] | `"EDGE_LOADS"` | Array \[Number, 3\] | - | Required |
+| (11) | [When Pressure Type, "FACE_EDGE_TYPE" is "EDGE"] Uniform Load · [EPU, 0, 0] Linear Load · [0, EP1, EP2] | `"EDGE_LOADS"` | Array \[Number, 3\] | - | **Required** |
 
 > Direction 지원 매트릭스:
 
@@ -1005,28 +1005,28 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `PSLT_K
 |-----|-------------|-----|-----------|---------|----------|
 | 1 | Load Type Name | `"NAME"` | String | - | Required |
 | 2 | Description | `"DESC"` | String | Blank | Optional |
-| 3 | Load Type (`"POINT"` / `"LINE"` / `"AREA"`) | `"LTYPE"` | String | - | Required |
+| 3 | Load Type · Point: "POINT" · Line: "LINE" · Area: "AREA" | `"LTYPE"` | String | - | **Required** |
 | 4 | Copy in X-Direction | `"COPY_X"` | Array \[Number\] | - | Required |
 | 5 | Copy in Y-Direction | `"COPY_Y"` | Array \[Number\] | - | Required |
 | 6 | Sequence Number (Unique) | `"SEQ"` | Integer | Auto | Optional |
 | **LTYPE = "POINT"** | | | | | |
-| 7 | Point Loads | `"POINTLOAD"` | Array \[Object\] | - | Required |
+| 7 | [Only for Point Loads] Point Loads · Insert the data as an object | `"POINTLOAD"` | Array \[Object\] | - | **Required** |
 | (1) | Point X | `"X"` | Number | 0 | Optional |
 | (2) | Point Y | `"Y"` | Number | 0 | Optional |
 | (3) | Force | `"F"` | Number | 0 | Optional |
 | **LTYPE = "LINE"** | | | | | |
 | 7 | Line Loads | `"LINELOAD"` | Object | - | Required |
 | (1) | Uniform (true) / Trapezoidal (false) | `"bUNIFORM"` | Boolean | true | Optional |
-| (2) | Coordinates of X1, X2 | `"X"` | Array \[Number, 2\] | 0 | Optional |
-| (3) | Coordinates of Y1, Y2 | `"Y"` | Array \[Number, 2\] | 0 | Optional |
-| (4) | Force (Uniform: [F1] / Trap: [F1, F2]) | `"F"` | Array \[Number, 2\] | 0 | Optional |
+| (2) | [Only for Line Loads] Coordinates of X1, X2 · [X1, X2] | `"X"` | Array \[Number, 2\] | 0 | Optional |
+| (3) | [Only for Line Loads] Coordinates of Y1, Y2 · [Y1, Y2] | `"Y"` | Array \[Number, 2\] | 0 | Optional |
+| (4) | [Only for Line Loads] Force · Uniform: [F1] · Trapezoidal: [F1, F2] | `"F"` | Array \[Number, 2\] | 0 | Optional |
 | **LTYPE = "AREA"** | | | | | |
 | 7 | Area Loads | `"AREALOAD"` | Object | - | Required |
 | (1) | Uniform (true) / Trapezoidal (false) | `"bUNIFORM"` | Boolean | false | Optional |
-| (2) | 3 Points (true) / 4 Points (false) | `"b3PNT"` | Boolean | false | Optional |
-| (3) | Coordinates X1~X4 | `"X"` | Array \[Number, 4\] | 0 | Optional |
-| (4) | Coordinates Y1~Y4 | `"Y"` | Array \[Number, 4\] | 0 | Optional |
-| (5) | Load (Uniform: [F1] / Trap: [F1,F2,F3,F4]) | `"LOAD"` | Array \[Number, 4\] | 0 | Optional |
+| (2) | [Only for Area Loads] Points · 3 points: true · 4 points: false | `"b3PNT"` | Boolean | false | Optional |
+| (3) | [Only for Area Loads] Coordinates of X1, X2, X3, X4 · [X1, X2, X3, X4] | `"X"` | Array \[Number, 4\] | 0 | Optional |
+| (4) | [Only for Area Loads] Coordinates of Y1, Y2, Y3, Y4 · [Y1, Y2, Y3, Y4] | `"Y"` | Array \[Number, 4\] | 0 | Optional |
+| (5) | [Only for Area Loads] Load · Uniform: [F1] · Trapezoidal: [F1, F2, F3, F4] | `"LOAD"` | Array \[Number, 4\] | 0 | Optional |
 
 ### Python 예제
 
@@ -1110,13 +1110,13 @@ midas_api("DELETE", "/db/PNLD", {"Assign": {"2": {}}})
 | 2 | Load Group Name | `"LOAD_GROUP"` | String | - | Required |
 | 3 | Defined Plane Load Key | `"PNLD_KEY"` | Integer | - | Required |
 | 4 | Element Type (`"PLATE"` / `"SOLID"`) | `"ELEM_TYPE"` | String | - | Required |
-| 5 | First Point / Origin [x, y, z] | `"POINT_ORIGIN"` | Array \[Number, 3\] | - | Required |
-| 6 | Second Point / on x-Axis [x, y, z] | `"AXIS_X"` | Array \[Number, 3\] | - | Required |
-| 7 | Third Point / on x-y Plane [x, y, z] | `"AXIS_Y"` | Array \[Number, 3\] | - | Required |
+| 5 | First Point (Origin) · [x, y, z] | `"POINT_ORIGIN"` | Array \[Number, 3\] | - | **Required** |
+| 6 | Second Point (on x Axis) · [x, y, z] | `"AXIS_X"` | Array \[Number, 3\] | - | **Required** |
+| 7 | Third Point (on x-y Plane) · [x, y, z] | `"AXIS_Y"` | Array \[Number, 3\] | - | **Required** |
 | 8 | Tolerance | `"TOL"` | Number | - | Required |
 | 9 | Element Selection (`"ON_PLANE"` / `"IN_GROUP"`) | `"SELECT_TYPE"` | String | - | Required |
-| 10 | Load Direction (`"NORMAL_PLANE"` / `"NORMAL_ELEM"` / `"GLOBAL_X"` / `"GLOBAL_Y"` / `"GLOBAL_Z"`) | `"LOAD_DIR"` | String | - | Required |
-| 11 | Projection Type (`"NO"` / `"LOAD_DIR"` / `"LOAD_PLANE"`) | `"PROJECT_TYPE"` | String | - | Required |
+| 10 | Load Direction · Normal (Loading Plane): "NORMAL_PLANE" · Normal (Element): "NORMAL_ELEM" · Global X: "GLOBAL_X" · Global Y: "GLOBAL_Y" · Global Z: "GLOBAL_Z" | `"LOAD_DIR"` | String | - | **Required** |
+| 11 | Projection Type · No: "NO" · Load Direction: "LOAD_DIR" · Loading Plane: "LOAD_PLANE" | `"PROJECT_TYPE"` | String | - | **Required** |
 | 12 | Description | `"DESC"` | String | Blank | Optional |
 | **ELEM_TYPE = "PLATE"** | | | | | |
 | 13 | Node Defining Loading Area | `"bDEFINE_NODE"` | Boolean | false | Optional |
@@ -1124,7 +1124,7 @@ midas_api("DELETE", "/db/PNLD", {"Assign": {"2": {}}})
 | **SELECT_TYPE = "IN_GROUP"** | | | | | |
 | 13 | Element Group Name | `"ELEM_GROUP"` | String | - | Optional |
 | **ELEM_TYPE = "SOLID"** | | | | | |
-| 14 | Solid Face No. (1~6) | `"FACE_NO"` | Integer | - | Optional |
+| 14 | [When Element Select Type, "ELEM_TYPE" is "SOLID"] Solid Face No. (1~6) · Face #1: 1 · Face #2: 2 · Face #3: 3 · Face #4: 4 · Face #5: 5 · Face #6: 6 | `"FACE_NO"` | Integer | - | Optional |
 
 > ⚠️ **2026-09-28 재확인 — 기존 오류 미해결 + 신규 오류 발견.** 2026-09-01 갱신으로 `ELEM_TYPE =
 > "SOLID"` 조건 행의 Key 오기(`"SELECT_TYPE"` → `"ELEM_TYPE"`)는 정정됐었으나, 같은 행의 **설명
@@ -1203,7 +1203,7 @@ midas_api("DELETE", "/db/PNLA", {"Assign": {"1": {}}})
 |-----|-------------|-----|-----------|---------|----------|
 | 1 | Floor Load Type Name | `"NAME"` | String | - | Required |
 | 2 | Description | `"DESC"` | String | Blank | Optional |
-| 3 | Floor Load items | `"ITEM"` | Array \[Object\] | - | Required |
+| 3 | Floor Loads · Insert the data as an object | `"ITEM"` | Array \[Object\] | - | **Required** |
 | (1) | Load Case Name | `"LCNAME"` | String | - | Required |
 | (2) | Floor Load (kN/m² or equivalent) | `"FLOOR_LOAD"` | Number | - | Required |
 | (3) | Consider Sub Beam Weight | `"OPT_SUB_BEAM_WEIGHT"` | Boolean | false | Optional |
@@ -1279,16 +1279,16 @@ midas_api("DELETE", "/db/FBLD", {"Assign": {"2": {}}})
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
 | 1 | Floor Load Type Name | `"FLOOR_LOAD_TYPE_NAME"` | String | - | Required |
-| 2 | Distribution Type (1=One Way / 2=Two Way / 3=Polygon-Centroid / 4=Polygon-Length) | `"FLOOR_DIST_TYPE"` | Integer | - | Required |
-| 3 | Load Direction (`"LX"` / `"LY"` / `"LZ"` / `"GX"` / `"GY"` / `"GZ"`) | `"DIR"` | String | `"LX"` | Optional |
-| 4 | Projection | `"OPT_PROJECTION"` | Boolean | false | Optional |
+| 2 | Distribution Type · One Way: 1 · Two Way: 2 · Polygon-Centroid: 3 · Polygon-Length: 4 | `"FLOOR_DIST_TYPE"` | Integer | - | **Required** |
+| 3 | Load Direction · Local x: "LX" · Local y: "LY" · Local z: "LZ" · Global X: "GX" · Global Y: "GY" · Global Z: "GZ" | `"DIR"` | String | `"LX"` | Optional |
+| 4 | Projection Boolean | `"OPT_PROJECTION"` | Boolean | false | Optional |
 | 5 | Description | `"DESC"` | String | Blank | Optional |
 | 6 | Load Group Name | `"GROUP_NAME"` | String | Blank | Optional |
 | 7 | Nodes defining Loading Area | `"NODES"` | Array \[Integer\] | - | Required |
 | **FLOOR_DIST_TYPE = 1** | | | | | |
-| 8 | Load Angle (A1) | `"LOAD_ANGLE"` | Number | 0 | Optional |
+| 8 | [When Distribution Type, "FLOOR_DIST_TYPE" is 1] Load Angle(A1) | `"LOAD_ANGLE"` | Number | 0 | Optional |
 | **FLOOR_DIST_TYPE = 2** | | | | | |
-| 8 | Allow Polygon Type Unit Area | `"OPT_ALLOW_POLYGON_TYPE_UNIT_AREA"` | Boolean | false | Optional |
+| 8 | [When Distribution Type, "FLOOR_DIST_TYPE" is 2] Allow Polygon Type Unit Angle | `"OPT_ALLOW_POLYGON_TYPE_UNIT_AREA"` | Boolean | false | Optional |
 | **FLOOR_DIST_TYPE = 1 or 2** | | | | | |
 | 9 | Exclude Inner Element of Area | `"OPT_EXCLUDE_INNER_ELEM_AREA"` | Boolean | false | Optional |
 | 10 | No. of Sub Beams | `"SUB_BEAM_NUM"` | Integer | 0 | Optional |
@@ -1381,15 +1381,15 @@ midas_api("DELETE", "/db/FBLA", {"Assign": {"2": {}}})
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
-| 1 | Finishing Material Load items | `"ITEMS"` | Array \[Object\] | - | Required |
+| 1 | Finishing Material Loads · Insert the data as an object | `"ITEMS"` | Array \[Object\] | - | **Required** |
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Load Case Name | `"LCNAME"` | String | - | Required |
 | (3) | Load Group Name | `"GROUP_NAME"` | String | Blank | Optional |
-| (4) | Covering Type (`"ENVELOP"` / `"FILL"` / `"SURROUND"`) | `"COVERING_TYPE"` | String | `"ENVELOP"` | Optional |
-| (5) | Covering Range [+x, -y, -x, +y] (`"FULL"` / `"HALF"`) | `"COVERING_RANGE"` | Array \[String, 4\] | - | Required |
+| (4) | Covering Type · Envelop: "ENVELOP" · Fill: "FILL" · Surround: "SURROUND" | `"COVERING_TYPE"` | String | `"ENVELOP"` | Optional |
+| (5) | Covering Range · Full: "FULL" · Half: "HALF" · [+x dir. face, -y dir. face, -x dir. face, +y dir. face] | `"COVERING_RANGE"` | Array \[String, 4\] | - | **Required** |
 | (6) | Covering Thickness (d) | `"THICKNESS"` | Number | 0 | Optional |
 | (7) | Filling Property (Density) | `"DENSITY"` | Number | 0 | Optional |
-| (8) | Direction (`"GX"` / `"GY"` / `"GZ"`) | `"DIR"` | String | `"GZ"` | Optional |
+| (8) | Direction · Global X: "GX" · Global Y: "GY" · Global Z: "GZ" | `"DIR"` | String | `"GZ"` | Optional |
 | (9) | Scale Factor | `"SCALE_FACTOR"` | Number | 0 | Required |
 
 ### Python 예제
@@ -1458,18 +1458,18 @@ midas_api("DELETE", "/db/FMLD", {"Assign": {"200": {}}})
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
-| 1 | Soil Properties Name | `"NAME"` | String | - | Required |
+| 1 | Parameters of Soil Properties Name | `"NAME"` | String | - | **Required** |
 | 2 | Description | `"DESC"` | String | Blank | Optional |
 | 3 | Use N Value · True : Use N Value of soil · False : Internal friction angle of soil | `"OPT_USE_N"` | Number | false | Optional |
-| 4 | Level of Ground Surface | `"GROUND_LEVEL"` | Number | - | Required |
+| 4 | Level of ground surface | `"GROUND_LEVEL"` | Number | - | **Required** |
 | 5 | Level of Bedrock | `"BEDROCK_LEVEL"` | Number | - | Required |
-| 6 | Level of Footing Bottom | `"FOOTING_LEVEL"` | Number | - | Required |
-| 7 | Soil Characteristic items | `"ITEMS"` | Array \[Object\] | - | Required |
-| (1) | Soil Layer Thickness | `"HEIGHT"` | Number | - | Required |
-| (2) | Internal Friction Angle or N Value | `"ANGLE_OR_N"` | Number | - | Required |
-| (3) | Unit Volume Weight of Soil | `"DENSITY"` | Number | - | Required |
+| 6 | Level of footing bottom | `"FOOTING_LEVEL"` | Number | - | **Required** |
+| 7 | Soil Characteristic · Insert the data as an object | `"ITEMS"` | Array \[Object\] | - | **Required** |
+| (1) | Soil layer thickness | `"HEIGHT"` | Number | - | **Required** |
+| (2) | Internal friction angle of soil or N Value | `"ANGLE_OR_N"` | Number | - | **Required** |
+| (3) | Unit volume weight of soil | `"DENSITY"` | Number | - | **Required** |
 | (4) | Shear Wave Velocity | `"VS"` | Number | - | Required |
-| (5) | Coeff. of Horizontal Ground Reaction | `"KH"` | Number | - | Required |
+| (5) | Coeff.of Horizontal Ground Reaction | `"KH"` | Number | - | **Required** |
 | (6) | Relative Displacement | `"DISP"` | Number | - | Required |
 
 ### Python 예제
@@ -1638,21 +1638,21 @@ midas_api("DELETE", "/db/EPST", {"Assign": {"1": {}}})
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
 | 1 | Load Case Name | `"LOADCASE"` | String | - | Required |
-| 2 | Load Direction (`"XY"` / `"NORMAL"`) | `"DIR"` | String | `"XY"` | Optional |
+| 2 | Load Direction · "XY" : Apply load in horizontal direction · "NORMAL" : Apply load normal to surface | `"DIR"` | String | `"XY"` | Optional |
 | 3 | Seismic Earth Pressure Angle | `"ANGLE"` | Number | 0 | Optional |
 | 4 | Inner Point | `"IN_PT"` | Number | - | Optional |
 | 5 | Scale Factor | `"SF"` | Number | - | Optional |
 | 6 | Design Code | `"CODE"` | String | - | Optional |
-| 7 | Seismic Load Name | `"SEIS_LOAD"` | String | - | Required |
-| 8 | Soil Layer Parameter (`"SINGLE"` / `"DOUBLE"`) | `"LAYER_PARAM"` | String | `"SINGLE"` | Optional |
-| 9 | Soil Second Layer Level (Double Cosine) | `"LAYER_LV"` | Number | 0 | Optional |
-| 10 | Soil Properties Name | `"SOIL_PROP"` | String | - | Required |
-| 11 | Selection Type (`"GROUP"` / `"ELEMENT"`) | `"SEL_TYPE"` | String | - | Required |
-| 12 | Element Type (`"FRAME"` / `"PLANAR"`) | `"ELEM_TYPE"` | String | `"ELEM"` | Optional |
+| 7 | Seismic Load Code | `"SEIS_LOAD"` | String | - | **Required** |
+| 8 | Soil Layer Parameter · "SINGLE" :Single layer to calculate ground displacement. · "DOUBLE" :Two layers to calculate ground displacement. | `"LAYER_PARAM"` | String | `"SINGLE"` | Optional |
+| 9 | Soil Second Layer Level (for Double Cosine Method) | `"LAYER_LV"` | Number | 0 | Optional |
+| 10 | Parameters of Soil Properties | `"SOIL_PROP"` | String | - | **Required** |
+| 11 | Selection Type · GROUP: Use Area Group from Loading Area Plane · ELEMENT: Use selected boundary elements | `"SEL_TYPE"` | String | - | **Required** |
+| 12 | Element Type · FRAME: Apply loads to frame nodes · PLANAR: Apply loads to planar element nodes | `"ELEM_TYPE"` | String | `"ELEM"` | Optional |
 | 13 | Node List | `"NODE_LIST"` | Array \[Integer\] | - | Optional |
 | 14 | Element List | `"ELEM_LIST"` | Array \[Integer\] | - | Optional |
 | 15 | Loading Area Group Name | `"LOADING_AREA_GROUP"` | Integer | - | Optional |
-| 16 | Pressure Profile items | `"PRES_PROFILE_ITEMS"` | Array \[Object\] | - | Optional |
+| 16 | Pressure Profile Items | `"PRES_PROFILE_ITEMS"` | Array \[Object\] | - | Optional |
 | (1) | Level | `"LEVEL"` | Number | - | Required |
 | (2) | Horizontal Coefficient KH | `"KH"` | Number | - | Required |
 | (3) | Relative Displacement | `"REL_DISP"` | Number | - | Required |
@@ -1732,13 +1732,13 @@ midas_api("DELETE", "/db/EPSE", {"Assign": {"1": {}}})
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
-| 1 | Load Case Name | `"NAME"` | String | - | Required |
+| 1 | Parameters of Seismic Earth Name | `"NAME"` | String | - | **Required** |
 | 2 | Seismic Load Code | `"CODE"` | String | - | Optional |
-| 3 | Seismic Calculation Method (`"RES_DISP"` / `"EQV_STATIC"`) | `"METHOD"` | String | - | Optional |
+| 3 | Seismic Calculation Method · RES_DISP: Response Displacement Method · EQV_STATIC: Equivalent Static Method | `"METHOD"` | String | - | Optional |
 | 4 | Seismic Zone | `"SZ"` | String | - | Required |
 | 5 | Effective Peak Ground Acceleration | `"EPA"` | Number | - | Required |
 | 6 | Site Class | `"SC"` | String | - | Required |
-| 7 | Short-period Site Coefficient | `"FA"` | Number | - | Required |
+| 7 | Short-period site coefficient | `"FA"` | Number | - | **Required** |
 | 8 | Long-period Site Coefficient | `"FV"` | Number | - | Required |
 | 9 | Design Spectral Acceleration at Short Period | `"SDS"` | Number | - | Required |
 | 10 | Design Spectral Acceleration at 1-sec Period | `"SD1"` | Number | - | Required |
@@ -1804,63 +1804,63 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `CALC_O
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
 | 1 | Wind Load Code (`"KDS(41-12: 2022)"`) | `"WIND_CODE"` | string (enum) | - | Required |
-| 2 | Description | `"DESC"` | string | `""` | Optional |
-| 3 | Scale Factor X | `"SCALE_FACTOR_X"` | number | - | Required |
-| 4 | Scale Factor Y | `"SCALE_FACTOR_Y"` | number | - | Required |
-| 5 | KDS(41-12:2022) Parameters | `"PARAMETERS"` | object | - | Required |
-| (1) | Input Method (0=Simplified / 1=General / 2=General+Vortex) | `"INPUT_METHOD"` | integer (enum) | - | Required |
+| 2 | Optional description. | `"DESC"` | string | `""` | Optional |
+| 3 | Scale factor for X direction. | `"SCALE_FACTOR_X"` | number | - | **Required** |
+| 4 | Scale factor for Y direction. | `"SCALE_FACTOR_Y"` | number | - | **Required** |
+| 5 | KDS(41-12:2022) wind parameters. | `"PARAMETERS"` | object | - | **Required** |
+| (1) | Input method for KDS(41-12:2022) wind parameters. · 0 : Simplified Method · 1 : General Method · 2 : General Method - Vortex Shedding | `"INPUT_METHOD"` | integer (enum) | - | **Required** |
 | **INPUT_METHOD = 0 (Simplified)** | | | | | |
 | | Basic Wind Speed | `"WIND_SPEED"` | number | - | Required |
 | | Roof Height | `"ROOF_HEIGHT"` | number | system | Optional |
-| | Exposure Coefficient CE | `"CE"` | number | 1 | Optional |
+| | [When INPUT_METHOD = 0] Exposure coefficient. | `"CE"` | number | 1 | Optional |
 | **INPUT_METHOD = 1 (General)** | | | | | |
-| | Exposure Category (0=A / 1=B / 2=C / 3=D) | `"EXP_CATEGORY"` | integer (enum) | - | Required |
+| | [When INPUT_METHOD = 1] Exposure category. · 0 : A · 1 : B · 2 : C · 3 : D | `"EXP_CATEGORY"` | integer (enum) | - | **Required** |
 | | Basic Wind Speed | `"WIND_SPEED"` | number | - | Required |
-| | Importance Factor | `"IMPORTANCE_FACTOR"` | number | - | Required |
+| | [When INPUT_METHOD = 1] Importance factor. | `"IMPORTANCE_FACTOR"` | number | - | **Required** |
 | | Roof Height | `"ROOF_HEIGHT"` | number | system | Optional |
-| | Topographic Effect | `"TOPOGRAPHIC_EFFECT"` | object | - | Optional |
+| | [When INPUT_METHOD = 1] Optional topographic effect. | `"TOPOGRAPHIC_EFFECT"` | object | - | Optional |
 | a | Use Topographic Effect | `"OPT_USE"` | boolean | false | Optional |
-| a | Topographic Factor KZT (OPT_USE=true) | `"KZT"` | number | - | Conditional |
-| | Direction Factor X | `"DIRECTION_FACTOR_X"` | number | 1 | Optional |
-| | Direction Factor Y | `"DIRECTION_FACTOR_Y"` | number | 1 | Optional |
-| | Rigidity Classification | `"RIGIDITY"` | integer | - | Required |
-| | Gust Factor X | `"GUST_FACTOR_X"` | number | - | Required |
-| | Gust Factor Y | `"GUST_FACTOR_Y"` | number | - | Required |
+| a | [When TOPOGRAPHIC_EFFECT.OPT_USE = true] Topographic factor. | `"KZT"` | number | - | Conditional |
+| | [When TOPOGRAPHIC_EFFECT.OPT_USE = true] Direction factor for X direction. | `"DIRECTION_FACTOR_X"` | number | 1 | Optional |
+| | [When TOPOGRAPHIC_EFFECT.OPT_USE = true] Direction factor for Y direction. | `"DIRECTION_FACTOR_Y"` | number | 1 | Optional |
+| | [When TOPOGRAPHIC_EFFECT.OPT_USE = true] Rigidity classification. | `"RIGIDITY"` | integer | - | **Required** |
+| | [When TOPOGRAPHIC_EFFECT.OPT_USE = true] Gust factor for X direction. | `"GUST_FACTOR_X"` | number | - | **Required** |
+| | [When TOPOGRAPHIC_EFFECT.OPT_USE = true] Gust factor for Y direction. | `"GUST_FACTOR_Y"` | number | - | **Required** |
 | | Force Coefficient | `"FORCE_COEF"` | object | - | Optional |
 | a | Use User-defined Force Coefficient | `"OPT_USE"` | boolean | false | Optional |
-| a | Force Coefficient Value (OPT_USE=true) | `"FORCE_COEF"` | number | - | Conditional |
-| | Building Type (0=Middle Low Rise / 1=High Rise) | `"BUILDING_TYPE"` | integer (enum) | - | Optional |
-| | Vibration Parameters | `"VIBRATION_PARAMS"` | object | - | Optional |
-| a | Across-wind Vibration | `"ACROSS_WIND"` | boolean | false | Optional |
-| b | Torsional-wind Vibration | `"TORSIONAL_WIND"` | boolean | false | Optional |
-| c | Wind Response | `"WIND_RESPONSE"` | boolean | false | Optional |
-| d | Building Length X | `"BL_X"` | number | - | Required |
-| e | Building Length Y | `"BL_Y"` | number | - | Required |
-| f | Natural Frequency X | `"NO_X"` | number | - | Required |
-| g | Natural Frequency Y | `"NO_Y"` | number | - | Required |
-| h | Torsional Natural Frequency | `"NO_T"` | number | - | Required |
-| i | Mass | `"M"` | number | system | Optional |
-| j | Mass in X direction | `"MX"` | number | system | Optional |
-| k | Mass in Y direction | `"MY"` | number | system | Optional |
-| l | Mass Moment of Inertia | `"MI"` | number | system | Optional |
-| m | Damping Ratio | `"ZF"` | number | - | Required |
-| n | Vibration Mode Coefficient | `"VIBRATION_MODE"` | number | - | Required |
+| a | [When FORCE_COEF.OPT_USE = true] Force coefficient value. | `"FORCE_COEF"` | number | - | Conditional |
+| | [When FORCE_COEF.OPT_USE = true] Building type. · 0 : Middle Low Rise Building · 1 : High Rise Building | `"BUILDING_TYPE"` | integer (enum) | - | Optional |
+| | [When FORCE_COEF.OPT_USE = true] Conditional vibration parameters. | `"VIBRATION_PARAMS"` | object | - | Optional |
+| a | [When FORCE_COEF.OPT_USE = true] Across-wind vibration option. | `"ACROSS_WIND"` | boolean | false | Optional |
+| b | [When FORCE_COEF.OPT_USE = true] Torsional-wind vibration option. | `"TORSIONAL_WIND"` | boolean | false | Optional |
+| c | [When FORCE_COEF.OPT_USE = true] Wind response option. | `"WIND_RESPONSE"` | boolean | false | Optional |
+| d | [When FORCE_COEF.OPT_USE = true] Building Length X. | `"BL_X"` | number | - | **Required** |
+| e | [When FORCE_COEF.OPT_USE = true] Building Length Y. | `"BL_Y"` | number | - | **Required** |
+| f | [When FORCE_COEF.OPT_USE = true] Natural frequency in X direction. | `"NO_X"` | number | - | **Required** |
+| g | [When FORCE_COEF.OPT_USE = true] Natural frequency in Y direction. | `"NO_Y"` | number | - | **Required** |
+| h | [When FORCE_COEF.OPT_USE = true] Torsional natural frequency. | `"NO_T"` | number | - | **Required** |
+| i | [When FORCE_COEF.OPT_USE = true] Mass. | `"M"` | number | system | Optional |
+| j | [When FORCE_COEF.OPT_USE = true] Mass in X direction. | `"MX"` | number | system | Optional |
+| k | [When FORCE_COEF.OPT_USE = true] Mass in Y direction. | `"MY"` | number | system | Optional |
+| l | [When FORCE_COEF.OPT_USE = true] Mass moment of inertia. | `"MI"` | number | system | Optional |
+| m | [When FORCE_COEF.OPT_USE = true] Damping ratio. | `"ZF"` | number | - | **Required** |
+| n | [When FORCE_COEF.OPT_USE = true] Vibration mode coefficient. | `"VIBRATION_MODE"` | number | - | **Required** |
 | **INPUT_METHOD = 2 (General + Vortex Shedding)** | | | | | |
 | | Roof Height | `"ROOF_HEIGHT"` | number | system | Optional |
-| | Vortex Shedding DM | `"DM"` | number | - | Required |
-| | Vortex Shedding DB | `"DB"` | number | - | Required |
-| | Natural Frequency for Vortex | `"N"` | number | - | Required |
+| | [When INPUT_METHOD = 2] Vortex shedding parameter DM. | `"DM"` | number | - | **Required** |
+| | [When INPUT_METHOD = 2] Vortex shedding parameter DB. | `"DB"` | number | - | **Required** |
+| | [When INPUT_METHOD = 2] Natural frequency for vortex shedding check. | `"N"` | number | - | **Required** |
 | | Mass for Vortex Check | `"M"` | number | system | Optional |
 | | Damping Ratio for Vortex | `"ZF"` | number | - | Required |
-| 6 | Additional Story-level Wind Load | `"ADDITIONAL_LOAD"` | array \[object\] | - | Optional |
+| 6 | Additional story-level wind load list. | `"ADDITIONAL_LOAD"` | array \[object\] | - | Optional |
 | (1) | Story Name | `"STORY_NAME"` | string | - | Required |
-| (2) | Along-wind Load X | `"ALONG_X"` | number | - | Optional |
-| (3) | Along-wind Load Y | `"ALONG_Y"` | number | - | Optional |
-| (4) | Across-wind Load X | `"ACROSS_X"` | number | - | Optional |
-| (5) | Across-wind Load Y | `"ACROSS_Y"` | number | - | Optional |
-| (6) | Torsional Wind Load RZ | `"TORSIONAL_RZ"` | number | - | Optional |
-| (7) | Torsional Wind Load RZ X | `"TORSIONAL_RZ_X"` | number | - | Optional |
-| (8) | Torsional Wind Load RZ Y | `"TORSIONAL_RZ_Y"` | number | - | Optional |
+| (2) | Additional along-wind load in X direction. | `"ALONG_X"` | number | - | Optional |
+| (3) | Additional along-wind load in Y direction. | `"ALONG_Y"` | number | - | Optional |
+| (4) | Additional across-wind load in X direction. | `"ACROSS_X"` | number | - | Optional |
+| (5) | Additional across-wind load in Y direction. | `"ACROSS_Y"` | number | - | Optional |
+| (6) | Additional torsional wind load RZ. | `"TORSIONAL_RZ"` | number | - | Optional |
+| (7) | Additional torsional wind load RZ for X direction. | `"TORSIONAL_RZ_X"` | number | - | Optional |
+| (8) | Additional torsional wind load RZ for Y direction. | `"TORSIONAL_RZ_Y"` | number | - | Optional |
 
 ### Python 예제
 
@@ -1925,21 +1925,21 @@ midas_api("DELETE", "/db/SWIND", {"Assign": {"1": {}}})
 
 | No. | Description | Key | Value Type | Default | Required |
 | --- | --- | --- | --- | --- | --- |
-| 1 | Wind Load Code (`"USER TYPE"`) | `"WIND_CODE"` | string (enum) | - | Required |
-| 2 | Description | `"DESC"` | string | `""` | Optional |
+| 1 | Wind load code. | `"WIND_CODE"` | string (enum) | - | **Required** |
+| 2 | Optional description. | `"DESC"` | string | `""` | Optional |
 | 3 | Wind Eccentricity Option X (0=Positive / 1=Negative / 2=None) | `"WIND_ECCEN_X"` | integer (enum) | `2` | Optional |
 | 4 | Wind Eccentricity Option Y (0=Positive / 1=Negative / 2=None) | `"WIND_ECCEN_Y"` | integer (enum) | `2` | Optional |
-| 5 | Scale Factor X | `"SCALE_FACTOR_X"` | number | - | Required |
-| 6 | Scale Factor Y | `"SCALE_FACTOR_Y"` | number | - | Required |
+| 5 | Scale factor for X direction. | `"SCALE_FACTOR_X"` | number | - | **Required** |
+| 6 | Scale factor for Y direction. | `"SCALE_FACTOR_Y"` | number | - | **Required** |
 | 7 | User-defined Story-level Wind Pressure | `"STORY_WIND_PRESSURE"` | array [object] | - | Required |
-| (1) | Story Name | `"STORY_NAME"` | string | - | Required |
+| (1) | Story name. | `"STORY_NAME"` | string | - | **Required** |
 | (2) | Wind Pressure X | `"PRESS_X"` | number | - | Required |
 | (3) | Wind Pressure Y | `"PRESS_Y"` | number | - | Required |
-| 8 | Additional Story-level Wind Load | `"ADDITIONAL_LOAD"` | array [object] | - | Optional |
-| (1) | Story Name | `"STORY_NAME"` | string | - | Optional |
-| (2) | Along-wind Load X | `"ALONG_X"` | number | - | Optional |
-| (3) | Along-wind Load Y | `"ALONG_Y"` | number | - | Optional |
-| (4) | Torsional Wind Load RZ | `"TORSIONAL_RZ"` | number | - | Optional |
+| 8 | Additional story-level wind load list. | `"ADDITIONAL_LOAD"` | array [object] | - | Optional |
+| (1) | Story name. | `"STORY_NAME"` | string | - | **Required** |
+| (2) | Additional along-wind load in X direction. | `"ALONG_X"` | number | - | Optional |
+| (3) | Additional along-wind load in Y direction. | `"ALONG_Y"` | number | - | Optional |
+| (4) | Additional torsional wind load RZ. | `"TORSIONAL_RZ"` | number | - | Optional |
 
 > ⚠️ `ELEV`, `LOAD_H`, `LOAD_BX`, `LOAD_BY` 등 GET 응답에만 나타나는 층 기하 필드는 원문 JSON
 > Schema 기준 요청 페이로드에 보내면 안 되는 것으로 명시되어 있어 위 표에서 제외했다.
@@ -1995,37 +1995,37 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `$comme
 |-----|-------------|-----|-----------|---------|----------|
 | 1 | Seismic Load Code (`"KDS(41-17-00:2019)"`) | `"SEIS_CODE"` | string (enum) | - | Required |
 | 2 | Description | `"DESC"` | string | `""` | Optional |
-| 3 | Scale Factor X | `"SCALE_FACTOR_X"` | number | - | Required |
-| 4 | Scale Factor Y | `"SCALE_FACTOR_Y"` | number | - | Required |
-| 5 | Accidental Eccentricity X (0=Positive / 1=Negative / 2=None) | `"ACCIDENT_ECCEN_X"` | integer (enum) | 0 | Optional |
-| 6 | Accidental Eccentricity Y (0=Positive / 1=Negative / 2=None) | `"ACCIDENT_ECCEN_Y"` | integer (enum) | 0 | Optional |
-| 7 | Consider Accidental Torsion | `"ACCIDENT_TORSION"` | boolean | false | Optional |
+| 3 | Scale factor for X direction. | `"SCALE_FACTOR_X"` | number | - | **Required** |
+| 4 | Scale factor for Y direction. | `"SCALE_FACTOR_Y"` | number | - | **Required** |
+| 5 | Accidental eccentricity option for X direction. · 0 : Positive · 1 : Negative · 2 : None | `"ACCIDENT_ECCEN_X"` | integer (enum) | 0 | Optional |
+| 6 | Accidental eccentricity option for Y direction. · 0 : Positive · 1 : Negative · 2 : None | `"ACCIDENT_ECCEN_Y"` | integer (enum) | 0 | Optional |
+| 7 | Whether to consider accidental torsion. | `"ACCIDENT_TORSION"` | boolean | false | Optional |
 | 8 | KDS(41-17-00:2019) Parameters | `"PARAMETERS"` | object | - | Required |
-| (1) | Seismic Zone (0=Zone1 / 1=Zone2) | `"SEIS_ZONE"` | integer (enum) | - | Required |
-| (2) | Effective Peak Acceleration | `"EPA"` | number | - | Required |
-| (3) | Site Class (0=S1 / 1=S2 / 2=S3 / 3=S4 / 4=S5 / 5=S6) | `"SITE_CLASS"` | integer (enum) | - | Required |
-| (4) | Short-period Site Coefficient FA | `"FA"` | number | system | Optional |
-| (5) | Long-period Site Coefficient FV | `"FV"` | number | system | Optional |
-| (6) | Design Spectral Acceleration at Short Period SDS | `"SDS"` | number | system | Optional |
-| (7) | Design Spectral Acceleration at 1-sec SD1 | `"SD1"` | number | system | Optional |
-| (8) | Seismic Use Group (0=Special / 1=I / 2=II) | `"SEIS_USE_GROUP"` | integer (enum) | - | Required |
-| (9) | Importance Factor | `"IMPORTANCE_FACTOR"` | number | - | Required |
-| (10) | Period Method (0=Analytical / 1=Approximate) | `"PERIOD_METHOD"` | integer (enum) | - | Required |
+| (1) | Seismic zone. · 0 : Zone 1 · 1 : Zone 2 | `"SEIS_ZONE"` | integer (enum) | - | **Required** |
+| (2) | Effective peak acceleration. | `"EPA"` | number | - | **Required** |
+| (3) | Site class. · 0 : S1 · 1 : S2 · 2 : S3 · 3 : S4 · 4 : S5 · 5 : S6 | `"SITE_CLASS"` | integer (enum) | - | **Required** |
+| (4) | Short-period site coefficient. | `"FA"` | number | system | Optional |
+| (5) | Long-period site coefficient. | `"FV"` | number | system | Optional |
+| (6) | Design spectral response acceleration at short period. | `"SDS"` | number | system | Optional |
+| (7) | Design spectral response acceleration at 1-second period. | `"SD1"` | number | system | Optional |
+| (8) | Seismic use group. · 0 : Special · 1 : I · 2 : II | `"SEIS_USE_GROUP"` | integer (enum) | - | **Required** |
+| (9) | Importance factor. | `"IMPORTANCE_FACTOR"` | number | - | **Required** |
+| (10) | Period input method. · 0 : Analytical Period · 1 : Approximate Period | `"PERIOD_METHOD"` | integer (enum) | - | **Required** |
 | **PERIOD_METHOD = 0** | | | | | |
-| | Analytical Period X | `"PERIOD_ANALYSIS_X"` | number | - | Required |
-| | Analytical Period Y | `"PERIOD_ANALYSIS_Y"` | number | - | Required |
+| | [When PERIOD_METHOD = 0] Analytical period for X direction. | `"PERIOD_ANALYSIS_X"` | number | - | **Required** |
+| | [When PERIOD_METHOD = 0] Analytical period for Y direction. | `"PERIOD_ANALYSIS_Y"` | number | - | **Required** |
 | | Approximate Period X | `"PERIOD_APPR_X"` | number | - | Required |
 | | Approximate Period Y | `"PERIOD_APPR_Y"` | number | - | Required |
 | **PERIOD_METHOD = 1** | | | | | |
 | | Approximate Period X | `"PERIOD_APPR_X"` | number | - | Required |
 | | Approximate Period Y | `"PERIOD_APPR_Y"` | number | - | Required |
-| | Response Modification Factor X | `"RESPONSE_MOD_FACTOR_X"` | number | - | Required |
-| | Response Modification Factor Y | `"RESPONSE_MOD_FACTOR_Y"` | number | - | Required |
-| 9 | Additional Story-level Seismic Load | `"ADDITIONAL_LOAD"` | object | - | Optional |
+| | [When PERIOD_METHOD = 1] Response modification factor for X direction. | `"RESPONSE_MOD_FACTOR_X"` | number | - | **Required** |
+| | [When PERIOD_METHOD = 1] Response modification factor for Y direction. | `"RESPONSE_MOD_FACTOR_Y"` | number | - | **Required** |
+| 9 | Additional story-level seismic load. | `"ADDITIONAL_LOAD"` | object | - | Optional |
 | (1) | Story Name | `"STORY_NAME"` | string | - | Required |
-| (2) | Additional Seismic Load X | `"ALONG_X"` | number | - | Required |
-| (3) | Additional Seismic Load Y | `"ALONG_Y"` | number | - | Required |
-| (4) | Additional Torsional Seismic Load RZ | `"TORSIONAL_RZ"` | number | - | Required |
+| (2) | Additional seismic load in X direction. | `"ALONG_X"` | number | - | **Required** |
+| (3) | Additional seismic load in Y direction. | `"ALONG_Y"` | number | - | **Required** |
+| (4) | Additional torsional seismic load RZ. | `"TORSIONAL_RZ"` | number | - | **Required** |
 
 ### Python 예제
 
@@ -2101,21 +2101,21 @@ midas_api("DELETE", "/db/SSEIS", {"Assign": {"2": {}}})
 | --- | --- | --- | --- | --- | --- |
 | 1 | Seismic Load Code (`"USER TYPE"`) | `"SEIS_CODE"` | string (enum) | - | Required |
 | 2 | Description | `"DESC"` | string | `""` | Optional |
-| 3 | Scale Factor X | `"SCALE_FACTOR_X"` | number | - | Required |
-| 4 | Scale Factor Y | `"SCALE_FACTOR_Y"` | number | - | Required |
-| 5 | Accidental Eccentricity X (0=Positive / 1=Negative / 2=None) | `"ACCIDENT_ECCEN_X"` | integer (enum) | `0` | Optional |
-| 6 | Accidental Eccentricity Y (0=Positive / 1=Negative / 2=None) | `"ACCIDENT_ECCEN_Y"` | integer (enum) | `0` | Optional |
-| 7 | Consider Accidental Torsion | `"ACCIDENT_TORSION"` | boolean | `false` | Optional |
+| 3 | Scale factor for X direction. | `"SCALE_FACTOR_X"` | number | - | **Required** |
+| 4 | Scale factor for Y direction. | `"SCALE_FACTOR_Y"` | number | - | **Required** |
+| 5 | Accidental eccentricity option for X direction. · 0 : Positive · 1 : Negative · 2 : None | `"ACCIDENT_ECCEN_X"` | integer (enum) | `0` | Optional |
+| 6 | Accidental eccentricity option for Y direction. · 0 : Positive · 1 : Negative · 2 : None | `"ACCIDENT_ECCEN_Y"` | integer (enum) | `0` | Optional |
+| 7 | Whether to consider accidental torsion. | `"ACCIDENT_TORSION"` | boolean | `false` | Optional |
 | 8 | Consider Inherent Torsion | `"INHERENT_TORSION"` | boolean | `false` | Optional |
 | 9 | User-defined Story-level Seismic Force | `"SEISMIC_FORCE"` | array [object] | - | Required |
-| (1) | Story Name | `"STORY_NAME"` | string | - | Required |
+| (1) | Story name. | `"STORY_NAME"` | string | - | **Required** |
 | (2) | Seismic Force X | `"FORCE_X"` | number | - | Required |
 | (3) | Seismic Force Y | `"FORCE_Y"` | number | - | Required |
-| 10 | Additional Story-level Seismic Load | `"ADDITIONAL_LOAD"` | object | - | Optional |
-| (1) | Story Name | `"STORY_NAME"` | string | - | Required |
-| (2) | Additional Seismic Load X | `"ALONG_X"` | number | - | Required |
-| (3) | Additional Seismic Load Y | `"ALONG_Y"` | number | - | Required |
-| (4) | Additional Torsional Seismic Load RZ | `"TORSIONAL_RZ"` | number | - | Required |
+| 10 | Additional story-level seismic load. | `"ADDITIONAL_LOAD"` | object | - | Optional |
+| (1) | Story name. | `"STORY_NAME"` | string | - | **Required** |
+| (2) | Additional seismic load in X direction. | `"ALONG_X"` | number | - | **Required** |
+| (3) | Additional seismic load in Y direction. | `"ALONG_Y"` | number | - | **Required** |
+| (4) | Additional torsional seismic load RZ. | `"TORSIONAL_RZ"` | number | - | **Required** |
 
 > ⚠️ **원문 ko 로케일 오염 — 2026-09-28 재확인 결과 미해결(형태만 변경).** 2026-09-06에 처음
 > 발견한 오염은 "KDS·User Type 두 아티클의 ko 본문이 완전히 동일(56,247자)"한 형태였다. 2026-09-28

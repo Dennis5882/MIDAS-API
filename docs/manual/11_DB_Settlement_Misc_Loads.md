@@ -140,13 +140,13 @@ create_settlement_groups()
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 1 | Settlement Load Case No. (Assign Key) | `"KEY"` | Integer | - | Required |
+| 1 | Settlement Load Case No. | `"KEY"` | Integer | - | **Required** |
 | 2 | Settlement Load Case Name | `"NAME"` | String | - | Required |
 | 3 | Description | `"DESC"` | String | - | Required |
 | 4 | Settlement Scale Factor | `"FACTOR"` | Number | - | Required |
-| 5 | Settlement – Min. Group Nos. | `"MIN"` | Integer | - | Required |
-| 6 | Settlement – Max. Group Nos. | `"MAX"` | Integer | - | Required |
-| 7 | Selected Settlement Group Names | `"ST_GROUPS"` | Array [String] | - | Required |
+| 5 | Settlement - Min. Group Nos. | `"MIN"` | Integer | - | **Required** |
+| 6 | Settlement - Max. Group Nos. | `"MAX"` | Integer | - | **Required** |
+| 7 | Selected Settlement Group Name | `"ST_GROUPS"` | Array [String] | - | **Required** |
 
 > **참고**: `MIN` / `MAX` 는 하중 케이스에 포함되는 침하 그룹의 최소/최대 개수를 의미합니다.
 
@@ -227,7 +227,7 @@ create_settlement_load_cases()
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 1 | Static Load Case Names | `"LCNAME_ITEM"` | Array [String] | - | Required |
+| 1 | Static Load Case Name | `"LCNAME_ITEM"` | Array [String] | - | **Required** |
 
 > **참고**: Assign Key `"1"` 이 유일한 레코드로, 시스템 전체에 하나의 Pre-composite 목록을 가집니다.
 
@@ -666,7 +666,7 @@ create_wave_load()
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 1 | Element ID | `"ELEMENT"` | Integer | - | Required |
+| 1 | Element | `"ELEMENT"` | Integer | - | **Required** |
 | 2 | Load Case Name | `"LCNAME"` | String | - | Required |
 | 3 | Ignore Option | `"OPT_IGNORE"` | Boolean | - | Required |
 
@@ -831,7 +831,7 @@ set_initial_forces_geometric_stiffness()
 | 1 | Use Add Initial Force to Element Force | `"bADDLC"` | Boolean | false | Optional |
 | 2 | Load Case Name | `"LCNAME"` | String | - | Required |
 | 3 | Use Initial Force Combination | `"bUSECOMB"` | Boolean | false | Optional |
-| 4 | Initial Force Combination Cases | `"COMB_LIST"` | Array [Object] | - | Required |
+| 4 | Load Cases · Insert the data as an object | `"COMB_LIST"` | Array [Object] | - | **Required** |
 | (1) | Load Case Name | `"LCNAME"` | String | - | Required |
 | (2) | Scale Factor | `"FACTOR"` | Number | - | Required |
 | 5 | Check to Reflect Initial Axial Forces into Geometric Stiffness | `"bCHECK_GEOM_STIFF"` | Boolean | false | Optional |
