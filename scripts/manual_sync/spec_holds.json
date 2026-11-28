@@ -1,0 +1,27 @@
+{
+  "_doc": "공식 원문과 다르게 유지한 기본값·타입·필수·Response HEAD. 문서 값과 원문 값이 저장한 값과 같을 때만 보류한다.",
+  "holds": [
+    {"file": "04_DB_Properties.md", "article_id": "35993732216985", "no": "7", "keys": ["MAINREBAR_B_FY"], "field": "required", "doc_value": "GET only", "om_value": "\"GET\"only", "reason": "04장 변경 재료의 ⚠️ 주석에 따라 공식 필수 표기의 깨진 인용부호와 공백을 바로잡아 유지함"},
+    {"file": "04_DB_Properties.md", "article_id": "35993732216985", "no": "8", "keys": ["SUBREBAR_B_FY"], "field": "required", "doc_value": "GET only", "om_value": "\"GET\"only", "reason": "04장 변경 재료의 ⚠️ 주석에 따라 공식 필수 표기의 깨진 인용부호와 공백을 바로잡아 유지함"},
+    {"file": "06_DB_Static_Loads.md", "article_id": "49511410691609", "no": "8", "keys": ["FV"], "field": "required", "doc_value": "Required", "om_value": "Requirel", "reason": "06장 내진 하중계수의 ⚠️ 주석에 따른 필수 표기 오타 보정"},
+    {"file": "06_DB_Static_Loads.md", "article_id": "49511410691609", "no": "9", "keys": ["SDS"], "field": "required", "doc_value": "Required", "om_value": "Require", "reason": "06장 내진 하중계수의 ⚠️ 주석에 따른 필수 표기 오타 보정"},
+    {"file": "06_DB_Static_Loads.md", "article_id": "49511410691609", "no": "10", "keys": ["SD1"], "field": "required", "doc_value": "Required", "om_value": "Require", "reason": "06장 내진 하중계수의 ⚠️ 주석에 따른 필수 표기 오타 보정"},
+    {"file": "06_DB_Static_Loads.md", "article_id": "49511410691609", "no": "11", "keys": ["USER_GROUP"], "field": "required", "doc_value": "Optional", "om_value": "", "reason": "06장 내진 하중계수의 ⚠️ 주석에 따라 공식 필수 칸이 비어 있는 행의 선택 표기를 유지함"},
+    {"file": "06_DB_Static_Loads.md", "article_id": "49511410691609", "no": "12", "keys": ["IF"], "field": "required", "doc_value": "Required", "om_value": "Require", "reason": "06장 내진 하중계수의 ⚠️ 주석에 따른 필수 표기 오타 보정"},
+    {"file": "06_DB_Static_Loads.md", "article_id": "49511410691609", "no": "13", "keys": ["RMF"], "field": "required", "doc_value": "Required", "om_value": "Require", "reason": "06장 내진 하중계수의 ⚠️ 주석에 따른 필수 표기 오타 보정"},
+    {"file": "08_DB_Moving_Loads.md", "article_id": "35956982840473", "no": "8", "keys": ["MARGIN"], "field": "required", "doc_value": "Optional", "om_value": "Optional9", "reason": "08장 ⚠️ 주석에 기록한 공식 필수 표기의 후행 숫자 오타를 보정함"},
+    {"file": "08_DB_Moving_Loads.md", "article_id": "35960417354649", "no": "9", "keys": ["SUB_LOAD_ITEMS"], "field": "required", "doc_value": "Required", "om_value": "", "reason": "08장 ⚠️ 주석에 따라 공식 필수 칸이 비어 있는 행의 기존 필수 표기를 유지함"},
+    {"file": "11_DB_Settlement_Misc_Loads.md", "article_id": "35988975670937", "no": "3", "keys": ["ELEMENT_FORCES"], "field": "type", "doc_value": "Array [Number]", "om_value": "Array [Number, 12]", "reason": "11장 ⚠️ 주석에 기록한 공식 TRUSS 요청 예제의 2개 값과 표의 고정 길이 12가 충돌함"},
+    {"file": "04_DB_Properties.md", "article_id": "35944476555801", "no": "(1)", "keys": ["FIBR_BASE_KEY"], "field": "type", "doc_value": "Integer", "om_value": "Boolean", "reason": "04장 ⚠️ 주석에 기록한 Schema의 integer와 요청 예제의 섬유 키 값 752를 따름"},
+    {"file": "04_DB_Properties.md", "article_id": "64608751935897", "no": "4.2", "keys": ["SLAB"], "field": "type", "doc_value": "Array[Number]", "om_value": "Array [any]", "reason": "04장 ⚠️ 주석에 기록한 Schema와 요청 예제의 수치 배열을 따름"},
+    {"file": "04_DB_Properties.md", "article_id": "64608751935897", "no": "4.2", "keys": ["SLAB"], "field": "required", "doc_value": "**Required** (`CI`/`CT`)", "om_value": "Required", "reason": "04장 ⚠️ 주석에 따라 문서의 CI/CT 조건을 유지함"},
+    {"file": "11_DB_Settlement_Misc_Loads.md", "article_id": "39236719728281", "no": "3", "keys": ["SUBTYPE"], "field": "required", "doc_value": "**Required** (위 ⚠️ 참고)", "om_value": "Required", "reason": "11장 ⚠️ 주석의 하중 유형별 원문 표와 요청 예제 차이를 표시함"},
+    {"file": "12_DB_Analysis_Control.md", "article_id": "35989644995609", "no": "23", "keys": ["iNFM"], "field": "required", "doc_value": "Required (조건부)", "om_value": "Required", "reason": "12장 ⚠️ 주석과 표의 코드 조건을 유지함"},
+    {"file": "12_DB_Analysis_Control.md", "article_id": "35989644995609", "no": "29", "keys": ["BRIDGE2"], "field": "required", "doc_value": "Required (조건부)", "om_value": "Required", "reason": "12장 ⚠️ 주석에 기록된 교량 코드 적용 조건을 유지함"},
+    {"file": "12_DB_Analysis_Control.md", "article_id": "56506850582425", "no": "6", "keys": ["LOAD_CASE"], "field": "required", "doc_value": "Required (조건부)", "om_value": "Required", "reason": "12장 ⚠️ 주석의 LC_SCOPE=SELECT 신규 항목 조건을 유지함"},
+    {"file": "12_DB_Analysis_Control.md", "article_id": "35990281053465", "no": "-", "keys": ["GROUP"], "field": "required", "doc_value": "Required (조건부)", "om_value": "Required", "reason": "12장 ⚠️ 주석의 구조 그룹 지정 조건을 유지함"},
+    {"file": "12_DB_Analysis_Control.md", "article_id": "35990281053465", "no": "-", "keys": ["LFFGR"], "field": "required", "doc_value": "Required (조건부)", "om_value": "Required", "reason": "12장 ⚠️ 주석의 하중 그룹 지정 조건을 유지함"},
+    {"file": "15_OPE.md", "article_id": "39772183634329", "no": "5-2", "keys": ["BOUNDARY.STIFF"], "field": "required", "doc_value": "**Required**(해당 타입)", "om_value": "Required", "reason": "15장 ⚠️ 주석에 기록한 점스프링과 탄성링크 요청의 조건 차이를 유지함"},
+    {"file": "24_DB_Design.md", "article_id": "49513985245849", "no": "iii", "keys": ["DIST"], "field": "type", "doc_value": "Number", "om_value": "Integer", "reason": "24장 ⚠️ 주석에 기록한 공식 요청 예제 DIST=0.15를 따름"}
+  ]
+}
