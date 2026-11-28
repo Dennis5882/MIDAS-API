@@ -31,7 +31,6 @@
 | `eval_retrieval.py` | 청크 색인의 검색 시험 (BM25, 질문은 공식 글에서만 생성) | ✗ |
 | `om_parse.py` | 공식 글 HTML의 Specifications 표 파서 (공용) | ✗ |
 | `coverage_exceptions.json` | 검토를 마친 `check_coverage.py` 항목과 그 사유 | — |
-| `prompt_sample.md` | 최초 매뉴얼 문서(01~27)를 사람이 손으로 생성할 때 썼던 프롬프트 예시 (참고용, 실행 스크립트 아님) | — |
 
 AI(Claude)는 CI에서 자동 호출되지 않습니다 — **API 키를 CI에 등록하지 않는 것이 의도된 설계**입니다. 대신 GitHub Actions는 변경 여부만 무료로 확인해서 GitHub Issue로 알리고, 실제 패치는 사람이 Claude Code 대화창을 열어 직접 트리거합니다.
 
