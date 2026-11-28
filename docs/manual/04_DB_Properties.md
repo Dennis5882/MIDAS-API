@@ -2706,13 +2706,13 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `__DESC
 | 1 | Effective Width Scale Factor · Insert the data as an object | `"ITEMS"` | Array[Object] | - | **Required** |
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Boundary Group Name | `"GROUP_NAME"` | String | Blank | Optional |
-| (3) | ly Scale Factor for Sbz (I-End) | `"LYSCALE"` | Number | 1 | **Required** |
-| (4) | z_top Scale Factor (I-End) | `"ZTSCALE"` | Number | 1 | **Required** |
-| (5) | z_bot Scale Factor (I-End) | `"ZBSCALE"` | Number | 1 | **Required** |
+| (3) | ly Scale Factor for Sbz (I-End) | `"LYSCALE"` | Real | 1 | **Required** |
+| (4) | z_top Scale Factor (I-End) | `"ZTSCALE"` | Real | 1 | **Required** |
+| (5) | z_bot Scale Factor (I-End) | `"ZBSCALE"` | Real | 1 | **Required** |
 | (6) | J-End Option | `"bJ"` | Boolean | false | **Required** |
-| (7) | [When J-End Option, "bJ" is True] ly Scale Factor for Sbz (J-End) | `"LYSCALE_J"` | Number | 1 | Optional |
-| (8) | z_top Scale Factor (J-End) | `"ZTSCALE_J"` | Number | 1 | Optional |
-| (9) | z_bot Scale Factor (J-End) | `"ZBSCALE_J"` | Number | 1 | Optional |
+| (7) | [When J-End Option, "bJ" is True] ly Scale Factor for Sbz (J-End) | `"LYSCALE_J"` | Real | 1 | Optional |
+| (8) | z_top Scale Factor (J-End) | `"ZTSCALE_J"` | Real | 1 | Optional |
+| (9) | z_bot Scale Factor (J-End) | `"ZBSCALE_J"` | Real | 1 | Optional |
 
 ### Request Body
 
@@ -2771,7 +2771,7 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `__DESC
 | 14 | [GEN Only] Number of divisions - z, Cover | `"WallDivNumZCover"` | Integer | - | **Required** |
 | 15 | [GEN Only] Number of divisions - y, Cover | `"WallDivNumYCover"` | Integer | - | **Required** |
 | 16 | Wall, Consider Rebar Area | `"OPT_ConsiderRebarAreaWall"` | Boolean | - | **Required** |
-| 17 | Shear Spring Location | `"dR"` | Number | - | **Required** |
+| 17 | Shear Spring Location | `"dR"` | Real | - | **Required** |
 
 ### Request Body
 
@@ -3494,6 +3494,9 @@ midas_api("POST", "/db/GRDP", grdp_data)
 
 > ⚠️ **2026-08-25 재확인 보강:** 합성단면 전용 필드 `iPart`(Before/After/All)가 누락돼 있어
 > 추가했다(아티클 id `44613910309401`).
+>
+> 공식 표와 영문·한국어 원문을 함께 대조해 다음 표기를 유지합니다.
+> - `ID` 타입(문서 `Integer`, 공식 표 `Array [Object]`) — 공식 글 44613910309401 요청 예제 「Element Stiffness Scale Factor - Single」의 `Assign.1.ITEMS.ID`가 `1`(integer)를 사용함.
 
 ### Python 예제
 
@@ -3533,7 +3536,7 @@ midas_api("POST", "/db/ESSF", essf_data)
 > ✅ **2026-09-06 해결 확인:** 원문 Specifications 표 4번 Key가 `"RABAR_CODENAME"`(E 누락 오타)
 > 이던 것이 2026-09-01 원문 갱신으로 `"REBAR_CODENAME"`으로 정정됐다(재확인 시
 > `REBAR_CODENAME` 3회·`RABAR_CODENAME` 0회). 우리 문서는 처음부터 정상 표기였다.
->
+
 > ⚠️ **스키마에만 존재하는 필드(설명 근거 없음).** `DATA1.DESIGN` 하위
 > `bLAMBDA`/`dLAMBDA`/`bTRANSFER`/`dTRANSFERFCI` 4개 필드는 JSON Schema에만 있고 원문
 > Specifications 표·Request Example 어디에도 설명·예시가 없다 — 경량콘크리트 λ계수·프리스트레스
@@ -3543,6 +3546,9 @@ midas_api("POST", "/db/ESSF", essf_data)
 >
 > ✅ **원문 JSON Schema 구문 오류 — 2026-10-04 해결 확인.** 2026-09-06에 발견한 `"bSERVCHECK"` 앞
 > 쉼표 누락(`..."type": "number" } "bSERVCHECK": {...`)은 원문 갱신(2026-09-28)으로 정정되었다.
+>
+> 공식 표와 영문·한국어 원문을 함께 대조해 다음 표기를 유지합니다.
+> - `DATA1.DESIGN` 타입(문서 `Object`, 공식 표 `String`) — 공식 글 35993732216985 요청 예제 「Modify Concrete Materials」의 `Assign.1.DATA1.DESIGN`가 `{"C_FC":16000,"C_FCI":11200}`(object)를 사용함.
 
 | No. | Description | Key | Value Type | Default | Required |
 | --- | --- | --- | --- | --- | --- |

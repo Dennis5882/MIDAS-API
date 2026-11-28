@@ -417,6 +417,13 @@ print("현재 강재 코드:", requests.get(f"{BASE_URL}/db/DSTL", headers=HEADE
 > 7개 필드)는 공식 JSON Schema에는 존재하지만 공식 Specifications 표에는 전혀 실려 있지
 > 않습니다(표가 `dSUB_BARANGLE`에서 바로 `COLM` 객체로 건너뜀). Required 배열 지정도 없어
 > Optional로 간주해 기재했습니다.
+>
+> 공식 표와 영문·한국어 원문을 함께 대조해 다음 표기를 유지합니다.
+> - `POS_TOP_LAYERS` 타입(문서 `Array[Object]`, 공식 표 `Array [Obejct]`) — 공식 Value 타입 철자나 괄호가 어긋남. 같은 글의 Schema와 요청 예제를 근거로 첨부함.
+> - `POS_BOT_LAYERS` 타입(문서 `Array[Object]`, 공식 표 `Array [Obejct]`) — 공식 Value 타입 철자나 괄호가 어긋남. 같은 글의 Schema와 요청 예제를 근거로 첨부함.
+> - `vPOSITION` 타입(문서 `Array[Object]`, 공식 표 `Array [Obejct]`) — 공식 Value 타입 철자나 괄호가 어긋남. 같은 글의 Schema와 요청 예제를 근거로 첨부함.
+> - `SUB_BAR` 타입(문서 `Object`, 공식 표 `Array [Object]`) — 공식 글 35993850335897 JSON Schema의 `RCHK.properties.COLM.SUB_BAR`에 `type: object`가 명시됨.
+> - `POSITION` 타입(문서 `String`, 공식 표 `Integer`) — 공식 글 35993850335897 요청 예제 「Rebar Input for Checking」의 `Assign.1.COLM.vLAYER.vPOSITION.POSITION`가 `"P1"`(string)를 사용함.
 
 **MEMBTYPE == `"COLUMN"` 일 때 — `"COLM"` 객체**
 
@@ -866,10 +873,10 @@ print(requests.get(f"{BASE_URL}/db/MEMB", headers=HEADERS).json())
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
-| 1 | X-Direction of Frame · Unbraced \| Sway: “Unbraced Sway” · Braced \| Non-sway: “Braced Non-sway” | `"FRAMEX"` | String | `"Braced Non-sway"` | Optional |
-| 2 | Y-Direction of Frame · Unbraced \| Sway: “Unbraced Sway” · Braced \| Non-sway: “Braced Non-sway” | `"FRAMEY"` | String | `"Braced Non-sway"` | Optional |
+| 1 | X-Direction of Frame · Unbraced \| Sway: “Unbraced Sway” · Braced \| Non-sway: “Braced Non-sway” | `"FRAMEX"` | String | “Braced Non-sway” | Optional |
+| 2 | Y-Direction of Frame · Unbraced \| Sway: “Unbraced Sway” · Braced \| Non-sway: “Braced Non-sway” | `"FRAMEY"` | String | “Braced Non-sway” | Optional |
 | 3 | Auto Calculate Effective Length Factor | `"bAUTOKF"` | Boolean | `false` | Optional |
-| 4 | Design Type · 3-D : “3D” · X-Z Plane : “XZ” · Y-Z Plane : “YZ” · X-Y Plane : “XY” | `"DT"` | String | `"3D"` | Optional |
+| 4 | Design Type · 3-D : “3D” · X-Z Plane : “XZ” · Y-Z Plane : “YZ” · X-Y Plane : “XY” | `"DT"` | String | “3D” | Optional |
 
 ### Request / Response JSON
 
@@ -1306,6 +1313,12 @@ print(requests.get(f"{BASE_URL}/db/WMAK", headers=HEADERS).json())
 | iii | 철근 간격 @ | `"DIST"` | Number | — | **Required** |
 
 > ⚠️ **공식 표기 불일치 (2026-10-04 확인).** 공식 Specifications 표는 `DIST`를 Integer로, 표피철근 개수 키를 `"SKIN_BAR"NUM"`(따옴표 오기)으로 적었으나, 공식 JSON Schema와 예제는 `DIST`를 number(예: `0.15`), 키를 `SKIN_BAR_NUM`으로 쓴다. 위 표는 스키마·예제를 따랐다.
+>
+> 공식 표와 영문·한국어 원문을 함께 대조해 다음 표기를 유지합니다.
+> - `BAR_SECTOR_I` 타입(문서 `Object`, 공식 표 `Array [Object]`) — 공식 글 49513985245849 요청 예제 「Modify Beam Rebar Data」의 `Assign.211.ITEMS.BAR_SECTOR_I`가 `{"vMAIN_BAR_TOP":[{"NAME":"D25","NUM":3},{"NAME":"D25","NUM":3}],"vMAIN_BAR_BOT":[{"NAME":"D25","NUM":3}],"SHEAR_BAR":{"NAME":"D13","LEG":3,"DIST":0.15},"SKIN_BAR_NAME":"","SKIN_BAR_NUM":0}`(object)를 사용함.
+> - `BAR_SECTOR_M` 타입(문서 `Object`, 공식 표 `Array [Object]`) — 공식 글 49513985245849 요청 예제 「Modify Beam Rebar Data」의 `Assign.211.ITEMS.BAR_SECTOR_M`가 `{"vMAIN_BAR_TOP":[{"NAME":"D25","NUM":3}],"vMAIN_BAR_BOT":[{"NAME":"D25","NUM":4}],"SHEAR_BAR":{"NAME":"D13","LEG":3,"DIST":0.15},"SKIN_BAR_NAME":"","SKIN_BAR_NUM":0}`(object)를 사용함.
+> - `BAR_SECTOR_J` 타입(문서 `Object`, 공식 표 `Array [Object]`) — 공식 글 49513985245849 요청 예제 「Modify Beam Rebar Data」의 `Assign.211.ITEMS.BAR_SECTOR_J`가 `{"vMAIN_BAR_TOP":[{"NAME":"D25","NUM":3},{"NAME":"D25","NUM":3}],"vMAIN_BAR_BOT":[{"NAME":"D25","NUM":3}],"SHEAR_BAR":{"NAME":"D13","LEG":3,"DIST":0.15},"SKIN_BAR_NAME":"","SKIN_BAR_NUM":0}`(object)를 사용함.
+> - `SHEAR_BAR` 타입(문서 `Object`, 공식 표 `Array [Object]`) — 공식 글 49513985245849 요청 예제 「Modify Beam Rebar Data」의 `Assign.211.ITEMS.BAR_SECTOR_I.SHEAR_BAR`가 `{"NAME":"D13","LEG":3,"DIST":0.15}`(object)를 사용함.
 
 ### Request / Response JSON
 
@@ -1501,7 +1514,7 @@ print(requests.get(f"{BASE_URL}/db/REBB", headers=HEADERS).json())
 |-----|------|-----|-----------|--------|------|
 | 1 | [Root Object] Keyed object (dictionary). Each property name is a section number string (e.g., "1"). | `"Assign"` | Object | — | **Required** |
 | 2 | 기둥 철근 항목 목록 | `"ITEMS"` | Array[Object] | — | **Required** |
-| 3 | 서브 구간 ID (읽기 전용) | `"ID"` | Integer | — | Optional |
+| 3 | 서브 구간 ID (읽기 전용) | `"ID"` | Integer | — | **Required** |
 | 4 | 주철근 목록 | `"vMAIN_BAR"` | Array[Object] | — | **Required** |
 | 5 | 단부 전단철근 | `"SHEAR_BAR_END"` | Object | — | **Required** |
 | 6 | 중앙부 전단철근 | `"SHEAR_BAR_CEN"` | Object | — | **Required** |
@@ -1530,6 +1543,10 @@ print(requests.get(f"{BASE_URL}/db/REBB", headers=HEADERS).json())
 | d | 철근 간격 @ | `"DIST"` | Number | — | **Required** |
 
 > ⚠️ **공식 표기 불일치 (2026-10-04 확인).** 공식 표는 콘크리트면 거리 키를 `"DO"`(영문 O), 띠철근 형식 키를 `"HOOP TYPE"`(공백)으로 적었으나, 공식 JSON Schema와 예제는 `"D0"`(숫자 0, `vMAIN_BAR` 원소 안)와 `"HOOP_TYPE"`을 쓴다. 위 표는 스키마·예제를 따랐다.
+>
+> 공식 표와 영문·한국어 원문을 함께 대조해 다음 표기를 유지합니다.
+> - `SHEAR_BAR_END` 타입(문서 `Object`, 공식 표 `Array [Object]`) — 공식 글 49513980544793 요청 예제 「Modify Column Rebar Data」의 `Assign.101.ITEMS.SHEAR_BAR_END`가 `{"NAME":"D10","LEG_Y":3,"LEG_Z":3,"DIST":0.15}`(object)를 사용함.
+> - `SHEAR_BAR_CEN` 타입(문서 `Object`, 공식 표 `Array [Object]`) — 공식 글 49513980544793 요청 예제 「Modify Column Rebar Data」의 `Assign.101.ITEMS.SHEAR_BAR_CEN`가 `{"NAME":"D10","LEG_Y":3,"LEG_Z":3,"DIST":0.15}`(object)를 사용함.
 
 ### Request / Response JSON
 
@@ -1697,9 +1714,15 @@ print(requests.get(f"{BASE_URL}/db/REBC", headers=HEADERS).json())
 | 11 | Number of End rebar | `"NUM_END_BAR"` | Integer | — | **Required** |
 | 12 | Boundary Element Hor. Rebar | `"BE_HOR_BAR"` | Object | — | **Required** |
 | 13 | Boundary Element Length | `"BE_LENGTH"` | Number | — | **Required** |
-| 14 | Story Key List | `"vSTORY_KEY"` | Array[Integer] | — | **Required** |
+| 14 | Story Key List | `"vSTORY_KEY"` | Integer | — | **Required** |
 
 > ⚠️ **공식 표기 불일치 (2026-10-04 확인).** 공식 표는 수직·수평·단부·경계요소 철근의 규격 키를 `"NUM"`(String)으로 적었으나, 공식 JSON Schema와 예제는 `"NAME"`을 쓴다. 위 표는 스키마·예제를 따랐다.
+>
+> 공식 표와 영문·한국어 원문을 함께 대조해 다음 표기를 유지합니다.
+> - `VER_BAR` 타입(문서 `Object`, 공식 표 `Array [Object]`) — 공식 글 49514033006745 요청 예제 「Modify Wall Rebar Data」의 `Assign.1.ITEMS.VER_BAR`가 `{"NAME":"D13","DIST":0.35}`(object)를 사용함.
+> - `HOR_BAR` 타입(문서 `Object`, 공식 표 `Array [Object]`) — 공식 글 49514033006745 요청 예제 「Modify Wall Rebar Data」의 `Assign.1.ITEMS.HOR_BAR`가 `{"NAME":"D10","DIST":0.28}`(object)를 사용함.
+> - `END_BAR` 타입(문서 `Object`, 공식 표 `Array [Object]`) — 공식 글 49514033006745 요청 예제 「Modify Wall Rebar Data」의 `Assign.1.ITEMS.END_BAR`가 `{"NAME":"D13","DIST":0.1}`(object)를 사용함.
+> - `BE_HOR_BAR` 타입(문서 `Object`, 공식 표 `Array [Object]`) — 공식 글 49514033006745 요청 예제 「Modify Wall Rebar Data」의 `Assign.1.ITEMS.BE_HOR_BAR`가 `{"NAME":"","DIST":0.2}`(object)를 사용함.
 
 ### Request / Response JSON
 

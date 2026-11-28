@@ -108,7 +108,7 @@
 | 4 | Summation method · Add: 0 · Envelope: 1 · ABS: 2 · SRSS: 3 | `"iTYPE"` | Integer | `0` | Optional |
 | 5 | Description | `"DESC"` | String | `""` | Optional |
 | 6 | Result Type · General: false · Min/Max/All: true | `"bCB"` | Boolean | — | Read Only |
-| 7 | Combinations List | `"vCOMB"` | Array | — | **Required** |
+| 7 | Combinations List | `"vCOMB"` | Array [Object] | — | **Required** |
 | — | └ Static Load Case: "ST" · Construction Stage Case: "CS" · Moving Load Case: "MV" · Settlement Case: "SM" · Response Spectrum Case: "RS" · Time History Cases: "TH" · General Comb.: "CB" | `"ANAL"` | String | — | **Required** |
 | — | └ Load Case Name | `"LCNAME"` | String | — | **Required** |
 | — | └ Factor | `"FACTOR"` | Number | — | **Required** |
@@ -274,7 +274,7 @@ print("DELETE:", resp.status_code)
 | 5 | Summation method · Add: 0 · Envelope: 1 · ABS: 2 · SRSS: 3 | `"iTYPE"` | Integer | `0` | Optional |
 | 6 | Description | `"DESC"` | String | `""` | Optional |
 | 7 | Result Type · General: false · Min/Max/All: true | `"bCB"` | Boolean | — | Read Only |
-| 8 | Combinations List | `"vCOMB"` | Array | — | **Required** |
+| 8 | Combinations List | `"vCOMB"` | Array [Object] | — | **Required** |
 | — | └ Static Load Case: "ST" · Construction Stage Case: "CS" · Moving Load Case: "MV" · Settlement Case: "SM" · Response Spectrum Case: "RS" · Time History Cases: "TH" · General Comb.: "CB" | `"ANAL"` | String | — | **Required** |
 | — | └ Load Case Name | `"LCNAME"` | String | — | **Required** |
 | — | └ Factor | `"FACTOR"` | Number | — | **Required** |
@@ -449,7 +449,7 @@ for key, val in resp.json().get("LCOM-CONC", {}).items():
 | 4 | Summation method · Add: 0 · Envelope: 1 · SRSS: 3 | `"iTYPE"` | Integer | `0` | Optional |
 | 5 | Description | `"DESC"` | String | `""` | Optional |
 | 6 | Result Type · General: false · Min/Max/All: true | `"bCB"` | Boolean | — | Read Only |
-| 7 | Combinations List | `"vCOMB"` | Array | — | **Required** |
+| 7 | Combinations List | `"vCOMB"` | Array [Object] | — | **Required** |
 | — | └ Static Load Case: "ST" · Construction Stage Case: "CS" · Moving Load Case: "MV" · Settlement Case: "SM" · Response Spectrum Case: "RS" · Time History Cases: "TH" · General Comb.: "CB" | `"ANAL"` | String | — | **Required** |
 | — | └ Load Case Name | `"LCNAME"` | String | — | **Required** |
 | — | └ Factor | `"FACTOR"` | Number | — | **Required** |
@@ -611,7 +611,7 @@ print("POST:", resp.status_code, resp.json())
 | 4 | Summation method · Add: 0 · Envelope: 1 · SRSS: 3 | `"iTYPE"` | Integer | `0` | Optional |
 | 5 | Description | `"DESC"` | String | `""` | Optional |
 | 6 | Result Type · General: false · Min/Max/All: true | `"bCB"` | Boolean | — | Read Only |
-| 7 | Combinations List | `"vCOMB"` | Array | — | **Required** |
+| 7 | Combinations List | `"vCOMB"` | Array [Object] | — | **Required** |
 | — | └ Static Load Case: "ST" · Construction Stage Case: "CS" · Moving Load Case: "MV" · Settlement Case: "SM" · Response Spectrum Case: "RS" · Time History Cases: "TH" · General Comb.: "CB" | `"ANAL"` | String | — | **Required** |
 | — | └ Load Case Name | `"LCNAME"` | String | — | **Required** |
 | — | └ Factor | `"FACTOR"` | Number | — | **Required** |
@@ -781,7 +781,7 @@ print("PUT:", resp.status_code, resp.json())
 | 4 | Summation method · Add: 0 · Envelope: 1 · SRSS: 3 | `"iTYPE"` | Integer | `0` | Optional |
 | 5 | Description | `"DESC"` | String | `""` | Optional |
 | 6 | Result Type · General: false · Min/Max/All: true | `"bCB"` | Boolean | — | Read Only |
-| 7 | Combinations List | `"vCOMB"` | Array | — | **Required** |
+| 7 | Combinations List | `"vCOMB"` | Array [Object] | — | **Required** |
 | — | └ Static Load Case: "ST" · Construction Stage Case: "CS" · Moving Load Case: "MV" · Settlement Case: "SM" · Response Spectrum Case: "RS" · Time History Cases: "TH" · General Comb.: "CB" | `"ANAL"` | String | — | **Required** |
 | — | └ Load Case Name | `"LCNAME"` | String | — | **Required** |
 | — | └ Factor | `"FACTOR"` | Number | — | **Required** |
@@ -948,7 +948,7 @@ for key, val in resp.json().get("LCOM-STLCOMP", {}).items():
 | 4 | Summation method · Add: 0 · Envelope: 1 · SRSS: 3 | `"iTYPE"` | Integer | `0` | Optional |
 | 5 | Description | `"DESC"` | String | `""` | Optional |
 | 6 | Result Type · General: false · Min/Max/All: true | `"bCB"` | Boolean | — | Read Only |
-| 7 | Combinations List | `"vCOMB"` | Array | — | **Required** |
+| 7 | Combinations List | `"vCOMB"` | Array [Object] | — | **Required** |
 | — | └ Static Load Case: "ST" · Construction Stage Case: "CS" · Moving Load Case: "MV" · Settlement Case: "SM" · Response Spectrum Case: "RS" · Time History Cases: "TH" · General Comb.: "CB" | `"ANAL"` | String | — | **Required** |
 | — | └ Load Case Name | `"LCNAME"` | String | — | **Required** |
 | — | └ Factor | `"FACTOR"` | Number | — | **Required** |

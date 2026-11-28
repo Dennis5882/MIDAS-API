@@ -45,6 +45,7 @@ python check_fields.py                    # 필드(Key) 단위 누락 점검 (ex
 python fill_fields.py                     # 빠진 Key를 공식 표에서 그대로 옮겨 섹션 끝에 추가 (추가만, 재실행 안전)
 python restore_descriptions.py --dry-run  # 지원하는 파라미터 표의 설명·필수 표기 원문 대조
 python build_index.py                     # docs/index/ (endpoints.json, chunks.jsonl)와 llms.txt 자동 생성
+python check_specs.py                      # 글별 기본값·타입·필수·Response HEAD 대조 (exit 1=실제 차이)
 python eval_retrieval.py                  # 색인 검색 시험 (BM25)
 ```
 
@@ -87,7 +88,12 @@ python eval_retrieval.py                  # 색인 검색 시험 (BM25)
    보는 숫자는 `변경` + `보류 — 원문 변경`이다. 보류 목록은
    [description_holds.json](scripts/manual_sync/description_holds.json)에 있다.
    해당 공식 글을 열어 원문 변경을 확인한다.
-9. 커밋·푸시는 사용자가 명시적으로 지시할 때만 진행한다 (자동 push 없음 — 아래 참고).
+9. **`check_specs.py`로 글별 기본값·타입·필수·Response HEAD를 대조한다.** 문서를 바꿨으면
+   `build_index.py`로 색인을 갱신한 뒤 실행한다. `실제 차이`는 공식 표·Schema·예제와 반대 로케일을
+   확인한다. 공식 표의 표기를 그대로 쓰고, Schema로 확인한 보강은 유지한다. 기존 표기를 유지할
+   근거는 섹션의 ⚠️ 주석과 [spec_holds.json](scripts/manual_sync/spec_holds.json)에 남긴다.
+   `모호`는 공식 글·조건의 귀속 근거를 확인한다. `--json`으로 글별 결과를 저장할 수 있다.
+10. 커밋·푸시는 사용자가 명시적으로 지시했을 때만 진행한다 (자동 push 없음 — 아래 참고).
 
 규모가 크면(예: 20~30개 아티클 동시 플래그) 병렬 서브에이전트로 나눠서: 1차는 리서치/대조
 전담(원문 vs 매뉴얼 비교, 실제 변경 여부만 판정), 2차는 1차에서 확정된 사실만 가지고 실제 패치를

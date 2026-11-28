@@ -73,7 +73,7 @@ RW는 Warping Torsion 자유도입니다.
 | 1 | Constraint Supports · Insert the data as an object | `"ITEMS"` | Array[Object] | — | **Required** |
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Boundary Group Name | `"GROUP_NAME"` | String | Blank | Optional |
-| (3) | Constraint · [DX, DY, DZ, RX, RY, RZ, RW] / Constraint: 1 / Unconstraint: 0 / RW: Warping Torsion | `"CONSTRAINT"` | String(7) | — | **Required** |
+| (3) | Constraint · [DX, DY, DZ, RX, RY, RZ, RW] / Constraint: 1 / Unconstraint: 0 / RW: Warping Torsion | `"CONSTRAINT"` | String | — | **Required** |
 
 ### 요청 바디 예시
 
@@ -154,6 +154,10 @@ midas_api("DELETE", "/db/CONS", {"Assign": {"10": {}}})
 > `35945908301081`). 실제로는 **COMP/TENS는 `STIFF`(단일 강성값)**, **MULTI는
 > `FUNCTION`(MLFC 함수 ID)**을 쓰며, `DIR`은 0~6(Vector 포함) enum이고 `DV`는 `DIR=6`
 > (Vector)일 때만 쓰는 방향 벡터다. LINEAR 타입의 `Cr`(감쇠계수 배열)도 누락돼 있었다.
+>
+> 공식 표와 영문·한국어 원문을 함께 대조해 다음 표기를 유지합니다.
+> - `DV` 타입(문서 `Array[Number,3]`, 공식 표 `Array [Number,3)`) — 공식 Value 타입 철자나 괄호가 어긋남. 같은 글의 Schema와 요청 예제를 근거로 첨부함.
+> - `DK` 타입(문서 `Array[Number,3]`, 공식 표 `Array [Number,3)`) — 공식 Value 타입 철자나 괄호가 어긋남. 같은 글의 Schema와 요청 예제를 근거로 첨부함.
 
 | No. | 설명 | 키 | 타입 | 기본값 | 필수 |
 | --- | --- | --- | --- | --- | --- |
@@ -708,19 +712,19 @@ midas_api("POST", "/db/RIGD", rigd_data)
 
 | No. | 설명 | 키 | 타입 | 필수 |
 |-----|------|----|------|------|
-| 1 | General Link Property Name | `"PROPERTY_NAME"` | String | Required |
-| 2 | Description | `"DESC"` | String | Optional |
-| 3 | Application Type | `"APPLICATION_TYPE"` | String | Required |
-| 4 | Property/Devices Type | `"APPLICATION_TYPE_D"` | String | Required |
-| 5 | Self-Weight (Total) | `"TOTAL_WEIGHT"` | Number | Optional |
-| 6 | Lumped Weight Ratio | `"L_WEIGHT_RATIO"` | Number | Optional |
-| 7 | Use Mass Option | `"OPT_USE_MASS"` | Boolean | Optional |
-| 8 | Mass (Total) | `"TOTAL_MASS"` | Number | Optional |
-| 9 | Lumped Mass Ratio | `"L_MASS_RATIO"` | Number | Optional |
-| 10 | Shear Spring Location Option | `"OPT_SHEAR_SPR_LOC"` | Boolean | Optional |
-| 11 | Distance Ratio from End I (Dy) | `"DIST_RATIO_DY"` | Number | Optional |
-| 12 | Distance Ratio from End I (Dz) | `"DIST_RATIO_DZ"` | Number | Optional |
-| 13 | Coupled Input Method | `"COUPLED_INPUT_METHOD"` | Integer | Optional |
+| 1 | General Link Property Name | `"PROPERTY_NAME"` | String | - |
+| 2 | Description | `"DESC"` | String | - |
+| 3 | Application Type | `"APPLICATION_TYPE"` | String | - |
+| 4 | Property/Devices Type | `"APPLICATION_TYPE_D"` | String | - |
+| 5 | Self-Weight (Total) | `"TOTAL_WEIGHT"` | Number | - |
+| 6 | Lumped Weight Ratio | `"L_WEIGHT_RATIO"` | Number | - |
+| 7 | Use Mass Option | `"OPT_USE_MASS"` | Boolean | - |
+| 8 | Mass (Total) | `"TOTAL_MASS"` | Number | - |
+| 9 | Lumped Mass Ratio | `"L_MASS_RATIO"` | Number | - |
+| 10 | Shear Spring Location Option | `"OPT_SHEAR_SPR_LOC"` | Boolean | - |
+| 11 | Distance Ratio from End I (Dy) | `"DIST_RATIO_DY"` | Number | - |
+| 12 | Distance Ratio from End I (Dz) | `"DIST_RATIO_DZ"` | Number | - |
+| 13 | Coupled Input Method | `"COUPLED_INPUT_METHOD"` | Integer | - |
 
 ### 요청 바디 예시
 
@@ -921,9 +925,9 @@ Hyper-S 솔버 전용 일반 링크 배정 엔드포인트입니다.
 | 1 | General Link Property Name | `"PROP_NAME"` | String | — | Required |
 | 2 | Node Number 1 | `"NODE1"` | Integer | — | **Required** |
 | 3 | Node 2 ID | `"NODE2"` | Integer | — | Required |
-| 4 | Reference Coordinate System · Element: 0 · Global: 1 | `"REF_SYSTEM"` | Integer | — | **Required** |
+| 4 | Reference Coordinate System · Element: 0 · Global: 1 | `"REF_SYSTEM"` | integer (enum) | — | **Required** |
 | 5 (REF_SYSTEM=0) | Beta Angle | `"BETA_ANGLE"` | Number | 0 | Required |
-| 6 (REF_SYSTEM=1) | [When REF_SYSTEM = 1] Input Method · Angle: 0 · 3 Points: 1 · Vector: 2 | `"INPUT_METHOD"` | Integer | — | **Required** |
+| 6 (REF_SYSTEM=1) | [When REF_SYSTEM = 1] Input Method · Angle: 0 · 3 Points: 1 · Vector: 2 | `"INPUT_METHOD"` | integer (enum) | — | **Required** |
 | 7 (INPUT_METHOD=0) | [When INPUT_METHOD = 0] Angle Value | `"ANGLE_VALUES"` | Array[Object] | — | **Required** |
 | 8 (INPUT_METHOD=1) | [When INPUT_METHOD = 1] Points Value | `"POINT_VALUES"` | Array[Object] | — | **Required** |
 | 9 (INPUT_METHOD=2) | [When INPUT_METHOD = 2] Vector Value | `"VECTOR_VALUES"` | Array[Object] | — | **Required** |
@@ -1030,6 +1034,10 @@ midas_api("POST", "/db/CGLP", cglp_data)
 
 ## 12. `/db/FRLS` — Beam End Release
 
+> ⚠️ 공식 표와 영문·한국어 원문을 함께 대조해 다음 표기를 유지합니다.
+> - `VALUE_I` 타입(문서 `Array[Number,7]`, 공식 표 `Number`) — 공식 글 35947184258585 요청 예제 「Beam End Release」의 `Assign.9.ITEMS.VALUE_I`가 `[0.1,0.2,0.3,0.4,0.5,0.6,0.7]`(array)를 사용함.
+> - `VALUE_J` 타입(문서 `Array[Number,7]`, 공식 표 `Number`) — 공식 글 35947184258585 요청 예제 「Beam End Release」의 `Assign.9.ITEMS.VALUE_J`가 `[0.1,0.2,0.3,0.4,0.5,0.6,0.7]`(array)를 사용함.
+
 보 요소의 단부 자유도를 해제합니다. `FLAG_I`/`FLAG_J`는 7자리 문자열 `[Fx, Fy, Fz, Mx, My, Mz, Mb]`이며, `1`=해제, `0`=연결입니다.  
 `bVALUE=true`이면 부분 고정도(Partial Fixity) 값을 `VALUE_I`/`VALUE_J`에 입력합니다.
 
@@ -1044,9 +1052,9 @@ midas_api("POST", "/db/CGLP", cglp_data)
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Load Group Name | `"GROUP_NAME"` | String | Blank | Optional |
 | (3) | Input Method · Relative: false · Value: true | `"bVALUE"` | Boolean | false | Optional |
-| (4) | Release i-Node | `"FLAG_I"` | String(7) | — | **Required** |
+| (4) | Release i-Node | `"FLAG_I"` | String | — | **Required** |
 | (5) | Partial Fixity for i-Node · [Fx, Fy, Fz, Mx, My, Mz, Mb ] | `"VALUE_I"` | Array[Number,7] | 0 | Optional |
-| (6) | Release j-Node | `"FLAG_J"` | String(7) | — | **Required** |
+| (6) | Release j-Node | `"FLAG_J"` | String | — | **Required** |
 | (7) | Partial Fixity for j-Node · [Fx, Fy, Fz, Mx, My, Mz, Mb ] | `"VALUE_J"` | Array[Number,7] | 0 | Optional |
 
 ### 요청 바디 예시
@@ -1783,6 +1791,10 @@ NLLP의 `APPLICATION_TYPE_D="IS"`에서 참조됩니다.
 > 잘못 기재(실제로는 `AR`/`TR`/`KH`/`DX{...}` 4+4개), (5) SB Data의 `QD`(Index)·`Pi_VALUE`를
 > 누락한 채 작성돼 있었다. 원문 JSON Schema + Request Example 대조로 전면 재작성했다
 > (아티클 id `35948330042649`).
+>
+> 공식 표와 영문·한국어 원문을 함께 대조해 다음 표기를 유지합니다.
+> - `DX` 타입(문서 `Object`, 공식 표 `Integer`) — 공식 글 35948330042649 JSON Schema의 `SDIS.properties.LRB.DX`에 `type: object`가 명시됨.
+> - `DX` 필수(문서 `Optional`, 공식 표 `Required`) — 영문·한국어 Isolator(MSS) 사용자 입력 예제(INPUT_METHOD=0)의 Assign.1.LRB·Assign.2.LRB·Assign.3.NRB에서 DX가 생략됨.
 
 | No. | 설명 | 키 | 타입 | 필수 |
 |-----|------|----|------|------|
@@ -1808,10 +1820,10 @@ NLLP의 `APPLICATION_TYPE_D="IS"`에서 참조됩니다.
 | (6) | 2nd Stiffness K2 | `"K2"` | Number | Required |
 | (7) | Characteristic Strength QD | `"QD"` | Number | Required |
 | (8) | Vertical Direction Properties | `"DX"` | Object | Optional |
-| (8)-i | Use Consider Vertical Direction Nonlinearity(`DX` 하위) | `"OPT_CONS_NONL"` | Boolean | Optional |
-| (8)-ii | Tensile Stiffness Reduction Factor β(`DX` 하위) | `"BETA"` | Number | Optional |
-| (8)-iii | Tensile Stiffness Reduction Ratio α(`DX` 하위) | `"ALPHA"` | Number | Optional |
-| (8)-iv | Tensile Limit Strength(`DX` 하위) | `"SIGMA_V"` | Number | Optional |
+| (8)-i | Use Consider Vertical Direction Nonlinearity(`DX` 하위) | `"OPT_CONS_NONL"` | Boolean | **Required** |
+| (8)-ii | Tensile Stiffness Reduction Factor β(`DX` 하위) | `"BETA"` | Number | **Required** |
+| (8)-iii | Tensile Stiffness Reduction Ratio α(`DX` 하위) | `"ALPHA"` | Number | **Required** |
+| (8)-iv | Tensile Limit Strength(`DX` 하위) | `"SIGMA_V"` | Number | **Required** |
 
 **`NRB` 객체**
 
@@ -1950,7 +1962,7 @@ midas_api("POST", "/db/SDIS", sdis_lrb_data)
 | 1 | Linear Constraints · Insert the data as an object | `"ITEMS"` | Array[Object] | — | **Required** |
 | (1) | Serial Number | `"ID"` | Integer | 0 | Optional |
 | (2) | Load Group Name | `"GROUP_NAME"` | String | Blank | Optional |
-| (3) | DOF of Constraint Node · 6th decimal place: DX · 5th decimal place: DY · 4th decimal place: DZ · 3rd decimal place: RX · 2nd decimal place: RY · 1st decimal place: RZ | `"SLAVE_TYPE"` | String(6) | — | **Required** |
+| (3) | DOF of Constraint Node · 6th decimal place: DX · 5th decimal place: DY · 4th decimal place: DZ · 3rd decimal place: RX · 2nd decimal place: RY · 1st decimal place: RZ | `"SLAVE_TYPE"` | String | — | **Required** |
 | (4) | Constraint Type · `"EX"`=Explicit, `"WD"`=Weighted Displacement | `"TYPE"` | String | — | Required |
 | (5) | Independent Nodes | `"SLAVES"` | Array[Object] | — | Required |
 

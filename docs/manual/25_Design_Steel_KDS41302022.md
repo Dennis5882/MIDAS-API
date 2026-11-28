@@ -1531,7 +1531,7 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
 | 1 | [Root Object] Object keyed by ID strings (e.g., "1"), where each entry represents an element. | `"Assign"` | Object | — | **Required** |
-| 2 | 지하 하중 타입 (`true`=지하 하중용, `false`=비지하 하중용) | `"bUNDERLOADTYPE"` | Boolean (oneOf) | `false` | 선택 |
+| 2 | 지하 하중 타입 (`true`=지하 하중용, `false`=비지하 하중용) | `"bUNDERLOADTYPE"` | Boolean (oneOf) | `false` | Optional |
 
 ### Request / Response JSON
 
@@ -4422,13 +4422,13 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| 1 | Argument 래퍼 | `"Argument"` | Object | — | **필수** |
-| 2 | 수행 대상 타입 (`"ALL"`=전체 요소, `"ELEMS"`=요소별, `"SECTIONS"`=단면별) | `"PERFORM_TYPE"` | String (oneOf) | `"ALL"` | 선택 |
-| 3 | 요소 입력 (ELEMS/SECTIONS 중 하나) | `"ELEMS"` | Object | — | 조건부 |
-| 3.1 | 개별 ID | `"KEYS"` | Array[Integer] | — | 선택 |
-| 3.2 | ID 범위 (예 `"1to160"`) | `"TO"` | String | — | 선택 |
-| 3.3 | 구조 그룹 이름 | `"STRUCTURE_GROUP_NAME"` | String | — | 선택 |
-| 4 | 단면 번호 (ELEMS/SECTIONS 중 하나) | `"SECTIONS"` | Array[Integer] | — | 조건부 |
+| 1 | Argument 래퍼 | `"Argument"` | Object | — | **Required** |
+| 2 | 수행 대상 타입 (`"ALL"`=전체 요소, `"ELEMS"`=요소별, `"SECTIONS"`=단면별) | `"PERFORM_TYPE"` | String (oneOf) | `"ALL"` | Optional |
+| 3 | 요소 입력 (ELEMS/SECTIONS 중 하나) | `"ELEMS"` | Object | — | Optional |
+| 3.1 | 개별 ID | `"KEYS"` | Array[Integer] | — | Optional |
+| 3.2 | ID 범위 (예 `"1to160"`) | `"TO"` | String | — | Optional |
+| 3.3 | 구조 그룹 이름 | `"STRUCTURE_GROUP_NAME"` | String | — | Optional |
+| 4 | 단면 번호 (ELEMS/SECTIONS 중 하나) | `"SECTIONS"` | Array[Integer] | — | Optional |
 
 > `Argument`는 `"ELEMS"` 또는 `"SECTIONS"` 중 **정확히 하나**만 포함해야 하며(oneOf), `ELEMS` 내부에서는 `KEYS`/`TO`/`STRUCTURE_GROUP_NAME` 중 하나만 사용합니다. `PERFORM_TYPE="ALL"`이면 대상 지정 없이 전체 수행됩니다.
 >
@@ -4774,12 +4774,12 @@ print(res.json())
 | 7 | View RatPc > 0.4 | `"VIEW_RATPC"` | Boolean | `false` | Optional |
 | 8 | Table Name Output table title in response | `"TABLE_NAME"` | String | `""` | Optional |
 | 9 | Export Path Optional: Save results to file path | `"EXPORT_PATH"` | String | — | Optional |
-| 10 | Unit Settings | `"UNIT"` | Object | — | Optional |
+| 10 | Unit Settings | `"UNIT"` | Object | System | Optional |
 | 10.1 | Force unit | `"FORCE"` | String | — | Optional |
 | 10.2 | Length/Distance unit | `"DIST"` | String | — | Optional |
 | 10.3 | Heat unit | `"HEAT"` | String | — | Optional |
 | 10.4 | Temperature unit | `"TEMP"` | String | — | Optional |
-| 11 | Number Format | `"STYLES"` | Object | — | Optional |
+| 11 | Number Format | `"STYLES"` | Object | System | Optional |
 | 11.1 | Number format · Default: "Default" · Fixed: "Fixed" · Scientific: "Scientific" · General: "General" | `"FORMAT"` | String (enum) | — | Optional |
 | 11.2 | Digit place Constraints: · Value Range: >= 0, <= 15 | `"PLACE"` | Integer | — | Optional |
 | 12 | Components · Strength Check Result: "CHK" · Member Number: "MEMB" · Max Combined Interaction Ratio: "COM" · Section Number: "SECT" · Shear Stress Ratio: "SHR" · Section Name: "Section" · Material Name: "Material" · Yield Strength: "Fy" · Critical Load Combination No.: "LCB" · Member Length: "Len" · Lateral Bracing Length: "Lb" · Unbraced Length: "Ly" · Unbraced Length: "Lz" · Bending Coefficient: "Cb" · Effective Length Factor: "Ky" · Effective Length Factor: "Kz" · Moment Magnification Factor B1: "B1y" · Moment Magnification Factor B1: "B1z" · Moment Magnification Factor B2: "B2y" · Moment Magnification Factor B2: "B2z" · Axial Strength Ratio: "RatPc" · Required Axial Strength: "Pu" · Design Axial Strength: "pPn" · Required Flexural Strength: "Muy" · Design Flexural Strength φMny: "pMny" · Required Flexural Strength: "Muz" · Design Flexural Strength φMnz: "pMnz" · Required Shear Strength: "Vuy" · Design Shear Strength φVny: "pVny" · Required Shear Strength: "Vuz" · Design Shear Strength φVnz: "pVnz" · Required Torsional Strength: "Tu" · Design Torsional Strength: "pTn" · Serviceability Deflection: "Def" · Allowable Deflection: "Defa" | `"COMPONENTS"` | Array[String] | — | Optional |
@@ -5718,13 +5718,13 @@ print(res.json())
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| 1 | Argument 래퍼 | `"Argument"` | Object | — | **필수** |
-| 2 | 이미지 저장 경로 및 파일명 | `"EXPORT_PATH"` | String | — | **필수** |
+| 1 | Argument 래퍼 | `"Argument"` | Object | — | **Required** |
+| 2 | 이미지 저장 경로 및 파일명 | `"EXPORT_PATH"` | String | — | **Required** |
 | 3 | [General] Smart Report Image Name | `"FIGURE_NAME"` | String | — | Optional |
 | 4 | [General] Hidden Option | `"SET_HIDDEN"` | Boolean | `false` | Optional |
 | 5 | [General] Active *) | `"ACTIVE"` | Object | — | Optional |
-| 6 | 이미지 폭 px (100~10000) | `"WIDTH"` | Integer | `1000` | 선택 |
-| 7 | 이미지 높이 px (100~10000) | `"HEIGHT"` | Integer | `1000` | 선택 |
+| 6 | 이미지 폭 px (100~10000) | `"WIDTH"` | Integer | `1000` | Optional |
+| 7 | 이미지 높이 px (100~10000) | `"HEIGHT"` | Integer | `1000` | Optional |
 | 8 | [General] Construction Stage Name | `"STAGE_NAME"` | String | — | Optional |
 | 9 | [General] Angle | `"ANGLE"` | Object | — | Optional |
 | 9.1 | [General] Horizontal | `"HORIZONTAL"` | Number | `0` | Optional |
@@ -5734,16 +5734,16 @@ print(res.json())
 | 12 | [General] Zoom Level Constraints: · Value Range: >= 25, <= 200 | `"ZOOM_LEVEL"` | Number | `100` | Optional |
 | 13 | [General] Background Color Top | `"BGCOLOR_TOP"` | Object | — | Optional |
 | 14 | [General] Result Graphic | `"RESULT_GRAPHIC"` | Object | — | **Required** |
-| 14.1 | 현재 모드 (`"INFLL_DESIGN_STEEL"`=Steel Design) | `"CURRENT_MODE"` | String (oneOf) | — | **필수** |
+| 14.1 | 현재 모드 (`"INFLL_DESIGN_STEEL"`=Steel Design) | `"CURRENT_MODE"` | String (oneOf) | — | **Required** |
 | 14.2 | [General] Load Cases/Combinations | `"LOAD_CASE_COMB"` | Object | — | **Required** |
-| 14.2.1 | 하중 타입 (`"CBS"`=Steel Design Load Combination) | `"TYPE"` | String (oneOf) | — | **필수** |
+| 14.2.1 | 하중 타입 (`"CBS"`=Steel Design Load Combination) | `"TYPE"` | String (oneOf) | — | **Required** |
 | 14.2.2 | [General] Load Name | `"NAME"` | String | — | **Required** |
-| 14.3 | 표시 성분 (`COMP`: Axial/Shear-y/Shear-z/Bend-y/Bend-z/Combined) | `"COMPONENTS"` | Object | — | 선택 |
-| 14.4 | 표시 타입 (CONTOUR / VALUES / LEGEND / CODE_CHECKING_RATIO) | `"TYPE_OF_DISPLAY"` | Object | — | 선택 |
+| 14.3 | 표시 성분 (`COMP`: Axial/Shear-y/Shear-z/Bend-y/Bend-z/Combined) | `"COMPONENTS"` | Object | — | Optional |
+| 14.4 | 표시 타입 (CONTOUR / VALUES / LEGEND / CODE_CHECKING_RATIO) | `"TYPE_OF_DISPLAY"` | Object | — | Optional |
 | 14.4.1 | [General] Contour | `"CONTOUR"` | Object | — | Optional |
 | 14.4.2 | [General] Values | `"VALUES"` | Object | — | Optional |
 | 14.4.3 | [General] Legend | `"LEGEND"` | Object | — | Optional |
-| 14.4.4 | Code Checking Ratio (COMP=Combined일 때; CHECK, DISPLAY_MEMBERS.BEAM·COLUMN·BRACE, COLUMN_SECTION_SIZE.SCALE_FACTOR, VALUE_OPTION) | `"CODE_CHECKING_RATIO"` | Object | — | 선택 |
+| 14.4.4 | Code Checking Ratio (COMP=Combined일 때; CHECK, DISPLAY_MEMBERS.BEAM·COLUMN·BRACE, COLUMN_SECTION_SIZE.SCALE_FACTOR, VALUE_OPTION) | `"CODE_CHECKING_RATIO"` | Object | — | Optional |
 
 > `RESULT_GRAPHIC` 하위는 위 표 외에도 스키마에 상세 중첩 필드가 정의되어 있습니다(각 색상/값/범례 옵션의 기본값·범위는 위의 **JSON Schema** 블록 참조).
 
@@ -6125,7 +6125,7 @@ print(res.json())
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| 1 | Argument 래퍼 | `"Argument"` | Object | — | **필수** |
+| 1 | Argument 래퍼 | `"Argument"` | Object | — | **Required** |
 | 2 | Table Name · Response Table Title | `"TABLE_NAME"` | String | `""` | Optional |
 | 3 | Result Table Type · "STEELMEMBERDESIGNFORCES" | `"TABLE_TYPE"` | String (enum) | — | **Required** |
 | 4 | Result Table Save Path | `"EXPORT_PATH"` | String | — | Optional |

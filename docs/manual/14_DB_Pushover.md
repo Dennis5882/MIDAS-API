@@ -28,6 +28,9 @@
 
 ## 1. `/db/POGD` — Pushover Analysis Control Data
 
+> ⚠️ 공식 표와 영문·한국어 원문을 함께 대조해 다음 표기를 유지합니다.
+> - `SHEAR_R` 타입(문서 `Number`, 공식 표 `Integer`) — 공식 글 35992664632601 요청 예제 「Pushover Analysis Control Data」의 `Assign.1.PHOP_OPT.SHEAR_R`가 `0.4`(number)를 사용함.
+
 > **기능:** 푸시오버(정적 비선형) 해석의 전역 제어 데이터를 정의합니다. 기하비선형 옵션, 초기하중 방법, 비선형 해석 옵션(수렴 조건·해석 정지 조건), 파이버 모델 옵션, 힌지 데이터 옵션을 포함합니다.
 
 ### Input URI
@@ -973,71 +976,71 @@ print("GET:", resp.json())
 
 | No. | 설명 | Key | Value 타입 | 기본값/enum | 필수 |
 |-----|------|-----|-----------|-------------|------|
-| 1 | 기하비선형 유형 (None: 0 / Large Displacements: 1 / P-Delta: 2). GEO_NONL_TYPE이 1 또는 2이면 INIT_LOAD_TYPE은 반드시 0이어야 함 | `GEO_NONL_TYPE` | integer (enum) | - | 필수 |
-| 2 | 초기하중 유형 (비선형 정적해석 수행: 0 / 정적·시공단계 해석 결과 가져오기: 1) | `INIT_LOAD_TYPE` | integer (enum) | - | 필수 |
-| 3 | 초기하중 하중케이스 목록 (INIT_LOAD_TYPE=1일 때 IGNORE_ELEM 지정 불가) | `INIT_LOAD_LIST` | array [object] | - | 선택 |
+| 1 | 기하비선형 유형 (None: 0 / Large Displacements: 1 / P-Delta: 2). GEO_NONL_TYPE이 1 또는 2이면 INIT_LOAD_TYPE은 반드시 0이어야 함 | `GEO_NONL_TYPE` | integer (enum) | - | **Required** |
+| 2 | 초기하중 유형 (비선형 정적해석 수행: 0 / 정적·시공단계 해석 결과 가져오기: 1) | `INIT_LOAD_TYPE` | integer (enum) | - | **Required** |
+| 3 | 초기하중 하중케이스 목록 (INIT_LOAD_TYPE=1일 때 IGNORE_ELEM 지정 불가) | `INIT_LOAD_LIST` | array [object] | - | Optional |
 | 3-1 | └ 하중케이스 이름 (길이 ≥1) | `INIT_LOAD_LIST[].LC_NAME` | string | - | 필수 (배열 사용 시) |
 | 3-2 | └ 하중케이스 타입 (Static: STATIC / Stage: STAGE) | `INIT_LOAD_LIST[].LC_TYPE` | string (enum) | - | 필수 (배열 사용 시) |
 | 3-3 | └ 배율(Scale Factor), 0 불가 | `INIT_LOAD_LIST[].SF` | number | - | 필수 (배열 사용 시) |
-| 4 | 초기하중 산정 시 요소 무시 옵션 (Ignore Elements for Initial Load). INIT_LOAD_TYPE=1이면 제공 불가 | `IGNORE_ELEM` | boolean | - | 선택 |
-| 5 | 해석 중단(Analysis Stop) 조건 그룹 | `ANALYSIS_STOP` | object | - | 선택 |
-| 5-1 | └ 전단 성분 항복(Shear Component Yield) | `ANALYSIS_STOP.SHEAR_YIELD` | object | - | 선택 |
+| 4 | 초기하중 산정 시 요소 무시 옵션 (Ignore Elements for Initial Load). INIT_LOAD_TYPE=1이면 제공 불가 | `IGNORE_ELEM` | boolean | - | Optional |
+| 5 | 해석 중단(Analysis Stop) 조건 그룹 | `ANALYSIS_STOP` | object | - | Optional |
+| 5-1 | └ 전단 성분 항복(Shear Component Yield) | `ANALYSIS_STOP.SHEAR_YIELD` | object | - | Optional |
 | 5-1-a | 　　└ 사용 여부 | `ANALYSIS_STOP.SHEAR_YIELD.OPT_USE` | boolean | - | 필수. true이면 BEAM_COLUMN/WALL 중 최소 1개는 true, false이면 둘 다 미기재 |
-| 5-1-b | 　　└ Beam/Column | `ANALYSIS_STOP.SHEAR_YIELD.BEAM_COLUMN` | boolean | - | 선택 |
+| 5-1-b | 　　└ Beam/Column | `ANALYSIS_STOP.SHEAR_YIELD.BEAM_COLUMN` | boolean | - | Optional |
 | 5-1-c | 　　└ Wall | `ANALYSIS_STOP.SHEAR_YIELD.WALL` | boolean | - | 선택 |
-| 5-2 | └ 축방향 성분 붕괴/좌굴(Axial Component Collapse) | `ANALYSIS_STOP.AXIAL_YIELD` | object | - | 선택 |
+| 5-2 | └ 축방향 성분 붕괴/좌굴(Axial Component Collapse) | `ANALYSIS_STOP.AXIAL_YIELD` | object | - | Optional |
 | 5-2-a | 　　└ 사용 여부 | `ANALYSIS_STOP.AXIAL_YIELD.OPT_USE` | boolean | - | 필수. true이면 BEAM/WALL/TRUSS 중 최소 1개는 true, false이면 모두 미기재 |
-| 5-2-b | 　　└ Beam | `ANALYSIS_STOP.AXIAL_YIELD.BEAM` | boolean | - | 선택 |
+| 5-2-b | 　　└ Beam | `ANALYSIS_STOP.AXIAL_YIELD.BEAM` | boolean | - | Optional |
 | 5-2-c | 　　└ Wall | `ANALYSIS_STOP.AXIAL_YIELD.WALL` | boolean | - | 선택 |
-| 5-2-d | 　　└ Truss | `ANALYSIS_STOP.AXIAL_YIELD.TRUSS` | boolean | - | 선택 |
-| 5-3 | └ 지점 들뜸/붕괴 : Dz 방향(Support Uplifting/Collapse) | `ANALYSIS_STOP.SUPPORT_DZ_DIR` | object | - | 선택 |
+| 5-2-d | 　　└ Truss | `ANALYSIS_STOP.AXIAL_YIELD.TRUSS` | boolean | - | Optional |
+| 5-3 | └ 지점 들뜸/붕괴 : Dz 방향(Support Uplifting/Collapse) | `ANALYSIS_STOP.SUPPORT_DZ_DIR` | object | - | Optional |
 | 5-3-a | 　　└ 사용 여부 | `ANALYSIS_STOP.SUPPORT_DZ_DIR.OPT_USE` | boolean | - | 필수. true이면 UPLIFT/COLLAPSE 중 최소 1개는 true, false이면 둘 다 미기재 |
-| 5-3-b | 　　└ Uplift | `ANALYSIS_STOP.SUPPORT_DZ_DIR.UPLIFT` | boolean | - | 선택 |
-| 5-3-c | 　　└ Collapse | `ANALYSIS_STOP.SUPPORT_DZ_DIR.COLLAPSE` | boolean | - | 선택 |
-| 6 | 반복 제어(Iteration Controls) | `ITER_CTRL` | object | - | 필수 |
-| 6-1 | └ 수렴 실패 허용(Permit Convergence Failure) | `ITER_CTRL.PERMIT_FAIL` | boolean | - | 선택 |
-| 6-2 | └ 최대 반복횟수(Maximum Iteration), ≥1 | `ITER_CTRL.MAX_ITER` | integer | - | 필수 |
-| 6-3 | └ 수렴 기준(Convergence Criteria) | `ITER_CTRL.NORM_CTRL` | object | - | 필수. DISP/FORCE/ENERGY 중 최소 1개는 OPT_USE=true |
-| 6-3-a | 　　└ 변위 노름(Displacement norm) | `ITER_CTRL.NORM_CTRL.DISP` | object | - | 필수 |
-| 6-3-a-i | 　　　　└ 사용 여부 | `ITER_CTRL.NORM_CTRL.DISP.OPT_USE` | boolean | - | 필수 |
-| 6-3-a-ii | 　　　　└ 허용오차 값 (>0). DISP.OPT_USE=true일 때 필수, false이면 제공 불가 | `ITER_CTRL.NORM_CTRL.DISP.VALUE` | number | - | 조건부 필수 |
-| 6-3-b | 　　└ 하중 노름(Force norm) | `ITER_CTRL.NORM_CTRL.FORCE` | object | - | 필수 |
-| 6-3-b-i | 　　　　└ 사용 여부 | `ITER_CTRL.NORM_CTRL.FORCE.OPT_USE` | boolean | - | 필수 |
-| 6-3-b-ii | 　　　　└ 허용오차 값 (>0). FORCE.OPT_USE=true일 때 필수, false이면 제공 불가 | `ITER_CTRL.NORM_CTRL.FORCE.VALUE` | number | - | 조건부 필수 |
-| 6-3-c | 　　└ 에너지 노름(Energy norm) | `ITER_CTRL.NORM_CTRL.ENERGY` | object | - | 필수 |
-| 6-3-c-i | 　　　　└ 사용 여부 | `ITER_CTRL.NORM_CTRL.ENERGY.OPT_USE` | boolean | - | 필수 |
-| 6-3-c-ii | 　　　　└ 허용오차 값 (>0). ENERGY.OPT_USE=true일 때 필수, false이면 제공 불가 | `ITER_CTRL.NORM_CTRL.ENERGY.VALUE` | number | - | 조건부 필수 |
-| 6-4 | └ 강성 갱신 방식 (Custom: 0 / Full Newton-Raphson: 1 / Initial Stiffness: 2) | `ITER_CTRL.STIFF_UPD_SCHEME` | integer (enum) | - | 필수 |
-| 6-5 | └ 강성 갱신 전 반복횟수. STIFF_UPD_SCHEME=0일 때 필수, 1·2이면 제공 불가 | `ITER_CTRL.ITER_BEF_UPDATE` | integer | - | 조건부 필수 |
-| 6-6 | └ 최대 이분(Bisection) 레벨 | `ITER_CTRL.MAX_BISECT_LEVEL` | integer | 5 | 선택 |
-| 6-7 | └ Smart Bisection 사용 | `ITER_CTRL.SMART_BISECT` | boolean | false | 선택 |
-| 6-8 | └ 발산 임계값(Divergence Threshold) | `ITER_CTRL.DIVERGENCE_THRESHOLD` | number | 3 | 선택 |
-| 6-9 | └ Line Search 사용 | `ITER_CTRL.LINE_SEARCH` | object | - | 선택 |
-| 6-9-a | 　　└ 사용 여부. false이면 세부 필드 모두 제공 불가, true이면 LINE_SEARCH_OPT 필수 | `ITER_CTRL.LINE_SEARCH.OPT_USE` | boolean | - | 필수 |
+| 5-3-b | 　　└ Uplift | `ANALYSIS_STOP.SUPPORT_DZ_DIR.UPLIFT` | boolean | - | Optional |
+| 5-3-c | 　　└ Collapse | `ANALYSIS_STOP.SUPPORT_DZ_DIR.COLLAPSE` | boolean | - | Optional |
+| 6 | 반복 제어(Iteration Controls) | `ITER_CTRL` | object | - | **Required** |
+| 6-1 | └ 수렴 실패 허용(Permit Convergence Failure) | `ITER_CTRL.PERMIT_FAIL` | boolean | - | Optional |
+| 6-2 | └ 최대 반복횟수(Maximum Iteration), ≥1 | `ITER_CTRL.MAX_ITER` | integer | - | **Required** |
+| 6-3 | └ 수렴 기준(Convergence Criteria) | `ITER_CTRL.NORM_CTRL` | object | - | **Required** |
+| 6-3-a | 　　└ 변위 노름(Displacement norm) | `ITER_CTRL.NORM_CTRL.DISP` | object | - | **Required** |
+| 6-3-a-i | 　　　　└ 사용 여부 | `ITER_CTRL.NORM_CTRL.DISP.OPT_USE` | boolean | - | **Required** |
+| 6-3-a-ii | 　　　　└ 허용오차 값 (>0). DISP.OPT_USE=true일 때 필수, false이면 제공 불가 | `ITER_CTRL.NORM_CTRL.DISP.VALUE` | number | - | **Required** |
+| 6-3-b | 　　└ 하중 노름(Force norm) | `ITER_CTRL.NORM_CTRL.FORCE` | object | - | **Required** |
+| 6-3-b-i | 　　　　└ 사용 여부 | `ITER_CTRL.NORM_CTRL.FORCE.OPT_USE` | boolean | - | **Required** |
+| 6-3-b-ii | 　　　　└ 허용오차 값 (>0). FORCE.OPT_USE=true일 때 필수, false이면 제공 불가 | `ITER_CTRL.NORM_CTRL.FORCE.VALUE` | number | - | **Required** |
+| 6-3-c | 　　└ 에너지 노름(Energy norm) | `ITER_CTRL.NORM_CTRL.ENERGY` | object | - | **Required** |
+| 6-3-c-i | 　　　　└ 사용 여부 | `ITER_CTRL.NORM_CTRL.ENERGY.OPT_USE` | boolean | - | **Required** |
+| 6-3-c-ii | 　　　　└ 허용오차 값 (>0). ENERGY.OPT_USE=true일 때 필수, false이면 제공 불가 | `ITER_CTRL.NORM_CTRL.ENERGY.VALUE` | number | - | **Required** |
+| 6-4 | └ 강성 갱신 방식 (Custom: 0 / Full Newton-Raphson: 1 / Initial Stiffness: 2) | `ITER_CTRL.STIFF_UPD_SCHEME` | integer (enum) | - | **Required** |
+| 6-5 | └ 강성 갱신 전 반복횟수. STIFF_UPD_SCHEME=0일 때 필수, 1·2이면 제공 불가 | `ITER_CTRL.ITER_BEF_UPDATE` | integer | - | **Required** |
+| 6-6 | └ 최대 이분(Bisection) 레벨 | `ITER_CTRL.MAX_BISECT_LEVEL` | integer | 5 | Optional |
+| 6-7 | └ Smart Bisection 사용 | `ITER_CTRL.SMART_BISECT` | boolean | false | Optional |
+| 6-8 | └ 발산 임계값(Divergence Threshold) | `ITER_CTRL.DIVERGENCE_THRESHOLD` | number | 3 | Optional |
+| 6-9 | └ Line Search 사용 | `ITER_CTRL.LINE_SEARCH` | object | - | Optional |
+| 6-9-a | 　　└ 사용 여부. false이면 세부 필드 모두 제공 불가, true이면 LINE_SEARCH_OPT 필수 | `ITER_CTRL.LINE_SEARCH.OPT_USE` | boolean | - | **Required** |
 | 6-9-b | 　　└ Line Search 옵션 (Auto: AUTO / User: USER). AUTO이면 세부값 제공 불가, USER이면 세부값 모두 필수 | `ITER_CTRL.LINE_SEARCH.LINE_SEARCH_OPT` | string (enum) | - | 조건부 필수 |
-| 6-9-c | 　　└ Line Search 시작 반복 횟수 (USER일 때 필수) | `ITER_CTRL.LINE_SEARCH.START_ITER_NO` | integer | - | 조건부 필수 |
-| 6-9-d | 　　└ 반복당 최대 Line Search 횟수 (USER일 때 필수) | `ITER_CTRL.LINE_SEARCH.MAX_LINE_SEARCH_ITER` | integer | - | 조건부 필수 |
-| 6-9-e | 　　└ Line Search 허용오차 (USER일 때 필수) | `ITER_CTRL.LINE_SEARCH.LINE_SEARCH_TOL` | number | - | 조건부 필수 |
-| 7 | Pushover 힌지 데이터 옵션 | `PO_HINGE_OPT` | object | - | 선택 |
-| 7-1 | └ 부재에만 힌지 속성 지정 | `PO_HINGE_OPT.ASSIGN_BY_MEMBER` | boolean | - | 필수 |
-| 7-2 | └ Skeleton Curve 기본 강성 저감비 (Trilinear) | `PO_HINGE_OPT.TRILINEAR` | object | - | 필수 |
-| 7-2-a | 　　└ α1 (+) | `PO_HINGE_OPT.TRILINEAR.TENS_A1` | number | - | 필수 |
-| 7-2-b | 　　└ α2 (+) | `PO_HINGE_OPT.TRILINEAR.TENS_A2` | number | - | 필수 |
-| 7-2-c | 　　└ α1 (-) | `PO_HINGE_OPT.TRILINEAR.COMP_A1` | number | - | 필수 |
-| 7-2-d | 　　└ α2 (-) | `PO_HINGE_OPT.TRILINEAR.COMP_A2` | number | - | 필수 |
-| 7-2-e | 　　└ 대칭 여부(SYMMETRIC) | `PO_HINGE_OPT.TRILINEAR.SYMMETRIC` | boolean | - | 필수 |
-| 7-3 | └ 힌지 속성 기본 강성 저감비 (Bilinear) | `PO_HINGE_OPT.BILINEAR` | object | - | 필수 |
-| 7-3-a | 　　└ α1 (+) | `PO_HINGE_OPT.BILINEAR.TENS_A1` | number | - | 필수 |
-| 7-3-b | 　　└ α1 (-) | `PO_HINGE_OPT.BILINEAR.COMP_A1` | number | - | 필수 |
-| 7-3-c | 　　└ 대칭 여부(SYMMETRIC) | `PO_HINGE_OPT.BILINEAR.SYMMETRIC` | boolean | - | 필수 |
-| 7-4 | └ 점 스프링 지점 & 탄성링크 비선형 유형 | `PO_HINGE_OPT.NONL_TYPE` | object | - | 필수 |
-| 7-4-a | 　　└ 점 스프링 지점 적용 방식 (Apply Nonlinear: 0 / Linear: 1) | `PO_HINGE_OPT.NONL_TYPE.PSPRING_SUP` | integer (enum) | - | 필수 |
-| 7-4-b | 　　└ 탄성링크 적용 방식 (Apply Nonlinear: 0 / Linear: 1) | `PO_HINGE_OPT.NONL_TYPE.EL` | integer (enum) | - | 필수 |
-| 7-5 | └ 분포힌지 기준 위치 (I-End: 0 / Mid-span: 1 / J-End: 2) | `PO_HINGE_OPT.LOC_BEAM` | integer (enum) | - | 필수 |
-| 7-6 | └ 좌굴 고려 Beam 항복면 계산 | `PO_HINGE_OPT.CALC_YIELDS` | boolean | - | 필수 |
-| 8 | Pushover 기타(Misc) 옵션 | `MISC` | object | - | 선택 |
-| 8-1 | └ 해석 후 Pushover 곡선 결과 표시 | `MISC.SHOW_GRAPH_AFTER` | boolean | - | 필수 |
-| 8-2 | └ 해석 중 Pushover 곡선 표시 | `MISC.SHOW_GRAPH_DURING` | boolean | - | 필수 |
+| 6-9-c | 　　└ Line Search 시작 반복 횟수 (USER일 때 필수) | `ITER_CTRL.LINE_SEARCH.START_ITER_NO` | integer | - | **Required** |
+| 6-9-d | 　　└ 반복당 최대 Line Search 횟수 (USER일 때 필수) | `ITER_CTRL.LINE_SEARCH.MAX_LINE_SEARCH_ITER` | integer | - | **Required** |
+| 6-9-e | 　　└ Line Search 허용오차 (USER일 때 필수) | `ITER_CTRL.LINE_SEARCH.LINE_SEARCH_TOL` | number | - | **Required** |
+| 7 | Pushover 힌지 데이터 옵션 | `PO_HINGE_OPT` | object | - | Optional |
+| 7-1 | └ 부재에만 힌지 속성 지정 | `PO_HINGE_OPT.ASSIGN_BY_MEMBER` | boolean | - | **Required** |
+| 7-2 | └ Skeleton Curve 기본 강성 저감비 (Trilinear) | `PO_HINGE_OPT.TRILINEAR` | object | - | **Required** |
+| 7-2-a | 　　└ α1 (+) | `PO_HINGE_OPT.TRILINEAR.TENS_A1` | number | - | **Required** |
+| 7-2-b | 　　└ α2 (+) | `PO_HINGE_OPT.TRILINEAR.TENS_A2` | number | - | **Required** |
+| 7-2-c | 　　└ α1 (-) | `PO_HINGE_OPT.TRILINEAR.COMP_A1` | number | - | **Required** |
+| 7-2-d | 　　└ α2 (-) | `PO_HINGE_OPT.TRILINEAR.COMP_A2` | number | - | **Required** |
+| 7-2-e | 　　└ 대칭 여부(SYMMETRIC) | `PO_HINGE_OPT.TRILINEAR.SYMMETRIC` | boolean | - | **Required** |
+| 7-3 | └ 힌지 속성 기본 강성 저감비 (Bilinear) | `PO_HINGE_OPT.BILINEAR` | object | - | **Required** |
+| 7-3-a | 　　└ α1 (+) | `PO_HINGE_OPT.BILINEAR.TENS_A1` | number | - | **Required** |
+| 7-3-b | 　　└ α1 (-) | `PO_HINGE_OPT.BILINEAR.COMP_A1` | number | - | **Required** |
+| 7-3-c | 　　└ 대칭 여부(SYMMETRIC) | `PO_HINGE_OPT.BILINEAR.SYMMETRIC` | boolean | - | **Required** |
+| 7-4 | └ 점 스프링 지점 & 탄성링크 비선형 유형 | `PO_HINGE_OPT.NONL_TYPE` | object | - | **Required** |
+| 7-4-a | 　　└ 점 스프링 지점 적용 방식 (Apply Nonlinear: 0 / Linear: 1) | `PO_HINGE_OPT.NONL_TYPE.PSPRING_SUP` | integer (enum) | - | **Required** |
+| 7-4-b | 　　└ 탄성링크 적용 방식 (Apply Nonlinear: 0 / Linear: 1) | `PO_HINGE_OPT.NONL_TYPE.EL` | integer (enum) | - | **Required** |
+| 7-5 | └ 분포힌지 기준 위치 (I-End: 0 / Mid-span: 1 / J-End: 2) | `PO_HINGE_OPT.LOC_BEAM` | integer (enum) | - | **Required** |
+| 7-6 | └ 좌굴 고려 Beam 항복면 계산 | `PO_HINGE_OPT.CALC_YIELDS` | boolean | - | **Required** |
+| 8 | Pushover 기타(Misc) 옵션 | `MISC` | object | - | Optional |
+| 8-1 | └ 해석 후 Pushover 곡선 결과 표시 | `MISC.SHOW_GRAPH_AFTER` | boolean | - | **Required** |
+| 8-2 | └ 해석 중 Pushover 곡선 표시 | `MISC.SHOW_GRAPH_DURING` | boolean | - | **Required** |
 
 > ⚠️ **2026-08-26 확인:** `GEO_NONL_TYPE`의 enum 순서를 이전엔 None:0/P-Delta:1/Large
 > Displacements:2로 잘못 기재했다. 원문 JSON Schema의 description은 단어 나열 순서가
@@ -1046,6 +1049,12 @@ print("GET:", resp.json())
 > 매겨 놓았다(스키마 설명 문구와 표가 서로 모순 — 표가 우선). 09장 `/db/THGC-M1`의 동명 필드
 > `GEO_NONL_TYPE`도 0=None/1=Large Disp/2=P-Delta로 동일 순서라 교차 확인됨(아티클 id
 > `56511008007705`).
+>
+> 공식 표와 영문·한국어 원문을 함께 대조해 다음 표기를 유지합니다.
+> - `ANALYSIS_STOP.SHEAR_YIELD.OPT_USE` 필수(문서 `필수. true이면 BEAM_COLUMN/WALL 중 최소 1개는 true, false이면 둘 다 미기재`, 공식 표 `Required`) — 필수 칸의 조건을 제거하기에 설명에 남아 있는 공식 적용 조건이 충분하지 않음.
+> - `ANALYSIS_STOP.AXIAL_YIELD.OPT_USE` 필수(문서 `필수. true이면 BEAM/WALL/TRUSS 중 최소 1개는 true, false이면 모두 미기재`, 공식 표 `Required`) — 필수 칸의 조건을 제거하기에 설명에 남아 있는 공식 적용 조건이 충분하지 않음.
+> - `ANALYSIS_STOP.SUPPORT_DZ_DIR.OPT_USE` 필수(문서 `필수. true이면 UPLIFT/COLLAPSE 중 최소 1개는 true, false이면 둘 다 미기재`, 공식 표 `Required`) — 필수 칸의 조건을 제거하기에 설명에 남아 있는 공식 적용 조건이 충분하지 않음.
+> - `ITER_CTRL.LINE_SEARCH.LINE_SEARCH_OPT` 필수(문서 `조건부 필수`, 공식 표 `Required`) — 필수 칸의 조건을 제거하기에 설명에 남아 있는 공식 적용 조건이 충분하지 않음.
 
 ### Request / Response JSON
 
@@ -2035,26 +2044,26 @@ for key, val in cases.items():
 
 | No. | 설명 | Key | Value 타입 | 기본값/enum | 필수 |
 |-----|------|-----|-----------|-------------|------|
-| 1 | 이름 (길이 1~20, 중복 불가) | `LCNAME` | string | - | 필수 |
-| 2 | 설명 (길이 ≤80) | `DESC` | string | `""` | 선택 |
-| 3 | 증분 스텝 수(nstep), 값 > 0 (UI 기본 20) | `INCRE_STEP` | integer | - | 필수 |
-| 4 | 기하비선형 유형 (None: NONE / P-Delta: PDELTA / Large Displacements: LARGE) | `NLTYPE` | string (enum) | - | 필수 |
-| 5 | 초기하중 사용 여부. true이면 bREACOUTPUT 필수, false이면 제공 불가 | `bUSEINITIAL` | boolean | - | 필수 |
-| 6 | 초기하중에 의한 누적 반력/층전단력 (bUSEINITIAL=true일 때 필수) | `bREACOUTPUT` | boolean | - | 조건부 필수 |
-| 7 | 증분 방법 (Load Control: LOAD / Displacement Control: DISP) | `INCRE_METHOD` | string (enum) | - | 필수 |
-| 8 | 제어 옵션 컨테이너 | `CTRL_OPT` | object | - | 필수 |
+| 1 | 이름 (길이 1~20, 중복 불가) | `LCNAME` | string | - | **Required** |
+| 2 | 설명 (길이 ≤80) | `DESC` | string | `""` | Optional |
+| 3 | 증분 스텝 수(nstep), 값 > 0 (UI 기본 20) | `INCRE_STEP` | integer | - | **Required** |
+| 4 | 기하비선형 유형 (None: NONE / P-Delta: PDELTA / Large Displacements: LARGE) | `NLTYPE` | string (enum) | - | **Required** |
+| 5 | 초기하중 사용 여부. true이면 bREACOUTPUT 필수, false이면 제공 불가 | `bUSEINITIAL` | boolean | - | **Required** |
+| 6 | 초기하중에 의한 누적 반력/층전단력 (bUSEINITIAL=true일 때 필수) | `bREACOUTPUT` | boolean | - | **Required** |
+| 7 | 증분 방법 (Load Control: LOAD / Displacement Control: DISP) | `INCRE_METHOD` | string (enum) | - | **Required** |
+| 8 | 제어 옵션 컨테이너 | `CTRL_OPT` | object | - | **Required** |
 | **INCRE_METHOD = "LOAD"인 경우** (CTRL_OPT 내 DISP 계열 필드 제공 불가) |
-| 8-1 | └ 자동 증분 제어 (Auto-Stepping: AUTO / Equal Step: EQUAL / Incremental Control Function: INC_FUNC) | `CTRL_OPT.STEPCTRLOPTION` | string (enum) | - | 필수 |
-| 8-2 | └ 증분 함수 이름 (STEPCTRLOPTION="INC_FUNC"일 때 필수, 그 외 제공 불가) | `CTRL_OPT.INCFUNC_NAME` | string | - | 조건부 필수 |
-| 8-3 | └ 현재 강성비(Cs), [0, 100] 범위 | `CTRL_OPT.STIFF_RATIO` | number | - | 필수 |
+| 8-1 | └ 자동 증분 제어 (Auto-Stepping: AUTO / Equal Step: EQUAL / Incremental Control Function: INC_FUNC) | `CTRL_OPT.STEPCTRLOPTION` | string (enum) | - | **Required** |
+| 8-2 | └ 증분 함수 이름 (STEPCTRLOPTION="INC_FUNC"일 때 필수, 그 외 제공 불가) | `CTRL_OPT.INCFUNC_NAME` | string | - | **Required** |
+| 8-3 | └ 현재 강성비(Cs), [0, 100] 범위 | `CTRL_OPT.STIFF_RATIO` | number | - | **Required** |
 | **INCRE_METHOD = "DISP"인 경우** (CTRL_OPT 내 LOAD 계열 필드 제공 불가) |
-| 9-1 | └ 변위 제어 옵션 (Global: GLOBAL / Master Node: NODE) | `CTRL_OPT.DISPCTRLOPTION` | string (enum) | - | 필수 |
-| 9-2 | └ 최대 병진 변위(GLOBAL일 때 필수, 값 > 0) | `CTRL_OPT.GLOBAL_MAX_DISP` | number | - | 조건부 필수 |
-| 9-3 | └ 절점 번호(NODE일 때 필수, ExistNode 통과 필요) | `CTRL_OPT.MASTERNODE` | integer | - | 조건부 필수 |
-| 9-4 | └ 방향 (DX: DX / DY: DY / DZ: DZ) (NODE일 때 필수) | `CTRL_OPT.MASTERDIRECTION` | string (enum) | - | 조건부 필수 |
-| 9-5 | └ 최대 변위(NODE일 때 필수, 값 != 0.0) | `CTRL_OPT.MASTERMAXDISP` | number | - | 조건부 필수 |
-| 10 | 하중 패턴 유형 (정적 하중케이스: LOAD / 균일 가속도: ACC / 모드형상: MODE / 정규화 모드형상: NOR_MODE) | `LOADPATTERNTYPE` | string (enum) | - | 필수 |
-| 11 | 하중 패턴 배열 (크기 ≥ 1; ACC/MODE/NOR_MODE는 원소 1개로 제한) | `LOADPATTERN` | array [object] | - | 필수 |
+| 9-1 | └ 변위 제어 옵션 (Global: GLOBAL / Master Node: NODE) | `CTRL_OPT.DISPCTRLOPTION` | string (enum) | - | **Required** |
+| 9-2 | └ 최대 병진 변위(GLOBAL일 때 필수, 값 > 0) | `CTRL_OPT.GLOBAL_MAX_DISP` | number | - | **Required** |
+| 9-3 | └ 절점 번호(NODE일 때 필수, ExistNode 통과 필요) | `CTRL_OPT.MASTERNODE` | integer | - | **Required** |
+| 9-4 | └ 방향 (DX: DX / DY: DY / DZ: DZ) (NODE일 때 필수) | `CTRL_OPT.MASTERDIRECTION` | string (enum) | - | **Required** |
+| 9-5 | └ 최대 변위(NODE일 때 필수, 값 != 0.0) | `CTRL_OPT.MASTERMAXDISP` | number | - | **Required** |
+| 10 | 하중 패턴 유형 (정적 하중케이스: LOAD / 균일 가속도: ACC / 모드형상: MODE / 정규화 모드형상: NOR_MODE) | `LOADPATTERNTYPE` | string (enum) | - | **Required** |
+| 11 | 하중 패턴 배열 (크기 ≥ 1; ACC/MODE/NOR_MODE는 원소 1개로 제한) | `LOADPATTERN` | array [object] | - | **Required** |
 | **LOADPATTERNTYPE = "LOAD"인 경우** (DIR, MODE 제공 불가) |
 | 11-1 | └ 하중케이스 이름 (ExistStld 통과 필요, Static Load Case 이름) | `LOADPATTERN[].LCNAME` | string | - | 필수 |
 | 11-2 | └ 배율(Scale Factor), 값 != 0.0 (UI 기본 1.0) | `LOADPATTERN[].SF` | number | - | 필수 |

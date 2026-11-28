@@ -25,6 +25,7 @@
 | `check_fields.py` | 필드 단위 누락 점검 — 공식 글의 Specifications 표 Key와 Schema·요청 예제의 JSON Key가 해당 문서 섹션(챕터 공통 표 포함)에 있는지 대조 | ✗ |
 | `fill_fields.py` | 빠진 Key를 공식 Specifications 표에서 원문 그대로 옮겨 해당 섹션 끝에 `<!-- om-fields -->` 블록으로 추가. 기존 텍스트는 수정하지 않고, 재실행하면 블록만 다시 만듦 | ✗ |
 | `restore_descriptions.py` | 설명·필수 표기를 공식 Specifications와 대조. 기본 적용은 한글 설명, `--english` 적용은 영어 설명 대상 | ✗ |
+| `check_specs.py` | 색인으로 공식 글을 식별해 기본값·Value 타입·필수 표기와 판별 값별 Response HEAD를 대조. 실제 차이가 있으면 종료 1 | ✗ |
 | `description_holds.json` | 원문과 다르게 보존한 설명·필수 값 및 대조 기준 | — |
 | `build_index.py` | `docs/index/endpoints.json`·`chunks.jsonl` 생성 (AI·RAG용). 끝에 `build_llms.py`를 불러 루트 `llms.txt`도 다시 만듦 | ✗ |
 | `build_llms.py` | 루트 `llms.txt`(AI 에이전트용 진입점) 생성. 네트워크 없이 `docs/index/`와 `docs/manual/INDEX.md`만 읽음 | ✗ |
@@ -75,6 +76,10 @@ python3 check_fields.py --out fields.json
 # 설명과 필수 표기 차이 점검
 python -X utf8 restore_descriptions.py --dry-run
 
+# 문서 반영 후 색인을 갱신하고 글별 스펙 점검
+python -X utf8 build_index.py
+python -X utf8 check_specs.py --json
+
 # 한 챕터의 영어 설명 복원 후보 확인 및 보고서 경로 지정
 python -X utf8 restore_descriptions.py --file 02_DB_Project_Structure.md --dry-run --english --report ../../work_orders/02_review.md
 ```
@@ -89,6 +94,11 @@ JP·⚠️ 보호 행도 원문과 대조하며 실제 차이는 의도적 차�
 
 2026-11-27 기준(공식 글 860건)으로 대조한 영어 행은 6,582개입니다. 변경 0행, 보류 — 원문 변경 0행, 보류 17행입니다.
 보류 17행 중 16행은 공식 표가 같은 글의 예제·Schema와 어긋나 기존 표기를 유지한 행이며, 문서의 해당 표 아래 ⚠️ 주석에 원문 표기를 적었습니다.
+
+`check_specs.py`는 `endpoints.json`의 글별 위치와 `chunks.jsonl`을 이용한다. 결과에는 공식 글 ID,
+로케일, 문서 위치 및 비교 값이 포함된다. `--file`로 번호가 붙은 챕터 하나를 선택하고, `--source`로
+저장한 공식 원문을 재사용할 수 있다. [spec_holds.json](spec_holds.json)은 보류의 근거와 원문 값을
+기록한다. 원문 값이 달라지면 다시 실제 차이로 표시된다.
 
 ## 필드 점검 읽는 법 (`check_fields.py`)
 

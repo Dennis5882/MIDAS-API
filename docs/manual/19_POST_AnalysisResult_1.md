@@ -138,6 +138,9 @@
 > 모두 `"REACTIONSURFACESPRING"`으로 일치하나, "Reaction(Local-Surface Spring)" Request Example
 > 하나만 `"REACTIONLSURFACESPRING"`(L 추가)을 사용한다. 표·스키마 2곳이 일치하는 쪽을 채택하고
 > 예제 쪽의 단발성 오타로 판단함.
+>
+> 공식 표와 영문·한국어 원문을 함께 대조해 다음 표기를 유지합니다.
+> - `REACTIONSURFACESPRING`: 양쪽 로케일 Schema enum과 요청 예제의 `REACTIONLSURFACESPRING`이 달라 기존 표기를 유지합니다.
 
 ### Response HEAD
 

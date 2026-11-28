@@ -9174,7 +9174,8 @@
        "kind": "section",
        "chunk_ids": [
         "04_DB_Properties:32-dbmatd:0",
-        "04_DB_Properties:32-dbmatd:1"
+        "04_DB_Properties:32-dbmatd:1",
+        "04_DB_Properties:32-dbmatd:2"
        ]
       }
      ],
@@ -13917,7 +13918,8 @@
        "ref": "05_DB_Boundary.md#2-dbnspr--point-spring",
        "kind": "section",
        "chunk_ids": [
-        "05_DB_Boundary:2-dbnspr--point-spring:0"
+        "05_DB_Boundary:2-dbnspr--point-spring:0",
+        "05_DB_Boundary:2-dbnspr--point-spring:1"
        ]
       }
      ],
@@ -22819,7 +22821,8 @@
        "chunk_ids": [
         "12_DB_Analysis_Control:18-dbstct-m1--construction-stage-analysis-control-data-hyper-s:0",
         "12_DB_Analysis_Control:18-dbstct-m1--construction-stage-analysis-control-data-hyper-s:1",
-        "12_DB_Analysis_Control:18-dbstct-m1--construction-stage-analysis-control-data-hyper-s:2"
+        "12_DB_Analysis_Control:18-dbstct-m1--construction-stage-analysis-control-data-hyper-s:2",
+        "12_DB_Analysis_Control:18-dbstct-m1--construction-stage-analysis-control-data-hyper-s:3"
        ]
       }
      ],
@@ -24855,7 +24858,8 @@
        "kind": "section",
        "chunk_ids": [
         "09_DB_Dynamic_Loads:4-dbthgc-m1--time-history-global-control-hyper-s:0",
-        "09_DB_Dynamic_Loads:4-dbthgc-m1--time-history-global-control-hyper-s:1"
+        "09_DB_Dynamic_Loads:4-dbthgc-m1--time-history-global-control-hyper-s:1",
+        "09_DB_Dynamic_Loads:4-dbthgc-m1--time-history-global-control-hyper-s:2"
        ]
       }
      ],
@@ -44042,7 +44046,8 @@
        "chunk_ids": [
         "26_Design_RC_KDS41202022:66-designrckds-41-20-2022cdesign--rc-concrete-design-result-rc-콘크리트-종합-설계-결과:0",
         "26_Design_RC_KDS41202022:66-designrckds-41-20-2022cdesign--rc-concrete-design-result-rc-콘크리트-종합-설계-결과:1",
-        "26_Design_RC_KDS41202022:66-designrckds-41-20-2022cdesign--rc-concrete-design-result-rc-콘크리트-종합-설계-결과:2"
+        "26_Design_RC_KDS41202022:66-designrckds-41-20-2022cdesign--rc-concrete-design-result-rc-콘크리트-종합-설계-결과:2",
+        "26_Design_RC_KDS41202022:66-designrckds-41-20-2022cdesign--rc-concrete-design-result-rc-콘크리트-종합-설계-결과:3"
        ]
       }
      ],
@@ -49876,7 +49881,8 @@
         "27_Design_SRC_AIKSRC2K:27-designsrcaik-src2kmrbd--modify-src-beam-section-data-src-보-단면-데이터-수정:3",
         "27_Design_SRC_AIKSRC2K:27-designsrcaik-src2kmrbd--modify-src-beam-section-data-src-보-단면-데이터-수정:4",
         "27_Design_SRC_AIKSRC2K:27-designsrcaik-src2kmrbd--modify-src-beam-section-data-src-보-단면-데이터-수정:5",
-        "27_Design_SRC_AIKSRC2K:27-designsrcaik-src2kmrbd--modify-src-beam-section-data-src-보-단면-데이터-수정:6"
+        "27_Design_SRC_AIKSRC2K:27-designsrcaik-src2kmrbd--modify-src-beam-section-data-src-보-단면-데이터-수정:6",
+        "27_Design_SRC_AIKSRC2K:27-designsrcaik-src2kmrbd--modify-src-beam-section-data-src-보-단면-데이터-수정:7"
        ]
       }
      ],
@@ -63064,7 +63070,8 @@
        "ref": "21_POST_StoryTables.md#13-stiffness-irregularity-check-soft-story",
        "kind": "section",
        "chunk_ids": [
-        "21_POST_StoryTables:13-stiffness-irregularity-check-soft-story:0"
+        "21_POST_StoryTables:13-stiffness-irregularity-check-soft-story:0",
+        "21_POST_StoryTables:13-stiffness-irregularity-check-soft-story:1"
        ]
       }
      ],

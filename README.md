@@ -18,7 +18,7 @@
 | 공식 글 번호(article id)로 출처 추적 | 코드 라이브러리 제공 |
 | 원문 안의 누락·오탈자·자기모순 표시 | |
 
-## 현재 상태 (2026-11-27 기준)
+## 현재 상태 (2026-11-28 기준)
 
 | 항목 | 상태 |
 | --- | --- |
@@ -30,7 +30,8 @@
 | Plug-in 문서 | 73건 중 63건 작성 ([목록](./docs/plugin/INDEX.md)) |
 | 교량 설계·평가 (2026-11-26 공식 목차 갱신) | [RC AASHTO-LRFD24/20 102건](./docs/manual/28_Design_RC_AASHTO_LRFD.md) · [PSC AASHTO-LRFD24 설계 42건](./docs/manual/29_Design_PSC_AASHTO_LRFD24.md) · [PSC AASHTO-LRFR19 평가 34건](./docs/manual/30_Rating_PSC_AASHTO_LRFR19.md) · [RC KDS 24 14 21:2021 설계 19건](./docs/manual/31_Design_RC_KDS241421.md) · [PSC KDS 24 14 21:2021 설계 33건](./docs/manual/32_Design_PSC_KDS241421.md) |
 | 필드 단위 완전성 | 문서화된 공식 글 838건의 요청 Key 13,359개에서 누락 0건 |
-| AI 검색용 색인 | `docs/index/`의 엔드포인트 573개 모두 문서화. 청크 2,467개. 검색 시험(BM25) hit@5는 엔드포인트 92%, Key 76% |
+| 글별 스펙 대조 | 기본값·Value 타입·필수·Response HEAD 28,797개 비교. 실제 차이 0건, 등록 보류 95건, 모호 999건 |
+| AI 검색용 색인 | `docs/index/`의 엔드포인트 573개 모두 문서화. 청크 2,474개. 검색 시험(BM25) hit@5는 엔드포인트 92%, Key 73.3% |
 
 ## 문서 읽는 법
 
@@ -112,16 +113,16 @@ AI 에이전트는 루트의 [llms.txt](./llms.txt)부터 읽으면 됩니다. �
 
 | `source` | 청크 수 | 내용 |
 | --- | --- | --- |
-| `om` | 1,577 | 공식 글을 정리한 본문. 파라미터 설명은 공식 원문을 따르며, 보존한 번역이나 ⚠️ 주석을 포함할 수 있음 |
+| `om` | 1,584 | 공식 글을 정리한 본문. 파라미터 설명은 공식 원문을 따르며, 보존한 번역이나 ⚠️ 주석을 포함할 수 있음 |
 | `om-verbatim` | 126 | "OM 원문 추가 필드" 블록. 공식 표를 그대로 옮긴 것 |
 | `repo-example` | 764 | 이 저장소가 작성한 Python 예제·워크플로. **공식 내용이 아니므로 근거로 인용하지 말 것** |
 
-검색 시험 결과는 `python -X utf8 scripts/manual_sync/eval_retrieval.py`로 다시 잴 수 있습니다 (2026-11-28 글별 출처 색인 반영 후 재측정, BM25 기준).
+검색 시험 결과는 `python -X utf8 scripts/manual_sync/eval_retrieval.py`로 다시 잴 수 있습니다 (2026-11-28 글별 스펙 대조 반영 후 재측정, BM25 기준).
 
 | 질문 | 건수 | hit@1 | hit@5 | hit@10 |
 | --- | --- | --- | --- | --- |
 | 엔드포인트 찾기 (글 제목 → 해당 청크) | 100 | 72% | 92% | 96% |
-| Key 찾기 (글 제목 + 설명 → 그 Key가 든 청크) | 150 | 54% | 76% | 81.3% |
+| Key 찾기 (글 제목 + 설명 → 그 Key가 든 청크) | 150 | 54% | 73.3% | 80.7% |
 
 시험의 한계:
 
@@ -156,6 +157,7 @@ scripts/manual_sync/     # 공식 매뉴얼과의 동기화·점검 도구
 | `fill_fields.py` | 빠진 Key를 공식 표에서 그대로 옮겨 섹션 끝에 추가 (추가만 함) |
 | `build_index.py` · `eval_retrieval.py` | AI용 색인·청크 생성, 검색 시험 |
 | `restore_descriptions.py --dry-run` | 문서 파라미터의 설명·필수 표기와 공식 Specifications 비교 |
+| `check_specs.py` | 공식 글별 기본값·Value 타입·필수·Response HEAD 비교. 실제 차이가 있으면 종료 1 |
 | `validate_manual.py` | JSON 코드블록과 목차 앵커 |
 
 ## 공식 문서

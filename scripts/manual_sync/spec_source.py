@@ -140,7 +140,10 @@ def parse_article(article, declared=()):
                                                       for alt in schema[kind] if isinstance(alt, dict)]
                             if isinstance(schema.get("items"), dict) and "type" in schema["items"]:
                                 evidence["item_type"] = schema["items"]["type"]
-                            parsed["schema"][key].append({"path": list(path), "required": key in obj.get("required", ()),
+                            required = obj.get("required")
+                            parsed["schema"][key].append({"path": list(path),
+                                                          "required": isinstance(required, list) and key in required,
+                                                          "required_keys": required if isinstance(required, list) else None,
                                                           **evidence})
                 continue
             has_head = any(isinstance(obj.get("HEAD"), list) for _, obj in objects(value))

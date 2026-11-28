@@ -735,23 +735,23 @@ print("POST:", resp.status_code, resp.json())
 | 5-1 | └ 활성화 | `ECCEN.USE` | Boolean | `false` | — |
 | 5-2 | └ 타입 · 도심: `0` / 옵셋: `1` | `ECCEN.TYPE` | Integer | — | — |
 | 5-3 | └ 방향 · 국부y: `"LY"` / 국부z: `"LZ"` / 전체X: `"GX"` / 전체Y: `"GY"` / 전체Z: `"GZ"` | `ECCEN.DIR` | String | — | — |
-| 5-4 | └ I단 편심량 | `ECCEN.I_END` | Number | — | — |
-| 5-5 | └ J단 편심량(`USE_J_END=true`일 때) | `ECCEN.J_END` | Number | — | — |
+| 5-4 | └ I단 편심량 | `ECCEN.I_END` | Real | — | — |
+| 5-5 | └ J단 편심량(`USE_J_END=true`일 때) | `ECCEN.J_END` | Real | — | — |
 | 5-6 | └ J단 편심 활성화 | `ECCEN.USE_J_END` | Boolean | — | — |
 | 6 | Option - Additional H from Top · It is available when "TYPE" value is as follows; / "UNIPRESSURE" / "TRAPRESSURE" | `"ADD_H"` | Object | — | Optional |
 | 6-1 | └ 활성화 | `ADD_H.USE` | Boolean | `false` | — |
-| 6-2 | └ I단 값 | `ADD_H.I_END` | Number | — | — |
-| 6-3 | └ J단 값(`USE_J_END=true`일 때) | `ADD_H.J_END` | Number | — | — |
+| 6-2 | └ I단 값 | `ADD_H.I_END` | Real | — | — |
+| 6-3 | └ J단 값(`USE_J_END=true`일 때) | `ADD_H.J_END` | Real | — | — |
 | 6-4 | └ J단 활성화 | `ADD_H.USE_J_END` | Boolean | — | — |
 | 7 | 하중 값 | `"LOAD"` | Object | — | **Required** |
 | 7-1 | └ 방향 · 국부x/y/z(`"LX"`/`"LY"`/`"LZ"`), 전체X/Y/Z(`"GX"`/`"GY"`/`"GZ"`); `UNIPRESSURE`/`TRAPRESSURE`는 `ADD_H` 설정에 따라 `LY`/`LZ`만 가능 | `LOAD.DIR` | String | — | **Required** |
-| 7-2 | └ 투영 여부 (METHOD=0→기본 false, METHOD=1→기본 true) | `LOAD.USE_PROJECTION` | Boolean | System | Optional |
+| 7-2 | └ 투영 여부 (METHOD=0→기본 false, METHOD=1→기본 true) | `LOAD.USE_PROJECTION` | Boolean | Systems | Optional |
 | 7-3 | └ 거리 타입(모든 타입 공통, `CURVED` 포함) · 상대: `0` / 절대: `1` | `LOAD.TYPE` | Integer | — | **Required** |
-| 7-4 | └ 거리 배열 [x1,x2,x3,x4] (`CURVED` 제외) | `LOAD.D` | Array [Number, 4] | — | **Required** |
-| 7-5 | └ 크기 배열 [P1,P2,P3,P4] (`CURVED` 제외) | `LOAD.P` | Array [Number, 4] | — | **Required** |
-| 7-6 | └ 곡선식 계수 a (`CURVED` 전용) | `LOAD.A` | Number | — | **Required** |
-| 7-7 | └ 곡선식 계수 b (`CURVED` 전용) | `LOAD.B` | Number | — | **Required** |
-| 7-8 | └ 곡선식 계수 c (`CURVED` 전용) | `LOAD.C` | Number | — | **Required** |
+| 7-4 | └ 거리 배열 [x1,x2,x3,x4] (`CURVED` 제외) | `LOAD.D` | Array [Real, 4] | — | **Required** |
+| 7-5 | └ 크기 배열 [P1,P2,P3,P4] (`CURVED` 제외) | `LOAD.P` | Array [Real, 4] | — | **Required** |
+| 7-6 | └ 곡선식 계수 a (`CURVED` 전용) | `LOAD.A` | Real | — | **Required** |
+| 7-7 | └ 곡선식 계수 b (`CURVED` 전용) | `LOAD.B` | Real | — | **Required** |
+| 7-8 | └ 곡선식 계수 c (`CURVED` 전용) | `LOAD.C` | Real | — | **Required** |
 | 8 | Copy Options | `"COPY"` | Object | — | Optional |
 | 8-1 | └ 활성화 | `COPY.USE` | Boolean | `false` | — |
 | 8-2 | └ 복사 축 · `"X"`/`"Y"`/`"Z"` | `COPY.AXIS` | String | — | — |
@@ -980,7 +980,7 @@ print("POST (복사):", resp.status_code, resp.json())
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 |-----|------|-----|-----------|--------|------|
 | 1 | 메셔 설정 | `"MESHER"` | Object | — | **Required** |
-| 1-1 | └ 자동 메시 방법 · 노드: `"Nodes"` / 선요소: `"LineElements"` / 평면요소: `"PlanarElements"` | `MESHER.METHOD` | String | `"LineElements"` | Optional |
+| 1-1 | └ 자동 메시 방법 · 노드: `"Nodes"` / 선요소: `"LineElements"` / 평면요소: `"PlanarElements"` | `MESHER.METHOD` | String | "Line Elements" | Optional |
 | 1-2 | └ 메시 대상 요소/노드 목록 | `MESHER.TARGETS` | Array [Integer] | — | **Required** |
 | 1-3 | └ 메시 형태 · 사각형: `"Quadrilateral"` / 사각+삼각: `"Quadandtriangle"` / 삼각형: `"Triangle"` | `MESHER.TYPE` | String | `"Quadrilateral"` | Optional |
 | 1-4 | └ 내부 도메인 메시 생성 여부 | `MESHER.MESH_INNER_DOMAIN` | Boolean | `false` | Optional |
@@ -1821,7 +1821,7 @@ for row in result.get("DATA", []):
 |-----|------|-----|-----------|--------|------|
 | 1 | Assign Type · "MANUAL" · "AUTO" | `"ASSIGN_TYPE"` | String | — | **Required** |
 | 2 | Selection Type · "ALL" · "SELECTION" | `"SELECTION_TYPE"` | String | — | **Required** |
-| 3 | Element List | `"ELEM_LIST"` | Array | — | Required(*) |
+| 3 | Element List | `"ELEM_LIST"` | Array [Integer] | — | Required(*) |
 | 4 | Allow Single Element Member | `"ALLOW_SINGLE"` | Boolean | — | **Required** |
 
 \* If Selection Type is set to "ALL", the Element List will be ignored.
@@ -1973,7 +1973,7 @@ print("POST (자동):", resp.status_code, resp.json())
 | 4-3 | └ 중요도계수 | `FLEXIBLE_PARAM.IMPORTANCE_FACTOR` | Number (≥0) | — | **Required** |
 | 4-4 | └ 지형효과 고려 옵션 | `FLEXIBLE_PARAM.TOPOGRAPHIC_EFFECT` | Object | — | Optional (생략 시 미사용) |
 | 4-4-a | 　└ 사용 여부 | `TOPOGRAPHIC_EFFECT.OPT_USE` | Boolean | `false` | **Required** |
-| 4-4-b | 　└ 지형계수 Kzt (`OPT_USE=true`일 때 필수) | `TOPOGRAPHIC_EFFECT.KZT` | Number (≥0) | — | 조건부 **Required** |
+| 4-4-b | 　└ 지형계수 Kzt (`OPT_USE=true`일 때 필수) | `TOPOGRAPHIC_EFFECT.KZT` | Number (≥0) | — | **Required** |
 | 4-5 | └ 방향계수(X) | `FLEXIBLE_PARAM.DIRECTION_FACTOR_X` | Number (≥0) | — | **Required** |
 | 4-6 | └ 방향계수(Y) | `FLEXIBLE_PARAM.DIRECTION_FACTOR_Y` | Number (≥0) | — | **Required** |
 | 4-7 | └ 평면 폭(X방향) | `FLEXIBLE_PARAM.BREADTH_X` | Number (≥0) | — | **Required** |
@@ -2560,13 +2560,13 @@ print(f"거스트영향계수 Gy = {result['GUST_FACTOR_Y']:.4f}")
 
 | No. | 설명 | Key | Value 타입 | 기본값/enum | 필수 |
 |---|---|---|---|---|---|
-| 1 | OPTION – 기존 조합에 추가할지 전체 대체할지 | `OPTION` | string (enum) | `ADD`, `REPLACE` | 필수 |
+| 1 | OPTION – 기존 조합에 추가할지 전체 대체할지 | `OPTION` | string (enum) | - | **Required** |
 | 2 | Add envelope option for LCOM-GEN (세 바디 CONCRETE/STEEL/SRC 공통) | `ADD_ENVELOPE` | boolean | 기본값 `true` | 선택 |
 | 3 | 설계 카테고리 선택 – 바디 구조 분기 키 | `CODE_SELECTION` | string (const) | `CONCRETE` \| `STEEL` \| `SRC` | 필수 |
-| 4 | 설계기준 코드 값. `CODE_SELECTION="CONCRETE"`일 때 const/기본값 `"KDS 41 20 : 2022"` | `DGNCODE` | string (const) | `KDS 41 20 : 2022` | 필수 (CONCRETE 바디에서) |
-| 4' | 설계기준 코드 값. `CODE_SELECTION="STEEL"`일 때 const/기본값 `"KDS 41 30 : 2022"` | `DGNCODE` | string (const) | `KDS 41 30 : 2022` | 필수 (STEEL 바디에서) |
-| 4'' | 설계기준 코드 값. `CODE_SELECTION="SRC"`일 때 const/기본값 `"KDS 41 SRC : 2022"` | `DGNCODE` | string (const) | `KDS 41 SRC : 2022` | 필수 (SRC 바디에서) |
-| 5 | 응답스펙트럼 하중조합 목록 | `RS_SCALE_FACTOR` | array [object] | - | 필수 (세 바디 모두) |
+| 4 | 설계기준 코드 값. `CODE_SELECTION="CONCRETE"`일 때 const/기본값 `"KDS 41 20 : 2022"` | `DGNCODE` | string (enum) | - | **Required** |
+| 4' | 설계기준 코드 값. `CODE_SELECTION="STEEL"`일 때 const/기본값 `"KDS 41 30 : 2022"` | `DGNCODE` | string (enum) | - | **Required** |
+| 4'' | 설계기준 코드 값. `CODE_SELECTION="SRC"`일 때 const/기본값 `"KDS 41 SRC : 2022"` | `DGNCODE` | string (enum) | - | **Required** |
+| 5 | 응답스펙트럼 하중조합 목록 | `RS_SCALE_FACTOR` | array [object] | - | **Required** |
 | 5-1 | 하중 케이스명 (정적: `NAME(ST)`, 응답스펙트럼: `NAME(RS)`) | `RS_SCALE_FACTOR[].LOAD_CASE` | string | - | 필수 |
 | 5-2 | 축계수 | `RS_SCALE_FACTOR[].FACTOR` | number | - | 필수 |
 | 6 | 풍하중 조합 세트. SRC 바디에서는 `WIND_LOAD_COMB` 자체가 필수, CONCRETE/STEEL 바디에서는 선택 | `WIND_LOAD_COMB` | object | - | SRC: 필수 / CONCRETE·STEEL: 선택 |
@@ -2753,6 +2753,9 @@ print(resp.json())
 
 ## 16. `/ope/LCOM-CONC` — Load Combination (Concrete) – KDS 41 20:2022
 
+> ⚠️ 공식 표와 영문·한국어 원문을 함께 대조해 다음 표기를 유지합니다.
+> - `UNDERGROUND_LOAD.OPT_USE` 필수(문서 `필수 (UNDERGROUND_LOAD 사용 시)`, 공식 표 `Required`) — 필수 칸의 조건을 제거하기에 설명에 남아 있는 공식 적용 조건이 충분하지 않음.
+
 > **기능:** KDS 41 20:2022 콘크리트 구조 설계기준에 따라 응답스펙트럼 축계수, 풍하중 조합, 직교효과, 특별지진하중·수직지진력·지하구조물하중 옵션을 지정하여 콘크리트 부재 설계용 하중조합을 자동 생성합니다. POST 전용 엔드포인트이며, 기존 조합에 추가(ADD)하거나 전체를 대체(REPLACE)할 수 있습니다.
 
 ### Input URI
@@ -2924,13 +2927,13 @@ print(resp.json())
 
 | No. | 설명 | Key | Value 타입 | 기본값/enum | 필수 |
 |---|---|---|---|---|---|
-| 1 | OPTION – 기존 조합에 추가할지 전체 대체할지 | `OPTION` | string (enum) | `ADD`, `REPLACE` | 필수 |
-| 2 | 콘크리트 설계기준 코드 값 | `DGNCODE` | string (enum) | `KDS 41 20 : 2022` | 필수 |
-| 3 | 응답스펙트럼 하중조합 목록 | `RS_SCALE_FACTOR` | array [object] | - | 선택 |
+| 1 | OPTION – 기존 조합에 추가할지 전체 대체할지 | `OPTION` | string (enum) | - | **Required** |
+| 2 | 콘크리트 설계기준 코드 값 | `DGNCODE` | string (enum) | - | **Required** |
+| 3 | 응답스펙트럼 하중조합 목록 | `RS_SCALE_FACTOR` | array [object] | - | Optional |
 | 3-1 | 하중 케이스명 (정적: `NAME(ST)`, 응답스펙트럼: `NAME(RS)`) | `RS_SCALE_FACTOR[].LOAD_CASE` | string | - | 필수 |
 | 3-2 | 축계수 | `RS_SCALE_FACTOR[].FACTOR` | number | - | 필수 |
-| 4 | 풍하중 조합 세트 | `WIND_LOAD_COMB` | object | - | 선택 |
-| 4-1 | 풍하중 조합 세트 목록 | `WIND_LOAD_COMB.PARAMETERS` | array [object] | - | 필수 (WIND_LOAD_COMB 사용 시) |
+| 4 | 풍하중 조합 세트 | `WIND_LOAD_COMB` | object | - | Optional |
+| 4-1 | 풍하중 조합 세트 목록 | `WIND_LOAD_COMB.PARAMETERS` | array [object] | - | **Required** |
 | 4-1-a | 풍하중 그룹 | `WIND_LOAD_COMB.PARAMETERS[].BUILDING_TYPE` | string (enum) | `MIDDLE`, `HIGH` | 필수 |
 | 4-1-b | 풍하중 방향(Wind Direction)별 케이스 | `WIND_LOAD_COMB.PARAMETERS[].WIND_LOAD_CASE` | object | - | 필수 |
 | 4-1-b-1 | 순풍(Along) 방향 하중 케이스 | `WIND_LOAD_COMB.PARAMETERS[].WIND_LOAD_CASE.ALONG` | string | - | 선택 |
@@ -2938,41 +2941,41 @@ print(resp.json())
 | 4-1-b-3 | 비틀림(Torsion) 하중 케이스 | `WIND_LOAD_COMB.PARAMETERS[].WIND_LOAD_CASE.TORSION` | string | - | 선택 |
 | 4-1-c | 거스트 계수 | `WIND_LOAD_COMB.PARAMETERS[].GUST_FACTOR` | number | 최소값 0 | 선택 |
 | 4-1-d | Kappa 계수 | `WIND_LOAD_COMB.PARAMETERS[].KAPPA_FACTOR` | number | 최소값 0 | 선택 |
-| 4-2 | 비틀림 풍하중 방향 | `WIND_LOAD_COMB.TORSION_DIR` | string (enum) | `BOTH`, `POSITIVE`, `NEGATIVE` (기본값 `BOTH`) | 선택 |
-| 5 | 직교효과 고려 옵션 | `ORTHO_EFFECT` | object | - | 선택 |
-| 5-1 | 직교효과 고려 여부 | `ORTHO_EFFECT.OPT_USE` | boolean | 기본값 `false` | 필수 |
-| 5-2 | 직교효과 방식 – `ORTHO_EFFECT.OPT_USE`가 `true`일 때 필수 | `ORTHO_EFFECT.TYPE` | string (enum) | `100_30`, `SRSS` | 조건부 필수 |
-| 5-3 | 직교 하중케이스 쌍 (길이 2 고정) – `ORTHO_EFFECT.OPT_USE`가 `true`일 때 필수 | `ORTHO_EFFECT.LOAD_GROUP` | array [string] | - | 조건부 필수 |
-| 6 | 추가 하중 옵션 컨테이너 | `ADDITIONAL_LOAD` | object | - | 선택 |
+| 4-2 | 비틀림 풍하중 방향 | `WIND_LOAD_COMB.TORSION_DIR` | string (enum) | BOTH | Optional |
+| 5 | 직교효과 고려 옵션 | `ORTHO_EFFECT` | object | - | Optional |
+| 5-1 | 직교효과 고려 여부 | `ORTHO_EFFECT.OPT_USE` | boolean | false | **Required** |
+| 5-2 | 직교효과 방식 – `ORTHO_EFFECT.OPT_USE`가 `true`일 때 필수 | `ORTHO_EFFECT.TYPE` | string (enum) | - | **Required** |
+| 5-3 | 직교 하중케이스 쌍 (길이 2 고정) – `ORTHO_EFFECT.OPT_USE`가 `true`일 때 필수 | `ORTHO_EFFECT.LOAD_GROUP` | array | - | **Required** |
+| 6 | 추가 하중 옵션 컨테이너 | `ADDITIONAL_LOAD` | object | - | Optional |
 | 6-1 | 특별지진하중 옵션 | `ADDITIONAL_LOAD.SPECIAL_LOAD` | object | - | 필수 (ADDITIONAL_LOAD 사용 시) |
-| 6-1-a | 특별지진하중 사용 여부 | `ADDITIONAL_LOAD.SPECIAL_LOAD.OPT_USE` | boolean | 기본값 `false` | 필수 |
-| 6-1-b | 수직하중계수 – `OPT_USE`가 `true`일 때 필수 | `ADDITIONAL_LOAD.SPECIAL_LOAD.VERTICAL_LOAD_FACTOR` | number | 최소값 0 | 조건부 필수 |
-| 6-1-c | Sds – `OPT_USE`가 `true`일 때 필수 | `ADDITIONAL_LOAD.SPECIAL_LOAD.SDS` | number | 최소값 0 | 조건부 필수 |
-| 6-1-d | 초과강도계수 목록 – `OPT_USE`가 `true`일 때 필수 | `ADDITIONAL_LOAD.SPECIAL_LOAD.OVER_STRENGTH_FACTOR` | array [object] | - | 조건부 필수 |
+| 6-1-a | 특별지진하중 사용 여부 | `ADDITIONAL_LOAD.SPECIAL_LOAD.OPT_USE` | boolean | false | **Required** |
+| 6-1-b | 수직하중계수 – `OPT_USE`가 `true`일 때 필수 | `ADDITIONAL_LOAD.SPECIAL_LOAD.VERTICAL_LOAD_FACTOR` | number | - | **Required** |
+| 6-1-c | Sds – `OPT_USE`가 `true`일 때 필수 | `ADDITIONAL_LOAD.SPECIAL_LOAD.SDS` | number | - | **Required** |
+| 6-1-d | 초과강도계수 목록 – `OPT_USE`가 `true`일 때 필수 | `ADDITIONAL_LOAD.SPECIAL_LOAD.OVER_STRENGTH_FACTOR` | array [object] | - | **Required** |
 | 6-1-d-1 | 하중 케이스명 | `ADDITIONAL_LOAD.SPECIAL_LOAD.OVER_STRENGTH_FACTOR[].LOAD_CASE` | string | - | 필수 |
 | 6-1-d-2 | 축계수 | `ADDITIONAL_LOAD.SPECIAL_LOAD.OVER_STRENGTH_FACTOR[].FACTOR` | number | - | 필수 |
-| 6-2 | 수직지진력 옵션 | `ADDITIONAL_LOAD.VERTICAL_LOAD` | object | - | 필수 (ADDITIONAL_LOAD 사용 시) |
-| 6-2-a | 수직지진력 고려 여부 | `ADDITIONAL_LOAD.VERTICAL_LOAD.OPT_USE` | boolean | 기본값 `false` | 필수 |
-| 6-2-b | 수직력 계수 – `OPT_USE`가 `true`일 때 필수 | `ADDITIONAL_LOAD.VERTICAL_LOAD.FORCE_FACTOR` | number | 최소값 0 | 조건부 필수 |
-| 7 | 지하구조물 하중 옵션 | `UNDERGROUND_LOAD` | object | - | 선택 |
-| 7-1 | 지하구조물 하중 사용 여부 | `UNDERGROUND_LOAD.OPT_USE` | boolean | 기본값 `false` | 필수 (UNDERGROUND_LOAD 사용 시) |
-| 7-2 | 지하구조물 하중 축계수 목록 – `OPT_USE`가 `true`일 때 필수 | `UNDERGROUND_LOAD.SCALE_FACTOR` | array [object] | - | 조건부 필수 |
+| 6-2 | 수직지진력 옵션 | `ADDITIONAL_LOAD.VERTICAL_LOAD` | object | - | **Required** |
+| 6-2-a | 수직지진력 고려 여부 | `ADDITIONAL_LOAD.VERTICAL_LOAD.OPT_USE` | boolean | false | **Required** |
+| 6-2-b | 수직력 계수 – `OPT_USE`가 `true`일 때 필수 | `ADDITIONAL_LOAD.VERTICAL_LOAD.FORCE_FACTOR` | number | - | **Required** |
+| 7 | 지하구조물 하중 옵션 | `UNDERGROUND_LOAD` | object | - | Optional |
+| 7-1 | 지하구조물 하중 사용 여부 | `UNDERGROUND_LOAD.OPT_USE` | boolean | false | 필수 (UNDERGROUND_LOAD 사용 시) |
+| 7-2 | 지하구조물 하중 축계수 목록 – `OPT_USE`가 `true`일 때 필수 | `UNDERGROUND_LOAD.SCALE_FACTOR` | array [object] | - | **Required** |
 | 7-2-a | 하중 케이스명 | `UNDERGROUND_LOAD.SCALE_FACTOR[].LOAD_CASE` | string | - | 필수 |
 | 7-2-b | 축계수 | `UNDERGROUND_LOAD.SCALE_FACTOR[].FACTOR` | number | - | 필수 |
-| 7-3 | 지진 하중케이스 목록 – `OPT_USE`가 `true`일 때 필수 | `UNDERGROUND_LOAD.LOAD_CASE_LIST` | array [object] | - | 조건부 필수 |
+| 7-3 | 지진 하중케이스 목록 – `OPT_USE`가 `true`일 때 필수 | `UNDERGROUND_LOAD.LOAD_CASE_LIST` | array [object] | - | **Required** |
 | 7-3-a | 하중 케이스명 | `UNDERGROUND_LOAD.LOAD_CASE_LIST[].LOAD_CASE` | string | - | 필수 |
 | 7-3-b | 지진 하중케이스 방향 | `UNDERGROUND_LOAD.LOAD_CASE_LIST[].DIRECTION` | string (enum) | `POSITIVE`, `NEGATIVE` | 필수 |
 | 7-3-c | 지진 성분 토압 하중케이스명 | `UNDERGROUND_LOAD.LOAD_CASE_LIST[].LOAD_CASE_SEISMIC` | array [string] | - | 필수 |
 | 7-3-d | 정적 성분 토압 하중케이스명 | `UNDERGROUND_LOAD.LOAD_CASE_LIST[].LOAD_CASE_STATIC` | array [string] | - | 필수 |
 | 7-4 | 지하구조물 특별하중 사용 옵션 | `UNDERGROUND_LOAD.SPECIAL_LOAD` | object | - | 선택 |
-| 7-4-a | 지하구조물 특별하중 사용 여부 | `UNDERGROUND_LOAD.SPECIAL_LOAD.OPT_USE` | boolean | 기본값 `false` | 필수 |
-| 7-4-b | 수직하중계수 – `OPT_USE`가 `true`일 때 필수 | `UNDERGROUND_LOAD.SPECIAL_LOAD.VERTICAL_LOAD_FACTOR` | number | 최소값 0 | 조건부 필수 |
-| 7-4-c | Sds – `OPT_USE`가 `true`일 때 필수 | `UNDERGROUND_LOAD.SPECIAL_LOAD.SDS` | number | 최소값 0 | 조건부 필수 |
-| 7-4-d | 지하구조물 특별하중 초과강도계수 목록(설명: Over-strength factors) – `OPT_USE`가 `true`일 때 필수 | `UNDERGROUND_LOAD.SPECIAL_LOAD.OVER_STRENGTH_FACTOR` | array [object] | - | 조건부 필수 |
+| 7-4-a | 지하구조물 특별하중 사용 여부 | `UNDERGROUND_LOAD.SPECIAL_LOAD.OPT_USE` | boolean | false | **Required** |
+| 7-4-b | 수직하중계수 – `OPT_USE`가 `true`일 때 필수 | `UNDERGROUND_LOAD.SPECIAL_LOAD.VERTICAL_LOAD_FACTOR` | number | - | **Required** |
+| 7-4-c | Sds – `OPT_USE`가 `true`일 때 필수 | `UNDERGROUND_LOAD.SPECIAL_LOAD.SDS` | number | - | **Required** |
+| 7-4-d | 지하구조물 특별하중 초과강도계수 목록(설명: Over-strength factors) – `OPT_USE`가 `true`일 때 필수 | `UNDERGROUND_LOAD.SPECIAL_LOAD.OVER_STRENGTH_FACTOR` | array [object] | - | **Required** |
 | 7-4-d-1 | 하중 케이스명 | `UNDERGROUND_LOAD.SPECIAL_LOAD.OVER_STRENGTH_FACTOR[].LOAD_CASE` | string | - | 필수 |
 | 7-4-d-2 | 축계수 | `UNDERGROUND_LOAD.SPECIAL_LOAD.OVER_STRENGTH_FACTOR[].FACTOR` | number | - | 필수 |
-| 8 | 시공단계 해석결과 반영 여부 | `CS_ANALYSIS` | boolean | 기본값 `false` | 선택 |
-| 9 | 프리스트레스 손실 반영 여부 | `PRESTRESS_LOSS` | boolean | 기본값 `false` | 선택 |
+| 8 | 시공단계 해석결과 반영 여부 | `CS_ANALYSIS` | boolean | false | Optional |
+| 9 | 프리스트레스 손실 반영 여부 | `PRESTRESS_LOSS` | boolean | false | Optional |
 
 ### Request / Response JSON
 
@@ -3096,6 +3099,9 @@ print(resp.json())
 ---
 
 ## 17. `/ope/LCOM-STEEL` — Load Combination (Steel) – KDS 41 30:2022
+
+> ⚠️ 공식 표와 영문·한국어 원문을 함께 대조해 다음 표기를 유지합니다.
+> - `UNDERGROUND_LOAD.OPT_USE` 필수(문서 `필수 (UNDERGROUND_LOAD 사용 시)`, 공식 표 `Required`) — 필수 칸의 조건을 제거하기에 설명에 남아 있는 공식 적용 조건이 충분하지 않음.
 
 > **기능:** KDS 41 30:2022 강구조 설계기준에 따라 응답스펙트럼 축계수, 풍하중 조합, 직교효과, 특별지진하중·수직지진력·지하구조물하중 옵션을 지정하여 강재 부재 설계용 하중조합을 자동 생성합니다. POST 전용 엔드포인트이며, 기존 조합에 추가(ADD)하거나 전체를 대체(REPLACE)할 수 있습니다. LCOM-CONC와 스키마 구조가 동일하나 `CS_ANALYSIS`, `PRESTRESS_LOSS` 필드는 존재하지 않습니다.
 
@@ -3266,13 +3272,13 @@ print(resp.json())
 
 | No. | 설명 | Key | Value 타입 | 기본값/enum | 필수 |
 |---|---|---|---|---|---|
-| 1 | OPTION – 기존 조합에 추가할지 전체 대체할지 | `OPTION` | string (enum) | `ADD`, `REPLACE` | 필수 |
-| 2 | 강재 설계기준 코드 값 | `DGNCODE` | string (enum) | `KDS 41 30 : 2022` | 필수 |
-| 3 | 응답스펙트럼 하중조합 목록 | `RS_SCALE_FACTOR` | array [object] | - | 선택 |
+| 1 | OPTION – 기존 조합에 추가할지 전체 대체할지 | `OPTION` | string (enum) | - | **Required** |
+| 2 | 강재 설계기준 코드 값 | `DGNCODE` | string (enum) | - | **Required** |
+| 3 | 응답스펙트럼 하중조합 목록 | `RS_SCALE_FACTOR` | array [object] | - | Optional |
 | 3-1 | 하중 케이스명 (정적: `NAME(ST)`, 응답스펙트럼: `NAME(RS)`) | `RS_SCALE_FACTOR[].LOAD_CASE` | string | - | 필수 |
 | 3-2 | 축계수 | `RS_SCALE_FACTOR[].FACTOR` | number | - | 필수 |
-| 4 | 풍하중 조합 세트 | `WIND_LOAD_COMB` | object | - | 선택 |
-| 4-1 | 풍하중 조합 세트 목록 | `WIND_LOAD_COMB.PARAMETERS` | array [object] | - | 필수 (WIND_LOAD_COMB 사용 시) |
+| 4 | 풍하중 조합 세트 | `WIND_LOAD_COMB` | object | - | Optional |
+| 4-1 | 풍하중 조합 세트 목록 | `WIND_LOAD_COMB.PARAMETERS` | array [object] | - | **Required** |
 | 4-1-a | 풍하중 그룹 | `WIND_LOAD_COMB.PARAMETERS[].BUILDING_TYPE` | string (enum) | `MIDDLE`, `HIGH` | 필수 |
 | 4-1-b | WIND_LOAD_CASE 컨테이너 | `WIND_LOAD_COMB.PARAMETERS[].WIND_LOAD_CASE` | object | - | 필수 |
 | 4-1-b-1 | 순풍(Along) 방향 하중 케이스 | `WIND_LOAD_COMB.PARAMETERS[].WIND_LOAD_CASE.ALONG` | string | - | 선택 |
@@ -3280,37 +3286,37 @@ print(resp.json())
 | 4-1-b-3 | 비틀림(Torsion) 하중 케이스 | `WIND_LOAD_COMB.PARAMETERS[].WIND_LOAD_CASE.TORSION` | string | - | 선택 |
 | 4-1-c | 거스트 계수 | `WIND_LOAD_COMB.PARAMETERS[].GUST_FACTOR` | number | 최소값 0 | 선택 |
 | 4-1-d | Kappa 계수 | `WIND_LOAD_COMB.PARAMETERS[].KAPPA_FACTOR` | number | 최소값 0 | 선택 |
-| 4-2 | 비틀림 풍하중 방향 | `WIND_LOAD_COMB.TORSION_DIR` | string (enum) | `BOTH`, `POSITIVE`, `NEGATIVE` (기본값 `BOTH`) | 선택 |
-| 5 | 직교효과 고려 옵션 | `ORTHO_EFFECT` | object | - | 선택 |
-| 5-1 | 직교효과 고려 여부 | `ORTHO_EFFECT.OPT_USE` | boolean | 기본값 `false` | 필수 |
-| 5-2 | 직교효과 방식 – `ORTHO_EFFECT.OPT_USE`가 `true`일 때 필수 | `ORTHO_EFFECT.TYPE` | string (enum) | `100_30`, `SRSS` | 조건부 필수 |
-| 5-3 | 직교 하중케이스 쌍 (길이 2 고정) – `ORTHO_EFFECT.OPT_USE`가 `true`일 때 필수 | `ORTHO_EFFECT.LOAD_GROUP` | array [string] | - | 조건부 필수 |
-| 6 | 추가 하중 옵션 컨테이너 | `ADDITIONAL_LOAD` | object | - | 선택 |
+| 4-2 | 비틀림 풍하중 방향 | `WIND_LOAD_COMB.TORSION_DIR` | string (enum) | BOTH | Optional |
+| 5 | 직교효과 고려 옵션 | `ORTHO_EFFECT` | object | - | Optional |
+| 5-1 | 직교효과 고려 여부 | `ORTHO_EFFECT.OPT_USE` | boolean | false | **Required** |
+| 5-2 | 직교효과 방식 – `ORTHO_EFFECT.OPT_USE`가 `true`일 때 필수 | `ORTHO_EFFECT.TYPE` | string (enum) | - | **Required** |
+| 5-3 | 직교 하중케이스 쌍 (길이 2 고정) – `ORTHO_EFFECT.OPT_USE`가 `true`일 때 필수 | `ORTHO_EFFECT.LOAD_GROUP` | array | - | **Required** |
+| 6 | 추가 하중 옵션 컨테이너 | `ADDITIONAL_LOAD` | object | - | Optional |
 | 6-1 | 특별지진하중 옵션 | `ADDITIONAL_LOAD.SPECIAL_LOAD` | object | - | 필수 (ADDITIONAL_LOAD 사용 시) |
-| 6-1-a | 특별지진하중 사용 여부 | `ADDITIONAL_LOAD.SPECIAL_LOAD.OPT_USE` | boolean | 기본값 `false` | 필수 |
-| 6-1-b | 수직하중계수 – `OPT_USE`가 `true`일 때 필수 | `ADDITIONAL_LOAD.SPECIAL_LOAD.VERTICAL_LOAD_FACTOR` | number | 최소값 0 | 조건부 필수 |
-| 6-1-c | Sds – `OPT_USE`가 `true`일 때 필수 | `ADDITIONAL_LOAD.SPECIAL_LOAD.SDS` | number | 최소값 0 | 조건부 필수 |
-| 6-1-d | Over Strength Factor 목록 – `OPT_USE`가 `true`일 때 필수 | `ADDITIONAL_LOAD.SPECIAL_LOAD.OVER_STRENGTH_FACTOR` | array [object] | - | 조건부 필수 |
+| 6-1-a | 특별지진하중 사용 여부 | `ADDITIONAL_LOAD.SPECIAL_LOAD.OPT_USE` | boolean | false | **Required** |
+| 6-1-b | 수직하중계수 – `OPT_USE`가 `true`일 때 필수 | `ADDITIONAL_LOAD.SPECIAL_LOAD.VERTICAL_LOAD_FACTOR` | number | - | **Required** |
+| 6-1-c | Sds – `OPT_USE`가 `true`일 때 필수 | `ADDITIONAL_LOAD.SPECIAL_LOAD.SDS` | number | - | **Required** |
+| 6-1-d | Over Strength Factor 목록 – `OPT_USE`가 `true`일 때 필수 | `ADDITIONAL_LOAD.SPECIAL_LOAD.OVER_STRENGTH_FACTOR` | array [object] | - | **Required** |
 | 6-1-d-1 | 하중 케이스명 | `ADDITIONAL_LOAD.SPECIAL_LOAD.OVER_STRENGTH_FACTOR[].LOAD_CASE` | string | - | 필수 |
 | 6-1-d-2 | 축계수 | `ADDITIONAL_LOAD.SPECIAL_LOAD.OVER_STRENGTH_FACTOR[].FACTOR` | number | - | 필수 |
-| 6-2 | 수직지진력 옵션 | `ADDITIONAL_LOAD.VERTICAL_LOAD` | object | - | 필수 (ADDITIONAL_LOAD 사용 시) |
-| 6-2-a | 수직지진력 고려 여부 | `ADDITIONAL_LOAD.VERTICAL_LOAD.OPT_USE` | boolean | 기본값 `false` | 필수 |
-| 6-2-b | 수직력 계수 – `OPT_USE`가 `true`일 때 필수 | `ADDITIONAL_LOAD.VERTICAL_LOAD.FORCE_FACTOR` | number | 최소값 0 | 조건부 필수 |
-| 7 | 지하구조물 하중 옵션 | `UNDERGROUND_LOAD` | object | - | 선택 |
-| 7-1 | 지하구조물 하중 사용 여부 | `UNDERGROUND_LOAD.OPT_USE` | boolean | 기본값 `false` | 필수 (UNDERGROUND_LOAD 사용 시) |
-| 7-2 | 지하구조물 하중 축계수 목록 – `OPT_USE`가 `true`일 때 필수 | `UNDERGROUND_LOAD.SCALE_FACTOR` | array [object] | - | 조건부 필수 |
+| 6-2 | 수직지진력 옵션 | `ADDITIONAL_LOAD.VERTICAL_LOAD` | object | - | **Required** |
+| 6-2-a | 수직지진력 고려 여부 | `ADDITIONAL_LOAD.VERTICAL_LOAD.OPT_USE` | boolean | false | **Required** |
+| 6-2-b | 수직력 계수 – `OPT_USE`가 `true`일 때 필수 | `ADDITIONAL_LOAD.VERTICAL_LOAD.FORCE_FACTOR` | number | - | **Required** |
+| 7 | 지하구조물 하중 옵션 | `UNDERGROUND_LOAD` | object | - | Optional |
+| 7-1 | 지하구조물 하중 사용 여부 | `UNDERGROUND_LOAD.OPT_USE` | boolean | false | 필수 (UNDERGROUND_LOAD 사용 시) |
+| 7-2 | 지하구조물 하중 축계수 목록 – `OPT_USE`가 `true`일 때 필수 | `UNDERGROUND_LOAD.SCALE_FACTOR` | array [object] | - | **Required** |
 | 7-2-a | 하중 케이스명 | `UNDERGROUND_LOAD.SCALE_FACTOR[].LOAD_CASE` | string | - | 필수 |
 | 7-2-b | 축계수 | `UNDERGROUND_LOAD.SCALE_FACTOR[].FACTOR` | number | - | 필수 |
-| 7-3 | 지진 하중케이스 목록 – `OPT_USE`가 `true`일 때 필수 | `UNDERGROUND_LOAD.LOAD_CASE_LIST` | array [object] | - | 조건부 필수 |
+| 7-3 | 지진 하중케이스 목록 – `OPT_USE`가 `true`일 때 필수 | `UNDERGROUND_LOAD.LOAD_CASE_LIST` | array [object] | - | **Required** |
 | 7-3-a | 하중 케이스명 | `UNDERGROUND_LOAD.LOAD_CASE_LIST[].LOAD_CASE` | string | - | 필수 |
 | 7-3-b | 지진 하중케이스 방향 | `UNDERGROUND_LOAD.LOAD_CASE_LIST[].DIRECTION` | string (enum) | `POSITIVE`, `NEGATIVE` | 필수 |
 | 7-3-c | 지진 성분 토압 하중케이스명 | `UNDERGROUND_LOAD.LOAD_CASE_LIST[].LOAD_CASE_SEISMIC` | array [string] | - | 필수 |
 | 7-3-d | 정적 성분 토압 하중케이스명 | `UNDERGROUND_LOAD.LOAD_CASE_LIST[].LOAD_CASE_STATIC` | array [string] | - | 필수 |
 | 7-4 | 지하구조물 특별하중 사용 옵션 | `UNDERGROUND_LOAD.SPECIAL_LOAD` | object | - | 선택 |
-| 7-4-a | 지하구조물 특별하중 사용 여부 | `UNDERGROUND_LOAD.SPECIAL_LOAD.OPT_USE` | boolean | 기본값 `false` | 필수 |
-| 7-4-b | 수직하중계수 – `OPT_USE`가 `true`일 때 필수 | `UNDERGROUND_LOAD.SPECIAL_LOAD.VERTICAL_LOAD_FACTOR` | number | 최소값 0 | 조건부 필수 |
-| 7-4-c | Sds – `OPT_USE`가 `true`일 때 필수 | `UNDERGROUND_LOAD.SPECIAL_LOAD.SDS` | number | 최소값 0 | 조건부 필수 |
-| 7-4-d | 지하구조물 특별하중 초과강도계수 목록 – `OPT_USE`가 `true`일 때 필수 | `UNDERGROUND_LOAD.SPECIAL_LOAD.OVER_STRENGTH_FACTOR` | array [object] | - | 조건부 필수 |
+| 7-4-a | 지하구조물 특별하중 사용 여부 | `UNDERGROUND_LOAD.SPECIAL_LOAD.OPT_USE` | boolean | false | **Required** |
+| 7-4-b | 수직하중계수 – `OPT_USE`가 `true`일 때 필수 | `UNDERGROUND_LOAD.SPECIAL_LOAD.VERTICAL_LOAD_FACTOR` | number | - | **Required** |
+| 7-4-c | Sds – `OPT_USE`가 `true`일 때 필수 | `UNDERGROUND_LOAD.SPECIAL_LOAD.SDS` | number | - | **Required** |
+| 7-4-d | 지하구조물 특별하중 초과강도계수 목록 – `OPT_USE`가 `true`일 때 필수 | `UNDERGROUND_LOAD.SPECIAL_LOAD.OVER_STRENGTH_FACTOR` | array [object] | - | **Required** |
 | 7-4-d-1 | 하중 케이스명 | `UNDERGROUND_LOAD.SPECIAL_LOAD.OVER_STRENGTH_FACTOR[].LOAD_CASE` | string | - | 필수 |
 | 7-4-d-2 | 축계수 | `UNDERGROUND_LOAD.SPECIAL_LOAD.OVER_STRENGTH_FACTOR[].FACTOR` | number | - | 필수 |
 
@@ -3602,9 +3608,9 @@ print(resp.json())
 
 | No. | 설명 | Key | Value 타입 | 기본값/enum | 필수 |
 |---|---|---|---|---|---|
-| 1 | OPTION – 기존 조합에 추가할지 전체 대체할지 | `OPTION` | string (enum) | `ADD`, `REPLACE` | 필수 |
-| 2 | SRC 설계기준 코드 값 | `DGNCODE` | string (enum) | `KDS 41 SRC : 2022` | 필수 |
-| 3 | 응답스펙트럼 하중조합 목록 | `RS_SCALE_FACTOR` | array [object] | - | 선택 |
+| 1 | OPTION – 기존 조합에 추가할지 전체 대체할지 | `OPTION` | string (enum) | - | **Required** |
+| 2 | SRC 설계기준 코드 값 | `DGNCODE` | string (enum) | - | **Required** |
+| 3 | 응답스펙트럼 하중조합 목록 | `RS_SCALE_FACTOR` | array [object] | - | Optional |
 | 3-1 | 하중 케이스명 (정적: `NAME(ST)`, 응답스펙트럼: `NAME(RS)`) | `RS_SCALE_FACTOR[].LOAD_CASE` | string | - | 필수 |
 | 3-2 | 축계수 | `RS_SCALE_FACTOR[].FACTOR` | number | - | 필수 |
 | 4 | 풍하중 조합 세트 | `WIND_LOAD_COMB` | object | - | 선택 |
@@ -3968,21 +3974,21 @@ print("POST (LCOM-SRC, AIK-SRC2K):", resp.status_code, resp.json())
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
 | 1 | Load Case/Combination name | `"LC_NAME"` | String | – | **Required** |
-| 2 | Diagram Type · Stress: 0 · Force: 1 | `"DGRM_TYPE"` | Integer | – | **Required** |
+| 2 | Diagram Type · Stress: 0 · Force: 1 | `"DGRM_TYPE"` | integer (enum) | – | **Required** |
 | 3 | Batch option When omitted, the default is treated as true. | `"BATCH"` | Boolean | true | Optional |
-| 4 | X-Axis Type · Distance: 0 · Node: 1 | `"X_AXIS_TYPE"` | Integer | 0 | Optional |
+| 4 | X-Axis Type · Distance: 0 · Node: 1 | `"X_AXIS_TYPE"` | integer (enum) | 0 | Optional |
 | 5 | [When BATCH = true or omitted] Batch output group-name list · Each item is entered directly as a non-empty string. · BRDG_GROUP, COMPONENTS, COMBINED_COMP, and 7TH_DOF_TYPE are not allowed at the top level in batch mode. | `"BATCH_LIST"` | Array[String] | – | **Required** |
 | 6 | [When BATCH = false] Bridge Girder Element Group | `"BRDG_GROUP"` | String | – | **Required** |
-| 7 | [When BATCH = false] Component Stress (DGRM_TYPE = 0) · Sax: 0 · +Sby: 1 · -Sby: 2 · +Sbz: 3 · -Sbz: 4 · Combined: 5 · 7th DOF: 6 Force (DGRM_TYPE = 1) · Fx: 0 · Fy: 1 · Fz: 2 · Mx: 3 · My: 4 · Mz: 5 · Mb: 6 · Mt: 7 · Mw: 8 | `"COMPONENTS"` | Integer | 0 | Optional |
-| 8 | [When BATCH = false, DGRM_TYPE = 0 (Stress), and COMPONENTS = 5 (Combined)] Location for the Display of Stress · Maximum: 0 · 1(-y, +z): 1 · 2(+y, +z): 2 · 3(+y, -z): 3 · 4(-y, -z): 4 | `"COMBINED_COMP"` | Integer | 0 | Optional |
-| 9 | [When BATCH = false, DGRM_TYPE = 0 (Stress), and COMPONENTS = 6 (7th DOF)] 7th DOF Type · Sax(Warping): 0 · Ssy(Mt): 1 · Ssy(Mw): 2 · Ssz(Mt): 3 · Ssz(Mw): 4 · Combined(Ssy): 5 · Combined(Ssz): 6 | `"7TH_DOF_TYPE"` | Integer | 0 | Optional |
+| 7 | [When BATCH = false] Component Stress (DGRM_TYPE = 0) · Sax: 0 · +Sby: 1 · -Sby: 2 · +Sbz: 3 · -Sbz: 4 · Combined: 5 · 7th DOF: 6 Force (DGRM_TYPE = 1) · Fx: 0 · Fy: 1 · Fz: 2 · Mx: 3 · My: 4 · Mz: 5 · Mb: 6 · Mt: 7 · Mw: 8 | `"COMPONENTS"` | integer (enum) | 0 | Optional |
+| 8 | [When BATCH = false, DGRM_TYPE = 0 (Stress), and COMPONENTS = 5 (Combined)] Location for the Display of Stress · Maximum: 0 · 1(-y, +z): 1 · 2(+y, +z): 2 · 3(+y, -z): 3 · 4(-y, -z): 4 | `"COMBINED_COMP"` | integer (enum) | 0 | Optional |
+| 9 | [When BATCH = false, DGRM_TYPE = 0 (Stress), and COMPONENTS = 6 (7th DOF)] 7th DOF Type · Sax(Warping): 0 · Ssy(Mt): 1 · Ssy(Mw): 2 · Ssz(Mt): 3 · Ssz(Mw): 4 · Combined(Ssy): 5 · Combined(Ssz): 6 | `"7TH_DOF_TYPE"` | integer (enum) | 0 | Optional |
 | 10 | [When DGRM_TYPE = 0 (Stress)] Allowable Stress Line | `"STRESS_LINE"` | Object | – | Optional |
 | 10-(1) | Draw Allowable Stress Line | `"STRESS_LINE.OPT_USE"` | Boolean | false | Optional |
 | 10-(2) | Allowable Compression Stress (`OPT_USE=true`) | `"STRESS_LINE.COMP"` | Integer | – | Required |
 | 10-(3) | Allowable Tension Stress (`OPT_USE=true`) | `"STRESS_LINE.TENS"` | Integer | – | Required |
 | 11 | Stage list for diagram generation | `"STAGE_LIST"` | Array[String] | – | **Required** |
 | 12 | Export path for the generated diagram image | `"EXPORT_PATH"` | String | – | **Required** |
-| 13 | Export image file extension · "bmp" · "jpg" · "emf" | `"EXTENSION"` | String | – | **Required** |
+| 13 | Export image file extension · "bmp" · "jpg" · "emf" | `"EXTENSION"` | enum (string) | – | **Required** |
 
 ### Request Examples
 

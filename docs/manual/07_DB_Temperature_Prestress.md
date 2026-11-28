@@ -862,15 +862,15 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `bRELAX
 | 19 | [When Reference Axis, "SHAPE" is "ELEMENT"] x Axis Direction Type · Direction for I to J: "I-J" · Direction for J to I: "J-I" | `"AXIS_IJ"` | String | `"I-J"` | Optional |
 | 20 | x Axis Rotation Angle | `"XAR_ANGLE"` | Number | 0 | Optional |
 | 21 | Projection | `"bPJ"` | Boolean | `false` | Optional |
-| 22 | [When Reference Axis, "SHAPE" is "ELEMENT"] Offset (y, z) · [y, z] | `"OFF_YZ"` | Array \[Number, 2\] | `[0,0]` | Optional |
+| 22 | [When Reference Axis, "SHAPE" is "ELEMENT"] Offset (y, z) · [y, z] | `"OFF_YZ"` | Array \[Number, 2\] | [0, 0] | Optional |
 
 **SHAPE = "STRAIGHT" 일 때 추가 파라미터:**
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
-| 17 | Insertion Point \[x, y, z\] | `"IP"` | Array \[Number, 3\] | `[0,0,0]` | Optional |
+| 17 | Insertion Point \[x, y, z\] | `"IP"` | Array \[Number, 3\] | [0, 0, 0] | Optional |
 | 18 | [When Reference Axis, "SHAPE" is "STRAIGHT"] x Axis Direction Type · x direction: "X" · y direction: "Y" · Vector direction: "VECTOR" | `"AXIS"` | String | `"X"` | Optional |
-| 19 | [When Reference Axis, "SHAPE" is "STRAIGHT"] Vector · [x, y] | `"VEC"` | Array \[Number, 2\] | `[0,0]` | Optional |
+| 19 | [When Reference Axis, "SHAPE" is "STRAIGHT"] Vector · [x, y] | `"VEC"` | Array \[Number, 2\] | [0, 0] | Optional |
 | 20 | x Axis Rotation Angle | `"XAR_ANGLE"` | Number | 0 | Optional |
 | 21 | Projection | `"bPJ"` | Boolean | `false` | Optional |
 | 22 | Grad. Rot. Angle Type · `"X"` · `"Y"` | `"GR_AXIS"` | String | `"Y"` | Optional |
@@ -880,7 +880,7 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `bRELAX
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|-----------|---------|----------|
-| 17 | Insertion Point \[x, y, z\] | `"IP"` | Array \[Number, 3\] | `[0,0,0]` | Optional |
+| 17 | Insertion Point \[x, y, z\] | `"IP"` | Array \[Number, 3\] | [0, 0, 0] | Optional |
 | 18 | [When Reference Axis, "SHAPE" is "CURVE"] Radius Center(X, Y) · [x, y] | `"RC"` | Array \[Number, 2\] | 0 | Optional |
 | 19 | Offset | `"OFFSET"` | Number | 0 | Optional |
 | 20 | Direction · CW: `"CW"` · CCW: `"CCW"` | `"DIR"` | String | `"CW"` | Optional |
@@ -894,6 +894,10 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `bRELAX
 > CURVE 예제 4종 전부(`"bPJ": true`), 그리고 원문 Specifications 표 모두에 존재한다(같은 필드가
 > ELEMENT·STRAIGHT 블록에는 이미 있었다). 20번이 `DIR`·`XAR_ANGLE` 두 행에 중복 부여된 것은
 > 원문 번호 오류를 그대로 옮긴 것이다(원문 표기 유지 — 되돌리지 말 것).
+>
+> 공식 표와 영문·한국어 원문을 함께 대조해 다음 표기를 유지합니다.
+> - `OPT` 기본값(문서 `"NONE"`, 공식 표 `0`) — 표의 수치 기본값, 문자열 Schema와 요청 예제를 교차 확인함. 예제로 생략 기본값을 확정할 수 없음.
+> - `OPT` 타입(문서 `String`, 공식 표 `Number`) — 공식 글 35954555962137 요청 예제 「2D Round Type (Element)」의 `Assign.2.PROFY.OPT`가 `"LEFT"`(string)를 사용함.
 
 **프로파일 좌표 (INPUT=2D, CURVE="SPLINE"):**
 

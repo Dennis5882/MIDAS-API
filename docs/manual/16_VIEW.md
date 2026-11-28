@@ -510,6 +510,11 @@ print("POST:", resp.status_code, resp.json())
 > 빠져 있음(Specifications 표·Request Example에는 존재) — 예제·표 기준으로 스키마에 보강.
 > `IDENTITY_TYPE`의 값은 표에 `"Story"`로 적혀 있으나 실제 Request Example은 `"STORY"`(전체
 > 대문자)를 사용해 예제 기준으로 채택.
+>
+> 공식 표와 영문·한국어 원문을 함께 대조해 다음 표기를 유지합니다.
+> - `N_LIST` 타입(문서 `Array [Integer]`, 공식 표 `Integer`) — 공식 글 35523395368985 요청 예제 「Active Mode 2 - Active by Node/Element」의 `Argument.N_LIST`가 `[469,770,772,773]`(array)를 사용함.
+> - `E_LIST` 타입(문서 `Array [Integer]`, 공식 표 `Integer`) — 공식 글 35523395368985 요청 예제 「Active Mode 2 - Active by Node/Element」의 `Argument.E_LIST`가 `[1631,1646,1654]`(array)를 사용함.
+> - `IDENTITY_LIST` 타입(문서 `Array [String]`, 공식 표 `String`) — 공식 글 35523395368985 요청 예제 「Active Mode 3 - Active by Identity」의 `Argument.IDENTITY_LIST`가 `["Support","Support2","Support3"]`(array)를 사용함.
 
 ### Parameters
 

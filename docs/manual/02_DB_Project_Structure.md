@@ -910,6 +910,9 @@ print(result)
 > ⚠️ **2026-08-25 재확인 정정:** `TOL` 기본값 `-`→`0`, `COORD`는 원문 Specifications 표에
 > Required가 아닌 **Optional(기본값 0)**로 명시돼 있어 정정(아티클 id `35805287066649`).
 > TYPE=1일 때만 쓰이지 않는 값이므로 실무상 "조건부 필수"처럼 보이지만, 원문 표기는 Optional.
+>
+> 공식 표와 영문·한국어 원문을 함께 대조해 다음 표기를 유지합니다.
+> - `POINT` 타입(문서 `Array [Number]`, 공식 표 `Object`) — 공식 글 35805287066649 요청 예제 「Named Plane」의 `NPLN.1.POINT`가 `[{"ITEM":[0,235,0]},{"ITEM":[0,9710,0]},{"ITEM":[15250,9710,0]}]`(array)를 사용함.
 
 #### Plane Type 상세
 
@@ -1295,6 +1298,11 @@ print(result)
 ---
 
 ## 14. `/db/SPAN` — Span Information
+
+> ⚠️ 공식 표와 영문·한국어 원문을 함께 대조해 다음 표기를 유지합니다.
+> - `SPAN_LIST` 타입(문서 `Array [Number]`, 공식 표 `Number`) — 공식 글 35805957502233 요청 예제 「Span Information」의 `Assign.1.SPAN_LIST`가 `[2.5,5,32.5]`(array)를 사용함.
+> - `SPAN_BASE_ITEMS` 타입(문서 `Integer`, 공식 표 `Object`) — 공식 예제의 SPAN_BASE_ITEMS는 배열이며 이 행은 배열 원소의 정수 ELEM_KEY를 설명함. 상위 Object 표기를 적용할 수 없음.
+> - `SPAN_BASE_ITEMS` 타입(문서 `Integer`, 공식 표 `Object`) — 공식 예제의 SPAN_BASE_ITEMS는 배열이며 이 행은 배열 원소의 정수 SUPPORT를 설명함. 상위 Object 표기를 적용할 수 없음.
 
 ### 기본 정보
 

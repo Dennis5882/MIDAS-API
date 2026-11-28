@@ -169,7 +169,7 @@
 | 1-1-8-1 | 　　　　└ 방식: `"FIXED"`(1.0 고정) / `"USER"`(층별 직접 입력) | `BETA.FIX_USER_CHECK` | String | `"FIXED"` | Optional |
 | 1-1-8-2 | 　　　　└ 적용 시작/종료 층 — `FIX_USER_CHECK: "USER"`일 때만 | `BETA.NAME_FROM` / `BETA.NAME_TO` | String | — | Optional |
 | 1-1-8-3 | 　　　　└ 사용자 지정 Beta 값 — `FIX_USER_CHECK: "USER"`일 때만 | `BETA.VALUE` | Number | `0` | Optional |
-| 1-2 | └ (`STORY_DRIFT_COMB` 전용) 추가 산출 방식 선택 | `ADDITIONAL.SET_STORY_DRIFT_CALCULATION_METHOD` | Object | `DRIFT_AT_THE_CENTER_OF_MASS` | Optional |
+| 1-2 | └ (`STORY_DRIFT_COMB` 전용) 추가 산출 방식 선택 | `ADDITIONAL.SET_STORY_DRIFT_CALCULATION_METHOD` | Object [String] | `DRIFT_AT_THE_CENTER_OF_MASS` | Optional |
 | 1-2-1 | 　　└ 질량중심 변위 | `SET_STORY_DRIFT_CALCULATION_METHOD.DRIFT_AT_THE_CENTER_OF_MASS` | Boolean | `true` | Optional |
 | 1-2-2 | 　　└ 수직요소 평균변위 | `SET_STORY_DRIFT_CALCULATION_METHOD.AVERAGE_DRIFT_OF_VERTICAL_ELEMENTS` | Boolean | `false` | Optional |
 | 1-2-3 | 　　└ 선택 절점 기준 수직선 변위 (X_DIR/Y_DIR/COMBINED **Required**) | `SET_STORY_DRIFT_CALCULATION_METHOD.DRIFT_OF_A_VERTICAL_LINE_ON_SELECTED_NODE` | Object | — | Optional |
@@ -667,18 +667,12 @@ for row in table.get("DATA", []):
 
 ### Response HEAD
 
-이 테이블은 두 가지 HEAD 배열을 사용합니다. 첫 행에는 `Index`가 포함되며, 동일 그룹의 이어지는 행에서는 `Index` 열이 생략되어 반환될 수 있습니다.
+공식 응답 예제의 `HEAD` 배열은 `Index`로 시작합니다.
 
 **HEAD (Index 포함)**
 
 ```json
 ["Index", "Story", "Level", "Load", "Type", "No", "Angle1", "Force1", "Ratio1", "Angle2", "Force2", "Ratio2"]
-```
-
-**HEAD (Index 생략)**
-
-```json
-["Story", "Level", "Load", "Type", "No", "Angle1", "Force1", "Ratio1", "Angle2", "Force2", "Ratio2"]
 ```
 
 응답 본문에는 위 `DATA` 외에도 부재유형별 층전단력 합계를 정리한 `"SUB_TABLES"` 배열이 함께 포함됩니다. 자세한 내용은 아래 `SUB_TABLES` 항목을 참고하십시오.
@@ -1324,7 +1318,7 @@ for row in table.get("DATA", []):
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 | --- | --- | --- | --- | --- | --- |
-| 1 | Additional Setting | `"ADDITIONAL"` | Object | — | Optional |
+| 1 | Additional Setting | `"ADDITIONAL"` | Array [String] | — | Optional |
 | 1-1 | └ 비틀림 증폭계수 산정 대상 극단부 절점 선택 | `ADDITIONAL.SELECT_IRREGULAR_ENDS` | Object | — | Required |
 | 1-1-1 | 　　└ 절점 선택 방식: `false`=자동 계산 / `true`=사용자 지정 | `SELECT_IRREGULAR_ENDS.USER_DEFINE` | Boolean | — | Required |
 | 1-1-2 | 　　└ 극단부 절점 번호 2개 지정 — `USER_DEFINE: true`일 때만 | `SELECT_IRREGULAR_ENDS.SELECT_NODES` | Array [Integer] | — | Required |
@@ -1427,7 +1421,7 @@ for row in table.get("DATA", []):
 
 | No. | 설명 | Key | Value 타입 | 기본값 | 필수 |
 | --- | --- | --- | --- | --- | --- |
-| 1 | Additional Setting | `"ADDITIONAL"` | Object | — | Optional |
+| 1 | Additional Setting | `"ADDITIONAL"` | Object | System | Optional |
 | 1-1 | └ 산정방식 설정 | `ADDITIONAL.SET_CALCULATION_METHOD` | Object | — | Required |
 | 1-1-1 | 　　└ 층간변위 산정방식: `"Drift at the Center of Mass"`(질량중심 변위) / `"Max. Drift of Outer Extreme Points"`(외곽 최대변위) / `"Max. Drift of All Vertical Elements"`(전 수직요소 최대변위) | `SET_CALCULATION_METHOD.STORY_DRIFT_METHOD` | String | `System` | Optional |
 | 1-1-2 | 　　└ 층강성 산정방식: `"1 / Story Drift Ratio"`(층간변위비 역수) / `"Story Shear / Story Drift"`(층전단력/층간변위) | `SET_CALCULATION_METHOD.STORY_STIFFNESS_METHOD` | String | `System` | Optional |
@@ -1438,6 +1432,10 @@ for row in table.get("DATA", []):
 > 이후 공식 측이 수정한 것으로 보임). 또한 두 항목의 `기본값`이 이전 버전에는 각각
 > `"Drift at the Center of Mass"`/`"1 / Story Drift Ratio"`로 잘못 기재되어 있었는데, 공식
 > 표는 둘 다 `Default: System`으로 명시하므로 정정했습니다.
+>
+> 공식 표와 영문·한국어 원문을 함께 대조해 다음 표기를 유지합니다.
+> - `SET_CALCULATION_METHOD.STORY_DRIFT_METHOD` 기본값(문서 `System`, 공식 표 `"Drift at the Center of Mass"`) — en-us 표는 `"Drift at the Center of Mass"`, ko 표는 `System`로 표기함.
+> - `SET_CALCULATION_METHOD.STORY_STIFFNESS_METHOD` 기본값(문서 `System`, 공식 표 `"1 / Story Drift Ratio"`) — en-us 표는 `"1 / Story Drift Ratio"`, ko 표는 `System`로 표기함.
 
 **요청 예시 — `ADDITIONAL` 포함**
 

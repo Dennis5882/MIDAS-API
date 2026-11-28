@@ -186,7 +186,7 @@ print(result)
 | 4 | Transverse Lane Optimization ²⁾ | `"OPT_AUTO_LANE"` | Boolean | false | Optional |
 | 5 | Allow Width for Optimization ²⁾ | `"ALLOW_WIDTH"` | Number | – | Optional |
 | 6 | Load Distribution · Lane Element: "LANE" · Cross Beam: "CROSS" | `"LOAD_DIST"` | String | – | **Required** |
-| 7 | Name of Structure Group ³⁾ | `"GROUP_NAME"` | String | `""` | Optional |
+| 7 | Name of Structure Group ³⁾ | `"GROUP_NAME"` | String | Blank- | Optional |
 | 8 | Skew Start ³⁾ | `"SKEW_START"` | Number | 0 | Optional |
 | 9 | Skew End ³⁾ | `"SKEW_END"` | Number | 0 | Optional |
 | 10 | Moving Direction · Forward: "FORWARD" · Backward: "BACKWARD" · Both: "BOTH" | `"MOVING"` | String | – | **Required** |
@@ -546,8 +546,8 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `ELEMS`
 | 7 | Optimization Lane | `"OPTIM_WIDTH"` | Number | – | **Required** |
 | 8 | Lane Width | `"LANE_WIDTH"` | Number | – | Required |
 | 9 | Offset Type (Generate Analysis Lanes) · Number of Lane: 0 · Offset from Centerline: 1 | `"OFFSET_TYPE"` | Integer | – | **Required** |
-| 10 | Divide Number (Number of Lanes) · if "OFFSET_TYPE": 0 | `"DIVIDE_NUM"` | Integer | – | Optional |
-| 11 | Analysis Lane Offset · if "OFFSET_TYPE": 1 | `"ANAL_LANE_OFFSET"` | Number | – | Optional |
+| 10 | Divide Number (Number of Lanes) · if "OFFSET_TYPE": 0 | `"DIVIDE_NUM"` | Integer | 1 | Optional |
+| 11 | Analysis Lane Offset · if "OFFSET_TYPE": 1 | `"ANAL_LANE_OFFSET"` | Number | 1 | Optional |
 | 12 | Wheel Spacing | `"WHEEL_SPACE"` | Number | 0 | Optional |
 | 13 | Margin | `"MARGIN"` | Number | 0 | Optional |
 | 14 | Lane Items · Insert the data as an object | `"LANE_ITEMS"` | Array[Object] | – | **Required** |
@@ -806,8 +806,8 @@ print(result)
 | 7 | Wheel Spacing | `"WHEEL_SPACE"` | Number | 0 | Optional |
 | 8 | Margin | `"MARGIN"` | Number | 0 | Optional |
 | 9 | Offset Type (Generate Analysis Lanes) · Number of Lane: 0 · Offset from Centerline: 1 | `"OFFSET_TYPE"` | Integer | – | **Required** |
-| 10 | Divide Number (Number of Lanes) · if "OFFSET_TYPE": 0 | `"DIVIDE_NUM"` | Integer | – | Optional |
-| 11 | Analysis Lane Offset · if "OFFSET_TYPE": 1 | `"ANALYSIS_LANE_OFFSET"` | Number | – | Optional |
+| 10 | Divide Number (Number of Lanes) · if "OFFSET_TYPE": 0 | `"DIVIDE_NUM"` | Integer | 1 | Optional |
+| 11 | Analysis Lane Offset · if "OFFSET_TYPE": 1 | `"ANALYSIS_LANE_OFFSET"` | Number | 1 | Optional |
 | 12 | Lane Items · Insert the data as an object | `"ITEMS"` | Array[Object] | – | **Required** |
 | (1) | Node Key | `"NODE_KEY"` | Integer | – | Required |
 | (2) | Offset | `"OFFSET"` | Number | 0 | Optional |
@@ -1139,7 +1139,7 @@ result = mv_post("MVHL", {
 | 1 | Unit Length for Loaded Length Increment Option | `"INCRE_LENGTH"` | Boolean | `false` | Optional |
 | 2 | Increment Length | `"INCRE_LENGTH_VALUE"` | Number | 0 | Optional |
 | NB Type | | | | | |
-| 3 | Number of Unit (36 또는 24) | `"UNIT_NUM"` | Number | - | Required(표준)/Integer,Required(User) |
+| 3 | Number of Unit (36 또는 24) | `"UNIT_NUM"` | Number | - | **Required** |
 | NC Type | | | | | |
 | 4 | Consider Load Area Giving Opposite Contribution | `"OPPOSITE"` | Boolean | `false` | Optional |
 | User Defined - NA Type 추가 | | | | | |
@@ -1742,6 +1742,11 @@ print(result)
 > ⚠️ 2026-08-25 확인: 위 표는 원문 Value Type 컬럼만 있고 Required 컬럼이 없어 이전 문서도 생략했으나,
 > Specifications 표 원문을 다시 보면 4개 필드 모두 Required로 표기돼 있어 보강함(원문 아티클
 > [Moving Load Cases](https://support.midasuser.com/hc/en-us/articles/35959068573209)).
+>
+> 공식 표와 영문·한국어 원문을 함께 대조해 다음 표기를 유지합니다.
+> - `LCNAME` 타입(문서 `String`, 공식 표 `Object`) — 공식 글 35959068573209 요청 예제 「KSCE-LSD15」의 `Assign.1.LCNAME`가 `"MV_Case1"`(string)를 사용함.
+> - `DESC` 타입(문서 `String`, 공식 표 `Object`) — 공식 글 35959068573209 요청 예제 「KSCE-LSD15」의 `Assign.1.DESC`가 `""`(string)를 사용함.
+> - `TYPE` 타입(문서 `Integer`, 공식 표 `Object`) — 공식 글 35959068573209 요청 예제 「KSCE-LSD15」의 `Assign.1.TYPE`가 `0`(integer)를 사용함.
 
 ### Parameters – DEFAULT (Australia – 추가 필드)
 
@@ -1801,8 +1806,8 @@ print(result)
 | 3 | Loaded Lane Name | `"LANE_NAME"` | String | Required |
 | 4 | Min. Number of Vehicle | `"MIN_NUM_VEHICLE"` | Integer | Required |
 | 5 | Max. Number of Vehicle | `"MAX_NUM_VEHICLE"` | Integer | Required |
-| 6 | Select Load Model (Australia 전용, 값은 DEFAULT의 LOAD_MODEL과 동일) | `"LOAD_MODEL"` | Integer | Optional |
-| 7 | Fatigue Option (Australia 전용) | `"FATIGUE"` | Boolean | Optional |
+| 6 | Select Load Model (Australia 전용, 값은 DEFAULT의 LOAD_MODEL과 동일) | `"LOAD_MODEL"` | Integer | **Required** |
+| 7 | Fatigue Option (Australia 전용) | `"FATIGUE"` | Boolean | **Required** |
 | 8 | Optimize Items · `VEHICLE_TYPE`("VL"/"VC")/`VEHICLE_NAME`/`SCALE_FACTOR` | `"OPTIMIZE_ITEMS"` | Array[Object] | Required |
 
 ### 코드별 지원 Load Type ¹⁾
@@ -1933,6 +1938,10 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `ECC`, 
 | (iii) | Scale Factor | `"SCALE_FACTOR"` | Number | – | Required |
 
 > ⚠️ 공식 Specifications 표는 `SUB_LOAD_ITEMS`의 필수 칸을 비워 둡니다. 기존 표기를 유지했습니다.
+>
+> 공식 표와 영문·한국어 원문을 함께 대조해 다음 표기를 유지합니다.
+> - `LCNAME` 타입(문서 `String`, 공식 표 `Object`) — 공식 글 35960417354649 요청 예제 「Moving Load Cases」의 `Assign.1.LCNAME`가 `"MV_Case1"`(string)를 사용함.
+> - `BRIDGE_TYPE` 타입(문서 `Integer`, 공식 표 `String`) — 공식 글 35960417354649 요청 예제 「Moving Load Cases」의 `Assign.1.BRIDGE_TYPE`가 `2`(integer)를 사용함.
 
 > ⚠️ 2026-08-25 확인: 이전 문서는 `OPT_AUTO_OPTIMIZE` 필드만 소개하고 실제 `true`일 때 쓰이는
 > Moving Load Optimization 필드 5개(`MIN_VEHICLE_DIST`~`AUTO_OPTIMIZE_ITEMS`)가 누락돼 있었음

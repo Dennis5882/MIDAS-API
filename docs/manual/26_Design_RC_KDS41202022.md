@@ -2859,16 +2859,16 @@ print("GET:", requests.get(URI, headers=HEADERS).json())
 |-----|------|-----|------|--------|------|
 | 1 | [Root Object] Keyed object (dictionary). Each property name is a material ID string (e.g., "1"). | `"Assign"` | Object | — | **Required** |
 | 2 | [General] Concrete material selection. | `"CONCRETE"` | Object | — | **Required** |
-| 2.1 | 코드 (None=사용자정의, Standard=표준) | `"CODE"` | String (oneOf) | — | **필수** |
+| 2.1 | 코드 (None=사용자정의, Standard=표준) | `"CODE"` | String (oneOf) | — | **Required** |
 | 2.2 | [General] Light Weight Concrete Factor (Lambda) | `"LIGHTWEIGHT"` | Boolean | `false` | Optional |
 | 2.3 | [General] Lambda | `"LAMBDA"` | Number | `1` | Optional |
-| 2.4 | 표준코드 (KS19(RC)) — CODE=Standard | `"STANDARD_CODE"` | String (oneOf) | — | 조건부 필수 |
+| 2.4 | 표준코드 (KS19(RC)) — CODE=Standard | `"STANDARD_CODE"` | String (oneOf) | — | **Required** |
 | 2.5 | [When "CODE" is Standard] Grade · C15: "C15" · C18: "C18" · C21: "C21" · C24: "C24" · C27: "C27" · C30: "C30" · C35: "C35" · C40: "C40" · C45: "C45" · C49: "C49" · C50: "C50" · C55: "C55" · C60: "C60" · C65: "C65" · C70: "C70" · C75: "C75" · C80: "C80" · C85: "C85" · C90: "C90" · C95: "C95" | `"GRADE"` | String (oneOf) | — | **Required** |
 | 2.6 | [When "CODE" is None] Name | `"NAME"` | String | — | **Required** |
 | 2.7 | [When "CODE" is None] Specified Compressive Strength (fc\|fck) [User input when Code=None / Auto-filled when Code=Standard] | `"FC"` | Number | — | **Required** |
 | 3 | [General] Rebar material selection. | `"REBAR"` | Object | — | **Required** |
-| 3.1 | 코드 (None=사용자정의, Standard=표준) | `"CODE"` | String (oneOf) | — | **필수** |
-| 3.2 | 표준코드 (KS19(RC)) — CODE=Standard | `"STANDARD_CODE"` | String (oneOf) | — | 조건부 필수 |
+| 3.1 | 코드 (None=사용자정의, Standard=표준) | `"CODE"` | String (oneOf) | — | **Required** |
+| 3.2 | 표준코드 (KS19(RC)) — CODE=Standard | `"STANDARD_CODE"` | String (oneOf) | — | **Required** |
 | 3.3 | [When "CODE" is Standard] Grade of Main Rebar · SD300: "SD300" · SD400: "SD400" · SD500: "SD500" · SD600: "SD600" · SD700: "SD700" · SD400S: "SD400S" · SD500S: "SD500S" · SD600S: "SD600S" | `"MAIN_REBAR_GRADE"` | String (oneOf) | — | **Required** |
 | 3.4 | [When "CODE" is Standard] Grade of Sub-Rebar · SD300: "SD300" · SD400: "SD400" · SD500: "SD500" · SD600: "SD600" · SD700: "SD700" · SD400S: "SD400S" · SD500S: "SD500S" · SD600S: "SD600S" | `"SUB_REBAR_GRADE"` | String (oneOf) | — | **Required** |
 | 3.5 | [When "CODE" is None] Name of Main Rebar | `"MAIN_REBAR_NAME"` | String | — | **Required** |
@@ -5869,67 +5869,71 @@ print("GET:", requests.get(URI, headers=HEADERS).json())   # 최상위 키 "DCRM
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| 1 | 인덱스 문자열 1개만 갖는 전역 설정 맵 | `"Assign"` | Object | — | **필수** |
-| 2 | 보 철근 기준 | `"BEAM"` | Object | — | 선택 |
-| 3 | 기둥 철근 기준 | `"COLUMN"` | Object | — | 선택 |
-| 4 | 가새 철근 기준 | `"BRACE"` | Object | — | 선택 |
-| 5 | 벽체 철근 기준 | `"WALL"` | Object | — | 선택 |
+| 1 | 인덱스 문자열 1개만 갖는 전역 설정 맵 | `"Assign"` | Object | — | **Required** |
+| 2 | 보 철근 기준 | `"BEAM"` | Object | — | Optional |
+| 3 | 기둥 철근 기준 | `"COLUMN"` | Object | — | Optional |
+| 4 | 가새 철근 기준 | `"BRACE"` | Object | — | Optional |
+| 5 | 벽체 철근 기준 | `"WALL"` | Object | — | Optional |
 
 **`BEAM` 객체 (기둥/가새는 유사, `DCRM-*` 참조)**
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| a | 주철근 규격 배열 (최대 5종) · 항목은 19종 (D4 ~ D57) | `"MAIN_REBAR"` | Array[String] | `["D22"]` | 선택 |
-| b | 스터럽 규격 · 19종 | `"STIRRUPS"` | String (enum) | `"D10"` | 선택 |
-| c | 스터럽 다리 수 · 2 ~ 20 | `"STIRRUP_ARRANGEMENT"` | Integer (enum) | `2` | 선택 |
-| d | 측면철근 규격 · 19종 | `"SIDE_BAR"` | String (enum) | `"D13"` | 선택 |
+| a | 주철근 규격 배열 (최대 5종) · 항목은 19종 (D4 ~ D57) | `"MAIN_REBAR"` | Array[String] | `["D22"]` | Optional |
+| b | 스터럽 규격 · 19종 | `"STIRRUPS"` | String (enum) | `"D10"` | Optional |
+| c | 스터럽 다리 수 · 2 ~ 20 | `"STIRRUP_ARRANGEMENT"` | Integer (enum) | `2` | Optional |
+| d | 측면철근 규격 · 19종 | `"SIDE_BAR"` | String (enum) | `"D13"` | Optional |
 | e | 상단/하단 피복 | `"DT"` / `"DB"` | Number | `0` | 선택 |
 | f | 복철근 설계 / k 계수 | `"DOUBLY_REBAR"` / `"DOUBLY_K"` | Boolean / Number | `true` / `1` | 선택 |
-| g | 간격 제한 고려 | `"SPACING_LIMIT"` | Boolean | `true` | 선택 |
-| h | 이음 옵션 (`None` \| `50%` \| `100%`) | `"SPLICED_BARS"` | String (enum) | `"50%"` | 선택 |
+| g | 간격 제한 고려 | `"SPACING_LIMIT"` | Boolean | `true` | Optional |
+| h | 이음 옵션 (`None` \| `50%` \| `100%`) | `"SPLICED_BARS"` | String (enum) | `"50%"` | Optional |
 
 **`COLUMN` / `BRACE` 객체 (공통)**
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| a | 주철근 규격 배열 (최대 5종) | `"MAIN_REBAR"` | Array[String] | `["D22"]` | 선택 |
-| b | 띠철근/나선철근 규격 · 19종 | `"TIES_SPIRALS"` | String (enum) | `"D10"` | 선택 |
+| a | 주철근 규격 배열 (최대 5종) | `"MAIN_REBAR"` | Array[String] | `["D22"]` | Optional |
+| b | 띠철근/나선철근 규격 · 19종 | `"TIES_SPIRALS"` | String (enum) | `"D10"` | Optional |
 | c | 다리 수 Y / Z · 2 ~ 20 | `"ARRANGEMENT_Y"` / `"ARRANGEMENT_Z"` | Integer (enum) | `2` | 선택 |
-| d | 주철근 중심 피복 do | `"DO"` | Number | `0` | 선택 |
+| d | 주철근 중심 피복 do | `"DO"` | Number | `0` | Optional |
 | e | 간격 제한 / 이음 | `"SPACING_LIMIT"` / `"SPLICED_BARS"` | Boolean / String | `true` / `"50%"` | 선택 |
 
 **`WALL` 객체**
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| a | 수직 철근 규격 배열 (다중 선택) · 19종 | `"VERTICAL_REBAR"` | Array[String] | `["D13"]` | 선택 |
+| a | 수직 철근 규격 배열 (다중 선택) · 19종 | `"VERTICAL_REBAR"` | Array[String] | `["D13"]` | Optional |
 | b | 수평 / 단부 / 경계요소 수평 철근 규격 · 19종 | `"HORIZONTAL_REBAR"` / `"END_REBAR"` / `"BE_HORZ_REBAR"` | String (enum) | `"D10"` | 선택 |
 | c | 경계요소 수평 / 수직 간격 | `"BE_HORZ_SPACE"` / `"BE_VERT_SPACE"` | Number | `0.2` / `0.1` | 선택 |
 | d | 단부 첫 수직철근까지 거리 / 벽면 피복 | `"DE"` / `"DW"` | Number | `0` | 선택 |
-| e | 직경별 재질 사용 | `"MATERIAL_BY_DIAMETER"` | Boolean | `false` | 선택 |
+| e | 직경별 재질 사용 | `"MATERIAL_BY_DIAMETER"` | Boolean | `false` | Optional |
 | f | 직경별 재질 입력 (사용 시) | `"MATERIAL_BY_DIAMETER_INPUT"` | Object | — | 조건부 |
-| g | 벽체 추가 데이터 | `"ADDITIONAL_WALL_DATA"` | Object | — | 선택 |
+| g | 벽체 추가 데이터 | `"ADDITIONAL_WALL_DATA"` | Object | — | Optional |
 
 **`MATERIAL_BY_DIAMETER_INPUT` 객체** — `VERTICAL_END_REBAR`·`HORIZONTAL_REBAR` 두 배열이 동일한 항목 구조를 가집니다.
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| a | 수직/단부 철근 재질 매핑 배열 | `"VERTICAL_END_REBAR"` | Array[Object] | — | 선택 |
-| b | 수평 철근 재질 매핑 배열 | `"HORIZONTAL_REBAR"` | Array[Object] | — | 선택 |
-| a→ | 철근 직경 · 19종 (D4 ~ D57) | `"REBAR_DIAMETER"` | String (enum) | — | 선택 |
-| a→ | 재질 등급 · `None`,`SD300`,`SD400`,`SD500`,`SD600`,`SD700`,`SD400S`,`SD500S`,`SD600S` | `"MATERIAL"` | String (enum) | — | 선택 |
+| a | 수직/단부 철근 재질 매핑 배열 | `"VERTICAL_END_REBAR"` | Array[Object] | — | Optional |
+| b | 수평 철근 재질 매핑 배열 | `"HORIZONTAL_REBAR"` | Array[Object] | — | Optional |
+| a→ | 철근 직경 · 19종 (D4 ~ D57) | `"REBAR_DIAMETER"` | String (enum) | — | Optional |
+| a→ | 재질 등급 · `None`,`SD300`,`SD400`,`SD500`,`SD600`,`SD700`,`SD400S`,`SD500S`,`SD600S` | `"MATERIAL"` | String (enum) | — | Optional |
 
 **`ADDITIONAL_WALL_DATA` 객체**
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| a | 면외 휨 설계 | `"OUT_OF_PLANE_BENDING"` | Boolean | `false` | 선택 |
-| b | 수직 철근 간격 설정 (`UNIT`: `mm`/`in`, `LIST_FOR_DESIGN`: 간격 값 배열) | `"VERTICAL_REBAR_SPACING"` | Object | `{"UNIT":"mm","LIST_FOR_DESIGN":[100,150]}` | 선택 |
-| c | 수평 철근 간격(from) | `"HORIZONTAL_REBAR_SPACING_FROM"` | Number | `0.05` | 선택 |
-| d | 단부 철근 설계 방법 (`1`=Method-1 … `4`=Method-4) | `"END_REBAR_METHOD"` | Integer (enum) | `1` | 선택 |
+| a | 면외 휨 설계 | `"OUT_OF_PLANE_BENDING"` | Boolean | `false` | Optional |
+| b | 수직 철근 간격 설정 (`UNIT`: `mm`/`in`, `LIST_FOR_DESIGN`: 간격 값 배열) | `"VERTICAL_REBAR_SPACING"` | Object | `{"UNIT":"mm","LIST_FOR_DESIGN":[100,150]}` | Optional |
+| c | 수평 철근 간격(from) | `"HORIZONTAL_REBAR_SPACING_FROM"` | Number | `0.05` | Optional |
+| d | 단부 철근 설계 방법 (`1`=Method-1 … `4`=Method-4) | `"END_REBAR_METHOD"` | Integer (enum) | `1` | Optional |
 | e | 단부 철근 배근 간격 (4개 / 6개 / 8개 이상) | `"DIST1"` / `"DIST2"` / `"DIST3"` | Number | `0.3` / `0.15` / `0.1` | 선택 |
 
 > ⚠️ **예제 표기 차이:** 아래 Request 예제는 `SPLICED_BARS` 를 정수(`1`)로, `VERTICAL_REBAR_SPACING` 을 `["@100", "@150", …]` 문자열 배열로 전송합니다. 스키마 정의(`SPLICED_BARS` = `"50%"` 등 문자열 enum, `VERTICAL_REBAR_SPACING` = 객체)와 표기 방식이 다르므로, 실제 전송 시에는 아래 예제 형식을 그대로 따르는 것이 안전합니다.
+>
+> 공식 표와 영문·한국어 원문을 함께 대조해 다음 표기를 유지합니다.
+> - `MATERIAL_BY_DIAMETER_INPUT` 필수(문서 `조건부`, 공식 표 `Optional`) — 필수 칸의 조건을 제거하기에 설명에 남아 있는 공식 적용 조건이 충분하지 않음.
+> - `VERTICAL_REBAR_SPACING` 기본값(문서 `{"UNIT":"mm","LIST_FOR_DESIGN":[100,150]}`, 공식 표 `[object Object]`) — 공식 표 기본값 칸이 객체 값을 `[object Object]`로 표시함.
 
 ### Request / Response JSON
 
@@ -6389,14 +6393,14 @@ print("GET:", requests.get(URI, headers=HEADERS).json())   # 최상위 키 "DCRE
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| a | 상단 주철근 (레이어별) | `"MAIN_BAR_TOP"` | Object | — | **필수** |
-| b | 하단 주철근 (레이어별) | `"MAIN_BAR_BOT"` | Object | — | **필수** |
+| a | 상단 주철근 (레이어별) | `"MAIN_BAR_TOP"` | Object | — | **Required** |
+| b | 하단 주철근 (레이어별) | `"MAIN_BAR_BOT"` | Object | — | **Required** |
 | a/b→ | 레이어1 (필수) / 레이어2 (선택) | `"LAYER1"` / `"LAYER2"` | Object | — | LAYER1 **필수** |
-| — | 레이어 내 철근 규격 · 19종 (D4 ~ D57) | `"NAME"` | String (enum) | — | **필수** |
-| — | 레이어 내 철근 개수 | `"NUM"` | Integer | — | **필수** |
-| c | 스터럽(전단철근) | `"SHEAR_BAR"` | Object | — | **필수** |
+| — | 레이어 내 철근 규격 · 19종 (D4 ~ D57) | `"NAME"` | String (enum) | — | **Required** |
+| — | 레이어 내 철근 개수 | `"NUM"` | Integer | — | **Required** |
+| c | 스터럽(전단철근) | `"SHEAR_BAR"` | Object | — | **Required** |
 | c→ | 스터럽 규격 / 다리 수 / 간격 | `"NAME"` / `"LEG"` / `"DIST"` | String / Integer / Number | — | **필수** |
-| d | 표피철근(skin bar, 있으면 사용) | `"SKIN_BAR"` | Object | — | 선택 |
+| d | 표피철근(skin bar, 있으면 사용) | `"SKIN_BAR"` | Object | — | Optional |
 | d→ | 표피철근 규격 / 개수 | `"NAME"` / `"NUM"` | String / Integer | — | **필수** |
 
 **`CREATE_SUB_SECTION == true` 일 때 — `ELEMS` (KEYS / TO / STRUCTURE_GROUP_NAME 중 택1)**
@@ -6541,6 +6545,9 @@ print("GET:", requests.get(URI, headers=HEADERS).json())   # 최상위 키 "REBB
 
 ## 36. `DESIGN/RC/KDS-41-20-2022/REBC` — Modify Column Rebar Data (기둥 철근 데이터 수정)
 
+> ⚠️ 공식 표와 영문·한국어 원문을 함께 대조해 다음 표기를 유지합니다.
+> - `HOOK_TYPE` 타입(문서 `Integer (enum)`, 공식 표 `enum`) — en-us 표는 `enum`, ko 표는 `integer`로 표기함.
+
 > **기능:** 단면 번호별로 콘크리트 기둥의 철근 데이터를 수정합니다. 주철근(`MAIN_BAR`), 단부/중앙부 전단철근(`SHEAR_BAR_END`/`SHEAR_BAR_CEN`), 피복 거리(`DO`), 후프 타입(`HOOP_TYPE`), 후크 타입(`HOOK_TYPE`)을 포함합니다.
 
 ### Input URI
@@ -6660,7 +6667,7 @@ print("GET:", requests.get(URI, headers=HEADERS).json())   # 최상위 키 "REBB
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| a | 주철근 규격 · 19종 (D4 ~ D57) | `"NAME"` | String (enum) | — | **필수** |
+| a | 주철근 규격 · 19종 (D4 ~ D57) | `"NAME"` | String (enum) | — | **Required** |
 | b | [When "CREATE_SUB_SECTION" is true] Numbers | `"NUM"` | Integer | — | **Required** |
 | c | [When "CREATE_SUB_SECTION" is true] Rows | `"ROW"` | Integer | — | **Required** |
 | d | [When "CREATE_SUB_SECTION" is true] Corner | `"USE_CORNER"` | Boolean | — | **Required** |
@@ -6670,16 +6677,16 @@ print("GET:", requests.get(URI, headers=HEADERS).json())   # 최상위 키 "REBB
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| a | 후프 철근 규격 · 19종 (D4 ~ D57) | `"NAME"` | String (enum) | — | **필수** |
-| b | 다리 수 (local Y) | `"LEG_Y"` | Integer | — | **필수** |
-| c | 다리 수 (local Z) | `"LEG_Z"` | Integer | — | **필수** |
-| d | 철근 간격 @ | `"DIST"` | Number | — | **필수** |
+| a | 후프 철근 규격 · 19종 (D4 ~ D57) | `"NAME"` | String (enum) | — | **Required** |
+| b | 다리 수 (local Y) | `"LEG_Y"` | Integer | — | **Required** |
+| c | 다리 수 (local Z) | `"LEG_Z"` | Integer | — | **Required** |
+| d | 철근 간격 @ | `"DIST"` | Number | — | **Required** |
 
 **`CREATE_SUB_SECTION == true` 일 때 — `ELEMS` (KEYS / TO / STRUCTURE_GROUP_NAME 중 택1)**
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| a | [When "CREATE_SUB_SECTION" is true] Specify Each ID | `"KEYS"` | Array[Integer] | — | Optional |
+| a | [When "CREATE_SUB_SECTION" is true] Specify Each ID | `"KEYS"` | array | — | Optional |
 | b | [When "CREATE_SUB_SECTION" is true] Specify ID Range | `"TO"` | String | — | Optional |
 | c | [When "CREATE_SUB_SECTION" is true] Structure Group Name | `"STRUCTURE_GROUP_NAME"` | String | — | Optional |
 
@@ -7131,7 +7138,7 @@ print("GET:", requests.get(URI, headers=HEADERS).json())   # 최상위 키 "REBW
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| a | 주철근 규격 · 19종 (D4 ~ D57) | `"NAME"` | String (enum) | — | **필수** |
+| a | 주철근 규격 · 19종 (D4 ~ D57) | `"NAME"` | String (enum) | — | **Required** |
 | b | [General] Numbers Constraints: · Items: min 4 | `"NUM"` | Integer | — | **Required** |
 | c | [General] Rows | `"ROW"` | Integer | — | **Required** |
 
@@ -7139,10 +7146,10 @@ print("GET:", requests.get(URI, headers=HEADERS).json())   # 최상위 키 "REBW
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| a | 후프 철근 규격 · 19종 (D4 ~ D57) | `"NAME"` | String (enum) | — | **필수** |
-| b | 다리 수 (local Y) | `"LEG_Y"` | Integer | — | **필수** |
-| c | 다리 수 (local Z) | `"LEG_Z"` | Integer | — | **필수** |
-| d | 철근 간격 @ | `"DIST"` | Number | — | **필수** |
+| a | 후프 철근 규격 · 19종 (D4 ~ D57) | `"NAME"` | String (enum) | — | **Required** |
+| b | 다리 수 (local Y) | `"LEG_Y"` | Integer | — | **Required** |
+| c | 다리 수 (local Z) | `"LEG_Z"` | Integer | — | **Required** |
+| d | 철근 간격 @ | `"DIST"` | Number | — | **Required** |
 
 **`CREATE_SUB_SECTION == true` 일 때 — `ELEMS` (KEYS / TO / STRUCTURE_GROUP_NAME 중 택1)**
 
@@ -7406,9 +7413,9 @@ print(res.json())   # {"message": "success"}
 | 6 | Result View Option · All: "0" · OK: "1" · NG: "2" | `"RESULT"` | Integer | `0` | Optional |
 | 7 | Table Name Output table title in response | `"TABLE_NAME"` | String | `"RC Beam Design Result"` | Optional |
 | 8 | Export Path Optional: Save results to file path | `"EXPORT_PATH"` | String | — | Optional |
-| 9 | 단위 설정 (`FORCE`/`DIST`/`HEAT`/`TEMP`) | `"UNIT"` | Object | System | 선택 |
-| 10 | 숫자 포맷 (`FORMAT`, `PLACE` 0~15) | `"STYLES"` | Object | System | 선택 |
-| 11 | Components · MEMB: "MEMB" · SECT: "SECT" · Span: "Span" · Section: "Section" · Bc: "Bc" · Hc: "Hc" · bf: "bf" · hf: "hf" · fck: "fck" · fy: "fy" · fys: "fys" · POS: "POS" · N(-)/Mu: "N(-)/Mu" · LCB_NegMu: "LCB_NegMu" · AsTop: "AsTop" · Rebar_Top: "Rebar_Top" · P(+)/Mu: "P(+)/Mu" · LCB_PosMu: "LCB_PosMu" · AsBot: "AsBot" · Rebar_Bot: "Rebar_Bot" · Vu: "Vu" · LCB_Vu: "LCB_Vu" · AsV: "AsV" · Stirrup: "Stirrup" · CHK: "CHK" | `"COMPONENTS"` | Array[String] | All | Optional |
+| 9 | 단위 설정 (`FORCE`/`DIST`/`HEAT`/`TEMP`) | `"UNIT"` | Object | System | Optional |
+| 10 | 숫자 포맷 (`FORMAT`, `PLACE` 0~15) | `"STYLES"` | Object | System | Optional |
+| 11 | Components · MEMB: "MEMB" · SECT: "SECT" · Span: "Span" · Section: "Section" · Bc: "Bc" · Hc: "Hc" · bf: "bf" · hf: "hf" · fck: "fck" · fy: "fy" · fys: "fys" · POS: "POS" · N(-)/Mu: "N(-)/Mu" · LCB_NegMu: "LCB_NegMu" · AsTop: "AsTop" · Rebar_Top: "Rebar_Top" · P(+)/Mu: "P(+)/Mu" · LCB_PosMu: "LCB_PosMu" · AsBot: "AsBot" · Rebar_Bot: "Rebar_Bot" · Vu: "Vu" · LCB_Vu: "LCB_Vu" · AsV: "AsV" · Stirrup: "Stirrup" · CHK: "CHK" | `"COMPONENTS"` | Array[String] | - | Optional |
 
 **응답 `HEAD` 열 설명** (25개 열)
 
@@ -7595,8 +7602,8 @@ for row in table["DATA"]:
 |-----|------|-----|------|--------|------|
 | 1 | [Root Object] Map of keyed objects where each key is a string identifier. | `"Argument"` | Object | — | **Required** |
 | 2 | [General] Table Type · MEMB: "MEMB" · PROP: "PROP" | `"REPORT_TYPE"` | String (enum) | — | **Required** |
-| 3 | [When "REPORT_TYPE" is MEMB] Report Mode · Graphic (JPG image): "Graphic" · Detail (DOC document): "Detail" · Summary (TXT text): "Summary" | `"CURRENT_MODE_MEMB"` | String (oneOf) | — | **Required** |
-| 4 | [When "REPORT_TYPE" is PROP] Report Mode · Graphic (JPG image): "Graphic" · Summary (TXT text): "Summary" | `"CURRENT_MODE_PROP"` | String (oneOf) | — | **Required** |
+| 3 | [When "REPORT_TYPE" is MEMB] Report Mode · Graphic (JPG image): "Graphic" · Detail (DOC document): "Detail" · Summary (TXT text): "Summary" | `"CURRENT_MODE_MEMB"` | string | — | **Required** |
+| 4 | [When "REPORT_TYPE" is PROP] Report Mode · Graphic (JPG image): "Graphic" · Summary (TXT text): "Summary" | `"CURRENT_MODE_PROP"` | string | — | **Required** |
 | 5 | [oneOf Choose exactly one of the following keys: "ELEMS" or "SECTIONS".] Element Numbers Use either ELEMS or SECTIONS, not both. | `"ELEMS"` | Object | — | Optional |
 | 6 | [oneOf Choose exactly one of the following keys: "ELEMS" or "SECTIONS".] Section Numbers Use either ELEMS or SECTIONS, not both. | `"SECTIONS"` | Array[Integer] | — | Optional |
 | 7 | [When "REPORT_TYPE" is MEMB, "CURRENT_MODE_MEMB" is Detail] Option for Detail Print Position | `"DETAIL_POSITIONS"` | Object | — | Optional |
@@ -7990,8 +7997,8 @@ for row in table["DATA"]:
 |-----|------|-----|------|--------|------|
 | 1 | [Root Object] Map of keyed objects where each key is a string identifier. | `"Argument"` | Object | — | **Required** |
 | 2 | [General] Table Type · MEMB: "MEMB" · PROP: "PROP" | `"REPORT_TYPE"` | String (enum) | — | **Required** |
-| 3 | [When "REPORT_TYPE" is MEMB] Report Mode · Graphic (JPG image): "Graphic" · Detail (DOC document): "Detail" · Summary (TXT text): "Summary" · PM Curve (JPG image): "PMCurve" | `"CURRENT_MODE_MEMB"` | String (oneOf) | — | **Required** |
-| 4 | [When "REPORT_TYPE" is PROP] Report Mode · Graphic (JPG image): "Graphic" · Summary (TXT text): "Summary" | `"CURRENT_MODE_PROP"` | String (oneOf) | — | **Required** |
+| 3 | [When "REPORT_TYPE" is MEMB] Report Mode · Graphic (JPG image): "Graphic" · Detail (DOC document): "Detail" · Summary (TXT text): "Summary" · PM Curve (JPG image): "PMCurve" | `"CURRENT_MODE_MEMB"` | string | — | **Required** |
+| 4 | [When "REPORT_TYPE" is PROP] Report Mode · Graphic (JPG image): "Graphic" · Summary (TXT text): "Summary" | `"CURRENT_MODE_PROP"` | string | — | **Required** |
 | 5 | [oneOf Choose exactly one of the following keys: "ELEMS" or "SECTIONS".] Element Numbers Use either ELEMS or SECTIONS, not both. | `"ELEMS"` | Object | — | Optional |
 | 6 | [oneOf Choose exactly one of the following keys: "ELEMS" or "SECTIONS".] Section Numbers Use either ELEMS or SECTIONS, not both. | `"SECTIONS"` | Array[Integer] | — | Optional |
 | 7 | Export Path e.g. C:\MIDAS\Report\ | `"EXPORT_PATH"` | String | — | **Required** |
@@ -8108,7 +8115,7 @@ print(res.json())
 | 1 | [Root Object] Execute design calculation | `"Argument"` | Object | — | **Required** |
 | 2 | [General] Perform Target · All Elements: "ALL" · By Element No.: "ELEMS" · By Section No.: "SECTIONS" | `"PERFORM_TYPE"` | String (enum) | `"ALL"` | Optional |
 | 3 | [oneOf Choose exactly one of the following keys: "ELEMS" or "SECTIONS".] Element No. Use either ELEMS or SECTIONS, not both. | `"ELEMS"` | Object | — | Optional |
-| 4 | [oneOf Choose exactly one of the following keys: "ELEMS" or "SECTIONS".] Section No. Use either ELEMS or SECTIONS, not both. | `"SECTIONS"` | Array | — | Optional |
+| 4 | [oneOf Choose exactly one of the following keys: "ELEMS" or "SECTIONS".] Section No. Use either ELEMS or SECTIONS, not both. | `"SECTIONS"` | Array [integer] | — | Optional |
 
 ### Request / Response JSON
 
@@ -8395,8 +8402,8 @@ for row in table["DATA"]:
 |-----|------|-----|------|--------|------|
 | 1 | [Root Object] Map of keyed objects where each key is a string identifier. | `"Argument"` | Object | — | **Required** |
 | 2 | [General] Table Type · MEMB: "MEMB" · PROP: "PROP" | `"REPORT_TYPE"` | String (enum) | — | **Required** |
-| 3 | [When "REPORT_TYPE" is MEMB] Report Mode · Graphic (JPG image): "Graphic" · Detail (DOC document): "Detail" · Summary (TXT text): "Summary" · PM Curve (JPG image): "PMCurve" | `"CURRENT_MODE_MEMB"` | String (oneOf) | — | Optional |
-| 4 | [When "REPORT_TYPE" is PROP] Report Mode · Graphic (JPG image): "Graphic" · Summary (TXT text): "Summary" | `"CURRENT_MODE_PROP"` | String (oneOf) | — | Optional |
+| 3 | [When "REPORT_TYPE" is MEMB] Report Mode · Graphic (JPG image): "Graphic" · Detail (DOC document): "Detail" · Summary (TXT text): "Summary" · PM Curve (JPG image): "PMCurve" | `"CURRENT_MODE_MEMB"` | string | — | Optional |
+| 4 | [When "REPORT_TYPE" is PROP] Report Mode · Graphic (JPG image): "Graphic" · Summary (TXT text): "Summary" | `"CURRENT_MODE_PROP"` | string | — | Optional |
 | 5 | [oneOf Choose exactly one of the following keys: "ELEMS" or "SECTIONS".] Element Numbers Use either ELEMS or SECTIONS, not both. | `"ELEMS"` | Object | — | Optional |
 | 6 | [oneOf Choose exactly one of the following keys: "ELEMS" or "SECTIONS".] Section Numbers Use either ELEMS or SECTIONS, not both. | `"SECTIONS"` | Array[Integer] | — | Optional |
 | 7 | Export Path e.g. C:\MIDAS\Report\ | `"EXPORT_PATH"` | String | — | **Required** |
@@ -8880,9 +8887,9 @@ for row in data["ROWS"]:
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
 | 1 | [Root Object] Generate RC Wall report. If SELECTIONS is omitted or empty, all wall IDs and all stories are included. | `"Argument"` | Object | — | **Required** |
-| 2 | [General] Report Type · WID+STORY: "WID+STORY" · WID: "WID" | `"REPORT_TYPE"` | String (enum) | — | **Required** |
-| 3 | [When "REPORT_TYPE" is WID+STORY] Report Mode · Graphic (JPG image): "Graphic" · Detail (DOC document): "Detail" · Summary (TXT text): "Summary" · PM Curve (JPG image): "PMCurve" | `"CURRENT_MODE_WID_STORY"` | String (oneOf) | — | **Required** |
-| 4 | [When "REPORT_TYPE" is WID] Report Mode · Graphic (JPG image): "Graphic" · Summary (TXT text): "Summary" · PM Curve (JPG image): "PMCurve" | `"CURRENT_MODE_WID"` | String (oneOf) | — | **Required** |
+| 2 | [General] Report Type · WID+STORY: "WID+STORY" · WID: "WID" | `"REPORT_TYPE"` | String (enum) | "WID+STORY" | **Required** |
+| 3 | [When "REPORT_TYPE" is WID+STORY] Report Mode · Graphic (JPG image): "Graphic" · Detail (DOC document): "Detail" · Summary (TXT text): "Summary" · PM Curve (JPG image): "PMCurve" | `"CURRENT_MODE_WID_STORY"` | string | — | **Required** |
+| 4 | [When "REPORT_TYPE" is WID] Report Mode · Graphic (JPG image): "Graphic" · Summary (TXT text): "Summary" · PM Curve (JPG image): "PMCurve" | `"CURRENT_MODE_WID"` | string | — | **Required** |
 | 5 | [General] Selections Constraints: · Items: min 0 | `"SELECTIONS"` | Array[Object] | — | Optional |
 | 6 | [General] Export Path e.g. C:\MIDAS\Report\ | `"EXPORT_PATH"` | String | — | **Required** |
 | 7 | [General] Output File Name | `"OUTPUT_NAME"` | String | — | **Required** |
@@ -12531,6 +12538,12 @@ print(res.json())   # {"SUCCESS": true, "FILE_PATH": "...", "MESSAGE": ""}
 ---
 ## 66. `DESIGN/RC/KDS-41-20-2022/CDESIGN` — RC Concrete Design Result (RC 콘크리트 종합 설계 결과)
 
+> ⚠️ 공식 표와 영문·한국어 원문을 함께 대조해 다음 표기를 유지합니다.
+> - `COMPONENTS` 기본값(문서 `"Combined"`, 공식 표 `-`) — 두 로케일 공식 JSON Schema에 `default: "Combined"`가 명시됨.
+> - `COMPONENTS` 타입(문서 `String (oneOf)`, 공식 표 `object`) — 공식 글 57458836502553 JSON Schema의 `properties.Argument.properties.RESULT_GRAPHIC.COMPONENTS`에 `type: string`가 명시됨.
+> - `REINFORCEMENT` 기본값(문서 `true`, 공식 표 `-`) — 두 로케일 공식 JSON Schema에 `default: true`가 명시됨.
+> - `REINFORCEMENT` 타입(문서 `Boolean`, 공식 표 `object`) — 공식 글 57458836502553 JSON Schema의 `properties.Argument.properties.RESULT_GRAPHIC.REINFORCEMENT`에 `type: boolean`가 명시됨.
+
 > **기능:** RC 콘크리트 설계(보·기둥·가새·벽체 통합) 결과를 화면에 표시하고 **이미지 파일로 캡처**합니다. 표시 하중조합, 강도비 성분(축력/전단/휨/조합), 배근 표시, 부재 종류 필터, 값/범례 등 그래픽 옵션을 세밀하게 설정합니다.
 
 ### Input URI
@@ -12840,12 +12853,12 @@ print(res.json())   # {"SUCCESS": true, "FILE_PATH": "...", "MESSAGE": ""}
 | 12.1 | [General] Load Cases/Combinations | `"LOAD_CASE_COMB"` | Object | — | **Required** |
 | 12.2 | [General] Ratio by Components | `"COMPONENTS"` | String (oneOf) | `"Combined"` | Optional |
 | 12.3 | [General] Type of Display *) | `"TYPE_OF_DISPLAY"` | Object | — | Optional |
-| 12.4 | 배근 표시 여부 | `"REINFORCEMENT"` | Boolean | `true` | 선택 |
-| 12.5 | 배근 표시 타입 (`REBAR`/`AREA`/`RATIO`) | `"REINFORCEMENT_TYPE"` | String (oneOf) | `"REBAR"` | 선택 |
-| 12.6 | 표시 부재 종류 (`BEAM`/`COLUMN`/`BRACE`/`WALL`) | `"DISPLAY_MEMBERS"` | Object | — | 선택 |
-| 12.7 | 출력 성분 (`RATIO_AXIAL_STRESS`/`MAIN_REBAR`/`SHEAR_REINFORCEMENT`) | `"OUTPUT_COMPONENT"` | Object | — | 선택 |
-| 12.8 | 기둥 단면 크기 표시 (`SCALE_FACTOR` 0.1–100) | `"COLUMN_SECTION_SIZE"` | Object | — | 선택 |
-| 12.9 | 값 표시 형식 (`DECIMAL_PLACES`/`EXPONENTIAL`) | `"VALUE_OPTION"` | Object | — | 선택 |
+| 12.4 | 배근 표시 여부 | `"REINFORCEMENT"` | Boolean | `true` | Optional |
+| 12.5 | 배근 표시 타입 (`REBAR`/`AREA`/`RATIO`) | `"REINFORCEMENT_TYPE"` | String (oneOf) | `"REBAR"` | Optional |
+| 12.6 | 표시 부재 종류 (`BEAM`/`COLUMN`/`BRACE`/`WALL`) | `"DISPLAY_MEMBERS"` | Object | — | Optional |
+| 12.7 | 출력 성분 (`RATIO_AXIAL_STRESS`/`MAIN_REBAR`/`SHEAR_REINFORCEMENT`) | `"OUTPUT_COMPONENT"` | Object | — | Optional |
+| 12.8 | 기둥 단면 크기 표시 (`SCALE_FACTOR` 0.1–100) | `"COLUMN_SECTION_SIZE"` | Object | — | Optional |
+| 12.9 | 값 표시 형식 (`DECIMAL_PLACES`/`EXPONENTIAL`) | `"VALUE_OPTION"` | Object | — | Optional |
 | 12.10 | [When "VALUES" is true] Output Section Location | `"OUTPUT_SECT_LOCATION"` | Object | — | Optional |
 
 > `RESULT_GRAPHIC.LOAD_CASE_COMB`은 필수이며, `TYPE`은 콘크리트 설계 하중조합을 뜻하는 `"CBC"`, `NAME`은 조합 이름입니다. 성분(`COMPONENTS`)이 `"Combined"`일 때만 `REINFORCEMENT` 관련 세부 옵션이 유효합니다.
@@ -13130,7 +13143,7 @@ print(res.json())   # 성공 시 지정 경로에 이미지 파일 생성
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| 1 | Argument 래퍼 | `"Argument"` | Object | — | **필수** |
+| 1 | Argument 래퍼 | `"Argument"` | Object | — | **Required** |
 | 2 | Table Name · Response Table Title | `"TABLE_NAME"` | String | `""` | Optional |
 | 3 | Result Table Type · "COLUMNDESIGNFORCES" | `"TABLE_TYPE"` | String (enum) | — | **Required** |
 | 4 | Result Table Save Path | `"EXPORT_PATH"` | String | — | Optional |
@@ -13451,7 +13464,7 @@ for row in table["DATA"][:5]:
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| 1 | Argument 래퍼 | `"Argument"` | Object | — | **필수** |
+| 1 | Argument 래퍼 | `"Argument"` | Object | — | **Required** |
 | 2 | Table Name · Response Table Title | `"TABLE_NAME"` | String | `""` | Optional |
 | 3 | Result Table Type · "BRACEDESIGNFORCES" | `"TABLE_TYPE"` | String (enum) | — | **Required** |
 | 4 | Result Table Save Path | `"EXPORT_PATH"` | String | — | Optional |
@@ -13779,7 +13792,7 @@ for row in table["DATA"][:5]:
 
 | No. | 설명 | Key | 타입 | 기본값 | 필수 |
 |-----|------|-----|------|--------|------|
-| 1 | Argument 래퍼 | `"Argument"` | Object | — | **필수** |
+| 1 | Argument 래퍼 | `"Argument"` | Object | — | **Required** |
 | 2 | Table Name · Response Table Title | `"TABLE_NAME"` | String | `""` | Optional |
 | 3 | Result Table Type · "BEAMDESIGNFORCES" | `"TABLE_TYPE"` | String (enum) | — | **Required** |
 | 4 | Result Table Save Path | `"EXPORT_PATH"` | String | — | Optional |

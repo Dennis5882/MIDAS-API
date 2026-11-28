@@ -1109,7 +1109,7 @@ Schema·요청 예제에만 있는 Key (원문 오탈자 포함 가능): `bAUTO`
 |-----|------|-----|------------|---------|----------|
 | 1 | 기하 비선형 타입 (0=None, 1=Large Disp, 2=P-Delta) | `GNT` | Integer | - | Required |
 | 2 | 초기 하중 유형 (0=비선형 정적 해석, 1=정적/시공단계 결과 가져오기) | `ILT` | Integer | 0 | Required |
-| 3 | 초기 하중 목록 | `aILL` | Array[Object] | [] | Optional |
+| 3 | 초기 하중 목록 | `aILL` | Array[Object] | Empty | Optional |
 | (1) | 정적 하중 케이스명 | `SLC` | String | - | Required |
 | (2) | 스케일 계수 | `SF` | Real | - | Required |
 | (3) | 하중 케이스 타입 (1=Static, 18=Construction) | `LCT` | Integer | - | Required |
@@ -1285,9 +1285,9 @@ Hyper-S 비선형 시간이력 전역 제어를 정의합니다.
 | 선형 탐색 옵션 (LINE_SEARCH) | `LINE_SEARCH` | Object | - | Optional |
 | - 선형 탐색 사용 여부 | `OPT_USE` | Boolean | true | Required |
 | - 선형 탐색 옵션 (0=자동, 1=사용자 정의) | `LINE_SEARCH_OPT` | Integer(enum) | 0 | Required |
-| - 선형 탐색 시작 반복 번호 | `START_ITER_NO` | Integer | - | Required |
-| - 최대 선형 탐색 반복 횟수 | `MAX_LINE_SEARCH_ITER` | Integer | - | Required |
-| - 선형 탐색 허용오차 | `LINE_SEARCH_TOL` | Number | - | Required |
+| - 선형 탐색 시작 반복 번호 | `START_ITER_NO` | Integer | 3 | Required |
+| - 최대 선형 탐색 반복 횟수 | `MAX_LINE_SEARCH_ITER` | Integer | 4 | Required |
+| - 선형 탐색 허용오차 | `LINE_SEARCH_TOL` | Number | 0.5 | Required |
 
 **HINGE_OPT 서브 파라미터**
 
@@ -1300,6 +1300,11 @@ Hyper-S 비선형 시간이력 전역 제어를 정의합니다.
 > 표기해 실제 의미(둘 다 0/1 enum — 비선형 특성 적용 여부)와 기본값이 누락돼 있었음. 원문
 > [Time History Global Control (THGC-M1)](https://support.midasuser.com/hc/en-us/articles/56510942223513)
 > 기준으로 정정.
+>
+> 공식 표와 영문·한국어 원문을 함께 대조해 다음 표기를 유지합니다.
+> - `DISP` 기본값(문서 `-`, 공식 표 `[object Object]`) — 공식 표 기본값 칸이 객체 값을 `[object Object]`로 표시함.
+> - `FORCE` 기본값(문서 `-`, 공식 표 `[object Object]`) — 공식 표 기본값 칸이 객체 값을 `[object Object]`로 표시함.
+> - `ENERGY` 기본값(문서 `-`, 공식 표 `[object Object]`) — 공식 표 기본값 칸이 객체 값을 `[object Object]`로 표시함.
 
 ### 4-3. Request Body 예시
 
@@ -1933,7 +1938,7 @@ Hyper-S 비선형 시간이력 하중 케이스를 정의합니다.
 | 4 | 종료 시간 | `ENDTIME` | Number | - | Required |
 | 5 | 시간 증분 | `TIME_INC` | Number | - | Required |
 | 6 | 출력 스텝 증분 수 | `OUTPUT_STEP` | Integer | 1 | Required |
-| 6-a | 증분 스텝 수 (Nonlinear+Static일 때 사실상 필수) | `INC_STEP` | Integer | 1 | Optional |
+| 6-a | 증분 스텝 수 (Nonlinear+Static일 때 사실상 필수) | `INC_STEP` | Integer | 1 | **Required** |
 | 7 | 초기 하중 방법 (`"INIT"` / `"ORDER"`) | `INIT_METHOD` | String(enum) | - | Required |
 | 8 | 초기 하중 사용 (INIT_METHOD=INIT 시) | `USE_INIT_LOAD` | Boolean | - | Required |
 | 9 | D/V/A 결과 누적 (USE_INIT_LOAD=true 시) | `CUM_DVA` | Boolean | false | Required |
@@ -1947,11 +1952,11 @@ Hyper-S 비선형 시간이력 하중 케이스를 정의합니다.
 | 13 | 감쇠 설정 | `DAMPING` | Object | - | Required |
 | (1) | 감쇠 방법 (0=Direct Modal, 1=M&S Proportional, 2=Strain Energy, 3=Element M&S — Modal+Element(3) 조합은 거부됨) | `DAMPING_METHOD` | Integer(enum) | - | Required |
 | (2) | 전체 모드 감쇠비 (DAMPING_METHOD=0 시) | `ALL_DAMPING_RATIO` | Number | - | Required |
-| (3) | 모드별 감쇠비 오버라이드 목록 | `MODAL_DAMPING_RATIO` | Array[Object] | - | Optional |
+| (3) | 모드별 감쇠비 오버라이드 목록 | `MODAL_DAMPING_RATIO` | Array[Object] | - | **Required** |
 | - 모드 번호 | `MODE_NO` | Integer | - | Required |
 | - 감쇠비 | `DAMPING` | Number | - | Required |
-| 14 | 비선형 제어 파라미터 (ANAL_TYPE=1 시) | `NONL_CTRL_PARAM` | Object | - | Optional |
-| (1) | 반복 수행 여부 | `PERFORM_ITER` | Boolean | - | Required |
+| 14 | 비선형 제어 파라미터 (ANAL_TYPE=1 시) | `NONL_CTRL_PARAM` | Object | - | **Required** |
+| (1) | 반복 수행 여부 | `PERFORM_ITER` | Boolean | true | Optional |
 | (2) | 반복 제어 파라미터 | `ITER_CTRL` | Object | - | Required |
 | - 수렴 실패 허용 | `PERMIT_FAIL` | Boolean | - | - |
 | - 최대 반복 횟수 | `MAX_ITER` | Integer | - | - |
@@ -1962,7 +1967,7 @@ Hyper-S 비선형 시간이력 하중 케이스를 정의합니다.
 | - 스마트 이분법 | `SMART_BISECT` | Boolean | - | - |
 | - 발산 임계값 | `DIVERGENCE_THRESHOLD` | Number | - | - |
 | - 선형 탐색 옵션 (LINE_SEARCH) | `LINE_SEARCH` | Object | - | - |
-| (3) | 감쇠 매트릭스 업데이트 (0/1/2, DAMPING_METHOD가 M&S(1)/Element M&S(3)일 때만) | `DAMP_UPDATE` | Integer(enum) | - | Optional |
+| (3) | 감쇠 매트릭스 업데이트 (0/1/2, DAMPING_METHOD가 M&S(1)/Element M&S(3)일 때만) | `DAMP_UPDATE` | Integer(enum) | 0 | Optional |
 
 > ⚠️ 2026-08-25 확인: 이전 문서는 다음 3개를 완전히 누락하고 있었음(원문
 > [Time History Load Cases (THIS-M1)](https://support.midasuser.com/hc/en-us/articles/56538335819673)
@@ -1978,9 +1983,9 @@ Hyper-S 비선형 시간이력 하중 케이스를 정의합니다.
 | 1 | 계수 산정 방식 (0=Direct Specification, 1=Calculate from Modal Damping) | `COEF_INPUT` | Integer(enum) | - | Required |
 | COEF_INPUT=0 | | | | | |
 | 2 | 질량 비례 사용 (USE_MASS/USE_STIFF 중 최소 1개는 true) | `USE_MASS` | Boolean | - | Optional |
-| 3 | 질량 계수(Rm) | `MASS_VALUE` | Number | - | Optional |
+| 3 | 질량 계수(Rm) | `MASS_VALUE` | Number | - | **Required** |
 | 4 | 강성 비례 사용 | `USE_STIFF` | Boolean | - | Optional |
-| 5 | 강성 계수(Rk) | `STIFF_VALUE` | Number | - | Optional |
+| 5 | 강성 계수(Rk) | `STIFF_VALUE` | Number | - | **Required** |
 | COEF_INPUT=1 | | | | | |
 | 2 | 계산 기준 (0=Frequency, 1=Period) | `COEF_CALC` | Integer(enum) | - | Required |
 | 3 | 모드1 주파수(COEF_CALC=0) / 주기(COEF_CALC=1) | `FREQ1`/`PERIOD1` | Number | - | Required |
@@ -1994,22 +1999,22 @@ Hyper-S 비선형 시간이력 하중 케이스를 정의합니다.
 |-----|------|-----|------------|---------|----------|
 | 1 | 증분 방법 (0=Load Control, 1=Displacement Control) | `INC_METHOD` | Integer(enum) | - | Required |
 | INC_METHOD=0 | | | | | |
-| 2 | Scale Factor | `SF` | Number | 1 | Optional |
+| 2 | Scale Factor | `SF` | Number | 1 | **Required** |
 | INC_METHOD=1(`DISP_CTRL` 오브젝트) | | | | | |
 | 2 | 제어 옵션 (0=Global, 1=Master Node Control) | `CTRL_OPT` | Integer(enum) | - | Required |
-| 3 | 최대 병진 변위(Global 전용) | `MAX_TRANS_DISP` | Number | - | Optional |
-| 4 | Master Node No.(Master Node Control 전용) | `MASTER_NODE` | Integer | - | Optional |
-| 5 | Master Direction(0/1/2, Master Node Control 전용) | `MASTER_DIR` | Integer(enum) | - | Optional |
-| 6 | 최대 변위(Master Node Control 전용) | `MAX_DISP` | Number | - | Optional |
+| 3 | 최대 병진 변위(Global 전용) | `MAX_TRANS_DISP` | Number | - | **Required** |
+| 4 | Master Node No.(Master Node Control 전용) | `MASTER_NODE` | Integer | - | **Required** |
+| 5 | Master Direction(0/1/2, Master Node Control 전용) | `MASTER_DIR` | Integer(enum) | - | **Required** |
+| 6 | 최대 변위(Master Node Control 전용) | `MAX_DISP` | Number | - | **Required** |
 
 **시간 적분 방법 (ANAL_METHOD=1 Direct Integration 전용, `TIME_PARAM`)**
 
 | No. | 설명 | Key | Value Type | Default | Required |
 |-----|------|-----|------------|---------|----------|
 | 1 | 적분 방법 (0=Newmark, 1=HHT) | `METHOD` | Integer(enum) | - | Required |
-| 2 | Newmark 방법 타입(METHOD=0) 0=Constant/1=Linear Accel./2=User Input | `NEWMARK_METHOD` | Integer(enum) | - | Optional |
-| 3 | Gamma(NEWMARK_METHOD=2 시) | `GAMMA` | Number | 0.5 | Optional |
-| 4 | Beta(NEWMARK_METHOD=2 시) | `BETA` | Number | 0.25 | Optional |
+| 2 | Newmark 방법 타입(METHOD=0) 0=Constant/1=Linear Accel./2=User Input | `NEWMARK_METHOD` | Integer(enum) | - | **Required** |
+| 3 | Gamma(NEWMARK_METHOD=2 시) | `GAMMA` | Number | 0.5 | **Required** |
+| 4 | Beta(NEWMARK_METHOD=2 시) | `BETA` | Number | 0.25 | **Required** |
 
 **비선형 경계요소 해석 (`BOUNDARY_NL_ANAL`)**
 
@@ -2166,6 +2171,9 @@ print("THIS-M1 GET:", resp.status_code)
 ---
 
 ## 8. /db/THFC – Time History Functions
+
+> ⚠️ 공식 표와 영문·한국어 원문을 함께 대조해 다음 표기를 유지합니다.
+> - `aFUNCDATA` 타입(문서 `Array[Object]`, 공식 표 `Object`) — 공식 글 35964507702937 JSON Schema의 `THFC.aFUNCDATA`에 `type: array`가 명시됨.
 
 시간이력 함수(시간-값 쌍 또는 사인파 함수)를 정의합니다.
 

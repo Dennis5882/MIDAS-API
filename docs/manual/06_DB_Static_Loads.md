@@ -1428,6 +1428,9 @@ midas_api("DELETE", "/db/FMLD", {"Assign": {"200": {}}})
 
 ## 16. /db/POSP — Parameter of Soil Properties
 
+> ⚠️ 공식 표와 영문·한국어 원문을 함께 대조해 다음 표기를 유지합니다.
+> - `ITEMS` 타입(문서 `Array [Object]`, 공식 표 `Arrary [Object]`) — 공식 표의 Arrary는 철자 오류이며 같은 글의 요청 예제는 객체 배열을 사용함.
+
 > 토압 계산에 사용되는 지반 특성 파라미터를 정의합니다.
 
 **Input URI:** `{base url}/db/POSP`  
@@ -1507,6 +1510,10 @@ midas_api("DELETE", "/db/POSP", {"Assign": {"1": {}}})
 
 ## 17. /db/EPST — Static Earth Pressure
 
+> ⚠️ 공식 표와 영문·한국어 원문을 함께 대조해 다음 표기를 유지합니다.
+> - `DIR` 타입(문서 `String`, 공식 표 `Stringr`) — 공식 Value 타입 철자나 괄호가 어긋남. 같은 글의 Schema와 요청 예제를 근거로 첨부함.
+> - `EP_TYPE` 타입(문서 `String`, 공식 표 `Number`) — 공식 글 49511059178521 요청 예제 「Import to Json」의 `Assign.1.EP_TYPE`가 `"AT_REST"`(string)를 사용함.
+
 > 정적 토압을 산정하여 벽체 요소에 부가합니다.
 
 **Input URI:** `{base url}/db/EPST`  
@@ -1554,10 +1561,10 @@ midas_api("DELETE", "/db/POSP", {"Assign": {"1": {}}})
 | 9 | Soil Properties Name | `"SOIL_PROP"` | String | - | Required |
 | 10 | Selection Type (`"GRUP"` / `"ELEMENT"`) | `"SEL_TYPE"` | String | - | Required |
 | 11 | Element Type (`"FRAME"` / `"PLANAR"`) | `"ELEM_TYPE"` | String | - | Required |
-| 12 | Node List | `"NODE_LIST"` | Array \[Integer\] | - | Optional |
-| 13 | Element List | `"ELEM_LIST"` | Array \[Integer\] | - | Optional |
+| 12 | Node List | `"NODE_LIST"` | Array(Integer) | - | Optional |
+| 13 | Element List | `"ELEM_LIST"` | Array(Integer) | - | Optional |
 | 14 | Loading Area Group Name | `"LOADING_AREA_GROUP"` | Integer | - | Optional |
-| 15 | Pressure Profile items | `"PRES_PROFILE_ITEMS"` | Array \[Object\] | - | Optional |
+| 15 | Pressure Profile items | `"PRES_PROFILE_ITEMS"` | Array(Object) | - | Optional |
 | (1) | Level of pressure profile point | `"LEVEL"` | Number | - | Required |
 | (2) | Soil pressure at level | `"SOIL_PRES"` | Number | - | Required |
 | (3) | Additional pressure at level | `"ADD_PRES"` | Number | - | Required |
@@ -1601,6 +1608,9 @@ midas_api("DELETE", "/db/EPST", {"Assign": {"1": {}}})
 ---
 
 ## 18. /db/EPSE — Seismic Earth Pressure
+
+> ⚠️ 공식 표와 영문·한국어 원문을 함께 대조해 다음 표기를 유지합니다.
+> - `DIR` 타입(문서 `String`, 공식 표 `Stringr`) — 공식 Value 타입 철자나 괄호가 어긋남. 같은 글의 Schema와 요청 예제를 근거로 첨부함.
 
 > 지진 시 동적 토압을 산정하여 벽체 요소에 부가합니다.
 
@@ -1650,9 +1660,9 @@ midas_api("DELETE", "/db/EPST", {"Assign": {"1": {}}})
 | 11 | Selection Type · GROUP: Use Area Group from Loading Area Plane · ELEMENT: Use selected boundary elements | `"SEL_TYPE"` | String | - | **Required** |
 | 12 | Element Type · FRAME: Apply loads to frame nodes · PLANAR: Apply loads to planar element nodes | `"ELEM_TYPE"` | String | `"ELEM"` | Optional |
 | 13 | Node List | `"NODE_LIST"` | Array \[Integer\] | - | Optional |
-| 14 | Element List | `"ELEM_LIST"` | Array \[Integer\] | - | Optional |
+| 14 | Element List | `"ELEM_LIST"` | Array(Integer) | - | Optional |
 | 15 | Loading Area Group Name | `"LOADING_AREA_GROUP"` | Integer | - | Optional |
-| 16 | Pressure Profile Items | `"PRES_PROFILE_ITEMS"` | Array \[Object\] | - | Optional |
+| 16 | Pressure Profile Items | `"PRES_PROFILE_ITEMS"` | Array(Object) | - | Optional |
 | (1) | Level | `"LEVEL"` | Number | - | Required |
 | (2) | Horizontal Coefficient KH | `"KH"` | Number | - | Required |
 | (3) | Relative Displacement | `"REL_DISP"` | Number | - | Required |

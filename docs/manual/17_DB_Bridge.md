@@ -619,11 +619,11 @@ for key, val in resp.json().get("ULFC", {}).items():
 | **DGRM_TYPE = 0(응력)에서만** | | | | | |
 | 10 | [When DGRM_TYPE = 0 (Stress)] Allowable Stress Line | `"STRESS_LINE"` | Object | — | Optional |
 | (1) | 허용응력선 표시 여부 | `STRESS_LINE.OPT_USE` | Boolean | `false` | Optional |
-| (2) | 압축 허용응력(OPT_USE=true 시) | `STRESS_LINE.COMP` | Integer | — | 조건부 **Required** |
-| (3) | 인장 허용응력(OPT_USE=true 시) | `STRESS_LINE.TENS` | Integer | — | 조건부 **Required** |
+| (2) | 압축 허용응력(OPT_USE=true 시) | `STRESS_LINE.COMP` | Integer | — | **Required** |
+| (3) | 인장 허용응력(OPT_USE=true 시) | `STRESS_LINE.TENS` | Integer | — | **Required** |
 | 11 | Stage list for diagram generation | `"STAGE_LIST"` | Array [String] | — | **Required** |
 | 12 | Export path for the generated diagram image | `"EXPORT_PATH"` | String | — | **Required** |
-| 13 | Export image file extension · "bmp" · "jpg" · "emf" | `"EXTENSION"` | String (enum) | — | **Required** |
+| 13 | Export image file extension · "bmp" · "jpg" · "emf" | `"EXTENSION"` | enum (string) | — | **Required** |
 
 > ✅ **2026-09-28 완전 해결 확인:** 원문 Specifications 표의 응력 성분 4번이 `"Sbz" 4`(부호·콜론
 > 모두 오표기)였던 것이 현재 `-Sbz: 4`로

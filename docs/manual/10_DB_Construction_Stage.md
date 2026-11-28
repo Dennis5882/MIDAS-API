@@ -64,21 +64,21 @@
 | 4 | 결과 저장 – 추가 스텝 | `bSV_STEP` | Boolean | false | Optional |
 | 5 | 재료 비선형 해석을 위한 하중 증분 스텝 사용 여부 | `bLOAD_STEP` | Boolean | false | Optional |
 | 6 | 하중 증분 스텝 수 (bLOAD_STEP=true 시) | `INCRE_STEP` | Integer | - | Required |
-| 7 | 추가 스텝 목록 | `ADD_STEP` | Array[Number] | [] | Optional |
-| 8 | 구조 그룹 활성화 목록 | `ACT_ELEM` | Array[Object] | [] | Optional |
+| 7 | 추가 스텝 목록 | `ADD_STEP` | Array[Number] | Empty | Optional |
+| 8 | 구조 그룹 활성화 목록 | `ACT_ELEM` | Array[Object] | Empty | Optional |
 | (1) | 활성화할 구조 그룹명 | `GRUP_NAME` | String | - | Required |
 | (2) | 재료 나이 (일) | `AGE` | Number | 0 | Optional |
-| 9 | 구조 그룹 비활성화 목록 | `DACT_ELEM` | Array[Object] | [] | Optional |
+| 9 | 구조 그룹 비활성화 목록 | `DACT_ELEM` | Array[Object] | Empty | Optional |
 | (1) | 비활성화할 구조 그룹명 | `GRUP_NAME` | String | - | Required |
 | (2) | 요소력 재분배 (%) | `REDIST` | Number | 0 | Optional |
-| 10 | 경계 그룹 활성화 목록 | `ACT_BNGR` | Array[Object] | [] | Optional |
+| 10 | 경계 그룹 활성화 목록 | `ACT_BNGR` | Array[Object] | Empty | Optional |
 | (1) | 활성화할 경계 그룹명 | `BNGR_NAME` | String | - | Required |
 | (2) | 지점/스프링 위치 (`"DEFORMED"` / `"ORIGINAL"`) | `POS` | String | - | Required |
-| 11 | 비활성화할 경계 그룹명 목록 | `DACT_BNGR` | Array[String] | [] | Optional |
-| 12 | 하중 그룹 활성화 목록 | `ACT_LOAD` | Array[Object] | [] | Optional |
+| 11 | 비활성화할 경계 그룹명 목록 | `DACT_BNGR` | Array[String] | Empty | Optional |
+| 12 | 하중 그룹 활성화 목록 | `ACT_LOAD` | Array[Object] | Empty | Optional |
 | (1) | 활성화할 하중 그룹명 | `LOAD_NAME` | String | - | Required |
 | (2) | 활성 일 (`"FIRST"` / `"LAST"` / 숫자 문자열) | `DAY` | String | `"FIRST"` | Optional |
-| 13 | 하중 그룹 비활성화 목록 | `DACT_LOAD` | Array[Object] | [] | Optional |
+| 13 | 하중 그룹 비활성화 목록 | `DACT_LOAD` | Array[Object] | Empty | Optional |
 | (1) | 비활성화할 하중 그룹명 | `LOAD_NAME` | String | - | Required |
 | (2) | 비활성 일 (`"FIRST"` / `"LAST"` / 숫자 문자열) | `DAY` | String | `"FIRST"` | Optional |
 
@@ -1448,10 +1448,10 @@ print("HPCE POST:", resp.status_code)
 | 5 | 활성화 구조 그룹 목록 | `ACT_ELEM` | Array[String] | - | Required |
 | 6 | 활성화 경계 그룹 목록 | `ACT_BNGR` | Array[String] | - | Required |
 | 7 | 비활성화 경계 그룹 목록 | `DACT_BNGR` | Array[String] | - | Required |
-| 8 | 활성화 하중 그룹 목록 | `ACT_LOAD` | Array[Object] | [] | Optional |
+| 8 | 활성화 하중 그룹 목록 | `ACT_LOAD` | Array[Object] | Empty | Optional |
 | (1) | 하중 케이스명 | `LOAD_NAME` | String | - | Optional |
 | (2) | 활성화 일 | `DAY` | String | - | Optional |
-| 9 | 비활성화 하중 그룹 목록 | `DACT_LOAD` | Array[Object] | [] | Optional |
+| 9 | 비활성화 하중 그룹 목록 | `DACT_LOAD` | Array[Object] | Empty | Optional |
 | (1) | 하중 케이스명 | `LOAD_NAME` | String | - | Optional |
 | (2) | 비활성화 일 | `DAY` | String | - | Optional |
 

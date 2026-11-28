@@ -871,7 +871,7 @@ Hyper-S(MEC) 솔버용 수화열 해석 제어입니다. 반복 횟수(`ITER`)�
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 1 | Final Stage · Last Stage: true · Other Stage: false | `"FINAL_STAGE"` | Boolean | true | Optional |
+| 1 | Final Stage · Last Stage: true · Other Stage: false | `"FINAL_STAGE"` | boolean (enum) | true | Optional |
 | 2 | [When FINAL_STAGE = false] Stage Name | `"STAGE_NAME"` | String | - | **Required** |
 | 3 | Initial Temperature | `"INIT_TEMP"` | Number | 20 | Optional |
 | 4 | [When FINAL_STAGE = false] Element Stress Evaluation · Center: CENTER · Gauss: GAUSS · Nodal Point: NODAL | `"EVAL"` | String (enum) | "GAUSS" | Optional |
@@ -1146,6 +1146,13 @@ set_moving_load_control()
 > 표에 enum 값 목록이 있는데도 이전 문서엔 누락돼 있었고, Required 여부도 실제로는 (조건부)
 > Required인데 Optional로 잘못 기재돼 있었다. `BRIDGE2` 객체(TB 10002-2017/Q·CR 9300-2018
 > 코드 전용)는 통째로 누락돼 있어 아래에 별도 표로 신규 추가했다(아티클 id `35989644995609`).
+>
+> 공식 표와 영문·한국어 원문을 함께 대조해 다음 표기를 유지합니다.
+> - `RC_bCASE2` 타입(문서 `Boolean (기본 false)`, 공식 표 `Boolean`) — 이 표에는 false 기본값이 적힌 칸이 없어 타입에서 기본값 표기를 빼면 정보가 사라짐.
+> - `STL_bCASE2` 타입(문서 `Boolean (기본 false)`, 공식 표 `Boolean`) — 이 표에는 false 기본값이 적힌 칸이 없어 타입에서 기본값 표기를 빼면 정보가 사라짐.
+> - `bCHECK` 타입(문서 `Boolean (기본 false)`, 공식 표 `Boolean`) — 이 표에는 false 기본값이 적힌 칸이 없어 타입에서 기본값 표기를 빼면 정보가 사라짐.
+> - `bLFAI` 타입(문서 `Boolean (기본 false)`, 공식 표 `Boolean`) — 이 표에는 false 기본값이 적힌 칸이 없어 타입에서 기본값 표기를 빼면 정보가 사라짐.
+> - `bLENGTH` 타입(문서 `Boolean (기본 false)`, 공식 표 `Boolean`) — 이 표에는 false 기본값이 적힌 칸이 없어 타입에서 기본값 표기를 빼면 정보가 사라짐.
 
 **FREQ 객체 주요 키** (교량 형식별 진동수 산정 파라미터):
 
@@ -1697,6 +1704,9 @@ set_settlement_control()
 > ⚠️ **2026-08-25 확인:** `MAXIMUM_DISPLACEMENT`(상단 12번, `ARCLEN_ITEMS`(6) 모두)가 원문
 > Specifications 표·예제 둘 다 기본값 `0`/Optional인데 이전엔 Required로 잘못 기재돼 있었다
 > (아티클 id `35990229420441`).
+>
+> 공식 표와 영문·한국어 원문을 함께 대조해 다음 표기를 유지합니다.
+> - `INITIAL_FORCE_RATIO_ARC_LEN` 타입(문서 `Number`, 공식 표 `Integer`) — 공식 글 35990229420441 JSON Schema의 `NLCT.INITIAL_FORCE_RATIO_ARC_LEN`에 `type: number`가 명시됨.
 
 ### Parameters — Displacement-Control (`ITERATION_METHOD = "DISP"`)
 
@@ -1905,16 +1915,16 @@ Hyper-S(MEC) 솔버용 비선형 해석 제어입니다. `LC_SCOPE`로 적용 �
 
 | Key | Value Type | Default | Description |
 | --- | --- | --- | --- |
-| `"STEP_MODE"` | String (enum: `"AUTO"`/`"MANUAL"`) | - | 스텝 모드 (Required). `ITER_METHOD="ARC"`일 때는 UI상 `"AUTO"`로 고정 |
-| `"NUMBER_STEPS"` | Integer (≥1) | 1 | 스텝 수 (`STEP_MODE="AUTO"`일 때 필수) |
-| `"OUTPUT"` | String (enum: `"EVERY"`/`"LAST"`) | "EVERY" | 중간 출력 (`STEP_MODE="AUTO"`일 때 필수) |
-| `"MANUAL_STEPS"` | Array [Number] (≥1개) | - | 사용자 정의 스텝 목록 (`STEP_MODE="MANUAL"`일 때) |
-| `"MIN_ARC_RATIO"` | Number (>0) | 0.25 | (`ITER_METHOD="ARC"`) 최소 호장 조정 비율 |
-| `"MAX_ARC_RATIO"` | Number (>0) | 4.0 | (`ITER_METHOD="ARC"`) 최대 호장 조정 비율 |
-| `"MAX_ARC_INCREMENTS"` | Integer (≥1) | 100 | (`ITER_METHOD="ARC"`) 최대 호장 증분 수 |
-| `"MASTER_NODE"` | Integer | 0 | (`ITER_METHOD="DISP"`) 주 절점 ID |
-| `"MAX_DISP"` | Number (0 금지) | - | (`ITER_METHOD="DISP"`) 최대 변위 — 서버가 0을 채우면 검증 실패하므로 명시적 값 필수 |
-| `"DIRECTION"` | String (enum: `"DX"`/`"DY"`/`"DZ"`) | "DX" | (`ITER_METHOD="DISP"`) 방향 |
+| `"STEP_MODE"` | string (enum) | - | 스텝 모드 (Required). `ITER_METHOD="ARC"`일 때는 UI상 `"AUTO"`로 고정 |
+| `"NUMBER_STEPS"` | integer | 1 | 스텝 수 (`STEP_MODE="AUTO"`일 때 필수) |
+| `"OUTPUT"` | string (enum) | "EVERY" | 중간 출력 (`STEP_MODE="AUTO"`일 때 필수) |
+| `"MANUAL_STEPS"` | array | - | 사용자 정의 스텝 목록 (`STEP_MODE="MANUAL"`일 때) |
+| `"MIN_ARC_RATIO"` | number | - | (`ITER_METHOD="ARC"`) 최소 호장 조정 비율 |
+| `"MAX_ARC_RATIO"` | number | - | (`ITER_METHOD="ARC"`) 최대 호장 조정 비율 |
+| `"MAX_ARC_INCREMENTS"` | integer | - | (`ITER_METHOD="ARC"`) 최대 호장 증분 수 |
+| `"MASTER_NODE"` | Integer | - | (`ITER_METHOD="DISP"`) 주 절점 ID |
+| `"MAX_DISP"` | number | - | (`ITER_METHOD="DISP"`) 최대 변위 — 서버가 0을 채우면 검증 실패하므로 명시적 값 필수 |
+| `"DIRECTION"` | string (enum) | "DX" | (`ITER_METHOD="DISP"`) 방향 |
 | `"REF_NODE"` | Object | - | (`ITER_METHOD="DISP"`) 기준(상대) 절점 — 하위 `OPT_USE`(Boolean, Required)/`NODE`(Integer, `OPT_USE=false`시 기본 0) |
 
 ### Parameters — CONV_CRITERIA 객체
@@ -1924,24 +1934,24 @@ Hyper-S(MEC) 솔버용 비선형 해석 제어입니다. `LC_SCOPE`로 적용 �
 | Key | Value Type | Default | Description |
 | --- | --- | --- | --- |
 | `"OPT_USE"` | Boolean | - | 해당 기준 사용 여부 (Required) |
-| `"VALUE"` | Number (0 초과 1 이하) | 0.001 | 허용오차 (`OPT_USE=true`일 때 필수) |
+| `"VALUE"` | number | - | 허용오차 (`OPT_USE=true`일 때 필수) |
 
 ### Parameters — ADVANCED 객체 (고급 비선형 설정, 전체 Optional — 미지정 시 서버 기본값 사용)
 
 | Key | Value Type | Default | Description |
 | --- | --- | --- | --- |
 | `"OPT_USE_DEFAULT"` | Boolean | - | 기본 설정 사용 여부 (Required — true면 아래 필드 모두 미지정 허용) |
-| `"STIFF_UPDATE_SCHEME"` | String (enum: `"CUSTOM"`/`"FULL_NEWTON_RAPHSON"`/`"INITIAL_STIFF"`) | - | 강성 갱신 방식 |
+| `"STIFF_UPDATE_SCHEME"` | string (enum) | - | 강성 갱신 방식 |
 | `"ITER_BEFORE_STIFF_UPDATE"` | Integer | - | 강성 갱신 전 반복 횟수 (`CUSTOM`이 아니면 방식별 서버 자동값 적용) |
-| `"OPT_TERMINATE_ON_FAILED_CONV"` | Boolean | false | 수렴 실패 시 해석 종료 여부 |
-| `"MAX_ITER_PER_INCREMENT"` | Integer | 50 | 증분당 최대 반복 횟수 |
-| `"MAX_BISECTION_LEVEL"` | Integer (0~20) | 5 | 최대 이분(Bisection) 단계 |
-| `"OPT_SMART_BISECTION"` | Boolean | false | Smart Bisection 사용 여부 |
-| `"DIVERGENCE_THRESHOLD"` | Number | 3 | 발산 판정 임계값 |
-| `"OPT_ENABLE_LINE_SEARCH"` | Boolean | true | Line Search 사용 여부 |
-| `"LINE_SEARCH_OPTION"` | String (enum: `"AUTO"`/`"MANUAL"`) | - | Line Search 방식 |
-| `"MAX_LINE_SEARCH_PER_ITER"` | Integer | 4 | 반복당 최대 Line Search 횟수 |
-| `"LINE_SEARCH_TOL"` | Number | 0.5 | Line Search 허용오차 |
+| `"OPT_TERMINATE_ON_FAILED_CONV"` | Boolean | - | 수렴 실패 시 해석 종료 여부 |
+| `"MAX_ITER_PER_INCREMENT"` | Integer | - | 증분당 최대 반복 횟수 |
+| `"MAX_BISECTION_LEVEL"` | integer | - | 최대 이분(Bisection) 단계 |
+| `"OPT_SMART_BISECTION"` | Boolean | - | Smart Bisection 사용 여부 |
+| `"DIVERGENCE_THRESHOLD"` | Number | - | 발산 판정 임계값 |
+| `"OPT_ENABLE_LINE_SEARCH"` | Boolean | - | Line Search 사용 여부 |
+| `"LINE_SEARCH_OPTION"` | string (enum) | - | Line Search 방식 |
+| `"MAX_LINE_SEARCH_PER_ITER"` | Integer | - | 반복당 최대 Line Search 횟수 |
+| `"LINE_SEARCH_TOL"` | Number | - | Line Search 허용오차 |
 
 ### Request Body — Force Control
 
@@ -2154,9 +2164,9 @@ update_nonlinear_control_m1_arc()
 |-----|-------------|-----|------------|---------|----------|
 | - | Number of Load Steps | `"iLSTEP"` | Integer | - | **Required** |
 | - | Maximum Number of Iteration/Load Step | `"iMAXITER"` | Integer | - | **Required** |
-| - | Convergence Failure | `"CF"` | Boolean | false | - |
-| - | Max Bi-Section Level for a Load Step | `"BSSTEP"` | Integer | - | Optional |
-| - | Max Allowable Diverged Steps | `"ADSTEP"` | Integer | - | Optional |
+| - | Convergence Failure | `"CF"` | Boolean | - | - |
+| - | Max Bi-Section Level for a Load Step | `"BSSTEP"` | Integer | - | - |
+| - | Max Allowable Diverged Steps | `"ADSTEP"` | Integer | - | - |
 | - | Energy Norm 사용 / 값 | `"bENEG"` / `"EV"` | Boolean / Number | - | Optional |
 | - | Displacement Norm 사용 / 값 | `"bDISP"` / `"DV"` | Boolean / Number | - | Optional |
 | - | Force Norm 사용 / 값 | `"bFORC"` / `"FV"` | Boolean / Number | - | Optional |
@@ -2334,7 +2344,7 @@ Hyper-S(MEC) 솔버용 시공단계 해석 제어입니다. 기능별로 중첩 
 
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
-| 1 | Final Stage | `"bLAST_FINAL"` | Boolean | - | **Required** |
+| 1 | Final Stage | `"bLAST_FINAL"` | Boolean | true | **Required** |
 | 2 | Analysis Type Object | `"ANAL_TYPE"` | Object | - | Optional |
 | 3 | [When bLAST_FINAL = false] Restart Construction Stage Analysis | `"RESTART_CS_ANAL"` | Object | - | Optional |
 | 4 | Load Cases to be Distinguished from Dead Load for C.S. Output | `"ERECTION_LOAD"` | Array [Object] | - | Optional |
@@ -2344,7 +2354,7 @@ Hyper-S(MEC) 솔버용 시공단계 해석 제어입니다. 기능별로 중첩 
 | 8 | Initial Force Control | `"INITIAL_CONTROL"` | Object | - | Optional |
 | 9 | Initial Displacement for C.S. | `"INITIAL_DISP"` | Object | - | Optional |
 | 10 | Consider Stress Decrease at Transfer Length Zone by Post-tension | `"STRESS_DECREASE"` | Object | - | Optional |
-| 11 | Beam Section Property Option (Constant: 0 / Change with Tendon: 1) | `"iBSC"` | Integer | 1 | Optional |
+| 11 | Beam Section Property Option (Constant: 0 / Change with Tendon: 1) | `"iBSC"` | integer (enum) | 1 | Optional |
 | 12 | Frame Output 설정 | `"FRAME_OUTPUT"` | Object | - | Optional |
 | 13 | Save Output of Current Stage (Beam/Truss) | `"bSAVE_OCS"` | Boolean | false | Optional |
 | 14 | Nonlinear Analysis Control (`iINC_NLA` ≠ 0일 때) | `"NONL_CONTROL"` | Object | - | Optional |
@@ -2352,13 +2362,16 @@ Hyper-S(MEC) 솔버용 시공단계 해석 제어입니다. 기능별로 중첩 
 > ⚠️ **2026-08-25 확인:** `iBSC`/`FRAME_OUTPUT`/`bSAVE_OCS`/`NONL_CONTROL` 4개 필드가 통째로
 > 누락돼 있었다. 특히 `iBSC`는 레거시 `STCT`(17번 절)와 이름은 같지만 **기본값이 다르다**
 > (STCT는 0, STCT-M1은 1)(아티클 id `57053813627673`).
+>
+> 공식 표와 영문·한국어 원문을 함께 대조해 다음 표기를 유지합니다.
+> - `NONL_CONTROL` 기본값(문서 `-`, 공식 표 `[object Object]`) — 공식 표 기본값 칸이 객체 값을 `[object Object]`로 표시함.
 
 ### Parameters — ANAL_TYPE 객체
 
 | Key | Value Type | Description |
 |-----|------------|-------------|
-| `"iINC_NLA"` | Integer | 해석 타입 (Linear: 0 / Geometric Nonlinear: 1 / Material Nonlinear: 2 / Geometric+Material Nonlinear: 3) |
-| `"iNLA_TYPE"` | Integer | 단계 옵션 (Independent: 0 / Accumulative: 1) — `iINC_NLA`=2 또는 3이면 `iNLA_TYPE`=1만 허용 |
+| `"iINC_NLA"` | integer (enum) | 해석 타입 (Linear: 0 / Geometric Nonlinear: 1 / Material Nonlinear: 2 / Geometric+Material Nonlinear: 3) |
+| `"iNLA_TYPE"` | integer (enum) | 단계 옵션 (Independent: 0 / Accumulative: 1) — `iINC_NLA`=2 또는 3이면 `iNLA_TYPE`=1만 허용 |
 | `"bIEMF"` | Boolean | Include Equilibrium Element Nodal Forces (`iINC_NLA`=1 & `iNLA_TYPE`=0일 때만) |
 | `"bINC_PDL"` | Boolean | Include P-Delta Effect (`iINC_NLA`=0일 때만) |
 | `"bINC_TDE"` | Boolean | Include Time Dependent Effect (`iNLA_TYPE`=1 & `iINC_NLA`∈{0,1}일 때만) |
@@ -2371,15 +2384,15 @@ Hyper-S(MEC) 솔버용 시공단계 해석 제어입니다. 기능별로 중첩 
 | Key | Value Type | Description |
 |-----|------------|-------------|
 | `"OPT_USE"` | Boolean | Restart 해석 사용 여부 |
-| `"RESTART_STAGE"` | Array [String] | Restart 대상 시공단계 목록 |
+| `"RESTART_STAGE"` | array | Restart 대상 시공단계 목록 |
 
 ### Parameters — ERECTION_LOAD 항목
 
 | Key | Value Type | Description |
 |-----|------------|-------------|
 | `"LTYPECC"` | String | Erection Load Case Name |
-| `"EREC"` | String | Load Type for C.S (`"D"`, `"W"`, …) |
-| `"vLCNAME"` | Array [String] | Load Case Name List |
+| `"EREC"` | string (enum) | Load Type for C.S (`"D"`, `"W"`, …) |
+| `"vLCNAME"` | array | Load Case Name List |
 
 ### Parameters — TIME_DEP_CONTROL 객체
 
@@ -2387,7 +2400,7 @@ Hyper-S(MEC) 솔버용 시공단계 해석 제어입니다. 기능별로 중첩 
 |-----|------------|-------------|
 | `"CREEP_SHRINKAGE"` | Object | 크리프·건조수축 설정 |
 | `"CREEP_SHRINKAGE.OPT_USE"` | Boolean | 사용 여부 |
-| `"CREEP_SHRINKAGE.TYPE"` | String | (`"CREEP"`/`"SHRINKAGE"`/`"BOTH"`) |
+| `"CREEP_SHRINKAGE.TYPE"` | string (enum) | (`"CREEP"`/`"SHRINKAGE"`/`"BOTH"`) |
 | `"CREEP_SHRINKAGE.bOUCC"` | Boolean | Only User's Creep Coefficient |
 | `"CREEP_SHRINKAGE.INTERNAL_STEP"` | Object | `{ "OPT_USE": bool, "iITS": int }` |
 | `"CREEP_SHRINKAGE.AUTO_TIME_STEP"` | Object | `{ "OPT_USE": bool, "iT10","iT100","iT1K","iT5K","iT10K": int }` |
@@ -2406,8 +2419,8 @@ Hyper-S(MEC) 솔버용 시공단계 해석 제어입니다. 기능별로 중첩 
 
 | Key | Value Type | Default | Description |
 | --- | --- | --- | --- |
-| `"iLSTEP"` | Integer (≥1) | - | 증분 스텝 수 |
-| `"INTOUT"` | String (enum: `"EVERY"`/`"LAST"`) | "LAST" | 중간 출력 요청 |
+| `"iLSTEP"` | integer | - | 증분 스텝 수 |
+| `"INTOUT"` | string (enum) | "LAST" | 중간 출력 요청 |
 | `"ADVANCED"` | Object | - | 고급 설정 — 하위 `USE_DEF_SETTINGS`(Boolean, Required, 기본 true)/`STIFF_UPD_SCHEME`(Integer enum 0=Custom·1=Full Newton-Raphson·2=Initial Stiffness, `USE_DEF_SETTINGS=false`일 때)/`ITER_BEF_UPDATE`(Integer, `STIFF_UPD_SCHEME=0`일 때만)/`TERMINATE_ON_FAIL_CONV`(Boolean)/`MAX_ITER_INCREMENT`(Integer)/`MAX_BISECT_LEVEL`(Integer)/`SMART_BISECT`(Boolean)/`DIVERG_THRESH`(Number)/`ENABLE_LINE_SEARCH`(Boolean, 기본 true)/`LINE_SEARCH`(Object, `ENABLE_LINE_SEARCH=true`일 때 필수 — 하위 `OPT_USE`(Boolean,Required)/`LINE_SEARCH_TYPE`(enum `"AUTO"`/`"USER"`, 기본 AUTO)/`MAX_LN_SRCH_ITER`(Integer, `LINE_SEARCH_TYPE="USER"`일 때)/`LN_SEARCH_TOL`(Number, 〃)) |
 | `"DISP"`/`"LOAD"`/`"WORK"` | Object | - | 변위/하중/일 수렴기준 — 각각 하위 `OPT_USE`(Boolean, Required, 기본 false)/`VALUE`(Number >0, `OPT_USE=true`일 때 필수) |
 
@@ -2419,7 +2432,7 @@ Hyper-S(MEC) 솔버용 시공단계 해석 제어입니다. 기능별로 중첩 
 
 | Object | Key | Value Type | Description |
 |--------|-----|------------|-------------|
-| `CABLE_CONTROL` | `"CPFC"` | String | Cable-Pretension Force Type (`"INTERNAL"`/`"EXTERNAL"`) |
+| `CABLE_CONTROL` | `"CPFC"` | string (enum) | Cable-Pretension Force Type (`"INTERNAL"`/`"EXTERNAL"`) |
 | `CABLE_CONTROL` | `"bEXT_REPL"` | Boolean | External Force Replace |
 | `INITIAL_CONTROL` | `"bCONV"` | Boolean | Convert Final Stage Forces to Initial Forces |
 | `INITIAL_CONTROL` | `"bTRUSS"` / `"bBEAM"` | Boolean | Truss / Beam |
@@ -2627,6 +2640,9 @@ update_construction_stage_control_m1()
 
 ## 19. /db/BCCT — Boundary Change Assignment
 
+> ⚠️ 공식 표와 영문·한국어 원문을 함께 대조해 다음 표기를 유지합니다.
+> - `vBG` 타입(문서 `Array [String]`, 공식 표 `String`) — 공식 글 35736960800281 요청 예제 「Boundary Change Assignment」의 `Assign.1.vBOUNDARY.vBG`가 `["BG1","BG2"]`(array)를 사용함.
+
 경계 변경(Boundary Change) 할당 데이터를 정의합니다. 어떤 경계 데이터 종류(지점/스프링/링크/강성계수/단부해제 등)를 변경 대상으로 할지 선택하고, 경계 그룹 조합(`vBOUNDARY`)과 해석/하중케이스별 적용(`vLOADANAL`)을 지정합니다.
 
 > `bWSSF`, `bESSF` 등 일부 항목은 Civil NX 또는 Gen NX 전용일 수 있습니다.
@@ -2772,7 +2788,7 @@ Hyper-S(MEC) 솔버용 경계 그룹 조합(Boundary Group Combination)을 정�
 | No. | Description | Key | Value Type | Default | Required |
 |-----|-------------|-----|------------|---------|----------|
 | 1 | Boundary Combination Name | `"BCG_NAME"` | String | - | **Required** |
-| 2 | Boundary Group List | `"GROUP_LIST"` | Array [String] | - | **Required** |
+| 2 | Boundary Group List | `"GROUP_LIST"` | array | - | **Required** |
 
 ### Request Body (POST)
 
@@ -2845,7 +2861,7 @@ Hyper-S(MEC) 솔버용 경계 조합 할당 데이터입니다. 해석 타입·�
 | (1) | ANAL_TYPE · Static Load Case: ST · Moving Load (): MV · Static Modal (): SM · Eigenvalue (): EIGV · Response Spectrum (): RS · Linear Time History (): LTH · Nonlinear Time History (Load Case ): NLTH · Pushover (Load Case ): PO | `"ANAL_TYPE"` | String (enum) | - | **Required** |
 | (2) | Load Case Name | `"LCNAME"` | String | - | **Required** |
 | (3) | Boundary Combination Name | `"BGCNAME"` | String | "" | Optional |
-| 2 | Select Boundary Conditions for Boundary Change | `"BC_SELECT"` | Array [String (enum)] | - | **Required** |
+| 2 | Select Boundary Conditions for Boundary Change | `"BC_SELECT"` | array | - | **Required** |
 
 **`BC_ASSIGN.ANAL_TYPE` 값 (enum):**
 

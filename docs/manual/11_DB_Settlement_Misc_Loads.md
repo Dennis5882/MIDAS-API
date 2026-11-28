@@ -366,14 +366,14 @@ create_load_sequence()
 |-----|-------------|-----|------------|---------|----------|
 | 1 | Wave Load Name | `"NAME"` | String | - | Required |
 | 2 | Description | `"DESC"` | String | Blank | Optional |
-| 3 | Use Static Load Generation | `"bSTLD"` | Boolean | false | - |
-| 4 | Use Time History Load Generation | `"bTHIS"` | Boolean | false | - |
+| 3 | Use Static Load Generation | `"bSTLD"` | Boolean | - | - |
+| 4 | Use Time History Load Generation | `"bTHIS"` | Boolean | - | - |
 | 5 | Time History Load Case Name | `"NAME_THIS"` | String | - | - |
-| 6 | Vertical Coordinate (`"GLOBAL_X"`(⚠️ 미확인) / `"GLOBAL_Y"` / `"GLOBAL_Z"`) | `"VERT_COORD"` | String | `"GLOBAL_Z"` | Required |
+| 6 | Vertical Coordinate (`"GLOBAL_X"`(⚠️ 미확인) / `"GLOBAL_Y"` / `"GLOBAL_Z"`) | `"VERT_COORD"` | String | - | - |
 | 7 | Water Weight Density | `"DENSITY"` | Number | - | - |
 | 8 | Water Depth | `"DEPTH"` | Number | - | - |
-| 9 | Use Self Weight | `"bSELFW"` | Boolean | false | - |
-| 10 | Use Buoyancy Load | `"bBUOYANT"` | Boolean | false | - |
+| 9 | Use Self Weight | `"bSELFW"` | Boolean | - | - |
+| 10 | Use Buoyancy Load | `"bBUOYANT"` | Boolean | - | - |
 
 > ⚠️ **2026-08-25 확인:** 원문 Specifications 표는 `VERT_COORD`의 옵션으로 `"GLOBAL_Y"`/`"GLOBAL_Z"`
 > 2개만 불릿으로 제시하며(JSON Schema·예제에도 enum 목록 없음), `"GLOBAL_X"`는 원문 어디에도
@@ -384,12 +384,12 @@ create_load_sequence()
 
 | No. | Description | Key | Value Type | Required |
 |-----|-------------|-----|------------|----------|
-| 1 | Type (`"CONST"`(Constant) / ⚠️미확인(Linear Interpolation, 리터럴 값 원문 미공개)) | `"TYPE"` | String | Required |
-| 2 | Coefficients – Slender Element Array | `"COEF_S"` | Array [Object] | Optional |
-| 3 | Coefficients – Rigid Element Array | `"COEF_R"` | Array [Object] | Optional |
-| 4 | Override Coefficients with Structure Group | `"bOVER"` | Boolean | Optional |
-| 5 | Override Slender Element Array | `"OVER_S"` | Array [Object] | Optional |
-| 6 | Override Rigid Element Array | `"OVER_R"` | Array [Object] | Optional |
+| 1 | Type (`"CONST"`(Constant) / ⚠️미확인(Linear Interpolation, 리터럴 값 원문 미공개)) | `"TYPE"` | String | - |
+| 2 | Coefficients – Slender Element Array | `"COEF_S"` | Array [Object] | - |
+| 3 | Coefficients – Rigid Element Array | `"COEF_R"` | Array [Object] | - |
+| 4 | Override Coefficients with Structure Group | `"bOVER"` | Boolean | - |
+| 5 | Override Slender Element Array | `"OVER_S"` | Array [Object] | - |
+| 6 | Override Rigid Element Array | `"OVER_R"` | Array [Object] | - |
 
 > ⚠️ **2026-08-25 확인:** 원문 Specifications 표는 `TYPE`의 두 옵션을 "Constant"/"Linear
 > Interpolation" 설명만 제시할 뿐 리터럴 문자열은 표·JSON Schema 어디에도 없다. 예제로 확인되는
@@ -413,24 +413,24 @@ create_load_sequence()
 
 | No. | Description | Key | Value Type | Required |
 |-----|-------------|-----|------------|----------|
-| 1 | Theory Type (`"AIRY"` / `"STOKES"` / `"STREAM"`) | `"THEORY"` | String | Required |
-| 2 | Function Order (Stokes/Stream 이론에서 사용) | `"FUNC"` | Integer | Optional |
-| 3 | Wave Direction (degrees) | `"DIR"` | Number | Required |
-| 4 | Wave Height | `"HEIGHT"` | Number | Required |
-| 5 | Wave Length / Wave Period 선택 (`"LENGTH"` / `"PERIOD"`) | `"CHAR_TYPE"` | String | Required |
-| 6 | Wave Length | `"LENGTH"` | Number | Optional |
-| 7 | Wave Period | `"PERIOD"` | Number | Optional |
-| 8 | Kinematics Factor | `"K_FACTOR"` | Number | Optional |
-| 9 | Current Surface Velocity | `"SURFACE_V"` | Number | Optional |
-| 10 | Current Bottom Velocity | `"BOTTOM_Y"` | Number | Optional |
+| 1 | Theory Type (`"AIRY"` / `"STOKES"` / `"STREAM"`) | `"THEORY"` | String | - |
+| 2 | Function Order (Stokes/Stream 이론에서 사용) | `"FUNC"` | Integer | - |
+| 3 | Wave Direction (degrees) | `"DIR"` | Number | - |
+| 4 | Wave Height | `"HEIGHT"` | Number | - |
+| 5 | Wave Length / Wave Period 선택 (`"LENGTH"` / `"PERIOD"`) | `"CHAR_TYPE"` | String | - |
+| 6 | Wave Length | `"LENGTH"` | Number | - |
+| 7 | Wave Period | `"PERIOD"` | Number | - |
+| 8 | Kinematics Factor | `"K_FACTOR"` | Number | - |
+| 9 | Current Surface Velocity | `"SURFACE_V"` | Number | - |
+| 10 | Current Bottom Velocity | `"BOTTOM_Y"` | Number | - |
 
 ### Parameters — PROF 객체 (조류 프로파일)
 
 | No. | Description | Key | Value Type | Required |
 |-----|-------------|-----|------------|----------|
-| 1 | Current Direction (degrees) | `"CUR_DIR"` | Number | Optional |
-| 2 | Current Blockage Factor | `"CUR_FACTOR"` | Number | Optional |
-| 3 | Grid Data (elevation × velocity points) | `"GRID_DATA"` | Array [Object] | Optional |
+| 1 | Current Direction (degrees) | `"CUR_DIR"` | Number | - |
+| 2 | Current Blockage Factor | `"CUR_FACTOR"` | Number | - |
+| 3 | Grid Data (elevation × velocity points) | `"GRID_DATA"` | Array [Object] | - |
 
 **GRID_DATA 항목 구조:**
 
@@ -443,17 +443,17 @@ create_load_sequence()
 
 | No. | Description | Key | Value Type | Required |
 |-----|-------------|-----|------------|----------|
-| 1 | Flood Condition (Structure Group Names) | `"FLOOD_GRUP"` | Array [String] | Optional |
-| 2 | Marine Growth Data | `"GROWTH"` | Array [Object] | Optional |
-| 3 | Grid X Size | `"GRID_X"` | Integer | Optional |
-| 4 | Grid Y Size | `"GRID_Z"` | Integer | Optional |
-| 5 | User Defined Grid Data (2D Array) | `"USERGRID"` | Array [Array [Object]] | Optional |
+| 1 | Flood Condition (Structure Group Names) | `"FLOOD_GRUP"` | Array [String] | - |
+| 2 | Marine Growth Data | `"GROWTH"` | Array [Object] | - |
+| 3 | Grid X Size | `"GRID_X"` | Integer | - |
+| 4 | Grid Y Size | `"GRID_Z"` | Integer | - |
+| 5 | User Defined Grid Data (2D Array) | `"USERGRID"` | Array [Array [Object]] | - |
 | 6 | Trajectory Grid Data (2D Array) | `"TRAJ"` | Array [Array [Object]] | Optional |
-| 7 | Crest Critical Position (리터럴 값 원문 미공개, 예제 확인값 `"MXM"`) | `"CREST"` | String | Optional |
-| 8 | Crest Position Unit (리터럴 값 원문 미공개, 예제 확인값 `"PHASE"`) | `"UNIT"` | String | Optional |
-| 9 | Initial Position | `"INITAL_POS"` | Number | Optional |
-| 10 | Increase Step | `"STEP"` | Number | Optional |
-| 11 | Number of Positions | `"POS"` | Integer | Optional |
+| 7 | Crest Critical Position (리터럴 값 원문 미공개, 예제 확인값 `"MXM"`) | `"CREST"` | String | - |
+| 8 | Crest Position Unit (리터럴 값 원문 미공개, 예제 확인값 `"PHASE"`) | `"UNIT"` | String | - |
+| 9 | Initial Position | `"INITAL_POS"` | Number | - |
+| 10 | Increase Step | `"STEP"` | Number | - |
+| 11 | Number of Positions | `"POS"` | Integer | - |
 
 > ⚠️ **2026-08-25 확인:** Key `"GRID_Z"`의 설명은 원문 Specifications 표·JSON Schema 둘 다
 > 일관되게 "Grid Y Size"로 표기하고 있어(오타가 아니라 원문 자체가 그렇게 명명) 정정. `"CREST"`/

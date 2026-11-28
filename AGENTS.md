@@ -40,7 +40,8 @@ python -X utf8 check_coverage.py                      # 공식 글 ↔ 문서 �
 python -X utf8 check_fields.py                        # 필드(Key) 단위 누락
 python -X utf8 restore_descriptions.py --dry-run --english   # 설명이 원문과 다른 행
 python -X utf8 build_index.py                         # docs/index/와 llms.txt 다시 생성
-python -X utf8 -m unittest test_sync_tools test_check_coverage test_restore_descriptions
+python -X utf8 check_specs.py                          # 기본값·타입·필수·Response HEAD 원문 대조
+python -X utf8 -m unittest discover -p 'test*.py'
 ```
 
 정기 동기화 순서와 각 점검의 판단 기준은 CLAUDE.md의 "매뉴얼/플러그인 동기화 워크플로"를 따릅니다.
