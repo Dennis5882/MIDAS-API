@@ -163,14 +163,18 @@ def variant_scope(section, uri, value):
     return False
 
 
-def covering(aid, text, sections, mapping):
-    hit = [s for s in sections if aid in s["ids"]]
-    uris = {u.upper() for u in ARTICLE_URI_RE.findall(text)}
+def mapped_sections(aid, sections, mapping):
     for name, label in mapping.get(aid, []):
         number = re.match(r"\s*(\d+|[A-H]-\d+)", label)
         if number:
             pattern = re.compile(r"#{2,3} " + re.escape(number.group(1)) + r"[.\s]")
-            hit += [s for s in sections if s["file"] == name and pattern.match(s["heading"])]
+            yield from (s for s in sections if s["file"] == name and pattern.match(s["heading"]))
+
+
+def covering(aid, text, sections, mapping):
+    hit = [s for s in sections if aid in s["ids"]]
+    uris = {u.upper() for u in ARTICLE_URI_RE.findall(text)}
+    hit.extend(mapped_sections(aid, sections, mapping))
     shared = {u for u in uris if shared_uri(u)}
     own = uris - shared
     linked = bool(hit)

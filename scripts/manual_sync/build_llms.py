@@ -65,9 +65,24 @@ def render(rows, index_text, endpoints, chunks):
         "",
         "## How to use this repository",
         "",
-        "1. **You know the URI** (e.g. `/db/NODE`): look it up in `docs/index/endpoints.json` "
-        "(`endpoint` is upper-cased without the leading slash, e.g. `DB/NODE`). Its `doc` field gives "
-        "`chapter.md#anchor`; read that section for methods, parameter table, schema and examples.",
+        "1. **When you know the URI**, run the offline lookup from the repository root. Use the URI alone to list "
+        "articles. Add an exact selector or article ID to read the chosen article's methods, keys, locations "
+        "and source chunks. The optional `--json` flag emits the same data for tools.",
+        "",
+        "   ```sh",
+        "   python -X utf8 scripts/manual_sync/lookup.py /post/TABLE --table-type BEAMFORCE --json",
+        "   python -X utf8 scripts/manual_sync/lookup.py DESIGN/PSC/AASHTO-LRFD24/DSPSC",
+        "   python -X utf8 scripts/manual_sync/lookup.py /design/steel/KDS-41-30-2022/DREULT --article-id 57390686440345",
+        "   ```",
+        "",
+        "   Other selectors are `--current-mode`, `--text-type` and `--dgncode`. Exit codes are 0 for lookup "
+        "or discovery, 1 for no match, 2 for invalid arguments and 3 for ambiguous filters.",
+        "   In `endpoints.json` (`schema_version` 2), URI summaries aggregate `current` and `unlinked` articles. "
+        "`legacy_methods` and `legacy_keys` contain values exclusive to legacy articles. `methods_status` is "
+        "`not_listed` when no method was extracted from the non-legacy articles. For an API request, "
+        "use the selected article's `methods`, `keys`, `variants` and official `url`. `locations` identifies "
+        "chapter anchors and exact chunks, including generated blocks that share an anchor with the main text.",
+        "",
         "2. **You know the task, not the URI**: search `docs/index/chunks.jsonl` (one JSON object per line: "
         "`file`, `heading`, `anchor`, `source`, `endpoints`, `articles`, `jp_only`, `text`), "
         "or scan the chapter map below.",
@@ -83,8 +98,8 @@ def render(rows, index_text, endpoints, chunks):
         f"| `om-verbatim` | {sources['om-verbatim']:,} | \"OM 원문 추가 필드\" blocks: official Specifications rows copied verbatim. |",
         f"| `repo-example` | {sources['repo-example']:,} | Python examples written by this repository. **Not official; do not cite as evidence.** |",
         "",
-        "Every endpoint record and chunk carries official article ids (`articles`); the article URL is "
-        "the citation of record.",
+        "A chunk's `articles` lists its attributed source IDs. Use the corresponding official article URL for "
+        "citations. `candidate_articles` records unresolved matches. Some shared text has no article-level attribution.",
         "",
         "## Conventions in the chapters",
         "",
@@ -114,8 +129,8 @@ def render(rows, index_text, endpoints, chunks):
         "",
         f"- [docs/manual/INDEX.md]({RAW}docs/manual/INDEX.md): full table of contents with design-code tables.",
         f"- [AGENTS.md]({RAW}AGENTS.md): rules for agents that edit or maintain this repository (not needed to use it).",
-        f"- [docs/index/endpoints.json]({RAW}docs/index/endpoints.json): endpoint → methods, official "
-        "articles, documented sections, request keys, `jp_only`, `documented`.",
+        f"- [docs/index/endpoints.json]({RAW}docs/index/endpoints.json): URI summaries and per-article "
+        "status, selectors, methods, request keys and source locations.",
         f"- [docs/index/chunks.jsonl]({RAW}docs/index/chunks.jsonl): retrieval chunks (≈3,500 characters max).",
         f"- [docs/plugin/INDEX.md]({RAW}docs/plugin/INDEX.md): MIDAS Plug-in tools built on this API "
         "(GUI walkthroughs, separate from the endpoint manual).",

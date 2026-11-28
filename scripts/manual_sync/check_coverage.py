@@ -116,7 +116,7 @@ def fetch_top_toc_ko():
         return ""
 
 
-def design_catalogs(articles, ko_body=None):
+def design_catalogs(articles, ko_body=None, *, include_legacy=False):
     """Collect the deduplicated catalogs, fetching only the missing top-level locale."""
     root = articles[TOC_ARTICLE_ID].get("body")
     ids = design_catalog_ids(root)
@@ -125,7 +125,8 @@ def design_catalogs(articles, ko_body=None):
     if ko_body is None:
         ko_body = fetch_top_toc_ko()
     ids |= design_catalog_ids(ko_body)
-    ids -= LEGACY_DESIGN_CATALOGS
+    if not include_legacy:
+        ids -= LEGACY_DESIGN_CATALOGS
     return {aid: parse_toc(articles[aid].get("body")) if aid in articles else None
             for aid in sorted(ids)}
 

@@ -149,8 +149,10 @@ class CoverageTests(unittest.TestCase):
         uri = "DESIGN/RC/DRC"
         kds = section("## 0. Existing RC", uri, 'Existing RC code: "KDS 41 20 : 2022"', "900")
         kds.update(path="26_test.md", file="26_test.md", level=2, start=0, end=2)
+        kds["text"] += '\n**Source** [original](https://support.midasuser.com/hc/en-us/articles/900)'
         lrfd = section("## 0. Bridge RC", uri, 'Bridge RC code: "AASHTO-LRFD24"', "901")
         lrfd.update(path="28_test.md", level=2, start=0, end=2)
+        lrfd["text"] += '\n**Source** [original](https://support.midasuser.com/hc/en-us/articles/901)'
         articles = {coverage.TOC_ARTICLE_ID: {"body": ""}}
         for aid, code in (("900", "KDS 41 20 : 2022"), ("901", "AASHTO-LRFD24"), ("902", "KDS 24 14 21 : 2021")):
             articles[aid] = dict(title=code, html_url=f"/hc/en-us/articles/{aid}",
@@ -159,7 +161,7 @@ class CoverageTests(unittest.TestCase):
              patch.object(build_index, "OUT", folder), \
              patch.object(build_index, "fetch_bodies", return_value=articles), \
              patch.object(build_index, "load_manifest", return_value={}), \
-             patch.object(coverage, "fetch_top_toc_ko", return_value=""), \
+             patch.object(build_index, "fetch_top_toc_ko", return_value=""), \
              patch.object(fields, "load_sections", return_value=([kds, lrfd], {})), \
              patch.object(fields, "mapped_headings", return_value={}), \
              patch.object(sys, "argv", ["build_index.py"]), \

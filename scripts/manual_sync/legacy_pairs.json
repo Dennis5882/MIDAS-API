@@ -1,0 +1,10 @@
+[
+  {"legacy": "57945514821529", "current": "57945530824345", "reason": "Reviewed older member assignment (MEMB)."},
+  {"legacy": "57945562325273", "current": "57945521269145", "reason": "Reviewed older virtual beam member assignment (MEMB-VBEAM)."},
+  {"legacy": "57945593541657", "current": "57945572333849", "reason": "Reviewed older design load combination selection (SLCT)."},
+  {"legacy": "57945592046233", "current": "57945615379609", "reason": "Reviewed older structure member information (INFS)."},
+  {"legacy": "57945623305113", "current": "57945623457561", "reason": "Reviewed older virtual beam structure member information (INFS-VBEAM)."},
+  {"legacy": "57946914266905", "current": "57946907749017", "reason": "Reviewed older PSC rebar definition (RPSC)."},
+  {"legacy": "57946974912921", "current": "57946987740569", "reason": "Reviewed older effective section (SECF)."},
+  {"legacy": "57947082529945", "current": "57947090728857", "reason": "Reviewed older PSC analysis settings (PSC-ANAL)."}
+]
